@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal">
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:background="@mipmap/audio_b2i"
+        android:padding="50dp">
+
+        <ImageView
+            android:id="@+id/circle_view"
+            android:layout_width="300dp"
+            android:layout_height="300dp" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

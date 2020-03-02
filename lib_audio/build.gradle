@@ -1,0 +1,79 @@
+apply plugin: 'com.android.library'
+apply plugin: 'org.greenrobot.greendao'
+apply plugin: 'maven'
+
+
+
+def pomName = this.getName()
+def pomVersionName = "1.0.0-SNAPSHOT"
+def pomDescription = "the audio library for all project"
+def versionString = '1.0'
+def versionNumber = 1
+
+android {
+    compileSdkVersion rootProject.android.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.android.minSdkVersion
+        targetSdkVersion rootProject.android.targetSdkVersion
+        versionCode versionNumber
+        versionName versionString
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+greendao {
+    //其它配置保持默认,有需要再研究
+    schemaVersion 1 //数据库版本号
+    daoPackage 'com.imooc.lib_audio.mediaplayer.db' //dao,master类所在包
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    
+    //RecyclerView依赖
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
+    //占位主工程android原生库
+    compileOnly this.rootProject.depsLibs.appcompat
+//    compileOnly this.rootProject.depsLibs.design
+//    compileOnly this.rootProject.depsLibs.recyclerview
+
+    //占位主工程的greenDao类库
+    compileOnly this.rootProject.depsLibs.greendao
+    //占位主工程的eventbus库
+    compileOnly this.rootProject.depsLibs.eventbus
+    //占位主工程的rxjava库
+    compileOnly this.rootProject.depsLibs.rxjava
+
+    //占位主工程自己源码库
+    compileOnly project(':lib_image_loader')
+    compileOnly project(':lib_common_ui')
+    compileOnly project(':lib_share')
+    //compileOnly project(':lib_base')
+}
+
+uploadArchives{
+    repositories{
+        mavenDeployer{
+            repository(url: NEXUS_REPOSITORY_URL){
+                authentication(userName: NEXUS_USERNAME, password: NEXUS_PASSWORD)
+            }
+            pom.project{
+                name pomName
+                version pomVersionName
+                description pomDescription
+                artifactId pomVersionName
+                groupId POM_GROUPID
+                packaging POM_PACKAGING
+            }
+        }
+
+    }
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<transitionSet xmlns:android="http://schemas.android.com/apk/res/android">
+    <slide android:slideEdge="bottom">
+        <targets />
+    </slide>
+    <fade>
+        <targets />
+    </fade>
+</transitionSet>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+  <!-- 按下状态 -->
+  <item android:drawable="@drawable/shape_seekbar_btn" android:state_pressed="true" />
+
+  <!-- 焦点状态 -->
+  <item android:drawable="@drawable/shape_seekbar_btn" android:state_focused="true" />
+
+  <!-- 选择状态 -->
+  <item android:drawable="@drawable/shape_seekbar_btn" android:state_selected="true" />
+
+  <!-- 默认状态 -->
+  <item android:drawable="@drawable/shape_seekbar_btn" />
+</selector>

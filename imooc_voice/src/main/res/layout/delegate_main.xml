@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_white">
+
+        <RelativeLayout
+            android:id="@+id/title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp">
+
+            <TextView
+                android:id="@+id/toggle_view"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/category" />
+
+            <TextView
+                android:id="@+id/search_view"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/b_p" />
+
+            <net.lucode.hackware.magicindicator.MagicIndicator
+                android:id="@+id/magic_indicator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="42dp"
+                android:layout_marginEnd="42dp"
+                android:layout_toStartOf="@id/search_view"
+                android:layout_toEndOf="@id/toggle_view" />
+
+
+        </RelativeLayout>
+
+        <!--<com.imooc.lib_audio.mediaplayer.view.BottomMusicView
+            android:id="@+id/bottom_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" />-->
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bottom_view"
+            android:layout_below="@id/title_layout" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/left_drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:layout_marginEnd="25dp"
+        android:background="@color/color_white">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/divider"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/avatr_view"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
+                        android:visibility="gone" />
+
+                    <LinearLayout
+                        android:id="@+id/unloggin_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:gravity="center"
+                            android:text="@string/home_login_tip"
+                            android:textColor="@color/color_333333"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:gravity="center"
+                            android:text="@string/home_login_tip_2"
+                            android:textColor="@color/color_333333"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/bg_home_login"
+                            android:paddingStart="40dp"
+                            android:paddingTop="5dp"
+                            android:paddingEnd="40dp"
+                            android:paddingBottom="5dp"
+                            android:text="@string/home_login"
+                            android:textColor="@color/color_333333"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
+                    android:orientation="horizontal"
+                    android:paddingStart="30dp"
+                    android:paddingEnd="30dp">
+
+                    <com.imooc.lib_common_ui.VerticalItemView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:icon="@mipmap/abi"
+                        app:iconHeight="35dp"
+                        app:iconWidth="35dp"
+                        app:infoText="我的消息"
+                        app:infoTextColor="@color/color_333333"
+                        app:infoTextMarginTop="5dp"
+                        app:infoTextSize="11sp"
+                        app:tipBg="@drawable/bg_home_tip"
+                        app:tipPaddingRight="2dp"
+                        app:tipPaddingTop="2dp"
+                        app:tipText="1"
+                        app:tipTextColor="@color/color_white"
+                        app:tipTextSize="11sp" />
+
+                    <com.imooc.lib_common_ui.VerticalItemView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:icon="@mipmap/abj"
+                        app:iconHeight="35dp"
+                        app:iconWidth="35dp"
+                        app:infoText="我的好友"
+                        app:infoTextColor="@color/color_333333"
+                        app:infoTextMarginTop="5dp"
+                        app:infoTextSize="11sp"
+                        app:tipBg="@drawable/bg_home_tip"
+                        app:tipPaddingRight="2dp"
+                        app:tipPaddingTop="2dp"
+                        app:tipText="1"
+                        app:tipTextColor="@color/color_white"
+                        app:tipTextSize="11sp" />
+
+                    <com.imooc.lib_common_ui.VerticalItemView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:icon="@mipmap/abk"
+                        app:iconHeight="35dp"
+                        app:iconWidth="35dp"
+                        app:infoText="个性换肤"
+                        app:infoTextColor="@color/color_333333"
+                        app:infoTextMarginTop="5dp"
+                        app:infoTextSize="11sp"
+                        app:tipBg="@drawable/bg_home_tip"
+                        app:tipPaddingRight="2dp"
+                        app:tipPaddingTop="2dp"
+                        app:tipText="1"
+                        app:tipTextColor="@color/color_white"
+                        app:tipTextSize="11sp" />
+
+                    <com.imooc.lib_common_ui.VerticalItemView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:icon="@mipmap/abi"
+                        app:iconHeight="35dp"
+                        app:iconWidth="35dp"
+                        app:infoText="听歌识曲"
+                        app:infoTextColor="@color/color_333333"
+                        app:infoTextMarginTop="5dp"
+                        app:infoTextSize="11sp"
+                        app:tipBg="@drawable/bg_home_tip"
+                        app:tipPaddingRight="2dp"
+                        app:tipPaddingTop="2dp"
+                        app:tipText="1"
+                        app:tipTextColor="@color/color_white"
+                        app:tipTextSize="11sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_margin="20dp"
+                    android:background="#dddddd" />
+
+                <com.imooc.lib_common_ui.HornizeItemView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hIcon="@mipmap/anc"
+                    app:hTipVisiblity="false"
+                    app:paddingLeft="20dp"
+                    app:paddingRight="20dp"
+                    app:rightText="林志颖北京"
+                    app:tileText="演出" />
+
+                <com.imooc.lib_common_ui.HornizeItemView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hIcon="@mipmap/and"
+                    app:hTipVisiblity="false"
+                    app:paddingLeft="20dp"
+                    app:paddingRight="20dp"
+                    app:rightText="JBL耳机78元"
+                    app:tileText="商城" />
+
+                <com.imooc.lib_common_ui.HornizeItemView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hIcon="@mipmap/ane"
+                    app:hTipVisiblity="false"
+                    app:paddingLeft="20dp"
+                    app:paddingRight="20dp"
+                    app:tileText="附近的人" />
+
+                <com.imooc.lib_common_ui.HornizeItemView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hIcon="@mipmap/anf"
+                    app:hTipVisiblity="false"
+                    app:paddingLeft="20dp"
+                    app:paddingRight="20dp"
+                    app:tileText="口袋铃声" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_margin="20dp"
+                    android:background="#dddddd" />
+
+                <com.imooc.lib_common_ui.HornizeItemView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hIcon="@mipmap/ang"
+                    app:hTipVisiblity="false"
+                    app:paddingLeft="20dp"
+                    app:paddingRight="20dp"
+                    app:tileText="定时停止播放" />
+
+                <com.imooc.lib_common_ui.HornizeItemView
+                    android:id="@+id/home_qrcode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hIcon="@mipmap/anh"
+                    app:hTipVisiblity="false"
+                    app:paddingLeft="20dp"
+                    app:paddingRight="20dp"
+                    app:tileText="扫一扫" />
+
+                <com.imooc.lib_common_ui.HornizeItemView
+                    android:id="@+id/home_music"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hIcon="@mipmap/ani"
+                    app:hTipVisiblity="false"
+                    app:paddingLeft="20dp"
+                    app:paddingRight="20dp"
+                    app:tileText="音乐闹钟" />
+
+                <com.imooc.lib_common_ui.HornizeItemView
+                    android:id="@+id/online_music_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hIcon="@mipmap/anj"
+                    app:hTipVisiblity="false"
+                    app:paddingLeft="20dp"
+                    app:paddingRight="20dp"
+                    app:tileText="在线听歌免流量" />
+
+                <com.imooc.lib_common_ui.HornizeItemView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hIcon="@mipmap/ank"
+                    app:hTipVisiblity="false"
+                    app:paddingLeft="20dp"
+                    app:paddingRight="20dp"
+                    app:tileText="游戏推荐" />
+
+                <com.imooc.lib_common_ui.HornizeItemView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hIcon="@mipmap/anl"
+                    app:hTipVisiblity="false"
+                    app:paddingLeft="20dp"
+                    app:paddingRight="20dp"
+                    app:tileText="优惠卷" />
+
+                <com.imooc.lib_common_ui.HornizeItemView
+                    android:id="@+id/check_update_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hIcon="@mipmap/anm"
+                    app:hTipVisiblity="false"
+                    app:paddingLeft="20dp"
+                    app:paddingRight="20dp"
+                    app:tileText="检查更新" />
+            </LinearLayout>
+
+        </ScrollView>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_alignTop="@id/operator_view"
+            android:background="#dddddd" />
+
+        <LinearLayout
+            android:id="@+id/operator_view"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@mipmap/baz" />
+
+                <View
+                    android:layout_width="6dp"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="夜间模式"
+                    android:textColor="@color/color_333333"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@mipmap/bb1" />
+
+                <View
+                    android:layout_width="6dp"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="设置"
+                    android:textColor="@color/color_333333"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/exit_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@mipmap/baq" />
+
+                <View
+                    android:layout_width="6dp"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="退出"
+                    android:textColor="@color/color_333333"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.v4.widget.DrawerLayout>

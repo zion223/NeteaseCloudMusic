@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_share">
+
+        <TextView
+            android:id="@+id/tip_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:text="分享到云音乐:"
+            android:textColor="#666666"
+            android:textSize="16sp" />
+
+        <HorizontalScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tip_view"
+            android:layout_marginTop="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.imooc.lib_common_ui.VerticalItemView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    app:icon="@drawable/bg_share_music"
+                    app:iconHeight="60dp"
+                    app:iconWidth="60dp"
+                    app:infoText="云音乐动态"
+                    app:infoTextColor="#333333"
+                    app:infoTextMarginTop="7dp"
+                    app:infoTextSize="12sp" />
+
+                <com.imooc.lib_common_ui.VerticalItemView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    app:icon="@drawable/bg_share_duanxin"
+                    app:iconHeight="60dp"
+                    app:iconWidth="60dp"
+                    app:infoText="私信"
+                    app:infoTextColor="#333333"
+                    app:infoTextMarginTop="7dp"
+                    app:infoTextSize="12sp" />
+
+                <com.imooc.lib_common_ui.VerticalItemView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    app:icon="@drawable/bg_share_link"
+                    app:iconHeight="60dp"
+                    app:iconWidth="60dp"
+                    app:infoText="复制链接"
+                    app:infoTextColor="#333333"
+                    app:infoTextMarginTop="7dp"
+                    app:infoTextSize="12sp" />
+
+                <com.imooc.lib_common_ui.VerticalItemView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    app:icon="@drawable/bg_share_ci"
+                    app:iconHeight="60dp"
+                    app:iconWidth="60dp"
+                    app:infoText="歌词分享"
+                    app:infoTextColor="#333333"
+                    app:infoTextMarginTop="7dp"
+                    app:infoTextSize="12sp" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@id/scroll_view"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="#cccccc" />
+
+        <HorizontalScrollView
+            android:id="@+id/second_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/divider"
+            android:layout_marginBottom="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.imooc.lib_common_ui.VerticalItemView
+                    android:id="@+id/moment_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    app:icon="@drawable/bg_share_moment"
+                    app:iconHeight="60dp"
+                    app:iconWidth="60dp"
+                    app:infoText="微信朋友圈"
+                    app:infoTextColor="#333333"
+                    app:infoTextMarginTop="7dp"
+                    app:infoTextSize="12sp" />
+
+                <com.imooc.lib_common_ui.VerticalItemView
+                    android:id="@+id/weixin_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    app:icon="@drawable/bg_share_friend"
+                    app:iconHeight="60dp"
+                    app:iconWidth="60dp"
+                    app:infoText="微信好友"
+                    app:infoTextColor="#333333"
+                    app:infoTextMarginTop="7dp"
+                    app:infoTextSize="12sp" />
+
+                <com.imooc.lib_common_ui.VerticalItemView
+                    android:id="@+id/qzone_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    app:icon="@drawable/bg_share_qzone"
+                    app:iconHeight="60dp"
+                    app:iconWidth="60dp"
+                    app:infoText="QQ空间"
+                    app:infoTextColor="#333333"
+                    app:infoTextMarginTop="7dp"
+                    app:infoTextSize="12sp" />
+
+                <com.imooc.lib_common_ui.VerticalItemView
+                    android:id="@+id/qq_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    app:icon="@drawable/bg_share_qq"
+                    app:iconHeight="60dp"
+                    app:iconWidth="60dp"
+                    app:infoText="QQ好友"
+                    app:infoTextColor="#333333"
+                    app:infoTextMarginTop="7dp"
+                    app:infoTextSize="12sp" />
+            </LinearLayout>
+        </HorizontalScrollView>
+    </RelativeLayout>
+</RelativeLayout>

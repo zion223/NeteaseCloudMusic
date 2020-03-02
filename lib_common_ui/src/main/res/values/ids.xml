@@ -1,0 +1,12 @@
+<resources>
+
+  <item name="vertical_image_id" type="id" />
+  <item name="vertical_text_id" type="id" />
+  <item name="vertical_tip_id" type="id" />
+
+  <item name="hornized_image_id" type="id" />
+  <item name="hornized_tile_id" type="id" />
+  <item name="hornized_right_image_id" type="id" />
+
+  <item name="delegate_container" type="id" />
+</resources>

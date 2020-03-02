@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">慕课云音乐</string>
+    <string name="home_login">立即登陆</string>
+    <string name="home_login_tip">登陆网易云音乐</string>
+    <string name="home_login_tip_2">手机电脑多端同步，尽享海量高品质音乐</string>
+</resources>

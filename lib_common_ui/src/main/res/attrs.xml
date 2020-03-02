@@ -1,0 +1,68 @@
+<resources>
+
+  <declare-styleable name="VerticalItem">
+    <attr name="iconWidth" format="dimension" />
+    <attr name="iconHeight" format="dimension" />
+    <attr name="icon" format="reference" />
+    <attr name="tipPaddingTop" format="dimension" />
+    <attr name="tipPaddingRight" format="dimension" />
+    <attr name="tipBg" format="reference" />
+    <attr name="tipTextColor" format="color" />
+    <attr name="tipTextSize" format="dimension" />
+    <attr name="tipText" format="string" />
+    <attr name="infoTextSize" format="dimension" />
+    <attr name="infoTextColor" format="color" />
+    <attr name="infoTextMarginTop" format="dimension" />
+    <attr name="infoText" format="string" />
+  </declare-styleable>
+
+  <declare-styleable name="HornizeItemView">
+    <attr name="paddingLeft" format="dimension" />
+    <attr name="paddingRight" format="dimension" />
+    <attr name="paddingTop" format="dimension" />
+    <attr name="paddingBottom" format="dimension" />
+    <attr name="hIconWidth" format="dimension" />
+    <attr name="hIconHeight" format="dimension" />
+    <attr name="hIcon" format="reference" />
+    <attr name="iconPaddingRight" format="dimension" />
+    <attr name="tileTextSize" format="dimension" />
+    <attr name="tileTextColor" format="color" />
+    <attr name="tileText" format="string" />
+    <attr name="rightTextSize" format="dimension" />
+    <attr name="rightTextColor" format="color" />
+    <attr name="rightText" format="string" />
+    <attr name="rightIcon" format="reference" />
+    <attr name="rightIconWidth" format="dimension" />
+    <attr name="rightIconHeight" format="dimension" />
+    <attr name="rightIconMarginLeft" format="dimension" />
+    <attr name="hTipTextSize" format="dimension" />
+    <attr name="hTipTextColor" format="color" />
+    <attr name="hTipText" format="string" />
+    <attr name="hTipPaddingLeft" format="dimension" />
+    <attr name="hTipVisiblity" format="boolean" />
+  </declare-styleable>
+
+  <!--CircleImageView使用-->
+  <declare-styleable name="CircleImageView">
+    <attr name="civ_border_width" format="dimension" />
+    <attr name="civ_border_color" format="color" />
+    <attr name="civ_border_overlay" format="boolean" />
+    <attr name="civ_circle_background_color" format="color" />
+  </declare-styleable>
+
+  <declare-styleable name="SpreadView">
+    <!--中心圆颜色-->
+    <attr name="spread_center_color" format="color" />
+    <!--中心圆半径-->
+    <attr name="spread_radius" format="integer" />
+    <!--扩散圆颜色-->
+    <attr name="spread_spread_color" format="color" />
+    <!--扩散间距-->
+    <attr name="spread_distance" format="integer" />
+    <!--扩散最大半径-->
+    <attr name="spread_max_radius" format="integer" />
+    <!--扩散延迟间隔-->
+    <attr name="spread_delay_milliseconds" format="integer" />
+  </declare-styleable>
+
+</resources>

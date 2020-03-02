@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="60dp"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="5dp">
+
+    <ImageView
+        android:id="@+id/iv_mine_spec"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_item_spec"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/t_dragonball_icn_playlist"/>
+    <TextView
+        android:id="@+id/tv_spec_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center_horizontal"
+        android:textSize="11sp"
+        android:text="古典专区"/>
+
+</LinearLayout>
