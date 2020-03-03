@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="10dp">
+    <TextView
+        android:id="@+id/tv_suggest_rank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/red"
+        android:layout_marginTop="10dp"
+        android:text="1"/>
+    <TextView
+        android:id="@+id/tv_suggest_name"
+        android:layout_toRightOf="@+id/tv_suggest_rank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:text="处处吻"/>
+    <TextView
+        android:id="@+id/tv_suggest_artist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_suggest_name"
+        android:layout_alignLeft="@+id/tv_suggest_name"
+        android:textSize="13sp"
+        android:layout_marginTop="5dp"
+        android:text="会唱着这首歌的人会发光"/>
+    <TextView
+        android:id="@+id/tv_suggest_hot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="1200022"
+        android:layout_alignParentRight="true"/>
+
+</RelativeLayout>

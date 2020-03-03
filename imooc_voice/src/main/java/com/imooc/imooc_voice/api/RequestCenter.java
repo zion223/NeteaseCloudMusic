@@ -1,7 +1,8 @@
 package com.imooc.imooc_voice.api;
 
 
-import com.imooc.imooc_voice.model.entity.ArtistDto;
+import com.imooc.imooc_voice.model.json.ArtistJson;
+import com.imooc.imooc_voice.model.json.BillListJson;
 import com.imooc.imooc_voice.model.user.User;
 import com.imooc.lib_network.CommonOkHttpClient;
 import com.imooc.lib_network.listener.DisposeDataHandler;
@@ -17,31 +18,6 @@ import java.net.URLEncoder;
  * 请求中心
  */
 public class RequestCenter {
-
-    static class HttpConstants {
-        private static final String ROOT_URL = "http://imooc.com/api";
-        //private static final String ROOT_URL = "http://39.97.122.129";
-
-        /**
-         * 首页请求接口
-         */
-        private static String HOME_RECOMMAND = ROOT_URL + "/module_voice/home_recommand";
-
-        private static String HOME_RECOMMAND_MORE = ROOT_URL + "/module_voice/home_recommand_more";
-
-        private static String HOME_FRIEND = ROOT_URL + "/module_voice/home_friend";
-
-        /**
-         * 登陆接口
-         */
-        static String LOGIN = ROOT_URL + "/module_voice/login_phone";
-
-        /**
-         *
-         */
-        static String ARTIST_PIC = "http://music.163.com/api/search/get/web";
-
-    }
 
     //根据参数发送所有post请求
     private static void getRequest(String url, RequestParams params, DisposeDataListener listener,
@@ -86,11 +62,17 @@ public class RequestCenter {
             String encode = URLEncoder.encode(artist, "utf-8");
             params.put("s", encode);
             params.put("type", "100");
-            RequestCenter.getRequest(HttpConstants.ARTIST_PIC, params, listener, ArtistDto.class);
+            RequestCenter.getRequest(HttpConstants.ARTIST_PIC, params, listener, ArtistJson.class);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+    }
 
+    /**
+     * 查询热搜榜
+     */
+    public static void querySuggest(DisposeDataListener listener) {
+        RequestCenter.getRequest(HttpConstants.Billboard.billSongList(2, 0, 10), null, listener, BillListJson.class);
     }
 
 

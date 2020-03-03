@@ -36,7 +36,7 @@ public class CommonJsonCallback implements Callback {
 	private static final Integer JSON_ERROR = -2;
 	private static final Integer OTHER_ERROR = -3;
 
-	public CommonJsonCallback(DisposeDataHandler handler){
+	public CommonJsonCallback(DisposeDataHandler handler) {
 		this.mDisposeDataListener = handler.mListener;
 		this.mDiveryHandler = new Handler(Looper.getMainLooper());
 		mClass = handler.mClass;
@@ -65,11 +65,12 @@ public class CommonJsonCallback implements Callback {
 
 	/**
 	 * 处理数据
+	 *
 	 * @param response
 	 */
 	private void handleResponse(Response response) {
 
-		if(response.toString().trim().equals("")){
+		if (response.toString().trim().equals("")) {
 			mDisposeDataListener.onFailure(new OkHttpException(NETWORK_ERROR, EMPTY_MSG));
 			return;
 		}
@@ -91,35 +92,4 @@ public class CommonJsonCallback implements Callback {
 		}
 
 	}
-	/**
-	 *  4749-4749/com.imooc.imooc_voice I/QarthLog: [PatchStore] create disable file for com.imooc.imooc_voice uid is 10213
-	 * 2020-02-23 14:14:06.067 4749-4749/com.imooc.imooc_voice E/AndroidRuntime: FATAL EXCEPTION: main
-	 *     Process: com.imooc.imooc_voice, PID: 4749
-	 *     java.lang.NoClassDefFoundError: Failed resolution of: Lcom/google/gson/Gson;
-	 *         at com.imooc.lib_network.response.CommonJsonCallback.handleResponse(CommonJsonCallback.java:82)
-	 *         at com.imooc.lib_network.response.CommonJsonCallback.access$100(CommonJsonCallback.java:20)
-	 *         at com.imooc.lib_network.response.CommonJsonCallback$2.run(CommonJsonCallback.java:61)
-	 *         at android.os.Handler.handleCallback(Handler.java:888)
-	 *         at android.os.Handler.dispatchMessage(Handler.java:100)
-	 *         at android.os.Looper.loop(Looper.java:213)
-	 *         at android.app.ActivityThread.main(ActivityThread.java:8147)
-	 *         at java.lang.reflect.Method.invoke(Native Method)
-	 *         at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:513)
-	 *         at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1101)
-	 *      Caused by: java.lang.ClassNotFoundException: Didn't find class "com.google.gson.Gson" on path: DexPathList[[zip file "/data/app/com.imooc.imooc_voice-odLxrqbaGsyw7VMCY9GRdw==/base.apk"],nativeLibraryDirectories=[/data/app/com.imooc.imooc_voice-odLxrqbaGsyw7VMCY9GRdw==/lib/arm64, /system/lib64, /system/product/lib64, /hw_product/lib64, /system/product/lib64]]
-	 *         at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:196)
-	 *         at java.lang.ClassLoader.loadClass(ClassLoader.java:379)
-	 *         at java.lang.ClassLoader.loadClass(ClassLoader.java:312)
-	 *         at com.imooc.lib_network.response.CommonJsonCallback.handleResponse(CommonJsonCallback.java:82) 
-	 *         at com.imooc.lib_network.response.CommonJsonCallback.access$100(CommonJsonCallback.java:20) 
-	 *         at com.imooc.lib_network.response.CommonJsonCallback$2.run(CommonJsonCallback.java:61) 
-	 *         at android.os.Handler.handleCallback(Handler.java:888) 
-	 *         at android.os.Handler.dispatchMessage(Handler.java:100) 
-	 *         at android.os.Looper.loop(Looper.java:213) 
-	 *         at android.app.ActivityThread.main(ActivityThread.java:8147) 
-	 *         at java.lang.reflect.Method.invoke(Native Method) 
-	 *         at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:513) 
-	 *         at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1101) 
-	 *
-	 */
 }

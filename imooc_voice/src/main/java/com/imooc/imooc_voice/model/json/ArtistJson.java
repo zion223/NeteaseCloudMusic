@@ -1,7 +1,7 @@
-package com.imooc.imooc_voice.model.entity;
+package com.imooc.imooc_voice.model.json;
 
 
-public class ArtistDto {
+public class ArtistJson {
 	/**
 	 * 			"id": 30796254,
 	 * 			"name": "勃勃",

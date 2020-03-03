@@ -21,7 +21,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.api.RequestCenter;
-import com.imooc.imooc_voice.model.entity.ArtistDto;
+import com.imooc.imooc_voice.model.json.ArtistJson;
 import com.imooc.imooc_voice.model.info.ArtistInfo;
 import com.imooc.imooc_voice.util.MusicUtils;
 import com.imooc.lib_common_ui.app.Netease;
@@ -31,7 +31,6 @@ import com.imooc.lib_network.listener.DisposeDataListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import butterknife.BindView;
 
@@ -177,7 +176,7 @@ public class ArtistDelegate extends NeteaseDelegate {
 				public void onSuccess(Object responseObj) {
 					if(albumView.getTag(R.id.image_loader_tag).toString().equals(String.valueOf(item.artist_id))){
 						albumView.setTag(R.id.image_loader_tag, "set");
-						String pic = ((ArtistDto)responseObj).getResult().getArtists()[0].getImg1v1Url();
+						String pic = ((ArtistJson)responseObj).getResult().getArtists()[0].getImg1v1Url();
 						Log.e(TAG, item.artist_name + " pic: "+ pic +" tag: " + albumView.getTag(R.id.image_loader_tag).toString());
 						imageLoaderManager.displayImageForCircle(albumView, pic);
 					}
