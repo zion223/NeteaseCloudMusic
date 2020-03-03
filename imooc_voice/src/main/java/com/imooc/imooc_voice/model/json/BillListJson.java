@@ -7,6 +7,7 @@ public class BillListJson {
 
 
     /**
+     * http://tools.jb51.net/code/json2javabean
      * artist_id : 2019217
      * language : 国语
      * pic_big : http://qukufile2.qianqian.com/data2/pic/61d0c9448c8e1abcd819efeec308e458/672337348/672337348.jpg@s_2,w_150,h_150
