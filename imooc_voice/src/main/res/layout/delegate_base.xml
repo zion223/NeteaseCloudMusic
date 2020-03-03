@@ -13,11 +13,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/color_white">
+
         <FrameLayout
             android:id="@+id/frame_base"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-
+        <View
+            android:id="@+id/drawer_layout"
+            android:layout_width="40dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_height="40dp"/>
         <com.imooc.lib_audio.mediaplayer.view.BottomMusicView
             android:id="@+id/bottom_view"
             android:layout_width="match_parent"

@@ -62,6 +62,7 @@ public class BottomMusicView extends RelativeLayout {
 
 	public BottomMusicView(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
+		setBackgroundColor(getResources().getColor(R.color.white));
 		mContext = context;
 		EventBus.getDefault().register(this);
 		initView();

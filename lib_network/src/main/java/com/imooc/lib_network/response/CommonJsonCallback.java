@@ -2,6 +2,7 @@ package com.imooc.lib_network.response;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.imooc.lib_network.exception.OkHttpException;
@@ -55,10 +56,11 @@ public class CommonJsonCallback implements Callback {
 
 	@Override
 	public void onResponse(Call call, final Response response) throws IOException {
+		final String result = response.body().string();
 		mDiveryHandler.post(new Runnable() {
 			@Override
 			public void run() {
-				handleResponse(response);
+				handleResponse(result);
 			}
 		});
 	}
@@ -68,19 +70,18 @@ public class CommonJsonCallback implements Callback {
 	 *
 	 * @param response
 	 */
-	private void handleResponse(Response response) {
+	private void handleResponse(Object response) {
 
 		if (response.toString().trim().equals("")) {
 			mDisposeDataListener.onFailure(new OkHttpException(NETWORK_ERROR, EMPTY_MSG));
 			return;
 		}
 		try {
-			String result = response.body().string();
-			JSONObject resultJson = new JSONObject(result);
+			JSONObject resultJson = new JSONObject(response.toString());
 			if (mClass == null) {
 				mDisposeDataListener.onSuccess(resultJson);
 			} else {
-				Object obj = new Gson().fromJson(result, mClass);
+				Object obj = new Gson().fromJson(response.toString(), mClass);
 				if (obj != null) {
 					mDisposeDataListener.onSuccess(obj);
 				} else {
@@ -88,6 +89,7 @@ public class CommonJsonCallback implements Callback {
 				}
 			}
 		} catch (Exception e) {
+			mDisposeDataListener.onFailure(e);
 			e.printStackTrace();
 		}
 

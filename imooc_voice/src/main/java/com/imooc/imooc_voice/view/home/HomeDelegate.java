@@ -20,6 +20,7 @@ import com.imooc.imooc_voice.model.login.LoginEvent;
 import com.imooc.imooc_voice.view.home.adapter.HomePagerAdapter;
 import com.imooc.imooc_voice.view.home.title.ScaleTransitionPagerTitleView;
 import com.imooc.imooc_voice.view.login.UserManager;
+import com.imooc.imooc_voice.view.search.SearchDelegate;
 import com.imooc.lib_audio.app.AudioHelper;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
@@ -50,24 +51,12 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 	/*
 	 * View
 	 */
-	@BindView(R2.id.drawer_layout)
-	DrawerLayout mDrawerLayout;
-	@BindView(R2.id.toggle_view)
-	View mToggleView;
 	@BindView(R2.id.search_view)
 	View mSearchView;
-	@BindView(R2.id.unloggin_layout)
-	View unLogginLayout;
-	@BindView(R2.id.avatr_view)
-	ImageView mPhotoView;
 	@BindView(R2.id.view_pager)
 	ViewPager mViewPager;
 	@BindView(R2.id.magic_indicator)
 	MagicIndicator magicIndicator;
-	@BindView(R2.id.home_qrcode)
-	View mDrawerQrcodeView;
-//	@BindView(R2.id.share_view)
-//	View mDrawerShareView;
 
 
 	private HomePagerAdapter mAdapter;
@@ -79,7 +68,6 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 
 	@Override
 	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
-		//EventBus.getDefault().register(this);
 		initView();
 		initData();
 	}
@@ -105,21 +93,11 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 	}
 
 
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		//EventBus.getDefault().unregister(this);
-	}
-
 	//初始化控件
 	private void initView() {
-		mToggleView.setOnClickListener(this);
 		mSearchView.setOnClickListener(this);
-		unLogginLayout.setOnClickListener(this);
-
 		mAdapter = new HomePagerAdapter(getChildFragmentManager(), CHANNELS);
 		mViewPager.setAdapter(mAdapter);
-		//mViewPager.setOffscreenPageLimit();
 		initMagicIndicator();
 	}
 
@@ -174,15 +152,14 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 					//跳转到LoginActivity
 					//LoginActivity.start(this);
 				} else {
-					mDrawerLayout.closeDrawer(Gravity.LEFT);
+					//mDrawerLayout.closeDrawer(Gravity.LEFT);
 				}
 				break;
 			case R.id.toggle_view:
-				if (mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
-					mDrawerLayout.closeDrawer(Gravity.LEFT);
-				} else {
-					mDrawerLayout.openDrawer(Gravity.LEFT);
-				}
+
+				break;
+			case R.id.search_view:
+				getSupportDelegate().start(new SearchDelegate());
 				break;
 			default:
 				break;
@@ -194,10 +171,10 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 	@Subscribe(threadMode = ThreadMode.MAIN)
 	public void onLoginEvent(LoginEvent event) {
 		//登陆成功
-		unLogginLayout.setVisibility(View.GONE);
-		mPhotoView.setVisibility(View.VISIBLE);
-		ImageLoaderManager.getInstance()
-				.displayImageForCircle(mPhotoView, UserManager.getInstance().getUser().data.photoUrl);
+		//unLogginLayout.setVisibility(View.GONE);
+		//mPhotoView.setVisibility(View.VISIBLE);
+		//ImageLoaderManager.getInstance()
+				//.displayImageForCircle(mPhotoView, UserManager.getInstance().getUser().data.photoUrl);
 	}
 
 	@Override

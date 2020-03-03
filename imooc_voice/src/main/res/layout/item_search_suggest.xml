@@ -6,11 +6,11 @@
     android:layout_marginRight="10dp">
     <TextView
         android:id="@+id/tv_suggest_rank"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="@color/red"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:textSize="18sp"
         android:layout_marginTop="10dp"
+        android:gravity="center"
         android:text="1"/>
     <TextView
         android:id="@+id/tv_suggest_name"
@@ -18,17 +18,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:textSize="16sp"
+        android:textSize="15sp"
         android:textColor="@color/black"
         android:text="处处吻"/>
+    <ImageView
+        android:id="@+id/iv_suggest_up"
+        android:layout_width="15dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/tv_suggest_name"
+        android:visibility="gone"
+        android:src="@drawable/b77"/>
+    <ImageView
+        android:id="@+id/iv_suggest_hot"
+        android:layout_width="25dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/tv_suggest_name"
+        android:visibility="gone"
+        android:src="@drawable/bl7"/>
     <TextView
         android:id="@+id/tv_suggest_artist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_suggest_name"
         android:layout_alignLeft="@+id/tv_suggest_name"
-        android:textSize="13sp"
-        android:layout_marginTop="5dp"
+        android:textSize="12sp"
+        android:layout_marginTop="3dp"
+        android:paddingBottom="10dp"
         android:text="会唱着这首歌的人会发光"/>
     <TextView
         android:id="@+id/tv_suggest_hot"
@@ -36,6 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="1200022"
+        android:textColor="@color/silver"
         android:layout_alignParentRight="true"/>
 
 </RelativeLayout>

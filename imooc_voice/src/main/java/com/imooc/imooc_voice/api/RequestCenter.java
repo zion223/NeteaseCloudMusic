@@ -3,6 +3,7 @@ package com.imooc.imooc_voice.api;
 
 import com.imooc.imooc_voice.model.json.ArtistJson;
 import com.imooc.imooc_voice.model.json.BillListJson;
+import com.imooc.imooc_voice.model.json.FocusJson;
 import com.imooc.imooc_voice.model.user.User;
 import com.imooc.lib_network.CommonOkHttpClient;
 import com.imooc.lib_network.listener.DisposeDataHandler;
@@ -72,9 +73,15 @@ public class RequestCenter {
      * 查询热搜榜
      */
     public static void querySuggest(DisposeDataListener listener) {
-        RequestCenter.getRequest(HttpConstants.Billboard.billSongList(2, 0, 10), null, listener, BillListJson.class);
+        RequestCenter.getRequest(HttpConstants.Billboard.billSongList(2, 0, 20), null, listener, BillListJson.class);
     }
 
+    /*
+     * 查询发现页面轮播图
+     */
+    public static void queryBanner(DisposeDataListener listener){
+        RequestCenter.getRequest(HttpConstants.focusPic(10), null, listener, FocusJson.class);
+    }
 
 
 }

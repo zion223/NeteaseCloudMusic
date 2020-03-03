@@ -34,7 +34,10 @@ dependencies {
     compile 'me.yokeyword:fragmentation:1.2.4'
     // Swipeback is based on fragmentation. Refer to SwipeBackActivity/Fragment for your Customized SupportActivity/Fragment
     compile 'me.yokeyword:fragmentation-swipeback:1.2.4'
-
+    //Banner依赖
+    compile 'com.bigkoo:convenientbanner:2.0.5'
+    compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
+    implementation rootProject.depsLibs.glide
     //ButterKnife依赖
     compile 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
