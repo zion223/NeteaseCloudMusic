@@ -52,14 +52,14 @@ public class MineDelegate extends NeteaseDelegate {
 		SpecData spec6 = new SpecData(R.drawable.t_dragonball_icn_xiaoice, "小冰电台");
 		SpecData spec7 = new SpecData(R.drawable.t_dragonball_icn_rank, "排行榜");
 		SpecData spec8 = new SpecData(R.drawable.t_dragonball_icn_daily, "每日推荐");
+		specData.add(spec6);
+		specData.add(spec7);
+		specData.add(spec8);
 		specData.add(spec1);
 		specData.add(spec2);
 		specData.add(spec3);
 		specData.add(spec4);
 		specData.add(spec5);
-		specData.add(spec6);
-		specData.add(spec7);
-		specData.add(spec8);
 		LinearLayoutManager manager = new LinearLayoutManager(getContext());
 		manager.setOrientation(LinearLayoutManager.HORIZONTAL);
 		mSpecAdapter = new SpecAdapter(specData);

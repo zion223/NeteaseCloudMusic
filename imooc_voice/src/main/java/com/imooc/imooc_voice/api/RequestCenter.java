@@ -4,6 +4,7 @@ package com.imooc.imooc_voice.api;
 import com.imooc.imooc_voice.model.json.ArtistJson;
 import com.imooc.imooc_voice.model.json.BillListJson;
 import com.imooc.imooc_voice.model.json.FocusJson;
+import com.imooc.imooc_voice.model.json.GedanJson;
 import com.imooc.imooc_voice.model.user.User;
 import com.imooc.lib_network.CommonOkHttpClient;
 import com.imooc.lib_network.listener.DisposeDataHandler;
@@ -83,5 +84,30 @@ public class RequestCenter {
         RequestCenter.getRequest(HttpConstants.focusPic(10), null, listener, FocusJson.class);
     }
 
+    /*
+     *  查询歌单列表
+     */
+    public static void queryGedan(int pageNo, int pageSize, DisposeDataListener listener){
+        RequestCenter.getRequest(HttpConstants.GeDan.geDan(pageNo, pageSize + 1), null, listener, GedanJson.class);
+    }
 
+    /*
+     *  根据标签查询歌单
+     */
+    public static void queryGeDanByTag(String tag, int pageNo, int pageSize, DisposeDataListener listener){
+        RequestCenter.getRequest(HttpConstants.GeDan.geDanByTag(tag, pageNo, pageSize +1), null, listener, GedanJson.class);
+    }
+
+    /*
+     *  新歌速递
+     */
+    public static void queryNewSongList(int pageNo, int pageSize, DisposeDataListener listener){
+        RequestCenter.getRequest(HttpConstants.Song.getNewSong(pageNo, pageSize), null, listener, BillListJson.class);
+    }
+    /*
+     *  新碟
+     */
+    public static void queryNewAlbumList(int pageNo, int pageSize, DisposeDataListener listener){
+        RequestCenter.getRequest(HttpConstants.Song.recommendAlbum(pageNo, pageSize +1), null, listener, BillListJson.class);
+    }
 }

@@ -121,7 +121,7 @@ public class ImageLoaderManager {
 	 */
 	public void displayImageForCorner(final ImageView imageView, String url, int corner) {
 		CornerTransform transformation = new CornerTransform(imageView.getContext(), Utils.dip2px(imageView.getContext(), corner));
-		transformation.setExceptCorner(true, true, true, true);
+		transformation.setExceptCorner(false, false, false, false);
 		Glide.with(imageView.getContext())
 				.asBitmap()
 				.load(url)

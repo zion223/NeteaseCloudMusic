@@ -48,7 +48,7 @@ class MusicMoreDialog implements View.OnClickListener{
 			TextView artist = window.findViewById(R.id.tv_artist_dialog);
 			TextView album = window.findViewById(R.id.tv_album_dialog);
 			//专辑是圆角图片
-			ImageLoaderManager.getInstance().displayImageForCorner(headerAlbum, info.albumData, 6);
+			ImageLoaderManager.getInstance().displayImageForCorner(headerAlbum, info.albumData, 3);
 			artist.setText("歌手: "+info.artist);
 			album.setText("专辑: "+info.albumName);
 			headerMusicName.setText("歌曲: "+info.musicName);

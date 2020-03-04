@@ -35,14 +35,12 @@ import butterknife.OnClick;
 
 public class TabDelegate extends NeteaseDelegate{
 
-
 	@BindView(R2.id.magic_indicator_tab)
 	MagicIndicator mTabMagicIndicator;
 	@BindView(R2.id.view_pager_tab)
 	ViewPager mTabViewPager;
 	@BindView(R2.id.img_tab_more)
 	ImageView mTabMore;
-
 
 
 	private TabAdapter mAdapter;

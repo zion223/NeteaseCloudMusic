@@ -28,12 +28,7 @@ public class CornerTransform implements Transformation<Bitmap> {
 	private boolean exceptLeftTop, exceptRightTop, exceptLeftBottom, exceptRightBotoom;
 
 	/**
-	 * 除了那几个角不需要圆角的
-	 *
-	 * @param leftTop
-	 * @param rightTop
-	 * @param leftBottom
-	 * @param rightBottom
+	 * 设置不需要圆角的位置
 	 */
 	public void setExceptCorner(boolean leftTop, boolean rightTop, boolean leftBottom, boolean rightBottom) {
 		this.exceptLeftTop = leftTop;

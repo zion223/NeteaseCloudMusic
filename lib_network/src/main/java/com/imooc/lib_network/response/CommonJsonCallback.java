@@ -89,8 +89,7 @@ public class CommonJsonCallback implements Callback {
 				}
 			}
 		} catch (Exception e) {
-			mDisposeDataListener.onFailure(e);
-			e.printStackTrace();
+			mDisposeDataListener.onFailure(new OkHttpException(JSON_ERROR, EMPTY_MSG));
 		}
 
 	}

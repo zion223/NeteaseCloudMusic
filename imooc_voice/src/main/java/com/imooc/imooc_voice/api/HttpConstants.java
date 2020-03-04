@@ -250,6 +250,35 @@ public class HttpConstants {
                     .append("&num=").append(num);
             return sb.toString();
         }
+
+        /**
+         * 新碟上架
+         * @param offset
+         * @param limit
+         * @return
+         */
+        public static String  recommendAlbum(int offset, int limit){
+            StringBuffer sb = new StringBuffer(BASE);
+            sb.append("&method=").append("baidu.ting.plaza.getRecommendAlbum")
+                    .append("&offset=").append(offset)
+                    .append("&limit=").append(limit);
+            return sb.toString();
+        }
+
+        /**
+         * 新歌速递
+         * @param offset
+         * @param limit
+         * @return
+         */
+        public static String getNewSong(int offset, int limit){
+            final StringBuffer sb = new StringBuffer(BASE);
+            sb.append("&method=").append("baidu.ting.plaza.getNewSongs")
+                    .append("&offset=").append(offset)
+                    .append("&limit=").append(limit);
+            return sb.toString();
+        }
+
     }
 
     /**
@@ -419,8 +448,6 @@ public class HttpConstants {
 
         /**
          * 歌单分类
-         *
-         * @return
          */
         public static String geDanCategory() {
             StringBuffer sb = new StringBuffer(BASE);

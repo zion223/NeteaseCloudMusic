@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginLeft="10dp"
+    android:layout_marginBottom="10dp">
+
+    <ImageView
+        android:id="@+id/iv_item_album_song"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/test"/>
+    <TextView
+        android:id="@+id/tv_item_album_song_name"
+        android:layout_below="@id/iv_item_discover"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/iv_item_discover"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:text="歌名"/>
+    <TextView
+        android:id="@+id/tv_item_album_song_artist"
+        android:layout_below="@id/iv_item_discover"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/iv_item_discover"
+        android:layout_marginTop="2dp"
+        android:textSize="11sp"
+        android:text="作者"/>
+</LinearLayout>

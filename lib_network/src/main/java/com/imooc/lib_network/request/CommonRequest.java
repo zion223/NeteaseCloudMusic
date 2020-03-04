@@ -39,7 +39,7 @@ public class CommonRequest {
 	}
 
 	public static Request createGetRequest(String url, RequestParams params) {
-
+		Log.d(TAG, "URL:" + url);
 		return createGetRequest(url, params, null);
 	}
 
