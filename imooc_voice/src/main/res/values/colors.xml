@@ -12,4 +12,5 @@
     <color name="text_color">#FF000000</color>
     <color name="listSubTextColor">#ff888888</color>
     <color name="listTextColor">#ff333333</color>
+    <color name="text_collect">#FE3A3C</color>
 </resources>

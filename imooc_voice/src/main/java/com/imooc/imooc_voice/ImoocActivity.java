@@ -6,16 +6,12 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 
 import com.imooc.imooc_voice.view.home.BaseDelegate;
-import com.imooc.imooc_voice.view.home.HomeDelegate;
-import com.imooc.lib_audio.app.AudioHelper;
 import com.imooc.lib_common_ui.app.Netease;
 import com.imooc.lib_common_ui.base.ProxyActivity;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.utils.StatusBarUtil;
 
 import me.yokeyword.eventbusactivityscope.EventBusActivityScope;
-import me.yokeyword.fragmentation.ISupportActivity;
-import me.yokeyword.fragmentation.SupportHelper;
 import pub.devrel.easypermissions.EasyPermissions;
 
 

@@ -4,6 +4,7 @@ package com.imooc.imooc_voice.api;
 import com.imooc.imooc_voice.model.json.ArtistJson;
 import com.imooc.imooc_voice.model.json.BillListJson;
 import com.imooc.imooc_voice.model.json.FocusJson;
+import com.imooc.imooc_voice.model.json.GedanDetailJson;
 import com.imooc.imooc_voice.model.json.GedanJson;
 import com.imooc.imooc_voice.model.user.User;
 import com.imooc.lib_network.CommonOkHttpClient;
@@ -109,5 +110,12 @@ public class RequestCenter {
      */
     public static void queryNewAlbumList(int pageNo, int pageSize, DisposeDataListener listener){
         RequestCenter.getRequest(HttpConstants.Song.recommendAlbum(pageNo, pageSize +1), null, listener, BillListJson.class);
+    }
+
+    /*
+     *  歌单详情
+     */
+    public static void queryGedanDetail(String id , DisposeDataListener listener){
+        RequestCenter.getRequest(HttpConstants.GeDan.geDanInfo(id), null, listener, GedanDetailJson.class);
     }
 }

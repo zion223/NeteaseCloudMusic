@@ -4,13 +4,9 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
@@ -21,6 +17,7 @@ import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.json.BillListJson;
 import com.imooc.imooc_voice.model.json.FocusJson;
 import com.imooc.imooc_voice.model.json.GedanJson;
+import com.imooc.imooc_voice.view.discory.gedandetail.GedanDetailDelegate;
 import com.imooc.imooc_voice.view.discory.square.GedanSquareDelegate;
 import com.imooc.lib_common_ui.bannder.BannerCreator;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
@@ -104,6 +101,15 @@ public class DiscoverDelegate extends NeteaseDelegate {
 				mGedanAdapter = new GedanAdapter(geDan);
 				mRecyclerViewGedan.setAdapter(mGedanAdapter);
 				mRecyclerViewGedan.setLayoutManager(gridLayoutManager);
+				mGedanAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+					@Override
+					public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+						final GedanJson.GeDan item = (GedanJson.GeDan) adapter.getItem(position);
+						//跳入歌单详情
+						final String listId = item.getListid();
+						getParentDelegate().getSupportDelegate().start(GedanDetailDelegate.newInstance(listId));
+					}
+				});
 			}
 
 			@Override
@@ -111,6 +117,8 @@ public class DiscoverDelegate extends NeteaseDelegate {
 
 			}
 		});
+
+
 		/*
 		 * 新碟
 		 */
@@ -153,14 +161,6 @@ public class DiscoverDelegate extends NeteaseDelegate {
 	@Override
 	public void onLazyInitView(@Nullable Bundle savedInstanceState) {
 		super.onLazyInitView(savedInstanceState);
-		mGedanAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-			@Override
-			public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-				final GedanJson.GeDan item = (GedanJson.GeDan) adapter.getItem(position);
-				//跳入歌单详情
-				final String listId = item.getListid();
-			}
-		});
 	}
 
 	@Override
