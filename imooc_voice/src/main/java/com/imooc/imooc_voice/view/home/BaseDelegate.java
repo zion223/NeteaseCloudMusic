@@ -31,14 +31,14 @@ public class BaseDelegate extends NeteaseDelegate {
 	}
 
 
-	@OnClick(R2.id.drawer_layout)
-	void onClickDrawer(){
-		if (mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
-			mDrawerLayout.closeDrawer(Gravity.LEFT);
-		} else {
-			mDrawerLayout.openDrawer(Gravity.LEFT);
-		}
-	}
+//	@OnClick(R2.id.drawer_layout)
+//	void onClickDrawer(){
+//		if (mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
+//			mDrawerLayout.closeDrawer(Gravity.LEFT);
+//		} else {
+//			mDrawerLayout.openDrawer(Gravity.LEFT);
+//		}
+//	}
 
 	@Override
 	public void post(Runnable runnable) {

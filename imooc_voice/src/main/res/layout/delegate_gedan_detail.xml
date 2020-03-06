@@ -17,7 +17,8 @@
             android:id="@+id/appbar_gedan_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/gray">
+            android:background="@color/gray"
+            app:elevation="0dp">
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar_layout"
                 android:layout_width="match_parent"
@@ -29,7 +30,6 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:orientation="vertical">
-
 
                     <RelativeLayout
                         android:id="@+id/rl_gedan_detail_img"

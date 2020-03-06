@@ -26,6 +26,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class GedanDetailDelegate extends NeteaseDelegate {
 
@@ -96,7 +97,7 @@ public class GedanDetailDelegate extends NeteaseDelegate {
 				DecimalFormat df = new DecimalFormat("0.0");
 				float num = (float)(Math.abs(i)) / (float)440;
 				float alpha = (1 - num) * 255;
-				mCollspsingToolbar.setAlpha(alpha);
+				//mCollspsingToolbar.setAlpha(alpha);
 
 			}
 		});
@@ -110,7 +111,7 @@ public class GedanDetailDelegate extends NeteaseDelegate {
 				mTvDetailTag.setText(json.getTag());
 				manager.displayImageForCorner(mImageViewGedan, json.getPic300(), 5);
 				//毛玻璃效果背景
-				manager.displayImageForViewGroup(mCollspsingToolbar, json.getPic300(), 200);
+				manager.displayImageForViewGroup(mAppBarLayout, json.getPic300(), 200);
 				ArrayList<GedanDetailJson.GeDanDetail> content = json.getContent();
 				mAdapter = new GedanDetailAdapter(content);
 				mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -130,6 +131,12 @@ public class GedanDetailDelegate extends NeteaseDelegate {
 
 			}
 		});
+	}
+
+
+	@OnClick(R2.id.img_gedan_detail_back)
+	void onClickBack(){
+		getSupportDelegate().pop();
 	}
 
 	@Override

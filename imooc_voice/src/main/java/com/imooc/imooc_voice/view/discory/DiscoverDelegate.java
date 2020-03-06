@@ -175,6 +175,10 @@ public class DiscoverDelegate extends NeteaseDelegate {
 	void onClickGedanSquare(){
 		getParentDelegate().getSupportDelegate().start(new GedanSquareDelegate());
 	}
+	@OnClick(R2.id.ll_discover_gedan)
+	void onClickGedanSquree(){
+		getParentDelegate().getSupportDelegate().start(new GedanSquareDelegate());
+	}
 
 	@OnClick(R2.id.tv_discover_new_album)
 	void onClickChooseAlbum(){

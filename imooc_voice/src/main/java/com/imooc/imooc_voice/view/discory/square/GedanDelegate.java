@@ -7,11 +7,13 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.json.GedanJson;
 import com.imooc.imooc_voice.view.discory.GedanAdapter;
+import com.imooc.imooc_voice.view.discory.gedandetail.GedanDetailDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
@@ -60,6 +62,13 @@ public class GedanDelegate extends NeteaseDelegate {
 				GedanJson json = (GedanJson) responseObj;
 				ArrayList<GedanJson.GeDan> content = json.getContent();
 				mAdapter = new GedanAdapter(content);
+				mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+					@Override
+					public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+						GedanJson.GeDan item = (GedanJson.GeDan) adapter.getItem(position);
+						getParentDelegate().getSupportDelegate().start(GedanDetailDelegate.newInstance(item.getListid()));
+					}
+				});
 				mRecyclerViewGedan.setAdapter(mAdapter);
 				mRecyclerViewGedan.setLayoutManager(manager);
 			}
