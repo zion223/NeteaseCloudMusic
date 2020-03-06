@@ -26,7 +26,7 @@ import com.bumptech.glide.request.transition.Transition;
 import com.imooc.lib_image_loader.R;
 import com.imooc.lib_image_loader.image.CornerTransform;
 import com.imooc.lib_image_loader.image.CustomRequestListener;
-import com.imooc.lib_image_loader.image.Utils;
+import com.imooc.lib_image_loader.image.ImageUtils;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -120,7 +120,7 @@ public class ImageLoaderManager {
 	 * @param url
 	 */
 	public void displayImageForCorner(final ImageView imageView, String url, int corner) {
-		CornerTransform transformation = new CornerTransform(imageView.getContext(), Utils.dip2px(imageView.getContext(), corner));
+		CornerTransform transformation = new CornerTransform(imageView.getContext(), ImageUtils.dip2px(imageView.getContext(), corner));
 		transformation.setExceptCorner(false, false, false, false);
 		Glide.with(imageView.getContext())
 				.asBitmap()
@@ -146,7 +146,7 @@ public class ImageLoaderManager {
 									public Drawable apply(Bitmap bitmap) {
 										Drawable drawable = new BitmapDrawable(
 												//毛玻璃效果
-												Utils.doBlur(res, radius, true)
+												ImageUtils.doBlur(res, radius, true)
 										);
 										return drawable;
 									}
