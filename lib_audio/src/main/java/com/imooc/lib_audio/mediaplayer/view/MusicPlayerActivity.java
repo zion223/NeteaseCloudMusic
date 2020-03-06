@@ -118,7 +118,7 @@ public class MusicPlayerActivity extends BaseActivity {
 	private void initView() {
 		//返回
 		mBgView = findViewById(R.id.root_layout);
-		ImageLoaderManager.getInstance().displayImageForViewGroup(mBgView, mAudioBean.getAlbumPic());
+		ImageLoaderManager.getInstance().displayImageForViewGroup(mBgView, mAudioBean.getAlbumPic(), 100);
 		findViewById(R.id.back_view).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -326,7 +326,7 @@ public class MusicPlayerActivity extends BaseActivity {
 	public void onAudioLoadEvent(AudioLoadEvent event) {
 		//更新notifacation为load状态
 		mAudioBean = event.mAudioBean;
-		ImageLoaderManager.getInstance().displayImageForViewGroup(mBgView, mAudioBean.getAlbumPic());
+		ImageLoaderManager.getInstance().displayImageForViewGroup(mBgView, mAudioBean.getAlbumPic(), 100);
 		mInfoView.setText(mAudioBean.getAlbumInfo());
 		mAuthorView.setText(mAudioBean.getAuthor());
 		mStartTimeView.setText("00:00");

@@ -224,7 +224,7 @@ public class GedanDetailJson {
             this.distribution = distribution;
         }
 
-        public String getSong_id() {
+        public String getSongid() {
             return song_id;
         }
 

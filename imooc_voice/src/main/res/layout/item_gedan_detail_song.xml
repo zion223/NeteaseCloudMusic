@@ -6,7 +6,7 @@
     android:layout_marginLeft="10dp">
 
     <ImageView
-        android:id="@+id/play_state"
+        android:id="@+id/item_play_state"
         android:layout_width="15dp"
         android:layout_height="25dp"
         android:layout_alignParentLeft="true"
@@ -17,18 +17,17 @@
         android:scaleType="centerInside"
         android:visibility="gone" />
     <TextView
-        android:id="@+id/play_no"
+        android:id="@+id/item_play_no"
         android:layout_width="15dp"
         android:layout_height="25dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dp"
         android:textSize="18sp"
-        android:textStyle="bold"
         android:text="1"/>
 
         <TextView
             android:id="@+id/viewpager_list_toptext"
-            android:layout_toRightOf="@id/play_no"
+            android:layout_toRightOf="@id/item_play_no"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
@@ -41,10 +40,9 @@
             android:textSize="15sp" />
         <ImageView
             android:id="@+id/iv_gedan_detail_sq"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:layout_marginTop="5dp"
-
             android:layout_below="@+id/viewpager_list_toptext"
             android:layout_alignLeft="@id/viewpager_list_toptext"
             android:src="@drawable/b73"/>
@@ -60,7 +58,7 @@
             android:singleLine="true"
             android:text="蔡健雅"
             android:textColor="@color/listSubTextColor"
-            android:textSize="13sp" />
+            android:textSize="10sp" />
 
 
     <ImageView

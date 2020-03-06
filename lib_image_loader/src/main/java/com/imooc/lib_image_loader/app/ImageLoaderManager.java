@@ -130,7 +130,7 @@ public class ImageLoaderManager {
 				.into(imageView);
 	}
 
-	public void displayImageForViewGroup(final ViewGroup group, String url) {
+	public void displayImageForViewGroup(final ViewGroup group, String url, final int radius) {
 		Glide.with(group.getContext())
 				.asBitmap()
 				.load(url)
@@ -146,7 +146,7 @@ public class ImageLoaderManager {
 									public Drawable apply(Bitmap bitmap) {
 										Drawable drawable = new BitmapDrawable(
 												//毛玻璃效果
-												Utils.doBlur(res, 100, true)
+												Utils.doBlur(res, radius, true)
 										);
 										return drawable;
 									}
