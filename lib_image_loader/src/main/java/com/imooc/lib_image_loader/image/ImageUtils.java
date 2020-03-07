@@ -3,7 +3,7 @@ package com.imooc.lib_image_loader.image;
 import android.content.Context;
 import android.graphics.Bitmap;
 
-public class Utils {
+public class ImageUtils {
 
     /**
      * 毛玻璃模糊算法

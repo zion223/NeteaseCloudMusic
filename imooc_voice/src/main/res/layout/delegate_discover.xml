@@ -59,6 +59,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_discover_gedan"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
