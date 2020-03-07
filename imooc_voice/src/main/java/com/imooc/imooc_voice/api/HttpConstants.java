@@ -7,8 +7,8 @@ public class HttpConstants {
 
     private static final String FORMATE = "json";
     private static final String BASE = "http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&format=" + FORMATE;
-    private static final String ROOT_URL = "http://imooc.com/api";
-    //private static final String ROOT_URL = "http://39.97.122.129";
+    //private static final String ROOT_URL = "http://imooc.com/api";
+    private static final String ROOT_URL = "http://39.97.122.129";
 
     /**
      * 首页请求接口
@@ -17,7 +17,7 @@ public class HttpConstants {
 
     private static String HOME_RECOMMAND_MORE = ROOT_URL + "/module_voice/home_recommand_more";
 
-    private static String HOME_FRIEND = ROOT_URL + "/module_voice/home_friend";
+    public static String HOME_FRIEND = ROOT_URL + "/module_voice/home_friend";
 
     /**
      * 登陆接口
@@ -28,11 +28,9 @@ public class HttpConstants {
      *
      */
     static String ARTIST_PIC = "http://music.163.com/api/search/get/web";
-    /**
+
+    /*
      * 轮播音乐封面
-     *
-     * @param num 数量
-     * @return
      */
     public static String focusPic(int num) {
         StringBuffer sb = new StringBuffer(BASE);

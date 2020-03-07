@@ -41,4 +41,5 @@ dependencies {
     //ButterKnife依赖
     compile 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    compileOnly project(':lib_image_loader')
 }

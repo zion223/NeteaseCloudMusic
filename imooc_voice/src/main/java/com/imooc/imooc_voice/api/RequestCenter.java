@@ -1,6 +1,7 @@
 package com.imooc.imooc_voice.api;
 
 
+import com.imooc.imooc_voice.model.friend.BaseFriendModel;
 import com.imooc.imooc_voice.model.json.ArtistJson;
 import com.imooc.imooc_voice.model.json.BillListJson;
 import com.imooc.imooc_voice.model.json.FocusJson;
@@ -39,9 +40,9 @@ public class RequestCenter {
 //                BaseRecommandMoreModel.class);
 //    }
 //
-//    public static void requestFriendData(DisposeDataListener listener) {
-//        RequestCenter.getRequest(HttpConstants.HOME_FRIEND, null, listener, BaseFriendModel.class);
-//    }
+    public static void requestFriendData(DisposeDataListener listener) {
+        RequestCenter.getRequest(HttpConstants.HOME_FRIEND, null, listener, BaseFriendModel.class);
+    }
 
     /**
      * 用户登陆请求

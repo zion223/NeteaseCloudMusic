@@ -1,0 +1,120 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical">
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="20dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="20dp"
+    android:orientation="vertical">
+
+    <ImageView
+      android:id="@+id/photo_view"
+      android:layout_width="30dp"
+      android:layout_height="30dp"
+      android:scaleType="fitXY" />
+
+    <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerVertical="true"
+      android:layout_marginStart="10dp"
+      android:layout_toRightOf="@id/photo_view"
+      android:orientation="vertical">
+
+      <TextView
+        android:id="@+id/name_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="朱康伟发布视频:"
+        android:textColor="#333333"
+        android:textSize="14sp" />
+
+      <TextView
+        android:id="@+id/fansi_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2919粉丝"
+        android:textColor="#999999"
+        android:textSize="12sp" />
+    </LinearLayout>
+
+    <TextView
+      android:id="@+id/guanzhu_view"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentEnd="true"
+      android:layout_centerVertical="true"
+      android:background="@drawable/bg_red_rect"
+      android:paddingBottom="5dp"
+      android:paddingEnd="10dp"
+      android:paddingStart="10dp"
+      android:paddingTop="5dp"
+      android:text="+ 关注"
+      android:textColor="#ffffff"
+      android:textSize="13sp" />
+  </RelativeLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingEnd="20dp"
+    android:paddingStart="60dp">
+
+    <TextView
+      android:id="@+id/text_view"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentEnd="true"
+      android:layout_centerVertical="true"
+      android:layout_marginBottom="5dp"
+      android:layout_marginTop="10dp"
+      android:text="我喜欢你"
+      android:textColor="#333333"
+      android:textSize="14sp" />
+
+    <RelativeLayout
+      android:id="@+id/video_layout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" />
+
+    <LinearLayout
+      android:id="@+id/bottom_layout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="15dp"
+      android:orientation="horizontal">
+
+      <TextView
+        android:id="@+id/zan_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/icon_zan"
+        android:drawablePadding="3dp"
+        android:text="16337"
+        android:textColor="#999999"
+        android:textSize="12sp" />
+
+      <TextView
+        android:id="@+id/message_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:drawableLeft="@mipmap/icon_msg"
+        android:drawablePadding="3dp"
+        android:text="1632"
+        android:textColor="#999999"
+        android:textSize="12sp" />
+    </LinearLayout>
+  </LinearLayout>
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:layout_marginTop="15dp"
+    android:background="#eeeeee" />
+</LinearLayout>
