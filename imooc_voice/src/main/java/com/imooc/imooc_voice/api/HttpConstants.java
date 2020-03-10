@@ -16,12 +16,93 @@ public class HttpConstants {
 
     private static String HOME_RECOMMAND_MORE = ROOT_URL + "/module_voice/home_recommand_more";
 
-    public static String HOME_FRIEND = ROOT_URL + "/module_voice/home_friend";
+    static String HOME_FRIEND = ROOT_URL + "/module_voice/home_friend";
 
     /**
      * 登陆接口
      */
     static String LOGIN = ROOT_URL + "/login/cellphone";
+
+    static String LOGOUT = ROOT_URL + "/logout";
+
+    static String RECOMMAND_PLAYLIST = ROOT_URL + "/recommend/resource";
+
+    static String DAILY_RECOMMAND = ROOT_URL + "/recommend/songs";
+
+    static String TOP_LIST = ROOT_URL + "/toplist";
+
+    static String RADIO_RECOMMEND = ROOT_URL + "/dj/recommend";
+
+    static String DJ_RECOMMEND_TYPE = ROOT_URL + "/dj/recommend/type";
+
+    static String RECOMMEND_PLAY_LIST = ROOT_URL + "/top/playlist";
+
+    static String RECOMMEND_PLAY_LIST_HIGHQUALITY = ROOT_URL + "/top/playlist/highquality";
+
+    static String CAT_LIST = ROOT_URL + "/playlist/catlist";
+
+    static String PLAY_LIST_DETAIL = ROOT_URL + "/playlist/detail";
+
+    static String MUSIC_CAN_PLAY = ROOT_URL + "/check/music";
+
+    static String USER_PLAY_LIST = ROOT_URL + "/user/playlist";
+
+    static String USER_EVENT = ROOT_URL + "/user/event";
+
+    static String USER_DETAIL = ROOT_URL + "/user/detail";
+
+    static String SEARCH_HOT = ROOT_URL + "/search/hot/detail";
+
+    static String SONG_SEARCH = ROOT_URL + "/search";
+
+    static String SINGER_HOT_SONG = ROOT_URL + "/artists";
+
+    static String SINGER_ALBUM = ROOT_URL + "/artist/album";
+
+    static String SINGER_DESC = ROOT_URL + "/artist/desc";
+
+    static String SINGER_SIMI = ROOT_URL + "/simi/artist";
+
+    static String LIKE_LIST = ROOT_URL + "/likelist";
+
+    static String SONG_DETAIL = ROOT_URL + "/song/detail";
+
+    static String LIKE_MUSIC = ROOT_URL + "/like";
+
+    static String MUSIC_COMMENT = ROOT_URL + "/comment/music";
+
+    static String COMMENT_LIKE = ROOT_URL + "/comment/like";
+
+    static String INTELLIGANCE_LIST = ROOT_URL + "/playmode/intelligence/list";
+
+    static String ALBUM_SUBLIST = ROOT_URL + "/album/sublist";
+
+    static String ARTIST_SUBLIST = ROOT_URL + "/artist/sublist";
+
+    static String MV_SUBLIST = ROOT_URL + "/mv/sublist";
+
+    static String PERSONAL_FM = ROOT_URL + "/personal_fm";
+
+    static String MAIN_EVENT = ROOT_URL + "/event";
+
+    static String LYRIC = ROOT_URL + "/lyric";
+
+    static String COMMENT_PLAYLIST = ROOT_URL + "/comment/playlist";
+
+    static String PAY_GIFT = ROOT_URL + "/dj/paygift";
+
+    static String DJ_RECOMMEND = ROOT_URL + "/dj/recommend";
+
+    static String DJ_CATLIST = ROOT_URL + "/dj/catelist";
+
+    static String DJ_SUB = ROOT_URL + "/dj/sub";
+
+    static String DJ_PROGRAM = ROOT_URL + "/dj/program";
+
+    static String DJ_DETAIL = ROOT_URL + "/dj/detail";
+
+
+
 
     /**
      *

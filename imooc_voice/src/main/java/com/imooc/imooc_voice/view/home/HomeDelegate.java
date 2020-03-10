@@ -16,8 +16,10 @@ import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.model.CHANNEL;
 import com.imooc.imooc_voice.model.login.LoginEvent;
+import com.imooc.imooc_voice.util.SharePreferenceUtil;
 import com.imooc.imooc_voice.view.home.adapter.HomePagerAdapter;
 import com.imooc.imooc_voice.view.home.title.ScaleTransitionPagerTitleView;
+import com.imooc.imooc_voice.view.login.LoginActivity;
 import com.imooc.imooc_voice.view.login.UserManager;
 import com.imooc.imooc_voice.view.search.SearchDelegate;
 import com.imooc.lib_audio.app.AudioHelper;
@@ -59,6 +61,7 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 	@BindView(R2.id.base_drawer_layout)
 	DrawerLayout mDrawerLayout;
 
+	private SharePreferenceUtil sharePreferenceUtil;
 
 	private HomePagerAdapter mAdapter;
 
@@ -71,6 +74,7 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
 		initView();
 		initData();
+		sharePreferenceUtil = SharePreferenceUtil.getInstance(getContext());
 	}
 
 	private void initData() {
@@ -149,11 +153,11 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 		int id = v.getId();
 		switch (id) {
 			case R.id.unloggin_layout:
-				if (UserManager.getInstance().hasLogin()) {
+				if (sharePreferenceUtil.getAuthToken("").equals("")) {
 					//跳转到LoginActivity
-					//LoginActivity.start(this);
+					LoginActivity.start(getContext());
 				} else {
-					//mDrawerLayout.closeDrawer(Gravity.LEFT);
+					mDrawerLayout.closeDrawer(Gravity.LEFT);
 				}
 				break;
 			case R.id.search_view:

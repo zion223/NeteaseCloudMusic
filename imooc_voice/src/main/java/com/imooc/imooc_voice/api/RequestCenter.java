@@ -1,13 +1,60 @@
 package com.imooc.imooc_voice.api;
 
 
+import com.imooc.imooc_voice.model.newapi.AlbumSublistBean;
+import com.imooc.imooc_voice.model.newapi.ArtistSublistBean;
+import com.imooc.imooc_voice.model.newapi.BannerBean;
+import com.imooc.imooc_voice.model.newapi.CatlistBean;
+import com.imooc.imooc_voice.model.newapi.DailyRecommendBean;
+import com.imooc.imooc_voice.model.newapi.HighQualityPlayListBean;
+import com.imooc.imooc_voice.model.newapi.LikeListBean;
+import com.imooc.imooc_voice.model.newapi.LoginBean;
 import com.imooc.imooc_voice.model.friend.BaseFriendModel;
 import com.imooc.imooc_voice.model.json.ArtistJson;
 import com.imooc.imooc_voice.model.json.BillListJson;
 import com.imooc.imooc_voice.model.json.FocusJson;
 import com.imooc.imooc_voice.model.json.GedanDetailJson;
 import com.imooc.imooc_voice.model.json.GedanJson;
-import com.imooc.imooc_voice.model.user.User;
+import com.imooc.imooc_voice.model.newapi.LogoutBean;
+import com.imooc.imooc_voice.model.newapi.MainEventBean;
+import com.imooc.imooc_voice.model.newapi.MainRecommendPlayListBean;
+import com.imooc.imooc_voice.model.newapi.MvSublistBean;
+import com.imooc.imooc_voice.model.newapi.MyFmBean;
+import com.imooc.imooc_voice.model.newapi.PlayModeIntelligenceBean;
+import com.imooc.imooc_voice.model.newapi.PlaylistDetailBean;
+import com.imooc.imooc_voice.model.newapi.RecommendPlayListBean;
+import com.imooc.imooc_voice.model.newapi.TopListBean;
+import com.imooc.imooc_voice.model.newapi.dj.DjCategoryRecommendBean;
+import com.imooc.imooc_voice.model.newapi.dj.DjCatelistBean;
+import com.imooc.imooc_voice.model.newapi.dj.DjDetailBean;
+import com.imooc.imooc_voice.model.newapi.dj.DjPaygiftBean;
+import com.imooc.imooc_voice.model.newapi.dj.DjProgramBean;
+import com.imooc.imooc_voice.model.newapi.dj.DjRecommendBean;
+import com.imooc.imooc_voice.model.newapi.dj.DjRecommendTypeBean;
+import com.imooc.imooc_voice.model.newapi.dj.DjSubBean;
+import com.imooc.imooc_voice.model.newapi.manager.MusicCanPlayBean;
+import com.imooc.imooc_voice.model.newapi.personal.UserDetailBean;
+import com.imooc.imooc_voice.model.newapi.personal.UserEventBean;
+import com.imooc.imooc_voice.model.newapi.personal.UserPlaylistBean;
+import com.imooc.imooc_voice.model.newapi.search.AlbumSearchBean;
+import com.imooc.imooc_voice.model.newapi.search.FeedSearchBean;
+import com.imooc.imooc_voice.model.newapi.search.HotSearchDetailBean;
+import com.imooc.imooc_voice.model.newapi.search.PlayListSearchBean;
+import com.imooc.imooc_voice.model.newapi.search.RadioSearchBean;
+import com.imooc.imooc_voice.model.newapi.search.SimiSingerBean;
+import com.imooc.imooc_voice.model.newapi.search.SingerAblumSearchBean;
+import com.imooc.imooc_voice.model.newapi.search.SingerDescriptionBean;
+import com.imooc.imooc_voice.model.newapi.search.SingerSearchBean;
+import com.imooc.imooc_voice.model.newapi.search.SingerSongSearchBean;
+import com.imooc.imooc_voice.model.newapi.search.SongSearchBean;
+import com.imooc.imooc_voice.model.newapi.search.SynthesisSearchBean;
+import com.imooc.imooc_voice.model.newapi.search.UserSearchBean;
+import com.imooc.imooc_voice.model.newapi.song.CommentLikeBean;
+import com.imooc.imooc_voice.model.newapi.song.LikeMusicBean;
+import com.imooc.imooc_voice.model.newapi.song.LyricBean;
+import com.imooc.imooc_voice.model.newapi.song.MusicCommentBean;
+import com.imooc.imooc_voice.model.newapi.song.PlayListCommentBean;
+import com.imooc.imooc_voice.model.newapi.song.SongDetailBean;
 import com.imooc.lib_network.CommonOkHttpClient;
 import com.imooc.lib_network.listener.DisposeDataHandler;
 import com.imooc.lib_network.listener.DisposeDataListener;
@@ -15,160 +62,17 @@ import com.imooc.lib_network.listener.DisposeDataListener;
 import com.imooc.lib_network.request.CommonRequest;
 import com.imooc.lib_network.request.RequestParams;
 
+import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+
+import io.reactivex.Observable;
 
 /**
  * 请求中心
  */
 public class RequestCenter {
 
-
-    /**
-     *  @GET("login/cellphone")
-     *     Observable<LoginBean> login(@Query("phone") String phone, @Query("password") String password);
-     *
-     *     @GET("logout")
-     *     Observable<LogoutBean> logout();
-     *
-     *     @GET("banner")
-     *     Observable<BannerBean> getBanner(@Query("type") String type);
-     *
-     *     @GET("recommend/resource")
-     *     Observable<MainRecommendPlayListBean> getRecommendPlayList();
-     *
-     *     @GET("recommend/songs")
-     *     Observable<DailyRecommendBean> getDailyRecommend();
-     *
-     *     @GET("toplist")
-     *     Observable<TopListBean> getTopList();
-     *
-     *     @GET("dj/recommend")
-     *     Observable<DjRecommendBean> getRadioRecommend();
-     *
-     *     @GET("dj/recommend/type")
-     *     Observable<DjRecommendTypeBean> getDjRecommend(@Query("type") int type);
-     *
-     *     @GET("top/playlist")
-     *     Observable<RecommendPlayListBean> getPlayList(@Query("cat") String type, @Query("limit") int limit);
-     *
-     *     @GET("top/playlist/highquality")
-     *     Observable<HighQualityPlayListBean> getHighquality(@Query("limit") int limit, @Query("before") long before);
-     *
-     *     @GET("playlist/catlist")
-     *     Observable<CatlistBean> getCatlist();
-     *
-     *     @GET("playlist/detail")
-     *     Observable<PlaylistDetailBean> getPlaylistDetail(@Query("id") long id);
-     *
-     *     @GET("check/music")
-     *     Observable<MusicCanPlayBean> getMusicCanPlay(@Query("id") long id);
-     *
-     *     @GET("user/playlist")
-     *     Observable<UserPlaylistBean> getUserPlaylist(@Query("uid") long uid);
-     *
-     *     @GET("user/event")
-     *     Observable<UserEventBean> getUserEvent(@Query("uid") long uid, @Query("limit") int limit, @Query("lasttime") long time);
-     *
-     *     @GET("user/detail")
-     *     Observable<UserDetailBean> getUserDetail(@Query("uid") long uid);
-     *
-     *     @GET("search/hot/detail")
-     *     Observable<HotSearchDetailBean> getSearchHotDetail();
-     *
-     *     @GET("search")
-     *     Observable<SongSearchBean> getSongSearch(@Query("keywords") String keywords, @Query("type") int type);
-     *
-     *     @GET("search")
-     *     Observable<FeedSearchBean> getFeedSearch(@Query("keywords") String keywords, @Query("type") int type);
-     *
-     *     @GET("search")
-     *     Observable<SingerSearchBean> getSingerSearch(@Query("keywords") String keywords, @Query("type") int type);
-     *
-     *     @GET("search")
-     *     Observable<AlbumSearchBean> getAlbumSearch(@Query("keywords") String keywords, @Query("type") int type);
-     *
-     *     @GET("search")
-     *     Observable<PlayListSearchBean> getPlayListSearch(@Query("keywords") String keywords, @Query("type") int type);
-     *
-     *     @GET("search")
-     *     Observable<RadioSearchBean> getRadioSearch(@Query("keywords") String keywords, @Query("type") int type);
-     *
-     *     @GET("search")
-     *     Observable<UserSearchBean> getUserSearch(@Query("keywords") String keywords, @Query("type") int type);
-     *
-     *     @GET("search")
-     *     Observable<SynthesisSearchBean> getSynthesisSearch(@Query("keywords") String keywords, @Query("type") int type);
-     *
-     *     @GET("artists")
-     *     Observable<SingerSongSearchBean> getSingerHotSong(@Query("id") long id);
-     *
-     *     @GET("artist/album")
-     *     Observable<SingerAblumSearchBean> getSingerAlbum(@Query("id") long id);
-     *
-     *     @GET("artist/desc")
-     *     Observable<SingerDescriptionBean> getSingerDesc(@Query("id") long id);
-     *
-     *     @GET("simi/artist")
-     *     Observable<SimiSingerBean> getSimiSinger(@Query("id") long id);
-     *
-     *     @GET("likelist")
-     *     Observable<LikeListBean> getLikeList(@Query("uid") long uid);
-     *
-     *     @GET("song/detail")
-     *     Observable<SongDetailBean> getSongDetail(@Query("ids") long ids);
-     *
-     *     @GET("like")
-     *     Observable<LikeMusicBean> likeMusice(@Query("id") long id);
-     *
-     *     @GET("comment/music")
-     *     Observable<MusicCommentBean> getMusicComment(@Query("id") long id);
-     *
-     *     @GET("comment/like")
-     *     Observable<CommentLikeBean> likeComment(@Query("id") long id, @Query("cid") long cid, @Query("t") int t, @Query("type") int type);
-     *
-     *     @GET("playmode/intelligence/list")
-     *     Observable<PlayModeIntelligenceBean> getIntelligenceList(@Query("id") long id, @Query("pid") long pid);
-     *
-     *     @GET("album/sublist")
-     *     Observable<AlbumSublistBean> getAlbumSublist();
-     *
-     *     @GET("artist/sublist")
-     *     Observable<ArtistSublistBean> getArtistSublist();
-     *
-     *     @GET("mv/sublist")
-     *     Observable<MvSublistBean> getMvSublist();
-     *
-     *     @GET("personal_fm")
-     *     Observable<MyFmBean> getMyFm();
-     *
-     *     @GET("event")
-     *     Observable<MainEventBean> getMainEvent();
-     *
-     *     @GET("lyric")
-     *     Observable<LyricBean> getLyric(@Query("id") long id);
-     *
-     *     @GET("comment/playlist")
-     *     Observable<PlayListCommentBean> getPlaylistComment(@Query("id") long id);
-     *
-     *     @GET("dj/paygift")
-     *     Observable<DjPaygiftBean> getDjPaygift(@Query("limit") int limit, @Query("offset") int offset);
-     *
-     *     @GET("dj/category/recommend")
-     *     Observable<DjCategoryRecommendBean> getDjCategoryRecommend();
-     *
-     *     @GET("dj/catelist")
-     *     Observable<DjCatelistBean> getDjCatelist();
-     *
-     *     @GET("dj/sub")
-     *     Observable<DjSubBean> subDj(@Query("rid") long rid, @Query("t") int isSub);
-     *
-     *     @GET("dj/program")
-     *     Observable<DjProgramBean> getDjProgram(@Query("rid") long rid);
-     *
-     *     @GET("dj/detail")
-     *     Observable<DjDetailBean> getDjDetail(@Query("rid") long rid);
-     */
 
     //根据参数发送所有post请求
     private static void getRequest(String url, RequestParams params, DisposeDataListener listener,
@@ -196,7 +100,401 @@ public class RequestCenter {
         RequestParams params = new RequestParams();
         params.put("phone", phone);
         params.put("password", password);
-        RequestCenter.getRequest(HttpConstants.LOGIN, params, listener, User.class);
+        RequestCenter.getRequest(HttpConstants.LOGIN, params, listener, LoginBean.class);
+    }
+
+    /**
+     *  用户登出请求
+     */
+    public static void logout(DisposeDataListener listener) {
+
+        RequestCenter.getRequest(HttpConstants.LOGOUT, null, listener, LogoutBean.class);
+    }
+
+    /**
+     *  获取Banner
+     */
+    public static void getBanner(int type, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("type", type);
+        RequestCenter.getRequest(HttpConstants.LOGOUT, params, listener, BannerBean.class);
+    }
+
+    /**
+     *  首页推荐歌单的ban
+     */
+    public static void getRecommendPlayList(DisposeDataListener listener){
+        RequestCenter.getRequest(HttpConstants.RECOMMAND_PLAYLIST, null, listener, MainRecommendPlayListBean.class);
+    }
+
+    /**
+     *  每日推荐
+     */
+    public static void getDailyRecommend(DisposeDataListener listener){
+        RequestCenter.getRequest(HttpConstants.DAILY_RECOMMAND, null, listener, DailyRecommendBean.class);
+    }
+
+    /**
+     *  榜单
+     */
+    public static void getTopList(DisposeDataListener listener){
+        RequestCenter.getRequest(HttpConstants.TOP_LIST, null, listener, TopListBean.class);
+    }
+
+    /**
+     *  推荐电台
+     */
+    public static void getRadioRecommend(DisposeDataListener listener){
+        RequestCenter.getRequest(HttpConstants.RADIO_RECOMMEND, null, listener, DjRecommendBean.class);
+    }
+
+    public static void getRadioRecommend(int type, DisposeDataListener listener){
+        RequestCenter.getRequest(HttpConstants.DJ_RECOMMEND_TYPE, null, listener, DjRecommendTypeBean.class);
+    }
+
+    /**
+     *  歌单模块
+     */
+    public static void getPlayList(String type, int limit, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("cat", type);
+        params.put("limit", limit);
+        RequestCenter.getRequest(HttpConstants.RECOMMEND_PLAY_LIST, params, listener, RecommendPlayListBean.class);
+    }
+
+    /**
+     *  获取精品歌单
+     */
+    public static void getHighquality(int limit, long before, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("limit", limit);
+        params.put("before", before);
+        RequestCenter.getRequest(HttpConstants.RECOMMEND_PLAY_LIST_HIGHQUALITY, params, listener, HighQualityPlayListBean.class);
+    }
+
+    public static void getCatList(DisposeDataListener listener){
+        RequestCenter.getRequest(HttpConstants.CAT_LIST, null, listener, CatlistBean.class);
+    }
+
+    /**
+     *  歌单详情
+     */
+    public static void getPlaylistDetail(long id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.PLAY_LIST_DETAIL, params, listener, PlaylistDetailBean.class);
+    }
+
+    /**
+     *  音乐是否可用
+     */
+    public static void getMusicCanPlay(long id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.MUSIC_CAN_PLAY, params, listener, MusicCanPlayBean.class);
+    }
+
+    /**
+     *  用户收藏的歌单
+     */
+    public static void getUserPlaylist(long uid, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", uid);
+        RequestCenter.getRequest(HttpConstants.USER_PLAY_LIST, params, listener, UserPlaylistBean.class);
+    }
+
+    /**
+     *  用户动态 lasttime默认-1
+     */
+    public static void getUserEvent(long uid, int limit, long time, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", uid);
+        params.put("limit", limit);
+        params.put("lasttime", time);
+        RequestCenter.getRequest(HttpConstants.USER_EVENT, params, listener, UserEventBean.class);
+    }
+
+    /**
+     *  用户详情
+     */
+    public static void getUserDetail(long uid, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("uid", uid);
+        RequestCenter.getRequest(HttpConstants.USER_DETAIL, params, listener, UserDetailBean.class);
+    }
+
+    /**
+     *  热搜列表 详细
+     */
+    public static void getSearchHotDetail(DisposeDataListener listener){
+        RequestCenter.getRequest(HttpConstants.SEARCH_HOT, null, listener, HotSearchDetailBean.class);
+    }
+
+    public static void getSongSearch(String keywords, int type, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("keywords", keywords);
+        params.put("type", type);
+        RequestCenter.getRequest(HttpConstants.SONG_SEARCH, params, listener, SongSearchBean.class);
+    }
+
+    public static void getFeedSearch(String keywords, int type, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("keywords", keywords);
+        params.put("type", type);
+        RequestCenter.getRequest(HttpConstants.SONG_SEARCH, params, listener, FeedSearchBean.class);
+    }
+
+    public static void getSingerSearch(String keywords, int type, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("keywords", keywords);
+        params.put("type", type);
+        RequestCenter.getRequest(HttpConstants.SONG_SEARCH, params, listener, SingerSearchBean.class);
+    }
+
+    public static void getAlbumSearch(String keywords, int type, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("keywords", keywords);
+        params.put("type", type);
+        RequestCenter.getRequest(HttpConstants.SONG_SEARCH, params, listener, AlbumSearchBean.class);
+    }
+
+    public static void getPlayListSearch(String keywords, int type, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("keywords", keywords);
+        params.put("type", type);
+        RequestCenter.getRequest(HttpConstants.SONG_SEARCH, params, listener, PlayListSearchBean.class);
+    }
+
+    public static void getRadioSearch(String keywords, int type, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("keywords", keywords);
+        params.put("type", type);
+        RequestCenter.getRequest(HttpConstants.SONG_SEARCH, params, listener, RadioSearchBean.class);
+    }
+
+    public static void getUserSearch(String keywords, int type, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("keywords", keywords);
+        params.put("type", type);
+        RequestCenter.getRequest(HttpConstants.SONG_SEARCH, params, listener, UserSearchBean.class);
+    }
+
+    public static void getSynthesisSearch(String keywords, int type, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("keywords", keywords);
+        params.put("type", type);
+        RequestCenter.getRequest(HttpConstants.SONG_SEARCH, params, listener, SynthesisSearchBean.class);
+    }
+
+    /**
+     *  获取歌手单曲
+     */
+    public static void getSingerHotSong(long id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.SINGER_HOT_SONG, params, listener, SingerSongSearchBean.class);
+    }
+
+    /**
+     *  歌手专辑
+     */
+    public static void getSingerAlbum(long id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.SINGER_ALBUM, params, listener, SingerAblumSearchBean.class);
+    }
+    /**
+     *  歌手简介
+     */
+    public static void getSingerDesc(long id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.SINGER_DESC, params, listener, SingerDescriptionBean.class);
+    }
+
+    /**
+     *  相似歌手
+     */
+    public static void getSimiSinger(long id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.SINGER_SIMI, params, listener, SimiSingerBean.class);
+    }
+
+    /**
+     *  喜欢音乐列表
+     */
+    public static void getLikeList(long id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.LIKE_LIST, params, listener, LikeListBean.class);
+    }
+
+    /**
+     * 获取歌曲详情
+     *  PS.调用此接口 , 传入音乐 id(支持多个 id, 用 , 隔开), 可获得歌曲详情(注意:歌曲封面现在需要通过专辑内容接口获取)
+     */
+    public static void getSongDetail(long id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("ids", id);
+        RequestCenter.getRequest(HttpConstants.SONG_DETAIL, params, listener, SongDetailBean.class);
+    }
+
+    /**
+     *  喜欢音乐
+     */
+    public static void getlikeMusic(long id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.LIKE_MUSIC, params, listener, LikeMusicBean.class);
+    }
+
+    /**
+     *  歌曲评论
+     */
+    public static void getMusicComment(long id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.MUSIC_COMMENT, params, listener, LikeMusicBean.class);
+    }
+
+    /**
+     *  给评论点赞
+     *  id : 资源 id, 如歌曲 id,mv id
+     *  cid : 评论 id
+     *  t : 是否点赞 ,1 为点赞 ,0 为取消点赞
+     *  tpye: 数字 , 资源类型 , 对应歌曲 , mv, 专辑 , 歌单 , 电台, 视频对应以下类型
+     *  0: 歌曲   1: mv 2: 歌单 3: 专辑 4: 电台 5: 视频 6: 动态
+     *
+     */
+    public static void getlikeComment(long id, long cid, int t, int type, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        params.put("cid", cid);
+        params.put("t", t);
+        params.put("type", type);
+        RequestCenter.getRequest(HttpConstants.COMMENT_LIKE, params, listener, CommentLikeBean.class);
+    }
+
+    /**
+     *  心动模式
+     *  pid : 歌单 id
+     *  可选参数 : sid : 要开始播放的歌曲的 id
+     */
+    public static void getIntelligenceList(long id, long pid, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        params.put("pid", pid);
+        RequestCenter.getRequest(HttpConstants.INTELLIGANCE_LIST, params, listener, PlayModeIntelligenceBean.class);
+    }
+
+    /**
+     * 获取已收藏专辑列表
+     */
+    public static void getAlbumSublist(DisposeDataListener listener){
+
+        RequestCenter.getRequest(HttpConstants.ALBUM_SUBLIST, null, listener, AlbumSublistBean.class);
+    }
+
+    /**
+     *  收藏的歌手列表
+     */
+    public static void getArtistSublist(DisposeDataListener listener){
+
+        RequestCenter.getRequest(HttpConstants.ARTIST_SUBLIST, null, listener, ArtistSublistBean.class);
+    }
+
+    /**
+     *  收藏的MV
+     */
+    public static void getMvSublist(DisposeDataListener listener){
+
+        RequestCenter.getRequest(HttpConstants.MV_SUBLIST, null, listener, MvSublistBean.class);
+    }
+
+    /**
+     * 私人FM
+     */
+    public static void getMyFm(DisposeDataListener listener){
+
+        RequestCenter.getRequest(HttpConstants.PERSONAL_FM, null, listener, MyFmBean.class);
+    }
+
+    /**
+     *  动态
+     */
+    public static void getMainEvent(DisposeDataListener listener){
+
+        RequestCenter.getRequest(HttpConstants.MAIN_EVENT, null, listener, MainEventBean.class);
+    }
+
+    public static void getLyric(long id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.LYRIC, params, listener, LyricBean.class);
+    }
+
+    /**
+     *  歌单评论
+     */
+    public static void getPlaylistComment(long id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.COMMENT_PLAYLIST, params, listener, PlayListCommentBean.class);
+    }
+
+    /**
+     *  电台-付费精选
+     */
+    public static void getRadioPaygift(int limit, int offset, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("limit", limit);
+        params.put("offset", offset);
+        RequestCenter.getRequest(HttpConstants.PAY_GIFT, params, listener, PlayListCommentBean.class);
+    }
+
+    public static void getRadioCategoryRecommend(DisposeDataListener listener){
+
+        RequestCenter.getRequest(HttpConstants.DJ_RECOMMEND, null, listener, PlayListCommentBean.class);
+    }
+
+    /**
+     *  电台分类
+     */
+    public static void getRadioCatelist(DisposeDataListener listener){
+
+        RequestCenter.getRequest(HttpConstants.DJ_CATLIST, null, listener, DjCatelistBean.class);
+    }
+
+    public static void getSubRadio(long rid, int isSub, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("rid", rid);
+        params.put("isSub", isSub);
+        RequestCenter.getRequest(HttpConstants.DJ_SUB, null, listener, DjSubBean.class);
+    }
+
+    /**
+     *  电台节目
+     *  PS.说明 : 登陆后调用此接口 , 传入rid, 可查看对应电台的电台节目以及对应的 id,
+     *  需要 注意的是这个接口返回的 mp3Url 已经无效 , 都为 null, 但是通过调用 /song/url 这 个接口 ,
+     *  传入节目 id 仍然能获取到节目音频 , 如 /song/url?id=478446370 获取代码时间的一个节目的音频
+     *   limit : 返回数量 , 默认为 30
+     *   offset : 偏移数量，用于分页 , 如 :( 页数 -1)*30, 其中 30 为 limit 的值 , 默认为 0
+     *   asc : 排序方式,默认为 false (新 => 老 ) 设置 true 可改为 老 => 新
+     */
+    public static void getRadioProgram(long rid, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("rid", rid);
+        RequestCenter.getRequest(HttpConstants.DJ_PROGRAM, null, listener, DjProgramBean.class);
+    }
+
+    /**
+     *  电台详情
+     */
+    public static void getRadioDetail(long rid, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("rid", rid);
+        RequestCenter.getRequest(HttpConstants.DJ_DETAIL, null, listener, DjDetailBean.class);
     }
 
     /**
