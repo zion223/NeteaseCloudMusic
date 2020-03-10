@@ -7,7 +7,6 @@ public class HttpConstants {
 
     private static final String FORMATE = "json";
     private static final String BASE = "http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&format=" + FORMATE;
-    //private static final String ROOT_URL = "http://imooc.com/api";
     private static final String ROOT_URL = "http://39.97.122.129";
 
     /**
@@ -22,7 +21,7 @@ public class HttpConstants {
     /**
      * 登陆接口
      */
-    static String LOGIN = ROOT_URL + "/module_voice/login_phone";
+    static String LOGIN = ROOT_URL + "/login/cellphone";
 
     /**
      *

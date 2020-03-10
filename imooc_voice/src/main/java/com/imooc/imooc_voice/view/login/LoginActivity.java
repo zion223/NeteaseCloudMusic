@@ -29,20 +29,20 @@ public class LoginActivity extends BaseActivity {
 		findViewById(R.id.login_view).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				RequestCenter.login(new DisposeDataListener() {
-					@Override
-					public void onSuccess(Object responseObj) {
-						User user = (User) responseObj;
-						UserManager.getInstance().saveUser(user);
-						EventBus.getDefault().post(new LoginEvent());
-						finish();
-					}
-
-					@Override
-					public void onFailure(Object reasonObj) {
-
-					}
-				});
+//				RequestCenter.login(new DisposeDataListener() {
+//					@Override
+//					public void onSuccess(Object responseObj) {
+//						User user = (User) responseObj;
+//						UserManager.getInstance().saveUser(user);
+//						EventBus.getDefault().post(new LoginEvent());
+//						finish();
+//					}
+//
+//					@Override
+//					public void onFailure(Object reasonObj) {
+//
+//					}
+//				});
 			}
 		});
 	}
