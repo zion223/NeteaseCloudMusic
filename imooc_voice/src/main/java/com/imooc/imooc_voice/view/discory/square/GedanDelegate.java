@@ -13,7 +13,7 @@ import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.json.GedanJson;
 import com.imooc.imooc_voice.view.discory.GedanAdapter;
-import com.imooc.imooc_voice.view.discory.gedandetail.GedanDetailDelegate;
+import com.imooc.imooc_voice.view.discory.square.gedandetail.GedanDetailDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_network.listener.DisposeDataListener;
 

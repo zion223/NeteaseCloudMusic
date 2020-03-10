@@ -1,7 +1,6 @@
-package com.imooc.imooc_voice.view.discory.gedandetail;
+package com.imooc.imooc_voice.view.discory.square.gedandetail;
 
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;

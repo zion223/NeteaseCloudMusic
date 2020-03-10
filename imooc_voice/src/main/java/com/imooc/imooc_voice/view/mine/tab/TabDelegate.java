@@ -1,12 +1,10 @@
 package com.imooc.imooc_voice.view.mine.tab;
 
-import android.content.ContentUris;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,7 +12,7 @@ import android.widget.ImageView;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.util.PreferencesUtil;
-import com.imooc.imooc_voice.util.SortOrder;
+import com.imooc.imooc_voice.view.home.BaseDelegate;
 import com.imooc.imooc_voice.view.mine.tab.view.SortPopupDialog;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.lxj.xpopup.XPopup;
@@ -46,9 +44,16 @@ public class TabDelegate extends NeteaseDelegate{
 	private TabAdapter mAdapter;
 	private BasePopupView tabMoreDialog;
 	private PreferencesUtil preferencesUtil;
-	private static final String[] mTitleDataList = {"单曲","歌手","专辑","文件夹"};
+	private static final String[] mTitleDataList = {"单曲", "歌手", "专辑", "文件夹"};
 	private static final SortPopupDialog.SortType[] mFramentType =
 			{SortPopupDialog.SortType.SONG, SortPopupDialog.SortType.AITIST, SortPopupDialog.SortType.ALBUM, SortPopupDialog.SortType.FOLDER};
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		//BaseDelegate.mIvDrawerLayout.setOnClickListener(null);
+	}
+
 	@Override
 	public Object setLayout() {
 		return R.layout.delegate_tab;

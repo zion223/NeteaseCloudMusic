@@ -21,7 +21,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50'
     implementation 'com.android.support:recyclerview-v7:25.4.0'
     compileOnly this.rootProject.depsLibs.appcompat
     implementation this.rootProject.depsLibs.eventbus

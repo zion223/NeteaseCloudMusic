@@ -10,7 +10,6 @@ import com.imooc.imooc_voice.view.mine.tab.music.MusicDelegate;
 public class TabAdapter extends FragmentPagerAdapter {
 
 
-
 	public TabAdapter(FragmentManager fm) {
 		super(fm);
 	}

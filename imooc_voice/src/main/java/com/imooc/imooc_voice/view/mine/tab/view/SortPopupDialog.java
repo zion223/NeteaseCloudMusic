@@ -10,7 +10,6 @@ import com.imooc.imooc_voice.util.PreferencesUtil;
 import com.imooc.imooc_voice.util.SortOrder;
 import com.lxj.xpopup.core.CenterPopupView;
 
-import java.math.BigInteger;
 
 public class SortPopupDialog extends CenterPopupView {
 

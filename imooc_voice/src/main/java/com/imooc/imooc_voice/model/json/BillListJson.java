@@ -1,6 +1,8 @@
 package com.imooc.imooc_voice.model.json;
 
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+
 import java.util.ArrayList;
 
 public class BillListJson {
@@ -75,7 +77,7 @@ public class BillListJson {
         this.song_list = song_list;
     }
 
-    public static class BillList {
+    public static class BillList implements MultiItemEntity {
         private String artist_id;
         private String language;
         private String pic_big;
@@ -131,6 +133,12 @@ public class BillListJson {
         private String album_500_500;
         private String album_800_800;
         private String album_1000_1000;
+
+        private int type;
+
+        public void setType(int type) {
+            this.type = type;
+        }
 
         public String getArtist_id() {
             return artist_id;
@@ -356,29 +364,6 @@ public class BillListJson {
             this.info = info;
         }
 
-        public String getHas_filmtv() {
-            return has_filmtv;
-        }
-
-        public void setHas_filmtv(String has_filmtv) {
-            this.has_filmtv = has_filmtv;
-        }
-
-        public String getSi_proxycompany() {
-            return si_proxycompany;
-        }
-
-        public void setSi_proxycompany(String si_proxycompany) {
-            this.si_proxycompany = si_proxycompany;
-        }
-
-        public String getRes_encryption_flag() {
-            return res_encryption_flag;
-        }
-
-        public void setRes_encryption_flag(String res_encryption_flag) {
-            this.res_encryption_flag = res_encryption_flag;
-        }
 
         public String getSong_id() {
             return song_id;
@@ -408,9 +393,6 @@ public class BillListJson {
             return author;
         }
 
-        public void setAuthor(String author) {
-            this.author = author;
-        }
 
         public String getAlbum_id() {
             return album_id;
@@ -571,5 +553,11 @@ public class BillListJson {
         public void setAlbum_1000_1000(String album_1000_1000) {
             this.album_1000_1000 = album_1000_1000;
         }
+
+        @Override
+        public int getItemType() {
+            return type;
+        }
+
     }
 }

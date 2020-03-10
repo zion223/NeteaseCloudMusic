@@ -1,4 +1,4 @@
-package com.imooc.imooc_voice.view.discory;
+package com.imooc.imooc_voice.view.discory.radio;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 
-public class SongSheetDelegate extends NeteaseDelegate {
+public class RadioDelegate extends NeteaseDelegate {
 
 
 	@Override

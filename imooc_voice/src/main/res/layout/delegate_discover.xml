@@ -113,6 +113,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_discover_radio"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -153,7 +154,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/bg_item_spec"
-                    android:src="@drawable/t_dragonball_icn_fm" />
+                    android:src="@drawable/az7" />
 
                 <TextView
                     android:id="@+id/tv_spec_name4"
@@ -195,10 +196,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="15dp"
+                android:padding="5dp"
                 android:background="@drawable/bg_discover_gedan"
                 android:text="歌单广场"
                 android:textColor="@color/black"
-                android:textSize="11sp" />
+                android:textSize="10sp" />
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
@@ -246,7 +248,7 @@
                 android:background="@drawable/bg_discover_gedan"
                 android:text="更多新碟"
                 android:textColor="@color/black"
-                android:textSize="11sp" />
+                android:textSize="10sp" />
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView

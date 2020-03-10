@@ -37,8 +37,6 @@ import butterknife.BindView;
 public class ArtistDelegate extends NeteaseDelegate {
 
 
-	private static final String TAG = "ArtistDelegate";
-
 	@BindView(R2.id.loadframe)
 	FrameLayout frameLayout;
 	private View rootview;

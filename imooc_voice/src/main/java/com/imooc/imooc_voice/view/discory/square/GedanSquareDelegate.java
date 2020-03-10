@@ -2,7 +2,6 @@ package com.imooc.imooc_voice.view.discory.square;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,9 +12,7 @@ import android.widget.LinearLayout;
 
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
-import com.imooc.imooc_voice.model.CHANNEL;
 import com.imooc.imooc_voice.model.SquareCHANNEL;
-import com.imooc.imooc_voice.view.mine.tab.TabAdapter;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;

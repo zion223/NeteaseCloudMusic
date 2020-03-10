@@ -405,10 +405,15 @@ public class HttpConstants {
      */
     public static class Billboard {
 
+        public static final int BILLBOARD_NEW_MUSIC = 1;
+        public static final int BILLBOARD_ORIGINAL = 200;
+        public static final int BILLBOARD_HOT_MUSIC = 2;
+        public static final int BILLBOARD_EU_UK = 21;
+        public static final int BILLBOARD_NET_MUSIC = 25;
+        public static final int BILLBOARD_KING = 100;
         /**
          * 所有音乐榜类别
          *
-         * @return
          */
         public static String billCategory() {
             StringBuffer sb = new StringBuffer(BASE);
@@ -424,17 +429,17 @@ public class HttpConstants {
          * @param type   类型
          * @param offset 偏移
          * @param size   获取数量
-         * @return
          */
         public static String billSongList(int type, int offset, int size) {
             StringBuffer sb = new StringBuffer(BASE);
             sb.append("&method=").append("baidu.ting.billboard.billList")
                     .append("&type=").append(type)
                     .append("&offset=").append(offset)
-                    .append("&size=").append(size)
-                    .append("&fields=").append(encode("song_id,title,author,album_title,pic_big,pic_small,havehigh,all_rate,charge,has_mv_mobile,learn,song_source,korean_bb_song"));
+                    .append("&size=").append(size);
+                    //.append("&fields=").append(encode("song_id,title,author,album_title,pic_big,pic_small,havehigh,all_rate,charge,has_mv_mobile,learn,song_source,korean_bb_song"));
             return sb.toString();
         }
+
     }
 
     /**

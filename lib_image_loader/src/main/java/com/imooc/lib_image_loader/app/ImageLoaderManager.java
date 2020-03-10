@@ -162,7 +162,38 @@ public class ImageLoaderManager {
 					}
 				});
 	}
-
+	public void displayImageForViewGroup(final ImageView view, String url, final int radius) {
+		Glide.with(view.getContext())
+				.asBitmap()
+				.load(url)
+				.apply(initCommonRequestOption())
+				.into(new SimpleTarget<Bitmap>() {//设置宽高
+					@Override
+					public void onResourceReady(@NonNull Bitmap resource,
+												@Nullable Transition<? super Bitmap> transition) {
+						final Bitmap res = resource;
+						Disposable subscribe = Observable.just(resource)
+								.map(new Function<Bitmap, Drawable>() {
+									@Override
+									public Drawable apply(Bitmap bitmap) {
+										Drawable drawable = new BitmapDrawable(
+												//毛玻璃效果
+												ImageUtils.doBlur(res, radius, true)
+										);
+										return drawable;
+									}
+								})
+								.subscribeOn(Schedulers.io())
+								.observeOn(AndroidSchedulers.mainThread())
+								.subscribe(new Consumer<Drawable>() {
+									@Override
+									public void accept(Drawable drawable) throws Exception {
+										view.setBackground(drawable);
+									}
+								});
+					}
+				});
+	}
 	public void displayImageForNotification(Context context, RemoteViews rv, int id,
 											Notification notification, int NOTIFICATION_ID, String url) {
 		this.displayImageForTarget(context,

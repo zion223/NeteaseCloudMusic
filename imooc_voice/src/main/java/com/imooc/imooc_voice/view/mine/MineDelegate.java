@@ -16,9 +16,7 @@ import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.model.mine.SpecData;
 import com.imooc.imooc_voice.view.mine.tab.TabDelegate;
-import com.imooc.lib_common_ui.circle_image_view.CircleImageView;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
-import com.imooc.lib_image_loader.app.ImageLoaderManager;
 
 import java.util.ArrayList;
 import java.util.List;

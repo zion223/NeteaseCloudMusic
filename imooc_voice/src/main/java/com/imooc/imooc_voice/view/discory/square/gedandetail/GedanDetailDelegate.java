@@ -1,4 +1,4 @@
-package com.imooc.imooc_voice.view.discory.gedandetail;
+package com.imooc.imooc_voice.view.discory.square.gedandetail;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -50,6 +50,9 @@ public class GedanDetailDelegate extends NeteaseDelegate {
 	RelativeLayout mRlToolbar;
 	@BindView(R2.id.collapsing_toolbar_layout)
 	CollapsingToolbarLayout mCollspsingToolbar;
+	@BindView(R2.id.iv_gedan_detail_img_cover)
+	ImageView mIvAppbarBackground;
+
 	private GedanDetailAdapter mAdapter;
 	private ImageLoaderManager manager;
 
@@ -96,8 +99,11 @@ public class GedanDetailDelegate extends NeteaseDelegate {
 				//mCollspsingToolbar 透明度变化 0- 660  i/660
 				DecimalFormat df = new DecimalFormat("0.0");
 				float num = (float)(Math.abs(i)) / (float)440;
-				float alpha = (1 - num) * 255;
+				//float alpha = (1 - num) * 255;
+				int alpha = (int) (num * 255);
+				//int alphaa = Integer.parseInt(String.valueOf(s.split(".")[0]));
 				//mCollspsingToolbar.setAlpha(alpha);
+				mIvAppbarBackground.setImageAlpha(alpha);
 
 			}
 		});
@@ -111,7 +117,8 @@ public class GedanDetailDelegate extends NeteaseDelegate {
 				mTvDetailTag.setText(json.getTag());
 				manager.displayImageForCorner(mImageViewGedan, json.getPic300(), 5);
 				//毛玻璃效果背景
-				manager.displayImageForViewGroup(mAppBarLayout, json.getPic300(), 200);
+				//manager.displayImageForViewGroup(mAppBarLayout, json.getPic300(), 200);
+				manager.displayImageForViewGroup(mIvAppbarBackground, json.getPic300(), 500);
 				ArrayList<GedanDetailJson.GeDanDetail> content = json.getContent();
 				mAdapter = new GedanDetailAdapter(content);
 				mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {

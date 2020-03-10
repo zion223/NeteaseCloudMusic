@@ -17,7 +17,7 @@ import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.json.BillListJson;
 import com.imooc.imooc_voice.model.json.FocusJson;
 import com.imooc.imooc_voice.model.json.GedanJson;
-import com.imooc.imooc_voice.view.discory.gedandetail.GedanDetailDelegate;
+import com.imooc.imooc_voice.view.discory.square.gedandetail.GedanDetailDelegate;
 import com.imooc.imooc_voice.view.discory.square.GedanSquareDelegate;
 import com.imooc.lib_common_ui.bannder.BannerCreator;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
@@ -192,6 +192,10 @@ public class DiscoverDelegate extends NeteaseDelegate {
 		changeAlbumOrSong(ALBUM_OR_SONG);
 	}
 
+	@OnClick(R2.id.ll_discover_radio)
+	void onClickRadio(){
+
+	}
 
 	void changeAlbumOrSong(int type){
 		if(type ==0){

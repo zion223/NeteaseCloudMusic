@@ -11,7 +11,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageView;
 
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
@@ -24,7 +23,6 @@ import com.imooc.imooc_voice.view.search.SearchDelegate;
 import com.imooc.lib_audio.app.AudioHelper;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
-import com.imooc.lib_image_loader.app.ImageLoaderManager;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -40,6 +38,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class HomeDelegate extends NeteaseDelegate implements View.OnClickListener {
 
@@ -57,6 +56,8 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 	ViewPager mViewPager;
 	@BindView(R2.id.magic_indicator)
 	MagicIndicator magicIndicator;
+	@BindView(R2.id.base_drawer_layout)
+	DrawerLayout mDrawerLayout;
 
 
 	private HomePagerAdapter mAdapter;
@@ -155,9 +156,6 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 					//mDrawerLayout.closeDrawer(Gravity.LEFT);
 				}
 				break;
-			case R.id.toggle_view:
-
-				break;
 			case R.id.search_view:
 				getSupportDelegate().start(new SearchDelegate());
 				break;
@@ -180,5 +178,16 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 	@Override
 	public void post(Runnable runnable) {
 
+	}
+
+	@OnClick(R2.id.toggle_view)
+	void ClickToggle(){
+		if (mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
+			mDrawerLayout.closeDrawer(Gravity.LEFT);
+			BaseDelegate.musicView.getBackground().setAlpha(255);
+		} else {
+			mDrawerLayout.openDrawer(Gravity.LEFT);
+			BaseDelegate.musicView.getBackground().setAlpha(122);
+		}
 	}
 }

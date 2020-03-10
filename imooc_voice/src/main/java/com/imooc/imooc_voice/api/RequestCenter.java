@@ -119,4 +119,12 @@ public class RequestCenter {
     public static void queryGedanDetail(String id , DisposeDataListener listener){
         RequestCenter.getRequest(HttpConstants.GeDan.geDanInfo(id), null, listener, GedanDetailJson.class);
     }
+
+    /*
+     *  查询榜单歌曲(3首)
+     */
+    public static void queryRankingSong(int type , DisposeDataListener listener){
+        RequestCenter.getRequest(HttpConstants.Billboard.billSongList(type, 0, 3), null, listener, GedanDetailJson.class);
+    }
+
 }
