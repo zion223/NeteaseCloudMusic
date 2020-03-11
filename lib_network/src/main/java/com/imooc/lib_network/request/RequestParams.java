@@ -58,12 +58,17 @@ public class RequestParams {
         }
     }
 
-    public void put(String key, Object object)  {
-
-        if (key != null) {
-            fileParams.put(key, object);
+    public void put(String key, Object value) {
+        if (key != null ) {
+            urlParams.put(key, String.valueOf(value));
         }
     }
+//    private void put(String key, Object object)  {
+//
+//        if (key != null) {
+//            fileParams.put(key, object);
+//        }
+//    }
 
     public boolean hasParams() {
         if(urlParams.size() > 0 || fileParams.size() > 0){

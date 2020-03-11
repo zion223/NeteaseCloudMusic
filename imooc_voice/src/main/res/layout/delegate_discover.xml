@@ -32,6 +32,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/ll_discover_daily_recommend"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -86,6 +87,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_discover_rank"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -153,8 +155,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center_horizontal"
-                    android:background="@drawable/bg_item_spec"
-                    android:src="@drawable/az7" />
+                    android:background="@drawable/ic_mine_fm" />
 
                 <TextView
                     android:id="@+id/tv_spec_name4"

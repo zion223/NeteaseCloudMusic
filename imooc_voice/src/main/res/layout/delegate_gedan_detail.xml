@@ -76,18 +76,28 @@
                             android:layout_alignTop="@+id/iv_gedan_detail_img"
                             android:layout_marginLeft="20dp"
                             android:layout_toRightOf="@+id/iv_gedan_detail_img"
+                            android:layout_marginRight="10dp"
                             android:maxLines="2"
                             android:text="80怀旧经典I Vol.3"
                             android:textColor="@color/white"
-                            android:textSize="18sp"
+                            android:textSize="17sp"
                             android:textStyle="bold" />
 
+                        <ImageView
+                            android:id="@+id/iv_gedan_detail_avatar_img"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_alignLeft="@+id/tv_gedan_detail_title"
+                            android:layout_below="@+id/tv_gedan_detail_title"
+                            android:src="@drawable/test"/>
                         <TextView
-                            android:id="@+id/tv_gedan_detail_tag"
+                            android:id="@+id/tv_gedan_detail_avatar_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tv_gedan_detail_title"
                             android:layout_alignLeft="@+id/tv_gedan_detail_title"
+                            android:layout_marginLeft="30dp"
                             android:layout_marginTop="20dp"
                             android:text="华语流行 华语怀旧"
                             android:textColor="@color/white" />
@@ -96,7 +106,6 @@
                             android:id="@+id/tv_gedan_detail_desc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/tv_gedan_detail_tag"
                             android:layout_alignLeft="@+id/tv_gedan_detail_title"
                             android:layout_alignBottom="@+id/iv_gedan_detail_img"
                             android:gravity="bottom"
@@ -128,6 +137,7 @@
                                 android:src="@drawable/bgr" />
 
                             <TextView
+                                android:id="@+id/tv_gedan_detail_comment_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -149,32 +159,12 @@
                                 android:src="@drawable/bge" />
 
                             <TextView
+                                android:id="@+id/tv_gedan_detail_share_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
                                 android:gravity="bottom"
-                                android:text="分享"
-                                android:textColor="@color/white" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="35dp"
-                                android:layout_height="35dp"
-                                android:layout_gravity="center_vertical"
-                                android:src="@drawable/bga" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="5dp"
-                                android:text="收藏"
+                                android:text="1236"
                                 android:textColor="@color/white" />
                         </LinearLayout>
 
@@ -196,6 +186,27 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="5dp"
                                 android:text="下载"
+                                android:textColor="@color/white" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_gravity="center_vertical"
+                                android:src="@drawable/bgt" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="5dp"
+                                android:text="多选"
                                 android:textColor="@color/white" />
                         </LinearLayout>
                     </LinearLayout>
@@ -260,12 +271,7 @@
                             android:textSize="8sp" />
                     </RelativeLayout>
                 </android.support.v7.widget.Toolbar>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="230dp"
-                    android:background="@drawable/bg_dailyrecommend"
-                    app:layout_collapseMode="pin" />
+
             </android.support.design.widget.CollapsingToolbarLayout>
 
             <LinearLayout

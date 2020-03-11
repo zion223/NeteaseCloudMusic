@@ -63,20 +63,20 @@ public class FriendFragment extends NeteaseDelegate implements SwipeRefreshLayou
 
 	private void requestData(){
 
-		RequestCenter.requestFriendData(new DisposeDataListener() {
-			@Override
-			public void onSuccess(Object responseObj) {
-				mRecommandData = (BaseFriendModel) responseObj;
-				mDatas = mRecommandData.data.list;
-				mAdapter = new FriendAdapter(mDatas);
-				mRecyclerView.setAdapter(mAdapter);
-				mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-			}
-
-			@Override
-			public void onFailure(Object reasonObj) {
-
-			}
-		});
+//		RequestCenter.requestFriendData(new DisposeDataListener() {
+//			@Override
+//			public void onSuccess(Object responseObj) {
+//				mRecommandData = (BaseFriendModel) responseObj;
+//				mDatas = mRecommandData.data.list;
+//				mAdapter = new FriendAdapter(mDatas);
+//				mRecyclerView.setAdapter(mAdapter);
+//				mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//			}
+//
+//			@Override
+//			public void onFailure(Object reasonObj) {
+//
+//			}
+//		});
 	}
 }

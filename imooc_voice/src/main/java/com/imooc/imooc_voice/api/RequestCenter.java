@@ -112,16 +112,24 @@ public class RequestCenter {
     }
 
     /**
-     *  获取Banner
+     *  获取发现页面Banner
+     *   PS. 0: pc 1: android 2: iphone 3: ipad
      */
     public static void getBanner(int type, DisposeDataListener listener){
         RequestParams params = new RequestParams();
-        params.put("type", type);
-        RequestCenter.getRequest(HttpConstants.LOGOUT, params, listener, BannerBean.class);
+        params.put("type", String.valueOf(type));
+        RequestCenter.getRequest(HttpConstants.BANNER, params, listener, BannerBean.class);
     }
 
     /**
-     *  首页推荐歌单的ban
+     *  获取电台Banner
+     */
+    public static void getRadioBanner( DisposeDataListener listener){
+        RequestCenter.getRequest(HttpConstants.RADIO_BANNER, null, listener, BannerBean.class);
+    }
+
+    /**
+     *  首页推荐歌单的ban 需要登录
      */
     public static void getRecommendPlayList(DisposeDataListener listener){
         RequestCenter.getRequest(HttpConstants.RECOMMAND_PLAYLIST, null, listener, MainRecommendPlayListBean.class);
@@ -158,7 +166,7 @@ public class RequestCenter {
     public static void getPlayList(String type, int limit, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
         params.put("cat", type);
-        params.put("limit", limit);
+        params.put("limit", String.valueOf(limit));
         RequestCenter.getRequest(HttpConstants.RECOMMEND_PLAY_LIST, params, listener, RecommendPlayListBean.class);
     }
 
@@ -179,7 +187,7 @@ public class RequestCenter {
     /**
      *  歌单详情
      */
-    public static void getPlaylistDetail(long id, DisposeDataListener listener){
+    public static void getPlaylistDetail(String id, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("id", id);
         RequestCenter.getRequest(HttpConstants.PLAY_LIST_DETAIL, params, listener, PlaylistDetailBean.class);
@@ -195,11 +203,11 @@ public class RequestCenter {
     }
 
     /**
-     *  用户收藏的歌单
+     *  用户的歌单 创建的歌单和收藏的歌单
      */
     public static void getUserPlaylist(long uid, DisposeDataListener listener){
         RequestParams params = new RequestParams();
-        params.put("id", uid);
+        params.put("uid", uid);
         RequestCenter.getRequest(HttpConstants.USER_PLAY_LIST, params, listener, UserPlaylistBean.class);
     }
 
@@ -334,7 +342,7 @@ public class RequestCenter {
      * 获取歌曲详情
      *  PS.调用此接口 , 传入音乐 id(支持多个 id, 用 , 隔开), 可获得歌曲详情(注意:歌曲封面现在需要通过专辑内容接口获取)
      */
-    public static void getSongDetail(long id, DisposeDataListener listener){
+    public static void getSongDetail(String id, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("ids", id);
         RequestCenter.getRequest(HttpConstants.SONG_DETAIL, params, listener, SongDetailBean.class);

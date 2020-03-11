@@ -11,8 +11,8 @@
         android:layout_height="100dp"
         android:src="@drawable/test"/>
     <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
         android:layout_toLeftOf="@+id/tv_item_discover_playnum"
         android:src="@drawable/note_btn_play_ms"/>
     <TextView
@@ -22,6 +22,7 @@
         android:textColor="@color/white"
         android:layout_alignRight="@+id/iv_item_discover"
         android:layout_marginRight="5dp"
+        android:textSize="12sp"
         android:text="11万"/>
     <TextView
         android:id="@+id/tv_item_discover_des"

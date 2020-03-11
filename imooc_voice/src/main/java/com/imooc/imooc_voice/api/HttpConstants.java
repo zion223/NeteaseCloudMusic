@@ -7,7 +7,9 @@ public class HttpConstants {
 
     private static final String FORMATE = "json";
     private static final String BASE = "http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&format=" + FORMATE;
-    private static final String ROOT_URL = "http://39.97.122.129";
+    //private static final String ROOT_URL = "http://39.97.122.129";
+    //private static final String ROOT_URL = "http://192.168.1.54:3000";
+    private static final String ROOT_URL = "http://cy3xr6.natappfree.cc";
 
     /**
      * 首页请求接口
@@ -24,6 +26,10 @@ public class HttpConstants {
     static String LOGIN = ROOT_URL + "/login/cellphone";
 
     static String LOGOUT = ROOT_URL + "/logout";
+
+    static String BANNER = ROOT_URL + "/banner";
+
+    static String RADIO_BANNER = ROOT_URL + "/dj/banner";
 
     static String RECOMMAND_PLAYLIST = ROOT_URL + "/recommend/resource";
 

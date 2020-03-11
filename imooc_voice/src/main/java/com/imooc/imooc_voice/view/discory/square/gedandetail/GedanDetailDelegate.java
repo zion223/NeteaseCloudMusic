@@ -18,12 +18,14 @@ import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.json.GedanDetailJson;
+import com.imooc.imooc_voice.model.newapi.PlaylistDetailBean;
+import com.imooc.imooc_voice.model.newapi.song.SongDetailBean;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -40,8 +42,8 @@ public class GedanDetailDelegate extends NeteaseDelegate {
 	TextView mTvDetailTitle;
 	@BindView(R2.id.tv_gedan_detail_desc)
 	TextView mTvDetailDesc;
-	@BindView(R2.id.tv_gedan_detail_tag)
-	TextView mTvDetailTag;
+	@BindView(R2.id.tv_gedan_detail_avatar_name)
+	TextView mTvDetailAvatarName;
 	@BindView(R2.id.toolbar_gedan_detail)
 	Toolbar mToolBar;
 	@BindView(R2.id.iv_gedan_detail_img)
@@ -52,6 +54,14 @@ public class GedanDetailDelegate extends NeteaseDelegate {
 	CollapsingToolbarLayout mCollspsingToolbar;
 	@BindView(R2.id.iv_gedan_detail_img_cover)
 	ImageView mIvAppbarBackground;
+	@BindView(R2.id.iv_gedan_detail_avatar_img)
+	ImageView mIvAvatarView;
+	@BindView(R2.id.tv_gedan_detail_playnum)
+	TextView mTvGedanPlayNum;
+	@BindView(R2.id.tv_gedan_detail_share_count)
+	TextView mTvShareCount;
+	@BindView(R2.id.tv_gedan_detail_comment_count)
+	TextView mTvCommentCount;
 
 	private GedanDetailAdapter mAdapter;
 	private ImageLoaderManager manager;
@@ -108,29 +118,63 @@ public class GedanDetailDelegate extends NeteaseDelegate {
 			}
 		});
 
-		RequestCenter.queryGedanDetail(id, new DisposeDataListener() {
+		RequestCenter.getPlaylistDetail(id, new DisposeDataListener() {
 			@Override
 			public void onSuccess(Object responseObj) {
-				GedanDetailJson json = (GedanDetailJson) responseObj;
-				mTvDetailTitle.setText(json.getTitle());
-				mTvDetailDesc.setText(json.getDesc());
-				mTvDetailTag.setText(json.getTag());
-				manager.displayImageForCorner(mImageViewGedan, json.getPic300(), 5);
+				PlaylistDetailBean json = (PlaylistDetailBean) responseObj;
+				mTvDetailTitle.setText(json.getPlaylist().getName());
+				mTvDetailDesc.setText(json.getPlaylist().getDescription());
+				mTvDetailAvatarName.setText(json.getPlaylist().getCreator().getNickname());
+				mTvGedanPlayNum.setText(json.getPlaylist().getPlayCount()/10000 + "万");
+				manager.displayImageForCircle(mIvAvatarView, json.getPlaylist().getCreator().getAvatarUrl());
+
+				manager.displayImageForCorner(mImageViewGedan, json.getPlaylist().getCoverImgUrl(), 5);
+				mTvShareCount.setText(json.getPlaylist().getShareCount());
+				mTvCommentCount.setText(json.getPlaylist().getCommentCount());
 				//毛玻璃效果背景
-				//manager.displayImageForViewGroup(mAppBarLayout, json.getPic300(), 200);
-				manager.displayImageForViewGroup(mIvAppbarBackground, json.getPic300(), 500);
-				ArrayList<GedanDetailJson.GeDanDetail> content = json.getContent();
-				mAdapter = new GedanDetailAdapter(content);
-				mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+				manager.displayImageForViewGroup(mAppBarLayout, json.getPlaylist().getCoverImgUrl(), 200);
+				String params = "";
+				List<PlaylistDetailBean.PlaylistBean.TrackIdsBean> trackIds = json.getPlaylist().getTrackIds();
+				for(int i=0;i<trackIds.size();i++){
+					params = trackIds.get(i).getId() + ",";
+				}
+				RequestCenter.getSongDetail(params, new DisposeDataListener() {
 					@Override
-					public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-						GedanDetailJson.GeDanDetail item = (GedanDetailJson.GeDanDetail) adapter.getItem(position);
-						String songId = item.getSongid();
-						//加入播放队列
+					public void onSuccess(Object responseObj) {
+						SongDetailBean bean = (SongDetailBean) responseObj;
+						List<SongDetailBean.SongsBean> songs = bean.getSongs();
+						mAdapter = new GedanDetailAdapter(songs);
+						mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+							@Override
+							public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+								SongDetailBean.SongsBean item = (SongDetailBean.SongsBean) adapter.getItem(position);
+
+								//TODO 加入播放队列
+							}
+						});
+						mRecyclerViewGedan.setAdapter(mAdapter);
+						mRecyclerViewGedan.setLayoutManager(new LinearLayoutManager(getContext()));
+					}
+
+					@Override
+					public void onFailure(Object reasonObj) {
+
 					}
 				});
-				mRecyclerViewGedan.setAdapter(mAdapter);
-				mRecyclerViewGedan.setLayoutManager(new LinearLayoutManager(getContext()));
+
+//				manager.displayImageForViewGroup(mIvAppbarBackground, json.getPic300(), 500);
+//				ArrayList<GedanDetailJson.GeDanDetail> content = json.getContent();
+//				mAdapter = new GedanDetailAdapter(content);
+//				mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+//					@Override
+//					public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+//						GedanDetailJson.GeDanDetail item = (GedanDetailJson.GeDanDetail) adapter.getItem(position);
+//						String songId = item.getSongid();
+//						//加入播放队列
+//					}
+//				});
+//				mRecyclerViewGedan.setAdapter(mAdapter);
+//				mRecyclerViewGedan.setLayoutManager(new LinearLayoutManager(getContext()));
 			}
 
 			@Override

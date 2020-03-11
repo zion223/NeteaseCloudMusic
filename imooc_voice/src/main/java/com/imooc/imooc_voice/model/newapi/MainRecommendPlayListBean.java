@@ -4,7 +4,6 @@ import java.util.List;
 
 /**
  * 首页推荐歌单的ban
- * Created By Rikka on 2019/7/15
  */
 public class MainRecommendPlayListBean {
 

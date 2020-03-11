@@ -59,16 +59,16 @@ public class GedanDelegate extends NeteaseDelegate {
 		RequestCenter.queryGeDanByTag(tag, 1, 20, new DisposeDataListener() {
 			@Override
 			public void onSuccess(Object responseObj) {
-				GedanJson json = (GedanJson) responseObj;
-				ArrayList<GedanJson.GeDan> content = json.getContent();
-				mAdapter = new GedanAdapter(content);
-				mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-					@Override
-					public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-						GedanJson.GeDan item = (GedanJson.GeDan) adapter.getItem(position);
-						getParentDelegate().getSupportDelegate().start(GedanDetailDelegate.newInstance(item.getListid()));
-					}
-				});
+//				GedanJson json = (GedanJson) responseObj;
+//				ArrayList<GedanJson.GeDan> content = json.getContent();
+//				mAdapter = new GedanAdapter(content);
+//				mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+//					@Override
+//					public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+//						GedanJson.GeDan item = (GedanJson.GeDan) adapter.getItem(position);
+//						getParentDelegate().getSupportDelegate().start(GedanDetailDelegate.newInstance(item.getListid()));
+//					}
+//				});
 				mRecyclerViewGedan.setAdapter(mAdapter);
 				mRecyclerViewGedan.setLayoutManager(manager);
 			}

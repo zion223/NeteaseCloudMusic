@@ -11,6 +11,8 @@ public interface Constants {
 
         String USER_INFO = "userInfo";
 
+        String USER_ID = "userId";
+
         String PHONE_NUMBER = "phoneNumber";
 
         String LATEST_SONG = "latestSong";

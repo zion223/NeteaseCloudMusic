@@ -11,20 +11,27 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.model.CHANNEL;
 import com.imooc.imooc_voice.model.login.LoginEvent;
+import com.imooc.imooc_voice.model.newapi.LoginBean;
+import com.imooc.imooc_voice.util.GsonUtil;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
 import com.imooc.imooc_voice.view.home.adapter.HomePagerAdapter;
 import com.imooc.imooc_voice.view.home.title.ScaleTransitionPagerTitleView;
-import com.imooc.imooc_voice.view.login.LoginActivity;
-import com.imooc.imooc_voice.view.login.UserManager;
+import com.imooc.imooc_voice.view.login.LoginDelegate;
 import com.imooc.imooc_voice.view.search.SearchDelegate;
 import com.imooc.lib_audio.app.AudioHelper;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
+import com.imooc.lib_common_ui.circle_image_view.CircleImageView;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
+import com.imooc.lib_image_loader.app.ImageLoaderManager;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -60,6 +67,14 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 	MagicIndicator magicIndicator;
 	@BindView(R2.id.base_drawer_layout)
 	DrawerLayout mDrawerLayout;
+	@BindView(R2.id.avatr_view)
+	ImageView mAvatarView;
+	@BindView(R2.id.avatar_name)
+	TextView mAvatarName;
+	@BindView(R2.id.rl_main_avatar)
+	RelativeLayout mRlAvatar;
+	@BindView(R2.id.unloggin_layout)
+	LinearLayout mLlUnLoggin;
 
 	private SharePreferenceUtil sharePreferenceUtil;
 
@@ -75,6 +90,17 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 		initView();
 		initData();
 		sharePreferenceUtil = SharePreferenceUtil.getInstance(getContext());
+		LoginBean bean = GsonUtil.fromJSON(sharePreferenceUtil.getUserInfo(""), LoginBean.class);
+		if(bean != null){
+			mRlAvatar.setVisibility(View.VISIBLE);
+			mLlUnLoggin.setVisibility(View.GONE);
+			ImageLoaderManager.getInstance().displayImageForCircle(mAvatarView, bean.getProfile().getAvatarUrl());
+			mAvatarName.setText(bean.getProfile().getNickname());
+		}else{
+			mRlAvatar.setVisibility(View.GONE);
+			mLlUnLoggin.setVisibility(View.VISIBLE);
+		}
+
 	}
 
 	private void initData() {
@@ -145,7 +171,7 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 		});
 		magicIndicator.setNavigator(commonNavigator);
 		ViewPagerHelper.bind(magicIndicator, mViewPager);
-
+		mViewPager.setCurrentItem(1);
 	}
 
 	@Override
@@ -155,7 +181,7 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 			case R.id.unloggin_layout:
 				if (sharePreferenceUtil.getAuthToken("").equals("")) {
 					//跳转到LoginActivity
-					LoginActivity.start(getContext());
+					getSupportDelegate().start(new LoginDelegate());
 				} else {
 					mDrawerLayout.closeDrawer(Gravity.LEFT);
 				}

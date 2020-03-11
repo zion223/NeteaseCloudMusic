@@ -65,6 +65,7 @@ public class SharePreferenceUtil {
         if (bean.getBindings().size() > 1) {
             saveAuthToken(bean.getBindings().get(1).getTokenJsonStr());
         }
+        saveUserId(String.valueOf(bean.getProfile().getUserId()));
         saveAccountNum(phoneNumber);
         saveString(Constants.SpKey.USER_INFO, GsonUtil.toJson(bean));
     }
@@ -75,6 +76,13 @@ public class SharePreferenceUtil {
 
     private void saveAccountNum(String phoneNumber) {
         saveString(Constants.SpKey.PHONE_NUMBER, phoneNumber);
+    }
+
+    private void saveUserId(String id) {
+        saveString(Constants.SpKey.USER_ID, id);
+    }
+    private void getUserId(String id) {
+        getString(Constants.SpKey.USER_ID, id);
     }
 
     public String getAccountNum() {

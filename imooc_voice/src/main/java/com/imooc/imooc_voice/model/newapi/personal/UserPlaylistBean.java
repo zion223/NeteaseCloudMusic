@@ -1,11 +1,16 @@
 package com.imooc.imooc_voice.model.newapi.personal;
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+
 import java.util.List;
 
 /**
  * 通过接口获取的用户收藏歌单
  */
 public class UserPlaylistBean {
+
+
+
     private boolean more;
     private int code;
     private List<PlaylistBean> playlist;
@@ -71,6 +76,8 @@ public class UserPlaylistBean {
          * id : 592471964
          * coverImgId_str : 109951163920229500
          */
+        public static final int TYPE_CREATE = 0;
+        public static final int TYPE_COLLECT = 1;
 
         private boolean subscribed;
         private CreatorBean creator;
