@@ -696,7 +696,7 @@ public class PlaylistDetailBean {
             private int gender;
             private int city;
             private long birthday;
-            private int userId;
+            private long userId;
             private int userType;
             private String nickname;
             private String signature;
@@ -788,7 +788,7 @@ public class PlaylistDetailBean {
                 this.birthday = birthday;
             }
 
-            public int getUserId() {
+            public long getUserId() {
                 return userId;
             }
 

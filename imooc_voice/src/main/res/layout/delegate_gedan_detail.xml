@@ -124,6 +124,7 @@
                         android:layout_marginBottom="5dp">
 
                         <LinearLayout
+                            android:id="@+id/ll_gedan_detail_comment"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="30dp"
@@ -250,8 +251,8 @@
 
                         <TextView
                             android:id="@+id/tv_gedan_detail_toolbar_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="200dp"
+                            android:layout_height="30dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="10dp"
                             android:layout_toRightOf="@+id/img_gedan_detail_back"
@@ -288,6 +289,7 @@
                     android:src="@drawable/any" />
 
                 <TextView
+                    android:id="@+id/tv_gedan_detaill_all_play"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -297,6 +299,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tv_gedan_detail_song_num"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -318,6 +321,7 @@
                         android:src="@drawable/plus" />
 
                     <TextView
+                        android:id="@+id/tv_gedan_detail_collect_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"

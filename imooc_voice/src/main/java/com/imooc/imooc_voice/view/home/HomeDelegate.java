@@ -26,10 +26,9 @@ import com.imooc.imooc_voice.util.SharePreferenceUtil;
 import com.imooc.imooc_voice.view.home.adapter.HomePagerAdapter;
 import com.imooc.imooc_voice.view.home.title.ScaleTransitionPagerTitleView;
 import com.imooc.imooc_voice.view.login.LoginDelegate;
-import com.imooc.imooc_voice.view.search.SearchDelegate;
+import com.imooc.imooc_voice.view.home.search.SearchDelegate;
 import com.imooc.lib_audio.app.AudioHelper;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
-import com.imooc.lib_common_ui.circle_image_view.CircleImageView;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 

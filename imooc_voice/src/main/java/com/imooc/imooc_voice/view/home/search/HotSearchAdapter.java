@@ -1,4 +1,4 @@
-package com.imooc.imooc_voice.view.search;
+package com.imooc.imooc_voice.view.home.search;
 
 import android.graphics.Color;
 import android.graphics.Typeface;

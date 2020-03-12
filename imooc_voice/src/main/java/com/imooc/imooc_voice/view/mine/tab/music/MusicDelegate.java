@@ -26,6 +26,7 @@ import com.imooc.lib_audio.mediaplayer.core.AudioController;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_common_ui.app.Netease;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
+import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class MusicDelegate extends NeteaseDelegate {
+public class MusicDelegate extends NeteaseLoadingDelegate {
 
 	private static final String TAG = "MusicDelegate";
 	/**
@@ -53,22 +54,10 @@ public class MusicDelegate extends NeteaseDelegate {
 	private boolean isFirstLoad;
 	private int currentMusicPosition = -1;
 
-	@Override
-	public Object setLayout() {
-		return R.layout.delegate_music_load_framelayout;
-	}
-
 
 	@Override
 	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
-		final View loadView = LayoutInflater.from(getContext()).inflate(R.layout.delegate_normal_loading, frameLayout, false);
-		ImageView anim1 = loadView.findViewById(R.id.anim_image2);
-		ImageView anim2 = loadView.findViewById(R.id.anim_image);
-		AnimationDrawable animationDrawable = (AnimationDrawable)anim1.getDrawable();
-		AnimationDrawable animation2Drawable = (AnimationDrawable)anim2.getDrawable();
-		animationDrawable.start();
-		animation2Drawable.start();
-		frameLayout.addView(loadView);
+		super.onBindView(savedInstanceState, view);
 		//显示loading效果
 		Netease.getHandler().postDelayed(new Runnable() {
 			@Override
@@ -126,6 +115,7 @@ public class MusicDelegate extends NeteaseDelegate {
 			@Override
 			protected void onPostExecute(Void aVoid) {
 				mAdapter.notifyDataSetChanged();
+				//避免第二次加载时执行
 				if(isFirstLoad){
 					frameLayout.removeAllViews();
 					ViewGroup p = (ViewGroup) rootview.getParent();

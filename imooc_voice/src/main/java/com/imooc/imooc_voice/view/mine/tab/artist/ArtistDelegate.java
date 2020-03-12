@@ -26,6 +26,7 @@ import com.imooc.imooc_voice.model.info.ArtistInfo;
 import com.imooc.imooc_voice.util.MusicUtils;
 import com.imooc.lib_common_ui.app.Netease;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
+import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
@@ -34,7 +35,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class ArtistDelegate extends NeteaseDelegate {
+public class ArtistDelegate extends NeteaseLoadingDelegate {
 
 
 	@BindView(R2.id.loadframe)
@@ -51,21 +52,11 @@ public class ArtistDelegate extends NeteaseDelegate {
 	private ArtistAdapter mAdapter;
 	private ImageLoaderManager imageLoaderManager;
 
-	@Override
-	public Object setLayout() {
-		return R.layout.delegate_music_load_framelayout;
-	}
+
 
 	@Override
 	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
-		final View loadView = LayoutInflater.from(getContext()).inflate(R.layout.delegate_normal_loading, frameLayout, false);
-		ImageView anim1 = loadView.findViewById(R.id.anim_image2);
-		ImageView anim2 = loadView.findViewById(R.id.anim_image);
-		AnimationDrawable animationDrawable = (AnimationDrawable)anim1.getDrawable();
-		AnimationDrawable animation2Drawable = (AnimationDrawable)anim2.getDrawable();
-		animationDrawable.start();
-		animation2Drawable.start();
-		frameLayout.addView(loadView);
+		super.onBindView(savedInstanceState, view);
 		imageLoaderManager = ImageLoaderManager.getInstance();
 
 		//显示loading效果
