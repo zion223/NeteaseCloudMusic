@@ -21,7 +21,7 @@ import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.newapi.PlaylistDetailBean;
 import com.imooc.imooc_voice.model.newapi.song.SongDetailBean;
 import com.imooc.lib_common_ui.app.Netease;
-import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
+import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
@@ -31,12 +31,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class GedanDetailDelegate extends NeteaseDelegate {
+public class GedanDetailDelegate extends NeteaseLoadingDelegate {
 
 	private static final String TAG = "GedanDetailDelegate";
 
-	@BindView(R2.id.rv_gedan_detail_normal)
-	RecyclerView mRecyclerViewGedan;
 	@BindView(R2.id.appbar_gedan_detail)
 	AppBarLayout mAppBarLayout;
 	@BindView(R2.id.tv_gedan_detail_toolbar_title)
@@ -69,6 +67,8 @@ public class GedanDetailDelegate extends NeteaseDelegate {
 	TextView mTvSongNum;
 	@BindView(R2.id.tv_gedan_detail_collect_count)
 	TextView mTvSongCollectCount;
+	@BindView(R2.id.rv_gedan_detail_normal)
+	RecyclerView mRecyclerViewGedan;
 
 	private GedanDetailAdapter mAdapter;
 	private ImageLoaderManager manager;
@@ -117,30 +117,33 @@ public class GedanDetailDelegate extends NeteaseDelegate {
 		RequestCenter.getPlaylistDetail(id, new DisposeDataListener() {
 			@Override
 			public void onSuccess(Object responseObj) {
+
 				PlaylistDetailBean json = (PlaylistDetailBean) responseObj;
-				mTvDetailTitle.setText(json.getPlaylist().getName());
-				mTvDetailDesc.setText(json.getPlaylist().getDescription());
-				mTvDetailAvatarName.setText(json.getPlaylist().getCreator().getNickname());
-				mTvGedanPlayNum.setText(json.getPlaylist().getPlayCount() / 10000 + "万");
-				manager.displayImageForCircle(mIvAvatarView, json.getPlaylist().getCreator().getAvatarUrl());
+				final PlaylistDetailBean.PlaylistBean playlist = json.getPlaylist();
+				mTvDetailTitle.setText(playlist.getName());
+				mTvDetailDesc.setText(playlist.getDescription());
+				mTvDetailAvatarName.setText(playlist.getCreator().getNickname());
+				mTvGedanPlayNum.setText(playlist.getPlayCount() / 10000 + "万");
+				manager.displayImageForCircle(mIvAvatarView, playlist.getCreator().getAvatarUrl());
 
-
-				manager.displayImageForCorner(mImageViewGedan, json.getPlaylist().getCoverImgUrl(), 5);
-				mTvShareCount.setText(String.valueOf(json.getPlaylist().getShareCount()));
-				mTvCommentCount.setText(String.valueOf(json.getPlaylist().getCommentCount()));
+				manager.displayImageForCorner(mImageViewGedan, playlist.getCoverImgUrl(), 5);
+				mTvShareCount.setText(String.valueOf(playlist.getShareCount()));
+				mTvCommentCount.setText(String.valueOf(playlist.getCommentCount()));
 				//传递给评论Delegate的数据
-				count = String.valueOf(json.getPlaylist().getCommentCount());
-				gedanImg = String.valueOf(json.getPlaylist().getCoverImgUrl());
-				gedanCreator = json.getPlaylist().getCreator().getNickname();
-				gedanTitle = json.getPlaylist().getName();
-				mTvSongCollectCount.setText("收藏(" + json.getPlaylist().getSubscribedCount() + ")");
+				count = String.valueOf(playlist.getCommentCount());
+				gedanImg = String.valueOf(playlist.getCoverImgUrl());
+				gedanCreator = playlist.getCreator().getNickname();
+				gedanTitle = playlist.getName();
+				mTvSongCollectCount.setText("收藏(" + playlist.getSubscribedCount() + ")");
 				//毛玻璃效果背景
-				manager.displayImageForViewGroup(mAppBarLayout, json.getPlaylist().getCoverImgUrl(), 200);
+				manager.displayImageForViewGroup(mAppBarLayout, playlist.getCoverImgUrl(), 200);
 
-				List<PlaylistDetailBean.PlaylistBean.TrackIdsBean> trackIds = json.getPlaylist().getTrackIds();
+				List<PlaylistDetailBean.PlaylistBean.TrackIdsBean> trackIds = playlist.getTrackIds();
 
 				final int trakIds = trackIds.size();
 				mTvSongNum.setText("(共" + (trakIds -1) + "首)");
+
+				//TODO 歌曲数量过多时 先请求少量数据
 				for (int i = 0; i < trakIds; i++) {
 					//最后一个参数不加逗号
 					if (i == trakIds - 1) {
@@ -149,6 +152,7 @@ public class GedanDetailDelegate extends NeteaseDelegate {
 						params.append(trackIds.get(i).getId()).append(",");
 					}
 				}
+
 				Netease.getHandler().post(new Runnable() {
 					@Override
 					public void run() {

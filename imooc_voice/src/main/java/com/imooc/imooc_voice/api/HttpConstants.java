@@ -9,7 +9,7 @@ public class HttpConstants {
     private static final String BASE = "http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&format=" + FORMATE;
     //private static final String ROOT_URL = "http://39.97.122.129";
     //private static final String ROOT_URL = "http://192.168.1.54:3000";
-    private static final String ROOT_URL = "http://pxi78h.natappfree.cc";
+    private static final String ROOT_URL = "http://uhajme.natappfree.cc";
 
     /**
      * 首页请求接口

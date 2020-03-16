@@ -486,7 +486,7 @@ public class RequestCenter {
      *   offset : 偏移数量，用于分页 , 如 :( 页数 -1)*30, 其中 30 为 limit 的值 , 默认为 0
      *   asc : 排序方式,默认为 false (新 => 老 ) 设置 true 可改为 老 => 新
      */
-    public static void getRadioProgram(long rid, DisposeDataListener listener){
+    public static void getRadioProgram(String rid, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("rid", rid);
         RequestCenter.getRequest(HttpConstants.DJ_PROGRAM, null, listener, DjProgramBean.class);
@@ -495,7 +495,7 @@ public class RequestCenter {
     /**
      *  电台详情
      */
-    public static void getRadioDetail(long rid, DisposeDataListener listener){
+    public static void getRadioDetail(String rid, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("rid", rid);
         RequestCenter.getRequest(HttpConstants.DJ_DETAIL, null, listener, DjDetailBean.class);
