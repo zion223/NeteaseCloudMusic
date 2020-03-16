@@ -87,7 +87,7 @@
                             android:id="@+id/iv_gedan_detail_avatar_img"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginTop="15dp"
                             android:layout_alignLeft="@+id/tv_gedan_detail_title"
                             android:layout_below="@+id/tv_gedan_detail_title"
                             android:src="@drawable/test"/>
@@ -98,7 +98,7 @@
                             android:layout_below="@+id/tv_gedan_detail_title"
                             android:layout_alignLeft="@+id/tv_gedan_detail_title"
                             android:layout_marginLeft="30dp"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginTop="17dp"
                             android:text="华语流行 华语怀旧"
                             android:textColor="@color/white" />
 
@@ -121,77 +121,74 @@
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:orientation="horizontal"
+                        android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp">
 
                         <LinearLayout
                             android:id="@+id/ll_gedan_detail_comment"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="30dp"
+                            android:layout_width="fill_parent"
                             android:layout_weight="1"
+                            android:layout_height="match_parent"
                             android:orientation="vertical">
 
                             <ImageView
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
-                                android:layout_gravity="center_vertical"
+                                android:layout_gravity="center_horizontal"
                                 android:src="@drawable/bgr" />
 
                             <TextView
                                 android:id="@+id/tv_gedan_detail_comment_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="5dp"
+                                android:layout_gravity="center_horizontal"
                                 android:text="123"
                                 android:textColor="@color/white" />
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="60dp"
+                            android:layout_width="fill_parent"
                             android:layout_weight="1"
+                            android:layout_height="60dp"
                             android:orientation="vertical">
 
                             <ImageView
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
-                                android:layout_gravity="center_vertical"
+                                android:layout_gravity="center_horizontal"
                                 android:src="@drawable/bge" />
 
                             <TextView
                                 android:id="@+id/tv_gedan_detail_share_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:gravity="bottom"
+                                android:layout_gravity="center_horizontal"
                                 android:text="1236"
                                 android:textColor="@color/white" />
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_width="fill_parent"
                             android:layout_weight="1"
+                            android:layout_height="wrap_content"
                             android:orientation="vertical">
 
                             <ImageView
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
-                                android:layout_gravity="center_vertical"
+                                android:layout_gravity="center_horizontal"
                                 android:src="@drawable/bgt" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="5dp"
+                                android:layout_gravity="center_horizontal"
                                 android:text="下载"
                                 android:textColor="@color/white" />
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="0dp"
+                            android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical">
@@ -199,14 +196,13 @@
                             <ImageView
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
-                                android:layout_gravity="center_vertical"
+                                android:layout_gravity="center_horizontal"
                                 android:src="@drawable/bgt" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="5dp"
+                                android:layout_gravity="center_horizontal"
                                 android:text="多选"
                                 android:textColor="@color/white" />
                         </LinearLayout>

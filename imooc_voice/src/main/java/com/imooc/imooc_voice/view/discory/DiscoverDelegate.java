@@ -23,6 +23,7 @@ import com.imooc.imooc_voice.model.newapi.LoginBean;
 import com.imooc.imooc_voice.model.newapi.MainRecommendPlayListBean;
 import com.imooc.imooc_voice.util.GsonUtil;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
+import com.imooc.imooc_voice.view.discory.radio.RadioDelegate;
 import com.imooc.imooc_voice.view.discory.square.gedandetail.GedanDetailDelegate;
 import com.imooc.imooc_voice.view.discory.square.GedanSquareDelegate;
 import com.imooc.lib_common_ui.bannder.BannerCreator;
@@ -204,8 +205,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 	//歌单
 	@OnClick(R2.id.ll_discover_gedan)
 	void onClickGedanSquree(){
-
-		//getParentDelegate().getSupportDelegate().start(new GedanSquareDelegate());
+		getParentDelegate().getSupportDelegate().start(new GedanSquareDelegate());
 	}
 
 	//排行榜
@@ -217,7 +217,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 	//电台
 	@OnClick(R2.id.ll_discover_radio)
 	void onClickRadio(){
-
+		getParentDelegate().getSupportDelegate().start(new RadioDelegate());
 	}
 
 

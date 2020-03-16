@@ -1,5 +1,6 @@
 package com.imooc.imooc_voice.view.mine;
 
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -23,6 +24,7 @@ import com.imooc.imooc_voice.model.newapi.personal.UserPlayListEntity;
 import com.imooc.imooc_voice.model.newapi.personal.UserPlaylistBean;
 import com.imooc.imooc_voice.util.GsonUtil;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
+import com.imooc.imooc_voice.view.discory.square.gedandetail.GedanDetailDelegate;
 import com.imooc.imooc_voice.view.mine.tab.TabDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
@@ -60,6 +62,7 @@ public class MineDelegate extends NeteaseDelegate {
 		LoginBean loginBean = GsonUtil.fromJSON(SharePreferenceUtil.getInstance(getContext()).getUserInfo(""), LoginBean.class);
 		int id = loginBean.getProfile().getUserId();
 		final ArrayList<UserPlayListEntity> entities = new ArrayList<>();
+		final ArrayList<UserPlayListEntity> no_create_entities = new ArrayList<>();
 		RequestCenter.getUserPlaylist(id, new DisposeDataListener() {
 			@Override
 			public void onSuccess(Object responseObj) {
@@ -73,14 +76,61 @@ public class MineDelegate extends NeteaseDelegate {
 					}
 				}
 				entities.add(new UserPlayListEntity(true, "创建的歌单", subIndex));
-				for(int j = 0;j < subIndex; j++){
+				no_create_entities.add(new UserPlayListEntity(true, "创建的歌单", subIndex));
+				for(int j = 0 ; j < subIndex; j++){
 					entities.add(new UserPlayListEntity(playlist.get(j)));
 				}
 				entities.add(new UserPlayListEntity(true, "收藏的歌单", playlist.size() - subIndex));
+				no_create_entities.add(new UserPlayListEntity(true, "收藏的歌单", playlist.size() - subIndex));
 				for(int k = subIndex; k < playlist.size(); k++){
 					entities.add(new UserPlayListEntity(playlist.get(k)));
+					no_create_entities.add(new UserPlayListEntity(playlist.get(k)));
 				}
-				MultipleSectionGedanAdapter multipleSectionGedanAdapter = new MultipleSectionGedanAdapter(entities);
+				final MultipleSectionGedanAdapter multipleSectionGedanAdapter = new MultipleSectionGedanAdapter(entities);
+
+				multipleSectionGedanAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+					@Override
+					public void onItemClick(BaseQuickAdapter adapter, View view, int positon) {
+						//点击到header则执行 隐藏或显示动作 否则就进入歌单详情
+						UserPlayListEntity entity = (UserPlayListEntity) adapter.getItem(positon);
+						ImageView changeView = view.findViewById(R.id.iv_mine_gedan_state);
+						if(entity.isHeader){
+							//是创建的还是收藏的
+
+							//显示动画
+							if((boolean)changeView.getTag()){
+								final ObjectAnimator hideRotate = ObjectAnimator.ofFloat(changeView, "rotation", 270f, 180f);
+								hideRotate.setDuration(300);
+								hideRotate.start();
+								changeView.setTag(false);
+							}else{
+								final ObjectAnimator showRotate = ObjectAnimator.ofFloat(changeView, "rotation", 180f, 270f);
+								showRotate.setDuration(300);
+								showRotate.start();
+								changeView.setTag(true);
+							}
+							if(entity.header.contains("创建")){
+								if((boolean)changeView.getTag()){
+									//隐藏创建的歌单
+									//adapter.replaceData(no_create_entities);
+								}else{
+									//显示创建的歌单
+									//adapter.replaceData(entities);
+								}
+							}else{
+								//收藏的歌单
+								if((boolean)changeView.getTag()){
+									//隐藏收藏的歌单
+								}else{
+									//显示收藏的歌单
+								}
+							}
+						}else{
+							getParentDelegate().getSupportDelegate().start(GedanDetailDelegate.newInstance(String.valueOf(entity.t.getId())));
+						}
+
+					}
+				});
 				mRvSectionGedan.setAdapter(multipleSectionGedanAdapter);
 				mRvSectionGedan.setLayoutManager(new LinearLayoutManager(getContext()){
 					@Override
@@ -134,7 +184,7 @@ public class MineDelegate extends NeteaseDelegate {
 		mSpecRecyclerView.setLayoutManager(manager);
 	}
 
-	class SpecAdapter extends BaseQuickAdapter<SpecData, BaseViewHolder>{
+	static class SpecAdapter extends BaseQuickAdapter<SpecData, BaseViewHolder>{
 
 		public SpecAdapter(@Nullable List<SpecData> data) {
 			super(R.layout.item_mine_spec,data);
@@ -150,13 +200,14 @@ public class MineDelegate extends NeteaseDelegate {
 	class MultipleSectionGedanAdapter extends BaseSectionQuickAdapter<UserPlayListEntity, BaseViewHolder> {
 
 
-		public MultipleSectionGedanAdapter(List<UserPlayListEntity> data) {
+		MultipleSectionGedanAdapter(List<UserPlayListEntity> data) {
 			super(R.layout.item_mine_gedan_content, R.layout.item_mine_gedan_header, data);
 		}
 
 		@Override
 		protected void convertHead(BaseViewHolder helper, UserPlayListEntity userPlayListEntity) {
 			ImageView imageView = helper.getView(R.id.iv_item_gedan_new);
+			helper.getView(R.id.iv_mine_gedan_state).setTag(true);
 			if(userPlayListEntity.header.equals("收藏的歌单")){
 				imageView.setVisibility(View.GONE);
 			}

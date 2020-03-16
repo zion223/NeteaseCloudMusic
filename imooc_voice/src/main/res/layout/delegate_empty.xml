@@ -1,92 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
-    <RelativeLayout
+    android:background="@color/black">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <ImageView
+                android:id="@+id/iv_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/test"
+                app:layout_collapseMode="parallax" />
+
+            <ImageView
+                android:id="@+id/iv_background_cover"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_collapseMode="parallax">
+
+                <TextView
+                    android:id="@+id/tv_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="80dp"
+                    android:text="12"
+                    android:textColor="#f0f0f0f0"
+                    android:textSize="30sp"
+                    android:typeface="monospace" />
+
+                <TextView
+                    android:id="@+id/tv_month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/tv_day"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/tv_day"
+                    android:text="/7"
+                    android:textColor="#f0f0f0"
+                    android:textSize="28sp"
+                    android:typeface="monospace" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_day"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="根据你的音乐口味，为你推荐好音乐、好朋友"
+                    android:textColor="#f0f0f0" />
+            </RelativeLayout>
+
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:layout_collapseMode="pin">
+
+                <RelativeLayout
+                    android:id="@+id/rl_toolbar_gedan_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/img_gedan_detail_back"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/aqm" />
+
+
+
+                    <TextView
+                        android:id="@+id/tv_gedan_detail_toolbar_title"
+                        android:layout_width="200dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@+id/img_gedan_detail_back"
+                        android:text="歌单"
+                        android:textColor="@color/white"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/tv_gedan_detail_toolbar_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="15dp"
+                        android:layout_below="@+id/tv_gedan_detail_toolbar_title"
+                        android:layout_alignLeft="@+id/tv_gedan_detail_toolbar_title"
+                        android:gravity="top"
+                        android:text="编辑推荐:暗恋就是永远都得不到"
+                        android:textColor="@color/white"
+                        android:textSize="8sp" />
+                </RelativeLayout>
+            </android.support.v7.widget.Toolbar>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_marginTop="590dp"
+                android:background="@drawable/bg_dailyrecommend"
+                app:layout_collapseMode="pin" />
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_play"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:paddingBottom="40dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <RelativeLayout
+            android:id="@+id/rl_playall_top"
             android:layout_width="match_parent"
-            android:layout_height="200dp">
-            <com.imooc.lib_common_ui.circle_image_view.CircleImageView
-                android:id="@+id/avatr_view"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_alignParentLeft="true"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/test"
-                android:visibility="visible" />
-            <TextView
-                android:id="@+id/avatar_name"
+            android:layout_height="40dp"
+            tools:ignore="RtlSymmetry">
+
+            <RelativeLayout
+                android:id="@+id/rl_playall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/avatr_view"
-                android:layout_alignLeft="@+id/avatr_view"
-                android:textColor="@color/black"
-                android:layout_marginTop="10dp"
-                android:textSize="19sp"
-                android:text="张张"/>
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/avatar_name"
-                android:layout_alignBottom="@+id/avatar_name"
-                android:layout_toRightOf="@+id/avatar_name"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/vip"/>
-            <TextView
-                android:id="@+id/avatar_check"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/avatar_name"
-                android:textSize="18sp"
-                android:text="签到"/>
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp">
+
+                <ImageView
+                    android:id="@+id/iv_playall"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/test" />
+
+                <TextView
+                    android:id="@+id/tv_playall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="7dp"
+                    android:layout_toEndOf="@+id/iv_playall"
+                    android:text="播放"
+                    android:textColor="#333333"
+                    android:textSize="18sp" />
+            </RelativeLayout>
         </RelativeLayout>
-        <LinearLayout
-            android:id="@+id/unloggin_layout"
+
+        <TextView
+            android:id="@+id/tv_gap"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:orientation="vertical">
+            android:layout_height="1dp"
+            android:background="#f0f0f0"
+            android:layout_below="@id/rl_playall_top"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:text="@string/home_login_tip"
-                android:textColor="@color/color_333333"
-                android:textSize="13sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:gravity="center"
-                android:text="@string/home_login_tip_2"
-                android:textColor="@color/color_333333"
-                android:textSize="13sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/bg_home_login"
-                android:paddingStart="40dp"
-                android:paddingTop="5dp"
-                android:paddingEnd="40dp"
-                android:paddingBottom="5dp"
-                android:text="@string/home_login"
-                android:textColor="@color/color_333333"
-                android:textSize="15sp" />
-        </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_dailyrecommend"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tv_gap"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
     </RelativeLayout>
-</LinearLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

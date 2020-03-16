@@ -11,7 +11,9 @@ import android.widget.ImageView;
 
 import com.imooc.lib_common_ui.R;
 
+
 public abstract class NeteaseLoadingDelegate extends NeteaseDelegate{
+
 
 	@Override
 	public Object setLayout() {
@@ -21,6 +23,7 @@ public abstract class NeteaseLoadingDelegate extends NeteaseDelegate{
 
 	@Override
 	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
+
 		final View loadView = LayoutInflater.from(getContext()).inflate(R.layout.delegate_normal_loading, (FrameLayout)view.findViewById(R.id.loadframe), false);
 		ImageView anim1 = loadView.findViewById(R.id.anim_image2);
 		ImageView anim2 = loadView.findViewById(R.id.anim_image);
@@ -29,6 +32,7 @@ public abstract class NeteaseLoadingDelegate extends NeteaseDelegate{
 		animationDrawable.start();
 		animation2Drawable.start();
 		((FrameLayout)view.findViewById(R.id.loadframe)).addView(loadView);
+
 	}
 
 

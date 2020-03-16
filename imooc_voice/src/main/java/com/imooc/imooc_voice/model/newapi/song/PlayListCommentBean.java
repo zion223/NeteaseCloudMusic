@@ -17,7 +17,7 @@ public class PlayListCommentBean {
      */
 
     private boolean isMusician;
-    private long userId;
+    private String userId;
     private boolean moreHot;
     private int code;
     private int total;
@@ -34,11 +34,11 @@ public class PlayListCommentBean {
         isMusician = musician;
     }
 
-    public long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

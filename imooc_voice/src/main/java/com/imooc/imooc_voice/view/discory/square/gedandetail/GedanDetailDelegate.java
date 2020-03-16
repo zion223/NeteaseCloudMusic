@@ -76,6 +76,15 @@ public class GedanDetailDelegate extends NeteaseDelegate {
 	private static final String ARGS_GEDAN_ID = "ARGS_GEDAN_ID";
 	//歌单ID
 	private String id;
+	//评论数量
+	private String count;
+	//歌单图片
+	private String gedanImg;
+	//歌单创建者
+	private String gedanCreator;
+	//歌单标题
+	private String gedanTitle;
+
 	final StringBuilder params = new StringBuilder();
 
 	public static GedanDetailDelegate newInstance(String id) {
@@ -115,16 +124,23 @@ public class GedanDetailDelegate extends NeteaseDelegate {
 				mTvGedanPlayNum.setText(json.getPlaylist().getPlayCount() / 10000 + "万");
 				manager.displayImageForCircle(mIvAvatarView, json.getPlaylist().getCreator().getAvatarUrl());
 
+
 				manager.displayImageForCorner(mImageViewGedan, json.getPlaylist().getCoverImgUrl(), 5);
 				mTvShareCount.setText(String.valueOf(json.getPlaylist().getShareCount()));
 				mTvCommentCount.setText(String.valueOf(json.getPlaylist().getCommentCount()));
+				//传递给评论Delegate的数据
+				count = String.valueOf(json.getPlaylist().getCommentCount());
+				gedanImg = String.valueOf(json.getPlaylist().getCoverImgUrl());
+				gedanCreator = json.getPlaylist().getCreator().getNickname();
+				gedanTitle = json.getPlaylist().getName();
 				mTvSongCollectCount.setText("收藏(" + json.getPlaylist().getSubscribedCount() + ")");
 				//毛玻璃效果背景
-				//manager.displayImageForViewGroup(mAppBarLayout, json.getPlaylist().getCoverImgUrl(), 200);
+				manager.displayImageForViewGroup(mAppBarLayout, json.getPlaylist().getCoverImgUrl(), 200);
 
 				List<PlaylistDetailBean.PlaylistBean.TrackIdsBean> trackIds = json.getPlaylist().getTrackIds();
-				mTvSongNum.setText("(共" + trackIds.size() + "首)");
+
 				final int trakIds = trackIds.size();
+				mTvSongNum.setText("(共" + (trakIds -1) + "首)");
 				for (int i = 0; i < trakIds; i++) {
 					//最后一个参数不加逗号
 					if (i == trakIds - 1) {
@@ -208,7 +224,7 @@ public class GedanDetailDelegate extends NeteaseDelegate {
 
 	@OnClick(R2.id.ll_gedan_detail_comment)
 	void onClickGedanComment(){
-		getSupportDelegate().start(new GedanCommentDelegate());
+		getSupportDelegate().start(GedanCommentDelegate.newInstance(id, count, gedanImg, gedanCreator, gedanTitle));
 	}
 
 	@Override

@@ -2,7 +2,7 @@ package com.imooc.imooc_voice.model;
 
 public enum SquareCHANNEL {
 
-	HUAYU("华语", 0x01),
+	HUAYU("推荐", 0x01),
 	JIQING("经典老歌", 0x02),
 	ANJING("安静", 0x03),
 	GUFENG("古风", 0x04),

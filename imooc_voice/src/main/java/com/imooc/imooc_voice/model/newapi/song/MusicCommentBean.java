@@ -138,7 +138,7 @@ public class MusicCommentBean {
         private int likedCount;
         private Object expressionUrl;
         private int commentLocationType;
-        private int parentCommentId;
+        private long parentCommentId;
         private DecorationBean decoration;
         private Object repliedMark;
         private boolean liked;
@@ -224,11 +224,11 @@ public class MusicCommentBean {
             this.commentLocationType = commentLocationType;
         }
 
-        public int getParentCommentId() {
+        public long getParentCommentId() {
             return parentCommentId;
         }
 
-        public void setParentCommentId(int parentCommentId) {
+        public void setParentCommentId(long parentCommentId) {
             this.parentCommentId = parentCommentId;
         }
 
@@ -282,7 +282,7 @@ public class MusicCommentBean {
 
             private Object locationInfo;
             private Object liveInfo;
-            private int userId;
+            private long userId;
             private String nickname;
             private int authStatus;
             private String avatarUrl;
@@ -309,11 +309,11 @@ public class MusicCommentBean {
                 this.liveInfo = liveInfo;
             }
 
-            public int getUserId() {
+            public long getUserId() {
                 return userId;
             }
 
-            public void setUserId(int userId) {
+            public void setUserId(long userId) {
                 this.userId = userId;
             }
 

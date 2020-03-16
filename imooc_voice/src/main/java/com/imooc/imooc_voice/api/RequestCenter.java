@@ -6,6 +6,7 @@ import com.imooc.imooc_voice.model.newapi.ArtistSublistBean;
 import com.imooc.imooc_voice.model.newapi.BannerBean;
 import com.imooc.imooc_voice.model.newapi.CatlistBean;
 import com.imooc.imooc_voice.model.newapi.DailyRecommendBean;
+import com.imooc.imooc_voice.model.newapi.DjBannerBean;
 import com.imooc.imooc_voice.model.newapi.HighQualityPlayListBean;
 import com.imooc.imooc_voice.model.newapi.LikeListBean;
 import com.imooc.imooc_voice.model.newapi.LoginBean;
@@ -24,7 +25,6 @@ import com.imooc.imooc_voice.model.newapi.PlayModeIntelligenceBean;
 import com.imooc.imooc_voice.model.newapi.PlaylistDetailBean;
 import com.imooc.imooc_voice.model.newapi.RecommendPlayListBean;
 import com.imooc.imooc_voice.model.newapi.TopListBean;
-import com.imooc.imooc_voice.model.newapi.dj.DjCategoryRecommendBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjCatelistBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjDetailBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjPaygiftBean;
@@ -52,7 +52,6 @@ import com.imooc.imooc_voice.model.newapi.search.UserSearchBean;
 import com.imooc.imooc_voice.model.newapi.song.CommentLikeBean;
 import com.imooc.imooc_voice.model.newapi.song.LikeMusicBean;
 import com.imooc.imooc_voice.model.newapi.song.LyricBean;
-import com.imooc.imooc_voice.model.newapi.song.MusicCommentBean;
 import com.imooc.imooc_voice.model.newapi.song.PlayListCommentBean;
 import com.imooc.imooc_voice.model.newapi.song.SongDetailBean;
 import com.imooc.lib_network.CommonOkHttpClient;
@@ -62,11 +61,8 @@ import com.imooc.lib_network.listener.DisposeDataListener;
 import com.imooc.lib_network.request.CommonRequest;
 import com.imooc.lib_network.request.RequestParams;
 
-import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-
-import io.reactivex.Observable;
 
 /**
  * 请求中心
@@ -125,7 +121,7 @@ public class RequestCenter {
      *  获取电台Banner
      */
     public static void getRadioBanner( DisposeDataListener listener){
-        RequestCenter.getRequest(HttpConstants.RADIO_BANNER, null, listener, BannerBean.class);
+        RequestCenter.getRequest(HttpConstants.RADIO_BANNER, null, listener, DjBannerBean.class);
     }
 
     /**
@@ -368,14 +364,14 @@ public class RequestCenter {
 
     /**
      *  给评论点赞
-     *  id : 资源 id, 如歌曲 id,mv id
+     *  id : 资源 id, 如歌曲 id, mv id
      *  cid : 评论 id
      *  t : 是否点赞 ,1 为点赞 ,0 为取消点赞
      *  tpye: 数字 , 资源类型 , 对应歌曲 , mv, 专辑 , 歌单 , 电台, 视频对应以下类型
      *  0: 歌曲   1: mv 2: 歌单 3: 专辑 4: 电台 5: 视频 6: 动态
      *
      */
-    public static void getlikeComment(long id, long cid, int t, int type, DisposeDataListener listener){
+    public static void getlikeComment(String id, long cid, int t, int type, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("id", id);
         params.put("cid", cid);
@@ -445,7 +441,7 @@ public class RequestCenter {
     /**
      *  歌单评论
      */
-    public static void getPlaylistComment(long id, DisposeDataListener listener){
+    public static void getPlaylistComment(String id, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("id", id);
         RequestCenter.getRequest(HttpConstants.COMMENT_PLAYLIST, params, listener, PlayListCommentBean.class);
@@ -458,7 +454,7 @@ public class RequestCenter {
         RequestParams params = new RequestParams();
         params.put("limit", limit);
         params.put("offset", offset);
-        RequestCenter.getRequest(HttpConstants.PAY_GIFT, params, listener, PlayListCommentBean.class);
+        RequestCenter.getRequest(HttpConstants.PAY_GIFT, params, listener, DjPaygiftBean.class);
     }
 
     public static void getRadioCategoryRecommend(DisposeDataListener listener){

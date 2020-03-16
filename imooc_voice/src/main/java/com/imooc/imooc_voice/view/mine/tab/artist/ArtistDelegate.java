@@ -73,7 +73,7 @@ public class ArtistDelegate extends NeteaseLoadingDelegate {
 	private void initView() {
 		if(rootview == null){
 			rootview = LayoutInflater.from(getContext()).inflate(R.layout.delegate_music_recyclerview, frameLayout, false);
-			recyclerView = rootview.findViewById(R.id.recyclerview);
+			//recyclerView = rootview.findViewById(R.id.recyclerview);
 			linearLayoutManager = new LinearLayoutManager(getContext());
 			recyclerView.setLayoutManager(linearLayoutManager);
 			mAdapter = new ArtistAdapter(null);

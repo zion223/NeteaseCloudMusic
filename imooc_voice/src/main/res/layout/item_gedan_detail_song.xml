@@ -63,11 +63,11 @@
 
     <ImageView
         android:id="@+id/viewpager_list_button"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="15dp"
+        android:layout_height="20dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="10dp"
         android:focusable="true"
         android:src="@drawable/ic_songinfo" />
 </RelativeLayout>
