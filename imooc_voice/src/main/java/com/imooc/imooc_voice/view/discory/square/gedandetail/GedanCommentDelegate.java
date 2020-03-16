@@ -3,16 +3,13 @@ package com.imooc.imooc_voice.view.discory.square.gedandetail;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
-import android.app.DownloadManager;
 import android.graphics.Color;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.transition.Visibility;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -241,7 +238,7 @@ public class GedanCommentDelegate extends NeteaseLoadingDelegate implements View
 				@Override
 				public void onClick(View v) {
 					if(!(Boolean) zanView.getTag()){
-						zanView.setImageResource(R.drawable.bi8);
+						zanView.setImageResource(R.drawable.zan_red);
 						//点赞
 						AnimatorSet animatorSetsuofang = new AnimatorSet();//组合动画
 						ObjectAnimator scaleX = ObjectAnimator.ofFloat(zanView, "scaleX", 1f, 1.5f,1f);
