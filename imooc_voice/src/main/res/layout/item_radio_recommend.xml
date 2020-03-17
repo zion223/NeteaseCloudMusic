@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginBottom="10dp">
+
+    <ImageView
+        android:id="@+id/iv_radio_recommend_img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/test"/>
+    <TextView
+        android:id="@+id/iv_radio_recommend_name"
+        android:layout_alignBottom="@+id/iv_radio_recommend_img"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/iv_item_discover"
+        android:layout_marginTop="7dp"
+        android:textColor="@color/white"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textSize="12sp"
+        android:text="歌单的描述"/>
+    <TextView
+        android:id="@+id/iv_radio_recommend_des"
+        android:layout_below="@id/iv_radio_recommend_img"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/iv_item_discover"
+        android:layout_marginTop="7dp"
+        android:textColor="@color/black"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textSize="12sp"
+        android:text="歌单的描述"/>
+
+</RelativeLayout>
