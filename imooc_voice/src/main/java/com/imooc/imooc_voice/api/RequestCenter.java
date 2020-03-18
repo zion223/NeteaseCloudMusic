@@ -16,7 +16,7 @@ import com.imooc.imooc_voice.model.json.BillListJson;
 import com.imooc.imooc_voice.model.json.FocusJson;
 import com.imooc.imooc_voice.model.json.GedanDetailJson;
 import com.imooc.imooc_voice.model.json.GedanJson;
-import com.imooc.imooc_voice.model.newapi.LogoutBean;
+import com.imooc.imooc_voice.model.newapi.CommonMessageBean;
 import com.imooc.imooc_voice.model.newapi.MainEventBean;
 import com.imooc.imooc_voice.model.newapi.MainRecommendPlayListBean;
 import com.imooc.imooc_voice.model.newapi.MvSublistBean;
@@ -104,7 +104,7 @@ public class RequestCenter {
      */
     public static void logout(DisposeDataListener listener) {
 
-        RequestCenter.getRequest(HttpConstants.LOGOUT, null, listener, LogoutBean.class);
+        RequestCenter.getRequest(HttpConstants.LOGOUT, null, listener, CommonMessageBean.class);
     }
 
     /**
@@ -500,6 +500,38 @@ public class RequestCenter {
         params.put("rid", rid);
         RequestCenter.getRequest(HttpConstants.DJ_DETAIL, null, listener, DjDetailBean.class);
     }
+
+    /**
+     *  创建歌单
+     *      参数:歌单名称
+     */
+    public static void createPlayList(String name, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("name", name);
+        RequestCenter.getRequest(HttpConstants.CREATE_PLAYLIST, params, listener, UserPlaylistBean.class);
+    }
+
+    /**
+     *  删除歌单
+     *      参数:歌单ID
+     */
+    public static void deletePlayList(String id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.DELETE_PLAYLIST, params, listener, CommonMessageBean.class);
+    }
+
+    /**
+     *  收藏或取消收藏
+     *
+     */
+    public static void subscribePlayList(String id, boolean sub, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        params.put("t", sub ? 1 : 2);
+        RequestCenter.getRequest(HttpConstants.PLAYLIST_SUBSCRIBE, params, listener, CommonMessageBean.class);
+    }
+
 
     /**
      * 查询歌手图片
