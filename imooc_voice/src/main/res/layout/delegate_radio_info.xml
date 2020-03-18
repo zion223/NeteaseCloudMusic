@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="15dp"
-    android:layout_marginTop="20dp">
+    android:layout_height="match_parent">
     <TextView
         android:id="@+id/tv_radio_info_zhubo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
         android:text="主播"
         android:textColor="@color/black"
         android:textSize="15sp"
         android:textStyle="bold"/>
     <ImageView
         android:id="@+id/iv_radio_info_img"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/tv_radio_info_zhubo"
         android:src="@drawable/test"/>
@@ -35,6 +36,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_radio_info_name"
         android:layout_alignLeft="@+id/tv_radio_info_name"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:paddingRight="10dp"
         android:text="更新时间"
         android:textSize="11sp"/>
     <TextView
@@ -42,24 +46,44 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/iv_radio_info_img"
-        android:layout_marginTop="20dp"
-        android:text="电台内容详情"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="15dp"
+        android:text="电台内容简介"
         android:textColor="@color/black"
         android:textSize="15sp"
         android:textStyle="bold"/>
     <TextView
-        android:id="@+id/tv_radio_info_sort"
+        android:id="@+id/tv_radio_info_sortt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_radio_info_xiangqing"
+        android:layout_alignLeft="@+id/tv_radio_info_xiangqing"
         android:layout_marginTop="15dp"
-        android:textSize="15sp"
-        android:text="分类"/>
+        android:textSize="12sp"
+        android:text="分类:"/>
+    <TextView
+        android:id="@+id/tv_radio_info_sort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:layout_marginLeft="3dp"
+        android:layout_below="@+id/tv_radio_info_xiangqing"
+        android:layout_toRightOf="@+id/tv_radio_info_sortt"
+        android:layout_marginTop="15dp"
+        android:textSize="9sp"
+        android:background="@drawable/bg_radio_sort"
+        android:textColor="#C8575B"
+        android:text="相声曲艺"/>
     <TextView
         android:id="@+id/tv_radio_info_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_radio_info_sort"
+        android:layout_alignLeft="@+id/tv_radio_info_xiangqing"
         android:layout_marginTop="5dp"
+        android:textSize="12sp"
         android:text="这是有魔性的声音"/>
 </RelativeLayout>

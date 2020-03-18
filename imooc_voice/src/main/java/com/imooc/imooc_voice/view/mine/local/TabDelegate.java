@@ -1,4 +1,4 @@
-package com.imooc.imooc_voice.view.mine.tab;
+package com.imooc.imooc_voice.view.mine.local;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -12,8 +12,7 @@ import android.widget.ImageView;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.util.PreferencesUtil;
-import com.imooc.imooc_voice.view.home.BaseDelegate;
-import com.imooc.imooc_voice.view.mine.tab.view.SortPopupDialog;
+import com.imooc.imooc_voice.view.mine.local.view.SortPopupDialog;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.core.BasePopupView;
@@ -48,11 +47,6 @@ public class TabDelegate extends NeteaseDelegate{
 	private static final SortPopupDialog.SortType[] mFramentType =
 			{SortPopupDialog.SortType.SONG, SortPopupDialog.SortType.AITIST, SortPopupDialog.SortType.ALBUM, SortPopupDialog.SortType.FOLDER};
 
-	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		//BaseDelegate.mIvDrawerLayout.setOnClickListener(null);
-	}
 
 	@Override
 	public Object setLayout() {
@@ -84,7 +78,7 @@ public class TabDelegate extends NeteaseDelegate{
 				ColorTransitionPagerTitleView colorTransitionPagerTitleView = new ColorTransitionPagerTitleView(context);
 				colorTransitionPagerTitleView.setNormalColor(Color.BLACK);
 				colorTransitionPagerTitleView.setSelectedColor(Color.RED);
-				colorTransitionPagerTitleView.setTextSize(14);
+				colorTransitionPagerTitleView.setTextSize(13);
 				colorTransitionPagerTitleView.getPaint().setFakeBoldText(true);
 				colorTransitionPagerTitleView.setText(mTitleDataList[index]);
 				colorTransitionPagerTitleView.setOnClickListener(new View.OnClickListener() {

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="60dp"
@@ -39,32 +38,36 @@
         android:text="幸福的人从不晚睡"
         android:textColor="@color/listTextColor"
         android:textSize="15sp" />
-    <ImageView
-        android:id="@+id/iv_gedan_detail_sq"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/item_radio_program_toptext"
-        android:layout_alignLeft="@id/item_radio_program_toptext"
-        android:src="@drawable/b73"/>
+
     <TextView
         android:id="@+id/item_radio_program_createtime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/item_radio_program_toptext"
         android:layout_toRightOf="@+id/iv_gedan_detail_sq"
+        android:layout_alignLeft="@+id/item_radio_program_toptext"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="3dp"
         android:maxLength="20"
         android:singleLine="true"
         android:text="3-15"
         android:textSize="10sp" />
+    <ImageView
+        android:id="@+id/iv_gedan_detail_playnum"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_alignTop="@+id/item_radio_program_duration"
+        android:layout_alignBottom="@+id/item_radio_program_duration"
+        android:layout_toRightOf="@+id/item_radio_program_createtime"
+        android:layout_below="@+id/item_radio_program_toptext"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/play_num"/>
     <TextView
         android:id="@+id/item_radio_program_playnum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/item_radio_program_toptext"
-        android:layout_toRightOf="@+id/item_radio_program_createtime"
+        android:layout_toRightOf="@+id/iv_gedan_detail_playnum"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="3dp"
         android:maxLength="20"
@@ -79,6 +82,7 @@
         android:layout_alignBottom="@+id/item_radio_program_duration"
         android:layout_toRightOf="@+id/item_radio_program_playnum"
         android:layout_below="@+id/item_radio_program_toptext"
+        android:layout_marginLeft="5dp"
         android:src="@drawable/time"/>
     <TextView
         android:id="@+id/item_radio_program_duration"
@@ -96,10 +100,10 @@
     <ImageView
         android:id="@+id/viewpager_list_button"
         android:layout_width="15dp"
-        android:layout_height="20dp"
+        android:layout_height="25dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
         android:focusable="true"
-        android:src="@drawable/ic_songinfo" />
+        android:src="@drawable/b6r" />
 </RelativeLayout>

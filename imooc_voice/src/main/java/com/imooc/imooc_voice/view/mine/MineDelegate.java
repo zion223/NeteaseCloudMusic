@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseSectionMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseSectionQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
@@ -20,12 +19,14 @@ import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.mine.SpecData;
 import com.imooc.imooc_voice.model.newapi.LoginBean;
+import com.imooc.imooc_voice.model.newapi.SubCountBean;
 import com.imooc.imooc_voice.model.newapi.personal.UserPlayListEntity;
 import com.imooc.imooc_voice.model.newapi.personal.UserPlaylistBean;
 import com.imooc.imooc_voice.util.GsonUtil;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
 import com.imooc.imooc_voice.view.discory.square.gedandetail.GedanDetailDelegate;
-import com.imooc.imooc_voice.view.mine.tab.TabDelegate;
+import com.imooc.imooc_voice.view.mine.local.TabDelegate;
+import com.imooc.imooc_voice.view.mine.radio.MineRadioDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
@@ -45,10 +46,13 @@ public class MineDelegate extends NeteaseDelegate {
 	RecyclerView mSpecRecyclerView;
 	@BindView(R2.id.rv_mine_create_gedan)
 	RecyclerView mRvSectionGedan;
+	@BindView(R2.id.fragment_main_item_radio_count)
+	TextView mTvRadioCount;
 
 	private SpecAdapter mSpecAdapter;
 
 	private ImageLoaderManager manager;
+
 	@Override
 	public Object setLayout() {
 		return R.layout.delegate_mine;
@@ -145,6 +149,22 @@ public class MineDelegate extends NeteaseDelegate {
 
 			}
 		});
+
+		/*
+		 * 获取用户信息
+		 */
+		RequestCenter.getsubCount(new DisposeDataListener() {
+			@Override
+			public void onSuccess(Object responseObj) {
+				SubCountBean bean = (SubCountBean) responseObj;
+				mTvRadioCount.setText("("+bean.getDjRadioCount()+")");
+			}
+
+			@Override
+			public void onFailure(Object reasonObj) {
+
+			}
+		});
 	}
 
 
@@ -153,6 +173,10 @@ public class MineDelegate extends NeteaseDelegate {
 		getParentDelegate().getSupportDelegate().start(new TabDelegate());
 	}
 
+	@OnClick(R2.id.ll_mine_radio)
+	void onClickMineRadio(){
+		getParentDelegate().getSupportDelegate().start(new MineRadioDelegate());
+	}
 
 	@Override
 	public void post(Runnable runnable) {
@@ -186,7 +210,7 @@ public class MineDelegate extends NeteaseDelegate {
 
 	static class SpecAdapter extends BaseQuickAdapter<SpecData, BaseViewHolder>{
 
-		public SpecAdapter(@Nullable List<SpecData> data) {
+		SpecAdapter(@Nullable List<SpecData> data) {
 			super(R.layout.item_mine_spec,data);
 		}
 

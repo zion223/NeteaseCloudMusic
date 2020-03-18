@@ -1,7 +1,6 @@
-package com.imooc.imooc_voice.view.mine.tab.music;
+package com.imooc.imooc_voice.view.mine.local.music;
 
 import android.annotation.SuppressLint;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -21,11 +20,9 @@ import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.model.info.MusicInfo;
 import com.imooc.imooc_voice.util.IConstants;
 import com.imooc.imooc_voice.util.MusicUtils;
-import com.imooc.imooc_voice.view.home.BaseDelegate;
 import com.imooc.lib_audio.mediaplayer.core.AudioController;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_common_ui.app.Netease;
-import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 
 

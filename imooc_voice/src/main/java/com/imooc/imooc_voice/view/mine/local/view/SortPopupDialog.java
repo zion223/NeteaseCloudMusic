@@ -1,4 +1,4 @@
-package com.imooc.imooc_voice.view.mine.tab.view;
+package com.imooc.imooc_voice.view.mine.local.view;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

@@ -38,7 +38,7 @@ public class UnsubscribeRadioDialog extends CenterPopupView {
         });
     }
 
-    interface IConfirmUnsubscribeListener{
+    public interface IConfirmUnsubscribeListener{
         void onConfirm();
     }
 }

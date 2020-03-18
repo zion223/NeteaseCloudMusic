@@ -1,7 +1,6 @@
-package com.imooc.imooc_voice.view.mine.tab.artist;
+package com.imooc.imooc_voice.view.mine.local.artist;
 
 import android.annotation.SuppressLint;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,7 +24,6 @@ import com.imooc.imooc_voice.model.json.ArtistJson;
 import com.imooc.imooc_voice.model.info.ArtistInfo;
 import com.imooc.imooc_voice.util.MusicUtils;
 import com.imooc.lib_common_ui.app.Netease;
-import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
