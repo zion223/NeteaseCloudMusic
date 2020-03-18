@@ -16,7 +16,7 @@ import com.imooc.imooc_voice.model.json.BillListJson;
 import com.imooc.imooc_voice.model.json.FocusJson;
 import com.imooc.imooc_voice.model.json.GedanDetailJson;
 import com.imooc.imooc_voice.model.json.GedanJson;
-import com.imooc.imooc_voice.model.newapi.LogoutBean;
+import com.imooc.imooc_voice.model.newapi.CommonMessageBean;
 import com.imooc.imooc_voice.model.newapi.MainEventBean;
 import com.imooc.imooc_voice.model.newapi.MainRecommendPlayListBean;
 import com.imooc.imooc_voice.model.newapi.MvSublistBean;
@@ -24,6 +24,7 @@ import com.imooc.imooc_voice.model.newapi.MyFmBean;
 import com.imooc.imooc_voice.model.newapi.PlayModeIntelligenceBean;
 import com.imooc.imooc_voice.model.newapi.PlaylistDetailBean;
 import com.imooc.imooc_voice.model.newapi.RecommendPlayListBean;
+import com.imooc.imooc_voice.model.newapi.SubCountBean;
 import com.imooc.imooc_voice.model.newapi.TopListBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjCatelistBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjDetailBean;
@@ -32,6 +33,7 @@ import com.imooc.imooc_voice.model.newapi.dj.DjProgramBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjRecommendBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjRecommendTypeBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjSubBean;
+import com.imooc.imooc_voice.model.newapi.dj.DjSubListBean;
 import com.imooc.imooc_voice.model.newapi.manager.MusicCanPlayBean;
 import com.imooc.imooc_voice.model.newapi.personal.UserDetailBean;
 import com.imooc.imooc_voice.model.newapi.personal.UserEventBean;
@@ -100,11 +102,19 @@ public class RequestCenter {
     }
 
     /**
+     * 获取用户信息 , 歌单，收藏，mv, dj 数量
+     */
+    public static void getsubCount(DisposeDataListener listener) {
+
+        RequestCenter.getRequest(HttpConstants.USER_SUBCOUNT, null, listener, SubCountBean.class);
+    }
+
+    /**
      *  用户登出请求
      */
     public static void logout(DisposeDataListener listener) {
 
-        RequestCenter.getRequest(HttpConstants.LOGOUT, null, listener, LogoutBean.class);
+        RequestCenter.getRequest(HttpConstants.LOGOUT, null, listener, CommonMessageBean.class);
     }
 
     /**
@@ -152,8 +162,14 @@ public class RequestCenter {
         RequestCenter.getRequest(HttpConstants.RADIO_RECOMMEND, null, listener, DjRecommendBean.class);
     }
 
+    /**
+     *  电台 分类推荐
+     *      PS. type: 电台类型 , 数字 , 可通过/dj/catelist获取 , 对应关系为 id 对应 此接口的 type, name 对应类型
+     */
     public static void getRadioRecommend(int type, DisposeDataListener listener){
-        RequestCenter.getRequest(HttpConstants.DJ_RECOMMEND_TYPE, null, listener, DjRecommendTypeBean.class);
+        RequestParams params = new RequestParams();
+        params.put("type", String.valueOf(type));
+        RequestCenter.getRequest(HttpConstants.DJ_RECOMMEND_TYPE, params, listener, DjRecommendTypeBean.class);
     }
 
     /**
@@ -470,13 +486,22 @@ public class RequestCenter {
         RequestCenter.getRequest(HttpConstants.DJ_CATLIST, null, listener, DjCatelistBean.class);
     }
 
-    public static void getSubRadio(long rid, int isSub, DisposeDataListener listener){
+    /**
+     *  订阅电台
+     */
+    public static void getSubRadio(String rid, boolean isSub, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("rid", rid);
-        params.put("isSub", isSub);
-        RequestCenter.getRequest(HttpConstants.DJ_SUB, null, listener, DjSubBean.class);
+        params.put("t", isSub ? 1:0);
+        RequestCenter.getRequest(HttpConstants.DJ_SUB, params, listener, DjSubBean.class);
     }
 
+    /**
+     *  已经订阅的电台
+     */
+    public static void getSubRadioList(DisposeDataListener listener){
+        RequestCenter.getRequest(HttpConstants.DJ_SUB_LIST, null, listener, DjSubListBean.class);
+    }
     /**
      *  电台节目
      *  PS.说明 : 登陆后调用此接口 , 传入rid, 可查看对应电台的电台节目以及对应的 id,
@@ -489,7 +514,7 @@ public class RequestCenter {
     public static void getRadioProgram(String rid, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("rid", rid);
-        RequestCenter.getRequest(HttpConstants.DJ_PROGRAM, null, listener, DjProgramBean.class);
+        RequestCenter.getRequest(HttpConstants.DJ_PROGRAM, params, listener, DjProgramBean.class);
     }
 
     /**
@@ -498,7 +523,38 @@ public class RequestCenter {
     public static void getRadioDetail(String rid, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("rid", rid);
-        RequestCenter.getRequest(HttpConstants.DJ_DETAIL, null, listener, DjDetailBean.class);
+        RequestCenter.getRequest(HttpConstants.DJ_DETAIL, params, listener, DjDetailBean.class);
+    }
+
+    /**
+     *  创建歌单
+     *      参数:歌单名称
+     */
+    public static void createPlayList(String name, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("name", name);
+        RequestCenter.getRequest(HttpConstants.CREATE_PLAYLIST, params, listener, UserPlaylistBean.class);
+    }
+
+    /**
+     *  删除歌单
+     *      参数:歌单ID
+     */
+    public static void deletePlayList(String id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.DELETE_PLAYLIST, params, listener, CommonMessageBean.class);
+    }
+
+    /**
+     *  收藏或取消收藏
+     *
+     */
+    public static void subscribePlayList(String id, boolean sub, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        params.put("t", sub ? 1 : 2);
+        RequestCenter.getRequest(HttpConstants.PLAYLIST_SUBSCRIBE, params, listener, CommonMessageBean.class);
     }
 
     /**
