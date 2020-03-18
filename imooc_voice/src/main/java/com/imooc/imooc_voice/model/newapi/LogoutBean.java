@@ -1,9 +1,11 @@
 package com.imooc.imooc_voice.model.newapi;
 
-public class CommonMessageBean {
+public class LogoutBean {
 
+    /**
+     * code : 200
+     */
 
-    private String id;
     private int code;
 
     public int getCode() {
@@ -12,13 +14,5 @@ public class CommonMessageBean {
 
     public void setCode(int code) {
         this.code = code;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 }

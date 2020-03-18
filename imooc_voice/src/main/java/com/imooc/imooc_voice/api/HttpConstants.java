@@ -27,12 +27,6 @@ public class HttpConstants {
 
     static String LOGOUT = ROOT_URL + "/logout";
 
-    static String CREATE_PLAYLIST = ROOT_URL + "/playlist/create";
-
-    static String DELETE_PLAYLIST = ROOT_URL + "/playlist/delete";
-
-    static String PLAYLIST_SUBSCRIBE = ROOT_URL + "/playlist/subscribe";
-
     static String BANNER = ROOT_URL + "/banner";
 
     static String RADIO_BANNER = ROOT_URL + "/dj/banner";
