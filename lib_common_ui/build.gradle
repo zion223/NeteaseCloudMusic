@@ -41,5 +41,6 @@ dependencies {
     //ButterKnife依赖
     compile 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    implementation 'com.lxj:xpopup:1.8.10'
     compileOnly project(':lib_image_loader')
 }
