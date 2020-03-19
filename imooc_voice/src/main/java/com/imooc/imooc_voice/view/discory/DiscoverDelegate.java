@@ -23,6 +23,7 @@ import com.imooc.imooc_voice.model.newapi.LoginBean;
 import com.imooc.imooc_voice.model.newapi.MainRecommendPlayListBean;
 import com.imooc.imooc_voice.util.GsonUtil;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
+import com.imooc.imooc_voice.view.discory.daily.DailyRecommendDelegate;
 import com.imooc.imooc_voice.view.discory.radio.RadioDelegate;
 import com.imooc.imooc_voice.view.discory.square.gedandetail.GedanDetailDelegate;
 import com.imooc.imooc_voice.view.discory.square.GedanSquareDelegate;
@@ -199,7 +200,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 	//每日推荐
 	@OnClick(R2.id.ll_discover_daily_recommend)
 	void onClickDaliyRecommend(){
-		//getParentDelegate().getSupportDelegate().start();
+		getParentDelegate().getSupportDelegate().start(new DailyRecommendDelegate());
 	}
 
 	//歌单

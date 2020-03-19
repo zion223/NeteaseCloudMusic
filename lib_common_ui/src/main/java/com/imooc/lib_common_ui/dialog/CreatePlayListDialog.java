@@ -16,7 +16,7 @@ public class CreatePlayListDialog extends CenterPopupView implements View.OnClic
 
     private EditText mEtName;
     private TextView mTvTextSize;
-    private TextView mTvCancel;
+    private AppCompatButton mButtonCancel;
     private AppCompatButton mButtonConfirm;
     OnConfirmListener listener;
 
@@ -34,11 +34,14 @@ public class CreatePlayListDialog extends CenterPopupView implements View.OnClic
     protected void onCreate() {
         super.onCreate();
         mEtName = findViewById(R.id.et_create_playlist_name);
+        mEtName.setFocusable(true);
         mTvTextSize = findViewById(R.id.tv_create_playlist_text_size);
-        mTvCancel = findViewById(R.id.tv_create_playlist_cancel);
+        mButtonCancel = findViewById(R.id.tv_create_playlist_cancel);
         mButtonConfirm = findViewById(R.id.tv_create_playlist_confirm);
-        mTvCancel.setOnClickListener(this);
+        mButtonCancel.setOnClickListener(this);
         mButtonConfirm.setOnClickListener(this);
+        mButtonConfirm.setClickable(false);
+        mButtonConfirm.setEnabled(false);
         mEtName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -55,13 +58,17 @@ public class CreatePlayListDialog extends CenterPopupView implements View.OnClic
 
                 if(editable.toString().length() > 0 && editable.toString().length() < 16){
                     mTvTextSize.setEnabled(true);
+                    mButtonConfirm.setClickable(true);
                     mButtonConfirm.setEnabled(true);
-                    mTvTextSize.setTextColor(getResources().getColor(R.color.color_999999));
-                }else if(editable.toString().length() < 16){
+                    mTvTextSize.setTextColor(getResources().getColor(R.color.color_333333));
+                }else if(editable.toString().length() < 16 && editable.toString().length() != 0 ){
+                    mButtonConfirm.setClickable(false);
+                    mButtonConfirm.setEnabled(false);
                     mTvTextSize.setTextColor(getResources().getColor(R.color.colorAccent));
                 }else if(editable.toString().length() == 0){
                     mTvTextSize.setTextColor(getResources().getColor(R.color.color_999999));
                     mTvTextSize.setEnabled(false);
+                    mButtonConfirm.setClickable(false);
                     mButtonConfirm.setEnabled(false);
                 }
                 mTvTextSize.setText(editable.toString().length() + "/16");
@@ -75,6 +82,7 @@ public class CreatePlayListDialog extends CenterPopupView implements View.OnClic
             dismiss();
         }else if(view.getId() == R.id.tv_create_playlist_confirm){
             listener.onConfirm(mEtName.getText().toString());
+            dismiss();
         }
     }
 

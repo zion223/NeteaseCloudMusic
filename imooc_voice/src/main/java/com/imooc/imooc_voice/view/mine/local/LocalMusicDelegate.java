@@ -30,7 +30,7 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ColorT
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class TabDelegate extends NeteaseDelegate{
+public class LocalMusicDelegate extends NeteaseDelegate{
 
 	@BindView(R2.id.magic_indicator_tab)
 	MagicIndicator mTabMagicIndicator;
@@ -40,7 +40,7 @@ public class TabDelegate extends NeteaseDelegate{
 	ImageView mTabMore;
 
 
-	private TabAdapter mAdapter;
+	private LocalMusicAdapter mAdapter;
 	private BasePopupView tabMoreDialog;
 	private PreferencesUtil preferencesUtil;
 	private static final String[] mTitleDataList = {"单曲", "歌手", "专辑", "文件夹"};
@@ -56,7 +56,7 @@ public class TabDelegate extends NeteaseDelegate{
 	@Override
 	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
 
-		mAdapter = new TabAdapter(getChildFragmentManager());
+		mAdapter = new LocalMusicAdapter(getChildFragmentManager());
 		mTabViewPager.setAdapter(mAdapter);
 		initMagicIndicator();
 		initDialog();

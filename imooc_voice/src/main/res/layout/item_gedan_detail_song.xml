@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="60dp"
-    android:background="@color/white"
     android:paddingLeft="10dp">
 
     <ImageView
@@ -64,10 +63,10 @@
     <ImageView
         android:id="@+id/viewpager_list_button"
         android:layout_width="15dp"
-        android:layout_height="20dp"
+        android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
         android:focusable="true"
-        android:src="@drawable/ic_songinfo" />
+        android:src="@drawable/more" />
 </RelativeLayout>

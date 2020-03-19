@@ -134,6 +134,7 @@ public class GedanDetailDelegate extends NeteaseLoadingDelegate {
 				gedanImg = String.valueOf(playlist.getCoverImgUrl());
 				gedanCreator = playlist.getCreator().getNickname();
 				gedanTitle = playlist.getName();
+				//TODO 是否已经收藏
 				mTvSongCollectCount.setText("收藏(" + playlist.getSubscribedCount() + ")");
 				//毛玻璃效果背景
 				manager.displayImageForViewGroup(mAppBarLayout, playlist.getCoverImgUrl(), 200);

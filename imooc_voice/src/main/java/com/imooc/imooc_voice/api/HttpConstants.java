@@ -8,8 +8,8 @@ public class HttpConstants {
     private static final String FORMATE = "json";
     private static final String BASE = "http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&format=" + FORMATE;
     //private static final String ROOT_URL = "http://39.97.122.129";
-    //private static final String ROOT_URL = "http://192.168.1.54:3000";
-    private static final String ROOT_URL = "http://ppurm5.natappfree.cc";
+    private static final String ROOT_URL = "http://192.168.1.54:3000";
+    //private static final String ROOT_URL = "http://xc7fr4.natappfree.cc";
 
     /**
      * 首页请求接口
@@ -18,7 +18,7 @@ public class HttpConstants {
 
     private static String HOME_RECOMMAND_MORE = ROOT_URL + "/module_voice/home_recommand_more";
 
-    static String HOME_FRIEND = ROOT_URL + "/module_voice/home_friend";
+    static String HOME_FRIEND = "http://39.97.122.129/module_voice/home_friend";
 
     /**
      * 登陆接口

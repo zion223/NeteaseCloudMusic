@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -23,6 +22,7 @@ import com.imooc.lib_network.listener.DisposeDataListener;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class MineRadioDelegate extends NeteaseDelegate {
 
@@ -67,6 +67,11 @@ public class MineRadioDelegate extends NeteaseDelegate {
 	@Override
 	public void post(Runnable runnable) {
 
+	}
+
+	@OnClick(R2.id.img_mine_radio_back)
+	void onClickBack(){
+		getSupportDelegate().pop();
 	}
 
 	static class MineRadioAdapter extends BaseQuickAdapter<DjSubListBean.DjRadios, BaseViewHolder>{

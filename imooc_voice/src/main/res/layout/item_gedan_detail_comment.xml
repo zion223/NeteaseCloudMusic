@@ -32,8 +32,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_item_gedan_comment_avatar_name"
         android:layout_alignLeft="@+id/tv_item_gedan_comment_avatar_name"
-        android:layout_marginTop="5dp"
-        android:textSize="12sp"
+        android:layout_marginTop="2dp"
+        android:textSize="10sp"
         android:text="09:25"/>
     <TextView
         android:id="@+id/tv_item_gedan_comment_content"
@@ -54,9 +54,9 @@
         android:layout_alignLeft="@+id/tv_item_gedan_comment_time"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
-        android:textSize="13sp"
+        android:textSize="12sp"
         android:textColor="#517D98"
-        android:visibility="gone"
+        android:visibility="visible"
         android:text=""/>
     <ImageView
         android:id="@+id/iv_item_gedan_comment_zan"
@@ -71,8 +71,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/iv_item_gedan_comment_zan"
+        android:layout_alignTop="@+id/iv_item_gedan_comment_zan"
+        android:layout_alignBottom="@+id/iv_item_gedan_comment_zan"
         android:layout_marginRight="5dp"
-        android:visibility="gone"
+        android:visibility="visible"
+        android:textSize="13sp"
         android:text="44"/>
     <View
         android:layout_below="@+id/tv_item_gedan_comment_replied"

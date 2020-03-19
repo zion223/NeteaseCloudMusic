@@ -27,7 +27,7 @@ public class UnsubscribeRadioDialog extends CenterPopupView {
         findViewById(R.id.tv_radio_sub_cancel).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                dismiss(); // 关闭弹窗
+                dismiss();
             }
         });
         findViewById(R.id.tv_radio_sub_confirm).setOnClickListener(new OnClickListener() {

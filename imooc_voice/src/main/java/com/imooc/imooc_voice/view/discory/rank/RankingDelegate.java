@@ -30,17 +30,6 @@ public class RankingDelegate extends NeteaseDelegate {
 	@Override
 	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
 
-		RequestCenter.queryRankingSong(HttpConstants.Billboard.BILLBOARD_NEW_MUSIC, new DisposeDataListener() {
-			@Override
-			public void onSuccess(Object responseObj) {
-				
-			}
-
-			@Override
-			public void onFailure(Object reasonObj) {
-
-			}
-		});
 	}
 
 	@Override

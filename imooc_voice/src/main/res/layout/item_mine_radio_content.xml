@@ -5,8 +5,7 @@
     android:layout_marginLeft="15dp"
     android:layout_marginRight="10dp"
     android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp"
-    android:background="@color/white">
+    android:layout_marginBottom="10dp">
     <ImageView
         android:id="@+id/iv_item_radio_content_img"
         android:layout_width="70dp"

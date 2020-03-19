@@ -69,8 +69,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:layout_marginEnd="25dp"
-        android:background="@color/color_white">
+        android:layout_marginEnd="25dp">
 
         <ScrollView
             android:layout_width="match_parent"

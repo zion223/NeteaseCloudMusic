@@ -7,10 +7,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.imooc.imooc_voice.view.mine.local.artist.ArtistDelegate;
 import com.imooc.imooc_voice.view.mine.local.music.MusicDelegate;
 
-public class TabAdapter extends FragmentPagerAdapter {
+public class LocalMusicAdapter extends FragmentPagerAdapter {
 
 
-	public TabAdapter(FragmentManager fm) {
+	public LocalMusicAdapter(FragmentManager fm) {
 		super(fm);
 	}
 

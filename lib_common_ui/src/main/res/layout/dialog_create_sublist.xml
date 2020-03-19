@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="180dp"
     android:background="@drawable/bg_dialog_corner_normal">
     <TextView
         android:id="@+id/tv_create_playlist_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:layout_marginLeft="20dp"
         android:textStyle="bold"
+        android:textSize="16sp"
         android:textColor="@color/text_color"
         android:text="新建歌单"/>
     <EditText
         android:id="@+id/et_create_playlist_name"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="35dp"
+        android:hint="请输入歌单名称"
+        android:textSize="13sp"
         android:layout_below="@+id/tv_create_playlist_title"
         android:layout_alignLeft="@+id/tv_create_playlist_title"
         android:background="@null"
@@ -28,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_alignLeft="@+id/et_create_playlist_name"
         android:layout_alignRight="@+id/et_create_playlist_name"
-        android:background="@color/color_999999"
+        android:background="#E1E1E1"
         android:layout_height="1.5dp"/>
     <TextView
         android:id="@+id/tv_create_playlist_text_size"
@@ -38,28 +41,35 @@
         android:layout_alignRight="@+id/view_gap"
         android:layout_below="@+id/view_gap"
         android:enabled="false"
+        android:textSize="12sp"
         android:text="0/16"/>
 
-    <TextView
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/tv_create_playlist_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_toLeftOf="@+id/tv_create_playlist_confirm"
         android:layout_alignTop="@+id/tv_create_playlist_confirm"
-        android:layout_marginRight="40dp"
+        android:layout_alignBottom="@+id/tv_create_playlist_confirm"
+        android:paddingTop="2dp"
+        android:gravity="right|center_vertical"
         android:text="取消"
         android:textSize="14sp"
         android:textColor="#FE3A3C"/>
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/tv_create_playlist_confirm"
-        android:layout_width="wrap_content"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        style="?android:attr/borderlessButtonStyle"
+        android:paddingTop="2dp"
         android:textColor="#FE3A3C"
         android:textSize="14sp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="130dp"
+        android:layout_marginBottom="10dp"
         android:enabled="false"
         android:text="提交"/>
 </RelativeLayout>

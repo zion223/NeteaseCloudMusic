@@ -25,11 +25,13 @@ import com.imooc.imooc_voice.model.newapi.personal.UserPlaylistBean;
 import com.imooc.imooc_voice.util.GsonUtil;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
 import com.imooc.imooc_voice.view.discory.square.gedandetail.GedanDetailDelegate;
-import com.imooc.imooc_voice.view.mine.local.TabDelegate;
+import com.imooc.imooc_voice.view.mine.local.LocalMusicDelegate;
 import com.imooc.imooc_voice.view.mine.radio.MineRadioDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
+import com.imooc.lib_common_ui.dialog.CreatePlayListDialog;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
+import com.lxj.xpopup.XPopup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -170,7 +172,7 @@ public class MineDelegate extends NeteaseDelegate {
 
 	@OnClick(R2.id.ll_mine_local_music)
 	void onClickLocalMusic(){
-		getParentDelegate().getSupportDelegate().start(new TabDelegate());
+		getParentDelegate().getSupportDelegate().start(new LocalMusicDelegate());
 	}
 
 	@OnClick(R2.id.ll_mine_radio)
@@ -235,6 +237,29 @@ public class MineDelegate extends NeteaseDelegate {
 			if(userPlayListEntity.header.equals("收藏的歌单")){
 				imageView.setVisibility(View.GONE);
 			}
+			helper.getView(R.id.iv_item_gedan_new).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					new XPopup.Builder(getContext())
+							.asCustom(new CreatePlayListDialog(getContext(), new CreatePlayListDialog.OnConfirmListener() {
+								@Override
+								public void onConfirm(String name) {
+									RequestCenter.createPlayList(name, new DisposeDataListener() {
+										@Override
+										public void onSuccess(Object responseObj) {
+											UserPlaylistBean bean = (UserPlaylistBean) responseObj;
+											//bean.getPlaylist().get(0).getName();
+										}
+
+										@Override
+										public void onFailure(Object reasonObj) {
+
+										}
+									});
+								}
+							})).show();
+				}
+			});
 			helper.setText(R.id.tv_item_gedan_header, userPlayListEntity.header);
 			helper.setText(R.id.tv_item_gedan_header_playnum, "("+userPlayListEntity.playNum+")");
 

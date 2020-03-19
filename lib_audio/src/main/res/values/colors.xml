@@ -2,6 +2,7 @@
 <resources>
     <color name="app_background">#1111</color>
     <color name="gedan_detail">#F2EDF3</color>
+    <color name="color_F71816">#F71816</color>
     <color name="white">#FFFFFF</color>
     <!-- 白色 -->
     <color name="ivory">#FFFFF0</color>
