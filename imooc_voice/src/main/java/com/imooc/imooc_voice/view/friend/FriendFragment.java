@@ -13,8 +13,12 @@ import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.friend.BaseFriendModel;
 import com.imooc.imooc_voice.model.friend.FriendBodyValue;
+import com.imooc.imooc_voice.model.newapi.MainEventBean;
+import com.imooc.imooc_voice.model.newapi.personal.UserEventBean;
+import com.imooc.imooc_voice.view.friend.adapter.EventAdapter;
 import com.imooc.imooc_voice.view.friend.adapter.FriendAdapter;
 import com.imooc.imooc_voice.view.home.BaseDelegate;
+import com.imooc.lib_common_ui.app.Netease;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
@@ -26,17 +30,15 @@ import butterknife.BindView;
 
 public class FriendFragment extends NeteaseDelegate implements SwipeRefreshLayout.OnRefreshListener{
 
-
-
 	@BindView(R2.id.refresh_layout_delegate_friend)
 	SwipeRefreshLayout refreshLayout;
 	@BindView(R2.id.rv_delegate_friend)
 	RecyclerView mRecyclerView;
 
-	private BaseFriendModel mRecommandData;
-	private List<FriendBodyValue> mDatas = new ArrayList<>();
+	private MainEventBean mRecommandData;
+	private List<UserEventBean.EventsBean> mDatas = new ArrayList<>();
 
-	private FriendAdapter mAdapter;
+	private EventAdapter mAdapter;
 
 	@Override
 	public Object setLayout() {
@@ -56,19 +58,24 @@ public class FriendFragment extends NeteaseDelegate implements SwipeRefreshLayou
 
 	@Override
 	public void onRefresh() {
-		requestData();
-		refreshLayout.setRefreshing(false);
+		//requestData();
+		Netease.getHandler().postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				refreshLayout.setRefreshing(false);
+			}
+		}, 2000);
 	}
 
 
 	private void requestData(){
 
-		RequestCenter.requestFriendData(new DisposeDataListener() {
+		RequestCenter.getMainEvent(new DisposeDataListener() {
 			@Override
 			public void onSuccess(Object responseObj) {
-				mRecommandData = (BaseFriendModel) responseObj;
-				mDatas = mRecommandData.data.list;
-				mAdapter = new FriendAdapter(mDatas);
+				mRecommandData = (MainEventBean) responseObj;
+				mDatas = mRecommandData.getEvent();
+				mAdapter = new EventAdapter(mDatas);
 				mRecyclerView.setAdapter(mAdapter);
 				mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 			}

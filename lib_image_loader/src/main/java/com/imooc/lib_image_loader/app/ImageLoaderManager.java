@@ -90,29 +90,7 @@ public class ImageLoaderManager {
 				});
 	}
 
-	/**
-	 * 加载圆形图片
-	 * @param imageView
-	 * @param url
-	 */
-	public void displayImageForCircle(final ImageView imageView, final int url) {
-		imageView.setTag(R.id.image_loader_manager_tag, url);
-		Glide.with(imageView.getContext())
-				.asBitmap()
-				.load(url)
-				.apply(initCommonRequestOption())
-				.into(new BitmapImageViewTarget(imageView) {
-					@Override
-					protected void setResource(final Bitmap resource) {
-						if(imageView.getTag(R.id.image_loader_manager_tag).equals(url)){
-							RoundedBitmapDrawable circularBitmapDrawable =
-									RoundedBitmapDrawableFactory.create(imageView.getResources(), resource);
-							circularBitmapDrawable.setCircular(true);
-							imageView.setImageDrawable(circularBitmapDrawable);
-						}
-					}
-				});
-	}
+
 
 	/**
 	 * 加载圆角图片
@@ -129,7 +107,14 @@ public class ImageLoaderManager {
 				.transform(transformation)
 				.into(imageView);
 	}
-
+	/**
+	 * 加载圆角图片 圆角5dp
+	 * @param imageView
+	 * @param url
+	 */
+	public void displayImageForCorner(final ImageView imageView, String url) {
+		displayImageForCorner(imageView, url, 5);
+	}
 	public void displayImageForViewGroup(final ViewGroup group, String url, final int radius) {
 		Glide.with(group.getContext())
 				.asBitmap()
