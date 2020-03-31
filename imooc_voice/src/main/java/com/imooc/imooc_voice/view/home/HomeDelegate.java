@@ -19,7 +19,7 @@ import android.widget.TextView;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.model.CHANNEL;
-import com.imooc.imooc_voice.model.login.LoginEvent;
+import com.imooc.imooc_voice.model.event.LoginEvent;
 import com.imooc.imooc_voice.model.newapi.LoginBean;
 import com.imooc.imooc_voice.util.GsonUtil;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
@@ -53,7 +53,7 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 
 	//首页的卡片
 	private static final CHANNEL[] CHANNELS =
-			new CHANNEL[]{CHANNEL.MY, CHANNEL.DISCORY, CHANNEL.FRIEND};
+			new CHANNEL[]{CHANNEL.MY, CHANNEL.DISCORY, CHANNEL.YUNCUN};
 
 	/*
 	 * View
@@ -128,6 +128,7 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 		mSearchView.setOnClickListener(this);
 		mAdapter = new HomePagerAdapter(getChildFragmentManager(), CHANNELS);
 		mViewPager.setAdapter(mAdapter);
+		mViewPager.setOffscreenPageLimit(1);
 		initMagicIndicator();
 	}
 
@@ -204,10 +205,7 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 				//.displayImageForCircle(mPhotoView, UserManager.getInstance().getUser().data.photoUrl);
 	}
 
-	@Override
-	public void post(Runnable runnable) {
 
-	}
 
 	@OnClick(R2.id.toggle_view)
 	void ClickToggle(){

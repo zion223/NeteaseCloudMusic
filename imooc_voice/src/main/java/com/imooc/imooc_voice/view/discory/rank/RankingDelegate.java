@@ -20,7 +20,6 @@ public class RankingDelegate extends NeteaseDelegate {
 	@BindView(R2.id.rv_rank_normal)
 	RecyclerView mREcyclerViewRank;
 
-	private RankAdapter mAdapter;
 
 	@Override
 	public Object setLayout() {
@@ -32,8 +31,4 @@ public class RankingDelegate extends NeteaseDelegate {
 
 	}
 
-	@Override
-	public void post(Runnable runnable) {
-
-	}
 }

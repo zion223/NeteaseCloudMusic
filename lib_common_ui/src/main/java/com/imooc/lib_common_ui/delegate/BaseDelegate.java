@@ -201,4 +201,8 @@ public abstract class BaseDelegate extends Fragment implements ISupportFragment 
         return DELEGATE.onBackPressedSupport();
     }
 
+    @Override
+    public void post(Runnable runnable) {
+
+    }
 }

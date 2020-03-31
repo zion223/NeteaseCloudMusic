@@ -27,7 +27,7 @@
         <TextView
             android:id="@+id/viewpager_list_toptext"
             android:layout_toRightOf="@id/item_play_no"
-            android:layout_width="fill_parent"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:ellipsize="end"
@@ -47,7 +47,7 @@
             android:src="@drawable/b73"/>
         <TextView
             android:id="@+id/viewpager_list_bottom_text"
-            android:layout_width="fill_parent"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/viewpager_list_toptext"
             android:layout_toRightOf="@+id/iv_gedan_detail_sq"
@@ -59,6 +59,15 @@
             android:textColor="@color/listSubTextColor"
             android:textSize="10sp" />
 
+        <ImageView
+            android:id="@+id/iv_list_video"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/viewpager_list_button"
+            android:layout_marginRight="60dp"
+            android:visibility="gone"
+            android:src="@drawable/t_actionbar_video_normal"/>
 
     <ImageView
         android:id="@+id/viewpager_list_button"

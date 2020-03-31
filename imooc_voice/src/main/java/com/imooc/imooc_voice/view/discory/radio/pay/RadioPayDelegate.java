@@ -30,26 +30,28 @@ import butterknife.BindView;
 
 public class RadioPayDelegate extends NeteaseLoadingDelegate {
 
-	@BindView(R2.id.loadframe)
-	FrameLayout frameLayout;
 
 	private ImageView backView;
-	private View rootview;
 	private RecyclerView recyclerView;
 
 	private RadioPayAdapter mAdapter;
 
+
 	@Override
-	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
-		super.onBindView(savedInstanceState, view);
+	public void initView() {
 		initRadioPayView();
 	}
 
+	@Override
+	public int setLoadingViewLayout() {
+		return R.layout.delegate_radio_pay;
+	}
+
+
 	@SuppressLint("StaticFieldLeak")
 	private void initRadioPayView() {
-		rootview = LayoutInflater.from(getContext()).inflate(R.layout.delegate_radio_pay, frameLayout, false);
-		recyclerView = rootview.findViewById(R.id.rv_radio_pay_normal);
-		backView = rootview.findViewById(R.id.img_radio_pay_back);
+		recyclerView = rootView.findViewById(R.id.rv_radio_pay_normal);
+		backView = rootView.findViewById(R.id.img_radio_pay_back);
 		backView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -60,18 +62,6 @@ public class RadioPayDelegate extends NeteaseLoadingDelegate {
 			@Override
 			protected void onPostExecute(Void aVoid) {
 				super.onPostExecute(aVoid);
-				Netease.getHandler().postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						frameLayout.removeAllViews();
-						//framelayout 创建了新的实例
-						ViewGroup p = (ViewGroup) rootview.getParent();
-						if (p != null) {
-							p.removeAllViewsInLayout();
-						}
-						frameLayout.addView(rootview);
-					}
-				}, 500);
 			}
 
 			@Override
@@ -97,6 +87,7 @@ public class RadioPayDelegate extends NeteaseLoadingDelegate {
 						}, recyclerView);
 						recyclerView.setAdapter(mAdapter);
 						recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+						addRootView();
 					}
 
 					@Override

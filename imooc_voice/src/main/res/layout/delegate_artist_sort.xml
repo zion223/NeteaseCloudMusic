@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img_artist_sort_back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/left_arrow" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="7"
+            android:gravity="center_vertical"
+            android:text="歌手分类"
+            android:textColor="@color/black"
+            android:textSize="19sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="25dp">
+        <TextView
+            android:id="@+id/tv_artist_sort_china"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="14sp"
+            android:text="华语"/>
+        <TextView
+            android:id="@+id/tv_artist_sort_west"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="14sp"
+            android:text="欧美"/>
+        <TextView
+            android:id="@+id/tv_artist_sort_japan"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="14sp"
+            android:text="日本"/>
+        <TextView
+            android:id="@+id/tv_artist_sort_korea"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="14sp"
+            android:text="韩国"/>
+        <TextView
+            android:id="@+id/tv_artist_sort_other"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="14sp"
+            android:text="其他"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+        <TextView
+            android:id="@+id/tv_artist_sort_male"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="14sp"
+            android:text="男"/>
+        <TextView
+            android:id="@+id/tv_artist_sort_female"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="14sp"
+            android:text="女"/>
+
+        <TextView
+            android:id="@+id/tv_artist_sort_group"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="14sp"
+            android:text="乐队/组合"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="20dp"
+        android:gravity="center_vertical"
+        android:textSize="12sp"
+        android:text="热门歌手"
+        android:background="#F4F4F4"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_artist_sort"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

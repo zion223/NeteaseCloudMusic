@@ -64,10 +64,6 @@ public class MineRadioDelegate extends NeteaseDelegate {
 		});
 	}
 
-	@Override
-	public void post(Runnable runnable) {
-
-	}
 
 	@OnClick(R2.id.img_mine_radio_back)
 	void onClickBack(){

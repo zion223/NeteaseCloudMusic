@@ -1,4 +1,4 @@
-package com.rikkathewrold.rikkamusic.util;
+package com.imooc.imooc_voice.util;
 
 import android.util.Log;
 
@@ -35,7 +35,14 @@ public class TimeUtil {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         return format.format(time);
     }
-
+    public static String getTimeStandardOnlyYMDWithDot(long time) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd", Locale.getDefault());
+        return format.format(time);
+    }
+    public static String getTimeStandardOnlyYMDChinese(long time) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日", Locale.getDefault());
+        return format.format(time);
+    }
     //输入时间戳，返回分秒的时间格式
     public static String getTimeNoYMDH(long time){
         SimpleDateFormat format = new SimpleDateFormat("mm:ss", Locale.getDefault());

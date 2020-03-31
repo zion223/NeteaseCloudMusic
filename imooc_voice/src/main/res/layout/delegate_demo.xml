@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
+
+        <com.imooc.lib_common_ui.circle_image_view.CircleImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/iv_avatar">
+
+            <TextView
+                android:id="@+id/tv_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLength="20"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="#2196f3"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@id/tv_nickname"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_publish_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_nickname"
+                android:layout_marginTop="2dp"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_title"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="20dp">
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/rl_video"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            android:visibility="gone">
+
+            <com.imooc.lib_common_ui.widget.widget.RikkaRoundRectView
+                android:id="@+id/iv_vid"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                app:roundRatio="0.04"
+                android:scaleType="center" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/shape_video_play" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_content"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:id="@+id/ll_img_group1"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <com.imooc.lib_common_ui.widget.widget.RikkaRoundRectView
+                    android:id="@+id/iv_img_1"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:scaleType="centerCrop"
+                    app:roundRatio="0.04" />
+
+                <com.imooc.lib_common_ui.widget.widget.RikkaRoundRectView
+                    android:id="@+id/iv_img_2"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:scaleType="centerCrop"
+                    app:roundRatio="0.04" />
+
+                <com.imooc.lib_common_ui.widget.widget.RikkaRoundRectView
+                    android:id="@+id/iv_img_3"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:scaleType="centerCrop"
+                    app:roundRatio="0.04" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_img_group2"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_below="@id/ll_img_group1"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <com.imooc.lib_common_ui.widget.RikkaRoundRectView
+                    android:id="@+id/iv_img_4"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:scaleType="centerCrop"
+                    app:roundRatio="0.04" />
+
+                <com.imooc.lib_common_ui.widget.RikkaRoundRectView
+                    android:id="@+id/iv_img_5"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:scaleType="centerCrop"
+                    app:roundRatio="0.04" />
+
+                <com.imooc.lib_common_ui.widget.RikkaRoundRectView
+                    android:id="@+id/iv_img_6"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:scaleType="centerCrop"
+                    app:roundRatio="0.04" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_img_group3"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_below="@id/ll_img_group2"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <com.imooc.lib_common_ui.widget.RikkaRoundRectView
+                    android:id="@+id/iv_img_7"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:scaleType="centerCrop"
+                    app:roundRatio="0.04" />
+
+                <com.imooc.lib_common_ui.widget.RikkaRoundRectView
+                    android:id="@+id/iv_img_8"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:scaleType="centerCrop"
+                    app:roundRatio="0.04" />
+
+                <com.imooc.lib_common_ui.widget.RikkaRoundRectView
+                    android:id="@+id/iv_img_9"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:scaleType="centerCrop"
+                    app:roundRatio="0.04" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_share"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl_img"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bg_share_song"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:visibility="gone">
+
+            <com.imooc.lib_common_ui.widget.RikkaRoundRectView
+                android:id="@+id/iv_song_cover"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:scaleType="centerCrop"
+                app:roundRatio="0.025" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="7dp"
+                android:layout_toEndOf="@id/iv_song_cover">
+
+                <TextView
+                    android:id="@+id/tv_songname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="#303030"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_creator_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_songname"
+                    android:layout_marginTop="4dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textSize="11sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_share_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp">
+
+        <RelativeLayout
+            android:id="@+id/rl_relay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true">
+
+            <ImageView
+                android:id="@+id/iv_relay"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/shape_relay" />
+
+            <TextView
+                android:id="@+id/tv_relayout_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/iv_relay"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="45dp"
+            android:layout_toEndOf="@id/rl_relay">
+
+            <ImageView
+                android:id="@+id/iv_comment"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/shape_comment_event" />
+
+            <TextView
+                android:id="@+id/tv_comment_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/iv_comment"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="45dp"
+            android:layout_toEndOf="@id/rl_comment">
+
+            <ImageView
+                android:id="@+id/iv_like"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/shape_comment_unlike" />
+
+            <TextView
+                android:id="@+id/tv_like_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/iv_like"
+                android:textSize="14sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/rl_share_comment"
+        android:layout_marginTop="15dp"
+        android:background="#f0f0f0" />
+</RelativeLayout>

@@ -36,12 +36,12 @@
         android:layout_toRightOf="@+id/play_all_text"
         android:gravity="center_vertical"
         android:text="(共150首)"
-        android:textSize="14sp" />
+        android:textSize="13sp" />
 
     <ImageView
         android:id="@+id/select"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
         android:layout_alignParentRight="true"
         android:layout_centerInParent="true"
         android:layout_gravity="center|clip_vertical"

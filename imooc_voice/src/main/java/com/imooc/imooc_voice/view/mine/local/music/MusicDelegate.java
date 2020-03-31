@@ -37,9 +37,7 @@ public class MusicDelegate extends NeteaseLoadingDelegate {
 	/**
 	 * ui
 	 */
-	@BindView(R2.id.loadframe)
-	FrameLayout frameLayout;
-	private View rootview;
+
 	private View headerView;
 	private RecyclerView recyclerView;
 	private LinearLayoutManager linearLayoutManager;
@@ -48,7 +46,6 @@ public class MusicDelegate extends NeteaseLoadingDelegate {
 	/**
 	 * data
 	 */
-	private boolean isFirstLoad;
 	private int currentMusicPosition = -1;
 
 
@@ -59,7 +56,6 @@ public class MusicDelegate extends NeteaseLoadingDelegate {
 		Netease.getHandler().postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				isFirstLoad = true;
 				initView();
 			}
 		}, 100);
@@ -67,11 +63,9 @@ public class MusicDelegate extends NeteaseLoadingDelegate {
 	}
 
 
+	public void initView() {
 
-	private void initView() {
-		if(rootview == null){
-			rootview = LayoutInflater.from(getContext()).inflate(R.layout.delegate_music_recyclerview, frameLayout, false);
-			recyclerView = rootview.findViewById(R.id.recyclerview);
+			recyclerView = rootView.findViewById(R.id.recyclerview);
 			linearLayoutManager = new LinearLayoutManager(getContext());
 			recyclerView.setLayoutManager(linearLayoutManager);
 			mAdapter = new MusicAdapter(null);
@@ -97,8 +91,14 @@ public class MusicDelegate extends NeteaseLoadingDelegate {
 			});
 			recyclerView.setAdapter(mAdapter);
 			reloadMusicList();
-		}
+
 	}
+
+	@Override
+	public int setLoadingViewLayout() {
+		return R.layout.delegate_music_recyclerview;
+	}
+
 
 	//加载歌曲列表
 	@SuppressLint("StaticFieldLeak")
@@ -113,15 +113,7 @@ public class MusicDelegate extends NeteaseLoadingDelegate {
 			protected void onPostExecute(Void aVoid) {
 				mAdapter.notifyDataSetChanged();
 				//避免第二次加载时执行
-				if(isFirstLoad){
-					frameLayout.removeAllViews();
-					ViewGroup p = (ViewGroup) rootview.getParent();
-					if (p != null) {
-						p.removeAllViewsInLayout();
-					}
-					frameLayout.addView(rootview);
-					isFirstLoad = false;
-				}
+					addRootView();
 			}
 
 			@Override

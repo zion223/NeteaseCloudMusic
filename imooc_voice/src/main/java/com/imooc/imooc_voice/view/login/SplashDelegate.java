@@ -57,8 +57,5 @@ public class SplashDelegate extends NeteaseDelegate {
 		};
 		countDownTimer.start();
 	}
-	@Override
-	public void post(Runnable runnable) {
 
-	}
 }

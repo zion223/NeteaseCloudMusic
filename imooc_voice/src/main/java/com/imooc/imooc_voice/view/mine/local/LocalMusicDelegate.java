@@ -14,6 +14,7 @@ import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.util.PreferencesUtil;
 import com.imooc.imooc_voice.view.mine.local.view.SortPopupDialog;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
+import com.imooc.lib_common_ui.navigator.CommonNavigatorCreater;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.core.BasePopupView;
 import com.lxj.xpopup.interfaces.OnSelectListener;
@@ -65,44 +66,8 @@ public class LocalMusicDelegate extends NeteaseDelegate{
 
 	private void initMagicIndicator() {
 		mTabMagicIndicator.setBackgroundColor(Color.WHITE);
-		CommonNavigator commonNavigator = new CommonNavigator(getContext());
+		CommonNavigator commonNavigator = CommonNavigatorCreater.setDefaultNavigator(getContext(), mTitleDataList, mTabViewPager);
 		commonNavigator.setAdjustMode(true);
-		commonNavigator.setAdapter(new CommonNavigatorAdapter() {
-			@Override
-			public int getCount() {
-				return 4;
-			}
-
-			@Override
-			public IPagerTitleView getTitleView(Context context, final int index) {
-				ColorTransitionPagerTitleView colorTransitionPagerTitleView = new ColorTransitionPagerTitleView(context);
-				colorTransitionPagerTitleView.setNormalColor(Color.BLACK);
-				colorTransitionPagerTitleView.setSelectedColor(Color.RED);
-				colorTransitionPagerTitleView.setTextSize(13);
-				colorTransitionPagerTitleView.getPaint().setFakeBoldText(true);
-				colorTransitionPagerTitleView.setText(mTitleDataList[index]);
-				colorTransitionPagerTitleView.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						mTabViewPager.setCurrentItem(index);
-					}
-				});
-				return colorTransitionPagerTitleView;
-			}
-
-			@Override
-			public IPagerIndicator getIndicator(Context context) {
-				LinePagerIndicator indicator = new LinePagerIndicator(context);
-				indicator.setMode(LinePagerIndicator.MODE_WRAP_CONTENT);
-				indicator.setColors(Color.RED);
-				return indicator;
-			}
-
-			@Override
-			public float getTitleWeight(Context context, int index) {
-				return 1.0f;
-			}
-		});
 		mTabMagicIndicator.setNavigator(commonNavigator);
 		ViewPagerHelper.bind(mTabMagicIndicator, mTabViewPager);
 
@@ -148,10 +113,6 @@ public class LocalMusicDelegate extends NeteaseDelegate{
 
 	}
 
-	@Override
-	public void post(Runnable runnable) {
-
-	}
 
 	@OnClick(R2.id.img_tab_back)
 	void onClickBack(){
@@ -162,8 +123,6 @@ public class LocalMusicDelegate extends NeteaseDelegate{
 	void onClickMore(){
 		tabMoreDialog.show();
 	}
-
-
 
 
 }

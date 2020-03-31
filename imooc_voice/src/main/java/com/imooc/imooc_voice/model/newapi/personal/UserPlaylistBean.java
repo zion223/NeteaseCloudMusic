@@ -9,8 +9,6 @@ import java.util.List;
  */
 public class UserPlaylistBean {
 
-
-
     private boolean more;
     private int code;
     private List<PlaylistBean> playlist;

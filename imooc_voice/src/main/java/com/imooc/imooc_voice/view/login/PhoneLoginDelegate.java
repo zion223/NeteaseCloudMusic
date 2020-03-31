@@ -44,14 +44,11 @@ public class PhoneLoginDelegate extends NeteaseDelegate {
 		ScreenUtils.setStatusBarColor(getProxyActivity(), Color.parseColor("#ffffffff"));
 	}
 
-	@Override
-	public void post(Runnable runnable) {
 
-	}
 
 	@OnClick(R2.id.tv_login_next)
 	void onClickNext(){
-		//TODO 校验手机号位数
+		//TODO 校验手机号位数  判断手机号是否已经注册
 		if(mPhone.getText().toString().equals("")){
 			Toast.makeText(getContext(), "请先输入手机号",Toast.LENGTH_SHORT).show();
 		}else{

@@ -8,16 +8,15 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.api.RequestCenter;
-import com.imooc.imooc_voice.model.json.BillListJson;
-import com.imooc.imooc_voice.model.json.FocusJson;
-import com.imooc.imooc_voice.model.json.GedanJson;
 import com.imooc.imooc_voice.model.newapi.BannerBean;
 import com.imooc.imooc_voice.model.newapi.LoginBean;
 import com.imooc.imooc_voice.model.newapi.MainRecommendPlayListBean;
@@ -29,6 +28,7 @@ import com.imooc.imooc_voice.view.discory.square.gedandetail.GedanDetailDelegate
 import com.imooc.imooc_voice.view.discory.square.GedanSquareDelegate;
 import com.imooc.lib_common_ui.bannder.BannerCreator;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
+import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.exception.OkHttpException;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
@@ -63,8 +63,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 	@BindView(R2.id.tv_discover_new_song)
 	TextView mTvCurrentSong;
 
-	private GedanAdapter mGedanAdapter;
-	private AlbumSongAdapter mAlbumSongAdapter;
+	private RecommendPlayListAdapter mGedanAdapter;
 
 	private static final String TAG = "DiscoverDelegate";
 	private int ALBUM_OR_SONG = 0;
@@ -110,7 +109,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 				MainRecommendPlayListBean bean = ((MainRecommendPlayListBean)responseObj);
 				List<MainRecommendPlayListBean.RecommendBean> geDan = bean.getRecommend();
 				geDan = geDan.subList(0, 6);
-				mGedanAdapter = new GedanAdapter(geDan);
+				mGedanAdapter = new RecommendPlayListAdapter(geDan);
 				mRecyclerViewGedan.setAdapter(mGedanAdapter);
 				mRecyclerViewGedan.setLayoutManager(gridLayoutManager);
 				mGedanAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -144,32 +143,27 @@ public class DiscoverDelegate extends NeteaseDelegate {
 //
 //			}
 //		});
-		/*
-		 *	新歌
-		 */
-		RequestCenter.queryNewSongList(0, 3, new DisposeDataListener() {
-			@Override
-			public void onSuccess(Object responseObj) {
-				BillListJson json = (BillListJson) responseObj;
-				ArrayList<BillListJson.BillList> song_list = json.getSong_list();
-				mAlbumSongAdapter = new AlbumSongAdapter(song_list, 0);
-				mRecyclerViewAlbumSong.setAdapter(mAlbumSongAdapter);
-				GridLayoutManager manager = new GridLayoutManager(getContext(), 3);
-				mRecyclerViewAlbumSong.setLayoutManager(manager);
-			}
-
-			@Override
-			public void onFailure(Object reasonObj) {
-
-			}
-		});
+//		/*
+//		 *	新歌
+//		 */
+//		RequestCenter.queryNewSongList(0, 3, new DisposeDataListener() {
+//			@Override
+//			public void onSuccess(Object responseObj) {
+//				BillListJson json = (BillListJson) responseObj;
+//				ArrayList<BillListJson.BillList> song_list = json.getSong_list();
+//				mAlbumSongAdapter = new AlbumSongAdapter(song_list, 0);
+//				mRecyclerViewAlbumSong.setAdapter(mAlbumSongAdapter);
+//				GridLayoutManager manager = new GridLayoutManager(getContext(), 3);
+//				mRecyclerViewAlbumSong.setLayoutManager(manager);
+//			}
+//
+//			@Override
+//			public void onFailure(Object reasonObj) {
+//
+//			}
+//		});
 		changeAlbumOrSong(ALBUM_OR_SONG);
 
-	}
-
-	@Override
-	public void onLazyInitView(@Nullable Bundle savedInstanceState) {
-		super.onLazyInitView(savedInstanceState);
 	}
 
 	@Override
@@ -250,4 +244,26 @@ public class DiscoverDelegate extends NeteaseDelegate {
 			mTvAlbumOrSong.setText("新歌推荐");
 		}
 	}
+
+	static class RecommendPlayListAdapter extends BaseQuickAdapter<MainRecommendPlayListBean.RecommendBean, BaseViewHolder> {
+
+		private ImageLoaderManager manager;
+
+		public RecommendPlayListAdapter(@Nullable List<MainRecommendPlayListBean.RecommendBean> data) {
+			super(R.layout.item_discover_gedan, data);
+			manager = ImageLoaderManager.getInstance();
+		}
+
+		@Override
+		protected void convert(BaseViewHolder helper, MainRecommendPlayListBean.RecommendBean item) {
+			final ImageView geDanView = helper.getView(R.id.iv_item_discover);
+			//显示圆角图片
+			manager.displayImageForCorner(geDanView, item.getPicUrl(), 5);
+			int playCount = item.getPlaycount();
+			double playNum = (double)playCount/1000;
+			helper.setText(R.id.tv_item_discover_playnum, playNum + "万");
+			helper.setText(R.id.tv_item_discover_des, item.getName());
+		}
+	}
+
 }

@@ -21,6 +21,7 @@ import com.imooc.imooc_voice.model.newapi.DailyRecommendBean;
 import com.imooc.imooc_voice.model.newapi.LoginBean;
 import com.imooc.imooc_voice.util.GsonUtil;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
+import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.lib_common_ui.appbar.AppBarStateChangeListener;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.utils.StatusBarUtil;
@@ -49,7 +50,8 @@ public class DailyRecommendDelegate extends NeteaseDelegate {
 	RelativeLayout mRlPlayAll;
 	@BindView(R2.id.rv_dailyrecommend)
 	RecyclerView mRvRecommend;
-
+	@BindView(R2.id.tv_left_title)
+	TextView mTvLeftTitle;
 
 	private DailyRecommendAdapter mAdapter;
 	int deltaDistance;
@@ -67,11 +69,11 @@ public class DailyRecommendDelegate extends NeteaseDelegate {
 		minDistance = StatusBarUtil.dip2px(getContext(), 55);
 		deltaDistance = StatusBarUtil.dip2px(getContext(), 200) - minDistance;
 
-		mTvDay.setText(com.rikkathewrold.rikkamusic.util.TimeUtil.getDay(System.currentTimeMillis()));
-		mTvMonth.setText("/" + com.rikkathewrold.rikkamusic.util.TimeUtil.getMonth(System.currentTimeMillis()));
+		mTvDay.setText(TimeUtil.getDay(System.currentTimeMillis()));
+		mTvMonth.setText("/" +TimeUtil.getMonth(System.currentTimeMillis()));
 
 		String coverUrl = GsonUtil.fromJSON(SharePreferenceUtil.getInstance(getContext()).getUserInfo(""), LoginBean.class).getProfile().getBackgroundUrl();
-		manager.displayImageForViewGroup(mIvAppBarCoverBackground, coverUrl, 125);
+		manager.displayImageForViewGroup(mIvAppBarBackground, coverUrl, 125);
 		manager.displayImageForView(mIvAppBarCoverBackground, coverUrl);
 		RequestCenter.getDailyRecommend(new DisposeDataListener() {
 			@Override
@@ -101,7 +103,7 @@ public class DailyRecommendDelegate extends NeteaseDelegate {
 			@Override
 			public void onStateChanged(AppBarLayout appBarLayout, AppBarStateChangeListener.State state) {
 				if (state == State.COLLAPSED) {
-					//setLeftTitleAlpha(255f);
+					setLeftTitleAlpha(255f);
 				}
 			}
 
@@ -113,15 +115,21 @@ public class DailyRecommendDelegate extends NeteaseDelegate {
 				mIvAppBarCoverBackground.setImageAlpha(alpha);
 				mTvMonth.setAlpha(alphaPercent);
 				mTvDay.setAlpha(alphaPercent);
-
+				if (alphaPercent < 0.2f) {
+					float leftTitleAlpha = (1.0f - alphaPercent / 0.2f);
+					setLeftTitleAlpha(leftTitleAlpha);
+				} else {
+					setLeftTitleAlpha(0);
+				}
 			}
 		});
 	}
 
-	@Override
-	public void post(Runnable runnable) {
-
+	private void setLeftTitleAlpha(float alpha) {
+		mTvLeftTitle.setVisibility(View.VISIBLE);
+		mTvLeftTitle.setAlpha(alpha);
 	}
+
 
 	static class DailyRecommendAdapter extends BaseQuickAdapter<DailyRecommendBean.RecommendBean, BaseViewHolder>{
 

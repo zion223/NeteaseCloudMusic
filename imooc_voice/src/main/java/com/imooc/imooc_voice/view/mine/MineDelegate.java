@@ -64,18 +64,19 @@ public class MineDelegate extends NeteaseDelegate {
 	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
 		initSpecIcon();
 		manager = ImageLoaderManager.getInstance();
-		//查询用户创建的歌单
+
 		LoginBean loginBean = GsonUtil.fromJSON(SharePreferenceUtil.getInstance(getContext()).getUserInfo(""), LoginBean.class);
 		int id = loginBean.getProfile().getUserId();
 		final ArrayList<UserPlayListEntity> entities = new ArrayList<>();
 		final ArrayList<UserPlayListEntity> no_create_entities = new ArrayList<>();
+		//用户创建的歌单
 		RequestCenter.getUserPlaylist(id, new DisposeDataListener() {
 			@Override
 			public void onSuccess(Object responseObj) {
 				UserPlaylistBean bean = (UserPlaylistBean) responseObj;
 				List<UserPlaylistBean.PlaylistBean> playlist = bean.getPlaylist();
 				int subIndex = 0;
-				for(int i=0;i<playlist.size();i++){
+				for(int i = 0; i < playlist.size(); i++){
 					if(playlist.get(i).isSubscribed()){
 						subIndex = i;
 						break;
@@ -97,44 +98,8 @@ public class MineDelegate extends NeteaseDelegate {
 				multipleSectionGedanAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
 					@Override
 					public void onItemClick(BaseQuickAdapter adapter, View view, int positon) {
-						//点击到header则执行 隐藏或显示动作 否则就进入歌单详情
-						UserPlayListEntity entity = (UserPlayListEntity) adapter.getItem(positon);
-						ImageView changeView = view.findViewById(R.id.iv_mine_gedan_state);
-						if(entity.isHeader){
-							//是创建的还是收藏的
 
-							//显示动画
-							if((boolean)changeView.getTag()){
-								final ObjectAnimator hideRotate = ObjectAnimator.ofFloat(changeView, "rotation", 270f, 180f);
-								hideRotate.setDuration(300);
-								hideRotate.start();
-								changeView.setTag(false);
-							}else{
-								final ObjectAnimator showRotate = ObjectAnimator.ofFloat(changeView, "rotation", 180f, 270f);
-								showRotate.setDuration(300);
-								showRotate.start();
-								changeView.setTag(true);
-							}
-							if(entity.header.contains("创建")){
-								if((boolean)changeView.getTag()){
-									//隐藏创建的歌单
-									//adapter.replaceData(no_create_entities);
-								}else{
-									//显示创建的歌单
-									//adapter.replaceData(entities);
-								}
-							}else{
-								//收藏的歌单
-								if((boolean)changeView.getTag()){
-									//隐藏收藏的歌单
-								}else{
-									//显示收藏的歌单
-								}
-							}
-						}else{
-							getParentDelegate().getSupportDelegate().start(GedanDetailDelegate.newInstance(String.valueOf(entity.t.getId())));
-						}
-
+						changeGedanVisibleStatus(adapter, view, positon);
 					}
 				});
 				mRvSectionGedan.setAdapter(multipleSectionGedanAdapter);
@@ -169,6 +134,49 @@ public class MineDelegate extends NeteaseDelegate {
 		});
 	}
 
+	/**
+	 * 	改变歌单的显示状态
+	 */
+	private void changeGedanVisibleStatus(BaseQuickAdapter adapter, View view, int positon) {
+		//点击到header则执行 隐藏或显示动作 否则就进入歌单详情
+		UserPlayListEntity entity = (UserPlayListEntity) adapter.getItem(positon);
+		ImageView changeView = view.findViewById(R.id.iv_mine_gedan_state);
+		if(entity.isHeader){
+			//是创建的还是收藏的
+
+			//显示动画
+			if((boolean)changeView.getTag()){
+				final ObjectAnimator hideRotate = ObjectAnimator.ofFloat(changeView, "rotation", 270f, 180f);
+				hideRotate.setDuration(300);
+				hideRotate.start();
+				changeView.setTag(false);
+			}else{
+				final ObjectAnimator showRotate = ObjectAnimator.ofFloat(changeView, "rotation", 180f, 270f);
+				showRotate.setDuration(300);
+				showRotate.start();
+				changeView.setTag(true);
+			}
+			if(entity.header.contains("创建")){
+				if((boolean)changeView.getTag()){
+					//隐藏创建的歌单
+					//adapter.replaceData(no_create_entities);
+				}else{
+					//显示创建的歌单
+					//adapter.replaceData(entities);
+				}
+			}else{
+				//收藏的歌单
+				if((boolean)changeView.getTag()){
+					//隐藏收藏的歌单
+				}else{
+					//显示收藏的歌单
+				}
+			}
+		}else{
+			getParentDelegate().getSupportDelegate().start(GedanDetailDelegate.newInstance(String.valueOf(entity.t.getId())));
+		}
+	}
+
 
 	@OnClick(R2.id.ll_mine_local_music)
 	void onClickLocalMusic(){
@@ -180,10 +188,6 @@ public class MineDelegate extends NeteaseDelegate {
 		getParentDelegate().getSupportDelegate().start(new MineRadioDelegate());
 	}
 
-	@Override
-	public void post(Runnable runnable) {
-
-	}
 
 	private void initSpecIcon() {
 		List<SpecData> specData = new ArrayList<>();
@@ -260,8 +264,8 @@ public class MineDelegate extends NeteaseDelegate {
 							})).show();
 				}
 			});
-			helper.setText(R.id.tv_item_gedan_header, userPlayListEntity.header);
-			helper.setText(R.id.tv_item_gedan_header_playnum, "("+userPlayListEntity.playNum+")");
+			helper.setText(R.id.tv_item_gedan_header_lefttitle, userPlayListEntity.header);
+			helper.setText(R.id.tv_item_gedan_header_righttext, "("+userPlayListEntity.playNum+")");
 
 		}
 
@@ -269,13 +273,14 @@ public class MineDelegate extends NeteaseDelegate {
 		protected void convert(@NonNull BaseViewHolder helper, UserPlayListEntity userPlayListEntity) {
 			ImageView img = helper.getView(R.id.iv_item_gedan_content_img);
 			manager.displayImageForCorner(img, userPlayListEntity.t.getCoverImgUrl(), 5);
-			helper.setText(R.id.tv_item_gedan_content_name, userPlayListEntity.t.getName());
-			helper.setText(R.id.tv_item_gedan_content_num, userPlayListEntity.t.getTrackCount()+"首");
-			helper.setText(R.id.tv_item_gedan_content_num, userPlayListEntity.t.getTrackCount()+"首");
-			TextView creater = helper.getView(R.id.tv_item_gedan_content_creator);
+			helper.setText(R.id.tv_item_gedan_content_toptext, userPlayListEntity.t.getName());
+			TextView bottomText = helper.getView(R.id.tv_item_gedan_content_bottomtext);
+			helper.setText(R.id.tv_item_gedan_content_bottomtext, userPlayListEntity.t.getTrackCount()+"首");
+
 			if(userPlayListEntity.t.isSubscribed()){
-				creater.setVisibility(View.VISIBLE);
-				creater.setText("by "+userPlayListEntity.t.getCreator().getNickname());
+				bottomText.setText(userPlayListEntity.t.getTrackCount()+"首 " +"by "+userPlayListEntity.t.getCreator().getNickname());
+			}else{
+				bottomText.setText(userPlayListEntity.t.getTrackCount()+"首");
 			}
 		}
 	}

@@ -1,0 +1,88 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_singer"
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
+
+    <ImageView
+        android:id="@+id/iv_singer_avatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="12dp" />
+
+    <TextView
+        android:id="@+id/tv_singer_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="15sp"
+        android:layout_toEndOf="@id/iv_singer_avatar"
+        android:textColor="#333333"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_singer_alias"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_alignTop="@+id/tv_singer_name"
+        android:textSize="15sp"
+        android:layout_alignBottom="@+id/tv_singer_name"
+        android:layout_toRightOf="@+id/tv_singer_name" />
+    <LinearLayout
+        android:id="@+id/ll_singer_follow"
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/bg_follow"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="13dp"
+            android:layout_marginRight="3dp"
+            android:src="@drawable/plus_red" />
+
+        <TextView
+            android:id="@+id/tv_item_search_user_follow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="关注"
+            android:textColor="#FF4650"
+            android:textSize="11sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_singer_followed"
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/bg_already_follow"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/bdy" />
+
+        <TextView
+            android:id="@+id/tv_item_search_user_followed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="已关注"
+            android:textSize="11sp"
+            android:visibility="visible" />
+    </LinearLayout>
+</RelativeLayout>

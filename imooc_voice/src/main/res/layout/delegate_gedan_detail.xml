@@ -44,8 +44,8 @@
 
                         <ImageView
                             android:id="@+id/iv_gedan_detail_img"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
+                            android:layout_width="125dp"
+                            android:layout_height="125dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="20dp"
                             android:src="@drawable/test" />
@@ -101,7 +101,13 @@
                             android:layout_marginTop="17dp"
                             android:text="华语流行 华语怀旧"
                             android:textColor="@color/white" />
-
+                        <ImageView
+                            android:layout_width="10dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@+id/tv_gedan_detail_avatar_name"
+                            android:layout_alignBottom="@+id/tv_gedan_detail_avatar_name"
+                            android:layout_toRightOf="@+id/tv_gedan_detail_avatar_name"
+                            android:src="@drawable/right_white"/>
                         <TextView
                             android:id="@+id/tv_gedan_detail_desc"
                             android:layout_width="wrap_content"
@@ -112,9 +118,10 @@
                             android:layout_marginRight="5dp"
                             android:maxLines="2"
                             android:ellipsize="end"
-                            android:text="国语"
+                            android:text="国语国语国语国语国国语国语\n国语国语国语"
                             android:textColor="@color/white"
                             android:textSize="13sp" />
+
                     </RelativeLayout>
 
                     <LinearLayout

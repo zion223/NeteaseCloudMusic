@@ -20,7 +20,9 @@ import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.newapi.PlaylistDetailBean;
 import com.imooc.imooc_voice.model.newapi.song.SongDetailBean;
+import com.imooc.imooc_voice.view.user.UserDetailDelegate;
 import com.imooc.lib_common_ui.app.Netease;
+import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
@@ -31,7 +33,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class GedanDetailDelegate extends NeteaseLoadingDelegate {
+public class GedanDetailDelegate extends NeteaseDelegate {
 
 	private static final String TAG = "GedanDetailDelegate";
 
@@ -84,6 +86,8 @@ public class GedanDetailDelegate extends NeteaseLoadingDelegate {
 	private String gedanCreator;
 	//歌单标题
 	private String gedanTitle;
+	//创建歌单的用户ID
+	private String userId;
 
 	final StringBuilder params = new StringBuilder();
 
@@ -133,6 +137,8 @@ public class GedanDetailDelegate extends NeteaseLoadingDelegate {
 				count = String.valueOf(playlist.getCommentCount());
 				gedanImg = String.valueOf(playlist.getCoverImgUrl());
 				gedanCreator = playlist.getCreator().getNickname();
+				//创建歌单的用户ID
+				userId = String.valueOf(playlist.getCreator().getUserId());
 				gedanTitle = playlist.getName();
 				//TODO 是否已经收藏
 				mTvSongCollectCount.setText("收藏(" + playlist.getSubscribedCount() + ")");
@@ -227,10 +233,19 @@ public class GedanDetailDelegate extends NeteaseLoadingDelegate {
 		getSupportDelegate().pop();
 	}
 
+	//查看评论
 	@OnClick(R2.id.ll_gedan_detail_comment)
 	void onClickGedanComment(){
 		getSupportDelegate().start(GedanCommentDelegate.newInstance(id, count, gedanImg, gedanCreator, gedanTitle));
 	}
+
+	//查看用户详情
+	@OnClick(R2.id.tv_gedan_detail_avatar_name)
+	void onClickUserInfo(){
+		getSupportDelegate().start(UserDetailDelegate.newInstance(userId));
+	}
+
+
 
 	@Override
 	public void post(Runnable runnable) {

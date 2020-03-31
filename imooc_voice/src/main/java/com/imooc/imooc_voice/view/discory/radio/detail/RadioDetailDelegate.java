@@ -1,10 +1,7 @@
 package com.imooc.imooc_voice.view.discory.radio.detail;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,22 +10,16 @@ import android.support.v4.view.ViewPager;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.imooc.imooc_voice.R;
-import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.newapi.dj.DjDetailBean;
-import com.imooc.imooc_voice.model.radio.RadioProgramLoadEvent;
-import com.imooc.lib_common_ui.app.Netease;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_common_ui.dialog.UnsubscribeRadioDialog;
+import com.imooc.lib_common_ui.navigator.CommonNavigatorCreater;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
 import com.lxj.xpopup.XPopup;
@@ -36,22 +27,8 @@ import com.lxj.xpopup.XPopup;
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ColorTransitionPagerTitleView;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import butterknife.BindView;
 
 public class RadioDetailDelegate extends NeteaseLoadingDelegate implements View.OnClickListener {
-
-	@BindView(R2.id.loadframe)
-	FrameLayout frameLayout;
 
 	private TextView mTvRadioTitle;
 	private TextView mTvRadioSubscribed;
@@ -60,7 +37,6 @@ public class RadioDetailDelegate extends NeteaseLoadingDelegate implements View.
 	private ImageView mIvBack;
 	private MagicIndicator mRadioMagicIndicator;
 	private ViewPager mRadioViewPager;
-	private View rootView;
 
 	private static final String ARGS_RADIO_ID = "ARGS_RADIO_ID";
 	private ImageLoaderManager manager;
@@ -90,21 +66,14 @@ public class RadioDetailDelegate extends NeteaseLoadingDelegate implements View.
 			id = args.getString(ARGS_RADIO_ID);
 		}
 		manager = ImageLoaderManager.getInstance();
-		EventBus.getDefault().register(this);
+
 	}
 
-	@Override
-	public void onDestroyView() {
-		super.onDestroyView();
-		EventBus.getDefault().unregister(this);
-	}
 
-	@SuppressLint("SetTextI18n")
-	@Override
-	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
-		super.onBindView(savedInstanceState, view);
 
-		rootView = LayoutInflater.from(getContext()).inflate(R.layout.delegate_empty, frameLayout, false);
+
+	@Override
+	public void initView() {
 		mTvRadioTitle = rootView.findViewById(R.id.tv_radio_detail_title);
 		mTvRadioSubscribed = rootView.findViewById(R.id.tv_radio_detail_subscribed);
 		mTvRadioSubscrib = rootView.findViewById(R.id.tv_radio_detail_subscrib);
@@ -148,18 +117,7 @@ public class RadioDetailDelegate extends NeteaseLoadingDelegate implements View.
 				msp.setSpan(new AbsoluteSizeSpan(30), 2, msp.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 				mTitleDataList[1] = msp;
 				initMagicIndicator();
-				Netease.getHandler().postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						frameLayout.removeAllViews();
-						//framelayout 创建了新的实例
-						ViewGroup p = (ViewGroup) rootView.getParent();
-						if (p != null) {
-							p.removeAllViewsInLayout();
-						}
-						frameLayout.addView(rootView);
-					}
-				}, 500);
+				addRootView();
 			}
 
 			@Override
@@ -167,64 +125,22 @@ public class RadioDetailDelegate extends NeteaseLoadingDelegate implements View.
 
 			}
 		});
+	}
 
-
+	@Override
+	public int setLoadingViewLayout() {
+		return R.layout.delegate_radio_deatail;
 	}
 
 	private void initMagicIndicator() {
 		mRadioMagicIndicator.setBackgroundColor(Color.WHITE);
-
-		CommonNavigator commonNavigator = new CommonNavigator(getContext());
+		CommonNavigator commonNavigator = CommonNavigatorCreater.setDefaultNavigator(getContext(), mTitleDataList, mRadioViewPager);
 		commonNavigator.setAdjustMode(true);
-		commonNavigator.setAdapter(new CommonNavigatorAdapter() {
-			@Override
-			public int getCount() {
-				return 2;
-			}
-
-			@Override
-			public IPagerTitleView getTitleView(Context context, final int index) {
-				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-						LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-				params.setMargins(0, 0, 0, 10);
-				ColorTransitionPagerTitleView colorTransitionPagerTitleView = new ColorTransitionPagerTitleView(context);
-				colorTransitionPagerTitleView.setNormalColor(Color.BLACK);
-				colorTransitionPagerTitleView.setSelectedColor(Color.RED);
-				colorTransitionPagerTitleView.setTextSize(14);
-				colorTransitionPagerTitleView.setLayoutParams(params);
-				colorTransitionPagerTitleView.setText(mTitleDataList[index]);
-				colorTransitionPagerTitleView.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						mRadioViewPager.setCurrentItem(index);
-					}
-				});
-				return colorTransitionPagerTitleView;
-			}
-
-			@Override
-			public IPagerIndicator getIndicator(Context context) {
-				LinePagerIndicator indicator = new LinePagerIndicator(context);
-				indicator.setMode(LinePagerIndicator.MODE_WRAP_CONTENT);
-				indicator.setColors(Color.RED);
-				return indicator;
-			}
-
-			@Override
-			public float getTitleWeight(Context context, int index) {
-				return 1.0f;
-			}
-		});
-
 		mRadioMagicIndicator.setNavigator(commonNavigator);
 		mRadioMagicIndicator.onPageSelected(1);
 		ViewPagerHelper.bind(mRadioMagicIndicator, mRadioViewPager);
 	}
 
-	@Override
-	public void post(Runnable runnable) {
-
-	}
 
 	@Override
 	public void onClick(View v) {
@@ -285,10 +201,6 @@ public class RadioDetailDelegate extends NeteaseLoadingDelegate implements View.
 
 	}
 
-	@Subscribe(threadMode = ThreadMode.MAIN)
-	public void loadProgramFinish(RadioProgramLoadEvent event) {
-
-	}
 
 	class RadioTabAdapter extends FragmentPagerAdapter {
 

@@ -1,21 +1,18 @@
 package com.imooc.imooc_voice.api;
 
 
+import com.imooc.imooc_voice.model.json.ArtistJson;
 import com.imooc.imooc_voice.model.newapi.AlbumSublistBean;
+import com.imooc.imooc_voice.model.newapi.ArtistListBean;
 import com.imooc.imooc_voice.model.newapi.ArtistSublistBean;
 import com.imooc.imooc_voice.model.newapi.BannerBean;
 import com.imooc.imooc_voice.model.newapi.CatlistBean;
 import com.imooc.imooc_voice.model.newapi.DailyRecommendBean;
 import com.imooc.imooc_voice.model.newapi.DjBannerBean;
+import com.imooc.imooc_voice.model.newapi.FollowBean;
 import com.imooc.imooc_voice.model.newapi.HighQualityPlayListBean;
 import com.imooc.imooc_voice.model.newapi.LikeListBean;
 import com.imooc.imooc_voice.model.newapi.LoginBean;
-import com.imooc.imooc_voice.model.friend.BaseFriendModel;
-import com.imooc.imooc_voice.model.json.ArtistJson;
-import com.imooc.imooc_voice.model.json.BillListJson;
-import com.imooc.imooc_voice.model.json.FocusJson;
-import com.imooc.imooc_voice.model.json.GedanDetailJson;
-import com.imooc.imooc_voice.model.json.GedanJson;
 import com.imooc.imooc_voice.model.newapi.CommonMessageBean;
 import com.imooc.imooc_voice.model.newapi.MainEventBean;
 import com.imooc.imooc_voice.model.newapi.MainRecommendPlayListBean;
@@ -26,6 +23,7 @@ import com.imooc.imooc_voice.model.newapi.PlaylistDetailBean;
 import com.imooc.imooc_voice.model.newapi.RecommendPlayListBean;
 import com.imooc.imooc_voice.model.newapi.SubCountBean;
 import com.imooc.imooc_voice.model.newapi.TopListBean;
+import com.imooc.imooc_voice.model.newapi.TopListDetailBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjCatelistBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjDetailBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjPaygiftBean;
@@ -78,17 +76,6 @@ public class RequestCenter {
         CommonOkHttpClient.get(CommonRequest.
                 createGetRequest(url, params), new DisposeDataHandler(listener, clazz));
     }
-
-//    public static void requestRecommandData(DisposeDataListener listener) {
-//        RequestCenter.getRequest(HttpConstants.HOME_RECOMMAND, null, listener,
-//                BaseRecommandModel.class);
-//    }
-//
-//    public static void requestRecommandMore(DisposeDataListener listener) {
-//        RequestCenter.getRequest(HttpConstants.HOME_RECOMMAND_MORE, null, listener,
-//                BaseRecommandMoreModel.class);
-//    }
-//
 
     /**
      * 用户登陆请求
@@ -149,10 +136,17 @@ public class RequestCenter {
     }
 
     /**
-     *  榜单
+     *  所有榜单
      */
     public static void getTopList(DisposeDataListener listener){
         RequestCenter.getRequest(HttpConstants.TOP_LIST, null, listener, TopListBean.class);
+    }
+
+    /**
+     *  所有榜单内容摘要 - 排行榜页面
+     */
+    public static void getTopListDetail(DisposeDataListener listener){
+        RequestCenter.getRequest(HttpConstants.TOP_LIST_DETAIL, null, listener, TopListDetailBean.class);
     }
 
     /**
@@ -226,18 +220,25 @@ public class RequestCenter {
     /**
      *  用户动态 lasttime默认-1
      */
-    public static void getUserEvent(long uid, int limit, long time, DisposeDataListener listener){
+    public static void getUserEvent(String uid, int limit, long time, DisposeDataListener listener){
         RequestParams params = new RequestParams();
-        params.put("id", uid);
+        params.put("uid", uid);
         params.put("limit", limit);
         params.put("lasttime", time);
         RequestCenter.getRequest(HttpConstants.USER_EVENT, params, listener, UserEventBean.class);
     }
 
     /**
+     *   用户动态
+     */
+    public static void getUserEvent(String uid, DisposeDataListener listener){
+        getUserEvent(uid,30,-1, listener);
+    }
+
+    /**
      *  用户详情
      */
-    public static void getUserDetail(long uid, DisposeDataListener listener){
+    public static void getUserDetail(String uid, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("uid", uid);
         RequestCenter.getRequest(HttpConstants.USER_DETAIL, params, listener, UserDetailBean.class);
@@ -250,62 +251,92 @@ public class RequestCenter {
         RequestCenter.getRequest(HttpConstants.SEARCH_HOT, null, listener, HotSearchDetailBean.class);
     }
 
+    /**
+     *  搜索
+     *      PS.type: 搜索类型；默认为 1 即单曲 , 取值意义 :
+     *      1: 单曲, 10: 专辑, 100: 歌手, 1000: 歌单,
+     *      1002: 用户, 1004: MV, 1006: 歌词, 1009: 电台,
+     *      1014: 视频, 1018:综合
+     */
     public static void getSongSearch(String keywords, int type, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("keywords", keywords);
-        params.put("type", type);
-        RequestCenter.getRequest(HttpConstants.SONG_SEARCH, params, listener, SongSearchBean.class);
-    }
-
-    public static void getFeedSearch(String keywords, int type, DisposeDataListener listener){
-        RequestParams params = new RequestParams();
-        params.put("keywords", keywords);
-        params.put("type", type);
-        RequestCenter.getRequest(HttpConstants.SONG_SEARCH, params, listener, FeedSearchBean.class);
-    }
-
-    public static void getSingerSearch(String keywords, int type, DisposeDataListener listener){
-        RequestParams params = new RequestParams();
-        params.put("keywords", keywords);
-        params.put("type", type);
-        RequestCenter.getRequest(HttpConstants.SONG_SEARCH, params, listener, SingerSearchBean.class);
+        params.put("type", 1);
+        RequestCenter.getRequest(HttpConstants.SEARCH, params, listener, SongSearchBean.class);
     }
 
     public static void getAlbumSearch(String keywords, int type, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("keywords", keywords);
-        params.put("type", type);
-        RequestCenter.getRequest(HttpConstants.SONG_SEARCH, params, listener, AlbumSearchBean.class);
+        params.put("type", 10);
+        RequestCenter.getRequest(HttpConstants.SEARCH, params, listener, AlbumSearchBean.class);
+    }
+
+    public static void getSingerSearch(String keywords, int type, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("keywords", keywords);
+        params.put("type", 100);
+        RequestCenter.getRequest(HttpConstants.SEARCH, params, listener, SingerSearchBean.class);
     }
 
     public static void getPlayListSearch(String keywords, int type, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("keywords", keywords);
-        params.put("type", type);
-        RequestCenter.getRequest(HttpConstants.SONG_SEARCH, params, listener, PlayListSearchBean.class);
-    }
-
-    public static void getRadioSearch(String keywords, int type, DisposeDataListener listener){
-        RequestParams params = new RequestParams();
-        params.put("keywords", keywords);
-        params.put("type", type);
-        RequestCenter.getRequest(HttpConstants.SONG_SEARCH, params, listener, RadioSearchBean.class);
+        params.put("type", 1000);
+        RequestCenter.getRequest(HttpConstants.SEARCH, params, listener, PlayListSearchBean.class);
     }
 
     public static void getUserSearch(String keywords, int type, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("keywords", keywords);
-        params.put("type", type);
-        RequestCenter.getRequest(HttpConstants.SONG_SEARCH, params, listener, UserSearchBean.class);
+        params.put("type", 1002);
+        RequestCenter.getRequest(HttpConstants.SEARCH, params, listener, UserSearchBean.class);
+    }
+
+    public static void getVideoSearch(String keywords, int type, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("keywords", keywords);
+        params.put("type", 1014);
+        RequestCenter.getRequest(HttpConstants.SEARCH, params, listener, FeedSearchBean.class);
+    }
+
+    public static void getRadioSearch(String keywords, int type, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("keywords", keywords);
+        params.put("type", 1009);
+        RequestCenter.getRequest(HttpConstants.SEARCH, params, listener, RadioSearchBean.class);
     }
 
     public static void getSynthesisSearch(String keywords, int type, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("keywords", keywords);
-        params.put("type", type);
-        RequestCenter.getRequest(HttpConstants.SONG_SEARCH, params, listener, SynthesisSearchBean.class);
+        params.put("type", 1018);
+        RequestCenter.getRequest(HttpConstants.SEARCH, params, listener, SynthesisSearchBean.class);
     }
 
+    /**
+     *  歌手分类
+     *   PS.入驻歌手 5001
+     *  华语男歌手 1001 华语女歌手 1002 华语组合/乐队 1003
+     *  欧美男歌手 2001 欧美女歌手 2002 欧美组合/乐队 2003
+     *  日本男歌手 6001 日本女歌手 6002 日本组合/乐队 6003
+     *  韩国男歌手 7001 韩国女歌手 7002 韩国组合/乐队 7003
+     *  其他男歌手 4001 其他女歌手 4002 其他组合/乐队 4003
+     *
+     */
+    public static void getSingerList(String type, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("cat", type);
+        RequestCenter.getRequest(HttpConstants.SINGER_LIST, params, listener, ArtistListBean.class);
+    }
+
+    /**
+     *  获取热门歌手
+     */
+    public static void getHotSingerList(DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        RequestCenter.getRequest(HttpConstants.HOT_SINGER, params, listener, ArtistListBean.class);
+    }
     /**
      *  获取歌手单曲
      */
@@ -497,6 +528,16 @@ public class RequestCenter {
     }
 
     /**
+     *  关注歌手
+     */
+    public static void getSubArtist(String rid, boolean isSub, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", rid);
+        params.put("t", isSub ? 1:0);
+        RequestCenter.getRequest(HttpConstants.ARTIST_SUB, params, listener, DjSubBean.class);
+    }
+
+    /**
      *  已经订阅的电台
      */
     public static void getSubRadioList(DisposeDataListener listener){
@@ -547,6 +588,15 @@ public class RequestCenter {
     }
 
     /**
+     *  关注或取消关注用户
+     */
+    public static void follow(String id, boolean follow, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        params.put("t", follow ? 1 : 2);
+        RequestCenter.getRequest(HttpConstants.FOLLOW, params, listener, FollowBean.class);
+    }
+    /**
      *  收藏或取消收藏
      *
      */
@@ -574,63 +624,6 @@ public class RequestCenter {
         }
     }
 
-    /**
-     * 查询热搜榜
-     */
-    public static void querySuggest(DisposeDataListener listener) {
-        RequestCenter.getRequest(HttpConstants.Billboard.billSongList(2, 0, 20), null, listener, BillListJson.class);
-    }
 
-    /*
-     * 查询发现页面轮播图
-     */
-    public static void queryBanner(DisposeDataListener listener){
-        RequestCenter.getRequest(HttpConstants.focusPic(10), null, listener, FocusJson.class);
-    }
-
-    /*
-     *  查询歌单列表
-     */
-    public static void queryGedan(int pageNo, int pageSize, DisposeDataListener listener){
-        RequestCenter.getRequest(HttpConstants.GeDan.geDan(pageNo, pageSize + 1), null, listener, GedanJson.class);
-    }
-
-    /*
-     *  根据标签查询歌单
-     */
-    public static void queryGeDanByTag(String tag, int pageNo, int pageSize, DisposeDataListener listener){
-        RequestCenter.getRequest(HttpConstants.GeDan.geDanByTag(tag, pageNo, pageSize +1), null, listener, GedanJson.class);
-    }
-
-    /*
-     *  新歌速递
-     */
-    public static void queryNewSongList(int pageNo, int pageSize, DisposeDataListener listener){
-        RequestCenter.getRequest(HttpConstants.Song.getNewSong(pageNo, pageSize), null, listener, BillListJson.class);
-    }
-    /*
-     *  新碟
-     */
-    public static void queryNewAlbumList(int pageNo, int pageSize, DisposeDataListener listener){
-        RequestCenter.getRequest(HttpConstants.Song.recommendAlbum(pageNo, pageSize +1), null, listener, BillListJson.class);
-    }
-
-    /*
-     *  歌单详情
-     */
-    public static void queryGedanDetail(String id , DisposeDataListener listener){
-        RequestCenter.getRequest(HttpConstants.GeDan.geDanInfo(id), null, listener, GedanDetailJson.class);
-    }
-
-    /*
-     *  查询榜单歌曲(3首)
-     */
-    public static void queryRankingSong(int type , DisposeDataListener listener){
-        RequestCenter.getRequest(HttpConstants.Billboard.billSongList(type, 0, 3), null, listener, GedanDetailJson.class);
-    }
-
-    public static void requestFriendData(DisposeDataListener listener) {
-        RequestCenter.getRequest(HttpConstants.HOME_FRIEND, null, listener, BaseFriendModel.class);
-    }
 
 }

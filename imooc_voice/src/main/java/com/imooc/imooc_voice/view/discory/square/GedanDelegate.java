@@ -1,35 +1,48 @@
 package com.imooc.imooc_voice.view.discory.square;
 
+import android.annotation.SuppressLint;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.api.RequestCenter;
-import com.imooc.imooc_voice.model.json.GedanJson;
-import com.imooc.imooc_voice.view.discory.GedanAdapter;
+import com.imooc.imooc_voice.model.newapi.RecommendPlayListBean;
 import com.imooc.imooc_voice.view.discory.square.gedandetail.GedanDetailDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
+import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
+import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 
-public class GedanDelegate extends NeteaseDelegate {
+public class GedanDelegate extends NeteaseLoadingDelegate {
 
 	private static final String ARGS_GEDAN_TAG = "ARGS_GEDAN_TAG";
 	private String tag;
 
-	@BindView(R2.id.rv_gedan_normal)
+
 	RecyclerView mRecyclerViewGedan;
 
 	private GedanAdapter mAdapter;
+
+	//每行加载3个
+	private static final int INIT_LOAD_LINE = 3;
+	//总共加载30行
+	private static final int TOTAL_LOAD_LINE = 20;
 
 	static GedanDelegate newInstance(String tag){
 		final Bundle args = new Bundle();
@@ -39,10 +52,6 @@ public class GedanDelegate extends NeteaseDelegate {
 		return delegate;
 	}
 
-	@Override
-	public Object setLayout() {
-		return R.layout.delegate_gedan;
-	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,34 +63,79 @@ public class GedanDelegate extends NeteaseDelegate {
 	}
 
 	@Override
-	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
-		final GridLayoutManager manager = new GridLayoutManager(getContext(), 3);
-		RequestCenter.queryGeDanByTag(tag, 1, 20, new DisposeDataListener() {
-			@Override
-			public void onSuccess(Object responseObj) {
-//				GedanJson json = (GedanJson) responseObj;
-//				ArrayList<GedanJson.GeDan> content = json.getContent();
-//				mAdapter = new GedanAdapter(content);
-//				mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-//					@Override
-//					public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//						GedanJson.GeDan item = (GedanJson.GeDan) adapter.getItem(position);
-//						getParentDelegate().getSupportDelegate().start(GedanDetailDelegate.newInstance(item.getListid()));
-//					}
-//				});
-				mRecyclerViewGedan.setAdapter(mAdapter);
-				mRecyclerViewGedan.setLayoutManager(manager);
-			}
-
-			@Override
-			public void onFailure(Object reasonObj) {
-
-			}
-		});
+	public void initView() {
+		mRecyclerViewGedan = rootView.findViewById(R.id.rv_gedan_normal);
+		final GridLayoutManager manager = new GridLayoutManager(getContext(), INIT_LOAD_LINE);
+		initGedanView(manager);
 	}
 
 	@Override
-	public void post(Runnable runnable) {
+	public int setLoadingViewLayout() {
+		return R.layout.delegate_gedan;
+	}
 
+
+	@SuppressLint("StaticFieldLeak")
+	private void initGedanView(final GridLayoutManager manager) {
+		new AsyncTask<Void, Void, Boolean>() {
+
+			@Override
+			protected Boolean doInBackground(Void... voids) {
+				RequestCenter.getPlayList(tag, INIT_LOAD_LINE * TOTAL_LOAD_LINE, new DisposeDataListener() {
+					@Override
+					public void onSuccess(Object responseObj) {
+						RecommendPlayListBean bean = (RecommendPlayListBean) responseObj;
+						List<RecommendPlayListBean.PlaylistsBean> playlists = bean.getPlaylists();
+						mAdapter = new GedanAdapter(playlists);
+						mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+							@Override
+							public void onItemClick(BaseQuickAdapter adapter, View view, int i) {
+								RecommendPlayListBean.PlaylistsBean entity = (RecommendPlayListBean.PlaylistsBean) adapter.getItem(i);
+								getParentDelegate().getSupportDelegate().start(GedanDetailDelegate.newInstance(String.valueOf(entity.getId())));
+							}
+						});
+						mRecyclerViewGedan.setAdapter(mAdapter);
+						mRecyclerViewGedan.setLayoutManager(manager);
+						addRootView();
+					}
+
+					@Override
+					public void onFailure(Object reasonObj) {
+
+					}
+				});
+				return null;
+			}
+
+			@Override
+			protected void onPostExecute(Boolean aBoolean) {
+				super.onPostExecute(aBoolean);
+
+			}
+		}.execute();
+
+
+	}
+
+
+
+	static class GedanAdapter extends BaseQuickAdapter<RecommendPlayListBean.PlaylistsBean, BaseViewHolder>{
+		private ImageLoaderManager manager;
+
+		GedanAdapter(@Nullable List<RecommendPlayListBean.PlaylistsBean> data) {
+			super(R.layout.item_discover_gedan, data);
+			manager = ImageLoaderManager.getInstance();
+		}
+
+		@Override
+		protected void convert(@NonNull BaseViewHolder helper, RecommendPlayListBean.PlaylistsBean item) {
+			final ImageView geDanView = helper.getView(R.id.iv_item_discover);
+			//显示圆角图片
+			manager.displayImageForCorner(geDanView, item.getCoverImgUrl(), 5);
+			int playCount = item.getPlayCount();
+			double playNum = (double)playCount/1000;
+			helper.setText(R.id.tv_item_discover_playnum, playNum + "万");
+			helper.setText(R.id.tv_item_discover_des, item.getName());
+		}
 	}
 }

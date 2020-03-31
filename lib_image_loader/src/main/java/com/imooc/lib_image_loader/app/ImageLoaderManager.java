@@ -72,7 +72,7 @@ public class ImageLoaderManager {
 	 * @param url
 	 */
 	public void displayImageForCircle(final ImageView imageView, final String url) {
-		imageView.setTag(R.id.image_loader_manager_tag, url);
+		//imageView.setTag(R.id.image_loader_manager_tag, url);
 		Glide.with(imageView.getContext())
 				.asBitmap()
 				.load(url)
@@ -80,7 +80,7 @@ public class ImageLoaderManager {
 				.into(new BitmapImageViewTarget(imageView) {
 					@Override
 					protected void setResource(final Bitmap resource) {
-						if(imageView.getTag(R.id.image_loader_manager_tag).equals(url)){
+						if(true){
 							RoundedBitmapDrawable circularBitmapDrawable =
 									RoundedBitmapDrawableFactory.create(imageView.getResources(), resource);
 							circularBitmapDrawable.setCircular(true);
@@ -115,6 +115,7 @@ public class ImageLoaderManager {
 	public void displayImageForCorner(final ImageView imageView, String url) {
 		displayImageForCorner(imageView, url, 5);
 	}
+
 	public void displayImageForViewGroup(final ViewGroup group, String url, final int radius) {
 		Glide.with(group.getContext())
 				.asBitmap()
@@ -215,7 +216,7 @@ public class ImageLoaderManager {
 	private RequestOptions initCommonRequestOption() {
 
 		return new RequestOptions()
-				.placeholder(R.mipmap.b4y)//loading时显示的图片
+				//.placeholder(R.mipmap.b4y)//loading时显示的图片
 				.error(R.mipmap.b4y)//load失败时显示的图片
 				.diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)//缓存策略
 				.skipMemoryCache(false)//使用内存缓存

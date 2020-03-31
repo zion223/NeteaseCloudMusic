@@ -68,6 +68,8 @@
             android:id="@+id/tv_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:textColor="@color/black"
             android:textSize="15sp"
             android:visibility="gone" />
 
@@ -325,7 +327,7 @@
                 android:id="@+id/iv_like"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/shape_comment_unlike" />
+                android:src="@drawable/zan" />
 
             <TextView
                 android:id="@+id/tv_like_count"

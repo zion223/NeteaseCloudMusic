@@ -40,10 +40,7 @@ public class RadioDelegate extends NeteaseLoadingDelegate implements View.OnClic
 
 	@BindView(R2.id.banner_radio_recycler_item)
 	ConvenientBanner banner;
-	@BindView(R2.id.loadframe)
-	FrameLayout frameLayout;
 
-	private View rootView;
 	private RecyclerView mRvRadioRecommend;
 	private DjRecommendAdapter mRecommedAdapter;
 
@@ -59,10 +56,9 @@ public class RadioDelegate extends NeteaseLoadingDelegate implements View.OnClic
 		return R.layout.delegate_radio;
 	}
 
+
 	@Override
-	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
-		super.onBindView(savedInstanceState, view);
-		rootView = LayoutInflater.from(getContext()).inflate(R.layout.delegate_radio_loading, frameLayout, false);
+	public void initView() {
 		rootView.findViewById(R.id.tv_radio_recommend_header_change).setOnClickListener(this);
 		mRvRadioRecommend = rootView.findViewById(R.id.rv_radio_loading);
 		RequestCenter.getRadioBanner(new DisposeDataListener() {
@@ -83,8 +79,13 @@ public class RadioDelegate extends NeteaseLoadingDelegate implements View.OnClic
 			}
 		});
 		initRadioView();
-
 	}
+
+	@Override
+	public int setLoadingViewLayout() {
+		return R.layout.delegate_radio_loading;
+	}
+
 
 	@SuppressLint("StaticFieldLeak")
 	private void initRadioView() {
@@ -119,7 +120,7 @@ public class RadioDelegate extends NeteaseLoadingDelegate implements View.OnClic
 
 						mRvRadioRecommend.setLayoutManager(new GridLayoutManager(getContext(), 3));
 						mRvRadioRecommend.setAdapter(mRecommedAdapter);
-
+						addRootView();
 					}
 
 					@Override
@@ -133,18 +134,6 @@ public class RadioDelegate extends NeteaseLoadingDelegate implements View.OnClic
 			@Override
 			protected void onPostExecute(Void aVoid) {
 				super.onPostExecute(aVoid);
-				Netease.getHandler().postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						frameLayout.removeAllViews();
-						//framelayout 创建了新的实例
-						ViewGroup p = (ViewGroup) rootView.getParent();
-						if (p != null) {
-							p.removeAllViewsInLayout();
-						}
-						frameLayout.addView(rootView);
-					}
-				}, 500);
 			}
 		}.execute();
 	}

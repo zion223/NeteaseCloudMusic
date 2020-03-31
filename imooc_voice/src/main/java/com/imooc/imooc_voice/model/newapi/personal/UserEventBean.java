@@ -844,14 +844,14 @@ public class UserEventBean {
                      * t : 1563778997011
                      */
 
-                    private int s;
+                    private String s;
                     private long t;
 
-                    public int getS() {
+                    public String getS() {
                         return s;
                     }
 
-                    public void setS(int s) {
+                    public void setS(String s) {
                         this.s = s;
                     }
 

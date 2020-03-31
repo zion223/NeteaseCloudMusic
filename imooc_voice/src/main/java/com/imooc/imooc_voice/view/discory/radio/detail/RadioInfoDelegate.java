@@ -81,8 +81,4 @@ public class RadioInfoDelegate extends NeteaseDelegate {
         mTvRadioSort.setText(sort);
     }
 
-    @Override
-    public void post(Runnable runnable) {
-
-    }
 }

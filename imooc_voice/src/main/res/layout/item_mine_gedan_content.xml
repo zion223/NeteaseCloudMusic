@@ -5,8 +5,7 @@
     android:layout_marginLeft="15dp"
     android:layout_marginRight="10dp"
     android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp"
-    android:background="@color/white">
+    android:layout_marginBottom="10dp">
     <ImageView
         android:id="@+id/iv_item_gedan_content_img"
         android:layout_width="60dp"
@@ -14,21 +13,22 @@
         android:layout_centerVertical="true"
         android:src="@drawable/test"/>
     <TextView
-        android:id="@+id/tv_item_gedan_content_name"
+        android:id="@+id/tv_item_gedan_content_toptext"
         android:layout_toRightOf="@+id/iv_item_gedan_content_img"
         android:layout_alignTop="@+id/iv_item_gedan_content_img"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:maxLines="2"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="我喜欢的音乐"
         android:textColor="@color/black"
         android:textSize="14sp"/>
     <TextView
-        android:id="@+id/tv_item_gedan_content_num"
-        android:layout_below="@+id/tv_item_gedan_content_name"
+        android:id="@+id/tv_item_gedan_content_bottomtext"
+        android:layout_below="@+id/tv_item_gedan_content_toptext"
         android:layout_toRightOf="@+id/iv_item_gedan_content_img"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
@@ -38,21 +38,11 @@
         android:textSize="11sp"
         android:text="10首"/>
 
-    <TextView
-        android:id="@+id/tv_item_gedan_content_creator"
-        android:layout_below="@+id/tv_item_gedan_content_name"
-        android:layout_toRightOf="@+id/tv_item_gedan_content_num"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
-        android:textSize="11sp"
-        android:text="by xxx"/>
     <ImageView
-        android:layout_width="25dp"
+        android:id="@+id/iv_item_gedan_more"
+        android:layout_width="15dp"
         android:layout_height="25dp"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        android:src="@drawable/list_icn_more"/>
+        android:src="@drawable/more"/>
 </RelativeLayout>

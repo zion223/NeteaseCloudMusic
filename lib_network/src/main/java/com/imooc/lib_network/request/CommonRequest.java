@@ -39,7 +39,6 @@ public class CommonRequest {
 	}
 
 	public static Request createGetRequest(String url, RequestParams params) {
-		Log.d(TAG, "URL:" + url);
 		return createGetRequest(url, params, null);
 	}
 
@@ -59,6 +58,7 @@ public class CommonRequest {
 			}
 		}
 		Headers mHeader = mHeaderBuild.build();
+		Log.d(TAG, "requestUrl:" + urlBuilder.substring(0, urlBuilder.length() - 1));
 		return new Request.Builder()
 				.url(urlBuilder.substring(0, urlBuilder.length() - 1))
 				.get()

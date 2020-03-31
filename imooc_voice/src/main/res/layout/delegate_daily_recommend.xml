@@ -88,7 +88,19 @@
                         android:layout_height="25dp"
                         android:layout_margin="10dp"
                         android:src="@drawable/a47" />
-
+                    <TextView
+                        android:id="@+id/tv_left_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="15sp"
+                        android:layout_toEndOf="@id/img_daily_back"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:text="每日推荐"
+                        android:typeface="monospace"
+                        android:visibility="gone" />
 
                     <ImageView
                         android:id="@+id/img_tab_more"

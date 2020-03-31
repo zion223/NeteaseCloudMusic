@@ -1,13 +1,11 @@
 package com.imooc.imooc_voice.view.discory.square.gedandetail;
 
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
-import com.imooc.imooc_voice.model.json.GedanDetailJson;
 import com.imooc.imooc_voice.model.newapi.song.SongDetailBean;
 
 import java.util.List;

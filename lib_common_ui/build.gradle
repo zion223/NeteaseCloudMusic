@@ -21,9 +21,12 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation this.rootProject.depsLibs.magicindicator
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50'
     implementation 'com.android.support:recyclerview-v7:25.4.0'
     compileOnly this.rootProject.depsLibs.appcompat
+    compileOnly 'com.github.donkingliang:GroupedRecyclerViewAdapter:1.3.7'
     implementation this.rootProject.depsLibs.eventbus
     compile 'me.yokeyword:eventbus-activity-scope:1.1.0'
     compile 'com.android.support:support-v4:25.3.1'

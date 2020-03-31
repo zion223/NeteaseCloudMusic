@@ -2,14 +2,12 @@ package com.imooc.lib_network.response;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.imooc.lib_network.exception.OkHttpException;
 import com.imooc.lib_network.listener.DisposeDataHandler;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -79,17 +77,17 @@ public class CommonJsonCallback implements Callback {
 		}
 		try {
 			JSONObject resultJson = new JSONObject(response.toString());
-				//TODO 加入需要登录判断
-				if (mClass == null) {
-					mDisposeDataListener.onSuccess(resultJson);
+			//TODO 加入需要登录判断
+			if (mClass == null) {
+				mDisposeDataListener.onSuccess(resultJson);
+			} else {
+				Object obj = new Gson().fromJson(response.toString(), mClass);
+				if (obj != null) {
+					mDisposeDataListener.onSuccess(obj);
 				} else {
-					Object obj = new Gson().fromJson(response.toString(), mClass);
-					if (obj != null) {
-						mDisposeDataListener.onSuccess(obj);
-					} else {
-						mDisposeDataListener.onFailure(new OkHttpException(JSON_ERROR, EMPTY_MSG));
-					}
+					mDisposeDataListener.onFailure(new OkHttpException(JSON_ERROR, EMPTY_MSG));
 				}
+			}
 
 
 		} catch (Exception e) {

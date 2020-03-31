@@ -10,11 +10,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -23,13 +20,11 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseSectionQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
-import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.newapi.PlayListCommentEntity;
 import com.imooc.imooc_voice.model.newapi.song.CommentLikeBean;
 import com.imooc.imooc_voice.model.newapi.song.MusicCommentBean;
 import com.imooc.imooc_voice.model.newapi.song.PlayListCommentBean;
-import com.imooc.lib_common_ui.app.Netease;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
@@ -37,14 +32,9 @@ import com.imooc.lib_network.listener.DisposeDataListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
 
 public class GedanCommentDelegate extends NeteaseLoadingDelegate implements View.OnClickListener{
 
-	@BindView(R2.id.loadframe)
-	FrameLayout frameLayout;
-
-	private View view;
 
 	RecyclerView mRecyclerViewGedanComment;
 	private ImageView mGedanImg;
@@ -100,28 +90,31 @@ public class GedanCommentDelegate extends NeteaseLoadingDelegate implements View
 
 
 	@Override
-	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
-		super.onBindView(savedInstanceState, view);
+	public void initView() {
 		initCommentView();
+	}
+
+	@Override
+	public int setLoadingViewLayout() {
+		return R.layout.delegate_gedan_detail_comment;
 	}
 
 
 	@SuppressLint("StaticFieldLeak")
 	private void initCommentView() {
 		final ArrayList<PlayListCommentEntity> entities = new ArrayList<>();
-		view = LayoutInflater.from(getContext()).inflate(R.layout.delegate_gedan_detail_comment, frameLayout, false);
-		mRecyclerViewGedanComment = view.findViewById(R.id.rv_gedan_comment_normal);
-		mGedanTitle = view.findViewById(R.id.tv_gedan_detail_comment_title);
-		mGedanCreator = view.findViewById(R.id.tv_gedan_detail_comment_creator);
-		mRlGedanHeader = view.findViewById(R.id.rl_gedan_comment_header);
-		mBackView = view.findViewById(R.id.img_gedan_comment_back);
-		mTvGedanCommentTitle = view.findViewById(R.id.tv_gedan_detail_comment_num);
+		mRecyclerViewGedanComment = rootView.findViewById(R.id.rv_gedan_comment_normal);
+		mGedanTitle = rootView.findViewById(R.id.tv_gedan_detail_comment_title);
+		mGedanCreator = rootView.findViewById(R.id.tv_gedan_detail_comment_creator);
+		mRlGedanHeader = rootView.findViewById(R.id.rl_gedan_comment_header);
+		mBackView = rootView.findViewById(R.id.img_gedan_comment_back);
+		mTvGedanCommentTitle = rootView.findViewById(R.id.tv_gedan_detail_comment_num);
 		mTvGedanCommentTitle.setText("评论(" + count + ")");
 		mRlGedanHeader.setOnClickListener(this);
 		mBackView.setOnClickListener(this);
 		mGedanCreator.setText(gedanCreator);
 		mGedanTitle.setText(gedanTitle);
-		ImageLoaderManager.getInstance().displayImageForCorner((ImageView)view.findViewById(R.id.iv_gedan_detail_comment_img), gedanImg, 5);
+		ImageLoaderManager.getInstance().displayImageForCorner((ImageView)rootView.findViewById(R.id.iv_gedan_detail_comment_img), gedanImg, 5);
 
 		new AsyncTask<Void, Void, Void>() {
 			@Override
@@ -132,19 +125,6 @@ public class GedanCommentDelegate extends NeteaseLoadingDelegate implements View
 			@Override
 			protected void onPostExecute(Void aVoid) {
 				super.onPostExecute(aVoid);
-				Netease.getHandler().postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						frameLayout.removeAllViews();
-						//framelayout 创建了新的实例
-						ViewGroup p = (ViewGroup) view.getParent();
-						if (p != null) {
-							p.removeAllViewsInLayout();
-						}
-						frameLayout.addView(view);
-					}
-				}, 500);
-
 			}
 
 			@Override
@@ -169,6 +149,7 @@ public class GedanCommentDelegate extends NeteaseLoadingDelegate implements View
 								return false;
 							}
 						});
+						addRootView();
 					}
 
 					@Override
@@ -179,11 +160,6 @@ public class GedanCommentDelegate extends NeteaseLoadingDelegate implements View
 				return null;
 			}
 		}.execute();
-	}
-
-	@Override
-	public void post(Runnable runnable) {
-
 	}
 
 	@Override

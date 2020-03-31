@@ -36,12 +36,9 @@ public class LoginDelegate extends NeteaseDelegate {
 	@OnClick(R2.id.login_experience)
 	void onClickExPerience(){
 		//TODO 立即体验 需点击同意用户协议 checkbox 晃动
-		getSupportDelegate().startWithPop(new BaseDelegate());
+		//getSupportDelegate().startWithPop(new BaseDelegate());
 	}
 
 
-	@Override
-	public void post(Runnable runnable) {
 
-	}
 }
