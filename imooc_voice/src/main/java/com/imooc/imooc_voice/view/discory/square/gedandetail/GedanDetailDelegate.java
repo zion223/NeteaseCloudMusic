@@ -1,7 +1,8 @@
 package com.imooc.imooc_voice.view.discory.square.gedandetail;
 
+import android.annotation.SuppressLint;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -11,18 +12,20 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
+import com.imooc.imooc_voice.api.HttpConstants;
 import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.newapi.PlaylistDetailBean;
 import com.imooc.imooc_voice.model.newapi.song.SongDetailBean;
 import com.imooc.imooc_voice.view.user.UserDetailDelegate;
-import com.imooc.lib_common_ui.app.Netease;
-import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
+import com.imooc.lib_audio.app.AudioHelper;
+import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
@@ -33,7 +36,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class GedanDetailDelegate extends NeteaseDelegate {
+public class GedanDetailDelegate extends NeteaseLoadingDelegate {
 
 	private static final String TAG = "GedanDetailDelegate";
 
@@ -69,12 +72,18 @@ public class GedanDetailDelegate extends NeteaseDelegate {
 	TextView mTvSongNum;
 	@BindView(R2.id.tv_gedan_detail_collect_count)
 	TextView mTvSongCollectCount;
-	@BindView(R2.id.rv_gedan_detail_normal)
-	RecyclerView mRecyclerViewGedan;
+	@BindView(R2.id.tv_gedan_detail_collect_count1)
+	TextView mTvSongCollectCount1;
+	@BindView(R2.id.ll_gedan_subscribe)
+	LinearLayout mLlPlayListSubscribe;
+	@BindView(R2.id.ll_gedan_subscribed)
+	LinearLayout mLlPlayListSubscribed;
 
 	private GedanDetailAdapter mAdapter;
 	private ImageLoaderManager manager;
 
+	//@BindView(R2.id.rv_gedan_detail_normal)
+	RecyclerView mRecyclerViewGedan;
 	private static final String ARGS_GEDAN_ID = "ARGS_GEDAN_ID";
 	//歌单ID
 	private String id;
@@ -115,91 +124,6 @@ public class GedanDetailDelegate extends NeteaseDelegate {
 		return R.layout.delegate_gedan_detail;
 	}
 
-	@Override
-	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
-
-		RequestCenter.getPlaylistDetail(id, new DisposeDataListener() {
-			@Override
-			public void onSuccess(Object responseObj) {
-
-				PlaylistDetailBean json = (PlaylistDetailBean) responseObj;
-				final PlaylistDetailBean.PlaylistBean playlist = json.getPlaylist();
-				mTvDetailTitle.setText(playlist.getName());
-				mTvDetailDesc.setText(playlist.getDescription());
-				mTvDetailAvatarName.setText(playlist.getCreator().getNickname());
-				mTvGedanPlayNum.setText(playlist.getPlayCount() / 10000 + "万");
-				manager.displayImageForCircle(mIvAvatarView, playlist.getCreator().getAvatarUrl());
-
-				manager.displayImageForCorner(mImageViewGedan, playlist.getCoverImgUrl(), 5);
-				mTvShareCount.setText(String.valueOf(playlist.getShareCount()));
-				mTvCommentCount.setText(String.valueOf(playlist.getCommentCount()));
-				//传递给评论Delegate的数据
-				count = String.valueOf(playlist.getCommentCount());
-				gedanImg = String.valueOf(playlist.getCoverImgUrl());
-				gedanCreator = playlist.getCreator().getNickname();
-				//创建歌单的用户ID
-				userId = String.valueOf(playlist.getCreator().getUserId());
-				gedanTitle = playlist.getName();
-				//TODO 是否已经收藏
-				mTvSongCollectCount.setText("收藏(" + playlist.getSubscribedCount() + ")");
-				//毛玻璃效果背景
-				manager.displayImageForViewGroup(mAppBarLayout, playlist.getCoverImgUrl(), 200);
-
-				List<PlaylistDetailBean.PlaylistBean.TrackIdsBean> trackIds = playlist.getTrackIds();
-
-				final int trakIds = trackIds.size();
-				mTvSongNum.setText("(共" + (trakIds -1) + "首)");
-
-				//TODO 歌曲数量过多时 先请求少量数据
-				for (int i = 0; i < trakIds; i++) {
-					//最后一个参数不加逗号
-					if (i == trakIds - 1) {
-						params.append(trackIds.get(i).getId());
-					} else {
-						params.append(trackIds.get(i).getId()).append(",");
-					}
-				}
-
-				Netease.getHandler().post(new Runnable() {
-					@Override
-					public void run() {
-						//manager.displayImageForViewGroup(mIvAppbarBackground, json.getPic300(), 500);
-						RequestCenter.getSongDetail(params.toString(), new DisposeDataListener() {
-							@Override
-							public void onSuccess(Object responseObj) {
-								SongDetailBean bean = (SongDetailBean) responseObj;
-								List<SongDetailBean.SongsBean> songs = bean.getSongs();
-								mAdapter = new GedanDetailAdapter(songs);
-								mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-									@Override
-									public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-										SongDetailBean.SongsBean item = (SongDetailBean.SongsBean) adapter.getItem(position);
-										item.getId();
-										//TODO 加入播放队列
-									}
-								});
-								mRecyclerViewGedan.setAdapter(mAdapter);
-								mRecyclerViewGedan.setLayoutManager(new LinearLayoutManager(getContext()));
-							}
-
-							@Override
-							public void onFailure(Object reasonObj) {
-
-							}
-						});
-					}
-				});
-
-
-			}
-
-			@Override
-			public void onFailure(Object reasonObj) {
-
-			}
-		});
-	}
-
 
 	@Override
 	public void onLazyInitView(@Nullable Bundle savedInstanceState) {
@@ -228,6 +152,124 @@ public class GedanDetailDelegate extends NeteaseDelegate {
 		});
 	}
 
+	@Override
+	public void initView() {
+		mRecyclerViewGedan = rootView.findViewById(R.id.rv_gedan_detail_normal);
+
+		RequestCenter.getPlaylistDetail(id, new DisposeDataListener() {
+			@SuppressLint({"SetTextI18n", "StaticFieldLeak"})
+			@Override
+			public void onSuccess(Object responseObj) {
+
+				PlaylistDetailBean json = (PlaylistDetailBean) responseObj;
+				final PlaylistDetailBean.PlaylistBean playlist = json.getPlaylist();
+				mTvDetailTitle.setText(playlist.getName());
+				mTvDetailDesc.setText(playlist.getDescription());
+				mTvDetailAvatarName.setText(playlist.getCreator().getNickname());
+				long playcount = playlist.getPlayCount();
+				String playcountString;
+				if (playcount >= 10000) {
+					playcount = playcount / 10000;
+					playcountString = playcount + "万";
+				} else {
+					playcountString = playcount + "";
+				}
+				mTvGedanPlayNum.setText(playcountString);
+				manager.displayImageForCircle(mIvAvatarView, playlist.getCreator().getAvatarUrl());
+
+				manager.displayImageForCorner(mImageViewGedan, playlist.getCoverImgUrl(), 5);
+				mTvShareCount.setText(String.valueOf(playlist.getShareCount()));
+				mTvCommentCount.setText(String.valueOf(playlist.getCommentCount()));
+
+				//传递给评论Delegate的数据
+				count = String.valueOf(playlist.getCommentCount());
+				gedanImg = String.valueOf(playlist.getCoverImgUrl());
+				gedanCreator = playlist.getCreator().getNickname();
+				//创建歌单的用户ID
+				userId = String.valueOf(playlist.getCreator().getUserId());
+				gedanTitle = playlist.getName();
+				mTvSongCollectCount.setText("收藏(" + playlist.getSubscribedCount() + ")");
+
+				mTvSongCollectCount1.setText(String.valueOf(playlist.getSubscribedCount()));
+
+				if (playlist.isSubscribed()) {
+					//已收藏
+					mLlPlayListSubscribed.setVisibility(View.VISIBLE);
+				} else {
+					//未收藏
+					mLlPlayListSubscribe.setVisibility(View.VISIBLE);
+				}
+
+				//毛玻璃效果背景
+				manager.displayImageForViewGroup(mAppBarLayout, playlist.getCoverImgUrl(), 200);
+
+				List<PlaylistDetailBean.PlaylistBean.TrackIdsBean> trackIds = playlist.getTrackIds();
+
+				int trakIds = trackIds.size();
+				mTvSongNum.setText("(共" + (trakIds - 1) + "首)");
+
+				if(trakIds > 50){
+					trakIds = 50;
+				}
+				for (int i = 0; i < trakIds; i++) {
+					//最后一个参数不加逗号
+					if (i == trakIds - 1) {
+						params.append(trackIds.get(i).getId());
+					} else {
+						params.append(trackIds.get(i).getId()).append(",");
+					}
+				}
+				new AsyncTask<Void,Void,Void>(){
+
+					@Override
+					protected Void doInBackground(Void... voids) {
+						RequestCenter.getSongDetail(params.toString(), new DisposeDataListener() {
+							@Override
+							public void onSuccess(Object responseObj) {
+								SongDetailBean bean = (SongDetailBean) responseObj;
+								List<SongDetailBean.SongsBean> songs = bean.getSongs();
+								mAdapter = new GedanDetailAdapter(songs);
+								mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+									@Override
+									public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+										SongDetailBean.SongsBean item = (SongDetailBean.SongsBean) adapter.getItem(position);
+										String songPlayUrl = HttpConstants.getSongPlayUrl(item.getId());
+										AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getAr().get(0).getName(), item.getAl().getName(), item.getAl().getName(), item.getAl().getPicUrl(), "3:00"));
+
+									}
+								});
+								mRecyclerViewGedan.setAdapter(mAdapter);
+								mRecyclerViewGedan.setLayoutManager(new LinearLayoutManager(getContext()));
+								addRootView();
+							}
+
+							@Override
+							public void onFailure(Object reasonObj) {
+
+							}
+						});
+						return null;
+					}
+				}.execute();
+
+				//manager.displayImageForViewGroup(mIvAppbarBackground, json.getPic300(), 500);
+
+
+
+			}
+
+			@Override
+			public void onFailure(Object reasonObj) {
+
+			}
+		});
+	}
+
+	@Override
+	public int setLoadingViewLayout() {
+		return R.layout.delegate_gedan_loading_view;
+	}
+
 	@OnClick(R2.id.img_gedan_detail_back)
 	void onClickBack() {
 		getSupportDelegate().pop();
@@ -235,20 +277,15 @@ public class GedanDetailDelegate extends NeteaseDelegate {
 
 	//查看评论
 	@OnClick(R2.id.ll_gedan_detail_comment)
-	void onClickGedanComment(){
-		getSupportDelegate().start(GedanCommentDelegate.newInstance(id, count, gedanImg, gedanCreator, gedanTitle));
+	void onClickGedanComment() {
+		getSupportDelegate().start(CommentDelegate.newInstance(id, CommentDelegate.PLAYLIST, count, gedanImg, gedanCreator, gedanTitle));
 	}
 
 	//查看用户详情
 	@OnClick(R2.id.tv_gedan_detail_avatar_name)
-	void onClickUserInfo(){
+	void onClickUserInfo() {
 		getSupportDelegate().start(UserDetailDelegate.newInstance(userId));
 	}
 
 
-
-	@Override
-	public void post(Runnable runnable) {
-
-	}
 }

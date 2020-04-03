@@ -33,44 +33,54 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class GedanCommentDelegate extends NeteaseLoadingDelegate implements View.OnClickListener{
+public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnClickListener{
 
-
-	RecyclerView mRecyclerViewGedanComment;
 	private ImageView mGedanImg;
 	private TextView mGedanTitle;
 	private TextView mGedanCreator;
 	private TextView mTvGedanCommentTitle;
 	private RelativeLayout mRlGedanHeader;
 	private ImageView mBackView;
-	private MultipleSectionGedanCommentAdapter mAdapter;
 
-	private static final String ARGS_GEDAN_ID = "ARGS_GEDAN_ID";
-	private static final String ARGS_GEDAN_COMMENT_COUNT = "ARGS_GEDAN_COMMENT_COUNT";
-	private static final String ARGS_GEDAN_COMMENT_IMG = "ARGS_GEDAN_COMMENT_IMG";
-	private static final String ARGS_GEDAN_COMMENT_CREATOR = "ARGS_GEDAN_COMMENT_CREATOR";
-	private static final String ARGS_GEDAN_COMMENT_TITLE = "ARGS_GEDAN_COMMENT_TITLE";
+	private MultipleSectionGedanCommentAdapter mAdapter;
+	private RecyclerView mRecyclerViewComment;
+
+	private static final String ARGS_COMMENT_ID = "ARGS_COMMENT_ID";
+	private static final String ARGS_COMMENT_TYPE = "ARGS_COMMENT_TYPE";
+	private static final String ARGS_COMMENT_COUNT = "ARGS_COMMENT_COUNT";
+	private static final String ARGS_COMMENT_HEADER_IMG = "ARGS_COMMENT_HEADER_IMG";
+	private static final String ARGS_COMMENT_HEADER_TOP = "ARGS_COMMENT_HEADER_TOP";
+	private static final String ARGS_COMMENT_HEADER_BOTTOM = "ARGS_COMMENT_HEADER_BOTTOM";
+
+
+	public static final int SONG = 1;
+	public static final int PLAYLIST = 2;
+	public static final int ALBUM = 3;
 
 	//歌单ID
 	private String id;
+
+	private int type;
 	//评论数量
 	private String count;
 	//歌单图片
-	private String gedanImg;
+	private String headerImg;
 	//歌单创建者
-	private String gedanCreator;
+	private String headerTop;
 	//歌单标题
-	private String gedanTitle;
+	private String headerBottom;
 
+	private ArrayList<PlayListCommentEntity> entities = new ArrayList<>();
 
-	public static GedanCommentDelegate newInstance(String id, String commentCount, String img, String creator, String title) {
+	public static CommentDelegate newInstance(String id, int type, String commentCount, String img, String creator, String title) {
 		final Bundle args = new Bundle();
-		args.putString(ARGS_GEDAN_ID, id);
-		args.putString(ARGS_GEDAN_COMMENT_COUNT, commentCount);
-		args.putString(ARGS_GEDAN_COMMENT_IMG, img);
-		args.putString(ARGS_GEDAN_COMMENT_CREATOR, creator);
-		args.putString(ARGS_GEDAN_COMMENT_TITLE, title);
-		final GedanCommentDelegate delegate = new GedanCommentDelegate();
+		args.putString(ARGS_COMMENT_ID, id);
+		args.putString(ARGS_COMMENT_COUNT, commentCount);
+		args.putString(ARGS_COMMENT_HEADER_IMG, img);
+		args.putString(ARGS_COMMENT_HEADER_BOTTOM, creator);
+		args.putString(ARGS_COMMENT_HEADER_TOP, title);
+		args.putInt(ARGS_COMMENT_TYPE, type);
+		final CommentDelegate delegate = new CommentDelegate();
 		delegate.setArguments(args);
 		return delegate;
 	}
@@ -80,11 +90,12 @@ public class GedanCommentDelegate extends NeteaseLoadingDelegate implements View
 		super.onCreate(savedInstanceState);
 		final Bundle args = getArguments();
 		if (args != null) {
-			id = args.getString(ARGS_GEDAN_ID);
-			count = args.getString(ARGS_GEDAN_COMMENT_COUNT);
-			gedanImg = args.getString(ARGS_GEDAN_COMMENT_IMG);
-			gedanCreator = args.getString(ARGS_GEDAN_COMMENT_CREATOR);
-			gedanTitle = args.getString(ARGS_GEDAN_COMMENT_TITLE);
+			id = args.getString(ARGS_COMMENT_ID);
+			count = args.getString(ARGS_COMMENT_COUNT);
+			headerImg = args.getString(ARGS_COMMENT_HEADER_IMG);
+			headerTop = args.getString(ARGS_COMMENT_HEADER_TOP);
+			headerBottom = args.getString(ARGS_COMMENT_HEADER_BOTTOM);
+			type = args.getInt(ARGS_COMMENT_TYPE);
 		}
 	}
 
@@ -100,21 +111,23 @@ public class GedanCommentDelegate extends NeteaseLoadingDelegate implements View
 	}
 
 
-	@SuppressLint("StaticFieldLeak")
+	@SuppressLint({"StaticFieldLeak", "SetTextI18n"})
 	private void initCommentView() {
-		final ArrayList<PlayListCommentEntity> entities = new ArrayList<>();
-		mRecyclerViewGedanComment = rootView.findViewById(R.id.rv_gedan_comment_normal);
+
+		mRecyclerViewComment = rootView.findViewById(R.id.rv_gedan_comment_normal);
 		mGedanTitle = rootView.findViewById(R.id.tv_gedan_detail_comment_title);
 		mGedanCreator = rootView.findViewById(R.id.tv_gedan_detail_comment_creator);
 		mRlGedanHeader = rootView.findViewById(R.id.rl_gedan_comment_header);
 		mBackView = rootView.findViewById(R.id.img_gedan_comment_back);
 		mTvGedanCommentTitle = rootView.findViewById(R.id.tv_gedan_detail_comment_num);
+
 		mTvGedanCommentTitle.setText("评论(" + count + ")");
 		mRlGedanHeader.setOnClickListener(this);
 		mBackView.setOnClickListener(this);
-		mGedanCreator.setText(gedanCreator);
-		mGedanTitle.setText(gedanTitle);
-		ImageLoaderManager.getInstance().displayImageForCorner((ImageView)rootView.findViewById(R.id.iv_gedan_detail_comment_img), gedanImg, 5);
+		mGedanCreator.setText(headerBottom);
+		mGedanTitle.setText(headerTop);
+
+		ImageLoaderManager.getInstance().displayImageForCorner((ImageView)rootView.findViewById(R.id.iv_gedan_detail_comment_img), headerImg, 5);
 
 		new AsyncTask<Void, Void, Void>() {
 			@Override
@@ -129,37 +142,52 @@ public class GedanCommentDelegate extends NeteaseLoadingDelegate implements View
 
 			@Override
 			protected Void doInBackground(Void... voids) {
-				RequestCenter.getPlaylistComment(id, new DisposeDataListener() {
-					@Override
-					public void onSuccess(Object responseObj) {
-						PlayListCommentBean bean = (PlayListCommentBean) responseObj;
-						entities.add(new PlayListCommentEntity(true, "精彩评论", ""));
-						for(int i=0;i<bean.getHotComments().size();i++){
-							entities.add(new PlayListCommentEntity(bean.getHotComments().get(i)));
-						}
-						entities.add(new PlayListCommentEntity(true, "最新评论", count));
-						for(int j=0;j<bean.getComments().size();j++){
-							entities.add(new PlayListCommentEntity(bean.getComments().get(j)));
-						}
-						mAdapter = new MultipleSectionGedanCommentAdapter(entities);
-						mRecyclerViewGedanComment.setAdapter(mAdapter);
-						mRecyclerViewGedanComment.setLayoutManager(new LinearLayoutManager(getContext()){
+				switch (type){
+					case PLAYLIST:
+						//歌单评论
+						RequestCenter.getPlaylistComment(id, new DisposeDataListener() {
 							@Override
-							public boolean canScrollVertically() {
-								return false;
+							public void onSuccess(Object responseObj) {
+								loadCommentList((PlayListCommentBean) responseObj);
+							}
+
+							@Override
+							public void onFailure(Object reasonObj) {
+
 							}
 						});
-						addRootView();
-					}
+						break;
+					//专辑评论
+					case ALBUM:
+						break;
 
-					@Override
-					public void onFailure(Object reasonObj) {
 
-					}
-				});
+				}
+
+
 				return null;
 			}
 		}.execute();
+	}
+
+	private void loadCommentList(PlayListCommentBean responseObj) {
+		entities.add(new PlayListCommentEntity(true, "精彩评论", ""));
+		for(int i = 0; i< responseObj.getHotComments().size(); i++){
+			entities.add(new PlayListCommentEntity(responseObj.getHotComments().get(i)));
+		}
+		entities.add(new PlayListCommentEntity(true, "最新评论", count));
+		for(int j = 0; j< responseObj.getComments().size(); j++){
+			entities.add(new PlayListCommentEntity(responseObj.getComments().get(j)));
+		}
+		mAdapter = new MultipleSectionGedanCommentAdapter(entities);
+		mRecyclerViewComment.setAdapter(mAdapter);
+		mRecyclerViewComment.setLayoutManager(new LinearLayoutManager(getContext()){
+			@Override
+			public boolean canScrollVertically() {
+				return false;
+			}
+		});
+		addRootView();
 	}
 
 	@Override
@@ -177,12 +205,10 @@ public class GedanCommentDelegate extends NeteaseLoadingDelegate implements View
 	class MultipleSectionGedanCommentAdapter extends BaseSectionQuickAdapter<PlayListCommentEntity, BaseViewHolder> {
 
 		private ImageLoaderManager manager;
-		ImageView zanView;
 
-		public MultipleSectionGedanCommentAdapter(List<PlayListCommentEntity> data) {
+		MultipleSectionGedanCommentAdapter(List<PlayListCommentEntity> data) {
 			super(R.layout.item_gedan_detail_comment, R.layout.item_gedan_comment_header, data);
 			manager = ImageLoaderManager.getInstance();
-
 		}
 
 		@Override

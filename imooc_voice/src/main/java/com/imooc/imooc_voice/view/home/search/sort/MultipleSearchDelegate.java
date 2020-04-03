@@ -92,7 +92,7 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 			case 3:
 				//电台
 				SynthesisSearchBean.ResultBean.DjRadioBean.DjRadiosBean djRadiosBean = data.get(groupPosition).getDjRadio().getDjRadios().get(childPosition);
-				getParentDelegate().getSupportDelegate().start(RadioDetailDelegate.newInstance(String.valueOf(djRadiosBean.getId())));
+				getParentDelegate().getSupportDelegate().start(RadioDetailDelegate.newInstance(djRadiosBean.getId()));
 				break;
 			case 4:
 				SynthesisSearchBean.ResultBean.ArtistBean.ArtistsBean artistsBean = data.get(groupPosition).getArtist().getArtists().get(childPosition);

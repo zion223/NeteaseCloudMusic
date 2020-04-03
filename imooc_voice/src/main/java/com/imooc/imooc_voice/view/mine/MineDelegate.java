@@ -1,6 +1,7 @@
 package com.imooc.imooc_voice.view.mine;
 
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,12 +18,15 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.api.RequestCenter;
+import com.imooc.imooc_voice.model.info.MusicInfo;
 import com.imooc.imooc_voice.model.mine.SpecData;
 import com.imooc.imooc_voice.model.newapi.LoginBean;
 import com.imooc.imooc_voice.model.newapi.SubCountBean;
 import com.imooc.imooc_voice.model.newapi.personal.UserPlayListEntity;
 import com.imooc.imooc_voice.model.newapi.personal.UserPlaylistBean;
 import com.imooc.imooc_voice.util.GsonUtil;
+import com.imooc.imooc_voice.util.IConstants;
+import com.imooc.imooc_voice.util.MusicUtils;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
 import com.imooc.imooc_voice.view.discory.square.gedandetail.GedanDetailDelegate;
 import com.imooc.imooc_voice.view.mine.local.LocalMusicDelegate;
@@ -50,6 +54,8 @@ public class MineDelegate extends NeteaseDelegate {
 	RecyclerView mRvSectionGedan;
 	@BindView(R2.id.fragment_main_item_radio_count)
 	TextView mTvRadioCount;
+	@BindView(R2.id.fragment_main_item_localmusic_count)
+	TextView mTvLocalMusicCount;
 
 	private SpecAdapter mSpecAdapter;
 
@@ -60,6 +66,7 @@ public class MineDelegate extends NeteaseDelegate {
 		return R.layout.delegate_mine;
 	}
 
+	@SuppressLint("SetTextI18n")
 	@Override
 	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
 		initSpecIcon();
@@ -67,8 +74,27 @@ public class MineDelegate extends NeteaseDelegate {
 
 		LoginBean loginBean = GsonUtil.fromJSON(SharePreferenceUtil.getInstance(getContext()).getUserInfo(""), LoginBean.class);
 		int id = loginBean.getProfile().getUserId();
-		final ArrayList<UserPlayListEntity> entities = new ArrayList<>();
-		final ArrayList<UserPlayListEntity> no_create_entities = new ArrayList<>();
+
+		//创建的歌单
+		final ArrayList<UserPlayListEntity> createPlayListEntities = new ArrayList<>();
+		//收藏的歌单
+		final ArrayList<UserPlayListEntity> collectPlayListEntities = new ArrayList<>();
+
+		//本地音乐数量
+		int localMusicCount = SharePreferenceUtil.getInstance(getContext()).getLocalMusicCount();
+		if(SharePreferenceUtil.getInstance(getContext()).getLocalMusicCount() == 0){
+			ArrayList<MusicInfo> songList = (ArrayList) MusicUtils.queryMusic(getProxyActivity(), IConstants.START_FROM_LOCAL);
+			SharePreferenceUtil.getInstance(getContext()).saveLocalMusicCount(songList.size());
+			mTvLocalMusicCount.setText("("+songList.size()+")");
+		}else{
+			mTvLocalMusicCount.setText("("+localMusicCount+")");
+		}
+
+		//最近播放数量
+
+		//下载管理
+
+
 		//用户创建的歌单
 		RequestCenter.getUserPlaylist(id, new DisposeDataListener() {
 			@Override
@@ -82,18 +108,18 @@ public class MineDelegate extends NeteaseDelegate {
 						break;
 					}
 				}
-				entities.add(new UserPlayListEntity(true, "创建的歌单", subIndex));
-				no_create_entities.add(new UserPlayListEntity(true, "创建的歌单", subIndex));
+				createPlayListEntities.add(new UserPlayListEntity(true, "创建的歌单", subIndex));
+				collectPlayListEntities.add(new UserPlayListEntity(true, "创建的歌单", subIndex));
 				for(int j = 0 ; j < subIndex; j++){
-					entities.add(new UserPlayListEntity(playlist.get(j)));
+					createPlayListEntities.add(new UserPlayListEntity(playlist.get(j)));
 				}
-				entities.add(new UserPlayListEntity(true, "收藏的歌单", playlist.size() - subIndex));
-				no_create_entities.add(new UserPlayListEntity(true, "收藏的歌单", playlist.size() - subIndex));
+				createPlayListEntities.add(new UserPlayListEntity(true, "收藏的歌单", playlist.size() - subIndex));
+				collectPlayListEntities.add(new UserPlayListEntity(true, "收藏的歌单", playlist.size() - subIndex));
 				for(int k = subIndex; k < playlist.size(); k++){
-					entities.add(new UserPlayListEntity(playlist.get(k)));
-					no_create_entities.add(new UserPlayListEntity(playlist.get(k)));
+					createPlayListEntities.add(new UserPlayListEntity(playlist.get(k)));
+					collectPlayListEntities.add(new UserPlayListEntity(playlist.get(k)));
 				}
-				final MultipleSectionGedanAdapter multipleSectionGedanAdapter = new MultipleSectionGedanAdapter(entities);
+				final MultipleSectionGedanAdapter multipleSectionGedanAdapter = new MultipleSectionGedanAdapter(createPlayListEntities);
 
 				multipleSectionGedanAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
 					@Override
@@ -124,7 +150,10 @@ public class MineDelegate extends NeteaseDelegate {
 			@Override
 			public void onSuccess(Object responseObj) {
 				SubCountBean bean = (SubCountBean) responseObj;
+				//我的电台 数量
 				mTvRadioCount.setText("("+bean.getDjRadioCount()+")");
+				//我的收藏 - 收藏的歌手 收藏的视频
+
 			}
 
 			@Override
@@ -132,6 +161,8 @@ public class MineDelegate extends NeteaseDelegate {
 
 			}
 		});
+
+		//我的收藏数量
 	}
 
 	/**

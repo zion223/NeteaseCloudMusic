@@ -19,8 +19,12 @@ public interface Constants {
 
         String DAILY_UPDATE_TIME = "dailyUpdateTime";
 
+        String CURRENT_ARTIST_ID = "currentArtistId";
+
         String DAILY_RECOMMEND = "dailyRecommend";
 
         String LIKE_LIST = "likeList";
+
+        String LOCAL_MUSIC_COUNT = "LOCAL_MUSIC_COUNT";
     }
 }

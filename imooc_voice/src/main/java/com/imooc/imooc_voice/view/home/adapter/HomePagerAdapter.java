@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.imooc.imooc_voice.model.CHANNEL;
 import com.imooc.imooc_voice.view.cloud.CloudVillageFragment;
 import com.imooc.imooc_voice.view.discory.DiscoverDelegate;
-import com.imooc.imooc_voice.view.cloud.CloudVillageFragment;
 import com.imooc.imooc_voice.view.mine.MineDelegate;
 
 public class HomePagerAdapter extends FragmentPagerAdapter {

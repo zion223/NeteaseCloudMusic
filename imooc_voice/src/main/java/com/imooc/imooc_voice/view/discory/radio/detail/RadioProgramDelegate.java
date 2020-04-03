@@ -14,11 +14,10 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.newapi.dj.DjProgramBean;
+import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 
@@ -101,21 +100,18 @@ public class RadioProgramDelegate extends NeteaseLoadingDelegate {
         protected void convert(@NonNull BaseViewHolder adapter, DjProgramBean.ProgramsBean bean) {
 
             adapter.setText(R.id.item_radio_program_toptext, bean.getName());
-            adapter.setText(R.id.item_radio_program_no, String.valueOf(adapter.getLayoutPosition()+1));
-            adapter.setText(R.id.item_radio_program_createtime, timeStamp2Date(String.valueOf(bean.getCreateTime()), "yyyy-MM-dd"));
-            adapter.setText(R.id.item_radio_program_playnum, String.valueOf(bean.getListenerCount()));
-            adapter.setText(R.id.item_radio_program_duration, timeStamp2Date(String.valueOf(bean.getDuration()), "HH:mm:ss"));
+            adapter.setText(R.id.item_radio_program_no, String.valueOf(adapter.getLayoutPosition() + 1));
+            adapter.setText(R.id.item_radio_program_createtime, TimeUtil.getTimeStandardOnlyYMD(bean.getCreateTime()));
+            int listenerCount = bean.getListenerCount();
+            String count;
+            if(listenerCount > 10000){
+                count  = listenerCount/10000 +"万";
+            }else{
+                count = listenerCount + "";
+            }
+            adapter.setText(R.id.item_radio_program_playnum, count);
+            adapter.setText(R.id.item_radio_program_duration, TimeUtil.getTimeNoYMDH(bean.getDuration()));
         }
 
-        static String timeStamp2Date(String seconds, String format) {
-            if(seconds == null || seconds.isEmpty() || seconds.equals("null")){
-                return "";
-            }
-            if(format == null || format.isEmpty()){
-                format = "yyyy-MM-dd HH:mm:ss";
-            }
-            SimpleDateFormat sdf = new SimpleDateFormat(format);
-            return sdf.format(new Date(Long.valueOf(seconds+"000")));
-        }
     }
 }

@@ -22,7 +22,7 @@ public class BaseDelegate extends NeteaseDelegate {
 	@BindView(R2.id.content_layout)
 	RelativeLayout mRelativelayout;
 
-	public static BottomMusicView musicView;
+	public BottomMusicView musicView;
 
 	@Override
 	public Object setLayout() {

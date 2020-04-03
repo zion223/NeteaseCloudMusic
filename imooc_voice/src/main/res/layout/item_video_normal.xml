@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rl_feed"
     android:layout_width="match_parent"
-    android:layout_height="95dp"
+    android:layout_height="85dp"
     android:background="#ffffff"
     android:paddingTop="7dp"
     android:paddingBottom="7dp">

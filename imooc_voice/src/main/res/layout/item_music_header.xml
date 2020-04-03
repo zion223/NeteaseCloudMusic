@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="70dp"
-    android:background="?android:attr/selectableItemBackground"
+    android:layout_height="55dp"
     android:orientation="horizontal"
-    android:paddingTop="5dp"
-    android:paddingBottom="5dp">
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp">
 
     <ImageView
         android:id="@+id/play_all"
         android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_alignParentLeft="true"
-        android:layout_centerInParent="true"
+        android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -22,7 +19,6 @@
         android:id="@+id/play_all_text"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_toRightOf="@+id/play_all"
         android:gravity="center_vertical"
         android:text="播放全部"
         android:textColor="@color/text_color"
@@ -33,7 +29,6 @@
         android:layout_width="0dp"
         android:layout_weight="6"
         android:layout_height="match_parent"
-        android:layout_toRightOf="@+id/play_all_text"
         android:gravity="center_vertical"
         android:text="(共150首)"
         android:textSize="13sp" />
@@ -42,8 +37,6 @@
         android:id="@+id/select"
         android:layout_width="15dp"
         android:layout_height="15dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerInParent="true"
         android:layout_gravity="center|clip_vertical"
         android:background="?android:attr/selectableItemBackground"
         android:focusable="false"

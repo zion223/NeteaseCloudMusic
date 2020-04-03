@@ -50,7 +50,7 @@ public class MineRadioDelegate extends NeteaseDelegate {
 					@Override
 					public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
 						DjSubListBean.DjRadios entity = (DjSubListBean.DjRadios) baseQuickAdapter.getItem(i);
-						getSupportDelegate().start(RadioDetailDelegate.newInstance(String.valueOf(entity.getId())));
+						getSupportDelegate().start(RadioDetailDelegate.newInstance(entity.getId()));
 					}
 				});
 				mRvSubRadio.setAdapter(mAdapter);

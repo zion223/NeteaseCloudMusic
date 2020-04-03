@@ -46,6 +46,7 @@ import com.imooc.imooc_voice.model.newapi.search.SingerAblumSearchBean;
 import com.imooc.imooc_voice.model.newapi.search.SingerDescriptionBean;
 import com.imooc.imooc_voice.model.newapi.search.SingerSearchBean;
 import com.imooc.imooc_voice.model.newapi.search.SingerSongSearchBean;
+import com.imooc.imooc_voice.model.newapi.search.SingerVideoSearchBean;
 import com.imooc.imooc_voice.model.newapi.search.SongSearchBean;
 import com.imooc.imooc_voice.model.newapi.search.SynthesisSearchBean;
 import com.imooc.imooc_voice.model.newapi.search.UserSearchBean;
@@ -337,10 +338,11 @@ public class RequestCenter {
         RequestParams params = new RequestParams();
         RequestCenter.getRequest(HttpConstants.HOT_SINGER, params, listener, ArtistListBean.class);
     }
+
     /**
-     *  获取歌手单曲
+     *  获取歌手单曲 部分歌手简介
      */
-    public static void getSingerHotSong(long id, DisposeDataListener listener){
+    public static void getSingerInfo(String id, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("id", id);
         RequestCenter.getRequest(HttpConstants.SINGER_HOT_SONG, params, listener, SingerSongSearchBean.class);
@@ -349,13 +351,22 @@ public class RequestCenter {
     /**
      *  歌手专辑
      */
-    public static void getSingerAlbum(long id, DisposeDataListener listener){
+    public static void getSingerAlbum(String id, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("id", id);
         RequestCenter.getRequest(HttpConstants.SINGER_ALBUM, params, listener, SingerAblumSearchBean.class);
     }
+
     /**
-     *  歌手简介
+     *  歌手视频
+     */
+    public static void getSingerVideo(String id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.SINGER_VIDEO, params, listener, SingerVideoSearchBean.class);
+    }
+    /**
+     *  歌手描述
      */
     public static void getSingerDesc(long id, DisposeDataListener listener){
         RequestParams params = new RequestParams();
@@ -366,7 +377,7 @@ public class RequestCenter {
     /**
      *  相似歌手
      */
-    public static void getSimiSinger(long id, DisposeDataListener listener){
+    public static void getSimiSinger(String id, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("id", id);
         RequestCenter.getRequest(HttpConstants.SINGER_SIMI, params, listener, SimiSingerBean.class);

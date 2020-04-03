@@ -15,6 +15,7 @@ import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -60,6 +61,8 @@ public class UserDetailDelegate extends NeteaseDelegate {
 	LinearLayout mLlFollowUser;
 	@BindView(R2.id.tv_user_detail_send_msg)
 	TextView mTvSendMsg;
+	@BindView(R2.id.fl_user_detail_followed)
+	FrameLayout mFlFollowedUser;
 	@BindView(R2.id.magic_user_indicator)
 	MagicIndicator mUserMagicIndicator;
 	@BindView(R2.id.view_pager_user_detail)
@@ -125,7 +128,7 @@ public class UserDetailDelegate extends NeteaseDelegate {
 				//显示关注或者已关注
 				boolean isFollowed = bean.getProfile().isFollowed();
 				if(isFollowed){
-
+					mFlFollowedUser.setVisibility(View.VISIBLE);
 				}else{
 					mLlFollowUser.setVisibility(View.VISIBLE);
 				}
@@ -170,9 +173,8 @@ public class UserDetailDelegate extends NeteaseDelegate {
 				Toast.makeText(getContext(), bean.getFollowContent(), Toast.LENGTH_SHORT).show();
 				//显示关注天数
 				String followTimeContent = bean.getFollowTimeContent();
-				mLlFollowUser.setVisibility(View.GONE);
-
-
+				mLlFollowUser.setVisibility(View.INVISIBLE);
+				mFlFollowedUser.setVisibility(View.VISIBLE);
 			}
 
 			@Override
@@ -181,6 +183,30 @@ public class UserDetailDelegate extends NeteaseDelegate {
 			}
 		});
 
+	}
+
+	/**
+	 * 	取消关注
+	 */
+	@OnClick(R2.id.fl_user_detail_followed)
+	void onClickCancleSubscribe() {
+
+		RequestCenter.follow(userId, false, new DisposeDataListener() {
+			@Override
+			public void onSuccess(Object responseObj) {
+
+				//取消关注用户成功
+				FollowBean bean = (FollowBean) responseObj;
+
+				mLlFollowUser.setVisibility(View.VISIBLE);
+				mFlFollowedUser.setVisibility(View.INVISIBLE);
+			}
+
+			@Override
+			public void onFailure(Object reasonObj) {
+
+			}
+		});
 
 	}
 

@@ -3,14 +3,17 @@ package com.imooc.imooc_voice.view.home.search.sort;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.newapi.search.AlbumSearchBean;
+import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.imooc_voice.view.home.search.NeteaseSearchLoadingDelegate;
+import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
 import java.util.List;
@@ -19,14 +22,14 @@ public class AlbumSearchDelegate extends NeteaseSearchLoadingDelegate {
 
 
 	@Override
-	public void reloadSearchResult(String keyword) {
+	public void reloadSearchResult(final String keyword) {
 		RequestCenter.getAlbumSearch(keyword, 10, new DisposeDataListener() {
 			@Override
 			public void onSuccess(Object responseObj) {
 				AlbumSearchBean bean = (AlbumSearchBean) responseObj;
 				List<AlbumSearchBean.ResultBean.AlbumsBean> albums = bean.getResult().getAlbums();
 				mRecyclerView = rootView.findViewById(R.id.rv_delegate_normal);
-				//mAdapter = new AlbumSearchAdapter()
+				mAdapter = new AlbumSearchAdapter(keyword, albums);
 				mRecyclerView.setAdapter(mAdapter);
 				mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 				addRootView();
@@ -41,8 +44,12 @@ public class AlbumSearchDelegate extends NeteaseSearchLoadingDelegate {
 
 	static class AlbumSearchAdapter extends BaseQuickAdapter<AlbumSearchBean.ResultBean.AlbumsBean, BaseViewHolder>{
 
-		AlbumSearchAdapter(int layoutResId, @Nullable List<AlbumSearchBean.ResultBean.AlbumsBean> data) {
-			super(layoutResId, data);
+		private String keywords;
+		private ImageLoaderManager manager;
+		AlbumSearchAdapter(String keywords, @Nullable List<AlbumSearchBean.ResultBean.AlbumsBean> data) {
+			super(R.layout.item_mine_gedan_content, data);
+			this.keywords = keywords;
+			manager = ImageLoaderManager.getInstance();
 		}
 
 		@Override
@@ -53,7 +60,7 @@ public class AlbumSearchDelegate extends NeteaseSearchLoadingDelegate {
 			String artistName = "";
 			if(artistSize != 1){
 				for(int i = 0; i < artistSize; i++){
-					if(i ==artistSize-1){
+					if(i == artistSize-1){
 						artistName += artists.get(i).getName();
 					}else{
 						artistName += artists.get(i).getName()+"\\";
@@ -62,7 +69,17 @@ public class AlbumSearchDelegate extends NeteaseSearchLoadingDelegate {
 			}else{
 				artistName = item.getArtist().getName();
 			}
-			item.getBlurPicUrl();
+			String bottomText = artistName + " " + publishTime;
+
+			//显示图片右边的专辑特有的图片
+			adapter.setVisible(R.id.iv_album_right_flag, true);
+
+			adapter.setText(R.id.tv_item_gedan_content_toptext, SearchUtil.getMatchingKeywords(item.getName(),keywords));
+			adapter.setText(R.id.tv_item_gedan_content_bottomtext, SearchUtil.getMatchingKeywords(bottomText,keywords));
+			adapter.setVisible(R.id.iv_item_gedan_more, false);
+			//专辑图片
+			manager.displayImageForCorner((ImageView) adapter.getView(R.id.iv_item_gedan_content_img), item.getPicUrl());
+
 		}
 	}
 }

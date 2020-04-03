@@ -47,12 +47,13 @@ public class RadioDetailDelegate extends NeteaseLoadingDelegate implements View.
 	private String rcmd;
 	private String info;
 	private String sort;
+	private String djId;
 
 	private static CharSequence[] mTitleDataList = new CharSequence[2];
 
-	public static RadioDetailDelegate newInstance(String id) {
+	public static RadioDetailDelegate newInstance(long id) {
 		final Bundle args = new Bundle();
-		args.putString(ARGS_RADIO_ID, id);
+		args.putString(ARGS_RADIO_ID, String.valueOf(id));
 		final RadioDetailDelegate delegate = new RadioDetailDelegate();
 		delegate.setArguments(args);
 		return delegate;
@@ -90,10 +91,20 @@ public class RadioDetailDelegate extends NeteaseLoadingDelegate implements View.
 			@Override
 			public void onSuccess(Object responseObj) {
 				DjDetailBean bean = (DjDetailBean) responseObj;
+				//电台名称
 				mTvRadioTitle.setText(bean.getDjRadio().getName());
-				mTvRadioSubscribed.setText(bean.getDjRadio().getSubCount() + "人已订阅");
+				//订阅数
+				int subCount = bean.getDjRadio().getSubCount();
+				String count;
+				if(subCount > 10000){
+					count  = subCount/10000 +"万";
+				}else{
+					count = subCount + "";
+				}
+				mTvRadioSubscribed.setText(count + "人已订阅");
 				manager.displayImageForView(mIvAppbarBackground, bean.getDjRadio().getPicUrl());
 				boolean subed = bean.getDjRadio().isSubed();
+
 				if (subed) {
 					mTvRadioSubscrib.setText("已订阅");
 					mTvRadioSubscrib.setBackground(getResources().getDrawable(R.drawable.border_radio_subscribed));
@@ -103,11 +114,13 @@ public class RadioDetailDelegate extends NeteaseLoadingDelegate implements View.
 					mTvRadioSubscrib.setBackground(getResources().getDrawable(R.drawable.bg_collect));
 					mTvRadioSubscrib.setTag(false);
 				}
+
 				img = bean.getDjRadio().getDj().getAvatarUrl();
 				name = bean.getDjRadio().getDj().getNickname();
 				rcmd = bean.getDjRadio().getDj().getSignature();
 				info = bean.getDjRadio().getDesc();
 				sort = bean.getDjRadio().getCategory();
+				djId = String.valueOf(bean.getDjRadio().getDj().getUserId());
 
 				mRadioViewPager.setAdapter(new RadioTabAdapter(getChildFragmentManager()));
 				mRadioViewPager.setCurrentItem(1);
@@ -212,7 +225,7 @@ public class RadioDetailDelegate extends NeteaseLoadingDelegate implements View.
 		public Fragment getItem(int i) {
 			switch (i) {
 				case 0:
-					return RadioInfoDelegate.newInstance(img, name, rcmd, info, sort);
+					return RadioInfoDelegate.newInstance(djId, img, name, rcmd, info, sort);
 				case 1:
 					return RadioProgramDelegate.newInstance(id);
 				default:

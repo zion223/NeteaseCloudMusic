@@ -50,7 +50,7 @@
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/fragment_main_item_count"
+                android:id="@+id/fragment_main_item_localmusic_count"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"

@@ -19,9 +19,13 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
+import com.imooc.imooc_voice.api.HttpConstants;
 import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.newapi.search.SongSearchBean;
+import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.imooc_voice.view.home.search.NeteaseSearchLoadingDelegate;
+import com.imooc.lib_audio.app.AudioHelper;
+import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
 
@@ -57,8 +61,16 @@ public class SongSearchDelegate extends NeteaseSearchLoadingDelegate {
 					List<SongSearchBean.ResultBean.SongsBean> result = bean.getResult().getSongs();
 
 					mAdapter = new SongSearchAdapter(keywords, result);
+					mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+						@Override
+						public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
+							SongSearchBean.ResultBean.SongsBean entity = (SongSearchBean.ResultBean.SongsBean) baseQuickAdapter.getItem(i);
+							String songUrl = HttpConstants.getSongPlayUrl(entity.getId());
+							AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(entity.getId()), songUrl, entity.getName(), entity.getArtists().get(0).getName(), entity.getAlbum().getName(), entity.getAlbum().getName(), entity.getArtists().get(0).getPicUrl(), TimeUtil.getTimeNoYMDH(entity.getDuration())));
+						}
+					});
 					//reload data
-					mTvPlayNum.setText("(共"+result.size()+")首");
+					mTvPlayNum.setText("(共"+result.size()+"首)");
 					mRecyclerView = rootView.findViewById(R.id.rv_delegate_normal);
 					mAdapter.setHeaderView(headerView);
 					mRecyclerView.setAdapter(mAdapter);
@@ -79,17 +91,13 @@ public class SongSearchDelegate extends NeteaseSearchLoadingDelegate {
 
 		private String keywords;
 		private List<SongSearchBean.ResultBean.SongsBean> mData;
+
 		public SongSearchAdapter(String keyword, @Nullable List<SongSearchBean.ResultBean.SongsBean> data) {
 			super(R.layout.item_gedan_detail_song, data);
 			this.keywords = keyword;
 			this.mData = data;
 		}
 
-		public void reload(List<SongSearchBean.ResultBean.SongsBean> data){
-			if(data.get(0).getName().equals(mData.get(0).getName())){
-				setNewData(data);
-			}
-		}
 
 		@Override
 		protected void convert(@NonNull BaseViewHolder adapter, SongSearchBean.ResultBean.SongsBean item) {

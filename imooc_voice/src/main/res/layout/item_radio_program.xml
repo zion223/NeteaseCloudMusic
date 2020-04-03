@@ -41,7 +41,7 @@
 
     <TextView
         android:id="@+id/item_radio_program_createtime"
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/item_radio_program_toptext"
         android:layout_toRightOf="@+id/iv_gedan_detail_sq"
@@ -50,7 +50,7 @@
         android:layout_marginLeft="3dp"
         android:maxLength="20"
         android:singleLine="true"
-        android:text="3-15"
+        android:text="2019-3-15"
         android:textSize="10sp" />
     <ImageView
         android:id="@+id/iv_gedan_detail_playnum"
@@ -64,7 +64,7 @@
         android:src="@drawable/play_num"/>
     <TextView
         android:id="@+id/item_radio_program_playnum"
-        android:layout_width="wrap_content"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/item_radio_program_toptext"
         android:layout_toRightOf="@+id/iv_gedan_detail_playnum"

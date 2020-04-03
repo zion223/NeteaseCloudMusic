@@ -12,6 +12,10 @@ import android.widget.ImageView;
 
 import com.imooc.lib_common_ui.R;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 
 public abstract class NeteaseLoadingDelegate extends NeteaseDelegate{
 
@@ -19,19 +23,32 @@ public abstract class NeteaseLoadingDelegate extends NeteaseDelegate{
 	public View rootView;
 
 
+	/**
+	 * 	若重写此方法 则布局中需要有id为loadframe的FrameLayout
+	 */
 	@Override
 	public Object setLayout() {
 		return R.layout.delegate_music_load_framelayout;
 	}
 
+	@Nullable
+	@Override
+	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		EventBus.getDefault().register(this);
+		return super.onCreateView(inflater, container, savedInstanceState);
+	}
+
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		EventBus.getDefault().unregister(this);
+	}
 
 	@Override
 	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
 		frameLayout = view.findViewById(R.id.loadframe);
 		rootView = LayoutInflater.from(getContext()).inflate(setLoadingViewLayout(), frameLayout, false);
-
 		addLoadingView();
-
 	}
 
 	@Override
@@ -40,6 +57,13 @@ public abstract class NeteaseLoadingDelegate extends NeteaseDelegate{
 		initView();
 	}
 
+	/**
+	 * 	防止出现EventBus报错
+	 */
+	@Subscribe(threadMode = ThreadMode.MAIN)
+	public void onGetEvent(CommentEvent event){
+
+	}
 
 	public abstract void initView();
 

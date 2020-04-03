@@ -10,6 +10,7 @@ import com.imooc.imooc_voice.model.newapi.LoginBean;
 import java.util.List;
 import java.util.Locale;
 
+import static com.imooc.imooc_voice.Constants.SpKey.LOCAL_MUSIC_COUNT;
 
 
 /**
@@ -55,6 +56,13 @@ public class SharePreferenceUtil {
         return systemCurrentLocal;
     }
 
+    public int getLocalMusicCount(){
+        return Integer.parseInt(getString(LOCAL_MUSIC_COUNT, "0"));
+    }
+
+   public void saveLocalMusicCount(int count){
+        saveString(LOCAL_MUSIC_COUNT, String.valueOf(count));
+    }
 
     /**
      * 保存用户的信息以及电话号码（因为bean里的电话号码要处理字符串，所以这里直接暴力传比较高效）
@@ -117,6 +125,20 @@ public class SharePreferenceUtil {
      */
     public void saveDailyUpdateTime(long updateTime) {
         saveLong(Constants.SpKey.DAILY_UPDATE_TIME, updateTime);
+    }
+
+    /**
+     * 存储当前歌手ID
+     */
+    public void saveCurrentArtistId(String id) {
+        saveString(Constants.SpKey.CURRENT_ARTIST_ID, id);
+    }
+    public void removeCurrentArtistId() {
+        remove(Constants.SpKey.CURRENT_ARTIST_ID);
+    }
+
+    public String getCurrentArtistId() {
+        return getString(Constants.SpKey.CURRENT_ARTIST_ID,"");
     }
 
     public long getDailyUpdateTime() {

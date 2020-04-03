@@ -211,10 +211,8 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 	void ClickToggle(){
 		if (mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
 			mDrawerLayout.closeDrawer(Gravity.LEFT);
-			BaseDelegate.musicView.getBackground().setAlpha(255);
 		} else {
 			mDrawerLayout.openDrawer(Gravity.LEFT);
-			BaseDelegate.musicView.getBackground().setAlpha(122);
 		}
 	}
 }

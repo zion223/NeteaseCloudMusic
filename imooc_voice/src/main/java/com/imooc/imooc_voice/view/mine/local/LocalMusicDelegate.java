@@ -1,6 +1,5 @@
 package com.imooc.imooc_voice.view.mine.local;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,11 +21,6 @@ import com.lxj.xpopup.interfaces.OnSelectListener;
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ColorTransitionPagerTitleView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -44,6 +38,7 @@ public class LocalMusicDelegate extends NeteaseDelegate{
 	private LocalMusicAdapter mAdapter;
 	private BasePopupView tabMoreDialog;
 	private PreferencesUtil preferencesUtil;
+
 	private static final String[] mTitleDataList = {"单曲", "歌手", "专辑", "文件夹"};
 	private static final SortPopupDialog.SortType[] mFramentType =
 			{SortPopupDialog.SortType.SONG, SortPopupDialog.SortType.AITIST, SortPopupDialog.SortType.ALBUM, SortPopupDialog.SortType.FOLDER};
@@ -59,6 +54,7 @@ public class LocalMusicDelegate extends NeteaseDelegate{
 
 		mAdapter = new LocalMusicAdapter(getChildFragmentManager());
 		mTabViewPager.setAdapter(mAdapter);
+		mTabViewPager.setOffscreenPageLimit(4);
 		initMagicIndicator();
 		initDialog();
 		preferencesUtil = PreferencesUtil.getInstance(getContext());

@@ -1,11 +1,12 @@
 package com.imooc.imooc_voice.model.newapi.search;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * 获取歌手的热门歌曲
  */
-public class SingerSongSearchBean {
+public class SingerSongSearchBean implements Serializable {
 
     /**
      * artist : {"img1v1Id":109951164158292080,"topicPerson":0,"alias":["Mizuki Nana"],"briefDesc":"","musicSize":739,"img1v1Url":"https://p1.music.126.net/kblHQZmf3IXDp67GVQD7bA==/109951164158292078.jpg","albumSize":88,"picId":109951164158280930,"trans":"水树奈奈","picUrl":"https://p1.music.126.net/00jICa1MThsPSrcCGzpmEw==/109951164158280936.jpg","followed":false,"name":"水樹奈々","id":17028,"publishTime":1540523288064,"picId_str":"109951164158280936","transNames":["水树奈奈"],"img1v1Id_str":"109951164158292078","mvSize":3}

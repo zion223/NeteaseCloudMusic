@@ -65,8 +65,8 @@
         android:id="@+id/tv_radio_info_sort"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="3dp"
-        android:paddingRight="3dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:paddingTop="2dp"
         android:paddingBottom="2dp"
         android:layout_marginLeft="3dp"
@@ -83,7 +83,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_radio_info_sort"
         android:layout_alignLeft="@+id/tv_radio_info_xiangqing"
-        android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="8dp"
         android:textSize="12sp"
         android:text="这是有魔性的声音"/>
 </RelativeLayout>

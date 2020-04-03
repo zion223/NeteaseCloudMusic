@@ -133,8 +133,14 @@ public class GedanDelegate extends NeteaseLoadingDelegate {
 			//显示圆角图片
 			manager.displayImageForCorner(geDanView, item.getCoverImgUrl(), 5);
 			int playCount = item.getPlayCount();
-			double playNum = (double)playCount/1000;
-			helper.setText(R.id.tv_item_discover_playnum, playNum + "万");
+			String count;
+			if (playCount >= 10000) {
+				playCount = playCount / 10000;
+				count = playCount + "万";
+			} else {
+				count = playCount + "";
+			}
+			helper.setText(R.id.tv_item_discover_playnum, count);
 			helper.setText(R.id.tv_item_discover_des, item.getName());
 		}
 	}

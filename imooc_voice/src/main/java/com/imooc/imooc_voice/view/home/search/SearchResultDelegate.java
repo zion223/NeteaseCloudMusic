@@ -20,6 +20,7 @@ import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.model.event.KeywordsEvent;
 import com.imooc.imooc_voice.util.ScreenUtils;
+import com.imooc.imooc_voice.view.home.search.sort.AlbumSearchDelegate;
 import com.imooc.imooc_voice.view.home.search.sort.MultipleSearchDelegate;
 import com.imooc.imooc_voice.view.home.search.sort.PlayListSearchDelegate;
 import com.imooc.imooc_voice.view.home.search.sort.RadioSearchDelegate;
@@ -55,7 +56,7 @@ public class SearchResultDelegate extends NeteaseDelegate {
 
 	private static final String ARGS_KEYWORD = "ARGS_KEYWORD";
 
-	private String[] mTitleData = {"综合","单曲","歌单","视频","歌手","主播电台","用户"};
+	private String[] mTitleData = {"综合","单曲","歌单","视频","歌手","专辑","主播电台","用户"};
 
 	private String keywords;
 
@@ -101,6 +102,7 @@ public class SearchResultDelegate extends NeteaseDelegate {
 		mSearchResultDelegates.add(new PlayListSearchDelegate());
 		mSearchResultDelegates.add(new VideoSearchDelegate());
 		mSearchResultDelegates.add(new SingerSearchDelegate());
+		mSearchResultDelegates.add(new AlbumSearchDelegate());
 		mSearchResultDelegates.add(new RadioSearchDelegate());
 		mSearchResultDelegates.add(new UserSearchDelegate());
 

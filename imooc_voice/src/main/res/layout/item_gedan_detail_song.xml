@@ -27,13 +27,14 @@
         <TextView
             android:id="@+id/viewpager_list_toptext"
             android:layout_toRightOf="@id/item_play_no"
-            android:layout_width="150dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:singleLine="true"
             android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
             android:text="被驯服的象"
             android:textColor="@color/listTextColor"
             android:textSize="15sp" />
@@ -47,12 +48,13 @@
             android:src="@drawable/b73"/>
         <TextView
             android:id="@+id/viewpager_list_bottom_text"
-            android:layout_width="70dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/viewpager_list_toptext"
             android:layout_toRightOf="@+id/iv_gedan_detail_sq"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="3dp"
+            android:ellipsize="end"
             android:maxLength="20"
             android:singleLine="true"
             android:text="蔡健雅"

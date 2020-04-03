@@ -72,6 +72,13 @@ public class ArtistSortDelegate extends NeteaseDelegate {
 			public void onSuccess(Object responseObj) {
 				ArtistListBean bean = (ArtistListBean) responseObj;
 				mAdapter = new ArtistSortAdapter(bean.getArtists());
+				mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+					@Override
+					public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
+						TopListDetailBean.Artist entity = (TopListDetailBean.Artist) baseQuickAdapter.getItem(i);
+						getSupportDelegate().start(ArtistDetailDelegate.newInstance(entity.getId()));
+					}
+				});
 				mRvArtistSort.setAdapter(mAdapter);
 				mRvArtistSort.setLayoutManager(new LinearLayoutManager(getContext()));
 			}

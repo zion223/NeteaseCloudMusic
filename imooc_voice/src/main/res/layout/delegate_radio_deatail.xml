@@ -41,14 +41,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_gravity="bottom"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="30dp"
                 app:layout_collapseMode="parallax">
 
                 <TextView
                     android:id="@+id/tv_radio_detail_title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
+                    android:layout_marginRight="20dp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
                     android:text="婉儿电台"
                     android:textColor="#f0f0f0f0"
                     android:textSize="17sp"

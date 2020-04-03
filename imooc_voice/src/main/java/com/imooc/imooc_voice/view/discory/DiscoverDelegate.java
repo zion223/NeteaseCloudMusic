@@ -259,9 +259,17 @@ public class DiscoverDelegate extends NeteaseDelegate {
 			final ImageView geDanView = helper.getView(R.id.iv_item_discover);
 			//显示圆角图片
 			manager.displayImageForCorner(geDanView, item.getPicUrl(), 5);
-			int playCount = item.getPlaycount();
-			double playNum = (double)playCount/1000;
-			helper.setText(R.id.tv_item_discover_playnum, playNum + "万");
+			String count;
+			int playcount = item.getPlaycount();
+
+			if (playcount >= 10000) {
+				playcount = playcount / 10000;
+				count = playcount + "万";
+			} else {
+				count = playcount + "";
+			}
+
+			helper.setText(R.id.tv_item_discover_playnum, count);
 			helper.setText(R.id.tv_item_discover_des, item.getName());
 		}
 	}
