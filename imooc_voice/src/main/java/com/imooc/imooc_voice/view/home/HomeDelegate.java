@@ -53,7 +53,7 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 
 	//首页的卡片
 	private static final CHANNEL[] CHANNELS =
-			new CHANNEL[]{CHANNEL.MY, CHANNEL.DISCORY, CHANNEL.YUNCUN};
+			new CHANNEL[]{CHANNEL.MY, CHANNEL.DISCORY, CHANNEL.YUNCUN, CHANNEL.VIDEO};
 
 	/*
 	 * View
@@ -87,7 +87,7 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 	@Override
 	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
 		initView();
-		initData();
+		//initData();
 		sharePreferenceUtil = SharePreferenceUtil.getInstance(getContext());
 		LoginBean bean = GsonUtil.fromJSON(sharePreferenceUtil.getUserInfo(""), LoginBean.class);
 		if(bean != null){

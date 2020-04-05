@@ -1661,7 +1661,7 @@ public class SynthesisSearchBean {
                 private boolean followed;
                 private String alg;
                 private Object trans;
-                private int accountId;
+                private String accountId;
                 private List<String> alias;
 
                 public long getId() {
@@ -1752,11 +1752,11 @@ public class SynthesisSearchBean {
                     this.trans = trans;
                 }
 
-                public int getAccountId() {
+                public String getAccountId() {
                     return accountId;
                 }
 
-                public void setAccountId(int accountId) {
+                public void setAccountId(String accountId) {
                     this.accountId = accountId;
                 }
 

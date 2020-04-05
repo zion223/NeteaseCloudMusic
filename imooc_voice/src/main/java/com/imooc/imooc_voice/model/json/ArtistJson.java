@@ -64,7 +64,7 @@ public class ArtistJson {
 		Object alias;
 		long picId;
 		String img1v1Url;
-		long accountId;
+		String accountId;
 		long img1v1;
 		boolean followed;
 		Object trans;
@@ -117,11 +117,11 @@ public class ArtistJson {
 			this.img1v1Url = img1v1Url;
 		}
 
-		public long getAccountId() {
+		public String getAccountId() {
 			return accountId;
 		}
 
-		public void setAccountId(long accountId) {
+		public void setAccountId(String accountId) {
 			this.accountId = accountId;
 		}
 

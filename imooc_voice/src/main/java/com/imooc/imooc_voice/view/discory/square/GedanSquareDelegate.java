@@ -1,12 +1,10 @@
 package com.imooc.imooc_voice.view.discory.square;
 
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
@@ -15,7 +13,6 @@ import com.imooc.lib_common_ui.navigator.CommonNavigatorCreater;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
-import net.lucode.hackware.magicindicator.buildins.UIUtil;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 
 import butterknife.BindView;

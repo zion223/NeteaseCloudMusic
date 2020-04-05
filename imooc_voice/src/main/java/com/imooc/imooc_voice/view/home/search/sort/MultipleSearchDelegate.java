@@ -20,7 +20,7 @@ import com.imooc.imooc_voice.model.newapi.search.SynthesisSearchBean;
 import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.imooc_voice.view.discory.radio.detail.RadioDetailDelegate;
-import com.imooc.imooc_voice.view.discory.square.gedandetail.GedanDetailDelegate;
+import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
 import com.imooc.imooc_voice.view.home.search.NeteaseSearchLoadingDelegate;
 import com.imooc.imooc_voice.view.user.UserDetailDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
@@ -87,7 +87,7 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 			case 2:
 				//歌单
 				SynthesisSearchBean.ResultBean.PlayListBean.PlayListsBean playListsBean = data.get(groupPosition).getPlayList().getPlayLists().get(childPosition);
-				getParentDelegate().getSupportDelegate().start(GedanDetailDelegate.newInstance(String.valueOf(playListsBean.getId())));
+				getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(SongListDetailDelegate.TYPE_PLAYLIST, playListsBean.getId()));
 				break;
 			case 3:
 				//电台
@@ -212,7 +212,7 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 				case 2:
 					return mData.get(groupPosition).getPlayList().getPlayLists().size();
 				case 3:
-					return mData.get(groupPosition).getDjRadio().getDjRadios().size();
+					return mData.get(groupPosition).getDjRadio().getDjRadios() != null ? mData.get(groupPosition).getDjRadio().getDjRadios().size() : 0;
 				case 4:
 					return mData.get(groupPosition).getArtist().getArtists().size();
 				case 5:

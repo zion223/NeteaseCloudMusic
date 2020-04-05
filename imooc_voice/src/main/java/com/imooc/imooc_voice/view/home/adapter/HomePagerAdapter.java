@@ -9,6 +9,7 @@ import com.imooc.imooc_voice.model.CHANNEL;
 import com.imooc.imooc_voice.view.cloud.CloudVillageFragment;
 import com.imooc.imooc_voice.view.discory.DiscoverDelegate;
 import com.imooc.imooc_voice.view.mine.MineDelegate;
+import com.imooc.imooc_voice.view.video.VideoTabDelegate;
 
 public class HomePagerAdapter extends FragmentPagerAdapter {
 
@@ -30,6 +31,8 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
 				return new DiscoverDelegate();
 			case CHANNEL.YUNCUN_ID:
 				return new CloudVillageFragment();
+			case CHANNEL.VIDEO_ID:
+				return new VideoTabDelegate();
 		}
 		return null;
 	}

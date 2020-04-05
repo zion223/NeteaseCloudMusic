@@ -2,6 +2,7 @@ package com.imooc.imooc_voice.api;
 
 
 import com.imooc.imooc_voice.model.json.ArtistJson;
+import com.imooc.imooc_voice.model.newapi.AlbumDetailBean;
 import com.imooc.imooc_voice.model.newapi.AlbumSublistBean;
 import com.imooc.imooc_voice.model.newapi.ArtistListBean;
 import com.imooc.imooc_voice.model.newapi.ArtistSublistBean;
@@ -24,6 +25,9 @@ import com.imooc.imooc_voice.model.newapi.RecommendPlayListBean;
 import com.imooc.imooc_voice.model.newapi.SubCountBean;
 import com.imooc.imooc_voice.model.newapi.TopListBean;
 import com.imooc.imooc_voice.model.newapi.TopListDetailBean;
+import com.imooc.imooc_voice.model.newapi.VideoBean;
+import com.imooc.imooc_voice.model.newapi.VideoGroupBean;
+import com.imooc.imooc_voice.model.newapi.VideoUrlBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjCatelistBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjDetailBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjPaygiftBean;
@@ -200,6 +204,14 @@ public class RequestCenter {
         RequestCenter.getRequest(HttpConstants.PLAY_LIST_DETAIL, params, listener, PlaylistDetailBean.class);
     }
 
+    /**
+     *  专辑详情
+     */
+    public static void getAlbumDetail(String id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.ALBUM_DETAIL, params, listener, AlbumDetailBean.class);
+    }
     /**
      *  音乐是否可用
      */
@@ -506,6 +518,14 @@ public class RequestCenter {
     }
 
     /**
+     * 专辑评论
+     */
+    public static void getAlbumComment(String id, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.COMMENT_ALBUM, params, listener, PlayListCommentBean.class);
+    }
+    /**
      *  电台-付费精选
      */
     public static void getRadioPaygift(int limit, int offset, DisposeDataListener listener){
@@ -618,6 +638,30 @@ public class RequestCenter {
         RequestCenter.getRequest(HttpConstants.PLAYLIST_SUBSCRIBE, params, listener, CommonMessageBean.class);
     }
 
+    /**
+     *  获取视频标签列表
+     */
+    public static void getVideoGroup(DisposeDataListener listener){
+        RequestCenter.getRequest(HttpConstants.VIDEO_GROUP, null, listener, VideoGroupBean.class);
+    }
+
+    /**
+     *  获取视频标签下的视频
+     */
+    public static void getVideoTab(String id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.VIDEO_TAB, params, listener, VideoBean.class);
+    }
+
+    /**
+     *  获取视频标签下的视频
+     */
+    public static void getVideoUrl(String id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.VIDEO_URL, params, listener, VideoUrlBean.class);
+    }
     /**
      * 查询歌手图片
      * eg. http://music.163.com/api/search/get/web?s=邓紫棋&type=100

@@ -1,6 +1,8 @@
 package com.imooc.imooc_voice.model.newapi;
 
 
+import com.imooc.imooc_voice.model.newapi.personal.UserEventBean;
+
 import java.util.List;
 
 public class TopListDetailBean {
@@ -610,6 +612,16 @@ public class TopListDetailBean {
 		private String transName;
 		private int mark;
 		private String picId_str;
+		private UserEventBean.EventsBean.InfoBean info;
+
+		public UserEventBean.EventsBean.InfoBean getInfo() {
+			return info;
+		}
+
+		public void setInfo(UserEventBean.EventsBean.InfoBean info) {
+			this.info = info;
+		}
+
 		public void setName(String name) {
 			this.name = name;
 		}

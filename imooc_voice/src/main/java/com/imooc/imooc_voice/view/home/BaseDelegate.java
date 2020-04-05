@@ -38,9 +38,6 @@ public class BaseDelegate extends NeteaseDelegate {
 		getSupportDelegate().loadRootFragment(R.id.frame_base, new HomeDelegate());
 	}
 
-	@Override
-	public void post(Runnable runnable) {
 
-	}
 
 }

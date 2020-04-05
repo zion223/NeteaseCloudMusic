@@ -28,7 +28,7 @@ import com.imooc.imooc_voice.util.GsonUtil;
 import com.imooc.imooc_voice.util.IConstants;
 import com.imooc.imooc_voice.util.MusicUtils;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
-import com.imooc.imooc_voice.view.discory.square.gedandetail.GedanDetailDelegate;
+import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
 import com.imooc.imooc_voice.view.mine.local.LocalMusicDelegate;
 import com.imooc.imooc_voice.view.mine.radio.MineRadioDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
@@ -204,7 +204,7 @@ public class MineDelegate extends NeteaseDelegate {
 				}
 			}
 		}else{
-			getParentDelegate().getSupportDelegate().start(GedanDetailDelegate.newInstance(String.valueOf(entity.t.getId())));
+			getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(SongListDetailDelegate.TYPE_PLAYLIST, entity.t.getId()));
 		}
 	}
 

@@ -1,4 +1,4 @@
-package com.imooc.imooc_voice.view.discory.square.gedandetail;
+package com.imooc.imooc_voice.view.discory.square.detail;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
@@ -10,6 +10,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
@@ -25,6 +28,7 @@ import com.imooc.imooc_voice.model.newapi.PlayListCommentEntity;
 import com.imooc.imooc_voice.model.newapi.song.CommentLikeBean;
 import com.imooc.imooc_voice.model.newapi.song.MusicCommentBean;
 import com.imooc.imooc_voice.model.newapi.song.PlayListCommentBean;
+import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
@@ -33,16 +37,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnClickListener{
+public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnClickListener {
 
-	private ImageView mGedanImg;
-	private TextView mGedanTitle;
-	private TextView mGedanCreator;
-	private TextView mTvGedanCommentTitle;
+	private TextView mTvHeaderTitle;
+	private TextView mTvHeaderCreator;
+	private TextView mTvCommentTitle;
 	private RelativeLayout mRlGedanHeader;
 	private ImageView mBackView;
-
+	private ImageView mIvAlbumRightIcon;
 	private MultipleSectionGedanCommentAdapter mAdapter;
+
 	private RecyclerView mRecyclerViewComment;
 
 	private static final String ARGS_COMMENT_ID = "ARGS_COMMENT_ID";
@@ -53,9 +57,11 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 	private static final String ARGS_COMMENT_HEADER_BOTTOM = "ARGS_COMMENT_HEADER_BOTTOM";
 
 
-	public static final int SONG = 1;
-	public static final int PLAYLIST = 2;
-	public static final int ALBUM = 3;
+	//评论类型 歌曲评论 歌单评论 专辑评论
+
+	public static final int PLAYLIST = 0;
+	public static final int ALBUM = 1;
+	public static final int SONG = 2;
 
 	//歌单ID
 	private String id;
@@ -115,19 +121,33 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 	private void initCommentView() {
 
 		mRecyclerViewComment = rootView.findViewById(R.id.rv_gedan_comment_normal);
-		mGedanTitle = rootView.findViewById(R.id.tv_gedan_detail_comment_title);
-		mGedanCreator = rootView.findViewById(R.id.tv_gedan_detail_comment_creator);
+		mTvHeaderTitle = rootView.findViewById(R.id.tv_gedan_detail_comment_title);
+		mTvHeaderCreator = rootView.findViewById(R.id.tv_gedan_detail_comment_creator);
 		mRlGedanHeader = rootView.findViewById(R.id.rl_gedan_comment_header);
 		mBackView = rootView.findViewById(R.id.img_gedan_comment_back);
-		mTvGedanCommentTitle = rootView.findViewById(R.id.tv_gedan_detail_comment_num);
+		mTvCommentTitle = rootView.findViewById(R.id.tv_gedan_detail_comment_num);
+		mIvAlbumRightIcon = rootView.findViewById(R.id.iv_album_right_flag);
 
-		mTvGedanCommentTitle.setText("评论(" + count + ")");
+		mTvCommentTitle.setText("评论(" + count + ")");
 		mRlGedanHeader.setOnClickListener(this);
 		mBackView.setOnClickListener(this);
-		mGedanCreator.setText(headerBottom);
-		mGedanTitle.setText(headerTop);
+		//设置歌手名 或用户名
+		if (type == PLAYLIST) {
+			//显示用户名
+			String creator = "by " + headerBottom;
+			SpannableString msp = new SpannableString(creator);
+			ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(Color.GRAY);
+			msp.setSpan(foregroundColorSpan, 0, 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			mTvHeaderCreator.setText(msp);
+		} else {
+			//专辑显示右边的图片
+			mTvHeaderCreator.setText(headerBottom);
+			mIvAlbumRightIcon.setVisibility(View.VISIBLE);
+		}
+		//标题
+		mTvHeaderTitle.setText(headerTop);
 
-		ImageLoaderManager.getInstance().displayImageForCorner((ImageView)rootView.findViewById(R.id.iv_gedan_detail_comment_img), headerImg, 5);
+		ImageLoaderManager.getInstance().displayImageForCorner((ImageView) rootView.findViewById(R.id.iv_gedan_detail_comment_img), headerImg, 5);
 
 		new AsyncTask<Void, Void, Void>() {
 			@Override
@@ -142,7 +162,7 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 
 			@Override
 			protected Void doInBackground(Void... voids) {
-				switch (type){
+				switch (type) {
 					case PLAYLIST:
 						//歌单评论
 						RequestCenter.getPlaylistComment(id, new DisposeDataListener() {
@@ -159,6 +179,17 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 						break;
 					//专辑评论
 					case ALBUM:
+						RequestCenter.getAlbumComment(id, new DisposeDataListener() {
+							@Override
+							public void onSuccess(Object responseObj) {
+								loadCommentList((PlayListCommentBean) responseObj);
+							}
+
+							@Override
+							public void onFailure(Object reasonObj) {
+
+							}
+						});
 						break;
 
 
@@ -172,16 +203,16 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 
 	private void loadCommentList(PlayListCommentBean responseObj) {
 		entities.add(new PlayListCommentEntity(true, "精彩评论", ""));
-		for(int i = 0; i< responseObj.getHotComments().size(); i++){
+		for (int i = 0; i < responseObj.getHotComments().size(); i++) {
 			entities.add(new PlayListCommentEntity(responseObj.getHotComments().get(i)));
 		}
 		entities.add(new PlayListCommentEntity(true, "最新评论", count));
-		for(int j = 0; j< responseObj.getComments().size(); j++){
+		for (int j = 0; j < responseObj.getComments().size(); j++) {
 			entities.add(new PlayListCommentEntity(responseObj.getComments().get(j)));
 		}
 		mAdapter = new MultipleSectionGedanCommentAdapter(entities);
 		mRecyclerViewComment.setAdapter(mAdapter);
-		mRecyclerViewComment.setLayoutManager(new LinearLayoutManager(getContext()){
+		mRecyclerViewComment.setLayoutManager(new LinearLayoutManager(getContext()) {
 			@Override
 			public boolean canScrollVertically() {
 				return false;
@@ -192,7 +223,7 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 
 	@Override
 	public void onClick(View v) {
-		switch (v.getId()){
+		switch (v.getId()) {
 			case R.id.rl_gedan_comment_header:
 			case R.id.img_gedan_comment_back:
 				getSupportDelegate().pop();
@@ -223,44 +254,49 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 			ImageView avatarImg = baseViewHolder.getView(R.id.iv_item_gedan_comment_avatar_img);
 			manager.displayImageForCircle(avatarImg, bean.getUser().getAvatarUrl());
 			baseViewHolder.setText(R.id.tv_item_gedan_comment_avatar_name, bean.getUser().getNickname());
-			if(bean.getLikedCount() != 0){
+
+			baseViewHolder.setText(R.id.tv_item_gedan_comment_time, TimeUtil.getTimeStandardOnlyYMDChinese(bean.getTime()));
+			//点赞数量
+			if (bean.getLikedCount() != 0) {
 				baseViewHolder.setVisible(R.id.tv_item_gedan_comment_zan_count, true);
 				baseViewHolder.setText(R.id.tv_item_gedan_comment_zan_count, String.valueOf(bean.getLikedCount()));
 			}
 			baseViewHolder.setText(R.id.tv_item_gedan_comment_content, bean.getContent());
-			if(bean.getBeReplied().size() != 0){
+			//回复数量
+			if (bean.getBeReplied().size() != 0) {
 				baseViewHolder.setVisible(R.id.tv_item_gedan_comment_replied, true);
 				baseViewHolder.setText(R.id.tv_item_gedan_comment_replied, bean.getBeReplied().size() + "条回复");
 			}
 			baseViewHolder.setText(R.id.tv_item_gedan_comment_content, bean.getContent());
+
 			final ImageView zanView = baseViewHolder.getView(R.id.iv_item_gedan_comment_zan);
 			//tag : true 当前是赞 false当前不是赞
 			zanView.setTag(false);
 			baseViewHolder.setOnClickListener(R.id.iv_item_gedan_comment_zan, new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if(!(Boolean) zanView.getTag()){
+					if (!(Boolean) zanView.getTag()) {
 						zanView.setImageResource(R.drawable.zan_red);
 						//点赞
 						AnimatorSet animatorSetsuofang = new AnimatorSet();//组合动画
-						ObjectAnimator scaleX = ObjectAnimator.ofFloat(zanView, "scaleX", 1f, 1.5f,1f);
-						ObjectAnimator scaleY = ObjectAnimator.ofFloat(zanView, "scaleY", 1f, 1.5f,1f);
+						ObjectAnimator scaleX = ObjectAnimator.ofFloat(zanView, "scaleX", 1f, 1.5f, 1f);
+						ObjectAnimator scaleY = ObjectAnimator.ofFloat(zanView, "scaleY", 1f, 1.5f, 1f);
 						baseViewHolder.setText(R.id.tv_item_gedan_comment_zan_count, String.valueOf(bean.getLikedCount() + 1));
 						baseViewHolder.setTextColor(R.id.tv_item_gedan_comment_zan_count, Color.parseColor("#FF3A3A"));
 						RequestCenter.getlikeComment(id, bean.getCommentId(), 1, 2, new DisposeDataListener() {
 							@Override
 							public void onSuccess(Object responseObj) {
 								CommentLikeBean bean = (CommentLikeBean) responseObj;
-								if(bean.getCode() == 200){
-									Toast.makeText(getContext(), "点赞成功",Toast.LENGTH_SHORT).show();
-								}else{
-									Toast.makeText(getContext(), "点赞失败",Toast.LENGTH_SHORT).show();
+								if (bean.getCode() == 200) {
+									Toast.makeText(getContext(), "点赞成功", Toast.LENGTH_SHORT).show();
+								} else {
+									Toast.makeText(getContext(), "点赞失败", Toast.LENGTH_SHORT).show();
 								}
 							}
 
 							@Override
 							public void onFailure(Object reasonObj) {
-								Toast.makeText(getContext(), "点赞失败",Toast.LENGTH_SHORT).show();
+								Toast.makeText(getContext(), "点赞失败", Toast.LENGTH_SHORT).show();
 							}
 						});
 						animatorSetsuofang.setDuration(500);
@@ -268,7 +304,7 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 						animatorSetsuofang.play(scaleX).with(scaleY);//两个动画同时开始
 						animatorSetsuofang.start();
 						zanView.setTag(true);
-					}else{
+					} else {
 						baseViewHolder.setText(R.id.tv_item_gedan_comment_zan_count, String.valueOf(bean.getLikedCount()));
 						zanView.setImageResource(R.drawable.zan);
 						zanView.setTag(false);
@@ -277,16 +313,16 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 							@Override
 							public void onSuccess(Object responseObj) {
 								CommentLikeBean bean = (CommentLikeBean) responseObj;
-								if(bean.getCode() == 200){
-									Toast.makeText(getContext(), "取消赞成功",Toast.LENGTH_SHORT).show();
-								}else{
-									Toast.makeText(getContext(), "取消赞失败",Toast.LENGTH_SHORT).show();
+								if (bean.getCode() == 200) {
+									Toast.makeText(getContext(), "取消赞成功", Toast.LENGTH_SHORT).show();
+								} else {
+									Toast.makeText(getContext(), "取消赞失败", Toast.LENGTH_SHORT).show();
 								}
 							}
 
 							@Override
 							public void onFailure(Object reasonObj) {
-								Toast.makeText(getContext(), "取消赞失败",Toast.LENGTH_SHORT).show();
+								Toast.makeText(getContext(), "取消赞失败", Toast.LENGTH_SHORT).show();
 							}
 						});
 					}

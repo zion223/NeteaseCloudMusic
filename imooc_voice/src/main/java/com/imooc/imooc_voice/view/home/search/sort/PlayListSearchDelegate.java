@@ -12,7 +12,7 @@ import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.newapi.search.PlayListSearchBean;
 import com.imooc.imooc_voice.util.SearchUtil;
-import com.imooc.imooc_voice.view.discory.square.gedandetail.GedanDetailDelegate;
+import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
 import com.imooc.imooc_voice.view.home.search.NeteaseSearchLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
@@ -39,7 +39,7 @@ public class PlayListSearchDelegate extends NeteaseSearchLoadingDelegate {
 					@Override
 					public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
 						PlayListSearchBean.ResultBean.PlaylistsBean entity = (PlayListSearchBean.ResultBean.PlaylistsBean) baseQuickAdapter.getItem(i);
-						getParentDelegate().getSupportDelegate().start(GedanDetailDelegate.newInstance(String.valueOf(entity.getId())));
+						getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(SongListDetailDelegate.TYPE_PLAYLIST,entity.getId()));
 					}
 				});
 				mRecyclerView = rootView.findViewById(R.id.rv_delegate_normal);

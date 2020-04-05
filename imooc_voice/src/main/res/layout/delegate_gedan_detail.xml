@@ -44,6 +44,14 @@
                         android:paddingBottom="20dp">
 
                         <ImageView
+                            android:id="@+id/iv_gedan_detail_album_tag"
+                            android:layout_width="125dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="10dp"
+                            android:visibility="gone"
+                            android:src="@drawable/b5w" />
+
+                        <ImageView
                             android:id="@+id/iv_gedan_detail_img"
                             android:layout_width="125dp"
                             android:layout_height="125dp"
@@ -52,6 +60,7 @@
                             android:src="@drawable/test" />
 
                         <ImageView
+                            android:id="@+id/iv_gedan_detail_playnum"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_alignTop="@+id/iv_gedan_detail_img"
@@ -84,33 +93,37 @@
                             android:textSize="17sp"
                             android:textStyle="bold" />
 
-                        <ImageView
-                            android:id="@+id/iv_gedan_detail_avatar_img"
-                            android:layout_width="25dp"
+                        <LinearLayout
+                            android:layout_width="wrap_content"
                             android:layout_height="25dp"
                             android:layout_below="@+id/tv_gedan_detail_title"
                             android:layout_alignLeft="@+id/tv_gedan_detail_title"
-                            android:layout_marginTop="15dp"
-                            android:src="@drawable/test" />
+                            android:layout_marginTop="15dp">
 
-                        <TextView
-                            android:id="@+id/tv_gedan_detail_avatar_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/tv_gedan_detail_title"
-                            android:layout_alignLeft="@+id/tv_gedan_detail_title"
-                            android:layout_marginLeft="30dp"
-                            android:layout_marginTop="17dp"
-                            android:text="华语流行 华语怀旧"
-                            android:textColor="@color/white" />
+                            <ImageView
+                                android:id="@+id/iv_gedan_detail_avatar_img"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginRight="10dp"
+                                android:src="@drawable/test" />
 
-                        <ImageView
-                            android:layout_width="10dp"
-                            android:layout_height="wrap_content"
-                            android:layout_alignTop="@+id/tv_gedan_detail_avatar_name"
-                            android:layout_alignBottom="@+id/tv_gedan_detail_avatar_name"
-                            android:layout_toRightOf="@+id/tv_gedan_detail_avatar_name"
-                            android:src="@drawable/right_white" />
+                            <TextView
+                                android:id="@+id/tv_gedan_detail_avatar_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:text="华语流行 华语怀旧"
+                                android:textColor="@color/white"
+                                android:textSize="12sp" />
+
+                            <ImageView
+                                android:layout_width="10dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignTop="@+id/tv_gedan_detail_avatar_name"
+                                android:layout_alignBottom="@+id/tv_gedan_detail_avatar_name"
+                                android:layout_toRightOf="@+id/tv_gedan_detail_avatar_name"
+                                android:src="@drawable/right_white" />
+                        </LinearLayout>
 
                         <TextView
                             android:id="@+id/tv_gedan_detail_desc"
@@ -124,7 +137,7 @@
                             android:maxLines="2"
                             android:text="国语国语国语国语国国语国语\n国语国语国语"
                             android:textColor="@color/white"
-                            android:textSize="13sp" />
+                            android:textSize="11sp" />
 
                     </RelativeLayout>
 
@@ -336,6 +349,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
                         android:text="收藏(1222)"
                         android:textColor="@color/white" />
                 </LinearLayout>

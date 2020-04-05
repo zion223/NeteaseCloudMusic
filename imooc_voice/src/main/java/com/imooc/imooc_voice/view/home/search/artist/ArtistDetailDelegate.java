@@ -73,7 +73,7 @@ public class ArtistDetailDelegate extends NeteaseDelegate {
 	 * 	专辑
 	 * 	视频
 	 */
-	public static ArtistDetailDelegate newInstance(int id) {
+	public static ArtistDetailDelegate newInstance(String id) {
 		final Bundle args = new Bundle();
 		args.putString(ARGS_ARTIST_ID, String.valueOf(id));
 		final ArtistDetailDelegate delegate = new ArtistDetailDelegate();

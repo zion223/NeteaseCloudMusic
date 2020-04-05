@@ -83,7 +83,7 @@ public class SingerSearchBean {
             private boolean followed;
             private String alg;
             private String trans;
-            private int accountId;
+            private String accountId;
             private List<String> alias;
             private List<String> transNames;
             private List<String> alia;
@@ -176,11 +176,11 @@ public class SingerSearchBean {
                 this.trans = trans;
             }
 
-            public int getAccountId() {
+            public String getAccountId() {
                 return accountId;
             }
 
-            public void setAccountId(int accountId) {
+            public void setAccountId(String accountId) {
                 this.accountId = accountId;
             }
 

@@ -76,7 +76,7 @@ public class ArtistSortDelegate extends NeteaseDelegate {
 					@Override
 					public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
 						TopListDetailBean.Artist entity = (TopListDetailBean.Artist) baseQuickAdapter.getItem(i);
-						getSupportDelegate().start(ArtistDetailDelegate.newInstance(entity.getId()));
+						getSupportDelegate().start(ArtistDetailDelegate.newInstance(String.valueOf(entity.getId())));
 					}
 				});
 				mRvArtistSort.setAdapter(mAdapter);

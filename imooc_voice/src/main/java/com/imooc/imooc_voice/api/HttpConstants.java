@@ -8,7 +8,7 @@ public class HttpConstants {
     private static final String FORMATE = "json";
     private static final String BASE = "http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&format=" + FORMATE;
     //private static final String ROOT_URL = "http://192.168.1.54:3000";
-    private static final String ROOT_URL = "http://77jrnx.natappfree.cc";
+    private static final String ROOT_URL = "http://7iysta.natappfree.cc";
 
 
     static String LOGIN = ROOT_URL + "/login/cellphone";
@@ -48,6 +48,8 @@ public class HttpConstants {
     static String CAT_LIST = ROOT_URL + "/playlist/catlist";
 
     static String PLAY_LIST_DETAIL = ROOT_URL + "/playlist/detail";
+
+    static String ALBUM_DETAIL = ROOT_URL + "/album";
 
     static String MUSIC_CAN_PLAY = ROOT_URL + "/check/music";
 
@@ -101,6 +103,8 @@ public class HttpConstants {
 
     static String COMMENT_PLAYLIST = ROOT_URL + "/comment/playlist";
 
+    static String COMMENT_ALBUM = ROOT_URL + "/comment/album";
+
     static String PAY_GIFT = ROOT_URL + "/dj/paygift";
 
     static String DJ_RECOMMEND = ROOT_URL + "/dj/recommend";
@@ -116,6 +120,12 @@ public class HttpConstants {
     static String DJ_PROGRAM = ROOT_URL + "/dj/program";
 
     static String DJ_DETAIL = ROOT_URL + "/dj/detail";
+
+    static String VIDEO_GROUP = ROOT_URL + "/video/group/list";
+
+    static String VIDEO_TAB = ROOT_URL + "/video/group";
+
+    static String VIDEO_URL = ROOT_URL + "/video/url";
 
     static String ARTIST_PIC = "http://music.163.com/api/search/get/web";
 

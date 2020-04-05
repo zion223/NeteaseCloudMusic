@@ -24,7 +24,7 @@ import com.imooc.imooc_voice.util.GsonUtil;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
 import com.imooc.imooc_voice.view.discory.daily.DailyRecommendDelegate;
 import com.imooc.imooc_voice.view.discory.radio.RadioDelegate;
-import com.imooc.imooc_voice.view.discory.square.gedandetail.GedanDetailDelegate;
+import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
 import com.imooc.imooc_voice.view.discory.square.GedanSquareDelegate;
 import com.imooc.lib_common_ui.bannder.BannerCreator;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
@@ -78,7 +78,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 
 		final GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
 		LoginBean loginBean = GsonUtil.fromJSON(SharePreferenceUtil.getInstance(getContext()).getUserInfo(""), LoginBean.class);
-		Log.e(TAG,"userId:" + loginBean.getProfile().getUserId());
+		Log.d(TAG,"userId:" + loginBean.getProfile().getUserId());
 		/*
 		 * 查询轮播图
 		 */
@@ -116,7 +116,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 					@Override
 					public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 						MainRecommendPlayListBean.RecommendBean item = (MainRecommendPlayListBean.RecommendBean) adapter.getItem(position);
-						getParentDelegate().getSupportDelegate().start(GedanDetailDelegate.newInstance(String.valueOf(item.getId())));
+						getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(SongListDetailDelegate.TYPE_PLAYLIST, item.getId()));
 					}
 				});
 			}
