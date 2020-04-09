@@ -17,12 +17,12 @@ public class PlayListCommentBean {
      */
 
     private boolean isMusician;
-    private long userId;
+    private String userId;
     private boolean moreHot;
     private int code;
     private int total;
     private boolean more;
-    private List<?> topComments;
+    private List<MusicCommentBean.CommentsBean> topComments;
     private List<MusicCommentBean.CommentsBean> hotComments;
     private List<MusicCommentBean.CommentsBean> comments;
 
@@ -34,11 +34,11 @@ public class PlayListCommentBean {
         isMusician = musician;
     }
 
-    public long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -74,11 +74,11 @@ public class PlayListCommentBean {
         this.more = more;
     }
 
-    public List<?> getTopComments() {
+    public List<MusicCommentBean.CommentsBean> getTopComments() {
         return topComments;
     }
 
-    public void setTopComments(List<?> topComments) {
+    public void setTopComments(List<MusicCommentBean.CommentsBean> topComments) {
         this.topComments = topComments;
     }
 

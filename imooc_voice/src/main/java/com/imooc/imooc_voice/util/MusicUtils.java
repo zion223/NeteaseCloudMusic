@@ -1,6 +1,3 @@
-/**
- * Copyright (lrc_arrow) www.longdw.com
- */
 package com.imooc.imooc_voice.util;
 
 import android.content.ContentResolver;

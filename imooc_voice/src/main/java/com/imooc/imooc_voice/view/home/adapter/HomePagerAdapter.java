@@ -6,9 +6,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.imooc.imooc_voice.model.CHANNEL;
+import com.imooc.imooc_voice.view.cloud.CloudVillageFragment;
 import com.imooc.imooc_voice.view.discory.DiscoverDelegate;
-import com.imooc.imooc_voice.view.friend.FriendFragment;
 import com.imooc.imooc_voice.view.mine.MineDelegate;
+import com.imooc.imooc_voice.view.video.VideoTabDelegate;
 
 public class HomePagerAdapter extends FragmentPagerAdapter {
 
@@ -28,8 +29,10 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
 				return new MineDelegate();
 			case CHANNEL.DISCORY_ID:
 				return new DiscoverDelegate();
-			case CHANNEL.FRIEND_ID:
-				return new FriendFragment();
+			case CHANNEL.YUNCUN_ID:
+				return new CloudVillageFragment();
+			case CHANNEL.VIDEO_ID:
+				return new VideoTabDelegate();
 		}
 		return null;
 	}

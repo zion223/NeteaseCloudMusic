@@ -27,13 +27,13 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/login_view"
+        android:id="@+id/login_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="110dp"
+        android:layout_marginBottom="165dp"
         android:background="@drawable/bg_mobile_loggin"
         android:gravity="center"
         android:paddingTop="10dp"
@@ -43,12 +43,28 @@
         android:textSize="15sp" />
 
     <TextView
+        android:id="@+id/login_experience"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="110dp"
+        android:background="@drawable/bg_home_tiyan"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="立即体验"
+        android:textColor="@android:color/white"
+        android:textSize="15sp" />
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
         android:gravity="center"
-        android:text="已同意《用户协议》和《隐私政策》"
+        android:text="同意《用户协议》和《隐私政策》《儿童隐私政策》"
         android:textColor="@android:color/white"
         android:textSize="10sp" />
 </RelativeLayout>

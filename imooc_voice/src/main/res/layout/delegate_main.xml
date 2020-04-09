@@ -42,8 +42,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="42dp"
-                android:layout_marginEnd="42dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_toStartOf="@id/search_view"
                 android:layout_toEndOf="@id/toggle_view" />
 
@@ -69,8 +69,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:layout_marginEnd="25dp"
-        android:background="@color/color_white">
+        android:layout_marginEnd="25dp">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -86,14 +85,46 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/avatr_view"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="20dp"
-                        android:visibility="gone" />
+                    <RelativeLayout
+                        android:id="@+id/rl_main_avatar"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:background="@color/app_background">
+                        <ImageView
+                            android:id="@+id/avatr_view"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginLeft="10dp" />
+                        <TextView
+                            android:id="@+id/avatar_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/avatr_view"
+                            android:layout_alignLeft="@+id/avatr_view"
+                            android:textColor="@color/black"
+                            android:layout_marginTop="10dp"
+                            android:textSize="15sp"
+                            android:text="张张"/>
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@+id/avatar_name"
+                            android:layout_alignBottom="@+id/avatar_name"
+                            android:layout_toRightOf="@+id/avatar_name"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/vip"/>
+                        <TextView
+                            android:id="@+id/avatar_check"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@+id/avatar_name"
+                            android:textSize="16sp"
+                            android:text="签到"/>
+                    </RelativeLayout>
 
                     <LinearLayout
                         android:id="@+id/unloggin_layout"

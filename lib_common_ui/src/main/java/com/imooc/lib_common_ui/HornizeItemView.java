@@ -68,11 +68,11 @@ public class HornizeItemView extends RelativeLayout {
 		TypedArray a = mContext.obtainStyledAttributes(attrs, R.styleable.HornizeItemView);
 		mPaddingLeft = a.getLayoutDimension(R.styleable.HornizeItemView_paddingLeft, 20);
 		mPaddingRight = a.getLayoutDimension(R.styleable.HornizeItemView_paddingRight, 20);
-		mPaddingTop = a.getLayoutDimension(R.styleable.HornizeItemView_paddingTop, 10);
-		mPaddingBottom = a.getLayoutDimension(R.styleable.HornizeItemView_paddingBottom, 10);
+		mPaddingTop = a.getLayoutDimension(R.styleable.HornizeItemView_paddingTop, 25);
+		mPaddingBottom = a.getLayoutDimension(R.styleable.HornizeItemView_paddingBottom, 25);
 
-		mIconWidth = a.getLayoutDimension(R.styleable.HornizeItemView_hIconWidth, 70);
-		mIconHeight = a.getLayoutDimension(R.styleable.HornizeItemView_hIconHeight, 70);
+		mIconWidth = a.getLayoutDimension(R.styleable.HornizeItemView_hIconWidth, 90);
+		mIconHeight = a.getLayoutDimension(R.styleable.HornizeItemView_hIconHeight, 90);
 		mIcon = a.getDrawable(R.styleable.HornizeItemView_hIcon);
 		mIconPaddingRight = a.getLayoutDimension(R.styleable.HornizeItemView_iconPaddingRight, 15);
 

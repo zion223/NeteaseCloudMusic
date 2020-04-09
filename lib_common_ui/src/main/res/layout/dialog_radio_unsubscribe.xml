@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog_corner_normal">
+    <TextView
+        android:id="@+id/tv_radio_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:text="确定不在订阅该电台吗?"/>
+    <TextView
+        android:id="@+id/tv_radio_sub_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tv_radio_text"
+        android:layout_marginLeft="-10dp"
+        android:layout_marginTop="70dp"
+        android:text="取消"
+        android:textSize="14sp"
+        android:textColor="#FE3A3C"/>
+    <TextView
+        android:id="@+id/tv_radio_sub_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tv_radio_sub_cancel"
+        android:textColor="#FE3A3C"
+        android:textSize="14sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="20dp"
+        android:text="不再订阅"/>
+
+</RelativeLayout>

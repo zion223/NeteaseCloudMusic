@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray"
     android:orientation="vertical">
 
     <android.support.design.widget.CoordinatorLayout
@@ -17,16 +15,19 @@
             android:layout_height="wrap_content"
             android:background="@color/gray"
             app:elevation="0dp">
+
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
                 <ImageView
                     android:id="@+id/iv_gedan_detail_img_cover"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -43,14 +44,23 @@
                         android:paddingBottom="20dp">
 
                         <ImageView
+                            android:id="@+id/iv_gedan_detail_album_tag"
+                            android:layout_width="125dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="10dp"
+                            android:visibility="gone"
+                            android:src="@drawable/b5w" />
+
+                        <ImageView
                             android:id="@+id/iv_gedan_detail_img"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
+                            android:layout_width="125dp"
+                            android:layout_height="125dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="20dp"
                             android:src="@drawable/test" />
 
                         <ImageView
+                            android:id="@+id/iv_gedan_detail_playnum"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_alignTop="@+id/iv_gedan_detail_img"
@@ -75,69 +85,93 @@
                             android:layout_height="wrap_content"
                             android:layout_alignTop="@+id/iv_gedan_detail_img"
                             android:layout_marginLeft="20dp"
+                            android:layout_marginRight="10dp"
                             android:layout_toRightOf="@+id/iv_gedan_detail_img"
                             android:maxLines="2"
                             android:text="80怀旧经典I Vol.3"
                             android:textColor="@color/white"
-                            android:textSize="18sp"
+                            android:textSize="17sp"
                             android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/tv_gedan_detail_tag"
+                        <LinearLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="25dp"
                             android:layout_below="@+id/tv_gedan_detail_title"
                             android:layout_alignLeft="@+id/tv_gedan_detail_title"
-                            android:layout_marginTop="20dp"
-                            android:text="华语流行 华语怀旧"
-                            android:textColor="@color/white" />
+                            android:layout_marginTop="15dp">
+
+                            <ImageView
+                                android:id="@+id/iv_gedan_detail_avatar_img"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginRight="10dp"
+                                android:src="@drawable/test" />
+
+                            <TextView
+                                android:id="@+id/tv_gedan_detail_avatar_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:text="华语流行 华语怀旧"
+                                android:textColor="@color/white"
+                                android:textSize="12sp" />
+
+                            <ImageView
+                                android:layout_width="10dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignTop="@+id/tv_gedan_detail_avatar_name"
+                                android:layout_alignBottom="@+id/tv_gedan_detail_avatar_name"
+                                android:layout_toRightOf="@+id/tv_gedan_detail_avatar_name"
+                                android:src="@drawable/right_white" />
+                        </LinearLayout>
 
                         <TextView
                             android:id="@+id/tv_gedan_detail_desc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/tv_gedan_detail_tag"
                             android:layout_alignLeft="@+id/tv_gedan_detail_title"
                             android:layout_alignBottom="@+id/iv_gedan_detail_img"
-                            android:gravity="bottom"
                             android:layout_marginRight="5dp"
-                            android:maxLines="2"
                             android:ellipsize="end"
-                            android:text="国语"
+                            android:gravity="bottom"
+                            android:maxLines="2"
+                            android:text="国语国语国语国语国国语国语\n国语国语国语"
                             android:textColor="@color/white"
-                            android:textSize="13sp" />
+                            android:textSize="11sp" />
+
                     </RelativeLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="5dp">
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="0dp"
+                            android:id="@+id/ll_gedan_detail_comment"
+                            android:layout_width="fill_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="30dp"
                             android:layout_weight="1"
                             android:orientation="vertical">
 
                             <ImageView
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
-                                android:layout_gravity="center_vertical"
+                                android:layout_gravity="center_horizontal"
                                 android:src="@drawable/bgr" />
 
                             <TextView
+                                android:id="@+id/tv_gedan_detail_comment_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="5dp"
+                                android:layout_gravity="center_horizontal"
                                 android:text="123"
                                 android:textColor="@color/white" />
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="0dp"
+                            android:layout_width="fill_parent"
                             android:layout_height="60dp"
                             android:layout_weight="1"
                             android:orientation="vertical">
@@ -145,20 +179,20 @@
                             <ImageView
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
-                                android:layout_gravity="center_vertical"
+                                android:layout_gravity="center_horizontal"
                                 android:src="@drawable/bge" />
 
                             <TextView
+                                android:id="@+id/tv_gedan_detail_share_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:gravity="bottom"
-                                android:text="分享"
+                                android:layout_gravity="center_horizontal"
+                                android:text="1236"
                                 android:textColor="@color/white" />
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="0dp"
+                            android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical">
@@ -166,46 +200,45 @@
                             <ImageView
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
-                                android:layout_gravity="center_vertical"
-                                android:src="@drawable/bga" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="5dp"
-                                android:text="收藏"
-                                android:textColor="@color/white" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="35dp"
-                                android:layout_height="35dp"
-                                android:layout_gravity="center_vertical"
+                                android:layout_gravity="center_horizontal"
                                 android:src="@drawable/bgt" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="5dp"
+                                android:layout_gravity="center_horizontal"
                                 android:text="下载"
+                                android:textColor="@color/white" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/bgt" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="多选"
                                 android:textColor="@color/white" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
+
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar_gedan_detail"
                     android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                    android:layout_height="?attr/actionBarSize">
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
                     <RelativeLayout
                         android:id="@+id/rl_toolbar_gedan_detail"
@@ -239,8 +272,8 @@
 
                         <TextView
                             android:id="@+id/tv_gedan_detail_toolbar_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="200dp"
+                            android:layout_height="30dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="10dp"
                             android:layout_toRightOf="@+id/img_gedan_detail_back"
@@ -260,12 +293,7 @@
                             android:textSize="8sp" />
                     </RelativeLayout>
                 </android.support.v7.widget.Toolbar>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="230dp"
-                    android:background="@drawable/bg_dailyrecommend"
-                    app:layout_collapseMode="pin" />
+
             </android.support.design.widget.CollapsingToolbarLayout>
 
             <LinearLayout
@@ -282,6 +310,7 @@
                     android:src="@drawable/any" />
 
                 <TextView
+                    android:id="@+id/tv_gedan_detaill_all_play"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -291,6 +320,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tv_gedan_detail_song_num"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -298,36 +328,63 @@
                     android:text="(共13首)" />
 
                 <LinearLayout
+                    android:id="@+id/ll_gedan_subscribe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/bg_collect"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <ImageView
+                        android:id="@+id/iv_gedan_detail_collect_status"
                         android:layout_width="10dp"
                         android:layout_height="10dp"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/plus" />
 
                     <TextView
+                        android:id="@+id/tv_gedan_detail_collect_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
                         android:text="收藏(1222)"
                         android:textColor="@color/white" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_gedan_subscribed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/playlistsubscribe" />
+
+                    <TextView
+                        android:id="@+id/tv_gedan_detail_collect_count1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="1222" />
                 </LinearLayout>
             </LinearLayout>
         </android.support.design.widget.AppBarLayout>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_gedan_detail_normal"
+        <FrameLayout
+            android:id="@+id/loadframe"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/gedan_detail"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:layout_scrollFlags="scroll" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
 
     </android.support.design.widget.CoordinatorLayout>
 </LinearLayout>

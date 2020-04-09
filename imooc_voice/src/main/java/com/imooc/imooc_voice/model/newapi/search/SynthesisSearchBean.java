@@ -43,9 +43,8 @@ public class SynthesisSearchBean {
          * user : {"moreText":"查看全部","more":true,"users":[{"defaultAvatar":false,"province":310000,"authStatus":0,"followed":false,"avatarUrl":"http://p1.music.126.net/MlJ9Pnz7iFi7n8Dqw4aezg==/3308430489754999.jpg","accountStatus":0,"gender":1,"city":310108,"birthday":1374508800000,"userId":3701993,"userType":0,"nickname":"___JoJo","signature":"uoye voli","description":"","detailDescription":"","avatarImgId":3308430489754999,"backgroundImgId":109951162868126480,"backgroundUrl":"http://p1.music.126.net/_f8R60U9mZ42sSNvdPn2sQ==/109951162868126486.jpg","authority":0,"mutual":false,"expertTags":null,"experts":null,"djStatus":0,"vipType":0,"remarkName":null,"avatarImgIdStr":"3308430489754999","backgroundImgIdStr":"109951162868126486","alg":"alg_user_basic_d"}]}
          * order : ["playList","song","video","sim_query","artist","album","djRadio","user"]
          */
-
-        private SongBean song;
         private int code;
+        private SongBean song;
         private DjRadioBean djRadio;
         private Object rec_type;
         private ArtistBean artist;
@@ -1662,8 +1661,8 @@ public class SynthesisSearchBean {
                 private boolean followed;
                 private String alg;
                 private Object trans;
-                private int accountId;
-                private List<?> alias;
+                private String accountId;
+                private List<String> alias;
 
                 public long getId() {
                     return id;
@@ -1753,19 +1752,19 @@ public class SynthesisSearchBean {
                     this.trans = trans;
                 }
 
-                public int getAccountId() {
+                public String getAccountId() {
                     return accountId;
                 }
 
-                public void setAccountId(int accountId) {
+                public void setAccountId(String accountId) {
                     this.accountId = accountId;
                 }
 
-                public List<?> getAlias() {
+                public List<String> getAlias() {
                     return alias;
                 }
 
-                public void setAlias(List<?> alias) {
+                public void setAlias(List<String> alias) {
                     this.alias = alias;
                 }
             }
@@ -3067,7 +3066,7 @@ public class SynthesisSearchBean {
                          */
 
                         private String name;
-                        private int id;
+                        private String id;
                         private int size;
                         private String extension;
                         private int sr;
@@ -3084,11 +3083,11 @@ public class SynthesisSearchBean {
                             this.name = name;
                         }
 
-                        public int getId() {
+                        public String getId() {
                             return id;
                         }
 
-                        public void setId(int id) {
+                        public void setId(String id) {
                             this.id = id;
                         }
 
@@ -3163,7 +3162,7 @@ public class SynthesisSearchBean {
                          */
 
                         private String name;
-                        private int id;
+                        private String id;
                         private int size;
                         private String extension;
                         private int sr;
@@ -3180,11 +3179,11 @@ public class SynthesisSearchBean {
                             this.name = name;
                         }
 
-                        public int getId() {
+                        public String getId() {
                             return id;
                         }
 
-                        public void setId(int id) {
+                        public void setId(String id) {
                             this.id = id;
                         }
 

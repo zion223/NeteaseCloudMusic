@@ -9,31 +9,35 @@
         android:id="@+id/iv_item_discover"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/test"/>
+        android:src="@drawable/test" />
+
     <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
         android:layout_toLeftOf="@+id/tv_item_discover_playnum"
-        android:src="@drawable/note_btn_play_ms"/>
+        android:src="@drawable/note_btn_play_ms" />
+
     <TextView
         android:id="@+id/tv_item_discover_playnum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
         android:layout_alignRight="@+id/iv_item_discover"
         android:layout_marginRight="5dp"
-        android:text="11万"/>
+        android:text="11万"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
     <TextView
         android:id="@+id/tv_item_discover_des"
-        android:layout_below="@id/iv_item_discover"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/iv_item_discover"
         android:layout_alignLeft="@+id/iv_item_discover"
         android:layout_marginTop="7dp"
-        android:textColor="@color/black"
         android:ellipsize="end"
         android:maxLines="2"
-        android:textSize="12sp"
-        android:text="歌单的描述"/>
+        android:text="歌单的描述"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
 
 </RelativeLayout>

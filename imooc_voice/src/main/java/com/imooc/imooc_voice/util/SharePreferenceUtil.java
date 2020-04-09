@@ -10,6 +10,7 @@ import com.imooc.imooc_voice.model.newapi.LoginBean;
 import java.util.List;
 import java.util.Locale;
 
+import static com.imooc.imooc_voice.Constants.SpKey.LOCAL_MUSIC_COUNT;
 
 
 /**
@@ -55,6 +56,13 @@ public class SharePreferenceUtil {
         return systemCurrentLocal;
     }
 
+    public int getLocalMusicCount(){
+        return Integer.parseInt(getString(LOCAL_MUSIC_COUNT, "0"));
+    }
+
+   public void saveLocalMusicCount(int count){
+        saveString(LOCAL_MUSIC_COUNT, String.valueOf(count));
+    }
 
     /**
      * 保存用户的信息以及电话号码（因为bean里的电话号码要处理字符串，所以这里直接暴力传比较高效）
@@ -65,6 +73,7 @@ public class SharePreferenceUtil {
         if (bean.getBindings().size() > 1) {
             saveAuthToken(bean.getBindings().get(1).getTokenJsonStr());
         }
+        saveUserId(String.valueOf(bean.getProfile().getUserId()));
         saveAccountNum(phoneNumber);
         saveString(Constants.SpKey.USER_INFO, GsonUtil.toJson(bean));
     }
@@ -75,6 +84,13 @@ public class SharePreferenceUtil {
 
     private void saveAccountNum(String phoneNumber) {
         saveString(Constants.SpKey.PHONE_NUMBER, phoneNumber);
+    }
+
+    private void saveUserId(String id) {
+        saveString(Constants.SpKey.USER_ID, id);
+    }
+    private void getUserId(String id) {
+        getString(Constants.SpKey.USER_ID, id);
     }
 
     public String getAccountNum() {
@@ -109,6 +125,20 @@ public class SharePreferenceUtil {
      */
     public void saveDailyUpdateTime(long updateTime) {
         saveLong(Constants.SpKey.DAILY_UPDATE_TIME, updateTime);
+    }
+
+    /**
+     * 存储当前歌手ID
+     */
+    public void saveCurrentArtistId(String id) {
+        saveString(Constants.SpKey.CURRENT_ARTIST_ID, id);
+    }
+    public void removeCurrentArtistId() {
+        remove(Constants.SpKey.CURRENT_ARTIST_ID);
+    }
+
+    public String getCurrentArtistId() {
+        return getString(Constants.SpKey.CURRENT_ARTIST_ID,"");
     }
 
     public long getDailyUpdateTime() {

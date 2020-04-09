@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="30dp">
+
+    <TextView
+        android:id="@+id/tv_more_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textSize="11sp"
+        android:text="更多信息"/>
+
+    <ImageView
+        android:layout_width="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_alignTop="@+id/tv_more_info"
+        android:layout_alignBottom="@+id/tv_more_info"
+        android:layout_toRightOf="@+id/tv_more_info"
+        android:src="@drawable/fragmentation_ic_right"/>
+</RelativeLayout>

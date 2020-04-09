@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="color_F71816">#F71816</color>
+    <color name="colorPrimary">#333333</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="color_31c27c">#31c27c</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_white">#ffffffff</color>
+    <color name="white">#ffffffff</color>
+    <color name="color_999999">#11784F4F</color>
+    <color name="color_F71816">#F71816</color>
+
+    <color name="text_color">#FF000000</color>
+    <color name="listSubTextColor">#ff888888</color>
+    <color name="listTextColor">#ff333333</color>
+    <color name="text_collect">#FE3A3C</color>
 </resources>

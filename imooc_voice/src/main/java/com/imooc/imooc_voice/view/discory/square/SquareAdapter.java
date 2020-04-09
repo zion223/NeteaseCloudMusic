@@ -4,21 +4,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.imooc.imooc_voice.model.SquareCHANNEL;
-
 public class SquareAdapter extends FragmentPagerAdapter {
 
-	private SquareCHANNEL[] data;
+	private CharSequence[] data;
 
-	public SquareAdapter(FragmentManager fm, SquareCHANNEL[] channels) {
+	public SquareAdapter(FragmentManager fm, CharSequence[] channels) {
 		super(fm);
 		this.data = channels;
 	}
 
 	@Override
 	public Fragment getItem(int i) {
-		String tag = data[i].getKey();
-		return GedanDelegate.newInstance(tag);
+		return GedanDelegate.newInstance(data[i].toString());
 	}
 
 	@Override

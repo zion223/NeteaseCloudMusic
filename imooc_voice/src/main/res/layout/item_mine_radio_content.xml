@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp">
+    <ImageView
+        android:id="@+id/iv_item_radio_content_img"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/test"/>
+    <TextView
+        android:id="@+id/tv_item_radio_content_name"
+        android:layout_toRightOf="@+id/iv_item_radio_content_img"
+        android:layout_alignTop="@+id/iv_item_radio_content_img"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:maxLines="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="老泡在北京"
+        android:textColor="@color/black"
+        android:textSize="15sp"/>
+
+
+    <TextView
+        android:id="@+id/tv_item_radio_content_creator"
+        android:layout_below="@+id/tv_item_radio_content_name"
+        android:layout_alignLeft="@+id/tv_item_radio_content_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:textSize="11sp"
+        android:text="by xxx"/>
+    <TextView
+        android:id="@+id/tv_item_radio_content_last_program"
+        android:layout_below="@+id/tv_item_radio_content_creator"
+        android:layout_alignLeft="@+id/tv_item_radio_content_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:textSize="11sp"
+        android:text="第一首电台"/>
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/more"/>
+</RelativeLayout>

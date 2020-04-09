@@ -1,5 +1,12 @@
 package com.imooc.lib_network;
 
+import android.content.Context;
+
+import com.franmontiel.persistentcookiejar.ClearableCookieJar;
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+import com.imooc.lib_network.app.OkHttpHelper;
 import com.imooc.lib_network.listener.DisposeDataHandler;
 import com.imooc.lib_network.response.CommonJsonCallback;
 
@@ -20,11 +27,14 @@ public class CommonOkHttpClient {
 	private static final int TIME_OUT = 30;
 
 	private static OkHttpClient mOkHttpClient;
+
 	static{
 		OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder();
 		okHttpClientBuilder.connectTimeout(TIME_OUT, TimeUnit.SECONDS);
 		okHttpClientBuilder.readTimeout(TIME_OUT, TimeUnit.SECONDS);
 		okHttpClientBuilder.writeTimeout(TIME_OUT, TimeUnit.SECONDS);
+		ClearableCookieJar cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(OkHttpHelper.getContext()));
+		okHttpClientBuilder.cookieJar(cookieJar);
 		//重定向
 		okHttpClientBuilder.followRedirects(true);
 		okHttpClientBuilder.hostnameVerifier(new HostnameVerifier() {
@@ -34,6 +44,7 @@ public class CommonOkHttpClient {
 			}
 		});
 		//添加拦截器
+
 		okHttpClientBuilder.addInterceptor(new Interceptor() {
 			@Override
 			public Response intercept(Chain chain) throws IOException {

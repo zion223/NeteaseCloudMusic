@@ -20,7 +20,6 @@ public class RankingDelegate extends NeteaseDelegate {
 	@BindView(R2.id.rv_rank_normal)
 	RecyclerView mREcyclerViewRank;
 
-	private RankAdapter mAdapter;
 
 	@Override
 	public Object setLayout() {
@@ -30,21 +29,6 @@ public class RankingDelegate extends NeteaseDelegate {
 	@Override
 	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
 
-		RequestCenter.queryRankingSong(HttpConstants.Billboard.BILLBOARD_NEW_MUSIC, new DisposeDataListener() {
-			@Override
-			public void onSuccess(Object responseObj) {
-				
-			}
-
-			@Override
-			public void onFailure(Object reasonObj) {
-
-			}
-		});
 	}
 
-	@Override
-	public void post(Runnable runnable) {
-
-	}
 }

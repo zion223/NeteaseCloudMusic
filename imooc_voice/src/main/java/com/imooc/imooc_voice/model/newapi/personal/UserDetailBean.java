@@ -1,11 +1,12 @@
 package com.imooc.imooc_voice.model.newapi.personal;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * 通过接口获取的用户个人信息Bean
  */
-public class UserDetailBean {
+public class UserDetailBean implements Serializable {
 
     /**
      * level : 9
@@ -21,18 +22,21 @@ public class UserDetailBean {
      * createTime : 1486309512362
      * createDays : 901
      */
-
+    //等级LV.8
     private int level;
     private int listenSongs;
     private UserPointBean userPoint;
     private boolean mobileSign;
     private boolean pcSign;
+    //个人资料
     private ProfileBean profile;
     private boolean peopleCanSeeMyPlayRecord;
     private boolean adValid;
     private int code;
+    //村龄  时间戳
     private long createTime;
     private int createDays;
+    //绑定的账号
     private List<BindingsBean> bindings;
 
     public static class UserPointBean {

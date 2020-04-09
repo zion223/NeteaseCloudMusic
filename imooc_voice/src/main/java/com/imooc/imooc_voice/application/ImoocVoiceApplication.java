@@ -5,6 +5,7 @@ import android.app.Application;
 import com.imooc.lib_audio.BuildConfig;
 import com.imooc.lib_audio.app.AudioHelper;
 import com.imooc.lib_common_ui.app.Netease;
+import com.imooc.lib_network.app.OkHttpHelper;
 import com.imooc.lib_share.share.ShareManager;
 
 import me.yokeyword.fragmentation.Fragmentation;
@@ -30,6 +31,7 @@ public class ImoocVoiceApplication extends Application {
                 })
                 .install();
         AudioHelper.init(this);
+        OkHttpHelper.init(this);
         Netease.init(this)
                 .configure();
         ShareManager.init(this);

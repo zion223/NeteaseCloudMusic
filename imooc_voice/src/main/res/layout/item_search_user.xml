@@ -1,0 +1,123 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_item_search_user"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:background="#ffffff"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp">
+
+    <ImageView
+        android:id="@+id/iv_item_search_user_avatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="12dp" />
+
+    <ImageView
+        android:id="@+id/iv_item_search_user_tag"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignRight="@+id/iv_item_search_user_avatar"
+        android:layout_alignBottom="@+id/iv_item_search_user_avatar"
+        android:visibility="invisible"
+        android:src="@drawable/guanfang" />
+
+    <RelativeLayout
+        android:id="@+id/rl_name_and_gender"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toStartOf="@id/ll_search_user_follow"
+        android:layout_toEndOf="@id/iv_item_search_user_avatar"
+        android:paddingStart="12dp"
+        android:paddingEnd="5dp">
+
+        <TextView
+            android:id="@+id/tv_item_search_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:maxWidth="200dp"
+            android:maxLines="1"
+            android:textColor="#333333"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/iv_item_search_user_gender"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignBottom="@id/tv_item_search_user_name"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/tv_item_search_user_name"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_item_search_user_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_item_search_user_name"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textSize="12dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_search_user_follow"
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/bg_follow"
+        android:visibility="visible">
+
+        <ImageView
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="13dp"
+            android:layout_marginRight="3dp"
+            android:src="@drawable/plus_red" />
+
+        <TextView
+            android:id="@+id/tv_item_search_user_follow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="关注"
+            android:textColor="#FF4650"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_search_user_followed"
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/bg_already_follow"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/bdy" />
+
+        <TextView
+            android:id="@+id/tv_item_search_user_followed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="已关注"
+            android:textSize="11sp"
+            android:visibility="visible" />
+    </LinearLayout>
+</RelativeLayout>

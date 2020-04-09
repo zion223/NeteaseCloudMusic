@@ -92,7 +92,7 @@ public class LoginBean {
         private int baoyueVersion;
         private int donateVersion;
         private int vipType;
-        private int viptypeVersion;
+        private double viptypeVersion;
         private boolean anonimousUser;
 
         public long getId() {
@@ -191,7 +191,7 @@ public class LoginBean {
             this.vipType = vipType;
         }
 
-        public int getViptypeVersion() {
+        public double getViptypeVersion() {
             return viptypeVersion;
         }
 

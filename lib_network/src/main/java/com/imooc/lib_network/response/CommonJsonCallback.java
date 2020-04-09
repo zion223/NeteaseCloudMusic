@@ -2,14 +2,12 @@ package com.imooc.lib_network.response;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.imooc.lib_network.exception.OkHttpException;
 import com.imooc.lib_network.listener.DisposeDataHandler;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -27,10 +25,11 @@ public class CommonJsonCallback implements Callback {
 	//转成实体类
 	private final Class<?> mClass;
 
-	protected final String RESULT_CODE = "ecode"; // 有返回则对于http请求来说是成功的，但还有可能是业务逻辑上的错误
+	private final String RESULT_CODE = "code"; // 有返回则对于http请求来说是成功的，但还有可能是业务逻辑上的错误
 	protected final int RESULT_CODE_VALUE = 0;
 	protected final String ERROR_MSG = "emsg";
 	private final String EMPTY_MSG = "";
+	private final String NEED_LOGIN = "NEED_LOGIN";
 	protected final String COOKIE_STORE = "Set-Cookie"; // decide the server it
 
 	private static final Integer NETWORK_ERROR = -1;
@@ -78,6 +77,7 @@ public class CommonJsonCallback implements Callback {
 		}
 		try {
 			JSONObject resultJson = new JSONObject(response.toString());
+			//TODO 加入需要登录判断
 			if (mClass == null) {
 				mDisposeDataListener.onSuccess(resultJson);
 			} else {
@@ -88,7 +88,10 @@ public class CommonJsonCallback implements Callback {
 					mDisposeDataListener.onFailure(new OkHttpException(JSON_ERROR, EMPTY_MSG));
 				}
 			}
+
+
 		} catch (Exception e) {
+			e.printStackTrace();
 			mDisposeDataListener.onFailure(new OkHttpException(JSON_ERROR, EMPTY_MSG));
 		}
 

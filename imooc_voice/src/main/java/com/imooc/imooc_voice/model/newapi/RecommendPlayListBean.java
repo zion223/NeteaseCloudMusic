@@ -115,7 +115,7 @@ public class RecommendPlayListBean {
         private long id;
         private long trackNumberUpdateTime;
         private int status;
-        private int userId;
+        private String userId;
         private long createTime;
         private long updateTime;
         private int subscribedCount;
@@ -177,11 +177,11 @@ public class RecommendPlayListBean {
             this.status = status;
         }
 
-        public int getUserId() {
+        public String getUserId() {
             return userId;
         }
 
-        public void setUserId(int userId) {
+        public void setUserId(String userId) {
             this.userId = userId;
         }
 
@@ -753,7 +753,7 @@ public class RecommendPlayListBean {
             private int gender;
             private int city;
             private long birthday;
-            private int userId;
+            private String userId;
             private int userType;
             private String nickname;
             private String signature;
@@ -845,11 +845,11 @@ public class RecommendPlayListBean {
                 this.birthday = birthday;
             }
 
-            public int getUserId() {
+            public String getUserId() {
                 return userId;
             }
 
-            public void setUserId(int userId) {
+            public void setUserId(String userId) {
                 this.userId = userId;
             }
 

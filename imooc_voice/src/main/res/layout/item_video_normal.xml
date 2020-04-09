@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_feed"
+    android:layout_width="match_parent"
+    android:layout_height="85dp"
+    android:background="#ffffff"
+    android:paddingTop="7dp"
+    android:paddingBottom="7dp">
+
+    <ImageView
+        android:id="@+id/iv_item_video_cover"
+        android:layout_width="130dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="12dp"
+        android:scaleType="centerCrop" />
+    <ImageView
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_toLeftOf="@+id/tv_item_video_playnum"
+        android:src="@drawable/note_btn_play_ms" />
+
+    <TextView
+        android:id="@+id/tv_item_video_playnum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/iv_item_video_cover"
+        android:layout_marginRight="5dp"
+        android:text="11万"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_toEndOf="@id/iv_item_video_cover">
+
+        <TextView
+            android:id="@+id/tv_mv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:paddingStart="7dp"
+            android:paddingEnd="7dp"
+            android:text="MV"
+            android:textColor="#B53D32"
+            android:textSize="13sp"
+            android:visibility="gone"/>
+
+
+        <TextView
+            android:id="@+id/tv_item_video_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/tv_mv"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="#333333"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tv_item_video_creator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_item_video_name"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textSize="11sp" />
+    </RelativeLayout>
+</RelativeLayout>

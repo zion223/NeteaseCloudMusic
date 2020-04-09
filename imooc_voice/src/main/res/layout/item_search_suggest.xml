@@ -18,25 +18,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:textSize="15sp"
+        android:textSize="15.5sp"
         android:textColor="@color/black"
         android:text="处处吻"/>
+
     <ImageView
-        android:id="@+id/iv_suggest_up"
-        android:layout_width="15dp"
-        android:layout_height="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@id/tv_suggest_name"
-        android:visibility="gone"
-        android:src="@drawable/b77"/>
-    <ImageView
-        android:id="@+id/iv_suggest_hot"
+        android:id="@+id/iv_suggest_icon"
         android:layout_width="25dp"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_suggest_name"
+        android:layout_alignBottom="@+id/tv_suggest_name"
         android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@id/tv_suggest_name"
-        android:visibility="gone"
-        android:src="@drawable/bl7"/>
+        android:layout_toRightOf="@id/tv_suggest_name" />
+
     <TextView
         android:id="@+id/tv_suggest_artist"
         android:layout_width="wrap_content"
@@ -53,6 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="1200022"
+        android:textSize="12sp"
         android:textColor="@color/silver"
         android:layout_alignParentRight="true"/>
 

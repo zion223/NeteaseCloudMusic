@@ -6,4 +6,6 @@ public abstract class NeteaseDelegate extends PermissionCheckerDelegate {
     public <T extends NeteaseDelegate> T getParentDelegate() {
         return (T) getParentFragment();
     }
+
+
 }

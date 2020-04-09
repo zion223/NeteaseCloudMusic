@@ -1,6 +1,7 @@
 package com.imooc.imooc_voice.model.newapi.personal;
 
 import com.google.gson.annotations.SerializedName;
+import com.imooc.imooc_voice.model.newapi.PlaylistBean;
 
 import java.util.List;
 
@@ -23,6 +24,19 @@ public class UserEventJsonBean {
     private VideoBean video;
     private ProgramBean program;
     private UserEventBean event;
+    private UserPlaylistBean.PlaylistBean playlist;
+
+    @Override
+    public String toString() {
+        return "UserEventJsonBean{" +
+                "msg='" + msg + '\'' +
+                ", song=" + song +
+                ", video=" + video +
+                ", program=" + program +
+                ", event=" + event +
+                ", playlist=" + playlist +
+                '}';
+    }
 
     public String getMsg() {
         return msg;
@@ -54,6 +68,14 @@ public class UserEventJsonBean {
 
     public void setProgram(ProgramBean program) {
         this.program = program;
+    }
+
+    public UserPlaylistBean.PlaylistBean getPlaylist() {
+        return playlist;
+    }
+
+    public void setPlaylist(UserPlaylistBean.PlaylistBean playlist) {
+        this.playlist = playlist;
     }
 
     public static class SongBean {
@@ -900,7 +922,7 @@ public class UserEventJsonBean {
             private long dfsId;
             private int bitrate;
             private int playTime;
-            private int volumeDelta;
+            private String volumeDelta;
 
             public Object getName() {
                 return name;
@@ -966,11 +988,11 @@ public class UserEventJsonBean {
                 this.playTime = playTime;
             }
 
-            public int getVolumeDelta() {
+            public String getVolumeDelta() {
                 return volumeDelta;
             }
 
-            public void setVolumeDelta(int volumeDelta) {
+            public void setVolumeDelta(String volumeDelta) {
                 this.volumeDelta = volumeDelta;
             }
         }
