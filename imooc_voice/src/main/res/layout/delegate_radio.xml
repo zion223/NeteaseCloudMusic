@@ -63,8 +63,8 @@
 
             <ImageView
                 android:id="@+id/iv_mine_spec"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/bg_item_spec"
                 android:src="@drawable/t_dragonball_icn_radio_calss" />
@@ -91,8 +91,8 @@
 
             <ImageView
                 android:id="@+id/iv_mine_spec1"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/bg_item_spec"
                 android:src="@drawable/t_dragonball_icn_radio_rank" />
@@ -119,8 +119,8 @@
 
             <ImageView
                 android:id="@+id/iv_mine_spec2"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/bg_item_spec"
                 android:src="@drawable/t_dragonball_icn_radio_boutique" />
@@ -148,8 +148,8 @@
 
             <ImageView
                 android:id="@+id/iv_mine_spec3"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/bg_item_spec"
                 android:src="@drawable/t_dragonball_icn_radio" />

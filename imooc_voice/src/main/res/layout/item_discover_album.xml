@@ -2,21 +2,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="10dp"
+    android:layout_marginLeft="30dp"
     android:layout_marginBottom="10dp">
 
     <ImageView
         android:id="@+id/iv_item_album_song"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:src="@drawable/test" />
 
     <ImageView
         android:id="@+id/iv_item_album_icon"
         android:layout_width="20dp"
-        android:layout_height="100dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/iv_item_album_song"
-        android:visibility="gone"
+        android:visibility="visible"
         android:src="@drawable/and" />
 
     <TextView

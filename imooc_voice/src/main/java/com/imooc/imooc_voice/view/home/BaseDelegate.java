@@ -38,6 +38,9 @@ public class BaseDelegate extends NeteaseDelegate {
 		getSupportDelegate().loadRootFragment(R.id.frame_base, new HomeDelegate());
 	}
 
-
-
+	//TODO 返回按键拦截
+	@Override
+	public boolean onBackPressedSupport() {
+		return false;
+	}
 }

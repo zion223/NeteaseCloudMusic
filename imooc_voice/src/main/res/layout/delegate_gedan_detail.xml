@@ -282,7 +282,7 @@
                             android:textSize="17sp" />
 
                         <TextView
-                            android:id="@+id/tv_gedan_detail_toolbar_desc"
+                            android:id="@+id/tv_gedan_detail_toolbar_reason"
                             android:layout_width="wrap_content"
                             android:layout_height="15dp"
                             android:layout_below="@+id/tv_gedan_detail_toolbar_title"
@@ -290,6 +290,7 @@
                             android:gravity="top"
                             android:text="编辑推荐:暗恋就是永远都得不到"
                             android:textColor="@color/white"
+                            android:visibility="invisible"
                             android:textSize="8sp" />
                     </RelativeLayout>
                 </android.support.v7.widget.Toolbar>

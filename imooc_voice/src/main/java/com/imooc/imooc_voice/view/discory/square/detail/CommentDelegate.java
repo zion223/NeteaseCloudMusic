@@ -65,7 +65,7 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 
 	//歌单ID
 	private String id;
-
+	//评论类型
 	private int type;
 	//评论数量
 	private String count;
@@ -192,10 +192,7 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 						});
 						break;
 
-
 				}
-
-
 				return null;
 			}
 		}.execute();

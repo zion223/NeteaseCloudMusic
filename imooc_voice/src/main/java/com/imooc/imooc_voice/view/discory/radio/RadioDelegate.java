@@ -147,7 +147,8 @@ public class RadioDelegate extends NeteaseLoadingDelegate implements View.OnClic
 
 	@OnClick(R2.id.ll_radio_sort)
 	void onClickRadioSort(){
-
+		//电台分类
+		getSupportDelegate().start(new RadioSortDelegate());
 	}
 
 	@Override

@@ -70,9 +70,11 @@ public class TopListDetailBean {
 		private long id;
 		private String coverImgId_str;
 		private String ToplistType;
+
 		public void setSubscribers(List<String> subscribers) {
 			this.subscribers = subscribers;
 		}
+
 		public List<String> getSubscribers() {
 			return subscribers;
 		}
@@ -80,6 +82,7 @@ public class TopListDetailBean {
 		public void setSubscribed(String subscribed) {
 			this.subscribed = subscribed;
 		}
+
 		public String getSubscribed() {
 			return subscribed;
 		}
@@ -87,6 +90,7 @@ public class TopListDetailBean {
 		public void setCreator(String creator) {
 			this.creator = creator;
 		}
+
 		public String getCreator() {
 			return creator;
 		}
@@ -94,6 +98,7 @@ public class TopListDetailBean {
 		public void setArtists(String artists) {
 			this.artists = artists;
 		}
+
 		public String getArtists() {
 			return artists;
 		}
@@ -101,6 +106,7 @@ public class TopListDetailBean {
 		public void setTracks(List<Tracks> tracks) {
 			this.tracks = tracks;
 		}
+
 		public List<Tracks> getTracks() {
 			return tracks;
 		}
@@ -108,6 +114,7 @@ public class TopListDetailBean {
 		public void setUpdateFrequency(String updateFrequency) {
 			this.updateFrequency = updateFrequency;
 		}
+
 		public String getUpdateFrequency() {
 			return updateFrequency;
 		}
@@ -115,6 +122,7 @@ public class TopListDetailBean {
 		public void setBackgroundCoverId(int backgroundCoverId) {
 			this.backgroundCoverId = backgroundCoverId;
 		}
+
 		public int getBackgroundCoverId() {
 			return backgroundCoverId;
 		}
@@ -122,6 +130,7 @@ public class TopListDetailBean {
 		public void setBackgroundCoverUrl(String backgroundCoverUrl) {
 			this.backgroundCoverUrl = backgroundCoverUrl;
 		}
+
 		public String getBackgroundCoverUrl() {
 			return backgroundCoverUrl;
 		}
@@ -129,6 +138,7 @@ public class TopListDetailBean {
 		public void setTitleImage(int titleImage) {
 			this.titleImage = titleImage;
 		}
+
 		public int getTitleImage() {
 			return titleImage;
 		}
@@ -136,6 +146,7 @@ public class TopListDetailBean {
 		public void setTitleImageUrl(String titleImageUrl) {
 			this.titleImageUrl = titleImageUrl;
 		}
+
 		public String getTitleImageUrl() {
 			return titleImageUrl;
 		}
@@ -143,6 +154,7 @@ public class TopListDetailBean {
 		public void setEnglishTitle(String englishTitle) {
 			this.englishTitle = englishTitle;
 		}
+
 		public String getEnglishTitle() {
 			return englishTitle;
 		}
@@ -150,6 +162,7 @@ public class TopListDetailBean {
 		public void setOpRecommend(boolean opRecommend) {
 			this.opRecommend = opRecommend;
 		}
+
 		public boolean getOpRecommend() {
 			return opRecommend;
 		}
@@ -157,6 +170,7 @@ public class TopListDetailBean {
 		public void setRecommendInfo(String recommendInfo) {
 			this.recommendInfo = recommendInfo;
 		}
+
 		public String getRecommendInfo() {
 			return recommendInfo;
 		}
@@ -164,6 +178,7 @@ public class TopListDetailBean {
 		public void setAdType(int adType) {
 			this.adType = adType;
 		}
+
 		public int getAdType() {
 			return adType;
 		}
@@ -171,6 +186,7 @@ public class TopListDetailBean {
 		public void setTrackNumberUpdateTime(long trackNumberUpdateTime) {
 			this.trackNumberUpdateTime = trackNumberUpdateTime;
 		}
+
 		public long getTrackNumberUpdateTime() {
 			return trackNumberUpdateTime;
 		}
@@ -178,6 +194,7 @@ public class TopListDetailBean {
 		public void setCreateTime(long createTime) {
 			this.createTime = createTime;
 		}
+
 		public long getCreateTime() {
 			return createTime;
 		}
@@ -185,6 +202,7 @@ public class TopListDetailBean {
 		public void setHighQuality(boolean highQuality) {
 			this.highQuality = highQuality;
 		}
+
 		public boolean getHighQuality() {
 			return highQuality;
 		}
@@ -192,6 +210,7 @@ public class TopListDetailBean {
 		public void setUserId(int userId) {
 			this.userId = userId;
 		}
+
 		public int getUserId() {
 			return userId;
 		}
@@ -199,6 +218,7 @@ public class TopListDetailBean {
 		public void setUpdateTime(long updateTime) {
 			this.updateTime = updateTime;
 		}
+
 		public long getUpdateTime() {
 			return updateTime;
 		}
@@ -206,6 +226,7 @@ public class TopListDetailBean {
 		public void setCoverImgId(long coverImgId) {
 			this.coverImgId = coverImgId;
 		}
+
 		public long getCoverImgId() {
 			return coverImgId;
 		}
@@ -213,6 +234,7 @@ public class TopListDetailBean {
 		public void setNewImported(boolean newImported) {
 			this.newImported = newImported;
 		}
+
 		public boolean getNewImported() {
 			return newImported;
 		}
@@ -220,6 +242,7 @@ public class TopListDetailBean {
 		public void setAnonimous(boolean anonimous) {
 			this.anonimous = anonimous;
 		}
+
 		public boolean getAnonimous() {
 			return anonimous;
 		}
@@ -227,6 +250,7 @@ public class TopListDetailBean {
 		public void setSpecialType(int specialType) {
 			this.specialType = specialType;
 		}
+
 		public int getSpecialType() {
 			return specialType;
 		}
@@ -234,6 +258,7 @@ public class TopListDetailBean {
 		public void setTotalDuration(int totalDuration) {
 			this.totalDuration = totalDuration;
 		}
+
 		public int getTotalDuration() {
 			return totalDuration;
 		}
@@ -241,6 +266,7 @@ public class TopListDetailBean {
 		public void setCoverImgUrl(String coverImgUrl) {
 			this.coverImgUrl = coverImgUrl;
 		}
+
 		public String getCoverImgUrl() {
 			return coverImgUrl;
 		}
@@ -248,6 +274,7 @@ public class TopListDetailBean {
 		public void setTrackCount(int trackCount) {
 			this.trackCount = trackCount;
 		}
+
 		public int getTrackCount() {
 			return trackCount;
 		}
@@ -255,6 +282,7 @@ public class TopListDetailBean {
 		public void setCommentThreadId(String commentThreadId) {
 			this.commentThreadId = commentThreadId;
 		}
+
 		public String getCommentThreadId() {
 			return commentThreadId;
 		}
@@ -262,6 +290,7 @@ public class TopListDetailBean {
 		public void setPrivacy(int privacy) {
 			this.privacy = privacy;
 		}
+
 		public int getPrivacy() {
 			return privacy;
 		}
@@ -269,6 +298,7 @@ public class TopListDetailBean {
 		public void setTrackUpdateTime(long trackUpdateTime) {
 			this.trackUpdateTime = trackUpdateTime;
 		}
+
 		public long getTrackUpdateTime() {
 			return trackUpdateTime;
 		}
@@ -276,6 +306,7 @@ public class TopListDetailBean {
 		public void setPlayCount(long playCount) {
 			this.playCount = playCount;
 		}
+
 		public long getPlayCount() {
 			return playCount;
 		}
@@ -283,6 +314,7 @@ public class TopListDetailBean {
 		public void setSubscribedCount(long subscribedCount) {
 			this.subscribedCount = subscribedCount;
 		}
+
 		public long getSubscribedCount() {
 			return subscribedCount;
 		}
@@ -290,6 +322,7 @@ public class TopListDetailBean {
 		public void setCloudTrackCount(int cloudTrackCount) {
 			this.cloudTrackCount = cloudTrackCount;
 		}
+
 		public int getCloudTrackCount() {
 			return cloudTrackCount;
 		}
@@ -297,6 +330,7 @@ public class TopListDetailBean {
 		public void setOrdered(boolean ordered) {
 			this.ordered = ordered;
 		}
+
 		public boolean getOrdered() {
 			return ordered;
 		}
@@ -304,6 +338,7 @@ public class TopListDetailBean {
 		public void setTags(List<String> tags) {
 			this.tags = tags;
 		}
+
 		public List<String> getTags() {
 			return tags;
 		}
@@ -311,6 +346,7 @@ public class TopListDetailBean {
 		public void setDescription(String description) {
 			this.description = description;
 		}
+
 		public String getDescription() {
 			return description;
 		}
@@ -318,6 +354,7 @@ public class TopListDetailBean {
 		public void setStatus(int status) {
 			this.status = status;
 		}
+
 		public int getStatus() {
 			return status;
 		}
@@ -325,6 +362,7 @@ public class TopListDetailBean {
 		public void setName(String name) {
 			this.name = name;
 		}
+
 		public String getName() {
 			return name;
 		}
@@ -332,6 +370,7 @@ public class TopListDetailBean {
 		public void setId(long id) {
 			this.id = id;
 		}
+
 		public long getId() {
 			return id;
 		}
@@ -339,6 +378,7 @@ public class TopListDetailBean {
 		public void setCoverImgId_str(String coverImgId_str) {
 			this.coverImgId_str = coverImgId_str;
 		}
+
 		public String getCoverImgId_str() {
 			return coverImgId_str;
 		}
@@ -346,11 +386,13 @@ public class TopListDetailBean {
 		public void setToplistType(String ToplistType) {
 			this.ToplistType = ToplistType;
 		}
+
 		public String getToplistType() {
 			return ToplistType;
 		}
 
 	}
+
 	public void setArtistToplist(ArtistToplist artistToplist) {
 		this.artistToplist = artistToplist;
 	}
@@ -431,9 +473,11 @@ public class TopListDetailBean {
 		private String upateFrequency;
 		private int position;
 		private String updateFrequency;
+
 		public void setCoverUrl(String coverUrl) {
 			this.coverUrl = coverUrl;
 		}
+
 		public String getCoverUrl() {
 			return coverUrl;
 		}
@@ -441,6 +485,7 @@ public class TopListDetailBean {
 		public void setArtists(List<Artists> artists) {
 			this.artists = artists;
 		}
+
 		public List<Artists> getArtists() {
 			return artists;
 		}
@@ -448,6 +493,7 @@ public class TopListDetailBean {
 		public void setName(String name) {
 			this.name = name;
 		}
+
 		public String getName() {
 			return name;
 		}
@@ -455,6 +501,7 @@ public class TopListDetailBean {
 		public void setUpateFrequency(String upateFrequency) {
 			this.upateFrequency = upateFrequency;
 		}
+
 		public String getUpateFrequency() {
 			return upateFrequency;
 		}
@@ -462,6 +509,7 @@ public class TopListDetailBean {
 		public void setPosition(int position) {
 			this.position = position;
 		}
+
 		public int getPosition() {
 			return position;
 		}
@@ -469,6 +517,7 @@ public class TopListDetailBean {
 		public void setUpdateFrequency(String updateFrequency) {
 			this.updateFrequency = updateFrequency;
 		}
+
 		public String getUpdateFrequency() {
 			return updateFrequency;
 		}
@@ -502,6 +551,7 @@ public class TopListDetailBean {
 		public void setName(String name) {
 			this.name = name;
 		}
+
 		public String getName() {
 			return name;
 		}
@@ -509,6 +559,7 @@ public class TopListDetailBean {
 		public void setId(int id) {
 			this.id = id;
 		}
+
 		public int getId() {
 			return id;
 		}
@@ -516,6 +567,7 @@ public class TopListDetailBean {
 		public void setPicId(String picId) {
 			this.picId = picId;
 		}
+
 		public String getPicId() {
 			return picId;
 		}
@@ -523,6 +575,7 @@ public class TopListDetailBean {
 		public void setImg1v1Id(String img1v1Id) {
 			this.img1v1Id = img1v1Id;
 		}
+
 		public String getImg1v1Id() {
 			return img1v1Id;
 		}
@@ -530,6 +583,7 @@ public class TopListDetailBean {
 		public void setBriefDesc(String briefDesc) {
 			this.briefDesc = briefDesc;
 		}
+
 		public String getBriefDesc() {
 			return briefDesc;
 		}
@@ -537,6 +591,7 @@ public class TopListDetailBean {
 		public void setPicUrl(String picUrl) {
 			this.picUrl = picUrl;
 		}
+
 		public String getPicUrl() {
 			return picUrl;
 		}
@@ -544,6 +599,7 @@ public class TopListDetailBean {
 		public void setImg1v1Url(String img1v1Url) {
 			this.img1v1Url = img1v1Url;
 		}
+
 		public String getImg1v1Url() {
 			return img1v1Url;
 		}
@@ -551,6 +607,7 @@ public class TopListDetailBean {
 		public void setAlbumSize(int albumSize) {
 			this.albumSize = albumSize;
 		}
+
 		public int getAlbumSize() {
 			return albumSize;
 		}
@@ -558,6 +615,7 @@ public class TopListDetailBean {
 		public void setAlias(List<String> alias) {
 			this.alias = alias;
 		}
+
 		public List<String> getAlias() {
 			return alias;
 		}
@@ -565,6 +623,7 @@ public class TopListDetailBean {
 		public void setTrans(String trans) {
 			this.trans = trans;
 		}
+
 		public String getTrans() {
 			return trans;
 		}
@@ -572,6 +631,7 @@ public class TopListDetailBean {
 		public void setMusicSize(int musicSize) {
 			this.musicSize = musicSize;
 		}
+
 		public int getMusicSize() {
 			return musicSize;
 		}
@@ -579,6 +639,7 @@ public class TopListDetailBean {
 		public void setTopicPerson(int topicPerson) {
 			this.topicPerson = topicPerson;
 		}
+
 		public int getTopicPerson() {
 			return topicPerson;
 		}
@@ -625,6 +686,7 @@ public class TopListDetailBean {
 		public void setName(String name) {
 			this.name = name;
 		}
+
 		public String getName() {
 			return name;
 		}
@@ -632,6 +694,7 @@ public class TopListDetailBean {
 		public void setId(long id) {
 			this.id = id;
 		}
+
 		public long getId() {
 			return id;
 		}
@@ -639,6 +702,7 @@ public class TopListDetailBean {
 		public void setType(String type) {
 			this.type = type;
 		}
+
 		public String getType() {
 			return type;
 		}
@@ -646,6 +710,7 @@ public class TopListDetailBean {
 		public void setSize(int size) {
 			this.size = size;
 		}
+
 		public int getSize() {
 			return size;
 		}
@@ -653,6 +718,7 @@ public class TopListDetailBean {
 		public void setPicId(String picId) {
 			this.picId = picId;
 		}
+
 		public String getPicId() {
 			return picId;
 		}
@@ -660,6 +726,7 @@ public class TopListDetailBean {
 		public void setBlurPicUrl(String blurPicUrl) {
 			this.blurPicUrl = blurPicUrl;
 		}
+
 		public String getBlurPicUrl() {
 			return blurPicUrl;
 		}
@@ -667,6 +734,7 @@ public class TopListDetailBean {
 		public void setCompanyId(int companyId) {
 			this.companyId = companyId;
 		}
+
 		public int getCompanyId() {
 			return companyId;
 		}
@@ -674,6 +742,7 @@ public class TopListDetailBean {
 		public void setPic(long pic) {
 			this.pic = pic;
 		}
+
 		public long getPic() {
 			return pic;
 		}
@@ -681,6 +750,7 @@ public class TopListDetailBean {
 		public void setPicUrl(String picUrl) {
 			this.picUrl = picUrl;
 		}
+
 		public String getPicUrl() {
 			return picUrl;
 		}
@@ -688,6 +758,7 @@ public class TopListDetailBean {
 		public void setPublishTime(long publishTime) {
 			this.publishTime = publishTime;
 		}
+
 		public long getPublishTime() {
 			return publishTime;
 		}
@@ -695,6 +766,7 @@ public class TopListDetailBean {
 		public void setDescription(String description) {
 			this.description = description;
 		}
+
 		public String getDescription() {
 			return description;
 		}
@@ -702,6 +774,7 @@ public class TopListDetailBean {
 		public void setTags(String tags) {
 			this.tags = tags;
 		}
+
 		public String getTags() {
 			return tags;
 		}
@@ -709,6 +782,7 @@ public class TopListDetailBean {
 		public void setCompany(String company) {
 			this.company = company;
 		}
+
 		public String getCompany() {
 			return company;
 		}
@@ -716,6 +790,7 @@ public class TopListDetailBean {
 		public void setBriefDesc(String briefDesc) {
 			this.briefDesc = briefDesc;
 		}
+
 		public String getBriefDesc() {
 			return briefDesc;
 		}
@@ -723,6 +798,7 @@ public class TopListDetailBean {
 		public void setArtist(Artist artist) {
 			this.artist = artist;
 		}
+
 		public Artist getArtist() {
 			return artist;
 		}
@@ -730,6 +806,7 @@ public class TopListDetailBean {
 		public void setSongs(List<String> songs) {
 			this.songs = songs;
 		}
+
 		public List<String> getSongs() {
 			return songs;
 		}
@@ -737,6 +814,7 @@ public class TopListDetailBean {
 		public void setAlias(List<String> alias) {
 			this.alias = alias;
 		}
+
 		public List<String> getAlias() {
 			return alias;
 		}
@@ -744,6 +822,7 @@ public class TopListDetailBean {
 		public void setStatus(int status) {
 			this.status = status;
 		}
+
 		public int getStatus() {
 			return status;
 		}
@@ -751,6 +830,7 @@ public class TopListDetailBean {
 		public void setCopyrightId(int copyrightId) {
 			this.copyrightId = copyrightId;
 		}
+
 		public int getCopyrightId() {
 			return copyrightId;
 		}
@@ -758,6 +838,7 @@ public class TopListDetailBean {
 		public void setCommentThreadId(String commentThreadId) {
 			this.commentThreadId = commentThreadId;
 		}
+
 		public String getCommentThreadId() {
 			return commentThreadId;
 		}
@@ -765,6 +846,7 @@ public class TopListDetailBean {
 		public void setArtists(List<Artists> artists) {
 			this.artists = artists;
 		}
+
 		public List<Artists> getArtists() {
 			return artists;
 		}
@@ -772,6 +854,7 @@ public class TopListDetailBean {
 		public void setSubType(String subType) {
 			this.subType = subType;
 		}
+
 		public String getSubType() {
 			return subType;
 		}
@@ -779,6 +862,7 @@ public class TopListDetailBean {
 		public void setTransName(String transName) {
 			this.transName = transName;
 		}
+
 		public String getTransName() {
 			return transName;
 		}
@@ -786,6 +870,7 @@ public class TopListDetailBean {
 		public void setMark(int mark) {
 			this.mark = mark;
 		}
+
 		public int getMark() {
 			return mark;
 		}
@@ -793,6 +878,7 @@ public class TopListDetailBean {
 		public void setPicId_str(String picId_str) {
 			this.picId_str = picId_str;
 		}
+
 		public String getPicId_str() {
 			return picId_str;
 		}
@@ -810,9 +896,11 @@ public class TopListDetailBean {
 		private long bitrate;
 		private long playTime;
 		private int volumeDelta;
+
 		public void setName(String name) {
 			this.name = name;
 		}
+
 		public String getName() {
 			return name;
 		}
@@ -820,6 +908,7 @@ public class TopListDetailBean {
 		public void setId(long id) {
 			this.id = id;
 		}
+
 		public long getId() {
 			return id;
 		}
@@ -827,6 +916,7 @@ public class TopListDetailBean {
 		public void setSize(long size) {
 			this.size = size;
 		}
+
 		public long getSize() {
 			return size;
 		}
@@ -834,6 +924,7 @@ public class TopListDetailBean {
 		public void setExtension(String extension) {
 			this.extension = extension;
 		}
+
 		public String getExtension() {
 			return extension;
 		}
@@ -841,6 +932,7 @@ public class TopListDetailBean {
 		public void setSr(int sr) {
 			this.sr = sr;
 		}
+
 		public int getSr() {
 			return sr;
 		}
@@ -848,6 +940,7 @@ public class TopListDetailBean {
 		public void setDfsId(int dfsId) {
 			this.dfsId = dfsId;
 		}
+
 		public int getDfsId() {
 			return dfsId;
 		}
@@ -855,6 +948,7 @@ public class TopListDetailBean {
 		public void setBitrate(long bitrate) {
 			this.bitrate = bitrate;
 		}
+
 		public long getBitrate() {
 			return bitrate;
 		}
@@ -862,6 +956,7 @@ public class TopListDetailBean {
 		public void setPlayTime(long playTime) {
 			this.playTime = playTime;
 		}
+
 		public long getPlayTime() {
 			return playTime;
 		}
@@ -869,6 +964,7 @@ public class TopListDetailBean {
 		public void setVolumeDelta(int volumeDelta) {
 			this.volumeDelta = volumeDelta;
 		}
+
 		public int getVolumeDelta() {
 			return volumeDelta;
 		}
@@ -911,14 +1007,16 @@ public class TopListDetailBean {
 		private int rtype;
 		private String rurl;
 		private int mvid;
-		private String hMusic;
+		private HMusicBean hMusic;
 		private MMusic mMusic;
 		private LMusic lMusic;
 		private BMusic bMusic;
 		private String mp3Url;
+
 		public void setName(String name) {
 			this.name = name;
 		}
+
 		public String getName() {
 			return name;
 		}
@@ -926,6 +1024,7 @@ public class TopListDetailBean {
 		public void setId(long id) {
 			this.id = id;
 		}
+
 		public long getId() {
 			return id;
 		}
@@ -933,6 +1032,7 @@ public class TopListDetailBean {
 		public void setPosition(int position) {
 			this.position = position;
 		}
+
 		public int getPosition() {
 			return position;
 		}
@@ -940,6 +1040,7 @@ public class TopListDetailBean {
 		public void setAlias(List<String> alias) {
 			this.alias = alias;
 		}
+
 		public List<String> getAlias() {
 			return alias;
 		}
@@ -947,6 +1048,7 @@ public class TopListDetailBean {
 		public void setStatus(int status) {
 			this.status = status;
 		}
+
 		public int getStatus() {
 			return status;
 		}
@@ -954,6 +1056,7 @@ public class TopListDetailBean {
 		public void setFee(int fee) {
 			this.fee = fee;
 		}
+
 		public int getFee() {
 			return fee;
 		}
@@ -961,6 +1064,7 @@ public class TopListDetailBean {
 		public void setCopyrightId(int copyrightId) {
 			this.copyrightId = copyrightId;
 		}
+
 		public int getCopyrightId() {
 			return copyrightId;
 		}
@@ -968,6 +1072,7 @@ public class TopListDetailBean {
 		public void setDisc(String disc) {
 			this.disc = disc;
 		}
+
 		public String getDisc() {
 			return disc;
 		}
@@ -975,6 +1080,7 @@ public class TopListDetailBean {
 		public void setNo(int no) {
 			this.no = no;
 		}
+
 		public int getNo() {
 			return no;
 		}
@@ -982,6 +1088,7 @@ public class TopListDetailBean {
 		public void setArtists(List<Artists> artists) {
 			this.artists = artists;
 		}
+
 		public List<Artists> getArtists() {
 			return artists;
 		}
@@ -989,6 +1096,7 @@ public class TopListDetailBean {
 		public void setAlbum(Album album) {
 			this.album = album;
 		}
+
 		public Album getAlbum() {
 			return album;
 		}
@@ -996,6 +1104,7 @@ public class TopListDetailBean {
 		public void setStarred(boolean starred) {
 			this.starred = starred;
 		}
+
 		public boolean getStarred() {
 			return starred;
 		}
@@ -1003,6 +1112,7 @@ public class TopListDetailBean {
 		public void setPopularity(int popularity) {
 			this.popularity = popularity;
 		}
+
 		public int getPopularity() {
 			return popularity;
 		}
@@ -1010,6 +1120,7 @@ public class TopListDetailBean {
 		public void setScore(int score) {
 			this.score = score;
 		}
+
 		public int getScore() {
 			return score;
 		}
@@ -1017,6 +1128,7 @@ public class TopListDetailBean {
 		public void setStarredNum(int starredNum) {
 			this.starredNum = starredNum;
 		}
+
 		public int getStarredNum() {
 			return starredNum;
 		}
@@ -1024,6 +1136,7 @@ public class TopListDetailBean {
 		public void setDuration(long duration) {
 			this.duration = duration;
 		}
+
 		public long getDuration() {
 			return duration;
 		}
@@ -1031,6 +1144,7 @@ public class TopListDetailBean {
 		public void setPlayedNum(int playedNum) {
 			this.playedNum = playedNum;
 		}
+
 		public int getPlayedNum() {
 			return playedNum;
 		}
@@ -1038,6 +1152,7 @@ public class TopListDetailBean {
 		public void setDayPlays(int dayPlays) {
 			this.dayPlays = dayPlays;
 		}
+
 		public int getDayPlays() {
 			return dayPlays;
 		}
@@ -1045,6 +1160,7 @@ public class TopListDetailBean {
 		public void setHearTime(int hearTime) {
 			this.hearTime = hearTime;
 		}
+
 		public int getHearTime() {
 			return hearTime;
 		}
@@ -1052,6 +1168,7 @@ public class TopListDetailBean {
 		public void setRingtone(String ringtone) {
 			this.ringtone = ringtone;
 		}
+
 		public String getRingtone() {
 			return ringtone;
 		}
@@ -1059,6 +1176,7 @@ public class TopListDetailBean {
 		public void setCrbt(String crbt) {
 			this.crbt = crbt;
 		}
+
 		public String getCrbt() {
 			return crbt;
 		}
@@ -1066,6 +1184,7 @@ public class TopListDetailBean {
 		public void setAudition(String audition) {
 			this.audition = audition;
 		}
+
 		public String getAudition() {
 			return audition;
 		}
@@ -1073,6 +1192,7 @@ public class TopListDetailBean {
 		public void setCopyFrom(String copyFrom) {
 			this.copyFrom = copyFrom;
 		}
+
 		public String getCopyFrom() {
 			return copyFrom;
 		}
@@ -1080,6 +1200,7 @@ public class TopListDetailBean {
 		public void setCommentThreadId(String commentThreadId) {
 			this.commentThreadId = commentThreadId;
 		}
+
 		public String getCommentThreadId() {
 			return commentThreadId;
 		}
@@ -1087,6 +1208,7 @@ public class TopListDetailBean {
 		public void setRtUrl(String rtUrl) {
 			this.rtUrl = rtUrl;
 		}
+
 		public String getRtUrl() {
 			return rtUrl;
 		}
@@ -1094,6 +1216,7 @@ public class TopListDetailBean {
 		public void setFtype(int ftype) {
 			this.ftype = ftype;
 		}
+
 		public int getFtype() {
 			return ftype;
 		}
@@ -1101,6 +1224,7 @@ public class TopListDetailBean {
 		public void setRtUrls(List<String> rtUrls) {
 			this.rtUrls = rtUrls;
 		}
+
 		public List<String> getRtUrls() {
 			return rtUrls;
 		}
@@ -1108,6 +1232,7 @@ public class TopListDetailBean {
 		public void setCopyright(int copyright) {
 			this.copyright = copyright;
 		}
+
 		public int getCopyright() {
 			return copyright;
 		}
@@ -1115,6 +1240,7 @@ public class TopListDetailBean {
 		public void setTransName(String transName) {
 			this.transName = transName;
 		}
+
 		public String getTransName() {
 			return transName;
 		}
@@ -1122,6 +1248,7 @@ public class TopListDetailBean {
 		public void setSign(String sign) {
 			this.sign = sign;
 		}
+
 		public String getSign() {
 			return sign;
 		}
@@ -1129,6 +1256,7 @@ public class TopListDetailBean {
 		public void setMark(int mark) {
 			this.mark = mark;
 		}
+
 		public int getMark() {
 			return mark;
 		}
@@ -1136,6 +1264,7 @@ public class TopListDetailBean {
 		public void setRtype(int rtype) {
 			this.rtype = rtype;
 		}
+
 		public int getRtype() {
 			return rtype;
 		}
@@ -1143,6 +1272,7 @@ public class TopListDetailBean {
 		public void setRurl(String rurl) {
 			this.rurl = rurl;
 		}
+
 		public String getRurl() {
 			return rurl;
 		}
@@ -1150,20 +1280,23 @@ public class TopListDetailBean {
 		public void setMvid(int mvid) {
 			this.mvid = mvid;
 		}
+
 		public int getMvid() {
 			return mvid;
 		}
 
-		public void setHMusic(String hMusic) {
+		public void setHMusic(HMusicBean hMusic) {
 			this.hMusic = hMusic;
 		}
-		public String getHMusic() {
+
+		public HMusicBean getHMusic() {
 			return hMusic;
 		}
 
 		public void setMMusic(MMusic mMusic) {
 			this.mMusic = mMusic;
 		}
+
 		public MMusic getMMusic() {
 			return mMusic;
 		}
@@ -1171,6 +1304,7 @@ public class TopListDetailBean {
 		public void setLMusic(LMusic lMusic) {
 			this.lMusic = lMusic;
 		}
+
 		public LMusic getLMusic() {
 			return lMusic;
 		}
@@ -1178,6 +1312,7 @@ public class TopListDetailBean {
 		public void setBMusic(BMusic bMusic) {
 			this.bMusic = bMusic;
 		}
+
 		public BMusic getBMusic() {
 			return bMusic;
 		}
@@ -1185,6 +1320,7 @@ public class TopListDetailBean {
 		public void setMp3Url(String mp3Url) {
 			this.mp3Url = mp3Url;
 		}
+
 		public String getMp3Url() {
 			return mp3Url;
 		}
@@ -1197,9 +1333,11 @@ public class TopListDetailBean {
 		private List<Songs> songs;
 		private String name;
 		private int position;
+
 		public void setCoverUrl(String coverUrl) {
 			this.coverUrl = coverUrl;
 		}
+
 		public String getCoverUrl() {
 			return coverUrl;
 		}
@@ -1207,6 +1345,7 @@ public class TopListDetailBean {
 		public void setSongs(List<Songs> songs) {
 			this.songs = songs;
 		}
+
 		public List<Songs> getSongs() {
 			return songs;
 		}
@@ -1214,6 +1353,7 @@ public class TopListDetailBean {
 		public void setName(String name) {
 			this.name = name;
 		}
+
 		public String getName() {
 			return name;
 		}
@@ -1221,12 +1361,107 @@ public class TopListDetailBean {
 		public void setPosition(int position) {
 			this.position = position;
 		}
+
 		public int getPosition() {
 			return position;
 		}
 
 	}
+	public static class HMusicBean {
+		/**
+		 * name : null
+		 * id : 95291315
+		 * size : 8983164
+		 * extension : mp3
+		 * sr : 44100
+		 * dfsId : 0
+		 * bitrate : 320000
+		 * playTime : 224000
+		 * volumeDelta : -0.38
+		 */
 
+		private Object name;
+		private long id;
+		private int size;
+		private String extension;
+		private int sr;
+		private int dfsId;
+		private int bitrate;
+		private int playTime;
+		private double volumeDelta;
+
+		public Object getName() {
+			return name;
+		}
+
+		public void setName(Object name) {
+			this.name = name;
+		}
+
+		public long getId() {
+			return id;
+		}
+
+		public void setId(long id) {
+			this.id = id;
+		}
+
+		public int getSize() {
+			return size;
+		}
+
+		public void setSize(int size) {
+			this.size = size;
+		}
+
+		public String getExtension() {
+			return extension;
+		}
+
+		public void setExtension(String extension) {
+			this.extension = extension;
+		}
+
+		public int getSr() {
+			return sr;
+		}
+
+		public void setSr(int sr) {
+			this.sr = sr;
+		}
+
+		public int getDfsId() {
+			return dfsId;
+		}
+
+		public void setDfsId(int dfsId) {
+			this.dfsId = dfsId;
+		}
+
+		public int getBitrate() {
+			return bitrate;
+		}
+
+		public void setBitrate(int bitrate) {
+			this.bitrate = bitrate;
+		}
+
+		public int getPlayTime() {
+			return playTime;
+		}
+
+		public void setPlayTime(int playTime) {
+			this.playTime = playTime;
+		}
+
+		public double getVolumeDelta() {
+			return volumeDelta;
+		}
+
+		public void setVolumeDelta(double volumeDelta) {
+			this.volumeDelta = volumeDelta;
+		}
+	}
 	public static class MMusic {
 
 		private String name;
@@ -1238,9 +1473,11 @@ public class TopListDetailBean {
 		private long bitrate;
 		private long playTime;
 		private int volumeDelta;
+
 		public void setName(String name) {
 			this.name = name;
 		}
+
 		public String getName() {
 			return name;
 		}
@@ -1248,6 +1485,7 @@ public class TopListDetailBean {
 		public void setId(long id) {
 			this.id = id;
 		}
+
 		public long getId() {
 			return id;
 		}
@@ -1255,6 +1493,7 @@ public class TopListDetailBean {
 		public void setSize(long size) {
 			this.size = size;
 		}
+
 		public long getSize() {
 			return size;
 		}
@@ -1262,6 +1501,7 @@ public class TopListDetailBean {
 		public void setExtension(String extension) {
 			this.extension = extension;
 		}
+
 		public String getExtension() {
 			return extension;
 		}
@@ -1269,6 +1509,7 @@ public class TopListDetailBean {
 		public void setSr(int sr) {
 			this.sr = sr;
 		}
+
 		public int getSr() {
 			return sr;
 		}
@@ -1276,6 +1517,7 @@ public class TopListDetailBean {
 		public void setDfsId(int dfsId) {
 			this.dfsId = dfsId;
 		}
+
 		public int getDfsId() {
 			return dfsId;
 		}
@@ -1283,6 +1525,7 @@ public class TopListDetailBean {
 		public void setBitrate(long bitrate) {
 			this.bitrate = bitrate;
 		}
+
 		public long getBitrate() {
 			return bitrate;
 		}
@@ -1290,6 +1533,7 @@ public class TopListDetailBean {
 		public void setPlayTime(long playTime) {
 			this.playTime = playTime;
 		}
+
 		public long getPlayTime() {
 			return playTime;
 		}
@@ -1297,6 +1541,7 @@ public class TopListDetailBean {
 		public void setVolumeDelta(int volumeDelta) {
 			this.volumeDelta = volumeDelta;
 		}
+
 		public int getVolumeDelta() {
 			return volumeDelta;
 		}
@@ -1314,9 +1559,11 @@ public class TopListDetailBean {
 		private long bitrate;
 		private long playTime;
 		private int volumeDelta;
+
 		public void setName(String name) {
 			this.name = name;
 		}
+
 		public String getName() {
 			return name;
 		}
@@ -1324,6 +1571,7 @@ public class TopListDetailBean {
 		public void setId(long id) {
 			this.id = id;
 		}
+
 		public long getId() {
 			return id;
 		}
@@ -1331,6 +1579,7 @@ public class TopListDetailBean {
 		public void setSize(long size) {
 			this.size = size;
 		}
+
 		public long getSize() {
 			return size;
 		}
@@ -1338,6 +1587,7 @@ public class TopListDetailBean {
 		public void setExtension(String extension) {
 			this.extension = extension;
 		}
+
 		public String getExtension() {
 			return extension;
 		}
@@ -1345,6 +1595,7 @@ public class TopListDetailBean {
 		public void setSr(int sr) {
 			this.sr = sr;
 		}
+
 		public int getSr() {
 			return sr;
 		}
@@ -1352,6 +1603,7 @@ public class TopListDetailBean {
 		public void setDfsId(int dfsId) {
 			this.dfsId = dfsId;
 		}
+
 		public int getDfsId() {
 			return dfsId;
 		}
@@ -1359,6 +1611,7 @@ public class TopListDetailBean {
 		public void setBitrate(long bitrate) {
 			this.bitrate = bitrate;
 		}
+
 		public long getBitrate() {
 			return bitrate;
 		}
@@ -1366,6 +1619,7 @@ public class TopListDetailBean {
 		public void setPlayTime(long playTime) {
 			this.playTime = playTime;
 		}
+
 		public long getPlayTime() {
 			return playTime;
 		}
@@ -1373,6 +1627,7 @@ public class TopListDetailBean {
 		public void setVolumeDelta(int volumeDelta) {
 			this.volumeDelta = volumeDelta;
 		}
+
 		public int getVolumeDelta() {
 			return volumeDelta;
 		}

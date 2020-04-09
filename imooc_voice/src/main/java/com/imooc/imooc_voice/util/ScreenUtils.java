@@ -25,6 +25,7 @@ public class ScreenUtils {
         window.setStatusBarColor(statusBarColor);
     }
 
+
     /**
      * Set the status bar to dark.
      */

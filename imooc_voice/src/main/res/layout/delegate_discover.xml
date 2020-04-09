@@ -199,7 +199,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="15dp"
-                android:padding="5dp"
                 android:background="@drawable/bg_discover_gedan"
                 android:text="歌单广场"
                 android:textColor="@color/black"

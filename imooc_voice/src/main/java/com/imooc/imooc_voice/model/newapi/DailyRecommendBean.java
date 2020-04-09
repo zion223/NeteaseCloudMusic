@@ -88,7 +88,7 @@ public class DailyRecommendBean {
          */
 
         private String name;
-        private long id;
+        private String id;
         private int position;
         private int status;
         private int fee;
@@ -188,11 +188,11 @@ public class DailyRecommendBean {
             this.name = name;
         }
 
-        public long getId() {
+        public String getId() {
             return id;
         }
 
-        public void setId(long id) {
+        public void setId(String id) {
             this.id = id;
         }
 
@@ -788,7 +788,7 @@ public class DailyRecommendBean {
                 private String name;
                 private long id;
                 private int picId;
-                private int img1v1Id;
+                private String img1v1Id;
                 private String briefDesc;
                 private String picUrl;
                 private String img1v1Url;
@@ -822,11 +822,11 @@ public class DailyRecommendBean {
                     this.picId = picId;
                 }
 
-                public int getImg1v1Id() {
+                public String getImg1v1Id() {
                     return img1v1Id;
                 }
 
-                public void setImg1v1Id(int img1v1Id) {
+                public void setImg1v1Id(String img1v1Id) {
                     this.img1v1Id = img1v1Id;
                 }
 
@@ -914,7 +914,7 @@ public class DailyRecommendBean {
                 private String name;
                 private long id;
                 private int picId;
-                private int img1v1Id;
+                private String img1v1Id;
                 private String briefDesc;
                 private String picUrl;
                 private String img1v1Url;
@@ -948,11 +948,11 @@ public class DailyRecommendBean {
                     this.picId = picId;
                 }
 
-                public int getImg1v1Id() {
+                public String getImg1v1Id() {
                     return img1v1Id;
                 }
 
-                public void setImg1v1Id(int img1v1Id) {
+                public void setImg1v1Id(String img1v1Id) {
                     this.img1v1Id = img1v1Id;
                 }
 
@@ -1581,7 +1581,7 @@ public class DailyRecommendBean {
             private String name;
             private int id;
             private int picId;
-            private int img1v1Id;
+            private String img1v1Id;
             private String briefDesc;
             private String picUrl;
             private String img1v1Url;
@@ -1615,11 +1615,11 @@ public class DailyRecommendBean {
                 this.picId = picId;
             }
 
-            public int getImg1v1Id() {
+            public String getImg1v1Id() {
                 return img1v1Id;
             }
 
-            public void setImg1v1Id(int img1v1Id) {
+            public void setImg1v1Id(String img1v1Id) {
                 this.img1v1Id = img1v1Id;
             }
 
