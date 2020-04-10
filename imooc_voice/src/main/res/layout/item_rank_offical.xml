@@ -48,6 +48,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:paddingBottom="8dp"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:text="1.知足"
             android:textColor="#7D7D7D"
             android:textSize="12sp" />
@@ -58,6 +60,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:paddingBottom="8dp"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:text="2.温柔"
             android:textColor="#7D7D7D"
             android:textSize="12sp" />
@@ -68,6 +72,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:paddingBottom="8dp"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:text="3.干杯"
             android:textColor="#7D7D7D"
             android:textSize="12sp" />

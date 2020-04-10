@@ -8,11 +8,7 @@ public class HttpConstants {
     private static final String FORMATE = "json";
     private static final String BASE = "http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&format=" + FORMATE;
     //private static final String ROOT_URL = "http://192.168.1.54:3000";
-    private static final String ROOT_URL = "http://himbwu.natappfree.cc";
-
-    /**
-     * 电台排行 主播榜 三段数据 24小时榜 (电台 - 24小时节目榜)新人榜 最热主播
-     */
+    private static final String ROOT_URL = "http://brrtva.natappfree.cc";
 
     static String LOGIN = ROOT_URL + "/login/cellphone";
 
@@ -123,11 +119,21 @@ public class HttpConstants {
 
     static String DJ_SUB = ROOT_URL + "/dj/sub";
 
+    static String DJ_TOPLIST_HOURS = ROOT_URL + "/dj/toplist/hours";
+
+    static String DJ_TOPLIST_NEWCOMER = ROOT_URL + "/dj/toplist/newcomer";
+
+    static String DJ_TOPLIST_POPULAR = ROOT_URL + "/dj/toplist/popular";
+
     static String ARTIST_SUB = ROOT_URL + "/artist/sub";
 
     static String DJ_SUB_LIST = ROOT_URL + "/dj/sublist";
 
     static String DJ_PROGRAM = ROOT_URL + "/dj/program";
+
+    static String DJ_PROGRAM_TOPLIST_HOURS = ROOT_URL + "/dj/program/toplist/hours";
+
+    static String DJ_PROGRAM_TOPLIST = ROOT_URL + "/dj/program/toplist";
 
     static String DJ_DETAIL = ROOT_URL + "/dj/detail";
 

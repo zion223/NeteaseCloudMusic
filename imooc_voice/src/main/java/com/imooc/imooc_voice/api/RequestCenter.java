@@ -33,10 +33,12 @@ import com.imooc.imooc_voice.model.newapi.dj.DjCatelistBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjDetailBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjPaygiftBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjProgramBean;
+import com.imooc.imooc_voice.model.newapi.dj.DjProgramTopListBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjRecommendBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjRecommendTypeBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjSubBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjSubListBean;
+import com.imooc.imooc_voice.model.newapi.dj.DjTopListBean;
 import com.imooc.imooc_voice.model.newapi.manager.MusicCanPlayBean;
 import com.imooc.imooc_voice.model.newapi.personal.UserDetailBean;
 import com.imooc.imooc_voice.model.newapi.personal.UserEventBean;
@@ -623,6 +625,49 @@ public class RequestCenter {
         RequestCenter.getRequest(HttpConstants.DJ_PROGRAM, params, listener, DjProgramBean.class);
     }
 
+    /**
+     * 电台 - 24小时主播榜
+     */
+    public static void getRadioTopHours(int limit, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("limit", limit);
+        RequestCenter.getRequest(HttpConstants.DJ_TOPLIST_HOURS, params, listener, DjTopListBean.class);
+    }
+
+    /**
+     * 电台 - 24小时节目榜
+    */
+    public static void getRadioProgramTopHours(int limit, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("limit", limit);
+        RequestCenter.getRequest(HttpConstants.DJ_PROGRAM_TOPLIST_HOURS, params, listener, DjProgramTopListBean.class);
+    }
+
+    /**
+     * 电台 - 节目榜
+     */
+    public static void getRadioProgramTopList(int limit, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("limit", limit);
+        RequestCenter.getRequest(HttpConstants.DJ_PROGRAM_TOPLIST, params, listener, DjProgramTopListBean.class);
+    }
+
+    /**
+     * 电台 - 新人榜
+     */
+    public static void getRadioTopNewComer(int limit, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("limit", limit);
+        RequestCenter.getRequest(HttpConstants.DJ_TOPLIST_NEWCOMER, params, listener, DjTopListBean.class);
+    }
+    /**
+     * 电台 - 最热主播榜
+     */
+    public static void getRadioTopPopular(int limit, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("limit", limit);
+        RequestCenter.getRequest(HttpConstants.DJ_TOPLIST_POPULAR, params, listener, DjTopListBean.class);
+    }
     /**
      *  电台详情
      */
