@@ -14,10 +14,10 @@
         android:layout_marginStart="12dp"
         android:scaleType="centerCrop" />
     <ImageView
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
         android:layout_toLeftOf="@+id/tv_item_video_playnum"
-        android:src="@drawable/note_btn_play_ms" />
+        android:src="@drawable/playnum" />
 
     <TextView
         android:id="@+id/tv_item_video_playnum"

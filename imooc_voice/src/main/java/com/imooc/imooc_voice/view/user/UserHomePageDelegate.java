@@ -1,5 +1,6 @@
 package com.imooc.imooc_voice.view.user;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,7 +23,7 @@ import com.imooc.lib_network.listener.DisposeDataListener;
 
 import butterknife.BindView;
 
-public class UserInfoDelegate extends NeteaseDelegate {
+public class UserHomePageDelegate extends NeteaseDelegate {
 
 	private static final String ARGS_USER_DETAIL = "ARGS_USER_DETAIL";
 
@@ -55,10 +56,10 @@ public class UserInfoDelegate extends NeteaseDelegate {
 	private ImageLoaderManager manager;
 
 
-	public static UserInfoDelegate newInstance(UserDetailBean bean) {
+	public static UserHomePageDelegate newInstance(UserDetailBean bean) {
 		final Bundle args = new Bundle();
 		args.putSerializable(ARGS_USER_DETAIL, bean);
-		final UserInfoDelegate delegate = new UserInfoDelegate();
+		final UserHomePageDelegate delegate = new UserHomePageDelegate();
 		delegate.setArguments(args);
 		return delegate;
 	}
@@ -78,12 +79,13 @@ public class UserInfoDelegate extends NeteaseDelegate {
 		return R.layout.delegate_user_info;
 	}
 
+	@SuppressLint("SetTextI18n")
 	@Override
 	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
 
 		//基本信息
 		String createTime = TimeUtil.getTimeStandardOnlyYMD(mCurrentUser.getCreateTime());
-		mTvCreateTime.setText("村龄:  " + createTime + "注册");
+		mTvCreateTime.setText("村龄: " + createTime + "注册");
 		mTvAge.setText("年龄：  无法解析" + mCurrentUser.getProfile().getBirthday());
 		mTvArea.setText("地区：  地区码" + mCurrentUser.getProfile().getProvince() + " " + mCurrentUser.getProfile().getCity());
 		//听歌排行
@@ -109,6 +111,8 @@ public class UserInfoDelegate extends NeteaseDelegate {
 
 			}
 		});
+
+
 	}
 
 

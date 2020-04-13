@@ -12,10 +12,12 @@
         android:src="@drawable/test" />
 
     <ImageView
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:layout_width="13dp"
+        android:layout_height="13dp"
+        android:layout_alignTop="@+id/tv_item_discover_playnum"
+        android:layout_alignBottom="@+id/tv_item_discover_playnum"
         android:layout_toLeftOf="@+id/tv_item_discover_playnum"
-        android:src="@drawable/note_btn_play_ms" />
+        android:src="@drawable/playnum" />
 
     <TextView
         android:id="@+id/tv_item_discover_playnum"

@@ -5,7 +5,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.imooc.imooc_voice.R;
-import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.newapi.MainEventBean;
 import com.imooc.imooc_voice.model.newapi.personal.UserEventBean;
@@ -17,7 +16,6 @@ import com.imooc.lib_network.listener.DisposeDataListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
 
 
 public class CloudVillageFragment extends NeteaseLoadingDelegate implements SwipeRefreshLayout.OnRefreshListener{

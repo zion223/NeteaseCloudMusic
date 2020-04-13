@@ -61,6 +61,7 @@ public class DjRankDelegate extends NeteaseLoadingDelegate implements BaseQuickA
 							entities.add(new DjToplistEntity(list.get(j)));
 						}
                         mHoursAdapter = new DjHoursAdapter(entities);
+						//点击事件
 						mHoursAdapter.setOnItemClickListener(DjRankDelegate.this);
 						//横向
                         mRvDjHours.setLayoutManager(new GridLayoutManager(getContext(),3));
@@ -122,6 +123,7 @@ public class DjRankDelegate extends NeteaseLoadingDelegate implements BaseQuickA
 
 	static class DjHoursAdapter extends BaseSectionQuickAdapter<DjToplistEntity, BaseViewHolder>{
         private ImageLoaderManager manager;
+
         DjHoursAdapter(List<DjToplistEntity> data) {
             super(R.layout.item_dj_rank_123, R.layout.item_dj_rank_hours_header, data);
             manager = ImageLoaderManager.getInstance();
@@ -153,7 +155,7 @@ public class DjRankDelegate extends NeteaseLoadingDelegate implements BaseQuickA
 
     static class DjPopularAdapter extends BaseQuickAdapter<DjTopListBean.List, BaseViewHolder>{
 		private ImageLoaderManager manager;
-        public DjPopularAdapter(@Nullable List<DjTopListBean.List> data) {
+        DjPopularAdapter(@Nullable List<DjTopListBean.List> data) {
             super(R.layout.item_dj_rank_normal, data);
 			manager = ImageLoaderManager.getInstance();
         }

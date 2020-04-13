@@ -233,7 +233,7 @@ public class UserDetailDelegate extends NeteaseDelegate {
 			switch (i) {
 				case 0:
 					if (currentUser != null) {
-						return UserInfoDelegate.newInstance(currentUser);
+						return UserHomePageDelegate.newInstance(currentUser);
 					} else {
 						return null;
 					}

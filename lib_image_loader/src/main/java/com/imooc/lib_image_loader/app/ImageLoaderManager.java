@@ -72,7 +72,6 @@ public class ImageLoaderManager {
 	 * @param url
 	 */
 	public void displayImageForCircle(final ImageView imageView, final String url) {
-		//imageView.setTag(R.id.image_loader_manager_tag, url);
 		Glide.with(imageView.getContext())
 				.asBitmap()
 				.load(url)
@@ -162,11 +161,8 @@ public class ImageLoaderManager {
 								.map(new Function<Bitmap, Drawable>() {
 									@Override
 									public Drawable apply(Bitmap bitmap) {
-										Drawable drawable = new BitmapDrawable(
-												//毛玻璃效果
-												ImageUtils.doBlur(res, radius, true)
-										);
-										return drawable;
+										//毛玻璃效果
+										return new BitmapDrawable(ImageUtils.doBlur(res, radius, true));
 									}
 								})
 								.subscribeOn(Schedulers.io())

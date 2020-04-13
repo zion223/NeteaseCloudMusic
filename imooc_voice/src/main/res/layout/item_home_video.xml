@@ -40,9 +40,10 @@
 
             <ImageView
                 android:id="@+id/iv_item_video_btn_play_ms"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:src="@drawable/note_btn_play_ms" />
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/playnum" />
 
             <TextView
                 android:id="@+id/tv_item_video_play_count"

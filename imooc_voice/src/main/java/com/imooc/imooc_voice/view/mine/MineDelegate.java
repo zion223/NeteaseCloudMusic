@@ -51,7 +51,7 @@ public class MineDelegate extends NeteaseDelegate {
 	@BindView(R2.id.rv_spec_mine)
 	RecyclerView mSpecRecyclerView;
 	@BindView(R2.id.rv_mine_create_gedan)
-	RecyclerView mRvSectionGedan;
+	RecyclerView mRvSectionPlayList;
 	@BindView(R2.id.fragment_main_item_radio_count)
 	TextView mTvRadioCount;
 	@BindView(R2.id.fragment_main_item_localmusic_count)
@@ -128,8 +128,8 @@ public class MineDelegate extends NeteaseDelegate {
 						changeGedanVisibleStatus(adapter, view, positon);
 					}
 				});
-				mRvSectionGedan.setAdapter(multipleSectionGedanAdapter);
-				mRvSectionGedan.setLayoutManager(new LinearLayoutManager(getContext()){
+				mRvSectionPlayList.setAdapter(multipleSectionGedanAdapter);
+				mRvSectionPlayList.setLayoutManager(new LinearLayoutManager(getContext()){
 					@Override
 					public boolean canScrollVertically() {
 						return false;

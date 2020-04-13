@@ -34,6 +34,7 @@ import com.imooc.imooc_voice.model.newapi.dj.DjDetailBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjPaygiftBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjProgramBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjProgramTopListBean;
+import com.imooc.imooc_voice.model.newapi.dj.DjProgramTopListHoursBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjRecommendBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjRecommendTypeBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjSubBean;
@@ -640,7 +641,7 @@ public class RequestCenter {
     public static void getRadioProgramTopHours(int limit, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("limit", limit);
-        RequestCenter.getRequest(HttpConstants.DJ_PROGRAM_TOPLIST_HOURS, params, listener, DjProgramTopListBean.class);
+        RequestCenter.getRequest(HttpConstants.DJ_PROGRAM_TOPLIST_HOURS, params, listener, DjProgramTopListHoursBean.class);
     }
 
     /**

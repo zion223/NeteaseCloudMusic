@@ -61,12 +61,13 @@
 
                         <ImageView
                             android:id="@+id/iv_gedan_detail_playnum"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="13dp"
+                            android:layout_height="13dp"
                             android:layout_alignTop="@+id/iv_gedan_detail_img"
+                            android:layout_alignBottom="@+id/tv_gedan_detail_playnum"
                             android:layout_marginTop="5dp"
                             android:layout_toLeftOf="@+id/tv_gedan_detail_playnum"
-                            android:src="@drawable/note_btn_play_ms" />
+                            android:src="@drawable/playnum" />
 
                         <TextView
                             android:id="@+id/tv_gedan_detail_playnum"

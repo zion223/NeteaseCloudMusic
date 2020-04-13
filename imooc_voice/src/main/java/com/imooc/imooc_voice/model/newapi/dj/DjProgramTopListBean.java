@@ -9,8 +9,17 @@ public class DjProgramTopListBean {
 
 
 	private int code;
-	private String msg;
-	private Data data;
+	private String updateTime;
+	private ArrayList<List> list;
+	private ArrayList<List> toplist;
+
+	public ArrayList<List> getList() {
+		return list;
+	}
+
+	public void setList(ArrayList<List> list) {
+		this.list = list;
+	}
 
 	public void setCode(int code) {
 		this.code = code;
@@ -20,53 +29,20 @@ public class DjProgramTopListBean {
 		return code;
 	}
 
-	public void setMsg(String msg) {
-		this.msg = msg;
+	public String getUpdateTime() {
+		return updateTime;
 	}
 
-	public String getMsg() {
-		return msg;
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
 	}
 
-	public void setData(Data data) {
-		this.data = data;
+	public ArrayList<List> getToplist() {
+		return toplist;
 	}
 
-	public Data getData() {
-		return data;
-	}
-
-
-	public class Data {
-
-		private int total;
-		private long updateTime;
-		private ArrayList<List> list;
-
-		public void setTotal(int total) {
-			this.total = total;
-		}
-
-		public int getTotal() {
-			return total;
-		}
-
-		public void setUpdateTime(long updateTime) {
-			this.updateTime = updateTime;
-		}
-
-		public long getUpdateTime() {
-			return updateTime;
-		}
-
-		public void setList(ArrayList<List> list) {
-			this.list = list;
-		}
-
-		public ArrayList<List> getList() {
-			return list;
-		}
-
+	public void setToplist(ArrayList<List> toplist) {
+		this.toplist = toplist;
 	}
 
 	public class List {
@@ -513,7 +489,7 @@ public class DjProgramTopListBean {
 		private String rtUrl;
 		private int ftype;
 		private ArrayList<String> rtUrls;
-		private String hMusic;
+		private TopListDetailBean.HMusicBean hMusic;
 		private TopListDetailBean.MMusic mMusic;
 		private TopListDetailBean.LMusic lMusic;
 		private TopListDetailBean.BMusic bMusic;
@@ -738,11 +714,11 @@ public class DjProgramTopListBean {
 			return rtUrls;
 		}
 
-		public void setHMusic(String hMusic) {
+		public void setHMusic(TopListDetailBean.HMusicBean hMusic) {
 			this.hMusic = hMusic;
 		}
 
-		public String getHMusic() {
+		public TopListDetailBean.HMusicBean getHMusic() {
 			return hMusic;
 		}
 

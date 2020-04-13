@@ -322,7 +322,8 @@ public class DjSubListBean {
 		private int authority;
 		private boolean mutual;
 		private String expertTags;
-		private String experts;
+		//{"1":"音乐原创视频达人"}
+		private Object experts;
 		private int djStatus;
 		private int vipType;
 		private String remarkName;
@@ -498,11 +499,11 @@ public class DjSubListBean {
 			return expertTags;
 		}
 
-		public void setExperts(String experts) {
+		public void setExperts(Object experts) {
 			this.experts = experts;
 		}
 
-		public String getExperts() {
+		public Object getExperts() {
 			return experts;
 		}
 
