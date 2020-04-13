@@ -70,7 +70,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 	TextView mTvCurrentSong;
 
 	private RecommendPlayListAdapter mPlayListAdapter;
-	private GridLayoutManager albumSongManager ;
+	private GridLayoutManager albumSongManager;
 
 
 	private int TYPE_ALBUM = 0;
@@ -80,6 +80,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 	private final ArrayList<AlbumOrSongBean> songList = new ArrayList<>();
 
 	private AlbumSongAdapter mAlbumSongAdapter;
+
 	@Override
 	public Object setLayout() {
 		return R.layout.delegate_discover;
@@ -91,9 +92,6 @@ public class DiscoverDelegate extends NeteaseDelegate {
 		albumSongManager = new GridLayoutManager(getContext(), 3);
 		mRecyclerViewAlbumSong.setLayoutManager(albumSongManager);
 
-		final GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
-		LoginBean loginBean = GsonUtil.fromJSON(SharePreferenceUtil.getInstance(getContext()).getUserInfo(""), LoginBean.class);
-		Log.d(TAG, "userId:" + loginBean.getProfile().getUserId());
 		/*
 		 * 查询轮播图
 		 */
@@ -115,6 +113,9 @@ public class DiscoverDelegate extends NeteaseDelegate {
 
 			}
 		});
+
+
+		final GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
 		/*
 		 * 推荐歌单
 		 */
@@ -131,7 +132,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 					@Override
 					public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 						MainRecommendPlayListBean.RecommendBean item = (MainRecommendPlayListBean.RecommendBean) adapter.getItem(position);
-						getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(SongListDetailDelegate.TYPE_PLAYLIST, item.getId(),item.getCopywriter()));
+						getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(SongListDetailDelegate.TYPE_PLAYLIST, item.getId(), item.getCopywriter()));
 					}
 				});
 			}
@@ -162,9 +163,9 @@ public class DiscoverDelegate extends NeteaseDelegate {
 					@Override
 					public void onItemClick(BaseQuickAdapter adpater, View view, int i) {
 						AlbumOrSongBean entity = (AlbumOrSongBean) adpater.getItem(i);
-						if(entity.getType() == TYPE_ALBUM){
+						if (entity.getType() == TYPE_ALBUM) {
 							getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(1, entity.getId()));
-						}else{
+						} else {
 							//TODO 加入播放队列
 						}
 					}
@@ -251,7 +252,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 	//新歌推荐或者更多新碟
 	@OnClick(R2.id.tv_discover_more_album_song)
 	void onClickAlbumOrSong() {
-		if((int)mTvAlbumOrSong.getTag() == TYPE_ALBUM){
+		if ((int) mTvAlbumOrSong.getTag() == TYPE_ALBUM) {
 			getParentDelegate().getSupportDelegate().start(new NewAlbumDelegate());
 		}
 	}
@@ -274,7 +275,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 			mTvAlbumOrSong.setTag(TYPE_ALBUM);
 
 
-		} else if(type == TYPE_SONG){
+		} else if (type == TYPE_SONG) {
 			mTvCurrentSong.setTextColor(getResources().getColor(R.color.black));
 			mTvCurrentSong.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));//加粗
 			mTvCurrentSong.setTextSize(15);
@@ -320,7 +321,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 		}
 	}
 
-	static class AlbumSongAdapter extends BaseQuickAdapter<AlbumOrSongBean, BaseViewHolder>{
+	static class AlbumSongAdapter extends BaseQuickAdapter<AlbumOrSongBean, BaseViewHolder> {
 		private ImageLoaderManager manager;
 
 		AlbumSongAdapter(@Nullable List<AlbumOrSongBean> data) {

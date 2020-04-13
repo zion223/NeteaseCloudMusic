@@ -1,6 +1,7 @@
 package com.imooc.imooc_voice.view.discory.radio.rank;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -125,6 +126,7 @@ public class ProgramRankDelegate extends NeteaseLoadingDelegate {
 			//分数
 			adapter.setText(R.id.tv_item_program_rank_score, String.valueOf(item.getScore()));
 
+			//排名变化
 			int diffRank = item.getLastRank() - item.getRank();
 			if(diffRank != 0){
 				if(diffRank > 0){
@@ -135,10 +137,17 @@ public class ProgramRankDelegate extends NeteaseLoadingDelegate {
 			}else{
 				adapter.setImageResource(R.id.iv_item_program_diff, R.drawable.zero);
 			}
+			//排名
 			if(item.getRank() < 4){
 				adapter.setTextColor(R.id.tv_item_program_rank_rank, Color.RED);
 			}
-			adapter.setText(R.id.tv_item_program_rank_diff, String.valueOf(diffRank));
+			if(item.getRank() > 9){
+				((TextView)adapter.getView(R.id.tv_item_program_rank_rank)).setTextSize(16);
+				((TextView)adapter.getView(R.id.tv_item_program_rank_rank)).setTypeface(Typeface.DEFAULT);
+			}
+
+			//排名变化
+			adapter.setText(R.id.tv_item_program_rank_diff, String.valueOf(Math.abs(diffRank)));
 			//节目封面
 			ImageLoaderManager.getInstance().displayImageForCorner((ImageView) adapter.getView(R.id.iv_item_program_img), item.getProgram().getCoverUrl());
 			ImageLoaderManager.getInstance().displayImageForCircle((ImageView) adapter.getView(R.id.iv_item_program_rank_djavatar), item.getProgram().getDj().getAvatarUrl());

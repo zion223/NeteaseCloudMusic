@@ -212,7 +212,7 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 				case 2:
 					return mData.get(groupPosition).getPlayList().getPlayLists().size();
 				case 3:
-					return mData.get(groupPosition).getDjRadio().getDjRadios() != null ? mData.get(groupPosition).getDjRadio().getDjRadios().size() : 0;
+					return mData.get(groupPosition).getDjRadio() != null ? mData.get(groupPosition).getDjRadio().getDjRadios().size() : 0;
 				case 4:
 					return mData.get(groupPosition).getArtist().getArtists().size();
 				case 5:

@@ -40,14 +40,13 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
 		adapter.setText(R.id.tv_like_count, item.getInfo().getLikedCount() == 0 ? "" : String.valueOf(item.getInfo().getLikedCount()));
 
 		initImageView(adapter);
-
+		showImg(adapter, item);
 		String jsonEvnet = item.getJson();
 		UserEventJsonBean userEventJsonBean = GsonUtil.fromJSON(jsonEvnet, UserEventJsonBean.class);
 		if (userEventJsonBean != null) {
 			Log.d(TAG, "jsonBean:" + userEventJsonBean);
-			if (TextUtils.isEmpty(userEventJsonBean.getMsg())) {
-				adapter.setVisible(R.id.tv_content, false);
-			} else {
+			//显示msg内容
+			if (!TextUtils.isEmpty(userEventJsonBean.getMsg())) {
 				adapter.setVisible(R.id.tv_content, true);
 				adapter.setText(R.id.tv_content, userEventJsonBean.getMsg());
 			}
@@ -70,10 +69,12 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
 				case 18:
 					adapter.setText(R.id.tv_title, "分享单曲：");
 					break;
+				case 19:
+					adapter.setText(R.id.tv_title, "分享专辑：");
+					break;
 				case 17:
 				case 28:
-					adapter.setText(R.id.tv_title, "分享电台：");
-					showDjBean(userEventJsonBean);
+					adapter.setText(R.id.tv_title, "分享电台节目：");
 					break;
 				case 22:
 					adapter.setText(R.id.tv_title, "转发：");
@@ -91,9 +92,10 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
 					adapter.setText(R.id.tv_title, "分享专栏文章：");
 					break;
 				case 41:
+				case 21:
 					adapter.setText(R.id.tv_title, "分享视频：");
 					break;
-					// 13 分享歌单 24 分享专栏文章  41 分享视频 2 
+					// 13 分享歌单 24 分享专栏文章  41 21 分享视频 2
 
 			}
 
@@ -127,9 +129,7 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
 		imgList.add(ivShow9);
 	}
 
-	private void showDjBean(UserEventJsonBean jsonBean) {
 
-	}
 
 
 	//显示图片
@@ -159,14 +159,20 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
 		if (jsonBean != null && jsonBean.getSong() != null && !TextUtils.isEmpty(jsonBean.getSong().getName())) {
 			adapter.setVisible(R.id.rl_share, true);
 			manager.displayImageForCorner((ImageView) adapter.getView(R.id.iv_song_cover), jsonBean.getSong().getAlbum().getPicUrl());
+			//单曲名
 			adapter.setText(R.id.tv_songname, jsonBean.getSong().getName());
-			adapter.setText(R.id.tv_creator_name, "by " + jsonBean.getSong().getArtists().get(0).getName());
+			//歌手名
+			adapter.setText(R.id.tv_creator_name, jsonBean.getSong().getArtists().get(0).getName());
+
 			//节目
-		} else if (jsonBean != null && jsonBean.getProgram() != null && !TextUtils.isEmpty(jsonBean.getProgram().getName())) {
+		} else if (jsonBean != null && jsonBean.getProgram() != null && !TextUtils.isEmpty(jsonBean.getProgram().getName()) ) {
 			adapter.setVisible(R.id.rl_share, true);
 			manager.displayImageForCorner((ImageView) adapter.getView(R.id.iv_song_cover), jsonBean.getProgram().getCoverUrl());
-			adapter.setText(R.id.tv_songname, jsonBean.getSong().getName());
-			adapter.setText(R.id.tv_creator_name, "by " + jsonBean.getSong().getArtists().get(0).getName());
+
+			adapter.setText(R.id.tv_songname, jsonBean.getProgram().getName());
+			//电台名称
+			adapter.setText(R.id.tv_creator_name, jsonBean.getProgram().getRadio().getName());
+
 			//视频
 		} else if(jsonBean != null && jsonBean.getVideo() != null ){
 			adapter.setVisible(R.id.rl_video, true);

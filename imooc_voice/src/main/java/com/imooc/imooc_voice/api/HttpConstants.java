@@ -7,8 +7,8 @@ public class HttpConstants {
 
     private static final String FORMATE = "json";
     private static final String BASE = "http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&format=" + FORMATE;
-    private static final String ROOT_URL = "http://192.168.1.54:3000";
-    //private static final String ROOT_URL = "http://brrtva.natappfree.cc";
+    //private static final String ROOT_URL = "http://192.168.1.54:3000";
+    private static final String ROOT_URL = " http://xd8j67.natappfree.cc";
 
     static String LOGIN = ROOT_URL + "/login/cellphone";
 

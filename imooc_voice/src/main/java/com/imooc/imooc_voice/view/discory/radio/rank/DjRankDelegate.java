@@ -1,6 +1,7 @@
 package com.imooc.imooc_voice.view.discory.radio.rank;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -9,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseSectionQuickAdapter;
@@ -117,8 +119,20 @@ public class DjRankDelegate extends NeteaseLoadingDelegate implements BaseQuickA
 
 	@Override
 	public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
-		DjToplistEntity entity = (DjToplistEntity) baseQuickAdapter.getItem(i);
-		getSupportDelegate().start(UserDetailDelegate.newInstance(entity.t.getId()));;
+		if(baseQuickAdapter.getItem(i) instanceof DjTopListBean.List){
+			//最热主播数据
+			DjTopListBean.List entity = (DjTopListBean.List) baseQuickAdapter.getItem(i);
+			getParentDelegate().getSupportDelegate().start(UserDetailDelegate.newInstance(entity.getId()));;
+		}else{
+			//排行榜个人详情
+			DjToplistEntity entity = (DjToplistEntity) baseQuickAdapter.getItem(i);
+			if(entity.t != null){
+				getParentDelegate().getSupportDelegate().start(UserDetailDelegate.newInstance(entity.t.getId()));;
+			}else{
+				//点击了头部 查看排行榜详情
+			}
+		}
+
 	}
 
 	static class DjHoursAdapter extends BaseSectionQuickAdapter<DjToplistEntity, BaseViewHolder>{
@@ -174,7 +188,7 @@ public class DjRankDelegate extends NeteaseLoadingDelegate implements BaseQuickA
 			}else{
 				adapter.setImageResource(R.id.iv_item_dj_diff, R.drawable.zero);
 			}
-            String diff  = String.valueOf(diffRank);
+            String diff  = String.valueOf(Math.abs(diffRank));
             adapter.setText(R.id.tv_item_dj_rank_diff, diff);
             adapter.setText(R.id.tv_item_dj_rank_score, SearchUtil.getCorresPondingString(list.getScore()));
 			//userType
@@ -187,6 +201,10 @@ public class DjRankDelegate extends NeteaseLoadingDelegate implements BaseQuickA
 			}
 			if(list.getRank() < 4){
 				adapter.setTextColor(R.id.tv_item_dj_rank_rank, Color.RED);
+			}
+			if(list.getRank() > 9){
+				((TextView)adapter.getView(R.id.tv_item_dj_rank_rank)).setTextSize(16);
+				((TextView)adapter.getView(R.id.tv_item_dj_rank_rank)).setTypeface(Typeface.DEFAULT);
 			}
             adapter.setText(R.id.tv_item_dj_rank_rank, String.valueOf(list.getRank()));
 			manager.displayImageForCircle((ImageView) adapter.getView(R.id.iv_item_dj_avatar), list.getAvatarUrl());

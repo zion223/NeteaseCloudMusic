@@ -59,6 +59,7 @@ public class RankDelegate extends NeteaseDelegate {
 		CommonNavigator commonNavigator = CommonNavigatorCreater.setDefaultNavigator(getContext(), mTitleDataList, mTabViewPager);
 		commonNavigator.setAdjustMode(true);
 		mTabMagicIndicator.setNavigator(commonNavigator);
+		mTabMagicIndicator.onPageSelected(1);
 		ViewPagerHelper.bind(mTabMagicIndicator, mTabViewPager);
 
 	}

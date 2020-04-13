@@ -7,38 +7,39 @@
 
     <TextView
         android:id="@+id/tv_item_dj_rank_rank"
-        android:layout_width="20dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_centerVertical="true"
+        android:layout_width="25dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:gravity="center"
+        android:gravity="bottom|center_horizontal"
         android:text="1"
-        android:textSize="20sp"
+        android:textSize="21sp"
         android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/iv_item_dj_diff"
         android:layout_width="5dp"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/tv_item_dj_rank_diff"
-        android:layout_alignBottom="@+id/tv_item_dj_rank_diff"
         android:layout_below="@+id/tv_item_dj_rank_rank"
         android:layout_alignLeft="@+id/tv_item_dj_rank_rank"
+        android:layout_alignTop="@+id/tv_item_dj_rank_diff"
+        android:layout_alignBottom="@+id/tv_item_dj_rank_diff"
+        android:layout_marginLeft="5dp"
         android:src="@drawable/zero"
-        android:layout_marginLeft="4dp"
-        android:visibility="visible"/>
+        android:visibility="visible" />
+
     <TextView
         android:id="@+id/tv_item_dj_rank_diff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_item_dj_rank_rank"
-        android:layout_alignRight="@+id/tv_item_dj_rank_rank"
-        android:layout_marginRight="4dp"
-        android:layout_marginTop="2dp"
-        android:text="1"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="-3dp"
+        android:layout_toRightOf="@+id/iv_item_dj_diff"
         android:gravity="center"
-        android:textSize="8sp"
+        android:text="1"
+        android:textSize="9sp"
         android:textStyle="bold" />
 
     <ImageView
@@ -65,9 +66,9 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="25dp"
-        android:maxLines="1"
-        android:ellipsize="end"
         android:layout_toRightOf="@+id/iv_item_dj_avatar"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:text="xxxxx"
         android:textColor="@color/black"
         android:textSize="15sp" />
@@ -79,8 +80,8 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="15dp"
-        android:textSize="11sp"
-        android:text="10万" />
+        android:text="10万"
+        android:textSize="11sp" />
 
     <ImageView
         android:layout_width="10dp"

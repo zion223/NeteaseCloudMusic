@@ -16,8 +16,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
-            app:cardCornerRadius="10dp"
-            app:cardUseCompatPadding="true">
+            app:cardCornerRadius="5dp">
 
             <com.bigkoo.convenientbanner.ConvenientBanner
                 android:id="@+id/banner_recycler_item"
@@ -63,10 +62,10 @@
             <LinearLayout
                 android:id="@+id/ll_discover_gedan"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="5dp"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <ImageView
@@ -257,8 +256,9 @@
             android:id="@+id/rv_discover_album_song"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="220dp"/>
+            android:layout_height="220dp" />
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

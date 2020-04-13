@@ -27,6 +27,7 @@ import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.newapi.FollowBean;
 import com.imooc.imooc_voice.model.newapi.personal.UserDetailBean;
+import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.navigator.CommonNavigatorCreater;
@@ -126,7 +127,7 @@ public class UserDetailDelegate extends NeteaseDelegate {
 				//关注和粉丝数量
 				int followed = bean.getProfile().getFolloweds();
 				int follower = bean.getProfile().getFollows();
-				mTvUserSubAndFollow.setText("关注 " + follower + "  粉丝 " + followed);
+				mTvUserSubAndFollow.setText("关注 " + follower + "  粉丝 " + SearchUtil.getCorresPondingString(followed));
 				int vipType = bean.getProfile().getVipType();
 
 
@@ -143,11 +144,17 @@ public class UserDetailDelegate extends NeteaseDelegate {
 
 
 				ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(Color.GRAY);
-				SpannableString msp = new SpannableString("动态 " + bean.getProfile().getEventCount());
-				msp.setSpan(new AbsoluteSizeSpan(35), 3, msp.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-				msp.setSpan(foregroundColorSpan, 3, msp.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+				//动态数量
+				SpannableString eventText;
+				if(bean.getProfile().getEventCount() > 100){
+					eventText = new SpannableString("动态 99+" );
+				}else{
+					eventText = new SpannableString("动态 " + bean.getProfile().getEventCount());
+				}
+				eventText.setSpan(new AbsoluteSizeSpan(35), 3, eventText.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+				eventText.setSpan(foregroundColorSpan, 3, eventText.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 				mTitleDataList[0] = "主页";
-				mTitleDataList[1] = msp;
+				mTitleDataList[1] = eventText;
 
 				CommonNavigator commonNavigator = CommonNavigatorCreater.setDefaultNavigator(getContext(), mTitleDataList, mViewPager);
 				commonNavigator.setAdjustMode(true);

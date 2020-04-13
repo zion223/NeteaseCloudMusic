@@ -68,7 +68,7 @@ public class NewAlbumDelegate extends NeteaseLoadingDelegate {
 	static class NewAlbumAdapter extends BaseQuickAdapter<AlbumSearchBean.ResultBean.AlbumsBean, BaseViewHolder>{
 		private ImageLoaderManager manager;
 
-		public NewAlbumAdapter(@Nullable List<AlbumSearchBean.ResultBean.AlbumsBean> data) {
+		NewAlbumAdapter(@Nullable List<AlbumSearchBean.ResultBean.AlbumsBean> data) {
 			super(R.layout.item_discover_album, data);
 			manager = ImageLoaderManager.getInstance();
 		}
