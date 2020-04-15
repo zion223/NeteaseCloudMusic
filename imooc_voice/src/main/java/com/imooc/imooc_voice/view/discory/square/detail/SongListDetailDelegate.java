@@ -26,6 +26,7 @@ import com.imooc.imooc_voice.model.newapi.AlbumDetailBean;
 import com.imooc.imooc_voice.model.newapi.PlaylistDetailBean;
 import com.imooc.imooc_voice.model.newapi.TopListDetailBean;
 import com.imooc.imooc_voice.model.newapi.song.SongDetailBean;
+import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.imooc_voice.view.home.search.artist.ArtistDetailDelegate;
 import com.imooc.imooc_voice.view.user.UserDetailDelegate;
@@ -297,15 +298,9 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 				mTvDetailTitle.setText(playlist.getName());
 				mTvDetailDesc.setText(playlist.getDescription());
 				mTvDetailAvatarName.setText(playlist.getCreator().getNickname());
-				long playcount = playlist.getPlayCount();
-				String playcountString;
-				if (playcount >= 10000) {
-					playcount = playcount / 10000;
-					playcountString = playcount + "万";
-				} else {
-					playcountString = playcount + "";
-				}
-				mTvGedanPlayNum.setText(playcountString);
+
+				//播放数量
+				mTvGedanPlayNum.setText(SearchUtil.getCorresPondingString(playlist.getPlayCount()));
 				manager.displayImageForCircle(mIvAvatarView, playlist.getCreator().getAvatarUrl());
 
 				manager.displayImageForCorner(mImageViewGedan, playlist.getCoverImgUrl(), 5);
@@ -320,7 +315,8 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 				//创建歌单的用户ID
 				userId = String.valueOf(playlist.getCreator().getUserId());
 				gedanTitle = playlist.getName();
-				mTvSongCollectCount.setText("收藏(" + playlist.getSubscribedCount() + ")");
+				//收藏的数量
+				mTvSongCollectCount.setText("收藏(" + SearchUtil.getCorresPondingString(playlist.getSubscribedCount()) + ")");
 
 				mTvSongCollectCount1.setText(String.valueOf(playlist.getSubscribedCount()));
 

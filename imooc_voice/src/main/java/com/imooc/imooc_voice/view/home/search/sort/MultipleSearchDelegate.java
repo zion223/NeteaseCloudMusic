@@ -179,7 +179,6 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 		@Override
 		public void onBindHeaderViewHolder(BaseViewHolder holder, int groupPosition) {
 			String headerTitle = mDataType.get(groupPosition).getText();
-			//Log.e("MultipeSearchAdapter", headerTitle + "headerTitle");
 			holder.setText(R.id.tv_item_multiple_search_header, headerTitle);
 		}
 
@@ -190,8 +189,6 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 
 		@Override
 		public void onBindChildViewHolder(BaseViewHolder holder, int groupPosition, int childPosition) {
-
-			//Log.e("MultipeSearchAdapter", "groupPosition " + groupPosition + "childPosition"+ childPosition);
 			convertChildViewHolder(holder, groupPosition, childPosition);
 		}
 

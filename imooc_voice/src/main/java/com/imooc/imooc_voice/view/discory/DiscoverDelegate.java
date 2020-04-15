@@ -296,7 +296,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 
 		private ImageLoaderManager manager;
 
-		public RecommendPlayListAdapter(@Nullable List<MainRecommendPlayListBean.RecommendBean> data) {
+		RecommendPlayListAdapter(@Nullable List<MainRecommendPlayListBean.RecommendBean> data) {
 			super(R.layout.item_discover_gedan, data);
 			manager = ImageLoaderManager.getInstance();
 		}

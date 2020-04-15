@@ -109,7 +109,7 @@ public class UserDetailDelegate extends NeteaseDelegate {
 		mTvSendMsg.setCompoundDrawables(drawable, null, null, null);
 
 		//设置发私信透明度
-		mTvSendMsg.getBackground().mutate().setAlpha(100);
+		mTvSendMsg.getBackground().mutate().setAlpha(200);
 
 		RequestCenter.getUserDetail(userId, new DisposeDataListener() {
 			@SuppressLint("SetTextI18n")
@@ -128,8 +128,6 @@ public class UserDetailDelegate extends NeteaseDelegate {
 				int followed = bean.getProfile().getFolloweds();
 				int follower = bean.getProfile().getFollows();
 				mTvUserSubAndFollow.setText("关注 " + follower + "  粉丝 " + SearchUtil.getCorresPondingString(followed));
-				int vipType = bean.getProfile().getVipType();
-
 
 				//显示关注或者已关注
 				boolean isFollowed = bean.getProfile().isFollowed();
@@ -139,14 +137,12 @@ public class UserDetailDelegate extends NeteaseDelegate {
 					mLlFollowUser.setVisibility(View.VISIBLE);
 				}
 				mTvUserLevel.setText("Lv." + bean.getLevel());
-				String timeStandard = TimeUtil.getTimeStandard(bean.getCreateTime());
-				Log.e("USER", "创建时间" + timeStandard + "vipType:" + vipType);
 
 
 				ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(Color.GRAY);
 				//动态数量
 				SpannableString eventText;
-				if(bean.getProfile().getEventCount() > 100){
+				if(bean.getProfile().getEventCount() > 10000){
 					eventText = new SpannableString("动态 99+" );
 				}else{
 					eventText = new SpannableString("动态 " + bean.getProfile().getEventCount());

@@ -40,7 +40,6 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
 		adapter.setText(R.id.tv_like_count, item.getInfo().getLikedCount() == 0 ? "" : String.valueOf(item.getInfo().getLikedCount()));
 
 		initImageView(adapter);
-		showImg(adapter, item);
 		String jsonEvnet = item.getJson();
 		UserEventJsonBean userEventJsonBean = GsonUtil.fromJSON(jsonEvnet, UserEventJsonBean.class);
 		if (userEventJsonBean != null) {
@@ -50,7 +49,7 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
 				adapter.setVisible(R.id.tv_content, true);
 				adapter.setText(R.id.tv_content, userEventJsonBean.getMsg());
 			}
-			//showImg(adapter, item);
+			showImg(adapter, item);
 			showShareLayout(adapter, userEventJsonBean);
 			int type;
 			if (item.getInfo().getCommentThread().getResourceInfo() == null) {
