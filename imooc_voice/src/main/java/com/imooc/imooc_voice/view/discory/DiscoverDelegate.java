@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
@@ -34,10 +35,12 @@ import com.imooc.imooc_voice.view.discory.square.GedanSquareDelegate;
 import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
 import com.imooc.lib_common_ui.bannder.BannerCreator;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
+import com.imooc.lib_common_ui.delegate.web.WebDelegateImpl;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.exception.OkHttpException;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,13 +102,27 @@ public class DiscoverDelegate extends NeteaseDelegate {
 			@Override
 			public void onSuccess(Object responseObj) {
 				BannerBean bannerBean = (BannerBean) responseObj;
-				List<BannerBean.BannersBean> banners = bannerBean.getBanners();
+				final List<BannerBean.BannersBean> banners = bannerBean.getBanners();
 				ArrayList<String> banner = new ArrayList<>();
 				for (BannerBean.BannersBean item : banners) {
 					banner.add(item.getPic());
 				}
-				//TODO 设置Banner的点击事件
-				BannerCreator.setDefault(convenientBanner, banner, null);
+				BannerCreator.setDefault(convenientBanner, banner, new OnItemClickListener() {
+					@Override
+					public void onItemClick(int position) {
+						BannerBean.BannersBean item = banners.get(position);
+						if(item.getTargetType() == 4){
+							//歌曲
+						}else if(item.getTargetType() == 10){
+							//专辑
+							getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(SongListDetailDelegate.TYPE_ALBUM, item.getTargetId()));
+						}
+						if(item.getUrl() != null ){
+							Log.d(TAG, "banner url:" + item.getUrl());
+							getParentDelegate().getSupportDelegate().start(WebContainerDelegate.newInstance(item.getUrl()));
+						}
+					}
+				});
 			}
 
 			@Override

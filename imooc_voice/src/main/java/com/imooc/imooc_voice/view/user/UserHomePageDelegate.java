@@ -98,7 +98,7 @@ public class UserHomePageDelegate extends NeteaseDelegate {
 		//基本信息
 		String createTime = TimeUtil.getTimeStandardOnlyYMD(mCurrentUser.getCreateTime());
 		mTvCreateTime.setText("村龄: " + createTime + "注册");
-		mTvAge.setText("年龄：无法解析" + mCurrentUser.getProfile().getBirthday());
+		mTvAge.setText("年龄：出生日期" + TimeUtil.getTimeStandardOnlyYMD(mCurrentUser.getProfile().getBirthday()));
 		mTvArea.setText("地区：地区码" + mCurrentUser.getProfile().getProvince() + " " + mCurrentUser.getProfile().getCity());
 		//听歌排行
 		mTvListenRankTitle.setText(mCurrentUser.getProfile().getNickname() + "的听歌排行");
