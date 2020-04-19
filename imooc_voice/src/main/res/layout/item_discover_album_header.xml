@@ -2,18 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingTop="15dp"
+    android:paddingBottom="10dp">
     <!-- 精彩评论 最新评论-->
     <TextView
         android:id="@+id/tv_gedan_detail_comment_header_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="20dp"
         android:padding="3dp"
         android:text="本周新碟"
+        android:layout_gravity="center_vertical"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="17sp"
         android:textStyle="bold" />
 
 </LinearLayout>

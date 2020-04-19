@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="10dp"
     android:layout_marginTop="10dp"
-    android:layout_marginRight="20dp"
+    android:layout_marginRight="10dp"
     android:layout_marginBottom="5dp"
     android:orientation="horizontal">
 
@@ -12,8 +12,8 @@
         android:id="@+id/iv_mine_gedan_state"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:rotation="270"
         android:layout_gravity="center_vertical"
+        android:rotation="270"
         android:src="@drawable/ic_left_gedan" />
 
     <TextView
@@ -26,14 +26,16 @@
         android:textColor="@color/black"
         android:textSize="17sp"
         android:textStyle="bold" />
+
     <TextView
         android:id="@+id/tv_item_gedan_header_righttext"
         android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_gravity="center_vertical"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_marginLeft="5dp"
+        android:layout_weight="1"
         android:text="(3)" />
+
     <ImageView
         android:id="@+id/iv_item_gedan_new"
         android:layout_width="20dp"
@@ -44,7 +46,7 @@
 
     <ImageView
         android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_height="18dp"
         android:layout_gravity="center_vertical"
         android:src="@drawable/more" />
 </LinearLayout>

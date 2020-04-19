@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
 
-        <RelativeLayout
+        <!--<RelativeLayout
             android:id="@+id/rl_item_video_group"
             android:layout_width="match_parent"
             android:layout_height="180dp"
@@ -26,8 +26,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:src="@color/gray" />
-        </RelativeLayout>
+        </RelativeLayout>-->
+        <LinearLayout
+            android:id="@+id/rl_item_video_group"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
 
+            <com.imooc.lib_video.videoplayer.CustomJzVideoView
+                android:id="@+id/videoplayer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
         <LinearLayout
             android:id="@+id/ll_item_video_status"
             android:layout_width="match_parent"

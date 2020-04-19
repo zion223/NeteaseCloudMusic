@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -13,6 +14,7 @@ import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.newapi.search.AlbumSearchBean;
+import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
@@ -42,8 +44,15 @@ public class NewAlbumDelegate extends NeteaseLoadingDelegate {
 				List<AlbumSearchBean.ResultBean.AlbumsBean> albums = bean.getAlbums();
 				mAdapter = new NewAlbumAdapter(albums);
 				mAdapter.setHeaderView(LayoutInflater.from(getContext()).inflate(R.layout.item_discover_album_header, null, false));
-				mRecyclerViewNewAlbum.setAdapter(mAdapter);
+				mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+					@Override
+					public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
+						AlbumSearchBean.ResultBean.AlbumsBean entity = (AlbumSearchBean.ResultBean.AlbumsBean) baseQuickAdapter.getItem(i);
+						getSupportDelegate().start(SongListDetailDelegate.newInstance(SongListDetailDelegate.TYPE_ALBUM, Long.parseLong(entity.getId())));
+					}
+				});
 				mRecyclerViewNewAlbum.setLayoutManager(new GridLayoutManager(getContext(),2));
+				mRecyclerViewNewAlbum.setAdapter(mAdapter);
 				addRootView();
 			}
 
