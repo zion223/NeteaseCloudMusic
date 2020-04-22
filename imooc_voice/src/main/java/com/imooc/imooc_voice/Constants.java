@@ -27,4 +27,12 @@ public interface Constants {
 
 		String LOCAL_MUSIC_COUNT = "LOCAL_MUSIC_COUNT";
 	}
+
+	int SONG = 0;
+	int MV = 1;
+	int PLAYLIST = 2;
+	int ALBUM = 3;
+	int RADIO = 4;
+	int VIDEO = 5;
+	int EVENT = 6;
 }

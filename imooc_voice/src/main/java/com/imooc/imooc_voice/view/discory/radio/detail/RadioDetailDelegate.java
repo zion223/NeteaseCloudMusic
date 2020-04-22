@@ -1,5 +1,6 @@
 package com.imooc.imooc_voice.view.discory.radio.detail;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.newapi.dj.DjDetailBean;
+import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_common_ui.dialog.UnsubscribeRadioDialog;
 import com.imooc.lib_common_ui.navigator.CommonNavigatorCreater;
@@ -88,6 +90,7 @@ public class RadioDetailDelegate extends NeteaseLoadingDelegate implements View.
 
 
 		RequestCenter.getRadioDetail(id, new DisposeDataListener() {
+			@SuppressLint("SetTextI18n")
 			@Override
 			public void onSuccess(Object responseObj) {
 				DjDetailBean bean = (DjDetailBean) responseObj;
@@ -95,13 +98,7 @@ public class RadioDetailDelegate extends NeteaseLoadingDelegate implements View.
 				mTvRadioTitle.setText(bean.getDjRadio().getName());
 				//订阅数
 				int subCount = bean.getDjRadio().getSubCount();
-				String count;
-				if(subCount > 10000){
-					count  = subCount/10000 +"万";
-				}else{
-					count = subCount + "";
-				}
-				mTvRadioSubscribed.setText(count + "人已订阅");
+				mTvRadioSubscribed.setText(SearchUtil.getCorresPondingString(subCount) + "人已订阅");
 				manager.displayImageForView(mIvAppbarBackground, bean.getDjRadio().getPicUrl());
 				boolean subed = bean.getDjRadio().isSubed();
 

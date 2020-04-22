@@ -43,6 +43,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.imooc.imooc_voice.Constants.PLAYLIST;
+
 public class MineDelegate extends NeteaseDelegate {
 
 
@@ -120,8 +122,7 @@ public class MineDelegate extends NeteaseDelegate {
 				mPlayListAdapter.setOnChildClickListener(new GroupedRecyclerViewAdapter.OnChildClickListener() {
 					@Override
 					public void onChildClick(GroupedRecyclerViewAdapter adapter, com.donkingliang.groupedadapter.holder.BaseViewHolder holder, int groupPosition, int childPosition) {
-						getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(SongListDetailDelegate.TYPE_PLAYLIST,
-								playListEntities.get(groupPosition).getBean().get(childPosition).getId()));
+						getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(PLAYLIST, playListEntities.get(groupPosition).getBean().get(childPosition).getId()));
 					}
 				});
 

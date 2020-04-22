@@ -31,7 +31,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import static com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate.TYPE_PLAYLIST;
+import static com.imooc.imooc_voice.Constants.PLAYLIST;
+
 
 public class UserHomePageDelegate extends NeteaseDelegate {
 
@@ -137,7 +138,7 @@ public class UserHomePageDelegate extends NeteaseDelegate {
 					@Override
 					public void onChildClick(GroupedRecyclerViewAdapter adapter, BaseViewHolder holder, int groupPosition, int childPosition) {
 						UserPlaylistBean.PlaylistBean entity = playlistEntities.get(groupPosition).getPlaylist().get(childPosition);
-						getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(TYPE_PLAYLIST,entity.getId()));
+						getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(PLAYLIST, entity.getId()));
 					}
 				});
 				//更多歌单
@@ -169,7 +170,7 @@ public class UserHomePageDelegate extends NeteaseDelegate {
 	//喜欢的音乐歌单
 	@OnClick(R2.id.rl_user_info_likemusic)
 	void onClickLikeMusicPlaylist(){
-		getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(TYPE_PLAYLIST, likeMusicId));
+		getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(PLAYLIST, likeMusicId));
 	}
 
 

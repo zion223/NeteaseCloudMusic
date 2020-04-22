@@ -735,6 +735,32 @@ public class RequestCenter {
     }
 
     /**
+     * 获取视频详情
+     */
+    public static void getVideoDetail(String id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.VIDEO_DETAIL, params, listener, VideoDetailBean.class);
+    }
+
+    /**
+     * 获取视频评论
+     */
+    public static void getVideoComment(String id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.VIDEO_COMMENT, params, listener, PlayListCommentBean.class);
+    }
+    /**
+     * 获取相关视频详情
+     */
+    public static void getVideoRelated(String id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.VIDEO_RELATED, params, listener, VideoRelatedBean.class);
+    }
+
+    /**
      *  获取视频标签下的视频
      */
     public static void getVideoUrl(String id, DisposeDataListener listener){

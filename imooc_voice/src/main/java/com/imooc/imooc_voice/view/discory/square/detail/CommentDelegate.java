@@ -3,6 +3,7 @@ package com.imooc.imooc_voice.view.discory.square.detail;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
@@ -36,6 +38,9 @@ import com.imooc.lib_network.listener.DisposeDataListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.imooc.imooc_voice.Constants.ALBUM;
+import static com.imooc.imooc_voice.Constants.PLAYLIST;
+
 
 public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnClickListener {
 
@@ -57,11 +62,7 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 	private static final String ARGS_COMMENT_HEADER_BOTTOM = "ARGS_COMMENT_HEADER_BOTTOM";
 
 
-	//评论类型 歌曲评论 歌单评论 专辑评论
-
-	public static final int PLAYLIST = 0;
-	public static final int ALBUM = 1;
-	public static final int SONG = 2;
+	//评论类型 歌曲评论 歌单评论 专辑评论 0: 歌曲  1: mv 2: 歌单 3: 专辑 4: 电台 5: 视频 6: 动态
 
 	//歌单ID
 	private String id;
@@ -168,7 +169,7 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 						RequestCenter.getPlaylistComment(id, new DisposeDataListener() {
 							@Override
 							public void onSuccess(Object responseObj) {
-								loadCommentList((PlayListCommentBean) responseObj);
+								loadCommentList((PlayListCommentBean) responseObj, PLAYLIST);
 							}
 
 							@Override
@@ -182,7 +183,7 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 						RequestCenter.getAlbumComment(id, new DisposeDataListener() {
 							@Override
 							public void onSuccess(Object responseObj) {
-								loadCommentList((PlayListCommentBean) responseObj);
+								loadCommentList((PlayListCommentBean) responseObj, ALBUM);
 							}
 
 							@Override
@@ -198,7 +199,7 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 		}.execute();
 	}
 
-	private void loadCommentList(PlayListCommentBean responseObj) {
+	private void loadCommentList(PlayListCommentBean responseObj, int type) {
 		entities.add(new PlayListCommentEntity(true, "精彩评论", ""));
 		for (int i = 0; i < responseObj.getHotComments().size(); i++) {
 			entities.add(new PlayListCommentEntity(responseObj.getHotComments().get(i)));
@@ -207,7 +208,7 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 		for (int j = 0; j < responseObj.getComments().size(); j++) {
 			entities.add(new PlayListCommentEntity(responseObj.getComments().get(j)));
 		}
-		mAdapter = new MultipleSectionGedanCommentAdapter(entities);
+		mAdapter = new MultipleSectionGedanCommentAdapter(id, type, getContext(), entities);
 		mRecyclerViewComment.setAdapter(mAdapter);
 		mRecyclerViewComment.setLayoutManager(new LinearLayoutManager(getContext()) {
 			@Override
@@ -230,13 +231,21 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 		}
 	}
 
-	class MultipleSectionGedanCommentAdapter extends BaseSectionQuickAdapter<PlayListCommentEntity, BaseViewHolder> {
+
+	public static class MultipleSectionGedanCommentAdapter extends BaseSectionQuickAdapter<PlayListCommentEntity, BaseViewHolder> {
 
 		private ImageLoaderManager manager;
+		private String commentId;
+		private Context mContext;
+		private int commentType;
 
-		MultipleSectionGedanCommentAdapter(List<PlayListCommentEntity> data) {
+		//评论类型 tyep  0: 歌曲  1: mv 2: 歌单 3: 专辑 4: 电台 5: 视频 6: 动态
+		public MultipleSectionGedanCommentAdapter(String id, int type, Context context, List<PlayListCommentEntity> data) {
 			super(R.layout.item_gedan_detail_comment, R.layout.item_gedan_comment_header, data);
 			manager = ImageLoaderManager.getInstance();
+			commentId = id;
+			mContext = context;
+			commentType = type;
 		}
 
 		@Override
@@ -248,10 +257,15 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 		@Override
 		protected void convert(@NonNull final BaseViewHolder baseViewHolder, PlayListCommentEntity playListCommentEntity) {
 			final MusicCommentBean.CommentsBean bean = playListCommentEntity.t;
+			//用户头像
 			ImageView avatarImg = baseViewHolder.getView(R.id.iv_item_gedan_comment_avatar_img);
 			manager.displayImageForCircle(avatarImg, bean.getUser().getAvatarUrl());
+			//用户昵称
 			baseViewHolder.setText(R.id.tv_item_gedan_comment_avatar_name, bean.getUser().getNickname());
-
+			//用户VIP类型
+			if(bean.getUser().getVipType() == 11){
+				baseViewHolder.setVisible(R.id.iv_item_gedan_comment_avatar_vip, true);
+			}
 			baseViewHolder.setText(R.id.tv_item_gedan_comment_time, TimeUtil.getTimeStandardOnlyYMDChinese(bean.getTime()));
 			//点赞数量
 			if (bean.getLikedCount() != 0) {
@@ -280,20 +294,20 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 						ObjectAnimator scaleY = ObjectAnimator.ofFloat(zanView, "scaleY", 1f, 1.5f, 1f);
 						baseViewHolder.setText(R.id.tv_item_gedan_comment_zan_count, String.valueOf(bean.getLikedCount() + 1));
 						baseViewHolder.setTextColor(R.id.tv_item_gedan_comment_zan_count, Color.parseColor("#FF3A3A"));
-						RequestCenter.getlikeComment(id, bean.getCommentId(), 1, 2, new DisposeDataListener() {
+						RequestCenter.getlikeComment(commentId, bean.getCommentId(), 1, commentType, new DisposeDataListener() {
 							@Override
 							public void onSuccess(Object responseObj) {
 								CommentLikeBean bean = (CommentLikeBean) responseObj;
 								if (bean.getCode() == 200) {
-									Toast.makeText(getContext(), "点赞成功", Toast.LENGTH_SHORT).show();
+									Toast.makeText(mContext, "点赞成功", Toast.LENGTH_SHORT).show();
 								} else {
-									Toast.makeText(getContext(), "点赞失败", Toast.LENGTH_SHORT).show();
+									Toast.makeText(mContext, "点赞失败", Toast.LENGTH_SHORT).show();
 								}
 							}
 
 							@Override
 							public void onFailure(Object reasonObj) {
-								Toast.makeText(getContext(), "点赞失败", Toast.LENGTH_SHORT).show();
+								Toast.makeText(mContext, "点赞失败", Toast.LENGTH_SHORT).show();
 							}
 						});
 						animatorSetsuofang.setDuration(500);
@@ -306,20 +320,20 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 						zanView.setImageResource(R.drawable.zan);
 						zanView.setTag(false);
 						baseViewHolder.setTextColor(R.id.tv_item_gedan_comment_zan_count, Color.GRAY);
-						RequestCenter.getlikeComment(id, bean.getCommentId(), 0, 2, new DisposeDataListener() {
+						RequestCenter.getlikeComment(commentId, bean.getCommentId(), 0, commentType, new DisposeDataListener() {
 							@Override
 							public void onSuccess(Object responseObj) {
 								CommentLikeBean bean = (CommentLikeBean) responseObj;
 								if (bean.getCode() == 200) {
-									Toast.makeText(getContext(), "取消赞成功", Toast.LENGTH_SHORT).show();
+									Toast.makeText(mContext, "取消赞成功", Toast.LENGTH_SHORT).show();
 								} else {
-									Toast.makeText(getContext(), "取消赞失败", Toast.LENGTH_SHORT).show();
+									Toast.makeText(mContext, "取消赞失败", Toast.LENGTH_SHORT).show();
 								}
 							}
 
 							@Override
 							public void onFailure(Object reasonObj) {
-								Toast.makeText(getContext(), "取消赞失败", Toast.LENGTH_SHORT).show();
+								Toast.makeText(mContext, "取消赞失败", Toast.LENGTH_SHORT).show();
 							}
 						});
 					}

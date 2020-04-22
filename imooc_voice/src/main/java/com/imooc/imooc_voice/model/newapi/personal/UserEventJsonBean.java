@@ -1018,7 +1018,7 @@ public class UserEventJsonBean {
             private long dfsId;
             private int bitrate;
             private int playTime;
-            private int volumeDelta;
+            private String volumeDelta;
 
             public Object getName() {
                 return name;
@@ -1084,11 +1084,11 @@ public class UserEventJsonBean {
                 this.playTime = playTime;
             }
 
-            public int getVolumeDelta() {
+            public String getVolumeDelta() {
                 return volumeDelta;
             }
 
-            public void setVolumeDelta(int volumeDelta) {
+            public void setVolumeDelta(String volumeDelta) {
                 this.volumeDelta = volumeDelta;
             }
         }
@@ -1114,7 +1114,7 @@ public class UserEventJsonBean {
             private long dfsId;
             private int bitrate;
             private int playTime;
-            private int volumeDelta;
+            private String volumeDelta;
 
             public Object getName() {
                 return name;
@@ -1180,11 +1180,11 @@ public class UserEventJsonBean {
                 this.playTime = playTime;
             }
 
-            public int getVolumeDelta() {
+            public String getVolumeDelta() {
                 return volumeDelta;
             }
 
-            public void setVolumeDelta(int volumeDelta) {
+            public void setVolumeDelta(String volumeDelta) {
                 this.volumeDelta = volumeDelta;
             }
         }
@@ -1210,7 +1210,7 @@ public class UserEventJsonBean {
             private long dfsId;
             private int bitrate;
             private int playTime;
-            private int volumeDelta;
+            private String volumeDelta;
 
             public Object getName() {
                 return name;
@@ -1276,11 +1276,11 @@ public class UserEventJsonBean {
                 this.playTime = playTime;
             }
 
-            public int getVolumeDelta() {
+            public String getVolumeDelta() {
                 return volumeDelta;
             }
 
-            public void setVolumeDelta(int volumeDelta) {
+            public void setVolumeDelta(String volumeDelta) {
                 this.volumeDelta = volumeDelta;
             }
         }

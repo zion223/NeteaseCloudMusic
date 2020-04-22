@@ -20,6 +20,8 @@ import com.imooc.lib_network.listener.DisposeDataListener;
 
 import java.util.List;
 
+import static com.imooc.imooc_voice.Constants.ALBUM;
+
 public class AlbumSearchDelegate extends NeteaseSearchLoadingDelegate {
 
 
@@ -36,7 +38,7 @@ public class AlbumSearchDelegate extends NeteaseSearchLoadingDelegate {
 					@Override
 					public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
 						AlbumSearchBean.ResultBean.AlbumsBean entity = (AlbumSearchBean.ResultBean.AlbumsBean) baseQuickAdapter.getItem(i);
-						getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(SongListDetailDelegate.TYPE_ALBUM, Long.parseLong(entity.getId())));
+						getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(ALBUM, Long.parseLong(entity.getId())));
 					}
 				});
 				mRecyclerView.setAdapter(mAdapter);

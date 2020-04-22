@@ -26,6 +26,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.imooc.imooc_voice.Constants.PLAYLIST;
+
 public class RankingDelegate extends NeteaseDelegate {
 
 	@BindView(R2.id.rv_rank_offical)
@@ -71,7 +73,7 @@ public class RankingDelegate extends NeteaseDelegate {
 					@Override
 					public void onItemClick(BaseQuickAdapter adpater, View view, int i) {
 						TopListBean.ListBean entity = (TopListBean.ListBean) adpater.getItem(i);
-						getSupportDelegate().start(SongListDetailDelegate.newInstance(SongListDetailDelegate.TYPE_PLAYLIST, entity.getId()));
+						getSupportDelegate().start(SongListDetailDelegate.newInstance(PLAYLIST, entity.getId()));
 					}
 				});
 				mRvRankNoraml.setLayoutManager(new GridLayoutManager(getContext(), 3));

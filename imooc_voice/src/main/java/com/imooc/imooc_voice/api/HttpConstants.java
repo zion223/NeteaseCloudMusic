@@ -8,7 +8,7 @@ public class HttpConstants {
     private static final String FORMATE = "json";
     private static final String BASE = "http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&format=" + FORMATE;
     //private static final String ROOT_URL = "http://192.168.1.54:3000";
-    private static final String ROOT_URL = "http://dt6huv.natappfree.cc";
+    private static final String ROOT_URL = "http://62.234.57.125:3000";
 
     static String LOGIN = ROOT_URL + "/login/cellphone";
 
@@ -140,6 +140,12 @@ public class HttpConstants {
     static String VIDEO_GROUP = ROOT_URL + "/video/group/list";
 
     static String VIDEO_TAB = ROOT_URL + "/video/group";
+
+    static String VIDEO_DETAIL = ROOT_URL + "/video/detail";
+
+    static String VIDEO_COMMENT = ROOT_URL + "/comment/video";
+
+    static String VIDEO_RELATED = ROOT_URL + "/related/allvideo";
 
     static String VIDEO_URL = ROOT_URL + "/video/url";
 

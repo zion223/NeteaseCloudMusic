@@ -14,6 +14,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.newapi.dj.DjProgramBean;
+import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_network.listener.DisposeDataListener;
@@ -100,16 +101,13 @@ public class RadioProgramDelegate extends NeteaseLoadingDelegate {
         protected void convert(@NonNull BaseViewHolder adapter, DjProgramBean.ProgramsBean bean) {
 
             adapter.setText(R.id.item_radio_program_toptext, bean.getName());
+            //编号
             adapter.setText(R.id.item_radio_program_no, String.valueOf(adapter.getLayoutPosition() + 1));
+            //创建时间
             adapter.setText(R.id.item_radio_program_createtime, TimeUtil.getTimeStandardOnlyYMD(bean.getCreateTime()));
+            //播放数量
             int listenerCount = bean.getListenerCount();
-            String count;
-            if(listenerCount > 10000){
-                count  = listenerCount/10000 +"万";
-            }else{
-                count = listenerCount + "";
-            }
-            adapter.setText(R.id.item_radio_program_playnum, count);
+            adapter.setText(R.id.item_radio_program_playnum, SearchUtil.getCorresPondingString(listenerCount));
             adapter.setText(R.id.item_radio_program_duration, TimeUtil.getTimeNoYMDH(bean.getDuration()));
         }
 

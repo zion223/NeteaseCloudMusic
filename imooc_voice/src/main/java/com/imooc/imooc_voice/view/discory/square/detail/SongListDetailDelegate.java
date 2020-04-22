@@ -42,6 +42,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.imooc.imooc_voice.Constants.ALBUM;
+import static com.imooc.imooc_voice.Constants.PLAYLIST;
+
 /**
  * 歌单和专辑详情
  */
@@ -104,9 +107,6 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	private static final String ARGS_SONGLIST_REASON = "ARGS_SONGLIST_REASON";
 
 
-	public static final int TYPE_PLAYLIST = 0;
-	public static final int TYPE_ALBUM = 1;
-
 	//歌单ID
 	private String songlistId;
 	//推荐原因
@@ -161,11 +161,11 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	public void initView() {
 		mRecyclerViewGedan = rootView.findViewById(R.id.rv_gedan_detail_normal);
 		switch (type){
-			case TYPE_PLAYLIST:
+			case PLAYLIST:
 				//歌单
 				initPlayListView();
 				break;
-			case TYPE_ALBUM:
+			case ALBUM:
 				//专辑
 				initAlbumView();
 				break;
@@ -186,7 +186,7 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 				if (Math.abs(i) > 220) {
 					mTvToolBarTitle.setText(mTvDetailTitle.getText());
 				} else {
-					if(type == TYPE_ALBUM){
+					if(type == ALBUM){
 						mTvToolBarTitle.setText("专辑");
 					}else{
 						mTvToolBarTitle.setText("歌单");
@@ -415,11 +415,11 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	@OnClick(R2.id.tv_gedan_detail_avatar_name)
 	void onClickUserInfo() {
 		switch (type){
-			case TYPE_ALBUM:
+			case ALBUM:
 				//查看歌手
 				getSupportDelegate().start(ArtistDetailDelegate.newInstance(userId));
 				break;
-			case TYPE_PLAYLIST:
+			case PLAYLIST:
 				//查看用户
 				getSupportDelegate().start(UserDetailDelegate.newInstance(userId));
 				break;

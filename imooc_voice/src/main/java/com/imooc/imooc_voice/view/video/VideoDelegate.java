@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -56,14 +57,21 @@ public class VideoDelegate extends NeteaseLoadingDelegate {
 	public void initView() {
 		//TODO videoId = 1000 请求的视频是MV
 		mRecyclerView = rootView.findViewById(R.id.rv_delegate_normal);
+		Log.e("VideoDelegate","videoId:" + videoId);
 		RequestCenter.getVideoTab(videoId, new DisposeDataListener() {
 			@Override
 			public void onSuccess(Object responseObj) {
 				VideoBean bean = (VideoBean) responseObj;
 				List<VideoBean.VideoEntity> datas = bean.getDatas();
 				mAdapter = new VideoAdapter(datas);
+				mAdapter.setOnItemClickListener((adapter, view, i) -> {
+					VideoBean.VideoEntity entity = (VideoBean.VideoEntity) adapter.getItem(i);
+					//视频详情
+					getParentDelegate().getParentDelegate().getSupportDelegate().start(VideoDetailDelegate.newInstance(entity.getData().getVid()));
+				});
 				mRecyclerView.setAdapter(mAdapter);
 				mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
 				mRecyclerView.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
 					@Override
 					public void onChildViewAttachedToWindow(@NonNull View view) {
@@ -93,12 +101,21 @@ public class VideoDelegate extends NeteaseLoadingDelegate {
 		});
 	}
 
+	@Override
+	public boolean onBackPressedSupport() {
+		if(Jzvd.backPress()){
+			return false;
+		}else{
+			return super.onBackPressedSupport();
+		}
+	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		Jzvd.releaseAllVideos();
 	}
+
 	@Override
 	public int setLoadingViewLayout() {
 		return R.layout.delegate_recyclerview_normal;
@@ -130,6 +147,9 @@ public class VideoDelegate extends NeteaseLoadingDelegate {
 			//评论次数
 			adapter.setText(R.id.tv_item_video_comment_count, String.valueOf(item.getData().getCommentcount()));
 
+			//视频标签
+			//adapter.setText(R.id.tv_item_video_tag, String.valueOf(item.getData().getE));
+
 
 			CustomJzVideoView jzvdStd = adapter.getView(R.id.videoplayer);
 			//切换视频相关内容  播放量
@@ -144,6 +164,7 @@ public class VideoDelegate extends NeteaseLoadingDelegate {
 					llVideoState.setVisibility(View.VISIBLE);
 				}
 			});
+			//视频播放封面
 			manager.displayImageForView(jzvdStd.posterImageView,item.getData().getCoverurl());
 			RequestCenter.getVideoUrl(item.getData().getVid(), new DisposeDataListener() {
 				@Override
@@ -159,26 +180,7 @@ public class VideoDelegate extends NeteaseLoadingDelegate {
 
 				}
 			});
-//			adapter.setOnClickListener(R.id.iv_item_video_cover, new View.OnClickListener() {
-//				@Override
-//				public void onClick(View v) {
-//					RequestCenter.getVideoUrl(item.getData().getVid(), new DisposeDataListener() {
-//						@Override
-//						public void onSuccess(Object responseObj) {
-//
-//							VideoUrlBean bean = (VideoUrlBean) responseObj;
-//							Log.e("VideoDelegate", "videoUrl:" + bean.getUrls().get(0).getUrl());
-//							VideoAdContext videoAdSlot = new VideoAdContext((RelativeLayout)adapter.getView(R.id.rl_item_video_group), bean.getUrls().get(0).getUrl());
-//						}
-//
-//						@Override
-//						public void onFailure(Object reasonObj) {
-//
-//						}
-//					});
-//
-//				}
-//			});
+
 
 		}
 	}

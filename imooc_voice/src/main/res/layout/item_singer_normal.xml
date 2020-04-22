@@ -24,11 +24,12 @@
         android:id="@+id/tv_singer_alias"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
         android:layout_alignTop="@+id/tv_singer_name"
-        android:textSize="15sp"
         android:layout_alignBottom="@+id/tv_singer_name"
-        android:layout_toRightOf="@+id/tv_singer_name" />
+        android:layout_toRightOf="@+id/tv_singer_name"
+        android:gravity="center_vertical"
+        android:textSize="15sp" />
+
     <LinearLayout
         android:id="@+id/ll_singer_follow"
         android:layout_width="65dp"
@@ -58,6 +59,7 @@
             android:textColor="#FF4650"
             android:textSize="11sp" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/ll_singer_followed"
         android:layout_width="65dp"

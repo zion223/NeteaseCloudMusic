@@ -26,6 +26,7 @@ import com.imooc.imooc_voice.model.newapi.MainRecommendPlayListBean;
 import com.imooc.imooc_voice.model.newapi.NewSongBean;
 import com.imooc.imooc_voice.model.newapi.search.AlbumSearchBean;
 import com.imooc.imooc_voice.util.GsonUtil;
+import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
 import com.imooc.imooc_voice.view.discory.album.NewAlbumDelegate;
 import com.imooc.imooc_voice.view.discory.daily.DailyRecommendDelegate;
@@ -46,6 +47,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+
+import static com.imooc.imooc_voice.Constants.ALBUM;
+import static com.imooc.imooc_voice.Constants.PLAYLIST;
 
 public class DiscoverDelegate extends NeteaseDelegate {
 
@@ -115,7 +119,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 							//歌曲
 						}else if(item.getTargetType() == 10){
 							//专辑
-							getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(SongListDetailDelegate.TYPE_ALBUM, item.getTargetId()));
+							getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(ALBUM, item.getTargetId()));
 						}
 						if(item.getUrl() != null ){
 							Log.d(TAG, "banner url:" + item.getUrl());
@@ -149,7 +153,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 					@Override
 					public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 						MainRecommendPlayListBean.RecommendBean item = (MainRecommendPlayListBean.RecommendBean) adapter.getItem(position);
-						getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(SongListDetailDelegate.TYPE_PLAYLIST, item.getId(), item.getCopywriter()));
+						getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(PLAYLIST, item.getId(), item.getCopywriter()));
 					}
 				});
 			}
@@ -176,15 +180,12 @@ public class DiscoverDelegate extends NeteaseDelegate {
 					albumList.add(new AlbumOrSongBean(id, TYPE_ALBUM, picUrl, albumName, artistName));
 				}
 				mAlbumSongAdapter = new AlbumSongAdapter(albumList);
-				mAlbumSongAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-					@Override
-					public void onItemClick(BaseQuickAdapter adpater, View view, int i) {
-						AlbumOrSongBean entity = (AlbumOrSongBean) adpater.getItem(i);
-						if (entity.getType() == TYPE_ALBUM) {
-							getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(1, entity.getId()));
-						} else {
-							//TODO 加入播放队列
-						}
+				mAlbumSongAdapter.setOnItemClickListener((adpater, view1, i) -> {
+					AlbumOrSongBean entity = (AlbumOrSongBean) adpater.getItem(i);
+					if (entity.getType() == TYPE_ALBUM) {
+						getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(1, entity.getId()));
+					} else {
+						//TODO 加入播放队列
 					}
 				});
 				mRecyclerViewAlbumSong.setAdapter(mAlbumSongAdapter);
@@ -323,17 +324,8 @@ public class DiscoverDelegate extends NeteaseDelegate {
 			final ImageView geDanView = helper.getView(R.id.iv_item_discover);
 			//显示圆角图片
 			manager.displayImageForCorner(geDanView, item.getPicUrl(), 5);
-			String count;
-			int playcount = item.getPlaycount();
-
-			if (playcount >= 10000) {
-				playcount = playcount / 10000;
-				count = playcount + "万";
-			} else {
-				count = playcount + "";
-			}
-
-			helper.setText(R.id.tv_item_discover_playnum, count);
+			//播放次数
+			helper.setText(R.id.tv_item_discover_playnum, SearchUtil.getCorresPondingString(item.getPlaycount()));
 			helper.setText(R.id.tv_item_discover_des, item.getName());
 		}
 	}
