@@ -143,11 +143,19 @@ public class HttpConstants {
 
     static String VIDEO_DETAIL = ROOT_URL + "/video/detail";
 
+    static String TOP_MV = ROOT_URL + "/top/mv";
+
     static String VIDEO_COMMENT = ROOT_URL + "/comment/video";
 
     static String VIDEO_RELATED = ROOT_URL + "/related/allvideo";
 
     static String VIDEO_URL = ROOT_URL + "/video/url";
+
+    static String MSG_PRIVATE = ROOT_URL + "/msg/private";
+
+    static String MSG_COMMENT = ROOT_URL + "/msg/comments";
+
+    static String USER_CLOUD = ROOT_URL + "/user/cloud";
 
     static String ARTIST_PIC = "http://music.163.com/api/search/get/web";
 

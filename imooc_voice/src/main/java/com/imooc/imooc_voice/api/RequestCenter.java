@@ -18,6 +18,7 @@ import com.imooc.imooc_voice.model.newapi.CommonMessageBean;
 import com.imooc.imooc_voice.model.newapi.MainEventBean;
 import com.imooc.imooc_voice.model.newapi.MainRecommendPlayListBean;
 import com.imooc.imooc_voice.model.newapi.MvSublistBean;
+import com.imooc.imooc_voice.model.newapi.MvTopBean;
 import com.imooc.imooc_voice.model.newapi.MyFmBean;
 import com.imooc.imooc_voice.model.newapi.NewSongBean;
 import com.imooc.imooc_voice.model.newapi.PlayModeIntelligenceBean;
@@ -41,6 +42,9 @@ import com.imooc.imooc_voice.model.newapi.dj.DjSubBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjSubListBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjTopListBean;
 import com.imooc.imooc_voice.model.newapi.manager.MusicCanPlayBean;
+import com.imooc.imooc_voice.model.newapi.notification.PrivateCommentBean;
+import com.imooc.imooc_voice.model.newapi.notification.PrivateMsgBean;
+import com.imooc.imooc_voice.model.newapi.notification.UserCloudBean;
 import com.imooc.imooc_voice.model.newapi.personal.UserDetailBean;
 import com.imooc.imooc_voice.model.newapi.personal.UserEventBean;
 import com.imooc.imooc_voice.model.newapi.personal.UserPlaylistBean;
@@ -742,7 +746,14 @@ public class RequestCenter {
         params.put("id", id);
         RequestCenter.getRequest(HttpConstants.VIDEO_DETAIL, params, listener, VideoDetailBean.class);
     }
-
+    /**
+     * 获取MV排行
+     */
+    public static void getMvTop(String area, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("area", area);
+        RequestCenter.getRequest(HttpConstants.TOP_MV, params, listener, MvTopBean.class);
+    }
     /**
      * 获取视频评论
      */
@@ -767,6 +778,32 @@ public class RequestCenter {
         RequestParams params = new RequestParams();
         params.put("id", id);
         RequestCenter.getRequest(HttpConstants.VIDEO_URL, params, listener, VideoUrlBean.class);
+    }
+
+    /**
+     *  获取私信
+     */
+    public static void getPrivateMsg(int limit, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("limit", limit);
+        RequestCenter.getRequest(HttpConstants.MSG_PRIVATE, params, listener, PrivateMsgBean.class);
+    }
+
+    /**
+     *  获取评论
+     */
+    public static void getPrivateComment(int id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("uid", id);
+        RequestCenter.getRequest(HttpConstants.MSG_COMMENT, params, listener, PrivateCommentBean.class);
+    }
+
+    /**
+     *  获取云盘数据
+     */
+    public static void getUserCloud(DisposeDataListener listener){
+
+        RequestCenter.getRequest(HttpConstants.USER_CLOUD, null, listener, UserCloudBean.class);
     }
     /**
      * 查询歌手图片

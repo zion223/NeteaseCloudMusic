@@ -11,14 +11,13 @@
         android:id="@+id/tv_item_multiple_search_header"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
         android:layout_toRightOf="@+id/play_all"
         android:gravity="center_vertical"
-        android:layout_marginLeft="15dp"
-        android:textStyle="bold"
         android:text="单曲"
         android:textColor="@color/text_color"
-        android:textSize="15sp" />
-
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
 
 </LinearLayout>
