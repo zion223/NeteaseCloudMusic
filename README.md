@@ -21,9 +21,13 @@
  - **Banner**： [android-ConvenientBanner](https://github.com/saiwu-bigkoo/Android-ConvenientBannern)
  - **依赖注入**： [butterknife](https://github.com/JakeWharton/butterknife)
  - **RikkaMusic**： [RikkaMusic](https://github.com/Rikkatheworld/RikkaMusic)
-
-
-## TODO(数据来源NeteaseCloudMusicApi)
+ - **网络请求库**： [okhttp](https://github.com/square/okhttp)
+ - **cookie管理**： [PersistentCookieJar](https://github.com/franmontiel/PersistentCookieJar)
+ - **图片加载**： [glide](https://github.com/bumptech/glide)
+ - **事件总线**： [EventBus](https://github.com/greenrobot/EventBus)
+ - **动态权限申请**： [easypermissions](https://github.com/googlesamples/easypermissions)
+ 
+## TODO
 
  * [x] 登录
  * [ ] 刷新登录
