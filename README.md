@@ -3,7 +3,12 @@
 
 
 ## 应用展示
-暂时无gif
+
+![avatar](/imooc_voice/src/main/res/raw/发现1.gif) ![avatar](/imooc_voice/src/main/res/raw/发现2.gif)
+![avatar](/imooc_voice/src/main/res/raw/发现3.gif) ![avatar](/imooc_voice/src/main/res/raw/云村.gif)
+![avatar](/imooc_voice/src/main/res/raw/电台.gif) ![avatar](/imooc_voice/src/main/res/raw/搜索1.gif)
+![avatar](/imooc_voice/src/main/res/raw/搜索2.gif) ![avatar](/imooc_voice/src/main/res/raw/视频1.gif)
+![avatar](/imooc_voice/src/main/res/raw/视频2.gif) ![avatar](/imooc_voice/src/main/res/raw/通知.gif)
 
 
 ## App介绍
