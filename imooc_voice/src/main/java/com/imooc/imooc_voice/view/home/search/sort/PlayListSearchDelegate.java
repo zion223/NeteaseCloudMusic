@@ -19,6 +19,8 @@ import com.imooc.lib_network.listener.DisposeDataListener;
 
 import java.util.List;
 
+import static com.imooc.imooc_voice.Constants.PLAYLIST;
+
 /*
  *	歌单搜素
  */
@@ -38,8 +40,9 @@ public class PlayListSearchDelegate extends NeteaseSearchLoadingDelegate {
 				mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
 					@Override
 					public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
+						//歌单详情
 						PlayListSearchBean.ResultBean.PlaylistsBean entity = (PlayListSearchBean.ResultBean.PlaylistsBean) baseQuickAdapter.getItem(i);
-						getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(SongListDetailDelegate.TYPE_PLAYLIST,entity.getId()));
+						getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(PLAYLIST, entity.getId()));
 					}
 				});
 				mRecyclerView = rootView.findViewById(R.id.rv_delegate_normal);
@@ -69,19 +72,11 @@ public class PlayListSearchDelegate extends NeteaseSearchLoadingDelegate {
 		@Override
 		protected void convert(@NonNull BaseViewHolder adapter, PlayListSearchBean.ResultBean.PlaylistsBean item) {
 
-
 			adapter.setText(R.id.tv_item_gedan_content_toptext, SearchUtil.getMatchingKeywords(item.getName(), keywords));
 
-			String description;
 			int playcount = item.getPlayCount();
-			String count;
-			if (playcount >= 10000) {
-				playcount = playcount / 10000;
-				count = playcount + "万次";
-			} else {
-				count = playcount + "次";
-			}
-			description = item.getTrackCount() + "首，by " + item.getCreator().getNickname() + "，播放" + count;
+
+			final String description = item.getTrackCount() + "首，by " + item.getCreator().getNickname() + "，播放" + SearchUtil.getCorresPondingString(playcount) + "次";
 
 			adapter.setText(R.id.tv_item_gedan_content_bottomtext, SearchUtil.getMatchingKeywords(description, keywords));
 			adapter.setVisible(R.id.iv_item_gedan_more, false);

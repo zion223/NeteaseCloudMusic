@@ -11,8 +11,7 @@
         android:layout_marginRight="15dp"
         android:orientation="vertical">
 
-
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/rl_item_video_group"
             android:layout_width="match_parent"
             android:layout_height="180dp"
@@ -21,13 +20,11 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp">
 
-            <ImageView
-                android:id="@+id/iv_item_video_cover"
+            <com.imooc.lib_video.videoplayer.CustomJzVideoView
+                android:id="@+id/videoplayer"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:src="@color/gray" />
-        </RelativeLayout>
-
+                android:layout_height="match_parent" />
+        </LinearLayout>
         <LinearLayout
             android:id="@+id/ll_item_video_status"
             android:layout_width="match_parent"
@@ -40,9 +37,10 @@
 
             <ImageView
                 android:id="@+id/iv_item_video_btn_play_ms"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:src="@drawable/note_btn_play_ms" />
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/playnum" />
 
             <TextView
                 android:id="@+id/tv_item_video_play_count"
@@ -87,6 +85,7 @@
             android:paddingRight="7dp"
             android:paddingBottom="3dp"
             android:text="情感"
+            android:visibility="gone"
             android:textColor="@color/white"
             android:textSize="11sp" />
 

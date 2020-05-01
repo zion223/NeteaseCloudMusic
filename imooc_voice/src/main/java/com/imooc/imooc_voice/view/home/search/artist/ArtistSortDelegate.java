@@ -52,7 +52,7 @@ public class ArtistSortDelegate extends NeteaseDelegate {
 	private int topPosition = -1;
 	private int bottomPosition = -1;
 
-	private TextView[] mTopTextViewArray = new TextView[8];
+	private TextView[] mTopTextViewArray = new TextView[5];
 	private TextView[] mBottomTextViewArray = new TextView[4];
 
 	private ArtistSortAdapter mAdapter;
@@ -92,19 +92,22 @@ public class ArtistSortDelegate extends NeteaseDelegate {
 	}
 
 	private void initSortView() {
+
+		//area
 		mTvSortChina.setTag(1);
 		mTvSortWest.setTag(2);
-		mTvSortJapan.setTag(6);
-		mTvSortKorea.setTag(7);
-		mTvSortOther.setTag(4);
+		mTvSortJapan.setTag(3);
+		mTvSortKorea.setTag(4);
+		mTvSortOther.setTag(0);
+		//type
 		mTvSortMale.setTag(1);
 		mTvSortFemale.setTag(2);
 		mTvSortGroup.setTag(3);
 		mTopTextViewArray[1] = mTvSortChina;
 		mTopTextViewArray[2] = mTvSortWest;
-		mTopTextViewArray[6] = mTvSortJapan;
-		mTopTextViewArray[7] = mTvSortKorea;
-		mTopTextViewArray[4] = mTvSortOther;
+		mTopTextViewArray[3] = mTvSortJapan;
+		mTopTextViewArray[4] = mTvSortKorea;
+		mTopTextViewArray[0] = mTvSortOther;
 		mBottomTextViewArray[1] = mTvSortMale;
 		mBottomTextViewArray[2] = mTvSortFemale;
 		mBottomTextViewArray[3] = mTvSortGroup;
@@ -155,7 +158,7 @@ public class ArtistSortDelegate extends NeteaseDelegate {
 
 
 	void reloadArtistSortRecyclerView(int top, int bottom){
-		RequestCenter.getSingerList(top + "00" + bottom, new DisposeDataListener() {
+		RequestCenter.getSingerList(bottom, top, new DisposeDataListener() {
 			@Override
 			public void onSuccess(Object responseObj) {
 				ArtistListBean bean = (ArtistListBean) responseObj;

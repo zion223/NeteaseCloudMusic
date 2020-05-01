@@ -19,6 +19,9 @@ import com.imooc.imooc_voice.model.newapi.DjBannerBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjRecommendBean;
 import com.imooc.imooc_voice.view.discory.radio.detail.RadioDetailDelegate;
 import com.imooc.imooc_voice.view.discory.radio.pay.RadioPayDelegate;
+import com.imooc.imooc_voice.view.discory.radio.rank.DjRankDelegate;
+import com.imooc.imooc_voice.view.discory.radio.rank.ProgramRankDelegate;
+import com.imooc.imooc_voice.view.discory.radio.rank.RankDelegate;
 import com.imooc.lib_common_ui.bannder.BannerCreator;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
@@ -147,7 +150,13 @@ public class RadioDelegate extends NeteaseLoadingDelegate implements View.OnClic
 
 	@OnClick(R2.id.ll_radio_sort)
 	void onClickRadioSort(){
+		//电台分类
+		getSupportDelegate().start(new RadioSortDelegate());
+	}
 
+	@OnClick(R2.id.ll_radio_rank)
+	void onClickRank(){
+		getSupportDelegate().start(new RankDelegate());
 	}
 
 	@Override

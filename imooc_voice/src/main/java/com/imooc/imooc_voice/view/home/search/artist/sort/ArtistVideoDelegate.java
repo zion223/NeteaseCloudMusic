@@ -93,16 +93,9 @@ public class ArtistVideoDelegate extends NeteaseLoadingDelegate {
 		@Override
 		protected void convert(@NonNull BaseViewHolder adapter, SingerVideoSearchBean.Mvs item) {
 
-			String count;
-			long playcount = item.getPlayCount();
-			if (playcount >= 10000) {
-				playcount = playcount / 10000;
-				count = playcount + "万";
-			} else {
-				count = playcount + "";
-			}
+
 			//设置播放次数
-			adapter.setText(R.id.tv_item_video_playnum, count);
+			adapter.setText(R.id.tv_item_video_playnum, SearchUtil.getCorresPondingString(item.getPlayCount()));
 			//视频标题
 			adapter.setText(R.id.tv_item_video_name, item.getName());
 			//视频描述

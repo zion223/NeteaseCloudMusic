@@ -36,6 +36,15 @@ public class AlbumSearchBean {
 
         private int albumCount;
         private List<AlbumsBean> albums;
+        private int code;
+
+        public int getCode() {
+            return code;
+        }
+
+        public void setCode(int code) {
+            this.code = code;
+        }
 
         public int getAlbumCount() {
             return albumCount;

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_item_mv_rank_avatar"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_margin="10dp" />
+
+    <ImageView
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_alignTop="@+id/tv_item_mv_playnum"
+        android:layout_alignBottom="@+id/tv_item_mv_playnum"
+        android:layout_toLeftOf="@+id/tv_item_mv_playnum"
+        android:src="@drawable/playnum" />
+
+    <TextView
+        android:id="@+id/tv_item_mv_playnum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/iv_item_mv_rank_avatar"
+        android:layout_alignRight="@+id/iv_item_mv_rank_avatar"
+        android:layout_marginRight="5dp"
+        android:text="11万"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_mv_rank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_item_mv_rank_avatar"
+        android:layout_alignLeft="@+id/iv_item_mv_rank_avatar"
+        android:text="1"
+        android:textColor="@color/black"
+        android:textSize="19sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/iv_item_mv_rank_diff"
+        android:layout_width="5dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_mv_rank"
+        android:layout_alignLeft="@+id/tv_mv_rank"
+        android:layout_alignTop="@+id/tv_item_mv_rank_diff"
+        android:layout_alignBottom="@+id/tv_item_mv_rank_diff"
+        android:src="@drawable/zero"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tv_item_mv_rank_diff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_mv_rank"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="-3dp"
+        android:layout_toRightOf="@+id/iv_item_mv_rank_diff"
+        android:gravity="center"
+        android:text="1"
+        android:textSize="9sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_mv_rank_mv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_mv_rank"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/tv_mv_rank"
+        android:text="xxx"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_mv_rank_artist_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_mv_rank_mv_name"
+        android:layout_alignLeft="@+id/tv_mv_rank_mv_name"
+        android:text="xxx"
+        android:textSize="11sp"/>
+
+</RelativeLayout>

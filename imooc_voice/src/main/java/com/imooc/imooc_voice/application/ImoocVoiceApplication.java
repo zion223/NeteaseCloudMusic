@@ -30,10 +30,13 @@ public class ImoocVoiceApplication extends Application {
                     }
                 })
                 .install();
+        //音频组件
         AudioHelper.init(this);
         OkHttpHelper.init(this);
+        //Netease初始化
         Netease.init(this)
                 .configure();
+        //分享组件
         ShareManager.init(this);
     }
 

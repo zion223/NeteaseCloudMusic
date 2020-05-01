@@ -9,6 +9,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,6 +26,7 @@ import com.imooc.imooc_voice.model.newapi.AlbumDetailBean;
 import com.imooc.imooc_voice.model.newapi.PlaylistDetailBean;
 import com.imooc.imooc_voice.model.newapi.TopListDetailBean;
 import com.imooc.imooc_voice.model.newapi.song.SongDetailBean;
+import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.imooc_voice.view.home.search.artist.ArtistDetailDelegate;
 import com.imooc.imooc_voice.view.user.UserDetailDelegate;
@@ -39,6 +41,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+
+import static com.imooc.imooc_voice.Constants.ALBUM;
+import static com.imooc.imooc_voice.Constants.PLAYLIST;
 
 /**
  * 歌单和专辑详情
@@ -73,6 +78,8 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	ImageView mIvAvatarView;
 	@BindView(R2.id.tv_gedan_detail_playnum)
 	TextView mTvGedanPlayNum;
+	@BindView(R2.id.tv_gedan_detail_toolbar_reason)
+	TextView mTvCopyWriter;
 	@BindView(R2.id.tv_gedan_detail_share_count)
 	TextView mTvShareCount;
 	@BindView(R2.id.tv_gedan_detail_comment_count)
@@ -97,13 +104,13 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 
 	private static final String ARGS_SONGLIST_ID = "ARGS_SONGLIST_ID";
 	private static final String ARGS_SONGLIST_TYPE = "ARGS_SONGLIST_TYPE";
+	private static final String ARGS_SONGLIST_REASON = "ARGS_SONGLIST_REASON";
 
-
-	public static final int TYPE_PLAYLIST = 0;
-	public static final int TYPE_ALBUM = 1;
 
 	//歌单ID
 	private String songlistId;
+	//推荐原因
+	private String copyWriter;
 	//专辑或者歌单
 	private int type;
 	//评论数量
@@ -120,9 +127,14 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	final StringBuilder params = new StringBuilder();
 
 	public static SongListDetailDelegate newInstance(int type, long id) {
+		return newInstance(type, id, "");
+	}
+
+	public static SongListDetailDelegate newInstance(int type, long id, String copyWriter) {
 		final Bundle args = new Bundle();
 		args.putString(ARGS_SONGLIST_ID, String.valueOf(id));
 		args.putInt(ARGS_SONGLIST_TYPE, type);
+		args.putString(ARGS_SONGLIST_REASON, copyWriter);
 		final SongListDetailDelegate delegate = new SongListDetailDelegate();
 		delegate.setArguments(args);
 		return delegate;
@@ -135,6 +147,7 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 		if (args != null) {
 			songlistId = args.getString(ARGS_SONGLIST_ID);
 			type = args.getInt(ARGS_SONGLIST_TYPE);
+			copyWriter = args.getString(ARGS_SONGLIST_REASON, "");
 		}
 		manager = ImageLoaderManager.getInstance();
 	}
@@ -147,13 +160,12 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	@Override
 	public void initView() {
 		mRecyclerViewGedan = rootView.findViewById(R.id.rv_gedan_detail_normal);
-
 		switch (type){
-			case TYPE_PLAYLIST:
+			case PLAYLIST:
 				//歌单
 				initPlayListView();
 				break;
-			case TYPE_ALBUM:
+			case ALBUM:
 				//专辑
 				initAlbumView();
 				break;
@@ -174,7 +186,7 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 				if (Math.abs(i) > 220) {
 					mTvToolBarTitle.setText(mTvDetailTitle.getText());
 				} else {
-					if(type == TYPE_ALBUM){
+					if(type == ALBUM){
 						mTvToolBarTitle.setText("专辑");
 					}else{
 						mTvToolBarTitle.setText("歌单");
@@ -219,7 +231,8 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 				}
 				//专辑图片
 				manager.displayImageForCorner(mImageViewGedan, album.getPicUrl());
-				manager.displayImageForViewGroup(mAppBarLayout, album.getPicUrl(), 250);
+				//毛玻璃效果 Failed to allocate a 144000016 byte allocation with 25165824 free bytes and 95MB until OOM, target footprint 462221240, growth limit 536870912
+				//manager.displayImageForViewGroup(mAppBarLayout, album.getBlurPicUrl(), 200);
 				//显示歌手名
 				mTvDetailAvatarName.setText("歌手:  " + album.getArtist().getName());
 				mTvDetailDesc.setText("发行时间:" + TimeUtil.getTimeStandardOnlyYMD(album.getPublishTime())+"\n"+album.getDescription());
@@ -269,6 +282,12 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	 * 初始化歌单
 	 */
 	private void initPlayListView() {
+
+		//copyWeriter
+		if(!TextUtils.isEmpty(copyWriter)){
+			mTvCopyWriter.setText(copyWriter);
+			mTvCopyWriter.setVisibility(View.VISIBLE);
+		}
 		RequestCenter.getPlaylistDetail(songlistId, new DisposeDataListener() {
 			@SuppressLint({"SetTextI18n", "StaticFieldLeak"})
 			@Override
@@ -279,15 +298,9 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 				mTvDetailTitle.setText(playlist.getName());
 				mTvDetailDesc.setText(playlist.getDescription());
 				mTvDetailAvatarName.setText(playlist.getCreator().getNickname());
-				long playcount = playlist.getPlayCount();
-				String playcountString;
-				if (playcount >= 10000) {
-					playcount = playcount / 10000;
-					playcountString = playcount + "万";
-				} else {
-					playcountString = playcount + "";
-				}
-				mTvGedanPlayNum.setText(playcountString);
+
+				//播放数量
+				mTvGedanPlayNum.setText(SearchUtil.getCorresPondingString(playlist.getPlayCount()));
 				manager.displayImageForCircle(mIvAvatarView, playlist.getCreator().getAvatarUrl());
 
 				manager.displayImageForCorner(mImageViewGedan, playlist.getCoverImgUrl(), 5);
@@ -302,7 +315,8 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 				//创建歌单的用户ID
 				userId = String.valueOf(playlist.getCreator().getUserId());
 				gedanTitle = playlist.getName();
-				mTvSongCollectCount.setText("收藏(" + playlist.getSubscribedCount() + ")");
+				//收藏的数量
+				mTvSongCollectCount.setText("收藏(" + SearchUtil.getCorresPondingString(playlist.getSubscribedCount()) + ")");
 
 				mTvSongCollectCount1.setText(String.valueOf(playlist.getSubscribedCount()));
 
@@ -401,11 +415,11 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	@OnClick(R2.id.tv_gedan_detail_avatar_name)
 	void onClickUserInfo() {
 		switch (type){
-			case TYPE_ALBUM:
+			case ALBUM:
 				//查看歌手
 				getSupportDelegate().start(ArtistDetailDelegate.newInstance(userId));
 				break;
-			case TYPE_PLAYLIST:
+			case PLAYLIST:
 				//查看用户
 				getSupportDelegate().start(UserDetailDelegate.newInstance(userId));
 				break;

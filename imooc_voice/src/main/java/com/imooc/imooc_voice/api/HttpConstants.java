@@ -8,8 +8,7 @@ public class HttpConstants {
     private static final String FORMATE = "json";
     private static final String BASE = "http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&format=" + FORMATE;
     //private static final String ROOT_URL = "http://192.168.1.54:3000";
-    private static final String ROOT_URL = "http://7iysta.natappfree.cc";
-
+    private static final String ROOT_URL = "http://62.234.57.125:3000";
 
     static String LOGIN = ROOT_URL + "/login/cellphone";
 
@@ -50,6 +49,12 @@ public class HttpConstants {
     static String PLAY_LIST_DETAIL = ROOT_URL + "/playlist/detail";
 
     static String ALBUM_DETAIL = ROOT_URL + "/album";
+
+    static String TOP_ALBUM = ROOT_URL + "/top/album";
+
+    static String NEW_ALBUM = ROOT_URL + "/album/newest";
+
+    static String TOP_SONG = ROOT_URL + "/top/song";
 
     static String MUSIC_CAN_PLAY = ROOT_URL + "/check/music";
 
@@ -107,11 +112,18 @@ public class HttpConstants {
 
     static String PAY_GIFT = ROOT_URL + "/dj/paygift";
 
+
     static String DJ_RECOMMEND = ROOT_URL + "/dj/recommend";
 
     static String DJ_CATLIST = ROOT_URL + "/dj/catelist";
 
     static String DJ_SUB = ROOT_URL + "/dj/sub";
+
+    static String DJ_TOPLIST_HOURS = ROOT_URL + "/dj/toplist/hours";
+
+    static String DJ_TOPLIST_NEWCOMER = ROOT_URL + "/dj/toplist/newcomer";
+
+    static String DJ_TOPLIST_POPULAR = ROOT_URL + "/dj/toplist/popular";
 
     static String ARTIST_SUB = ROOT_URL + "/artist/sub";
 
@@ -119,13 +131,31 @@ public class HttpConstants {
 
     static String DJ_PROGRAM = ROOT_URL + "/dj/program";
 
+    static String DJ_PROGRAM_TOPLIST_HOURS = ROOT_URL + "/dj/program/toplist/hours";
+
+    static String DJ_PROGRAM_TOPLIST = ROOT_URL + "/dj/program/toplist";
+
     static String DJ_DETAIL = ROOT_URL + "/dj/detail";
 
     static String VIDEO_GROUP = ROOT_URL + "/video/group/list";
 
     static String VIDEO_TAB = ROOT_URL + "/video/group";
 
+    static String VIDEO_DETAIL = ROOT_URL + "/video/detail";
+
+    static String TOP_MV = ROOT_URL + "/top/mv";
+
+    static String VIDEO_COMMENT = ROOT_URL + "/comment/video";
+
+    static String VIDEO_RELATED = ROOT_URL + "/related/allvideo";
+
     static String VIDEO_URL = ROOT_URL + "/video/url";
+
+    static String MSG_PRIVATE = ROOT_URL + "/msg/private";
+
+    static String MSG_COMMENT = ROOT_URL + "/msg/comments";
+
+    static String USER_CLOUD = ROOT_URL + "/user/cloud";
 
     static String ARTIST_PIC = "http://music.163.com/api/search/get/web";
 

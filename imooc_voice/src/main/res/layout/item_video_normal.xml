@@ -13,21 +13,26 @@
         android:layout_height="match_parent"
         android:layout_marginStart="12dp"
         android:scaleType="centerCrop" />
+
     <ImageView
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:id="@+id/iv_play_num"
+        android:layout_width="13dp"
+        android:layout_height="13dp"
+        android:layout_marginTop="3dp"
         android:layout_toLeftOf="@+id/tv_item_video_playnum"
-        android:src="@drawable/note_btn_play_ms" />
+        android:src="@drawable/playnum" />
 
     <TextView
         android:id="@+id/tv_item_video_playnum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/iv_item_video_cover"
+        android:layout_alignTop="@+id/iv_play_num"
+        android:layout_alignBottom="@+id/iv_play_num"
         android:layout_marginRight="5dp"
         android:text="11万"
-        android:textColor="@color/white"
-        android:textSize="12sp" />
+        android:textColor="@color/white" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,7 +51,7 @@
             android:text="MV"
             android:textColor="#B53D32"
             android:textSize="13sp"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
 
         <TextView
@@ -64,7 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_item_video_name"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="5dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:singleLine="true"

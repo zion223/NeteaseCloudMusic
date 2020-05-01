@@ -2,6 +2,7 @@ package com.imooc.imooc_voice.view.mine;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,10 +12,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseSectionQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.donkingliang.groupedadapter.adapter.GroupedRecyclerViewAdapter;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.api.RequestCenter;
@@ -22,7 +22,7 @@ import com.imooc.imooc_voice.model.info.MusicInfo;
 import com.imooc.imooc_voice.model.mine.SpecData;
 import com.imooc.imooc_voice.model.newapi.LoginBean;
 import com.imooc.imooc_voice.model.newapi.SubCountBean;
-import com.imooc.imooc_voice.model.newapi.personal.UserPlayListEntity;
+import com.imooc.imooc_voice.model.newapi.personal.UserPlayListGroupEntity;
 import com.imooc.imooc_voice.model.newapi.personal.UserPlaylistBean;
 import com.imooc.imooc_voice.util.GsonUtil;
 import com.imooc.imooc_voice.util.IConstants;
@@ -43,6 +43,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.imooc.imooc_voice.Constants.PLAYLIST;
+
 public class MineDelegate extends NeteaseDelegate {
 
 
@@ -51,7 +53,7 @@ public class MineDelegate extends NeteaseDelegate {
 	@BindView(R2.id.rv_spec_mine)
 	RecyclerView mSpecRecyclerView;
 	@BindView(R2.id.rv_mine_create_gedan)
-	RecyclerView mRvSectionGedan;
+	RecyclerView mRvPlayList;
 	@BindView(R2.id.fragment_main_item_radio_count)
 	TextView mTvRadioCount;
 	@BindView(R2.id.fragment_main_item_localmusic_count)
@@ -60,6 +62,9 @@ public class MineDelegate extends NeteaseDelegate {
 	private SpecAdapter mSpecAdapter;
 
 	private ImageLoaderManager manager;
+
+	//歌单
+	ArrayList<UserPlayListGroupEntity> playListEntities = new ArrayList<>();
 
 	@Override
 	public Object setLayout() {
@@ -73,21 +78,17 @@ public class MineDelegate extends NeteaseDelegate {
 		manager = ImageLoaderManager.getInstance();
 
 		LoginBean loginBean = GsonUtil.fromJSON(SharePreferenceUtil.getInstance(getContext()).getUserInfo(""), LoginBean.class);
-		int id = loginBean.getProfile().getUserId();
+		final int userId = loginBean.getProfile().getUserId();
 
-		//创建的歌单
-		final ArrayList<UserPlayListEntity> createPlayListEntities = new ArrayList<>();
-		//收藏的歌单
-		final ArrayList<UserPlayListEntity> collectPlayListEntities = new ArrayList<>();
 
 		//本地音乐数量
 		int localMusicCount = SharePreferenceUtil.getInstance(getContext()).getLocalMusicCount();
-		if(SharePreferenceUtil.getInstance(getContext()).getLocalMusicCount() == 0){
+		if (SharePreferenceUtil.getInstance(getContext()).getLocalMusicCount() == 0) {
 			ArrayList<MusicInfo> songList = (ArrayList) MusicUtils.queryMusic(getProxyActivity(), IConstants.START_FROM_LOCAL);
 			SharePreferenceUtil.getInstance(getContext()).saveLocalMusicCount(songList.size());
-			mTvLocalMusicCount.setText("("+songList.size()+")");
-		}else{
-			mTvLocalMusicCount.setText("("+localMusicCount+")");
+			mTvLocalMusicCount.setText("(" + songList.size() + ")");
+		} else {
+			mTvLocalMusicCount.setText("(" + localMusicCount + ")");
 		}
 
 		//最近播放数量
@@ -96,40 +97,37 @@ public class MineDelegate extends NeteaseDelegate {
 
 
 		//用户创建的歌单
-		RequestCenter.getUserPlaylist(id, new DisposeDataListener() {
+		RequestCenter.getUserPlaylist(userId, new DisposeDataListener() {
 			@Override
 			public void onSuccess(Object responseObj) {
 				UserPlaylistBean bean = (UserPlaylistBean) responseObj;
 				List<UserPlaylistBean.PlaylistBean> playlist = bean.getPlaylist();
 				int subIndex = 0;
-				for(int i = 0; i < playlist.size(); i++){
-					if(playlist.get(i).isSubscribed()){
+				for (int i = 0; i < playlist.size(); i++) {
+					if (playlist.get(i).getCreator().getUserId() != userId) {
 						subIndex = i;
 						break;
 					}
 				}
-				createPlayListEntities.add(new UserPlayListEntity(true, "创建的歌单", subIndex));
-				collectPlayListEntities.add(new UserPlayListEntity(true, "创建的歌单", subIndex));
-				for(int j = 0 ; j < subIndex; j++){
-					createPlayListEntities.add(new UserPlayListEntity(playlist.get(j)));
-				}
-				createPlayListEntities.add(new UserPlayListEntity(true, "收藏的歌单", playlist.size() - subIndex));
-				collectPlayListEntities.add(new UserPlayListEntity(true, "收藏的歌单", playlist.size() - subIndex));
-				for(int k = subIndex; k < playlist.size(); k++){
-					createPlayListEntities.add(new UserPlayListEntity(playlist.get(k)));
-					collectPlayListEntities.add(new UserPlayListEntity(playlist.get(k)));
-				}
-				final MultipleSectionGedanAdapter multipleSectionGedanAdapter = new MultipleSectionGedanAdapter(createPlayListEntities);
+				playListEntities.add(new UserPlayListGroupEntity(true, "创建的歌单", subIndex, playlist.subList(0, subIndex)));
+				playListEntities.add(new UserPlayListGroupEntity(true, "收藏的歌单", playlist.size() - subIndex, playlist.subList(subIndex, playlist.size())));
 
-				multipleSectionGedanAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+				final MultipleGroupPlaylistAdapter mPlayListAdapter = new MultipleGroupPlaylistAdapter(playListEntities, getContext());
+				mPlayListAdapter.setOnHeaderClickListener(new GroupedRecyclerViewAdapter.OnHeaderClickListener() {
 					@Override
-					public void onItemClick(BaseQuickAdapter adapter, View view, int positon) {
-
-						changeGedanVisibleStatus(adapter, view, positon);
+					public void onHeaderClick(GroupedRecyclerViewAdapter adapter, com.donkingliang.groupedadapter.holder.BaseViewHolder holder, int groupPosition) {
+						changePlayListVisibleStatus(adapter, holder, groupPosition);
 					}
 				});
-				mRvSectionGedan.setAdapter(multipleSectionGedanAdapter);
-				mRvSectionGedan.setLayoutManager(new LinearLayoutManager(getContext()){
+				mPlayListAdapter.setOnChildClickListener(new GroupedRecyclerViewAdapter.OnChildClickListener() {
+					@Override
+					public void onChildClick(GroupedRecyclerViewAdapter adapter, com.donkingliang.groupedadapter.holder.BaseViewHolder holder, int groupPosition, int childPosition) {
+						getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(PLAYLIST, playListEntities.get(groupPosition).getBean().get(childPosition).getId()));
+					}
+				});
+
+				mRvPlayList.setAdapter(mPlayListAdapter);
+				mRvPlayList.setLayoutManager(new LinearLayoutManager(getContext()) {
 					@Override
 					public boolean canScrollVertically() {
 						return false;
@@ -151,7 +149,7 @@ public class MineDelegate extends NeteaseDelegate {
 			public void onSuccess(Object responseObj) {
 				SubCountBean bean = (SubCountBean) responseObj;
 				//我的电台 数量
-				mTvRadioCount.setText("("+bean.getDjRadioCount()+")");
+				mTvRadioCount.setText("(" + bean.getDjRadioCount() + ")");
 				//我的收藏 - 收藏的歌手 收藏的视频
 
 			}
@@ -166,78 +164,52 @@ public class MineDelegate extends NeteaseDelegate {
 	}
 
 	/**
-	 * 	改变歌单的显示状态
+	 * 改变歌单的显示状态
 	 */
-	private void changeGedanVisibleStatus(BaseQuickAdapter adapter, View view, int positon) {
+	private void changePlayListVisibleStatus(GroupedRecyclerViewAdapter adapter, com.donkingliang.groupedadapter.holder.BaseViewHolder holder, int groupPosition) {
 		//点击到header则执行 隐藏或显示动作 否则就进入歌单详情
-		UserPlayListEntity entity = (UserPlayListEntity) adapter.getItem(positon);
-		ImageView changeView = view.findViewById(R.id.iv_mine_gedan_state);
-		if(entity.isHeader){
-			//是创建的还是收藏的
+		ImageView changeView = holder.get(R.id.iv_mine_gedan_state);
+		//是创建的还是收藏的
+		MultipleGroupPlaylistAdapter expandableAdapter = (MultipleGroupPlaylistAdapter) adapter;
 
-			//显示动画
-			if((boolean)changeView.getTag()){
-				final ObjectAnimator hideRotate = ObjectAnimator.ofFloat(changeView, "rotation", 270f, 180f);
-				hideRotate.setDuration(300);
-				hideRotate.start();
-				changeView.setTag(false);
-			}else{
-				final ObjectAnimator showRotate = ObjectAnimator.ofFloat(changeView, "rotation", 180f, 270f);
-				showRotate.setDuration(300);
-				showRotate.start();
-				changeView.setTag(true);
-			}
-			if(entity.header.contains("创建")){
-				if((boolean)changeView.getTag()){
-					//隐藏创建的歌单
-					//adapter.replaceData(no_create_entities);
-				}else{
-					//显示创建的歌单
-					//adapter.replaceData(entities);
-				}
-			}else{
-				//收藏的歌单
-				if((boolean)changeView.getTag()){
-					//隐藏收藏的歌单
-				}else{
-					//显示收藏的歌单
-				}
-			}
-		}else{
-			getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(SongListDetailDelegate.TYPE_PLAYLIST, entity.t.getId()));
+		//显示动画
+		if ((boolean) changeView.getTag()) {
+			final ObjectAnimator hideRotate = ObjectAnimator.ofFloat(changeView, "rotation", 270f, 180f);
+			hideRotate.setDuration(300);
+			hideRotate.start();
+			expandableAdapter.collapseGroup(groupPosition, true);
+			changeView.setTag(false);
+		} else {
+			final ObjectAnimator showRotate = ObjectAnimator.ofFloat(changeView, "rotation", 180f, 270f);
+			showRotate.setDuration(300);
+			showRotate.start();
+			expandableAdapter.expandGroup(groupPosition, true);
+			changeView.setTag(true);
 		}
 	}
 
 
 	@OnClick(R2.id.ll_mine_local_music)
-	void onClickLocalMusic(){
+	void onClickLocalMusic() {
 		getParentDelegate().getSupportDelegate().start(new LocalMusicDelegate());
 	}
 
 	@OnClick(R2.id.ll_mine_radio)
-	void onClickMineRadio(){
+	void onClickMineRadio() {
 		getParentDelegate().getSupportDelegate().start(new MineRadioDelegate());
 	}
 
 
 	private void initSpecIcon() {
 		List<SpecData> specData = new ArrayList<>();
-		SpecData spec1 = new SpecData(R.drawable.t_dragonball_icn_carplay, "驾驶模式");
-		SpecData spec2 = new SpecData(R.drawable.t_dragonball_icn_classical, "古典模式");
-		SpecData spec3 = new SpecData(R.drawable.t_dragonball_icn_look, "直播");
-		SpecData spec4 = new SpecData(R.drawable.t_dragonball_icn_radio, "电台");
-		SpecData spec5 = new SpecData(R.drawable.t_dragonball_icn_sati, "睡眠空间");
-		SpecData spec6 = new SpecData(R.drawable.t_dragonball_icn_xiaoice, "小冰电台");
-		SpecData spec7 = new SpecData(R.drawable.t_dragonball_icn_rank, "排行榜");
-		SpecData spec8 = new SpecData(R.drawable.t_dragonball_icn_daily, "每日推荐");
-		specData.add(spec6);
-		specData.add(spec7);
-		specData.add(spec8);
-		specData.add(spec1);
-		specData.add(spec2);
-		specData.add(spec3);
-		specData.add(spec4);
-		specData.add(spec5);
+		specData.add(new SpecData(R.drawable.t_dragonball_icn_carplay, "驾驶模式"));
+		specData.add(new SpecData(R.drawable.t_dragonball_icn_classical, "古典模式"));
+		specData.add(new SpecData(R.drawable.t_dragonball_icn_look, "直播"));
+		specData.add(new SpecData(R.drawable.t_dragonball_icn_radio, "电台"));
+		specData.add(new SpecData(R.drawable.t_dragonball_icn_sati, "睡眠空间"));
+		specData.add(new SpecData(R.drawable.t_dragonball_icn_xiaoice, "小冰电台"));
+		specData.add(new SpecData(R.drawable.t_dragonball_icn_rank, "排行榜"));
+		specData.add(new SpecData(R.drawable.t_dragonball_icn_daily, "每日推荐"));
 		LinearLayoutManager manager = new LinearLayoutManager(getContext());
 		manager.setOrientation(LinearLayoutManager.HORIZONTAL);
 		mSpecAdapter = new SpecAdapter(specData);
@@ -245,34 +217,81 @@ public class MineDelegate extends NeteaseDelegate {
 		mSpecRecyclerView.setLayoutManager(manager);
 	}
 
-	static class SpecAdapter extends BaseQuickAdapter<SpecData, BaseViewHolder>{
+	static class SpecAdapter extends BaseQuickAdapter<SpecData, BaseViewHolder> {
 
 		SpecAdapter(@Nullable List<SpecData> data) {
-			super(R.layout.item_mine_spec,data);
+			super(R.layout.item_mine_spec, data);
 		}
 
 		@Override
 		protected void convert(BaseViewHolder helper, SpecData item) {
-			((ImageView)helper.getView(R.id.iv_mine_spec)).setImageResource(item.getDrawableId());
-			((TextView)helper.getView(R.id.tv_spec_name)).setText(item.getText());
+			((ImageView) helper.getView(R.id.iv_mine_spec)).setImageResource(item.getDrawableId());
+			((TextView) helper.getView(R.id.tv_spec_name)).setText(item.getText());
 		}
 	}
 
-	class MultipleSectionGedanAdapter extends BaseSectionQuickAdapter<UserPlayListEntity, BaseViewHolder> {
 
+	class MultipleGroupPlaylistAdapter extends GroupedRecyclerViewAdapter {
 
-		MultipleSectionGedanAdapter(List<UserPlayListEntity> data) {
-			super(R.layout.item_mine_gedan_content, R.layout.item_mine_gedan_header, data);
+		private ArrayList<UserPlayListGroupEntity> mData;
+		private int setTagTimes = 0;
+		MultipleGroupPlaylistAdapter(ArrayList<UserPlayListGroupEntity> entities, Context context) {
+			super(context);
+			this.mData = entities;
 		}
 
 		@Override
-		protected void convertHead(BaseViewHolder helper, UserPlayListEntity userPlayListEntity) {
-			ImageView imageView = helper.getView(R.id.iv_item_gedan_new);
-			helper.getView(R.id.iv_mine_gedan_state).setTag(true);
-			if(userPlayListEntity.header.equals("收藏的歌单")){
+		public int getGroupCount() {
+			return mData.size();
+		}
+
+		@Override
+		public int getChildrenCount(int groupPosition) {
+			if (!isExpand(groupPosition)) {
+				return 0;
+			}
+			return mData.get(groupPosition).getBean().size();
+		}
+
+		@Override
+		public boolean hasHeader(int groupPosition) {
+			return true;
+		}
+
+		@Override
+		public boolean hasFooter(int groupPosition) {
+			return false;
+		}
+
+		@Override
+		public int getHeaderLayout(int viewType) {
+			return R.layout.item_mine_gedan_header;
+		}
+
+		@Override
+		public int getFooterLayout(int viewType) {
+			return 0;
+		}
+
+		@Override
+		public int getChildLayout(int viewType) {
+			return R.layout.item_mine_gedan_content;
+		}
+
+		@Override
+		public void onBindHeaderViewHolder(com.donkingliang.groupedadapter.holder.BaseViewHolder helper, int groupPosition) {
+			ImageView imageView = helper.get(R.id.iv_item_gedan_new);
+			//执行动画标识
+			if(setTagTimes < 3){
+				helper.get(R.id.iv_mine_gedan_state).setTag(true);
+			}
+			setTagTimes += 1;
+
+			if (groupPosition == 1) {
 				imageView.setVisibility(View.GONE);
 			}
-			helper.getView(R.id.iv_item_gedan_new).setOnClickListener(new View.OnClickListener() {
+			//新建歌单
+			helper.get(R.id.iv_item_gedan_new).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					new XPopup.Builder(getContext())
@@ -295,23 +314,90 @@ public class MineDelegate extends NeteaseDelegate {
 							})).show();
 				}
 			});
-			helper.setText(R.id.tv_item_gedan_header_lefttitle, userPlayListEntity.header);
-			helper.setText(R.id.tv_item_gedan_header_righttext, "("+userPlayListEntity.playNum+")");
-
+			helper.setText(R.id.tv_item_gedan_header_lefttitle, mData.get(groupPosition).getHeader());
+			helper.setText(R.id.tv_item_gedan_header_righttext, "(" + mData.get(groupPosition).getPlayNum() + ")");
 		}
 
 		@Override
-		protected void convert(@NonNull BaseViewHolder helper, UserPlayListEntity userPlayListEntity) {
-			ImageView img = helper.getView(R.id.iv_item_gedan_content_img);
-			manager.displayImageForCorner(img, userPlayListEntity.t.getCoverImgUrl(), 5);
-			helper.setText(R.id.tv_item_gedan_content_toptext, userPlayListEntity.t.getName());
-			TextView bottomText = helper.getView(R.id.tv_item_gedan_content_bottomtext);
-			helper.setText(R.id.tv_item_gedan_content_bottomtext, userPlayListEntity.t.getTrackCount()+"首");
+		public void onBindFooterViewHolder(com.donkingliang.groupedadapter.holder.BaseViewHolder holder, int groupPosition) {
 
-			if(userPlayListEntity.t.isSubscribed()){
-				bottomText.setText(userPlayListEntity.t.getTrackCount()+"首 " +"by "+userPlayListEntity.t.getCreator().getNickname());
-			}else{
-				bottomText.setText(userPlayListEntity.t.getTrackCount()+"首");
+		}
+
+		@SuppressLint("SetTextI18n")
+		@Override
+		public void onBindChildViewHolder(com.donkingliang.groupedadapter.holder.BaseViewHolder holder, int groupPosition, int childPosition) {
+			UserPlaylistBean.PlaylistBean item = mData.get(groupPosition).getBean().get(childPosition);
+			ImageView img = holder.get(R.id.iv_item_gedan_content_img);
+			manager.displayImageForCorner(img, item.getCoverImgUrl(), 5);
+			holder.setText(R.id.tv_item_gedan_content_toptext, item.getName());
+			TextView bottomText = holder.get(R.id.tv_item_gedan_content_bottomtext);
+			holder.setText(R.id.tv_item_gedan_content_bottomtext, item.getTrackCount() + "首");
+
+			if (item.isSubscribed()) {
+				bottomText.setText(item.getTrackCount() + "首 " + "by " + item.getCreator().getNickname());
+			} else {
+				bottomText.setText(item.getTrackCount() + "首");
+			}
+		}
+
+		/**
+		 * 判断当前组是否展开
+		 *
+		 * @param groupPosition
+		 * @return
+		 */
+		boolean isExpand(int groupPosition) {
+			UserPlayListGroupEntity entity = mData.get(groupPosition);
+			return entity.isExpand();
+		}
+
+		/**
+		 * 展开一个组
+		 *
+		 * @param groupPosition
+		 */
+		void expandGroup(int groupPosition) {
+			expandGroup(groupPosition, false);
+		}
+
+		/**
+		 * 展开一个组
+		 *
+		 * @param groupPosition
+		 * @param animate
+		 */
+		void expandGroup(int groupPosition, boolean animate) {
+			UserPlayListGroupEntity entity = mData.get(groupPosition);
+			entity.setExpand(true);
+			if (animate) {
+				notifyChildrenInserted(groupPosition);
+			} else {
+				notifyDataChanged();
+			}
+		}
+
+		/**
+		 * 收起一个组
+		 *
+		 * @param groupPosition
+		 */
+		void collapseGroup(int groupPosition) {
+			collapseGroup(groupPosition, false);
+		}
+
+		/**
+		 * 收起一个组
+		 *
+		 * @param groupPosition
+		 * @param animate
+		 */
+		void collapseGroup(int groupPosition, boolean animate) {
+			UserPlayListGroupEntity entity = mData.get(groupPosition);
+			entity.setExpand(false);
+			if (animate) {
+				notifyChildrenRemoved(groupPosition);
+			} else {
+				notifyDataChanged();
 			}
 		}
 	}

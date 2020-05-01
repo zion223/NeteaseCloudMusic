@@ -29,7 +29,7 @@ public class ShareManager {
 		ShareSDK.initSDK(context);
 	}
 
-	public void shareData(ShareData data, PlatformActionListener listener){
+	void shareData(ShareData data, PlatformActionListener listener){
 		switch (data.mPlatformType){
 			case QQ:
 				mPlatForm = ShareSDK.getPlatform(QQ.NAME);

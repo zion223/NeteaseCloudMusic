@@ -1,5 +1,6 @@
 package com.imooc.imooc_voice.view.user;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.newapi.FollowBean;
 import com.imooc.imooc_voice.model.newapi.personal.UserDetailBean;
+import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.navigator.CommonNavigatorCreater;
@@ -106,8 +108,11 @@ public class UserDetailDelegate extends NeteaseDelegate {
 		drawable.setBounds(5, 0, 50, 50);//第一个 0 是距左边距离，第二个 0 是距上边距离，40 分别是
 		mTvSendMsg.setCompoundDrawables(drawable, null, null, null);
 
+		//设置发私信透明度
+		mTvSendMsg.getBackground().mutate().setAlpha(200);
 
 		RequestCenter.getUserDetail(userId, new DisposeDataListener() {
+			@SuppressLint("SetTextI18n")
 			@Override
 			public void onSuccess(Object responseObj) {
 				UserDetailBean bean = (UserDetailBean) responseObj;
@@ -119,11 +124,10 @@ public class UserDetailDelegate extends NeteaseDelegate {
 				//用户头像
 				manager.displayImageForCircle(mIvUserAvatar, bean.getProfile().getAvatarUrl());
 				mTvUserNickName.setText(bean.getProfile().getNickname());
+				//关注和粉丝数量
 				int followed = bean.getProfile().getFolloweds();
 				int follower = bean.getProfile().getFollows();
-				mTvUserSubAndFollow.setText("关注 " + follower + "  粉丝 " + followed);
-				int vipType = bean.getProfile().getVipType();
-
+				mTvUserSubAndFollow.setText("关注 " + follower + "  粉丝 " + SearchUtil.getCorresPondingString(followed));
 
 				//显示关注或者已关注
 				boolean isFollowed = bean.getProfile().isFollowed();
@@ -133,14 +137,20 @@ public class UserDetailDelegate extends NeteaseDelegate {
 					mLlFollowUser.setVisibility(View.VISIBLE);
 				}
 				mTvUserLevel.setText("Lv." + bean.getLevel());
-				String timeStandard = TimeUtil.getTimeStandard(bean.getCreateTime());
-				Log.e("USER", "创建时间" + timeStandard + "vipType:" + vipType);
-				mTitleDataList[0] = "主页";
+
+
 				ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(Color.GRAY);
-				SpannableString msp = new SpannableString("动态 " + bean.getProfile().getEventCount());
-				msp.setSpan(new AbsoluteSizeSpan(35), 3, msp.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-				msp.setSpan(foregroundColorSpan, 3, msp.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-				mTitleDataList[1] = msp;
+				//动态数量
+				SpannableString eventText;
+				if(bean.getProfile().getEventCount() > 10000){
+					eventText = new SpannableString("动态 99+" );
+				}else{
+					eventText = new SpannableString("动态 " + bean.getProfile().getEventCount());
+				}
+				eventText.setSpan(new AbsoluteSizeSpan(35), 3, eventText.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+				eventText.setSpan(foregroundColorSpan, 3, eventText.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+				mTitleDataList[0] = "主页";
+				mTitleDataList[1] = eventText;
 
 				CommonNavigator commonNavigator = CommonNavigatorCreater.setDefaultNavigator(getContext(), mTitleDataList, mViewPager);
 				commonNavigator.setAdjustMode(true);
@@ -226,7 +236,7 @@ public class UserDetailDelegate extends NeteaseDelegate {
 			switch (i) {
 				case 0:
 					if (currentUser != null) {
-						return UserInfoDelegate.newInstance(currentUser);
+						return UserHomePageDelegate.newInstance(currentUser);
 					} else {
 						return null;
 					}

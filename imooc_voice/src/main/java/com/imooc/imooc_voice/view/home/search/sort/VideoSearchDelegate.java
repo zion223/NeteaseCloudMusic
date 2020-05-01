@@ -13,6 +13,7 @@ import com.imooc.imooc_voice.model.newapi.search.FeedSearchBean;
 import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.imooc_voice.view.home.search.NeteaseSearchLoadingDelegate;
+import com.imooc.imooc_voice.view.video.VideoDetailDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
@@ -30,6 +31,10 @@ public class VideoSearchDelegate extends NeteaseSearchLoadingDelegate {
 					List<FeedSearchBean.ResultBean.VideosBean> videos = bean.getResult().getVideos();
 
 					mAdapter = new VideoSearchAdapter(keywords, videos);
+					mAdapter.setOnItemClickListener((adapter, view, i) -> {
+						FeedSearchBean.ResultBean.VideosBean entity = (FeedSearchBean.ResultBean.VideosBean) adapter.getItem(i);
+						getParentDelegate().getSupportDelegate().start(VideoDetailDelegate.newInstance(entity.getVid()));
+					});
 					mRecyclerView = rootView.findViewById(R.id.rv_delegate_normal);
 					mRecyclerView.setAdapter(mAdapter);
 					mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -46,7 +51,7 @@ public class VideoSearchDelegate extends NeteaseSearchLoadingDelegate {
 
 
 
-	static class VideoSearchAdapter extends BaseQuickAdapter<FeedSearchBean.ResultBean.VideosBean, BaseViewHolder> {
+	public static class VideoSearchAdapter extends BaseQuickAdapter<FeedSearchBean.ResultBean.VideosBean, BaseViewHolder> {
 
 		private String keywords;
 
@@ -54,20 +59,16 @@ public class VideoSearchDelegate extends NeteaseSearchLoadingDelegate {
 			super(R.layout.item_video_normal, data);
 			keywords = keyword;
 		}
+		public VideoSearchAdapter(@Nullable List<FeedSearchBean.ResultBean.VideosBean> data) {
+			super(R.layout.item_video_normal, data);
+			keywords = "";
+		}
 
 		@Override
 		protected void convert(@NonNull BaseViewHolder adapter, FeedSearchBean.ResultBean.VideosBean item) {
 
-			String count;
-			long playcount = item.getPlayTime();
-			if (playcount >= 10000) {
-				playcount = playcount / 10000;
-				count = playcount + "万";
-			} else {
-				count = playcount + "";
-			}
 			//设置播放次数
-			adapter.setText(R.id.tv_item_video_playnum, count);
+			adapter.setText(R.id.tv_item_video_playnum, SearchUtil.getCorresPondingString(item.getPlayTime()));
 			//视频标题
 			adapter.setText(R.id.tv_item_video_name, SearchUtil.getMatchingKeywords(item.getTitle(), keywords));
 			//视频描述

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ContentFrameLayout;
+import android.widget.FrameLayout;
 
 
 import com.imooc.lib_common_ui.R;
@@ -38,7 +39,7 @@ public abstract class ProxyActivity extends AppCompatActivity implements ISuppor
     public abstract NeteaseDelegate setRootDelegate();
 
     private void initContainer(@Nullable Bundle savedInstanceState){
-        final ContentFrameLayout container = new ContentFrameLayout(this);
+        final FrameLayout container = new FrameLayout(this);
         container.setId(R.id.delegate_container);
         setContentView(container);
         if(savedInstanceState == null){
@@ -76,11 +77,6 @@ public abstract class ProxyActivity extends AppCompatActivity implements ISuppor
         DELEGATE.onBackPressedSupport();
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        DELEGATE.onBackPressed();
-    }
 
     @Override
     public void post(Runnable runnable) {

@@ -74,6 +74,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="25dp"
+                    android:layout_marginTop="5dp"
                     android:layout_toRightOf="@+id/iv_album_right_flag"
                     android:maxLines="2"
                     android:text="音乐实验室先锋嗅觉,不独特"

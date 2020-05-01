@@ -1905,31 +1905,48 @@ public class VideoBean {
 
 		private String alg;
 		private String scm;
+		//评论
 		private String threadId;
 		private String coverUrl;
 		private int height;
 		private int width;
 		private String title;
+		//详情
 		private String description;
+		//评论数量
 		private int commentCount;
+		//分享数量
 		private int shareCount;
+		private int subscribeCount;
 		private List<Resolutions> resolutions;
+		//作者
 		private Creator creator;
 		private Urlinfo urlInfo;
+		//相关组
 		private List<Videogroup> videoGroup;
 		private String previewUrl;
 		private int previewDurationms;
 		private boolean hasRelatedGameAd;
 		private Object markTypes;
+		//相关歌曲
 		private List<PlayModeIntelligenceBean.DataBean.SongInfoBean> relateSong;
 		private String relatedInfo;
 		private String videoUserLiveInfo;
 		private String vid;
 		private int durationms;
 		private int playTime;
+		//点赞数量
 		private int praisedCount;
 		private boolean praised;
 		private boolean subscribed;
+
+		public String getSubscribeCount() {
+			return String.valueOf(subscribeCount);
+		}
+
+		public void setSubscribeCount(int subscribeCount) {
+			this.subscribeCount = subscribeCount;
+		}
 
 		public void setAlg(String alg) {
 			this.alg = alg;
@@ -1999,16 +2016,16 @@ public class VideoBean {
 			this.commentCount = commentcount;
 		}
 
-		public int getCommentcount() {
-			return commentCount;
+		public String getCommentcount() {
+			return String.valueOf(commentCount);
 		}
 
 		public void setSharecount(int sharecount) {
 			this.shareCount = sharecount;
 		}
 
-		public int getSharecount() {
-			return shareCount;
+		public String getSharecount() {
+			return String.valueOf(shareCount);
 		}
 
 		public void setResolutions(List<Resolutions> resolutions) {
@@ -2127,8 +2144,8 @@ public class VideoBean {
 			this.praisedCount = praisedcount;
 		}
 
-		public int getPraisedcount() {
-			return praisedCount;
+		public String getPraisedcount() {
+			return String.valueOf(praisedCount);
 		}
 
 		public void setPraised(boolean praised) {

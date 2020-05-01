@@ -23,11 +23,15 @@ import com.imooc.imooc_voice.view.discory.radio.detail.RadioDetailDelegate;
 import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
 import com.imooc.imooc_voice.view.home.search.NeteaseSearchLoadingDelegate;
 import com.imooc.imooc_voice.view.user.UserDetailDelegate;
+import com.imooc.imooc_voice.view.video.VideoDetailDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.imooc.imooc_voice.Constants.PLAYLIST;
+
 
 /**
  * 综合搜索
@@ -77,17 +81,18 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 			case 0:
 				//单曲
 				SynthesisSearchBean.ResultBean.SongBean.SongsBean songsBean = data.get(groupPosition).getSong().getSongs().get(childPosition);
-				//TODO 调转到详情
+				//TODO 加入播放队列
 				//getParentDelegate().getSupportDelegate().start();
 				break;
 			case 1:
 				//视频
 				SynthesisSearchBean.ResultBean.VideoBean.VideosBean videosBean = data.get(groupPosition).getVideo().getVideos().get(childPosition);
+				getParentDelegate().getSupportDelegate().start(VideoDetailDelegate.newInstance(videosBean.getVid()));
 				break;
 			case 2:
 				//歌单
 				SynthesisSearchBean.ResultBean.PlayListBean.PlayListsBean playListsBean = data.get(groupPosition).getPlayList().getPlayLists().get(childPosition);
-				getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(SongListDetailDelegate.TYPE_PLAYLIST, playListsBean.getId()));
+				getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(PLAYLIST, playListsBean.getId()));
 				break;
 			case 3:
 				//电台
@@ -96,6 +101,7 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 				break;
 			case 4:
 				SynthesisSearchBean.ResultBean.ArtistBean.ArtistsBean artistsBean = data.get(groupPosition).getArtist().getArtists().get(childPosition);
+				//TODO 跳转到歌手详情
 				break;
 			case 5:
 				SynthesisSearchBean.ResultBean.UserBean.UsersBean usersBean = data.get(groupPosition).getUser().getUsers().get(childPosition);
@@ -179,7 +185,6 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 		@Override
 		public void onBindHeaderViewHolder(BaseViewHolder holder, int groupPosition) {
 			String headerTitle = mDataType.get(groupPosition).getText();
-			//Log.e("MultipeSearchAdapter", headerTitle + "headerTitle");
 			holder.setText(R.id.tv_item_multiple_search_header, headerTitle);
 		}
 
@@ -190,8 +195,6 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 
 		@Override
 		public void onBindChildViewHolder(BaseViewHolder holder, int groupPosition, int childPosition) {
-
-			//Log.e("MultipeSearchAdapter", "groupPosition " + groupPosition + "childPosition"+ childPosition);
 			convertChildViewHolder(holder, groupPosition, childPosition);
 		}
 
@@ -212,7 +215,7 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 				case 2:
 					return mData.get(groupPosition).getPlayList().getPlayLists().size();
 				case 3:
-					return mData.get(groupPosition).getDjRadio().getDjRadios() != null ? mData.get(groupPosition).getDjRadio().getDjRadios().size() : 0;
+					return mData.get(groupPosition).getDjRadio() != null ? mData.get(groupPosition).getDjRadio().getDjRadios().size() : 0;
 				case 4:
 					return mData.get(groupPosition).getArtist().getArtists().size();
 				case 5:
@@ -264,8 +267,7 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 					if (artist.contains(keyword)) {
 						int start = artist.indexOf(keyword);
 						int end = start + keyword.length();
-						String resString = artist;
-						SpannableStringBuilder style = new SpannableStringBuilder(resString);
+						SpannableStringBuilder style = new SpannableStringBuilder(artist);
 						style.setSpan(new ForegroundColorSpan(Color.parseColor("#2196f3")), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 						((TextView) adapter.get(R.id.viewpager_list_bottom_text)).setText(style);
 					} else {
@@ -276,16 +278,9 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 					//视频
 					List<SynthesisSearchBean.ResultBean.VideoBean.VideosBean> videos = mData.get(groupPosition).getVideo().getVideos();
 					final SynthesisSearchBean.ResultBean.VideoBean.VideosBean videoItem = videos.get(childPosition);
-					String count;
-					long playcount = videoItem.getPlayTime();
-					if (playcount >= 10000) {
-						playcount = playcount / 10000;
-						count = playcount + "万";
-					} else {
-						count = playcount + "";
-					}
+
 					//设置播放次数
-					adapter.setText(R.id.tv_item_video_playnum, count);
+					adapter.setText(R.id.tv_item_video_playnum, SearchUtil.getCorresPondingString(videoItem.getPlayTime()));
 					//视频标题
 					((TextView) adapter.get(R.id.tv_item_video_name)).setText(SearchUtil.getMatchingKeywords(videoItem.getTitle(), keyword));
 					//视频描述
@@ -300,14 +295,8 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 					((TextView) adapter.get(R.id.tv_item_gedan_content_toptext)).setText(SearchUtil.getMatchingKeywords(platlistItem.getName(), keyword));
 
 					int playListPlaycount = platlistItem.getPlayCount();
-					String playListcount;
-					if (playListPlaycount >= 10000) {
-						playcount = playListPlaycount / 10000;
-						playListcount = playcount + "万次";
-					} else {
-						playListcount = playListPlaycount + "次";
-					}
-					description = platlistItem.getTrackCount() + "首，by " + platlistItem.getCreator().getNickname() + "，播放" + playListcount;
+					//歌曲数量以及播放次数
+					description = platlistItem.getTrackCount() + "首，by " + platlistItem.getCreator().getNickname() + "，播放" + SearchUtil.getCorresPondingString(playListPlaycount) + "次";
 					adapter.setVisible(R.id.iv_item_gedan_more, false);
 					((TextView) adapter.get(R.id.tv_item_gedan_content_bottomtext)).setText(SearchUtil.getMatchingKeywords(description, keyword));
 					ImageLoaderManager.getInstance().displayImageForCorner((ImageView) adapter.get(R.id.iv_item_gedan_content_img), platlistItem.getCoverImgUrl());

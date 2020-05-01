@@ -22,5 +22,25 @@ public class SearchUtil {
 		}else{
 			return content;
 		}
+
 	}
+
+	public static String getCorresPondingString(int num){
+		String text;
+		if(num > 100000000){
+			num = num / 100000000;
+			text = num + "亿";
+		}else if (num >= 10000) {
+			num = num / 10000;
+			text = num + "万";
+		} else {
+			text = num + "";
+		}
+		return text;
+	}
+
+	public static String getCorresPondingString(long num){
+		return getCorresPondingString(((Long)num).intValue());
+	}
+
 }

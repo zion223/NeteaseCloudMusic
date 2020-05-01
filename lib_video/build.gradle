@@ -21,6 +21,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    //视频播放
+    implementation 'cn.jzvd:jiaozivideoplayer:7.2.4'
 
 }

@@ -39,6 +39,7 @@ public class SongSearchBean {
 
         private int songCount;
         private List<SongsBean> songs;
+        private List<SongsBean> data;
 
         public int getSongCount() {
             return songCount;

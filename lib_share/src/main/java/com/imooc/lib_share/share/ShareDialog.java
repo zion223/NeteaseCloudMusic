@@ -50,7 +50,7 @@ public class ShareDialog extends Dialog {
     }
 
     private void initView() {
-        /**
+        /*
          * 通过获取到dialog的window来控制dialog的宽高及位置
          */
         Window dialogWindow = getWindow();

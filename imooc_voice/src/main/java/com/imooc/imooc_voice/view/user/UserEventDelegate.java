@@ -46,7 +46,7 @@ public class UserEventDelegate extends NeteaseLoadingDelegate {
 
 	@Override
 	public void initView() {
-		mRecyclerView = rootView.findViewById(R.id.rv_user_event);
+
 		initEvent();
 	}
 
@@ -58,6 +58,7 @@ public class UserEventDelegate extends NeteaseLoadingDelegate {
 
 	@SuppressLint("StaticFieldLeak")
 	private void initEvent() {
+		mRecyclerView = rootView.findViewById(R.id.rv_user_event);
 		new AsyncTask<Void, Void, Void>() {
 			@Override
 			protected void onPostExecute(Void aVoid) {

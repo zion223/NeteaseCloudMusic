@@ -56,17 +56,17 @@
                             android:layout_width="125dp"
                             android:layout_height="125dp"
                             android:layout_marginLeft="10dp"
-                            android:layout_marginTop="20dp"
-                            android:src="@drawable/test" />
+                            android:layout_marginTop="20dp" />
 
                         <ImageView
                             android:id="@+id/iv_gedan_detail_playnum"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="13dp"
+                            android:layout_height="13dp"
                             android:layout_alignTop="@+id/iv_gedan_detail_img"
+                            android:layout_alignBottom="@+id/tv_gedan_detail_playnum"
                             android:layout_marginTop="5dp"
                             android:layout_toLeftOf="@+id/tv_gedan_detail_playnum"
-                            android:src="@drawable/note_btn_play_ms" />
+                            android:src="@drawable/playnum" />
 
                         <TextView
                             android:id="@+id/tv_gedan_detail_playnum"
@@ -76,7 +76,7 @@
                             android:layout_alignRight="@+id/iv_gedan_detail_img"
                             android:layout_marginTop="5dp"
                             android:layout_marginRight="5dp"
-                            android:text="11万"
+                            android:textSize="10sp"
                             android:textColor="@color/white" />
 
                         <TextView
@@ -88,7 +88,7 @@
                             android:layout_marginRight="10dp"
                             android:layout_toRightOf="@+id/iv_gedan_detail_img"
                             android:maxLines="2"
-                            android:text="80怀旧经典I Vol.3"
+                            android:text=""
                             android:textColor="@color/white"
                             android:textSize="17sp"
                             android:textStyle="bold" />
@@ -104,24 +104,21 @@
                                 android:id="@+id/iv_gedan_detail_avatar_img"
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
-                                android:layout_marginRight="10dp"
-                                android:src="@drawable/test" />
+                                android:layout_marginRight="10dp" />
 
                             <TextView
                                 android:id="@+id/tv_gedan_detail_avatar_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:text="华语流行 华语怀旧"
+                                android:text=""
                                 android:textColor="@color/white"
                                 android:textSize="12sp" />
 
                             <ImageView
                                 android:layout_width="10dp"
-                                android:layout_height="wrap_content"
-                                android:layout_alignTop="@+id/tv_gedan_detail_avatar_name"
-                                android:layout_alignBottom="@+id/tv_gedan_detail_avatar_name"
-                                android:layout_toRightOf="@+id/tv_gedan_detail_avatar_name"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical"
                                 android:src="@drawable/right_white" />
                         </LinearLayout>
 
@@ -135,7 +132,7 @@
                             android:ellipsize="end"
                             android:gravity="bottom"
                             android:maxLines="2"
-                            android:text="国语国语国语国语国国语国语\n国语国语国语"
+                            android:text=""
                             android:textColor="@color/white"
                             android:textSize="11sp" />
 
@@ -166,7 +163,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:text="123"
                                 android:textColor="@color/white" />
                         </LinearLayout>
 
@@ -187,7 +183,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:text="1236"
                                 android:textColor="@color/white" />
                         </LinearLayout>
 
@@ -282,14 +277,14 @@
                             android:textSize="17sp" />
 
                         <TextView
-                            android:id="@+id/tv_gedan_detail_toolbar_desc"
+                            android:id="@+id/tv_gedan_detail_toolbar_reason"
                             android:layout_width="wrap_content"
                             android:layout_height="15dp"
                             android:layout_below="@+id/tv_gedan_detail_toolbar_title"
                             android:layout_alignLeft="@+id/tv_gedan_detail_toolbar_title"
                             android:gravity="top"
-                            android:text="编辑推荐:暗恋就是永远都得不到"
                             android:textColor="@color/white"
+                            android:visibility="invisible"
                             android:textSize="8sp" />
                     </RelativeLayout>
                 </android.support.v7.widget.Toolbar>
@@ -351,6 +346,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
                         android:text="收藏(1222)"
+                        android:textSize="12sp"
                         android:textColor="@color/white" />
                 </LinearLayout>
 

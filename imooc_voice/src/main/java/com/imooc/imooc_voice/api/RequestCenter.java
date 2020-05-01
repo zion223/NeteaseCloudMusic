@@ -18,7 +18,9 @@ import com.imooc.imooc_voice.model.newapi.CommonMessageBean;
 import com.imooc.imooc_voice.model.newapi.MainEventBean;
 import com.imooc.imooc_voice.model.newapi.MainRecommendPlayListBean;
 import com.imooc.imooc_voice.model.newapi.MvSublistBean;
+import com.imooc.imooc_voice.model.newapi.MvTopBean;
 import com.imooc.imooc_voice.model.newapi.MyFmBean;
+import com.imooc.imooc_voice.model.newapi.NewSongBean;
 import com.imooc.imooc_voice.model.newapi.PlayModeIntelligenceBean;
 import com.imooc.imooc_voice.model.newapi.PlaylistDetailBean;
 import com.imooc.imooc_voice.model.newapi.RecommendPlayListBean;
@@ -32,11 +34,17 @@ import com.imooc.imooc_voice.model.newapi.dj.DjCatelistBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjDetailBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjPaygiftBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjProgramBean;
+import com.imooc.imooc_voice.model.newapi.dj.DjProgramTopListBean;
+import com.imooc.imooc_voice.model.newapi.dj.DjProgramTopListHoursBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjRecommendBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjRecommendTypeBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjSubBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjSubListBean;
+import com.imooc.imooc_voice.model.newapi.dj.DjTopListBean;
 import com.imooc.imooc_voice.model.newapi.manager.MusicCanPlayBean;
+import com.imooc.imooc_voice.model.newapi.notification.PrivateCommentBean;
+import com.imooc.imooc_voice.model.newapi.notification.PrivateMsgBean;
+import com.imooc.imooc_voice.model.newapi.notification.UserCloudBean;
 import com.imooc.imooc_voice.model.newapi.personal.UserDetailBean;
 import com.imooc.imooc_voice.model.newapi.personal.UserEventBean;
 import com.imooc.imooc_voice.model.newapi.personal.UserPlaylistBean;
@@ -212,6 +220,33 @@ public class RequestCenter {
         params.put("id", id);
         RequestCenter.getRequest(HttpConstants.ALBUM_DETAIL, params, listener, AlbumDetailBean.class);
     }
+
+    /**
+     *  新碟上架
+     */
+    public static void getTopAlbum(int limit, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("limit", String.valueOf(limit));
+        RequestCenter.getRequest(HttpConstants.TOP_ALBUM, params, listener, AlbumSearchBean.ResultBean.class);
+    }
+
+    /**
+     *  最新专辑
+     */
+    public static void getNewAlbum(DisposeDataListener listener){
+        RequestCenter.getRequest(HttpConstants.NEW_ALBUM, null, listener, AlbumSearchBean.ResultBean.class);
+    }
+
+    /**
+     *  新歌速递
+     *      PS.全部:0 华语:7  欧美:96 日本:8 韩国:16
+     */
+    public static void getTopSong(int type, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("type", type);
+        RequestCenter.getRequest(HttpConstants.TOP_SONG, params, listener, NewSongBean.class);
+    }
+
     /**
      *  音乐是否可用
      */
@@ -329,17 +364,23 @@ public class RequestCenter {
 
     /**
      *  歌手分类
-     *   PS.入驻歌手 5001
-     *  华语男歌手 1001 华语女歌手 1002 华语组合/乐队 1003
-     *  欧美男歌手 2001 欧美女歌手 2002 欧美组合/乐队 2003
-     *  日本男歌手 6001 日本女歌手 6002 日本组合/乐队 6003
-     *  韩国男歌手 7001 韩国女歌手 7002 韩国组合/乐队 7003
-     *  其他男歌手 4001 其他女歌手 4002 其他组合/乐队 4003
+     *  type 1:男歌手 2:女歌手 3:乐队
+     *  area  -1:全部 7:华语(1) 96:欧美(2) 8:日本(3) 16韩国(4) 0:其他
      *
      */
-    public static void getSingerList(String type, DisposeDataListener listener){
+    public static void getSingerList(int type, int area,  DisposeDataListener listener){
         RequestParams params = new RequestParams();
-        params.put("cat", type);
+        if(area == 1){
+            area = 7;
+        }else if(area == 2){
+            area = 96;
+        }else if(area == 3){
+            area = 8;
+        }else if(area == 4){
+            area = 16;
+        }
+        params.put("type", type);
+        params.put("area", area);
         RequestCenter.getRequest(HttpConstants.SINGER_LIST, params, listener, ArtistListBean.class);
     }
 
@@ -590,6 +631,49 @@ public class RequestCenter {
     }
 
     /**
+     * 电台 - 24小时主播榜
+     */
+    public static void getRadioTopHours(int limit, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("limit", limit);
+        RequestCenter.getRequest(HttpConstants.DJ_TOPLIST_HOURS, params, listener, DjTopListBean.class);
+    }
+
+    /**
+     * 电台 - 24小时节目榜
+    */
+    public static void getRadioProgramTopHours(int limit, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("limit", limit);
+        RequestCenter.getRequest(HttpConstants.DJ_PROGRAM_TOPLIST_HOURS, params, listener, DjProgramTopListHoursBean.class);
+    }
+
+    /**
+     * 电台 - 节目榜
+     */
+    public static void getRadioProgramTopList(int limit, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("limit", limit);
+        RequestCenter.getRequest(HttpConstants.DJ_PROGRAM_TOPLIST, params, listener, DjProgramTopListBean.class);
+    }
+
+    /**
+     * 电台 - 新人榜
+     */
+    public static void getRadioTopNewComer(int limit, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("limit", limit);
+        RequestCenter.getRequest(HttpConstants.DJ_TOPLIST_NEWCOMER, params, listener, DjTopListBean.class);
+    }
+    /**
+     * 电台 - 最热主播榜
+     */
+    public static void getRadioTopPopular(int limit, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("limit", limit);
+        RequestCenter.getRequest(HttpConstants.DJ_TOPLIST_POPULAR, params, listener, DjTopListBean.class);
+    }
+    /**
      *  电台详情
      */
     public static void getRadioDetail(String rid, DisposeDataListener listener){
@@ -655,12 +739,71 @@ public class RequestCenter {
     }
 
     /**
+     * 获取视频详情
+     */
+    public static void getVideoDetail(String id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.VIDEO_DETAIL, params, listener, VideoDetailBean.class);
+    }
+    /**
+     * 获取MV排行
+     */
+    public static void getMvTop(String area, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("area", area);
+        RequestCenter.getRequest(HttpConstants.TOP_MV, params, listener, MvTopBean.class);
+    }
+    /**
+     * 获取视频评论
+     */
+    public static void getVideoComment(String id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.VIDEO_COMMENT, params, listener, PlayListCommentBean.class);
+    }
+    /**
+     * 获取相关视频详情
+     */
+    public static void getVideoRelated(String id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.VIDEO_RELATED, params, listener, VideoRelatedBean.class);
+    }
+
+    /**
      *  获取视频标签下的视频
      */
     public static void getVideoUrl(String id, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("id", id);
         RequestCenter.getRequest(HttpConstants.VIDEO_URL, params, listener, VideoUrlBean.class);
+    }
+
+    /**
+     *  获取私信
+     */
+    public static void getPrivateMsg(int limit, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("limit", limit);
+        RequestCenter.getRequest(HttpConstants.MSG_PRIVATE, params, listener, PrivateMsgBean.class);
+    }
+
+    /**
+     *  获取评论
+     */
+    public static void getPrivateComment(int id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("uid", id);
+        RequestCenter.getRequest(HttpConstants.MSG_COMMENT, params, listener, PrivateCommentBean.class);
+    }
+
+    /**
+     *  获取云盘数据
+     */
+    public static void getUserCloud(DisposeDataListener listener){
+
+        RequestCenter.getRequest(HttpConstants.USER_CLOUD, null, listener, UserCloudBean.class);
     }
     /**
      * 查询歌手图片

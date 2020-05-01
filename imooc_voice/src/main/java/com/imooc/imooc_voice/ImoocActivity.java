@@ -15,7 +15,7 @@ import me.yokeyword.eventbusactivityscope.EventBusActivityScope;
 import pub.devrel.easypermissions.EasyPermissions;
 
 
-public class ImoocActivity extends ProxyActivity {
+public class ImoocActivity extends ProxyActivity{
 
 	private static final String TAG = "ImoocActivity";
 
@@ -37,13 +37,10 @@ public class ImoocActivity extends ProxyActivity {
 		String[] perms = {Manifest.permission.READ_PHONE_STATE
 				, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
 				, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-		if (EasyPermissions.hasPermissions(this, perms)) {
 
-		}else{
+		if (!EasyPermissions.hasPermissions(this, perms)) {
 			EasyPermissions.requestPermissions(this, "请打开相关权限", 1, perms);
 		}
-
-		//音频SDK初始化
 
 		super.onCreate(savedInstanceState);
 
