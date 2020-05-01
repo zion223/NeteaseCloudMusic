@@ -17,6 +17,8 @@
 
 
 ## 使用的技术/框架/开源项目
+
+ - **慕课网课程**：[**企业级Android应用架构设计与开发**](https://coding.imooc.com/class/364.html) 
  - **网易云音乐API**：[**NeteaseCloudMusicApi**](https://github.com/Binaryify/NeteaseCloudMusicApi) 
  - **ViewPager库**： [MagicIndicator](https://github.com/hackware1993/MagicIndicator)
  - **视频播放**： [JiaoZiVideoPlayer](https://github.com/Jzvd/JiaoZiVideoPlayer)
