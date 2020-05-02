@@ -28,6 +28,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
+//付费精品
 public class RadioPayDelegate extends NeteaseLoadingDelegate {
 
 

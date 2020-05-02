@@ -13,9 +13,8 @@
             android:id="@+id/img_search_result_back"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="10dp"
             android:src="@drawable/left_arrow" />
 
         <EditText

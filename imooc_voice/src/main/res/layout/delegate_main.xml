@@ -54,7 +54,7 @@
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/bottom_view"
+
             android:layout_below="@id/title_layout" />
 
         <!--<com.imooc.lib_audio.mediaplayer.view.BottomMusicView
@@ -64,6 +64,7 @@
             android:layout_alignParentBottom="true" />-->
 
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/left_drawer_layout_base"
         android:layout_width="match_parent"
@@ -86,52 +87,87 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <RelativeLayout
                         android:id="@+id/rl_main_avatar"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
+                        android:layout_height="150dp"
                         android:background="@color/app_background">
+
                         <ImageView
                             android:id="@+id/avatr_view"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
+
                             android:layout_alignParentLeft="true"
-                            android:layout_marginTop="25dp"
-                            android:layout_marginLeft="10dp" />
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="25dp" />
+
                         <TextView
                             android:id="@+id/avatar_name"
-                            android:layout_width="wrap_content"
+                            android:layout_width="90dp"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/avatr_view"
                             android:layout_alignLeft="@+id/avatr_view"
+                            android:layout_alignTop="@+id/avatar_check"
+                            android:layout_alignBottom="@+id/avatar_check"
+                            android:ellipsize="end"
+                            android:gravity="center_vertical"
+                            android:maxLines="1"
+                            android:text="张张"
+
                             android:textColor="@color/black"
-                            android:layout_marginTop="10dp"
-                            android:textSize="15sp"
-                            android:text="张张"/>
+                            android:textSize="15sp" />
+
                         <ImageView
+                            android:id="@+id/iv_avatar_vip"
                             android:layout_width="30dp"
                             android:layout_height="wrap_content"
                             android:layout_alignTop="@+id/avatar_name"
                             android:layout_alignBottom="@+id/avatar_name"
-                            android:layout_toRightOf="@+id/avatar_name"
                             android:layout_marginLeft="10dp"
-                            android:src="@drawable/vip"/>
+                            android:layout_toRightOf="@+id/avatar_name"
+                            android:visibility="gone"
+                            android:src="@drawable/vip" />
+
                         <TextView
-                            android:id="@+id/avatar_check"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginRight="20dp"
+                            android:id="@+id/tv_user_level"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignTop="@+id/avatar_name"
-                            android:textSize="16sp"
-                            android:text="签到"/>
+                            android:layout_alignBottom="@+id/avatar_name"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/iv_avatar_vip"
+                            android:gravity="center"
+                            android:paddingLeft="3dp"
+                            android:paddingRight="3dp"
+                            android:text="Lv.8"
+                            android:textColor="@color/gray"
+                            android:textSize="11sp"
+                            android:textStyle="bold|italic" />
+
+                        <TextView
+                            android:id="@+id/avatar_check"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/avatr_view"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="20dp"
+                            android:background="@drawable/bg_collect"
+                            android:gravity="center_horizontal"
+                            android:paddingTop="3dp"
+                            android:paddingBottom="3dp"
+                            android:text="签到"
+                            android:textColor="@color/white"
+                            android:textSize="11sp" />
                     </RelativeLayout>
 
                     <LinearLayout
                         android:id="@+id/unloggin_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -172,16 +208,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="35dp"
                     android:orientation="horizontal"
-                    android:paddingStart="30dp"
-                    android:paddingEnd="30dp">
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp">
 
                     <com.imooc.lib_common_ui.VerticalItemView
+                        android:id="@+id/icon_notification_msg"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        app:icon="@mipmap/abi"
-                        app:iconHeight="35dp"
-                        app:iconWidth="35dp"
+                        app:icon="@drawable/boi"
+                        app:iconHeight="23dp"
+                        app:iconWidth="23dp"
                         app:infoText="我的消息"
                         app:infoTextColor="@color/color_333333"
                         app:infoTextMarginTop="5dp"
@@ -191,15 +228,15 @@
                         app:tipPaddingTop="2dp"
                         app:tipText="1"
                         app:tipTextColor="@color/color_white"
-                        app:tipTextSize="11sp" />
+                        app:tipTextSize="7sp" />
 
                     <com.imooc.lib_common_ui.VerticalItemView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        app:icon="@mipmap/abj"
-                        app:iconHeight="35dp"
-                        app:iconWidth="35dp"
+                        app:icon="@drawable/b32"
+                        app:iconHeight="23dp"
+                        app:iconWidth="23dp"
                         app:infoText="我的好友"
                         app:infoTextColor="@color/color_333333"
                         app:infoTextMarginTop="5dp"
@@ -209,15 +246,15 @@
                         app:tipPaddingTop="2dp"
                         app:tipText="1"
                         app:tipTextColor="@color/color_white"
-                        app:tipTextSize="11sp" />
+                        app:tipTextSize="7sp" />
 
                     <com.imooc.lib_common_ui.VerticalItemView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        app:icon="@mipmap/abk"
-                        app:iconHeight="35dp"
-                        app:iconWidth="35dp"
+                        app:icon="@drawable/bon"
+                        app:iconHeight="23dp"
+                        app:iconWidth="23dp"
                         app:infoText="个性换肤"
                         app:infoTextColor="@color/color_333333"
                         app:infoTextMarginTop="5dp"
@@ -227,15 +264,15 @@
                         app:tipPaddingTop="2dp"
                         app:tipText="1"
                         app:tipTextColor="@color/color_white"
-                        app:tipTextSize="11sp" />
+                        app:tipTextSize="7sp" />
 
                     <com.imooc.lib_common_ui.VerticalItemView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        app:icon="@mipmap/abi"
-                        app:iconHeight="35dp"
-                        app:iconWidth="35dp"
+                        app:icon="@drawable/bog"
+                        app:iconHeight="23dp"
+                        app:iconWidth="23dp"
                         app:infoText="听歌识曲"
                         app:infoTextColor="@color/color_333333"
                         app:infoTextMarginTop="5dp"
@@ -245,7 +282,7 @@
                         app:tipPaddingTop="2dp"
                         app:tipText="1"
                         app:tipTextColor="@color/color_white"
-                        app:tipTextSize="11sp" />
+                        app:tipTextSize="7sp" />
                 </LinearLayout>
 
                 <View
@@ -257,39 +294,39 @@
                 <com.imooc.lib_common_ui.HornizeItemView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:hIcon="@mipmap/anc"
+                    app:hIcon="@drawable/boh"
                     app:hTipVisiblity="false"
                     app:paddingLeft="20dp"
-                    app:paddingRight="20dp"
+                    app:paddingRight="30dp"
                     app:rightText="林志颖北京"
                     app:tileText="演出" />
 
                 <com.imooc.lib_common_ui.HornizeItemView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:hIcon="@mipmap/and"
+                    app:hIcon="@drawable/bop"
                     app:hTipVisiblity="false"
                     app:paddingLeft="20dp"
-                    app:paddingRight="20dp"
+                    app:paddingRight="30dp"
                     app:rightText="JBL耳机78元"
                     app:tileText="商城" />
 
                 <com.imooc.lib_common_ui.HornizeItemView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:hIcon="@mipmap/ane"
+                    app:hIcon="@drawable/bok"
                     app:hTipVisiblity="false"
                     app:paddingLeft="20dp"
-                    app:paddingRight="20dp"
+                    app:paddingRight="30dp"
                     app:tileText="附近的人" />
 
                 <com.imooc.lib_common_ui.HornizeItemView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:hIcon="@mipmap/anf"
+                    app:hIcon="@drawable/bo6"
                     app:hTipVisiblity="false"
                     app:paddingLeft="20dp"
-                    app:paddingRight="20dp"
+                    app:paddingRight="30dp"
                     app:tileText="口袋铃声" />
 
                 <View
@@ -301,68 +338,69 @@
                 <com.imooc.lib_common_ui.HornizeItemView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:hIcon="@mipmap/ang"
+                    app:hIcon="@drawable/bor"
                     app:hTipVisiblity="false"
                     app:paddingLeft="20dp"
-                    app:paddingRight="20dp"
+                    app:paddingRight="30dp"
                     app:tileText="定时停止播放" />
 
                 <com.imooc.lib_common_ui.HornizeItemView
                     android:id="@+id/home_qrcode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:hIcon="@mipmap/anh"
+                    app:hIcon="@drawable/boj"
                     app:hTipVisiblity="false"
                     app:paddingLeft="20dp"
-                    app:paddingRight="20dp"
+                    app:paddingRight="30dp"
                     app:tileText="扫一扫" />
 
                 <com.imooc.lib_common_ui.HornizeItemView
                     android:id="@+id/home_music"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:hIcon="@mipmap/ani"
+                    app:hIcon="@drawable/bo9"
                     app:hTipVisiblity="false"
                     app:paddingLeft="20dp"
-                    app:paddingRight="20dp"
+                    app:paddingRight="30dp"
                     app:tileText="音乐闹钟" />
 
                 <com.imooc.lib_common_ui.HornizeItemView
                     android:id="@+id/online_music_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:hIcon="@mipmap/anj"
+                    app:hIcon="@drawable/bod"
                     app:hTipVisiblity="false"
                     app:paddingLeft="20dp"
-                    app:paddingRight="20dp"
+                    app:paddingRight="30dp"
                     app:tileText="在线听歌免流量" />
 
                 <com.imooc.lib_common_ui.HornizeItemView
+                    android:id="@+id/icon_cloud_music"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:hIcon="@mipmap/ank"
+                    app:hIcon="@drawable/bo_"
                     app:hTipVisiblity="false"
                     app:paddingLeft="20dp"
-                    app:paddingRight="20dp"
-                    app:tileText="游戏推荐" />
+                    app:paddingRight="30dp"
+                    app:tileText="音乐云盘" />
 
                 <com.imooc.lib_common_ui.HornizeItemView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:hIcon="@mipmap/anl"
+                    app:hIcon="@drawable/bob"
                     app:hTipVisiblity="false"
                     app:paddingLeft="20dp"
-                    app:paddingRight="20dp"
+                    app:paddingRight="30dp"
                     app:tileText="优惠卷" />
 
                 <com.imooc.lib_common_ui.HornizeItemView
                     android:id="@+id/check_update_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:hIcon="@mipmap/anm"
+                    app:hIcon="@drawable/boa"
                     app:hTipVisiblity="false"
                     app:paddingLeft="20dp"
-                    app:paddingRight="20dp"
+                    app:paddingRight="30dp"
                     app:tileText="检查更新" />
             </LinearLayout>
 

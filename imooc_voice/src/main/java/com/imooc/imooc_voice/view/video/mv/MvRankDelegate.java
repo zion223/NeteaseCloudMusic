@@ -1,6 +1,7 @@
 package com.imooc.imooc_voice.view.video.mv;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -70,6 +71,7 @@ public class MvRankDelegate extends NeteaseLoadingDelegate {
 				mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
 					@Override
 					public void onItemClick(BaseQuickAdapter adapter, View view, int i) {
+						//TODO MV详情
 						MvTopBean.MvTopDetailBean entity = (MvTopBean.MvTopDetailBean) adapter.getItem(i);
 						getParentDelegate().getParentDelegate().getSupportDelegate().start(VideoDetailDelegate.newInstance(entity.getId()));
 					}
@@ -123,6 +125,10 @@ public class MvRankDelegate extends NeteaseLoadingDelegate {
 				adapter.setImageResource(R.id.iv_item_mv_rank_diff, R.drawable.zero);
 			}
 			adapter.setText(R.id.tv_item_mv_rank_diff, String.valueOf(Math.abs(diff)));
+			//排行榜前三
+			if(currentRank < 4){
+				adapter.setTextColor(R.id.tv_mv_rank, Color.RED);
+			}
 			adapter.setText(R.id.tv_mv_rank, String.valueOf(currentRank));
 
 		}

@@ -1555,7 +1555,7 @@ public class VideoBean {
 		private int gender;
 		private int city;
 		private String birthday;
-		private int userId;
+		private long userId;
 		private int userType;
 		private String nickname;
 		private String signature;
@@ -1647,11 +1647,11 @@ public class VideoBean {
 			return birthday;
 		}
 
-		public void setUserid(int userid) {
+		public void setUserid(long userid) {
 			this.userId = userid;
 		}
 
-		public int getUserid() {
+		public long getUserid() {
 			return userId;
 		}
 

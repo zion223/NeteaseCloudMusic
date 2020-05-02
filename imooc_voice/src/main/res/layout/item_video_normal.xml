@@ -3,7 +3,6 @@
     android:id="@+id/rl_feed"
     android:layout_width="match_parent"
     android:layout_height="85dp"
-    android:background="#ffffff"
     android:paddingTop="7dp"
     android:paddingBottom="7dp">
 
@@ -19,6 +18,7 @@
         android:layout_width="13dp"
         android:layout_height="13dp"
         android:layout_marginTop="3dp"
+
         android:layout_toLeftOf="@+id/tv_item_video_playnum"
         android:src="@drawable/playnum" />
 
@@ -26,11 +26,13 @@
         android:id="@+id/tv_item_video_playnum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/iv_item_video_cover"
         android:layout_alignTop="@+id/iv_play_num"
         android:layout_alignBottom="@+id/iv_play_num"
+        android:layout_alignRight="@+id/iv_item_video_cover"
+        android:gravity="center"
         android:layout_marginRight="5dp"
         android:text="11万"
+        android:textSize="10sp"
         android:textColor="@color/white" />
 
     <RelativeLayout

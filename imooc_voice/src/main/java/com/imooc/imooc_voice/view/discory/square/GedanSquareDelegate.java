@@ -27,7 +27,7 @@ public class GedanSquareDelegate extends NeteaseDelegate {
 	ViewPager mTabViewPager;
 
 	private SquareAdapter mAdapter;
-
+	//TODO 添加官方 频道
 	private static final CharSequence[] CHANNELS = {"民谣","ACG","华语","影视原声","摇滚","经典","电子"};
 
 	@Override

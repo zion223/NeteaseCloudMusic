@@ -70,11 +70,11 @@ public class HornizeItemView extends RelativeLayout {
 		mPaddingRight = a.getLayoutDimension(R.styleable.HornizeItemView_paddingRight, 20);
 		mPaddingTop = a.getLayoutDimension(R.styleable.HornizeItemView_paddingTop, 25);
 		mPaddingBottom = a.getLayoutDimension(R.styleable.HornizeItemView_paddingBottom, 25);
-
-		mIconWidth = a.getLayoutDimension(R.styleable.HornizeItemView_hIconWidth, 90);
-		mIconHeight = a.getLayoutDimension(R.styleable.HornizeItemView_hIconHeight, 90);
+		//左边图标
+		mIconWidth = a.getLayoutDimension(R.styleable.HornizeItemView_hIconWidth, 50);
+		mIconHeight = a.getLayoutDimension(R.styleable.HornizeItemView_hIconHeight, 50);
 		mIcon = a.getDrawable(R.styleable.HornizeItemView_hIcon);
-		mIconPaddingRight = a.getLayoutDimension(R.styleable.HornizeItemView_iconPaddingRight, 15);
+		mIconPaddingRight = a.getLayoutDimension(R.styleable.HornizeItemView_iconPaddingRight, 20);
 
 		mTileTextSize = a.getDimension(R.styleable.HornizeItemView_tileTextSize, 15);
 		mTileTextColor = a.getColor(R.styleable.HornizeItemView_tileTextColor, 0xff333333);

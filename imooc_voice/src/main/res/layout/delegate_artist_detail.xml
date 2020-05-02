@@ -44,7 +44,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:text="周杰伦"
                     android:textColor="#f0f0f0f0"
                     android:textSize="17sp"
                     android:textStyle="bold" />

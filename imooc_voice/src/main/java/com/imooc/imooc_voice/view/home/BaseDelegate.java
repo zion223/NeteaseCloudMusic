@@ -33,7 +33,7 @@ public class BaseDelegate extends NeteaseDelegate {
 	@Override
 	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
 		final View loadView = LayoutInflater.from(getContext()).inflate(R.layout.delegate_base, mRelativelayout, false);
-		musicView = loadView.findViewById(R.id.bottom_view);
+		//musicView = loadView.findViewById(R.id.bottom_view);
 		ScreenUtils.setStatusBarColor(getProxyActivity(), Color.parseColor("#ffffffff"));
 		getSupportDelegate().loadRootFragment(R.id.frame_base, new HomeDelegate());
 	}

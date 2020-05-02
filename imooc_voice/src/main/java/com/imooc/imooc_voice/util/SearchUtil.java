@@ -27,11 +27,13 @@ public class SearchUtil {
 
 	public static String getCorresPondingString(int num){
 		String text;
+		//大于1亿
 		if(num > 100000000){
 			num = num / 100000000;
 			text = num + "亿";
-		}else if (num >= 10000) {
-			num = num / 10000;
+		//大于10万
+		}else if (num >= 100000) {
+			num = num / 100000;
 			text = num + "万";
 		} else {
 			text = num + "";

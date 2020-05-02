@@ -16,6 +16,7 @@ import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.newapi.VideoGroupBean;
+import com.imooc.imooc_voice.view.video.mv.MvDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.navigator.CommonNavigatorCreater;
 import com.imooc.lib_network.listener.DisposeDataListener;
@@ -56,10 +57,10 @@ public class VideoTabDelegate extends NeteaseDelegate {
 				VideoGroupBean bean = (VideoGroupBean) responseObj;
 				List<VideoGroupBean.Data> data = bean.getData();
 
-				// 根据ID查询视频 name为标题
+				// 根据ID查询视频 name为标题 tab数量最多为20个
 				int tabSize = data.size();
-				if(tabSize >= 10){
-					tabSize = 10;
+				if(tabSize >= 20){
+					tabSize = 20;
 				}
 				String[] mTitleData = new String[tabSize];
 				long[] mVideoTabId = new long[tabSize];
@@ -111,7 +112,11 @@ public class VideoTabDelegate extends NeteaseDelegate {
 
 		@Override
 		public Fragment getItem(int i) {
-			return VideoDelegate.newInstance(mTabIdArray[i]);
+			if(mTabIdArray[i] == 1000){
+				return new MvDelegate();
+			}else{
+				return VideoDelegate.newInstance(mTabIdArray[i]);
+			}
 		}
 
 		@Override

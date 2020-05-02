@@ -104,11 +104,12 @@ public class MusicDelegate extends NeteaseLoadingDelegate {
 			final ImageView playView = helper.getView(R.id.play_state);
 
 			//当前音乐是正在播放的音乐
-			if (AudioController.getInstance().getNowPlaying().getName().equals(item.musicName)) {
-				playView.setVisibility(View.VISIBLE);
-			} else {
-				playView.setVisibility(View.GONE);
-			}
+			playView.setVisibility(View.GONE);
+//			if (AudioController.getInstance().getNowPlaying().getName().equals(item.musicName)) {
+//				playView.setVisibility(View.VISIBLE);
+//			} else {
+//				playView.setVisibility(View.GONE);
+//			}
 
 		}
 

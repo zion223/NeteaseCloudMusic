@@ -18,7 +18,7 @@ public class ImoocVoiceApplication extends Application {
         super.onCreate();
         Fragmentation.builder()
                 // 设置 栈视图 模式为 悬浮球模式   SHAKE: 摇一摇唤出   NONE：隐藏
-                .stackViewMode(Fragmentation.SHAKE)
+                //.stackViewMode(Fragmentation.SHAKE)
                 .debug(BuildConfig.DEBUG)
                 // 在遇到After onSaveInstanceState时，不会抛出异常，会回调到下面的ExceptionHandler
                 .handleException(new ExceptionHandler() {

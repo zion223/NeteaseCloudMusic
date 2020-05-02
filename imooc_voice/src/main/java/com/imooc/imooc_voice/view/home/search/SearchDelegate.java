@@ -46,16 +46,13 @@ public class SearchDelegate extends NeteaseDelegate {
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
 
-        mEtKeywords.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                   getParentDelegate().getSupportDelegate().start(SearchResultDelegate.newInstance(mEtKeywords.getText().toString()));
-                    //隐藏软键盘
-                    getSupportDelegate().hideSoftInput();
-                }
-                return false;
+        mEtKeywords.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+               getParentDelegate().getSupportDelegate().start(SearchResultDelegate.newInstance(mEtKeywords.getText().toString()));
+                //隐藏软键盘
+                getSupportDelegate().hideSoftInput();
             }
+            return false;
         });
 
 

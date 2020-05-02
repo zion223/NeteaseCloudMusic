@@ -20,6 +20,7 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigat
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class MvRankTabDelegate extends NeteaseDelegate {
 
@@ -56,5 +57,11 @@ public class MvRankTabDelegate extends NeteaseDelegate {
 		commonNavigator.setAdjustMode(true);
 		mTabMagicIndicator.setNavigator(commonNavigator);
 		ViewPagerHelper.bind(mTabMagicIndicator, mTabViewPager);
+	}
+
+
+	@OnClick(R2.id.img_tab_back)
+	void onClickBack(){
+		getSupportDelegate().pop();
 	}
 }

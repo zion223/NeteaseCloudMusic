@@ -183,8 +183,10 @@ public class ArtistSortDelegate extends NeteaseDelegate {
 			//是否已关注
 			if(item.isFollowed()){
 				adapter.setVisible(R.id.ll_singer_followed, true);
+				adapter.setVisible(R.id.ll_singer_followed, false);
 			}else{
 				adapter.setVisible(R.id.ll_singer_follow, true);
+				adapter.setVisible(R.id.ll_singer_followed, false);
 			}
 			adapter.setText(R.id.tv_singer_name,item.getName());
 

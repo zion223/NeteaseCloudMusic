@@ -42,6 +42,8 @@ import cn.jzvd.Jzvd;
 
 import static com.imooc.imooc_voice.Constants.VIDEO;
 
+
+//视频详情
 public class VideoDetailDelegate extends NeteaseLoadingDelegate {
 
 	private static final String ARGS_VIDEO_ID = "ARGS_VIDEO_ID";

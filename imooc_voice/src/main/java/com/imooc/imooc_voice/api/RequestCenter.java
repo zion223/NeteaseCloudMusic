@@ -17,6 +17,7 @@ import com.imooc.imooc_voice.model.newapi.LoginBean;
 import com.imooc.imooc_voice.model.newapi.CommonMessageBean;
 import com.imooc.imooc_voice.model.newapi.MainEventBean;
 import com.imooc.imooc_voice.model.newapi.MainRecommendPlayListBean;
+import com.imooc.imooc_voice.model.newapi.MvBean;
 import com.imooc.imooc_voice.model.newapi.MvSublistBean;
 import com.imooc.imooc_voice.model.newapi.MvTopBean;
 import com.imooc.imooc_voice.model.newapi.MyFmBean;
@@ -778,6 +779,35 @@ public class RequestCenter {
         RequestParams params = new RequestParams();
         params.put("id", id);
         RequestCenter.getRequest(HttpConstants.VIDEO_URL, params, listener, VideoUrlBean.class);
+    }
+
+    /**
+     * 获取全部MV
+     *  area: 地区,可选值为全部,内地,港台,欧美,日本,韩国,不填则为全部
+     *  type: 类型,可选值为全部,官方版,原生,现场版,网易出品,不填则为全部
+     *  order: 排序,可选值为上升最快,最热,最新,不填则为上升最快
+     *  limit: 取出数量 , 默认为 30
+     *  offset: 偏移数量 , 用于分页 , 如 :( 页数 -1)*50, 其中 50 为 limit 的值 , 默认 为 0
+     */
+    public static void getAllMv(String area, String type, String order, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("area", area);
+        params.put("order", order);
+        params.put("type", type);
+        //TODO 分页
+        params.put("limit", 30);
+        RequestCenter.getRequest(HttpConstants.MV_ALL, params, listener, MvBean.class);
+    }
+
+    /**
+     *  获取最新MV
+     *      area: 地区,可选值为全部,内地,港台,欧美,日本,韩国,不填则为全部
+     */
+    public static void getFirstMv(String area, int limit, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("area", area);
+        params.put("limit", limit);
+        RequestCenter.getRequest(HttpConstants.MV_FIRST, params, listener, MvBean.class);
     }
 
     /**

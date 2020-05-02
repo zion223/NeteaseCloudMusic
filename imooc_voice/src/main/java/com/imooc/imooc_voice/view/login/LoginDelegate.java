@@ -24,6 +24,7 @@ public class LoginDelegate extends NeteaseDelegate {
 
 	}
 
+	//手机登录
 	@OnClick(R2.id.login_phone)
 	void onClickLoginPhone(){
 		getSupportDelegate().start(new PhoneLoginDelegate());

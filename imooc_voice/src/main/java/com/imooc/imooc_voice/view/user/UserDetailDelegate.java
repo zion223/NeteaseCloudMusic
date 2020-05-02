@@ -147,6 +147,7 @@ public class UserDetailDelegate extends NeteaseDelegate {
 				}else{
 					eventText = new SpannableString("动态 " + bean.getProfile().getEventCount());
 				}
+
 				eventText.setSpan(new AbsoluteSizeSpan(35), 3, eventText.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 				eventText.setSpan(foregroundColorSpan, 3, eventText.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 				mTitleDataList[0] = "主页";

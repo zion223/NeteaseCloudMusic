@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp"
+    android:paddingTop="10dp">
+
+    <ImageView
+        android:id="@+id/iv_item_notification_comment_avatar_img"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/test" />
+
+    <TextView
+        android:id="@+id/tv_item_notification_comment_avatar_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/iv_item_notification_comment_avatar_img"
+        android:layout_alignBottom="@+id/iv_item_notification_comment_avatar_img"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/iv_item_notification_comment_avatar_img"
+        android:gravity="center_vertical"
+        android:text="三字三十三"
+        android:textColor="#517D98"
+        android:textSize="13sp" />
+
+
+    <TextView
+        android:id="@+id/tv_item_notification_comment_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="10dp"
+        android:text="09:25"
+        android:textSize="11sp" />
+
+    <TextView
+        android:id="@+id/tv_item_notification_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_item_notification_comment_avatar_img"
+        android:layout_alignLeft="@+id/tv_item_notification_comment_avatar_name"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="15dp"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_item_notification_comment_replied"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_item_notification_content"
+        android:layout_alignLeft="@+id/tv_item_notification_comment_avatar_name"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/app_background"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:padding="5dp"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_below="@+id/tv_item_notification_comment_replied"
+        android:layout_alignLeft="@+id/tv_item_notification_comment_avatar_name"
+        android:layout_marginTop="2dp"
+        android:background="@color/app_background" />
+</RelativeLayout>

@@ -1,5 +1,6 @@
 package com.imooc.imooc_voice.view.discory.daily;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -32,6 +33,7 @@ import com.imooc.lib_network.listener.DisposeDataListener;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class DailyRecommendDelegate extends NeteaseDelegate {
 
@@ -63,6 +65,7 @@ public class DailyRecommendDelegate extends NeteaseDelegate {
 	}
 
 
+	@SuppressLint("SetTextI18n")
 	@Override
 	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
 		ImageLoaderManager manager = ImageLoaderManager.getInstance();
@@ -73,6 +76,7 @@ public class DailyRecommendDelegate extends NeteaseDelegate {
 		mTvMonth.setText("/" +TimeUtil.getMonth(System.currentTimeMillis()));
 
 		String coverUrl = GsonUtil.fromJSON(SharePreferenceUtil.getInstance(getContext()).getUserInfo(""), LoginBean.class).getProfile().getBackgroundUrl();
+		//模糊背景
 		manager.displayImageForViewGroup(mIvAppBarBackground, coverUrl, 125);
 		manager.displayImageForView(mIvAppBarCoverBackground, coverUrl);
 		RequestCenter.getDailyRecommend(new DisposeDataListener() {
@@ -96,6 +100,11 @@ public class DailyRecommendDelegate extends NeteaseDelegate {
 	public void onResume() {
 		super.onResume();
 		initAppBarLayoutListener();
+	}
+
+	@OnClick(R2.id.img_daily_back)
+	void onClickBack(){
+		getSupportDelegate().pop();
 	}
 
 	private void initAppBarLayoutListener() {

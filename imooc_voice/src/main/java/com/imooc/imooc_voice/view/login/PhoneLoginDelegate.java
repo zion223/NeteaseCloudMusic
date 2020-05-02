@@ -21,6 +21,8 @@ import com.imooc.imooc_voice.view.home.BaseDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -72,6 +74,8 @@ public class PhoneLoginDelegate extends NeteaseDelegate {
 				LoginBean bean = (LoginBean) responseObj;
 				Toast.makeText(getContext(), bean.getProfile().getNickname()+ "登陆成功", Toast.LENGTH_LONG).show();
 				SharePreferenceUtil.getInstance(getContext()).saveUserInfo(bean, "18561762719");
+				//TODO 立即体验时 从侧滑菜单登录
+				//EventBus.getDefault().postSticky();
 				getSupportDelegate().startWithPop(new BaseDelegate());
 			}
 

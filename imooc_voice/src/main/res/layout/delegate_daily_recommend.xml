@@ -22,7 +22,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/test"
                 app:layout_collapseMode="parallax" />
 
             <ImageView
@@ -102,13 +101,7 @@
                         android:typeface="monospace"
                         android:visibility="gone" />
 
-                    <ImageView
-                        android:id="@+id/img_tab_more"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginRight="10dp"
-                        android:src="@drawable/more" />
+
                 </LinearLayout>
             </android.support.v7.widget.Toolbar>
 

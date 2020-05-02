@@ -96,7 +96,7 @@ public class MineDelegate extends NeteaseDelegate {
 		//下载管理
 
 
-		//用户创建的歌单
+		//用户创建的歌单 和收藏的歌单
 		RequestCenter.getUserPlaylist(userId, new DisposeDataListener() {
 			@Override
 			public void onSuccess(Object responseObj) {
@@ -119,6 +119,7 @@ public class MineDelegate extends NeteaseDelegate {
 						changePlayListVisibleStatus(adapter, holder, groupPosition);
 					}
 				});
+				//查看歌单详情
 				mPlayListAdapter.setOnChildClickListener(new GroupedRecyclerViewAdapter.OnChildClickListener() {
 					@Override
 					public void onChildClick(GroupedRecyclerViewAdapter adapter, com.donkingliang.groupedadapter.holder.BaseViewHolder holder, int groupPosition, int childPosition) {

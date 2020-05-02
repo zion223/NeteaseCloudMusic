@@ -34,6 +34,8 @@ import com.imooc.imooc_voice.view.discory.radio.RadioDelegate;
 import com.imooc.imooc_voice.view.discory.rank.RankingDelegate;
 import com.imooc.imooc_voice.view.discory.square.GedanSquareDelegate;
 import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
+import com.imooc.imooc_voice.view.video.mv.MvRankDelegate;
+import com.imooc.imooc_voice.view.video.mv.MvRankTabDelegate;
 import com.imooc.lib_common_ui.bannder.BannerCreator;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.delegate.web.WebDelegateImpl;
@@ -183,7 +185,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 				mAlbumSongAdapter.setOnItemClickListener((adpater, view1, i) -> {
 					AlbumOrSongBean entity = (AlbumOrSongBean) adpater.getItem(i);
 					if (entity.getType() == TYPE_ALBUM) {
-						getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(1, entity.getId()));
+						getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(ALBUM, entity.getId()));
 					} else {
 						//TODO 加入播放队列
 					}
@@ -272,8 +274,12 @@ public class DiscoverDelegate extends NeteaseDelegate {
 	void onClickAlbumOrSong() {
 		if ((int) mTvAlbumOrSong.getTag() == TYPE_ALBUM) {
 			getParentDelegate().getSupportDelegate().start(new NewAlbumDelegate());
+		}else{
+			//TODO 新歌推荐
+
 		}
 	}
+
 
 
 	void changeAlbumOrSong(int type) {

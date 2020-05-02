@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,11 +19,15 @@ import android.widget.TextView;
 
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
+import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.CHANNEL;
 import com.imooc.imooc_voice.model.event.LoginEvent;
 import com.imooc.imooc_voice.model.newapi.LoginBean;
 import com.imooc.imooc_voice.util.GsonUtil;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
+import com.imooc.imooc_voice.view.drawer.CloudMusicDelegate;
+import com.imooc.imooc_voice.view.drawer.MessageTabDelegate;
+import com.imooc.imooc_voice.view.drawer.notification.PrivateLetterDelegate;
 import com.imooc.imooc_voice.view.home.adapter.HomePagerAdapter;
 import com.imooc.imooc_voice.view.home.title.ScaleTransitionPagerTitleView;
 import com.imooc.imooc_voice.view.login.LoginDelegate;
@@ -31,6 +36,7 @@ import com.imooc.lib_audio.app.AudioHelper;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
+import com.imooc.lib_network.listener.DisposeDataListener;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -67,9 +73,9 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 	@BindView(R2.id.base_drawer_layout)
 	DrawerLayout mDrawerLayout;
 	@BindView(R2.id.avatr_view)
-	ImageView mAvatarView;
+	ImageView mIvAvatarView;
 	@BindView(R2.id.avatar_name)
-	TextView mAvatarName;
+	TextView mTvAvatarName;
 	@BindView(R2.id.rl_main_avatar)
 	RelativeLayout mRlAvatar;
 	@BindView(R2.id.unloggin_layout)
@@ -93,8 +99,8 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 		if(bean != null){
 			mRlAvatar.setVisibility(View.VISIBLE);
 			mLlUnLoggin.setVisibility(View.GONE);
-			ImageLoaderManager.getInstance().displayImageForCircle(mAvatarView, bean.getProfile().getAvatarUrl());
-			mAvatarName.setText(bean.getProfile().getNickname());
+			ImageLoaderManager.getInstance().displayImageForCircle(mIvAvatarView, bean.getProfile().getAvatarUrl());
+			mTvAvatarName.setText(bean.getProfile().getNickname());
 		}else{
 			mRlAvatar.setVisibility(View.GONE);
 			mLlUnLoggin.setVisibility(View.VISIBLE);
@@ -179,7 +185,7 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 		int id = v.getId();
 		switch (id) {
 			case R.id.unloggin_layout:
-				if (sharePreferenceUtil.getAuthToken("").equals("")) {
+				if (TextUtils.isEmpty(sharePreferenceUtil.getAuthToken(""))) {
 					//跳转到LoginActivity
 					getSupportDelegate().start(new LoginDelegate());
 				} else {
@@ -195,6 +201,14 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 		}
 	}
 
+
+	//查看通知
+	@OnClick(R2.id.icon_notification_msg)
+	void onClickShowNotification(){
+		mDrawerLayout.closeDrawer(Gravity.LEFT);
+		getSupportDelegate().start(new MessageTabDelegate());
+	}
+
 	//主线程执行
 	@Subscribe(threadMode = ThreadMode.MAIN)
 	public void onLoginEvent(LoginEvent event) {
@@ -205,7 +219,28 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 				//.displayImageForCircle(mPhotoView, UserManager.getInstance().getUser().data.photoUrl);
 	}
 
+	//退出登录
+	@OnClick(R2.id.exit_layout)
+	void onClickQuit(){
 
+		RequestCenter.logout(new DisposeDataListener() {
+			@Override
+			public void onSuccess(Object responseObj) {
+				sharePreferenceUtil.removeUserInfo();
+			}
+
+			@Override
+			public void onFailure(Object reasonObj) {
+
+			}
+		});
+	}
+
+	@OnClick(R2.id.icon_cloud_music)
+	void onClickMusic(){
+		mDrawerLayout.closeDrawer(Gravity.LEFT);
+		getSupportDelegate().start(new CloudMusicDelegate());
+	}
 
 	@OnClick(R2.id.toggle_view)
 	void ClickToggle(){

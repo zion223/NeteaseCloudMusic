@@ -151,6 +151,10 @@ public class HttpConstants {
 
     static String VIDEO_URL = ROOT_URL + "/video/url";
 
+    static String MV_ALL = ROOT_URL + "/mv/all";
+
+    static String MV_FIRST = ROOT_URL + "/mv/first";
+
     static String MSG_PRIVATE = ROOT_URL + "/msg/private";
 
     static String MSG_COMMENT = ROOT_URL + "/msg/comments";
