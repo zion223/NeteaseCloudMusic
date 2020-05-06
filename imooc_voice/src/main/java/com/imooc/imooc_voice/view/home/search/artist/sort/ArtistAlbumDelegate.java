@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -15,6 +16,7 @@ import com.imooc.imooc_voice.model.event.ArtistIdEvent;
 import com.imooc.imooc_voice.model.newapi.search.SingerAblumSearchBean;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
+import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
@@ -23,6 +25,8 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
+
+import static com.imooc.imooc_voice.Constants.ALBUM;
 
 /**
  * 歌手专辑
@@ -47,6 +51,13 @@ public class ArtistAlbumDelegate extends NeteaseLoadingDelegate {
 				List<SingerAblumSearchBean.HotAlbumsBean> hotSongs = bean.getHotAlbums();
 				mRecyclerView = rootView.findViewById(R.id.rv_delegate_normal);
 				mAdapter = new ArtistAlbumAdapter(hotSongs);
+				mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+					@Override
+					public void onItemClick(BaseQuickAdapter adapter, View view, int i) {
+						SingerAblumSearchBean.HotAlbumsBean entity = (SingerAblumSearchBean.HotAlbumsBean) adapter.getItem(i);
+						getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(ALBUM, entity.getId()));
+					}
+				});
 				mRecyclerView.setAdapter(mAdapter);
 				mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 				addRootView();

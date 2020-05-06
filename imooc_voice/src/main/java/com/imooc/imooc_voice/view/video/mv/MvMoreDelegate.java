@@ -15,6 +15,7 @@ import com.imooc.imooc_voice.model.event.RequestSuccessEvent;
 import com.imooc.imooc_voice.model.newapi.MvBean;
 import com.imooc.imooc_voice.model.newapi.MvMoreEntity;
 import com.imooc.imooc_voice.util.SearchUtil;
+import com.imooc.imooc_voice.view.video.MvDeatilDelegate;
 import com.imooc.imooc_voice.view.video.VideoDetailDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
@@ -111,6 +112,7 @@ public class MvMoreDelegate extends NeteaseLoadingDelegate {
 	@Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
 	public void requestDataSuccess(RequestSuccessEvent event){
 		successTime += 1;
+		//数据请求完毕
 		if(successTime == 5){
 
 			mEntities.addAll(mEntities1);
@@ -119,9 +121,9 @@ public class MvMoreDelegate extends NeteaseLoadingDelegate {
 			mEntities.addAll(mEntities4);
 			mEntities.addAll(mEntities5);
 			mAdapter = new MvMoreAdapter(mEntities);
-			mAdapter.setOnItemChildClickListener((adapter, view, i) -> {
+			mAdapter.setOnItemClickListener((adapter, view, i) -> {
 				MvMoreEntity entity = (MvMoreEntity) adapter.getItem(i);
-				getParentDelegate().getParentDelegate().getSupportDelegate().start(VideoDetailDelegate.newInstance(entity.t.getId()));
+				getSupportDelegate().start(MvDeatilDelegate.newInstance(entity.t.getId()));
 			});
 			mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 			mRecyclerView.setAdapter(mAdapter);

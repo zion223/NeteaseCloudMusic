@@ -151,7 +151,7 @@ public class MineDelegate extends NeteaseDelegate {
 				SubCountBean bean = (SubCountBean) responseObj;
 				//我的电台 数量
 				mTvRadioCount.setText("(" + bean.getDjRadioCount() + ")");
-				//我的收藏 - 收藏的歌手 收藏的视频
+				//TODO 我的收藏 - 收藏的歌手 收藏的视频
 
 			}
 
@@ -189,12 +189,13 @@ public class MineDelegate extends NeteaseDelegate {
 		}
 	}
 
-
+	//本地音乐
 	@OnClick(R2.id.ll_mine_local_music)
 	void onClickLocalMusic() {
 		getParentDelegate().getSupportDelegate().start(new LocalMusicDelegate());
 	}
 
+	//我的电台
 	@OnClick(R2.id.ll_mine_radio)
 	void onClickMineRadio() {
 		getParentDelegate().getSupportDelegate().start(new MineRadioDelegate());

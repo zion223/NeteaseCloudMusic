@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,15 +17,17 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.api.RequestCenter;
-import com.imooc.imooc_voice.api.VideoDetailBean;
 import com.imooc.imooc_voice.api.VideoRelatedBean;
+import com.imooc.imooc_voice.model.newapi.MvBean;
+import com.imooc.imooc_voice.model.newapi.MvInfoBean;
 import com.imooc.imooc_voice.model.newapi.PlayListCommentEntity;
-import com.imooc.imooc_voice.model.newapi.VideoBean;
 import com.imooc.imooc_voice.model.newapi.VideoUrlBean;
 import com.imooc.imooc_voice.model.newapi.search.FeedSearchBean;
+import com.imooc.imooc_voice.model.newapi.search.SingerSongSearchBean;
 import com.imooc.imooc_voice.model.newapi.song.PlayListCommentBean;
 import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.view.discory.square.detail.CommentDelegate;
+import com.imooc.imooc_voice.view.home.search.artist.ArtistDetailDelegate;
 import com.imooc.imooc_voice.view.home.search.sort.VideoSearchDelegate;
 import com.imooc.imooc_voice.view.user.UserDetailDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
@@ -42,11 +45,9 @@ import cn.jzvd.Jzvd;
 
 import static com.imooc.imooc_voice.Constants.VIDEO;
 
+public class MvDeatilDelegate extends NeteaseLoadingDelegate {
 
-//普通视频详情
-public class VideoDetailDelegate extends NeteaseLoadingDelegate {
-
-	private static final String ARGS_VIDEO_ID = "ARGS_VIDEO_ID";
+	private static final String ARGS_MV_ID = "ARGS_MV_ID";
 
 	@BindView(R2.id.tv_video_detail_toolbar_title)
 	TextView mTvToolBarTitle;
@@ -78,19 +79,26 @@ public class VideoDetailDelegate extends NeteaseLoadingDelegate {
 	private RecyclerView mRvRelateVideo;
 	private RecyclerView mRvVideoComment;
 
-	private String videoId;
+	private String mvId;
+	//歌手id
+	private String artistId;
 
-	private VideoBean.Creator creator;
 	private ArrayList<PlayListCommentEntity> entities = new ArrayList<>();
-
+	//评论Adapter
 	private CommentDelegate.MultipleSectionGedanCommentAdapter mCommentAdapter;
+	//相关视频Adapter
 	private VideoSearchDelegate.VideoSearchAdapter mRelatedAdapter;
 
+	@Override
+	public Object setLayout() {
+		return R.layout.delegate_video_detail;
+	}
 
-	public static VideoDetailDelegate newInstance(String id) {
+
+	public static MvDeatilDelegate newInstance(String id) {
 		final Bundle args = new Bundle();
-		args.putString(ARGS_VIDEO_ID, id);
-		final VideoDetailDelegate delegate = new VideoDetailDelegate();
+		args.putString(ARGS_MV_ID, id);
+		final MvDeatilDelegate delegate = new MvDeatilDelegate();
 		delegate.setArguments(args);
 		return delegate;
 	}
@@ -100,85 +108,64 @@ public class VideoDetailDelegate extends NeteaseLoadingDelegate {
 		super.onCreate(savedInstanceState);
 		final Bundle args = getArguments();
 		if (args != null) {
-			videoId = args.getString(ARGS_VIDEO_ID);
+			mvId = args.getString(ARGS_MV_ID);
 		}
-	}
-
-
-	@Override
-	public boolean onBackPressedSupport() {
-		if (Jzvd.backPress()) {
-			return false;
-		} else {
-			return super.onBackPressedSupport();
-		}
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		Jzvd.releaseAllVideos();
-	}
-
-	@Override
-	public Object setLayout() {
-		return R.layout.delegate_video_detail;
 	}
 
 	@Override
 	public void initView() {
-
 		mRvRelateVideo = rootView.findViewById(R.id.rv_video_related);
 		mRvVideoComment = rootView.findViewById(R.id.rv_video_comment);
 
-		RequestCenter.getVideoDetail(videoId, new DisposeDataListener() {
+		RequestCenter.getMVDetail(mvId, new DisposeDataListener() {
 			@SuppressLint("SetTextI18n")
 			@Override
 			public void onSuccess(Object responseObj) {
-				VideoDetailBean bean = (VideoDetailBean) responseObj;
-				VideoBean.Data data = bean.getData();
-				mTvToolBarTitle.setText(data.getTitle());
-				mTvTitle.setText(data.getTitle());
-				mTvPlayTime.setText(SearchUtil.getCorresPondingString(data.getPlaytime()) + "次观看");
-				//视频创作者 头像
-				ImageLoaderManager.getInstance().displayImageForCircle(mIvCreatorAvatar, data.getCreator().getAvatarurl());
-				//名字
-				mTvCreatorName.setText(data.getCreator().getNickname());
-				creator = data.getCreator();
-				//是否已经关注
-				if (creator.getFollowed()) {
-					//已关注
-					mLlFollowed.setVisibility(View.VISIBLE);
-				} else {
-					//未关注
-					mLlFollow.setVisibility(View.VISIBLE);
-				}
-				//是否已经收藏或者点赞
-				if (data.getPraised()) {
-					//已经点赞过
-				} else {
-
-				}
-
-				if (data.getSubscribed()) {
-					//已经收藏过
-				} else {
-
-				}
-				//点赞收藏评论分享 数量
-				mTvPraiseCount.setText(data.getPraisedcount());
-				mTvCollectCount.setText(data.getSubscribeCount());
-				mTvCommentCount.setText(data.getCommentcount());
-				mTvShareCount.setText(data.getSharecount());
-
-				//播放url
-				RequestCenter.getVideoUrl(data.getVid(), new DisposeDataListener() {
+				MvInfoBean bean = (MvInfoBean) responseObj;
+				MvBean.MvDetailBean data = bean.getData();
+				mTvToolBarTitle.setText(data.getName());
+				mTvTitle.setText(data.getName());
+				//播放量
+				mTvPlayTime.setText(SearchUtil.getCorresPondingString(data.getPlayCount()) + "次观看");
+				//预览图
+				ImageLoaderManager.getInstance().displayImageForView(mVideoView.posterImageView, data.getCover());
+				artistId = bean.getData().getArtistId();
+				//获取歌手简介
+				RequestCenter.getSingerInfo(data.getArtistId(), new DisposeDataListener() {
 					@Override
 					public void onSuccess(Object responseObj) {
-						VideoUrlBean item = (VideoUrlBean) responseObj;
-						//视频播放View
-						ImageLoaderManager.getInstance().displayImageForView(mVideoView.posterImageView, data.getCoverurl());
-						mVideoView.setUp(item.getUrls().get(0).getUrl(), "", Jzvd.SCREEN_NORMAL);
+						SingerSongSearchBean singer = (SingerSongSearchBean) responseObj;
+						//歌手名 头像
+						ImageLoaderManager.getInstance().displayImageForCircle(mIvCreatorAvatar, singer.getArtist().getImg1v1Url());
+						//名字
+						mTvCreatorName.setText(singer.getArtist().getName());
+
+						//是否已经关注
+						if (singer.getArtist().isFollowed()) {
+							//已关注
+							mLlFollowed.setVisibility(View.VISIBLE);
+						} else {
+							//未关注
+							mLlFollow.setVisibility(View.VISIBLE);
+						}
+					}
+
+					@Override
+					public void onFailure(Object reasonObj) {
+
+					}
+				});
+				//点赞收藏评论分享 数量
+				mTvPraiseCount.setText(data.getLikeCount());
+				mTvCollectCount.setText(data.getSubCount());
+				mTvCommentCount.setText(data.getCommentCount());
+				mTvShareCount.setText(data.getShareCount());
+				//播放url
+				RequestCenter.getMvPlayUrl(mvId, new DisposeDataListener() {
+					@Override
+					public void onSuccess(Object responseObj) {
+						VideoUrlBean url = (VideoUrlBean) responseObj;
+						mVideoView.setUp(url.getData().getUrl(), "", Jzvd.SCREEN_NORMAL);
 						//自动播放
 						mVideoView.startVideo();
 					}
@@ -189,7 +176,7 @@ public class VideoDetailDelegate extends NeteaseLoadingDelegate {
 					}
 				});
 				//加载 相关视频和评论
-				RequestCenter.getVideoRelated(videoId, new DisposeDataListener() {
+				RequestCenter.getVideoRelated(mvId, new DisposeDataListener() {
 					@Override
 					public void onSuccess(Object responseObj) {
 						VideoRelatedBean videoRelatedBean = (VideoRelatedBean) responseObj;
@@ -216,8 +203,8 @@ public class VideoDetailDelegate extends NeteaseLoadingDelegate {
 
 					}
 				});
-				//加载评论
-				RequestCenter.getVideoComment(videoId, new DisposeDataListener() {
+				//加载MV评论
+				RequestCenter.getMvComment(mvId, new DisposeDataListener() {
 					@Override
 					public void onSuccess(Object responseObj) {
 						PlayListCommentBean bean = (PlayListCommentBean) responseObj;
@@ -227,11 +214,12 @@ public class VideoDetailDelegate extends NeteaseLoadingDelegate {
 								entities.add(new PlayListCommentEntity(bean.getHotComments().get(i)));
 							}
 						}
+
 						entities.add(new PlayListCommentEntity(true, "最新评论", String.valueOf(bean.getComments().size())));
 						for (int j = 0; j < bean.getComments().size(); j++) {
 							entities.add(new PlayListCommentEntity(bean.getComments().get(j)));
 						}
-						mCommentAdapter = new CommentDelegate.MultipleSectionGedanCommentAdapter(videoId, VIDEO, getContext(), entities);
+						mCommentAdapter = new CommentDelegate.MultipleSectionGedanCommentAdapter(mvId, VIDEO, getContext(), entities);
 						mRvVideoComment.setAdapter(mCommentAdapter);
 						mRvVideoComment.setLayoutManager(new LinearLayoutManager(getContext()) {
 							@Override
@@ -248,7 +236,6 @@ public class VideoDetailDelegate extends NeteaseLoadingDelegate {
 					}
 				});
 
-
 			}
 
 			@Override
@@ -259,10 +246,24 @@ public class VideoDetailDelegate extends NeteaseLoadingDelegate {
 	}
 
 	@Override
+	public boolean onBackPressedSupport() {
+		if (Jzvd.backPress()) {
+			return false;
+		} else {
+			return super.onBackPressedSupport();
+		}
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		Jzvd.releaseAllVideos();
+	}
+
+	@Override
 	public int setLoadingViewLayout() {
 		return R.layout.delegate_video_detail_loading_view;
 	}
-
 
 	//TODO 给视频点赞或取消点赞
 	@OnClick(R2.id.iv_video_detail_praise)
@@ -296,11 +297,11 @@ public class VideoDetailDelegate extends NeteaseLoadingDelegate {
 	}
 
 
-	//视频作者
+	//此MV的歌手
 	@OnClick(R2.id.rl_singer)
-	void onClickCreator() {
-		if (creator != null) {
-			getParentDelegate().getSupportDelegate().start(UserDetailDelegate.newInstance(String.valueOf(creator.getUserid())));
+	void onClickArtist() {
+		if (artistId != null) {
+			getParentDelegate().getSupportDelegate().start(ArtistDetailDelegate.newInstance(String.valueOf(artistId)));
 		}
 	}
 

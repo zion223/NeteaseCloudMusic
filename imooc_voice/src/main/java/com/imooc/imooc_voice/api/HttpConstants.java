@@ -143,13 +143,19 @@ public class HttpConstants {
 
     static String VIDEO_DETAIL = ROOT_URL + "/video/detail";
 
+    static String MV_DETAIL = ROOT_URL + "/mv/detail";
+
     static String TOP_MV = ROOT_URL + "/top/mv";
 
     static String VIDEO_COMMENT = ROOT_URL + "/comment/video";
 
+    static String MV_COMMENT = ROOT_URL + "/comment/mv";
+
     static String VIDEO_RELATED = ROOT_URL + "/related/allvideo";
 
     static String VIDEO_URL = ROOT_URL + "/video/url";
+
+    static String MV_URL = ROOT_URL + "/mv/url";
 
     static String MV_ALL = ROOT_URL + "/mv/all";
 

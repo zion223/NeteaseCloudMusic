@@ -18,6 +18,7 @@ import com.imooc.imooc_voice.model.newapi.CommonMessageBean;
 import com.imooc.imooc_voice.model.newapi.MainEventBean;
 import com.imooc.imooc_voice.model.newapi.MainRecommendPlayListBean;
 import com.imooc.imooc_voice.model.newapi.MvBean;
+import com.imooc.imooc_voice.model.newapi.MvInfoBean;
 import com.imooc.imooc_voice.model.newapi.MvSublistBean;
 import com.imooc.imooc_voice.model.newapi.MvTopBean;
 import com.imooc.imooc_voice.model.newapi.MyFmBean;
@@ -419,6 +420,7 @@ public class RequestCenter {
         params.put("id", id);
         RequestCenter.getRequest(HttpConstants.SINGER_VIDEO, params, listener, SingerVideoSearchBean.class);
     }
+
     /**
      *  歌手描述
      */
@@ -747,6 +749,16 @@ public class RequestCenter {
         params.put("id", id);
         RequestCenter.getRequest(HttpConstants.VIDEO_DETAIL, params, listener, VideoDetailBean.class);
     }
+
+    /**
+     * 获取MV详情
+     */
+    public static void getMVDetail(String id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("mvid", id);
+        RequestCenter.getRequest(HttpConstants.MV_DETAIL, params, listener, MvInfoBean.class);
+    }
+
     /**
      * 获取MV排行
      */
@@ -755,6 +767,14 @@ public class RequestCenter {
         params.put("area", area);
         RequestCenter.getRequest(HttpConstants.TOP_MV, params, listener, MvTopBean.class);
     }
+
+    /**
+     * 获取MV排行
+     */
+    public static void getMvTop(DisposeDataListener listener){
+        RequestCenter.getRequest(HttpConstants.TOP_MV, null, listener, MvTopBean.class);
+    }
+
     /**
      * 获取视频评论
      */
@@ -762,6 +782,15 @@ public class RequestCenter {
         RequestParams params = new RequestParams();
         params.put("id", id);
         RequestCenter.getRequest(HttpConstants.VIDEO_COMMENT, params, listener, PlayListCommentBean.class);
+    }
+
+    /**
+     * 获取MV评论
+     */
+    public static void getMvComment(String id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.MV_COMMENT, params, listener, PlayListCommentBean.class);
     }
     /**
      * 获取相关视频详情
@@ -773,12 +802,21 @@ public class RequestCenter {
     }
 
     /**
-     *  获取视频标签下的视频
+     *  获取视频播放地址
      */
     public static void getVideoUrl(String id, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("id", id);
         RequestCenter.getRequest(HttpConstants.VIDEO_URL, params, listener, VideoUrlBean.class);
+    }
+
+    /**
+     *  获取MV播放地址
+     */
+    public static void getMvPlayUrl(String id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.MV_URL, params, listener, VideoUrlBean.class);
     }
 
     /**

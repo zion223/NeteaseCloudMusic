@@ -27,6 +27,7 @@
         android:layout_alignTop="@+id/iv_item_mv_rank_avatar"
         android:layout_alignRight="@+id/iv_item_mv_rank_avatar"
         android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
         android:text="11万"
         android:textColor="@color/white"
         android:textSize="12sp" />
@@ -58,7 +59,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_mv_rank"
-
         android:layout_marginLeft="1dp"
         android:layout_marginTop="-3dp"
         android:layout_toRightOf="@+id/iv_item_mv_rank_diff"

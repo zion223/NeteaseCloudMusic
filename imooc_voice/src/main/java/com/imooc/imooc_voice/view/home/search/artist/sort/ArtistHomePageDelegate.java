@@ -51,14 +51,11 @@ public class ArtistHomePageDelegate extends NeteaseLoadingDelegate {
 				SingerSongSearchBean bean = (SingerSongSearchBean) responseObj;
 				SingerSongSearchBean.ArtistBean artist = bean.getArtist();
 				List<SingerSongSearchBean.HotSongsBean> hotSongs = bean.getHotSongs();
-				mAdapter = new ArtistHotSongAdapter(hotSongs.subList(0,5));
-				mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-					@Override
-					public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
-						SingerSongSearchBean.HotSongsBean entity = (SingerSongSearchBean.HotSongsBean) baseQuickAdapter.getItem(i);
-
-					}
-				});
+				if(hotSongs.size() > 5){
+					mAdapter = new ArtistHotSongAdapter(hotSongs.subList(0, 5));
+				}else{
+					mAdapter = new ArtistHotSongAdapter(hotSongs);
+				}
 				mRvArtistHotSong.setAdapter(mAdapter);
 				mRvArtistHotSong.setLayoutManager(new LinearLayoutManager(getContext()));
 				//简介
@@ -71,12 +68,12 @@ public class ArtistHomePageDelegate extends NeteaseLoadingDelegate {
 
 			}
 		});
-		//相似歌手
+		//TODO 相似歌手
 		RequestCenter.getSimiSinger(artistId, new DisposeDataListener() {
 			@Override
 			public void onSuccess(Object responseObj) {
 				SimiSingerBean bean = (SimiSingerBean) responseObj;
-				List<SimiSingerBean.ArtistsBean> simiArtists = bean.getArtists().subList(0, 3);
+				//List<SimiSingerBean.ArtistsBean> simiArtists = bean.getArtists().subList(0, 3);
 
 			}
 

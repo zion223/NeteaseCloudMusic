@@ -58,7 +58,7 @@ public class TimeUtil {
 	}
 
 	/**
-	 * 获取私信界面时间
+	 * 获取通知界面时间
 	 * 是否是同一天(昨天) 同一年
 	 */
 	public static String getPrivateMsgTime(long time) {

@@ -56,21 +56,49 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/tv_mv_rank_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_mv_rank_title"
             android:layout_marginTop="3dp"
             android:layout_marginBottom="15dp"
-            android:text="更新时间:12:00" />
+            android:text="更新时间 12:00" />
 
         <ImageView
+            android:id="@+id/iv_mv_rank_img"
             android:layout_width="70dp"
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/test" />
+            android:layout_centerVertical="true" />
     </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="8"
+            android:padding="3dp"
+            android:text="更多精彩MV"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_mv_sort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/bg_discover_gedan"
+            android:text="MV分类"
+            android:textColor="@color/black"
+            android:textSize="10sp" />
+    </LinearLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_mv_more"
         android:layout_width="match_parent"

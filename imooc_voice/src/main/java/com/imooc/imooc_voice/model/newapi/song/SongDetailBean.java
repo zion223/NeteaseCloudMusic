@@ -458,7 +458,7 @@ public class SongDetailBean {
              */
 
             private int br;
-            private int fid;
+            private String fid;
             private int size;
             private double vd;
 
@@ -470,11 +470,11 @@ public class SongDetailBean {
                 this.br = br;
             }
 
-            public int getFid() {
+            public String getFid() {
                 return fid;
             }
 
-            public void setFid(int fid) {
+            public void setFid(String fid) {
                 this.fid = fid;
             }
 
@@ -504,7 +504,7 @@ public class SongDetailBean {
              */
 
             private int br;
-            private int fid;
+            private String fid;
             private int size;
             private double vd;
 
@@ -516,11 +516,11 @@ public class SongDetailBean {
                 this.br = br;
             }
 
-            public int getFid() {
+            public String getFid() {
                 return fid;
             }
 
-            public void setFid(int fid) {
+            public void setFid(String fid) {
                 this.fid = fid;
             }
 
@@ -550,7 +550,7 @@ public class SongDetailBean {
              */
 
             private int br;
-            private int fid;
+            private String fid;
             private int size;
             private double vd;
 
@@ -562,11 +562,11 @@ public class SongDetailBean {
                 this.br = br;
             }
 
-            public int getFid() {
+            public String getFid() {
                 return fid;
             }
 
-            public void setFid(int fid) {
+            public void setFid(String fid) {
                 this.fid = fid;
             }
 

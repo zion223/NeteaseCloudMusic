@@ -18,7 +18,7 @@ import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.newapi.MvTopBean;
 import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
-import com.imooc.imooc_voice.view.video.VideoDetailDelegate;
+import com.imooc.imooc_voice.view.video.MvDeatilDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
@@ -71,9 +71,8 @@ public class MvRankDelegate extends NeteaseLoadingDelegate {
 				mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
 					@Override
 					public void onItemClick(BaseQuickAdapter adapter, View view, int i) {
-						//TODO MV详情
 						MvTopBean.MvTopDetailBean entity = (MvTopBean.MvTopDetailBean) adapter.getItem(i);
-						getParentDelegate().getParentDelegate().getSupportDelegate().start(VideoDetailDelegate.newInstance(entity.getId()));
+						getParentDelegate().getParentDelegate().getSupportDelegate().start(MvDeatilDelegate.newInstance(entity.getId()));
 					}
 				});
 				mRecyclerView.setAdapter(mAdapter);

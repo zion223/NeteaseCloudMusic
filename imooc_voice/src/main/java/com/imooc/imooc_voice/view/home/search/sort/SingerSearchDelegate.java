@@ -3,6 +3,7 @@ package com.imooc.imooc_voice.view.home.search.sort;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -12,6 +13,7 @@ import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.newapi.search.SingerSearchBean;
 import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.view.home.search.NeteaseSearchLoadingDelegate;
+import com.imooc.imooc_voice.view.home.search.artist.ArtistDetailDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
@@ -28,6 +30,13 @@ public class SingerSearchDelegate extends NeteaseSearchLoadingDelegate {
 					SingerSearchBean bean = (SingerSearchBean) responseObj;
 					List<SingerSearchBean.ResultBean.ArtistsBean> artists = bean.getResult().getArtists();
 					mAdapter = new SingerSearchAdapter(keywords, artists);
+					mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+						@Override
+						public void onItemClick(BaseQuickAdapter adapter, View view, int i) {
+							SingerSearchBean.ResultBean.ArtistsBean entity = (SingerSearchBean.ResultBean.ArtistsBean) adapter.getItem(i);
+							getParentDelegate().getSupportDelegate().start(ArtistDetailDelegate.newInstance(entity.getId()));
+						}
+					});
 					mRecyclerView = rootView.findViewById(R.id.rv_delegate_normal);
 					mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 					mRecyclerView.setAdapter(mAdapter);

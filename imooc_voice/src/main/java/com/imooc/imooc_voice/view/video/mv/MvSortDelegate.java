@@ -15,8 +15,10 @@ import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.newapi.MvBean;
+import com.imooc.imooc_voice.model.newapi.MvTopBean;
 import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
+import com.imooc.imooc_voice.view.video.MvDeatilDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.dialog.MvSortDialog;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
@@ -76,6 +78,13 @@ public class MvSortDelegate extends NeteaseDelegate {
 				MvBean bean = (MvBean) responseObj;
 				ArrayList<MvBean.MvDetailBean> data = bean.getData();
 				mAdapter = new MvSortAdapter(data);
+				mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+					@Override
+					public void onItemClick(BaseQuickAdapter adapter, View view, int i) {
+						MvBean.MvDetailBean entity = (MvBean.MvDetailBean) adapter.getItem(i);
+						getParentDelegate().getSupportDelegate().start(MvDeatilDelegate.newInstance(entity.getId()));
+					}
+				});
 				GridLayoutManager manager = new GridLayoutManager(getContext(), 2);
 				mRecyclerView.setLayoutManager(manager);
 				mRecyclerView.setAdapter(mAdapter);
@@ -91,6 +100,11 @@ public class MvSortDelegate extends NeteaseDelegate {
 	@OnClick(R2.id.tv_mv_sort_dialog)
 	void onClickSort(){
 		mSortDialog.show();
+	}
+
+	@OnClick(R2.id.img_tab_back)
+	void onClickBack(){
+		getSupportDelegate().pop();
 	}
 
 	static class MvSortAdapter extends BaseQuickAdapter<MvBean.MvDetailBean, BaseViewHolder>{

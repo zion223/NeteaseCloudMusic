@@ -31,9 +31,9 @@ public class SearchUtil {
 		if(num > 100000000){
 			num = num / 100000000;
 			text = num + "亿";
-		//大于10万
-		}else if (num >= 100000) {
-			num = num / 100000;
+		//大于1万
+		}else if (num >= 10000) {
+			num = num / 10000;
 			text = num + "万";
 		} else {
 			text = num + "";
