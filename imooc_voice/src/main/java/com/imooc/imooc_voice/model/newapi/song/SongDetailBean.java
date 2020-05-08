@@ -88,6 +88,7 @@ public class SongDetailBean {
         private Object crbt;
         private String cf;
         private AlBean al;
+        //歌曲时间
         private long dt;
         private HBean h;
         private MBean m;

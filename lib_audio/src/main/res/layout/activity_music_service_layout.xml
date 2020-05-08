@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_F71816">
+    android:background="@color/gray">
+
     <ImageView
         android:id="@+id/needle"
         android:layout_width="100dp"
         android:layout_height="170dp"
-        android:layout_alignParentRight="true"
         android:layout_below="@+id/title_layout"
-        android:layout_marginRight="100dp"
+        android:layout_alignParentRight="true"
         android:layout_marginTop="-16dp"
+        android:layout_marginRight="100dp"
         android:rotation="-30"
         android:src="@mipmap/b4i"
         android:transformPivotX="15.1dp"

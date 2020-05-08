@@ -264,7 +264,7 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 					public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 						SongDetailBean.SongsBean item = (SongDetailBean.SongsBean) adapter.getItem(position);
 						String songPlayUrl = HttpConstants.getSongPlayUrl(item.getId());
-						AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getAr().get(0).getName(), item.getAl().getName(), item.getAl().getName(), item.getAl().getPicUrl(), "3:00"));
+						AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getAr().get(0).getName(), item.getAl().getName(), item.getAl().getName(), item.getAl().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDt())));
 
 					}
 				});
@@ -366,7 +366,7 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 									public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 										SongDetailBean.SongsBean item = (SongDetailBean.SongsBean) adapter.getItem(position);
 										String songPlayUrl = HttpConstants.getSongPlayUrl(item.getId());
-										AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getAr().get(0).getName(), item.getAl().getName(), item.getAl().getName(), item.getAl().getPicUrl(), "3:00"));
+										AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getAr().get(0).getName(), item.getAl().getName(), item.getAl().getName(), item.getAl().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDt())));
 
 									}
 								});

@@ -1,5 +1,6 @@
 package com.imooc.imooc_voice.view.mine.radio;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -7,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -29,6 +31,8 @@ public class MineRadioDelegate extends NeteaseDelegate {
 
 	@BindView(R2.id.rv_mine_sub_radio)
 	RecyclerView mRvSubRadio;
+	@BindView(R2.id.tv_mine_sub_title)
+	TextView mTvSubRadioTitle;
 
 	private MineRadioAdapter mAdapter;
 
@@ -41,10 +45,12 @@ public class MineRadioDelegate extends NeteaseDelegate {
 	@Override
 	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
 		RequestCenter.getSubRadioList(new DisposeDataListener() {
+			@SuppressLint("SetTextI18n")
 			@Override
 			public void onSuccess(Object responseObj) {
 				DjSubListBean bean = (DjSubListBean) responseObj;
 				List<DjSubListBean.DjRadios> djRadios = bean.getDjRadios();
+				mTvSubRadioTitle.setText("我订阅的电台(" + djRadios.size() + ")");
 				mAdapter = new MineRadioAdapter(djRadios);
 				mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
 					@Override
@@ -54,7 +60,14 @@ public class MineRadioDelegate extends NeteaseDelegate {
 					}
 				});
 				mRvSubRadio.setAdapter(mAdapter);
-				mRvSubRadio.setLayoutManager(new LinearLayoutManager(getContext()));
+				LinearLayoutManager layoutManager = new LinearLayoutManager(getContext()){
+					@Override
+					public boolean canScrollVertically() {
+						return false;
+					}
+				};
+
+				mRvSubRadio.setLayoutManager(layoutManager);
 			}
 
 			@Override
@@ -74,7 +87,7 @@ public class MineRadioDelegate extends NeteaseDelegate {
 
 		private ImageLoaderManager manager;
 
-		public MineRadioAdapter(@Nullable List<DjSubListBean.DjRadios> data) {
+		MineRadioAdapter(@Nullable List<DjSubListBean.DjRadios> data) {
 			super(R.layout.item_mine_radio_content, data);
 			manager = ImageLoaderManager.getInstance();
 		}
