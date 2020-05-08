@@ -1,6 +1,7 @@
 package com.imooc.imooc_voice.view.discory.square.detail;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -33,6 +34,7 @@ import com.imooc.imooc_voice.view.user.UserDetailDelegate;
 import com.imooc.lib_audio.app.AudioHelper;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
+import com.imooc.lib_common_ui.dialog.MusicPopUpDialog;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
@@ -41,9 +43,11 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import me.yokeyword.fragmentation.SupportFragmentDelegate;
 
 import static com.imooc.imooc_voice.Constants.ALBUM;
 import static com.imooc.imooc_voice.Constants.PLAYLIST;
+import static com.imooc.imooc_voice.Constants.SONG;
 
 /**
  * 歌单和专辑详情
@@ -111,7 +115,7 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	private String songlistId;
 	//推荐原因
 	private String copyWriter;
-	//专辑或者歌单
+	//专辑或者歌单  0: 歌曲  1: mv 2: 歌单 3: 专辑 4: 电台 5: 视频 6: 动态
 	private int type;
 	//评论数量
 	private String count;
@@ -160,7 +164,7 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	@Override
 	public void initView() {
 		mRecyclerViewGedan = rootView.findViewById(R.id.rv_gedan_detail_normal);
-		switch (type){
+		switch (type) {
 			case PLAYLIST:
 				//歌单
 				initPlayListView();
@@ -186,9 +190,9 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 				if (Math.abs(i) > 220) {
 					mTvToolBarTitle.setText(mTvDetailTitle.getText());
 				} else {
-					if(type == ALBUM){
+					if (type == ALBUM) {
 						mTvToolBarTitle.setText("专辑");
-					}else{
+					} else {
 						mTvToolBarTitle.setText("歌单");
 					}
 					mTvToolBarTitle.setFocusable(true);
@@ -224,9 +228,9 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 				AlbumDetailBean bean = (AlbumDetailBean) responseObj;
 				TopListDetailBean.Album album = bean.getAlbum();
 				//专辑名称
-				if(bean.getAlbum().getAlias().size() != 0){
+				if (bean.getAlbum().getAlias().size() != 0) {
 					mTvDetailTitle.setText(bean.getAlbum().getName() + bean.getAlbum().getAlias().get(0));
-				}else{
+				} else {
 					mTvDetailTitle.setText(bean.getAlbum().getName());
 				}
 				//专辑图片
@@ -235,13 +239,13 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 				//manager.displayImageForViewGroup(mAppBarLayout, album.getBlurPicUrl(), 200);
 				//显示歌手名
 				mTvDetailAvatarName.setText("歌手:  " + album.getArtist().getName());
-				mTvDetailDesc.setText("发行时间:" + TimeUtil.getTimeStandardOnlyYMD(album.getPublishTime())+"\n"+album.getDescription());
+				mTvDetailDesc.setText("发行时间:" + TimeUtil.getTimeStandardOnlyYMD(album.getPublishTime()) + "\n" + album.getDescription());
 				//评论数量
 				mTvCommentCount.setText(String.valueOf(album.getInfo().getCommentCount()));
 				//分享数量
 				mTvShareCount.setText(String.valueOf(album.getInfo().getShareCount()));
 				//歌曲数量
-				mTvSongNum.setText("(共"+bean.getSongs().size() + "首)");
+				mTvSongNum.setText("(共" + bean.getSongs().size() + "首)");
 				//
 				mTvSongCollectCount.setText("收藏");
 				mLlPlayListSubscribe.setVisibility(View.VISIBLE);
@@ -254,7 +258,7 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 				gedanCreator = album.getArtist().getName();
 				gedanTitle = album.getName();
 
-				mAdapter = new PlayListAdapter(bean.getSongs());
+				mAdapter = new PlayListAdapter(getContext(), getSupportDelegate(), bean.getSongs());
 				mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
 					@Override
 					public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -284,7 +288,7 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	private void initPlayListView() {
 
 		//copyWeriter
-		if(!TextUtils.isEmpty(copyWriter)){
+		if (!TextUtils.isEmpty(copyWriter)) {
 			mTvCopyWriter.setText(copyWriter);
 			mTvCopyWriter.setVisibility(View.VISIBLE);
 		}
@@ -336,7 +340,7 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 				int trakIds = trackIds.size();
 				mTvSongNum.setText("(共" + (trakIds - 1) + "首)");
 
-				if(trakIds > 50){
+				if (trakIds > 50) {
 					trakIds = 50;
 				}
 				for (int i = 0; i < trakIds; i++) {
@@ -347,7 +351,7 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 						params.append(trackIds.get(i).getId()).append(",");
 					}
 				}
-				new AsyncTask<Void,Void,Void>(){
+				new AsyncTask<Void, Void, Void>() {
 
 					@Override
 					protected Void doInBackground(Void... voids) {
@@ -356,7 +360,7 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 							public void onSuccess(Object responseObj) {
 								SongDetailBean bean = (SongDetailBean) responseObj;
 								List<SongDetailBean.SongsBean> songs = bean.getSongs();
-								mAdapter = new PlayListAdapter(songs);
+								mAdapter = new PlayListAdapter(getContext(), getSupportDelegate(), songs);
 								mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
 									@Override
 									public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -383,7 +387,6 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 				//manager.displayImageForViewGroup(mIvAppbarBackground, json.getPic300(), 500);
 
 
-
 			}
 
 			@Override
@@ -407,14 +410,14 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	@OnClick(R2.id.ll_gedan_detail_comment)
 	void onClickGedanComment() {
 
-		getSupportDelegate().start(CommentDelegate.newInstance(songlistId, type, count, gedanImg, gedanCreator, gedanTitle));
+		getSupportDelegate().start(CommentDelegate.newInstance(songlistId, type, gedanImg, gedanCreator, gedanTitle));
 
 	}
 
 	//查看用户详情或者歌手
 	@OnClick(R2.id.tv_gedan_detail_avatar_name)
 	void onClickUserInfo() {
-		switch (type){
+		switch (type) {
 			case ALBUM:
 				//查看歌手
 				getSupportDelegate().start(ArtistDetailDelegate.newInstance(userId));
@@ -431,20 +434,70 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	//歌单的Adapter
 	static public class PlayListAdapter extends BaseQuickAdapter<SongDetailBean.SongsBean, BaseViewHolder> {
 
-		PlayListAdapter(@Nullable List<SongDetailBean.SongsBean> data) {
+		private Context mContext;
+		private SupportFragmentDelegate mDelegate;
+
+		PlayListAdapter(Context context, SupportFragmentDelegate delegate,  @Nullable List<SongDetailBean.SongsBean> data) {
 			super(R.layout.item_gedan_detail_song, data);
+			this.mContext = context;
+			this.mDelegate = delegate;
 		}
 
 		@Override
 		protected void convert(BaseViewHolder helper, SongDetailBean.SongsBean item) {
 
-			helper.setText(R.id.item_play_no, String.valueOf(helper.getLayoutPosition()+1));
+			helper.setText(R.id.item_play_no, String.valueOf(helper.getLayoutPosition() + 1));
 			helper.setText(R.id.viewpager_list_toptext, item.getName());
 			helper.setText(R.id.viewpager_list_bottom_text, item.getAr().get(0).getName());
+
 			helper.setOnClickListener(R.id.viewpager_list_button, new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					MusicPopUpDialog dialog = new MusicPopUpDialog.Builder()
+							.setContext(mContext)
+							.setDeleteViewInvisiable(true)
+							.setmAlbumName(item.getAl().getName())
+							.setmArtistName(item.getAr().get(0).getName())
+							.setmAlbumPic(item.getAl().getPicUrl())
+							.setmMusicName(item.getName())
+							.setListener(new MusicPopUpDialog.OnClickItemListener() {
+								@Override
+								public void onClickNext() {
 
+								}
+
+								@Override
+								public void onClickAddFav() {
+
+								}
+
+								@Override
+								public void onClickShare() {
+
+								}
+
+								@Override
+								public void onClickDelete() {
+
+								}
+
+								@Override
+								public void onClickArtistDetail() {
+									mDelegate.start(ArtistDetailDelegate.newInstance(item.getAr().get(0).getId()));
+								}
+
+								@Override
+								public void onClickAlbumDetail() {
+									mDelegate.start(SongListDetailDelegate.newInstance(ALBUM, item.getAl().getId()));
+								}
+
+								@Override
+								public void onClickComment() {
+									mDelegate.start(CommentDelegate.newInstance(String.valueOf(item.getId()), SONG, item.getAl().getPicUrl(), item.getAr().get(0).getName(), item.getAl().getName()));
+								}
+							})
+							.build();
+					dialog.show();
 				}
 			});
 		}

@@ -104,6 +104,41 @@ public class RequestCenter {
     }
 
     /**
+     * 发送验证码
+     */
+    public static void sendCaptcha(String phone, DisposeDataListener listener) {
+
+        RequestParams params = new RequestParams();
+        params.put("phone", phone);
+        RequestCenter.getRequest(HttpConstants.CAPTCHA_SEND, params, listener, CommonMessageBean.class);
+    }
+
+    /**
+     * 验证验证码
+     */
+    public static void verifyCaptcha(String phone, String captcha, DisposeDataListener listener) {
+
+        RequestParams params = new RequestParams();
+        params.put("phone", phone);
+        params.put("captcha", captcha);
+        RequestCenter.getRequest(HttpConstants.CAPTCHA_VERITY, params, listener, CommonMessageBean.class);
+    }
+
+    /**
+     * 注册(修改密码)
+     *  PS.captcha: 验证码 phone : 手机号码 password: 密码 nickname: 昵
+     */
+    public static void register(String phone, String captcha, String password, DisposeDataListener listener) {
+
+        RequestParams params = new RequestParams();
+        params.put("phone", phone);
+        params.put("captcha", captcha);
+        params.put("password", password);
+        RequestCenter.getRequest(HttpConstants.REGISTER, params, listener, LoginBean.class);
+    }
+
+
+    /**
      * 获取用户信息 , 歌单，收藏，mv, dj 数量
      */
     public static void getsubCount(DisposeDataListener listener) {
@@ -470,10 +505,10 @@ public class RequestCenter {
     /**
      *  歌曲评论
      */
-    public static void getMusicComment(long id, DisposeDataListener listener){
+    public static void getMusicComment(String id, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("id", id);
-        RequestCenter.getRequest(HttpConstants.MUSIC_COMMENT, params, listener, LikeMusicBean.class);
+        RequestCenter.getRequest(HttpConstants.MUSIC_COMMENT, params, listener, PlayListCommentBean.class);
     }
 
     /**
@@ -861,6 +896,15 @@ public class RequestCenter {
      *  获取评论
      */
     public static void getPrivateComment(int id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("uid", id);
+        RequestCenter.getRequest(HttpConstants.MSG_COMMENT, params, listener, PrivateCommentBean.class);
+    }
+
+    /**
+     *  获取通知 TODO
+     */
+    public static void getPrivateNotice(int id, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("uid", id);
         RequestCenter.getRequest(HttpConstants.MSG_COMMENT, params, listener, PrivateCommentBean.class);

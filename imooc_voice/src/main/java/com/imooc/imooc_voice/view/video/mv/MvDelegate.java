@@ -49,7 +49,7 @@ public class MvDelegate extends NeteaseDelegate {
 			public void onSuccess(Object responseObj) {
 				MvTopBean bean = (MvTopBean) responseObj;
 				//更新时间
-				mTvRankUpdateTime.setText("更新时间:" + TimeUtil.getTimeStandardOnlyMDChinese(bean.getUpdateTime()));
+				mTvRankUpdateTime.setText("更新时间 : " + TimeUtil.getTimeStandardOnlyMDChinese(bean.getUpdateTime()));
 				//排行榜右侧的图片
 				ImageLoaderManager.getInstance().displayImageForView(mIvRankImg, bean.getData().get(0).getCover());
 			}

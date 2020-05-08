@@ -15,12 +15,20 @@ public class LoginBean {
      * profile : {"detailDescription":"","followed":false,"userId":415560926,"defaultAvatar":false,"avatarUrl":"https://p3.music.126.net/ULOn30612l-96hKgIy18tA==/18787355185828647.jpg","nickname":"rikkatheworld","birthday":887904000000,"avatarImgId":18787355185828650,"province":440000,"accountStatus":0,"vipType":0,"gender":0,"djStatus":0,"avatarImgIdStr":"18787355185828647","backgroundImgIdStr":"109951163710677237","experts":{},"mutual":false,"remarkName":null,"expertTags":null,"authStatus":0,"backgroundImgId":109951163710677230,"userType":0,"city":440300,"signature":"","authority":0,"description":"","backgroundUrl":"https://p4.music.126.net/r4Ej-BqYiX-Al8AqRFeAUA==/109951163710677237.jpg","avatarImgId_str":"18787355185828647","followeds":3,"follows":1,"eventCount":0,"playlistCount":3,"playlistBeSubscribedCount":1}
      * bindings : [{"refreshTime":1486309535,"url":"","userId":415560926,"tokenJsonStr":"{\"countrycode\":\"\",\"cellphone\":\"13272136221\",\"hasPassword\":true}","id":2973312066,"type":1,"expiresIn":2147483647,"bindingTime":1486309535025,"expired":false},{"refreshTime":1558957256,"url":"","userId":415560926,"tokenJsonStr":"{\"access_token\":\"A73ACD9A247F38479247AD3BA69488BB\",\"refresh_token\":\"3DDEE9EA1955B12F72682A71CC2E95C8\",\"openid\":\"CFA63F441F4BA6BF4999A0182698EC62\",\"nickname\":\"RikkaTheWorld\",\"expires_in\":7776000}","id":2973299013,"type":5,"expiresIn":7776000,"bindingTime":1486309512369,"expired":false}]
      */
-
+    private String msg;
     private int loginType;
     private int code;
     private AccountBean account;
     private ProfileBean profile;
     private List<BindingsBean> bindings;
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
     public int getLoginType() {
         return loginType;

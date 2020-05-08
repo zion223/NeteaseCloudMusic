@@ -155,8 +155,8 @@
                             android:layout_marginRight="20dp"
                             android:background="@drawable/bg_collect"
                             android:gravity="center_horizontal"
-                            android:paddingTop="3dp"
-                            android:paddingBottom="3dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
                             android:text="签到"
                             android:textColor="@color/white"
                             android:textSize="11sp" />
@@ -249,6 +249,25 @@
                         app:tipTextSize="7sp" />
 
                     <com.imooc.lib_common_ui.VerticalItemView
+                        android:id="@+id/icon_notification_listen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:icon="@drawable/bog"
+                        app:iconHeight="23dp"
+                        app:iconWidth="23dp"
+                        app:infoText="听歌识曲"
+                        app:infoTextColor="@color/color_333333"
+                        app:infoTextMarginTop="5dp"
+                        app:infoTextSize="11sp"
+                        app:tipBg="@drawable/bg_home_tip"
+                        app:tipPaddingRight="2dp"
+                        app:tipPaddingTop="2dp"
+                        app:tipText="1"
+                        app:tipTextColor="@color/color_white"
+                        app:tipTextSize="7sp" />
+
+                    <com.imooc.lib_common_ui.VerticalItemView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -266,23 +285,6 @@
                         app:tipTextColor="@color/color_white"
                         app:tipTextSize="7sp" />
 
-                    <com.imooc.lib_common_ui.VerticalItemView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        app:icon="@drawable/bog"
-                        app:iconHeight="23dp"
-                        app:iconWidth="23dp"
-                        app:infoText="听歌识曲"
-                        app:infoTextColor="@color/color_333333"
-                        app:infoTextMarginTop="5dp"
-                        app:infoTextSize="11sp"
-                        app:tipBg="@drawable/bg_home_tip"
-                        app:tipPaddingRight="2dp"
-                        app:tipPaddingTop="2dp"
-                        app:tipText="1"
-                        app:tipTextColor="@color/color_white"
-                        app:tipTextSize="7sp" />
                 </LinearLayout>
 
                 <View

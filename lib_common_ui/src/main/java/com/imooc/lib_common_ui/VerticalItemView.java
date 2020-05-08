@@ -98,4 +98,8 @@ public class VerticalItemView extends RelativeLayout {
 
 		return rootLayout;
 	}
+
+	public ImageView getIconView() {
+		return mIconView;
+	}
 }

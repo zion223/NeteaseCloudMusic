@@ -151,7 +151,7 @@ public class MineDelegate extends NeteaseDelegate {
 				SubCountBean bean = (SubCountBean) responseObj;
 				//我的电台 数量
 				mTvRadioCount.setText("(" + bean.getDjRadioCount() + ")");
-				//TODO 我的收藏 - 收藏的歌手 收藏的视频
+				//TODO 我的收藏 - 收藏的歌手 收藏的视频   专辑 专栏 MLOG
 
 			}
 

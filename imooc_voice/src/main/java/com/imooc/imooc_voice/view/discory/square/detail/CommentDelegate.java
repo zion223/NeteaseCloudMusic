@@ -14,7 +14,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
@@ -40,6 +39,7 @@ import java.util.List;
 
 import static com.imooc.imooc_voice.Constants.ALBUM;
 import static com.imooc.imooc_voice.Constants.PLAYLIST;
+import static com.imooc.imooc_voice.Constants.SONG;
 
 
 public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnClickListener {
@@ -56,20 +56,17 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 
 	private static final String ARGS_COMMENT_ID = "ARGS_COMMENT_ID";
 	private static final String ARGS_COMMENT_TYPE = "ARGS_COMMENT_TYPE";
-	private static final String ARGS_COMMENT_COUNT = "ARGS_COMMENT_COUNT";
 	private static final String ARGS_COMMENT_HEADER_IMG = "ARGS_COMMENT_HEADER_IMG";
 	private static final String ARGS_COMMENT_HEADER_TOP = "ARGS_COMMENT_HEADER_TOP";
 	private static final String ARGS_COMMENT_HEADER_BOTTOM = "ARGS_COMMENT_HEADER_BOTTOM";
 
 
-	//评论类型 歌曲评论 歌单评论 专辑评论 0: 歌曲  1: mv 2: 歌单 3: 专辑 4: 电台 5: 视频 6: 动态
+	//评论类型 歌曲评论 歌单评论 专辑评论  0: 歌曲  1: mv 2: 歌单 3: 专辑 4: 电台 5: 视频 6: 动态
 
-	//歌单ID
+	//资源ID
 	private String id;
 	//评论类型
 	private int type;
-	//评论数量
-	private String count;
 	//歌单图片
 	private String headerImg;
 	//歌单创建者
@@ -79,10 +76,9 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 
 	private ArrayList<PlayListCommentEntity> entities = new ArrayList<>();
 
-	public static CommentDelegate newInstance(String id, int type, String commentCount, String img, String creator, String title) {
+	public static CommentDelegate newInstance(String id, int type, String img, String creator, String title) {
 		final Bundle args = new Bundle();
 		args.putString(ARGS_COMMENT_ID, id);
-		args.putString(ARGS_COMMENT_COUNT, commentCount);
 		args.putString(ARGS_COMMENT_HEADER_IMG, img);
 		args.putString(ARGS_COMMENT_HEADER_BOTTOM, creator);
 		args.putString(ARGS_COMMENT_HEADER_TOP, title);
@@ -98,7 +94,6 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 		final Bundle args = getArguments();
 		if (args != null) {
 			id = args.getString(ARGS_COMMENT_ID);
-			count = args.getString(ARGS_COMMENT_COUNT);
 			headerImg = args.getString(ARGS_COMMENT_HEADER_IMG);
 			headerTop = args.getString(ARGS_COMMENT_HEADER_TOP);
 			headerBottom = args.getString(ARGS_COMMENT_HEADER_BOTTOM);
@@ -129,7 +124,7 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 		mTvCommentTitle = rootView.findViewById(R.id.tv_gedan_detail_comment_num);
 		mIvAlbumRightIcon = rootView.findViewById(R.id.iv_album_right_flag);
 
-		mTvCommentTitle.setText("评论(" + count + ")");
+
 		mRlGedanHeader.setOnClickListener(this);
 		mBackView.setOnClickListener(this);
 		//设置歌手名 或用户名
@@ -178,6 +173,20 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 							}
 						});
 						break;
+					case SONG:
+						//歌曲评论
+						RequestCenter.getMusicComment(id, new DisposeDataListener() {
+							@Override
+							public void onSuccess(Object responseObj) {
+								loadCommentList((PlayListCommentBean) responseObj, SONG);
+							}
+
+							@Override
+							public void onFailure(Object reasonObj) {
+
+							}
+						});
+						break;
 					//专辑评论
 					case ALBUM:
 						RequestCenter.getAlbumComment(id, new DisposeDataListener() {
@@ -199,14 +208,17 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 		}.execute();
 	}
 
-	private void loadCommentList(PlayListCommentBean responseObj, int type) {
+	@SuppressLint("SetTextI18n")
+	private void loadCommentList(PlayListCommentBean commentBean, int type) {
+		//评论数量
+		mTvCommentTitle.setText("评论(" + commentBean.getTotal() + ")");
 		entities.add(new PlayListCommentEntity(true, "精彩评论", ""));
-		for (int i = 0; i < responseObj.getHotComments().size(); i++) {
-			entities.add(new PlayListCommentEntity(responseObj.getHotComments().get(i)));
+		for (int i = 0; i < commentBean.getHotComments().size(); i++) {
+			entities.add(new PlayListCommentEntity(commentBean.getHotComments().get(i)));
 		}
-		entities.add(new PlayListCommentEntity(true, "最新评论", count));
-		for (int j = 0; j < responseObj.getComments().size(); j++) {
-			entities.add(new PlayListCommentEntity(responseObj.getComments().get(j)));
+		entities.add(new PlayListCommentEntity(true, "最新评论", String.valueOf(commentBean.getTotal())));
+		for (int j = 0; j < commentBean.getComments().size(); j++) {
+			entities.add(new PlayListCommentEntity(commentBean.getComments().get(j)));
 		}
 		mAdapter = new MultipleSectionGedanCommentAdapter(id, type, getContext(), entities);
 		mRecyclerViewComment.setAdapter(mAdapter);
@@ -263,7 +275,7 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 			//用户昵称
 			baseViewHolder.setText(R.id.tv_item_gedan_comment_avatar_name, bean.getUser().getNickname());
 			//用户VIP类型
-			if(bean.getUser().getVipType() == 11){
+			if (bean.getUser().getVipType() == 11) {
 				baseViewHolder.setVisible(R.id.iv_item_gedan_comment_avatar_vip, true);
 			}
 			baseViewHolder.setText(R.id.tv_item_gedan_comment_time, TimeUtil.getTimeStandardOnlyYMDChinese(bean.getTime()));

@@ -20,10 +20,11 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/iv_item_mv_cover"
         android:layout_alignBottom="@+id/iv_item_mv_cover"
-        android:text="04:00"
         android:layout_marginLeft="5dp"
         android:layout_marginBottom="8dp"
-        android:textColor="@color/white" />
+        android:text="04:00"
+        android:textColor="@color/white"
+        android:textSize="9sp" />
 
     <ImageView
         android:id="@+id/iv_play_num"
@@ -42,6 +43,7 @@
         android:layout_alignRight="@+id/iv_item_mv_cover"
         android:layout_marginRight="5dp"
         android:text="11万"
+        android:textSize="11sp"
         android:textColor="@color/white" />
 
 
@@ -64,8 +66,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/iv_item_mv_cover"
         android:layout_alignLeft="@+id/iv_item_mv_cover"
-        android:ellipsize="end"
         android:layout_marginTop="3dp"
+        android:ellipsize="end"
         android:maxLines="1"
         android:textColor="#333333"
         android:textSize="13sp" />

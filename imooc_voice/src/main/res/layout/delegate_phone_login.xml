@@ -17,6 +17,7 @@
             android:src="@drawable/left_arrow" />
 
         <TextView
+            android:id="@+id/tv_login_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -60,9 +61,9 @@
             android:layout_below="@+id/tv_show_auto_signin"
             android:layout_alignBottom="@+id/tv_86"
             android:layout_marginTop="20dp"
-            android:paddingLeft="10dp"
             android:layout_toRightOf="@+id/tv_86"
-            android:background="@null" />
+            android:background="@null"
+            android:paddingLeft="10dp" />
 
         <View
             android:layout_width="match_parent"
@@ -94,32 +95,33 @@
         android:id="@+id/rv_login_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/et_login_password"
                 android:layout_width="0dp"
-                android:layout_weight="8"
-                android:layout_marginLeft="10dp"
-                android:paddingLeft="10dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="8"
+                android:background="@null"
                 android:inputType="textPassword"
-                android:background="@null" />
+                android:paddingLeft="10dp" />
 
             <TextView
+                android:id="@+id/tv_login_forget"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/blue"
                 android:layout_marginRight="10dp"
-                android:textSize="11sp"
-                android:text="忘记密码?" />
+                android:text="忘记密码?"
+                android:textColor="@color/blue"
+                android:textSize="11sp" />
         </LinearLayout>
 
         <View
@@ -147,4 +149,50 @@
             android:textColor="@android:color/white"
             android:textSize="15sp" />
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_captcha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_capcha_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="验证码已发送至"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_captcha_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:text="58秒" />
+
+        <TextView
+            android:id="@+id/tv_capcha_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_capcha_title"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:text="150****1555" />
+
+        <com.imooc.lib_common_ui.widget.CaptchaView
+            android:id="@+id/captcha_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_capcha_phone"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp" />
+
+
+    </RelativeLayout>
 </LinearLayout>

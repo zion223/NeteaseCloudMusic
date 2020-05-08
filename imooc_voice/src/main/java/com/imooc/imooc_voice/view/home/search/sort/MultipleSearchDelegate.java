@@ -22,6 +22,7 @@ import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.imooc_voice.view.discory.radio.detail.RadioDetailDelegate;
 import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
 import com.imooc.imooc_voice.view.home.search.NeteaseSearchLoadingDelegate;
+import com.imooc.imooc_voice.view.home.search.artist.ArtistDetailDelegate;
 import com.imooc.imooc_voice.view.user.UserDetailDelegate;
 import com.imooc.imooc_voice.view.video.VideoDetailDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
@@ -100,10 +101,12 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 				getParentDelegate().getSupportDelegate().start(RadioDetailDelegate.newInstance(djRadiosBean.getId()));
 				break;
 			case 4:
+				//歌手
 				SynthesisSearchBean.ResultBean.ArtistBean.ArtistsBean artistsBean = data.get(groupPosition).getArtist().getArtists().get(childPosition);
-				//TODO 跳转到歌手详情
+				getParentDelegate().getSupportDelegate().start(ArtistDetailDelegate.newInstance(artistsBean.getId()));
 				break;
 			case 5:
+				//用户
 				SynthesisSearchBean.ResultBean.UserBean.UsersBean usersBean = data.get(groupPosition).getUser().getUsers().get(childPosition);
 				getParentDelegate().getSupportDelegate().start(UserDetailDelegate.newInstance(String.valueOf(usersBean.getUserId())));
 				break;

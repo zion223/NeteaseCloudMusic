@@ -12,6 +12,10 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.CycleInterpolator;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -34,6 +38,7 @@ import com.imooc.imooc_voice.view.login.LoginDelegate;
 import com.imooc.imooc_voice.view.home.search.SearchDelegate;
 import com.imooc.lib_audio.app.AudioHelper;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
+import com.imooc.lib_common_ui.VerticalItemView;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
@@ -54,7 +59,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class HomeDelegate extends NeteaseDelegate implements View.OnClickListener {
+public class HomeDelegate extends NeteaseDelegate{
 
 
 	//首页的卡片
@@ -80,6 +85,8 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 	RelativeLayout mRlAvatar;
 	@BindView(R2.id.unloggin_layout)
 	LinearLayout mLlUnLoggin;
+	@BindView(R2.id.icon_notification_listen)
+	VerticalItemView mVerItemViewListen;
 
 	private SharePreferenceUtil sharePreferenceUtil;
 
@@ -131,7 +138,6 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 
 	//初始化控件
 	private void initView() {
-		mSearchView.setOnClickListener(this);
 		mAdapter = new HomePagerAdapter(getChildFragmentManager(), CHANNELS);
 		mViewPager.setAdapter(mAdapter);
 		mViewPager.setOffscreenPageLimit(1);
@@ -180,27 +186,21 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 		mViewPager.setCurrentItem(1);
 	}
 
-	@Override
-	public void onClick(View v) {
-		int id = v.getId();
-		switch (id) {
-			case R.id.unloggin_layout:
-				if (TextUtils.isEmpty(sharePreferenceUtil.getAuthToken(""))) {
-					//跳转到LoginActivity
-					getSupportDelegate().start(new LoginDelegate());
-				} else {
-					mDrawerLayout.closeDrawer(Gravity.LEFT);
-				}
-				break;
-			case R.id.search_view:
-				getSupportDelegate().start(new SearchDelegate());
-				break;
-			default:
-				break;
 
+	@OnClick(R2.id.unloggin_layout)
+	void onClickLogin(){
+		if (TextUtils.isEmpty(sharePreferenceUtil.getAuthToken(""))) {
+			//跳转到LoginActivity
+			getSupportDelegate().start(new LoginDelegate());
+		} else {
+			mDrawerLayout.closeDrawer(Gravity.LEFT);
 		}
 	}
 
+	@OnClick(R2.id.search_view)
+	void onClickSearch(){
+		getSupportDelegate().start(new SearchDelegate());
+	}
 
 	//查看通知
 	@OnClick(R2.id.icon_notification_msg)
@@ -227,6 +227,7 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 			@Override
 			public void onSuccess(Object responseObj) {
 				sharePreferenceUtil.removeUserInfo();
+				getSupportDelegate().start(new LoginDelegate());
 			}
 
 			@Override
@@ -248,6 +249,15 @@ public class HomeDelegate extends NeteaseDelegate implements View.OnClickListene
 			mDrawerLayout.closeDrawer(Gravity.LEFT);
 		} else {
 			mDrawerLayout.openDrawer(Gravity.LEFT);
+			//听歌识曲图标左右晃动
+			mVerItemViewListen.getIconView().setAnimation(shakeAnimation());
 		}
+	}
+
+	public static Animation shakeAnimation() {
+		Animation rotateAnimation = new RotateAnimation(-20, 20, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+		rotateAnimation.setRepeatCount(2);
+		rotateAnimation.setDuration(150);
+		return rotateAnimation;
 	}
 }

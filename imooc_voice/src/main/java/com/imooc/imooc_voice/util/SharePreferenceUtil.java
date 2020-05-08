@@ -96,6 +96,7 @@ public class SharePreferenceUtil {
 	//退出登录 移除已登录用户信息
 	public void removeUserInfo() {
 		remove(Constants.SpKey.USER_INFO);
+		saveAuthToken("");
 	}
 
 	private void saveAccountNum(String phoneNumber) {
@@ -124,6 +125,7 @@ public class SharePreferenceUtil {
 	public String getAuthToken(String defaultValue) {
 		return getString(Constants.SpKey.AUTH_TOKEN, defaultValue);
 	}
+
 
 	/*
 	 * 存储最近一次听过的歌曲

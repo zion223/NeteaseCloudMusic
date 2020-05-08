@@ -62,6 +62,7 @@
             android:layout_below="@+id/tv_mv_rank_title"
             android:layout_marginTop="3dp"
             android:layout_marginBottom="15dp"
+            android:textSize="12sp"
             android:text="更新时间 12:00" />
 
         <ImageView

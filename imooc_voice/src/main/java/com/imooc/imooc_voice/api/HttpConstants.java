@@ -12,6 +12,12 @@ public class HttpConstants {
 
     static String LOGIN = ROOT_URL + "/login/cellphone";
 
+    static String CAPTCHA_SEND = ROOT_URL + "/captcha/sent";
+
+    static String CAPTCHA_VERITY = ROOT_URL + "/captcha/verify";
+
+    static String REGISTER = ROOT_URL + "/register/cellphone";
+
     static String LOGOUT = ROOT_URL + "/logout";
 
     static String CREATE_PLAYLIST = ROOT_URL + "/playlist/create";
@@ -164,6 +170,8 @@ public class HttpConstants {
     static String MSG_PRIVATE = ROOT_URL + "/msg/private";
 
     static String MSG_COMMENT = ROOT_URL + "/msg/comments";
+
+    static String MSG_NOTICE = ROOT_URL + "/msg/notices";
 
     static String USER_CLOUD = ROOT_URL + "/user/cloud";
 

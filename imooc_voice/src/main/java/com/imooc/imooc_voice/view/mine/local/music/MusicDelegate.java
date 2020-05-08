@@ -1,7 +1,6 @@
 package com.imooc.imooc_voice.view.mine.local.music;
 
 import android.annotation.SuppressLint;
-import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -82,7 +81,7 @@ public class MusicDelegate extends NeteaseLoadingDelegate {
 
 
 
-	class MusicAdapter extends BaseQuickAdapter<MusicInfo, BaseViewHolder> {
+	static class MusicAdapter extends BaseQuickAdapter<MusicInfo, BaseViewHolder> {
 
 		MusicAdapter(@Nullable List<MusicInfo> data) {
 			super(R.layout.item_music_common, data);
@@ -98,7 +97,6 @@ public class MusicDelegate extends NeteaseLoadingDelegate {
 				@Override
 				public void onClick(View v) {
 					//弹出菜单
-					new MusicMoreDialog(getContext(), item).show();
 				}
 			});
 			final ImageView playView = helper.getView(R.id.play_state);
