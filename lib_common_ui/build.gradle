@@ -2,12 +2,15 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
 android {
     compileSdkVersion rootProject.android.compileSdkVersion
+    buildToolsVersion rootProject.android.buildToolsVersion
 
     defaultConfig {
+        applicationId rootProject.android.applicationId
         minSdkVersion rootProject.android.minSdkVersion
         targetSdkVersion rootProject.android.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode rootProject.android.versionCode
+        versionName rootProject.android.versionName
+        multiDexEnabled rootProject.android.multiDexEnabled
     }
 
     buildTypes {
@@ -21,30 +24,23 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api 'com.android.support:support-v4:25.3.1'
+    api this.rootProject.depsLibs.butterknife
+    api this.rootProject.depsLibs.cvbanner
+    api this.rootProject.depsLibs.fragmentation
 
-    implementation this.rootProject.depsLibs.magicindicator
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50'
-    implementation 'com.android.support:recyclerview-v7:25.4.0'
     compileOnly this.rootProject.depsLibs.appcompat
-    compileOnly 'com.github.donkingliang:GroupedRecyclerViewAdapter:1.3.7'
     implementation this.rootProject.depsLibs.eventbus
-    compile 'me.yokeyword:eventbus-activity-scope:1.1.0'
-    compile 'com.android.support:support-v4:25.3.1'
-    //compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:design:27.1.1'
-    compile 'com.android.support:multidex:1.0.1'
-    //Fragmentation依赖
-    compile 'me.yokeyword:fragmentation:1.2.4'
-    // Swipeback is based on fragmentation. Refer to SwipeBackActivity/Fragment for your Customized SupportActivity/Fragment
-    compile 'me.yokeyword:fragmentation-swipeback:1.2.4'
-    //Banner依赖
-    compile 'com.bigkoo:convenientbanner:2.0.5'
-    compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
+    implementation this.rootProject.depsLibs.recyclerview
+    implementation this.rootProject.depsLibs.magicindicator
+    implementation this.rootProject.depsLibs.GroupedRecyclerViewAdapter
+    implementation this.rootProject.depsLibs.BaseRecyclerViewAdapterHelper
+    implementation this.rootProject.depsLibs.design
+    implementation this.rootProject.depsLibs.multidex
+    implementation this.rootProject.depsLibs.xpopup
+    implementation this.rootProject.depsLibs.vptransforms
+    annotationProcessor this.rootProject.depsLibs.butterknife_compiler
     implementation rootProject.depsLibs.glide
-    //ButterKnife依赖
-    compile 'com.jakewharton:butterknife:8.4.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 
-    implementation 'com.lxj:xpopup:1.8.10'
     compileOnly project(':lib_image_loader')
 }

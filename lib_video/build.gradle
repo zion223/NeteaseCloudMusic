@@ -2,12 +2,15 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion rootProject.android.compileSdkVersion
+    buildToolsVersion rootProject.android.buildToolsVersion
 
     defaultConfig {
+        applicationId rootProject.android.applicationId
         minSdkVersion rootProject.android.minSdkVersion
         targetSdkVersion rootProject.android.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode rootProject.android.versionCode
+        versionName rootProject.android.versionName
+        multiDexEnabled rootProject.android.multiDexEnabled
     }
 
     buildTypes {
@@ -21,7 +24,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    //视频播放
-    implementation 'cn.jzvd:jiaozivideoplayer:7.2.4'
+    implementation this.rootProject.depsLibs.videoplayer
 
 }

@@ -29,9 +29,8 @@ buildscript {
         
     }
     dependencies {
-        //noinspection GradleDependency
         classpath 'com.android.tools.build:gradle:3.2.0'
-        //greendao插件依赖 appl
+        //greendao插件依赖
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
         classpath 'com.jakewharton:butterknife-gradle-plugin:9.0.0-rc1'
     }

@@ -19,7 +19,20 @@ ext{
         rxandroid      : '2.1.1',
         eventbus       : '3.1.1',
         greendao       : '3.2.2',
-        design         : '28.0.0'
+        design         : '28.0.0',
+        cardview       : '25.3.1',
+        xpopup         : '1.8.10',
+        multidex       : '1.0.1',
+        easypermission : '1.0.1',
+        tinypinyin     : '2.0.3',
+        videoplayer    : '7.2.4',
+        butterknife    : '8.4.0',
+        cvbanner       : '2.0.5',
+        fragmentation  : '1.2.4',
+        butterknife_compiler               : '8.6.0',
+        GroupedRecyclerViewAdapter         : '1.3.7',
+        BaseRVAdapterHelper                : '2.9.22',
+        view_pager_transforms              : '1.2.32@aar'
 
     ]
     depsLibs = [
@@ -33,7 +46,20 @@ ext{
             rxandroid      : "io.reactivex.rxjava2:rxandroid:${depsVersion.rxandroid}",
             eventbus       : "org.greenrobot:eventbus:${depsVersion.eventbus}",
             greendao       : "org.greenrobot:greendao:${depsVersion.greendao}",
-            recyclerview   : 'com.android.support:recyclerview-v7:28.0.0',
-            design         : "com.android.support:design:${depsVersion.design}"
+            multidex       : "com.android.support:multidex:${depsVersion.multidex}",
+            easypermission : "pub.devrel:easypermissions:${depsVersion.easypermission}",
+            recyclerview   : "com.android.support:recyclerview-v7:${depsVersion.design}",
+            butterknife    : "com.jakewharton:butterknife:${depsVersion.butterknife}",
+            tinypinyin     : "com.github.promeg:tinypinyin:${depsVersion.tinypinyin}",
+            videoplayer    : "cn.jzvd:jiaozivideoplayer:${depsVersion.videoplayer}",
+            xpopup         : "com.lxj:xpopup:${depsVersion.xpopup}",
+            fragmentation  : "me.yokeyword:fragmentation:${depsVersion.fragmentation}",
+            vptransforms   : "com.ToxicBakery.viewpager.transforms:view-pager-transforms:${depsVersion.view_pager_transforms}",
+            cvbanner       : "com.bigkoo:convenientbanner:${depsVersion.cvbanner}",
+            design         : "com.android.support:design:${depsVersion.design}",
+            cardview       : "com.android.support:cardview-v7:${depsVersion.cardview}",
+            GroupedRecyclerViewAdapter            : "com.github.donkingliang:GroupedRecyclerViewAdapter:${depsVersion.GroupedRecyclerViewAdapter}",
+            BaseRecyclerViewAdapterHelper         : "com.github.CymChad:BaseRecyclerViewAdapterHelper:${depsVersion.BaseRVAdapterHelper}",
+            butterknife_compiler                  : "com.jakewharton:butterknife-compiler:${depsVersion.butterknife_compiler}",
     ]
 }

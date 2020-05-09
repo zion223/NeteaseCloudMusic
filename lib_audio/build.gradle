@@ -38,10 +38,9 @@ greendao {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     
-    //RecyclerView依赖
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
     //占位主工程android原生库
     compileOnly this.rootProject.depsLibs.appcompat
+    compileOnly this.rootProject.depsLibs.BaseRecyclerViewAdapterHelper
 //    compileOnly this.rootProject.depsLibs.design
 //    compileOnly this.rootProject.depsLibs.recyclerview
 
