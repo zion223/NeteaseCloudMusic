@@ -3,18 +3,15 @@ package com.imooc.lib_common_ui.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ContentFrameLayout;
 import android.widget.FrameLayout;
 
 
 import com.imooc.lib_common_ui.R;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 
-import me.yokeyword.eventbusactivityscope.EventBusActivityScope;
 import me.yokeyword.fragmentation.ExtraTransaction;
 import me.yokeyword.fragmentation.ISupportActivity;
 import me.yokeyword.fragmentation.SupportActivityDelegate;
-import me.yokeyword.fragmentation.SupportHelper;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 

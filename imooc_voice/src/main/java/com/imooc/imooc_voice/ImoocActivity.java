@@ -11,7 +11,6 @@ import com.imooc.lib_common_ui.base.ProxyActivity;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.utils.StatusBarUtil;
 
-import me.yokeyword.eventbusactivityscope.EventBusActivityScope;
 import pub.devrel.easypermissions.EasyPermissions;
 
 
@@ -48,7 +47,6 @@ public class ImoocActivity extends ProxyActivity{
 
 	@Override
 	protected void onDestroy() {
-		EventBusActivityScope.getDefault(this).unregister(this);
 		super.onDestroy();
 	}
 
