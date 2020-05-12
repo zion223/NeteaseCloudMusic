@@ -188,13 +188,15 @@
                 android:textSize="12sp" />
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginLeft="65dp"
             android:background="@color/app_background" />
+
         <LinearLayout
-            android:id="@+id/ll_mine_local_music5"
+            android:id="@+id/ll_mine_collect"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal">
@@ -222,12 +224,12 @@
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/fragment_main_item_coun5"
+                android:id="@+id/fragment_main_item_collect_count"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:paddingLeft="5dp"
-                android:text="(8)"
+                android:text="(0)"
                 android:textSize="12sp" />
         </LinearLayout>
 

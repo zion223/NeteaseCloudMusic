@@ -5,24 +5,28 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.api.RequestCenter;
-import com.imooc.imooc_voice.api.VideoDetailBean;
-import com.imooc.imooc_voice.api.VideoRelatedBean;
+import com.imooc.imooc_voice.model.newapi.VideoDetailBean;
+import com.imooc.imooc_voice.model.newapi.VideoRelatedBean;
 import com.imooc.imooc_voice.model.newapi.PlayListCommentEntity;
 import com.imooc.imooc_voice.model.newapi.VideoBean;
 import com.imooc.imooc_voice.model.newapi.VideoUrlBean;
 import com.imooc.imooc_voice.model.newapi.search.FeedSearchBean;
+import com.imooc.imooc_voice.model.newapi.song.CommentLikeBean;
 import com.imooc.imooc_voice.model.newapi.song.PlayListCommentBean;
+import com.imooc.imooc_voice.util.AnimUtil;
 import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.view.discory.square.detail.CommentDelegate;
 import com.imooc.imooc_voice.view.home.search.sort.VideoSearchDelegate;
@@ -74,13 +78,19 @@ public class VideoDetailDelegate extends NeteaseLoadingDelegate {
 	LinearLayout mLlFollow;
 	@BindView(R2.id.ll_singer_followed)
 	LinearLayout mLlFollowed;
+	@BindView(R2.id.iv_video_detail_praise)
+	ImageView mIvPraiseView;
+	@BindView(R2.id.iv_video_detail_collect)
+	ImageView mIvCollect;
 
 	private RecyclerView mRvRelateVideo;
 	private RecyclerView mRvVideoComment;
 
+	//视频ID
 	private String videoId;
-
-	private VideoBean.Creator creator;
+	private VideoBean.Data videoData;
+	//视频创作者ID
+	private String creatorId;
 	private ArrayList<PlayListCommentEntity> entities = new ArrayList<>();
 
 	private CommentDelegate.MultipleSectionGedanCommentAdapter mCommentAdapter;
@@ -136,15 +146,16 @@ public class VideoDetailDelegate extends NeteaseLoadingDelegate {
 			@Override
 			public void onSuccess(Object responseObj) {
 				VideoDetailBean bean = (VideoDetailBean) responseObj;
-				VideoBean.Data data = bean.getData();
-				mTvToolBarTitle.setText(data.getTitle());
-				mTvTitle.setText(data.getTitle());
-				mTvPlayTime.setText(SearchUtil.getCorresPondingString(data.getPlaytime()) + "次观看");
+				videoData = bean.getData();
+				mTvToolBarTitle.setText(videoData.getTitle());
+				mTvTitle.setText(videoData.getTitle());
+				mTvPlayTime.setText(SearchUtil.getCorresPondingString(videoData.getPlaytime()) + "次观看");
 				//视频创作者 头像
-				ImageLoaderManager.getInstance().displayImageForCircle(mIvCreatorAvatar, data.getCreator().getAvatarurl());
+				ImageLoaderManager.getInstance().displayImageForCircle(mIvCreatorAvatar, videoData.getCreator().getAvatarurl());
 				//名字
-				mTvCreatorName.setText(data.getCreator().getNickname());
-				creator = data.getCreator();
+				mTvCreatorName.setText(videoData.getCreator().getNickname());
+				VideoBean.Creator creator = videoData.getCreator();
+				creatorId = String.valueOf(creator.getUserid());
 				//是否已经关注
 				if (creator.getFollowed()) {
 					//已关注
@@ -153,31 +164,37 @@ public class VideoDetailDelegate extends NeteaseLoadingDelegate {
 					//未关注
 					mLlFollow.setVisibility(View.VISIBLE);
 				}
-				//是否已经收藏或者点赞
-				if (data.getPraised()) {
+				//是否已经点赞
+				if (videoData.getPraised()) {
 					//已经点赞过
+					mIvPraiseView.setImageResource(R.drawable.zan_red);
+					mIvPraiseView.setTag(true);
 				} else {
-
+					mIvPraiseView.setImageResource(R.drawable.zan);
+					mIvPraiseView.setTag(false);
 				}
 
-				if (data.getSubscribed()) {
+				if (videoData.getSubscribed()) {
 					//已经收藏过
+					mIvCollect.setImageResource(R.drawable.ic_collected);
+					mIvCollect.setTag(true);
 				} else {
-
+					mIvCollect.setImageResource(R.drawable.ic_collect);
+					mIvCollect.setTag(false);
 				}
 				//点赞收藏评论分享 数量
-				mTvPraiseCount.setText(data.getPraisedcount());
-				mTvCollectCount.setText(data.getSubscribeCount());
-				mTvCommentCount.setText(data.getCommentcount());
-				mTvShareCount.setText(data.getSharecount());
+				mTvPraiseCount.setText(videoData.getPraisedcount());
+				mTvCollectCount.setText(videoData.getSubscribeCount());
+				mTvCommentCount.setText(videoData.getCommentcount());
+				mTvShareCount.setText(videoData.getSharecount());
 
 				//播放url
-				RequestCenter.getVideoUrl(data.getVid(), new DisposeDataListener() {
+				RequestCenter.getVideoUrl(videoData.getVid(), new DisposeDataListener() {
 					@Override
 					public void onSuccess(Object responseObj) {
 						VideoUrlBean item = (VideoUrlBean) responseObj;
 						//视频播放View
-						ImageLoaderManager.getInstance().displayImageForView(mVideoView.posterImageView, data.getCoverurl());
+						ImageLoaderManager.getInstance().displayImageForView(mVideoView.posterImageView, videoData.getCoverurl());
 						mVideoView.setUp(item.getUrls().get(0).getUrl(), "", Jzvd.SCREEN_NORMAL);
 						//自动播放
 						mVideoView.startVideo();
@@ -264,16 +281,69 @@ public class VideoDetailDelegate extends NeteaseLoadingDelegate {
 	}
 
 
-	//TODO 给视频点赞或取消点赞
 	@OnClick(R2.id.iv_video_detail_praise)
 	void onClickPraise() {
+		//是否已经点赞过
+		Boolean praise = (Boolean) mIvPraiseView.getTag();
+		RequestCenter.getlikeResource(videoId, 5, !praise, new DisposeDataListener() {
+			@Override
+			public void onSuccess(Object responseObj) {
+				CommentLikeBean bean = (CommentLikeBean) responseObj;
+				if(bean.getCode() == 200){
+					if(!praise){
+						//点赞成功
+						mIvPraiseView.setImageResource(R.drawable.zan_red);
+						AnimUtil.getLikeAnim(mIvPraiseView).start();
+						mTvPraiseCount.setText(String.valueOf(Integer.parseInt(videoData.getPraisedcount()) + 1));
+					}else{
+						//取消赞成功
+						mIvPraiseView.setImageResource(R.drawable.zan);
+						mTvPraiseCount.setText(videoData.getPraisedcount());
+					}
+					//设置点赞标志位
+					mIvPraiseView.setTag(!praise);
+				}else{
+					//点赞或取消赞失败
+					Toast.makeText(getContext(), "点赞或取消赞失败", Toast.LENGTH_SHORT).show();
+				}
 
+			}
+
+			@Override
+			public void onFailure(Object reasonObj) {
+				Toast.makeText(getContext(), "点赞或取消赞失败", Toast.LENGTH_SHORT).show();
+			}
+		});
 	}
 
-	//TODO 收藏该视频或取消收藏
 	@OnClick(R2.id.iv_video_detail_collect)
 	void onClickCollect() {
+		Boolean collect = (Boolean) mIvCollect.getTag();
+		RequestCenter.getVideoSub(videoId, !collect, new DisposeDataListener() {
+			@Override
+			public void onSuccess(Object responseObj) {
+				CommentLikeBean bean = (CommentLikeBean) responseObj;
+				if(bean.getCode() == 200){
+					mIvCollect.setTag(!collect);
+					if(!collect){
+						//收藏成功
+						mIvCollect.setImageResource(R.drawable.ic_collected);
+						mTvCollectCount.setText(String.valueOf(Integer.parseInt(videoData.getSubscribeCount()) + 1));
+					}else{
+						//取消收藏成功
+						mIvCollect.setImageResource(R.drawable.ic_collect);
+						mTvCollectCount.setText(videoData.getSubscribeCount());
+					}
+				}else{
+					//失败
+				}
+			}
 
+			@Override
+			public void onFailure(Object reasonObj) {
+
+			}
+		});
 	}
 
 	//TODO 滚动到评论处
@@ -299,8 +369,8 @@ public class VideoDetailDelegate extends NeteaseLoadingDelegate {
 	//视频作者
 	@OnClick(R2.id.rl_singer)
 	void onClickCreator() {
-		if (creator != null) {
-			getParentDelegate().getSupportDelegate().start(UserDetailDelegate.newInstance(String.valueOf(creator.getUserid())));
+		if (!TextUtils.isEmpty(creatorId)) {
+			getParentDelegate().getSupportDelegate().start(UserDetailDelegate.newInstance(creatorId));
 		}
 	}
 

@@ -1,7 +1,5 @@
 package com.imooc.imooc_voice.view.discory.square.detail;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
@@ -15,7 +13,6 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -29,6 +26,7 @@ import com.imooc.imooc_voice.model.newapi.PlayListCommentEntity;
 import com.imooc.imooc_voice.model.newapi.song.CommentLikeBean;
 import com.imooc.imooc_voice.model.newapi.song.MusicCommentBean;
 import com.imooc.imooc_voice.model.newapi.song.PlayListCommentBean;
+import com.imooc.imooc_voice.util.AnimUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
@@ -292,63 +290,53 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 			}
 			baseViewHolder.setText(R.id.tv_item_gedan_comment_content, bean.getContent());
 
-			final ImageView zanView = baseViewHolder.getView(R.id.iv_item_gedan_comment_zan);
+			final ImageView praiseView = baseViewHolder.getView(R.id.iv_item_gedan_comment_zan);
 			//tag : true 当前是赞 false当前不是赞
-			zanView.setTag(false);
+			if (bean.isLiked()) {
+				//当前是赞过的
+				praiseView.setTag(true);
+				praiseView.setImageResource(R.drawable.zan_red);
+			} else {
+				praiseView.setTag(false);
+				praiseView.setImageResource(R.drawable.zan);
+			}
 			baseViewHolder.setOnClickListener(R.id.iv_item_gedan_comment_zan, new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if (!(Boolean) zanView.getTag()) {
-						zanView.setImageResource(R.drawable.zan_red);
-						//点赞
-						AnimatorSet animatorSetsuofang = new AnimatorSet();//组合动画
-						ObjectAnimator scaleX = ObjectAnimator.ofFloat(zanView, "scaleX", 1f, 1.5f, 1f);
-						ObjectAnimator scaleY = ObjectAnimator.ofFloat(zanView, "scaleY", 1f, 1.5f, 1f);
-						baseViewHolder.setText(R.id.tv_item_gedan_comment_zan_count, String.valueOf(bean.getLikedCount() + 1));
-						baseViewHolder.setTextColor(R.id.tv_item_gedan_comment_zan_count, Color.parseColor("#FF3A3A"));
-						RequestCenter.getlikeComment(commentId, bean.getCommentId(), 1, commentType, new DisposeDataListener() {
-							@Override
-							public void onSuccess(Object responseObj) {
-								CommentLikeBean bean = (CommentLikeBean) responseObj;
-								if (bean.getCode() == 200) {
+					//是否已经点过赞
+					Boolean parise = (Boolean) praiseView.getTag();
+					//点赞或取消点赞
+					RequestCenter.getlikeComment(commentId, bean.getCommentId(), !parise, commentType, new DisposeDataListener() {
+						@Override
+						public void onSuccess(Object responseObj) {
+							CommentLikeBean result = (CommentLikeBean) responseObj;
+							if (result.getCode() == 200) {
+								praiseView.setTag(!parise);
+								if (!parise) {
+									praiseView.setImageResource(R.drawable.zan_red);
+									//点赞
+									AnimUtil.getLikeAnim(praiseView).start();
+									baseViewHolder.setText(R.id.tv_item_gedan_comment_zan_count, String.valueOf(bean.getLikedCount() + 1));
+									baseViewHolder.setTextColor(R.id.tv_item_gedan_comment_zan_count, Color.parseColor("#FF3A3A"));
 									Toast.makeText(mContext, "点赞成功", Toast.LENGTH_SHORT).show();
 								} else {
-									Toast.makeText(mContext, "点赞失败", Toast.LENGTH_SHORT).show();
-								}
-							}
-
-							@Override
-							public void onFailure(Object reasonObj) {
-								Toast.makeText(mContext, "点赞失败", Toast.LENGTH_SHORT).show();
-							}
-						});
-						animatorSetsuofang.setDuration(500);
-						animatorSetsuofang.setInterpolator(new DecelerateInterpolator());
-						animatorSetsuofang.play(scaleX).with(scaleY);//两个动画同时开始
-						animatorSetsuofang.start();
-						zanView.setTag(true);
-					} else {
-						baseViewHolder.setText(R.id.tv_item_gedan_comment_zan_count, String.valueOf(bean.getLikedCount()));
-						zanView.setImageResource(R.drawable.zan);
-						zanView.setTag(false);
-						baseViewHolder.setTextColor(R.id.tv_item_gedan_comment_zan_count, Color.GRAY);
-						RequestCenter.getlikeComment(commentId, bean.getCommentId(), 0, commentType, new DisposeDataListener() {
-							@Override
-							public void onSuccess(Object responseObj) {
-								CommentLikeBean bean = (CommentLikeBean) responseObj;
-								if (bean.getCode() == 200) {
+									baseViewHolder.setText(R.id.tv_item_gedan_comment_zan_count, String.valueOf(bean.getLikedCount()));
+									praiseView.setImageResource(R.drawable.zan);
+									baseViewHolder.setTextColor(R.id.tv_item_gedan_comment_zan_count, Color.GRAY);
 									Toast.makeText(mContext, "取消赞成功", Toast.LENGTH_SHORT).show();
-								} else {
-									Toast.makeText(mContext, "取消赞失败", Toast.LENGTH_SHORT).show();
 								}
-							}
 
-							@Override
-							public void onFailure(Object reasonObj) {
-								Toast.makeText(mContext, "取消赞失败", Toast.LENGTH_SHORT).show();
+							} else {
+								Toast.makeText(mContext, "点赞或取消赞失败", Toast.LENGTH_SHORT).show();
 							}
-						});
-					}
+						}
+
+						@Override
+						public void onFailure(Object reasonObj) {
+							Toast.makeText(mContext, "点赞或取消赞失败", Toast.LENGTH_SHORT).show();
+						}
+					});
+
 				}
 			});
 		}

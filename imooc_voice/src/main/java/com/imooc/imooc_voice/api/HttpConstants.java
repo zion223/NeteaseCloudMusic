@@ -5,8 +5,6 @@ import java.net.URLEncoder;
 
 public class HttpConstants {
 
-    private static final String FORMATE = "json";
-    private static final String BASE = "http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&format=" + FORMATE;
     //private static final String ROOT_URL = "http://192.168.1.54:3000";
     private static final String ROOT_URL = "http://62.234.57.125:3000";
 
@@ -98,6 +96,8 @@ public class HttpConstants {
 
     static String COMMENT_LIKE = ROOT_URL + "/comment/like";
 
+    static String RESOURCE_LIKE = ROOT_URL + "/resource/like";
+
     static String INTELLIGANCE_LIST = ROOT_URL + "/playmode/intelligence/list";
 
     static String ALBUM_SUBLIST = ROOT_URL + "/album/sublist";
@@ -149,7 +149,11 @@ public class HttpConstants {
 
     static String VIDEO_DETAIL = ROOT_URL + "/video/detail";
 
+    static String VIDEO_SUB = ROOT_URL + "/video/sub";
+
     static String MV_DETAIL = ROOT_URL + "/mv/detail";
+
+    static String MV_SUB = ROOT_URL + "/mv/sub";
 
     static String TOP_MV = ROOT_URL + "/top/mv";
 

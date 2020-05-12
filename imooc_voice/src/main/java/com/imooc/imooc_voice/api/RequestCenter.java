@@ -30,7 +30,9 @@ import com.imooc.imooc_voice.model.newapi.SubCountBean;
 import com.imooc.imooc_voice.model.newapi.TopListBean;
 import com.imooc.imooc_voice.model.newapi.TopListDetailBean;
 import com.imooc.imooc_voice.model.newapi.VideoBean;
+import com.imooc.imooc_voice.model.newapi.VideoDetailBean;
 import com.imooc.imooc_voice.model.newapi.VideoGroupBean;
+import com.imooc.imooc_voice.model.newapi.VideoRelatedBean;
 import com.imooc.imooc_voice.model.newapi.VideoUrlBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjCatelistBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjDetailBean;
@@ -520,13 +522,27 @@ public class RequestCenter {
      *  0: 歌曲   1: mv 2: 歌单 3: 专辑 4: 电台 5: 视频 6: 动态
      *
      */
-    public static void getlikeComment(String id, long cid, int t, int type, DisposeDataListener listener){
+    public static void getlikeComment(String id, long cid, boolean praise, int type, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("id", id);
         params.put("cid", cid);
-        params.put("t", t);
+        params.put("t", praise ? 1 : 0);
         params.put("type", type);
         RequestCenter.getRequest(HttpConstants.COMMENT_LIKE, params, listener, CommentLikeBean.class);
+    }
+
+    /**
+     *  给资源点赞
+     *  type : 资源类型 1: mv 4: 电台 5: 视频 6: 动态
+     *  t : 是否点赞 ,1 为点赞 ,0 为取消点赞
+     *  id: 资源 id
+     */
+    public static void getlikeResource(String id, int type, boolean praise, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("t", praise ? 1 : 0);
+        params.put("type", type);
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.RESOURCE_LIKE, params, listener, CommentLikeBean.class);
     }
 
     /**
@@ -653,6 +669,7 @@ public class RequestCenter {
     public static void getSubRadioList(DisposeDataListener listener){
         RequestCenter.getRequest(HttpConstants.DJ_SUB_LIST, null, listener, DjSubListBean.class);
     }
+
     /**
      *  电台节目
      *  PS.说明 : 登陆后调用此接口 , 传入rid, 可查看对应电台的电台节目以及对应的 id,
@@ -783,6 +800,16 @@ public class RequestCenter {
         RequestParams params = new RequestParams();
         params.put("id", id);
         RequestCenter.getRequest(HttpConstants.VIDEO_DETAIL, params, listener, VideoDetailBean.class);
+    }
+
+    /**
+     * 获取视频详情
+     */
+    public static void getVideoSub(String id, Boolean sub, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        params.put("t", sub ? 1 : 0);
+        RequestCenter.getRequest(HttpConstants.VIDEO_SUB, params, listener, CommentLikeBean.class);
     }
 
     /**

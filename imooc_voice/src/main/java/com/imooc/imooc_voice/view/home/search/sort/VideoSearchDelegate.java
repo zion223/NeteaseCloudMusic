@@ -54,14 +54,17 @@ public class VideoSearchDelegate extends NeteaseSearchLoadingDelegate {
 	public static class VideoSearchAdapter extends BaseQuickAdapter<FeedSearchBean.ResultBean.VideosBean, BaseViewHolder> {
 
 		private String keywords;
+		private ImageLoaderManager manager;
 
 		VideoSearchAdapter(String keyword, @Nullable List<FeedSearchBean.ResultBean.VideosBean> data) {
 			super(R.layout.item_video_normal, data);
 			keywords = keyword;
+			manager = ImageLoaderManager.getInstance();
 		}
 		public VideoSearchAdapter(@Nullable List<FeedSearchBean.ResultBean.VideosBean> data) {
 			super(R.layout.item_video_normal, data);
 			keywords = "";
+			manager = ImageLoaderManager.getInstance();
 		}
 
 		@Override
@@ -74,8 +77,7 @@ public class VideoSearchDelegate extends NeteaseSearchLoadingDelegate {
 			//视频描述
 			String description = TimeUtil.getTimeNoYMDH(item.getDurationms()) + " by " + item.getCreator().get(0).getUserName();
 			adapter.setText(R.id.tv_item_video_creator, description);
-			ImageLoaderManager.getInstance().displayImageForCorner((ImageView) adapter.getView(R.id.iv_item_video_cover), item.getCoverUrl());
-
+			manager.displayImageForCorner((ImageView) adapter.getView(R.id.iv_item_video_cover), item.getCoverUrl());
 
 		}
 	}

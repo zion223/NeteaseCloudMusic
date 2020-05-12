@@ -42,7 +42,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="15dp"
-            android:src="@drawable/aqy" />
+            android:src="@drawable/ic_singer" />
     </LinearLayout>
 
     <View

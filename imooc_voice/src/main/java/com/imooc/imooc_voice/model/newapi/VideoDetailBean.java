@@ -1,6 +1,5 @@
-package com.imooc.imooc_voice.api;
+package com.imooc.imooc_voice.model.newapi;
 
-import com.imooc.imooc_voice.model.newapi.VideoBean;
 
 public class VideoDetailBean {
 

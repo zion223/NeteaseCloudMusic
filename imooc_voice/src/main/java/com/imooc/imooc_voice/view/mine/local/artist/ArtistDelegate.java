@@ -116,6 +116,7 @@ public class ArtistDelegate extends NeteaseLoadingDelegate {
 			super.onBindViewHolder(holder, positions);
 		}
 
+		@SuppressLint("SetTextI18n")
 		@Override
 		protected void convert(final BaseViewHolder helper, final ArtistInfo item) {
 			((TextView) helper.getView(R.id.viewpager_list_toptext)).setText(item.artist_name);

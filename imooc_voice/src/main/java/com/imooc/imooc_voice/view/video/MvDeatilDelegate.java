@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,7 +16,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.api.RequestCenter;
-import com.imooc.imooc_voice.api.VideoRelatedBean;
+import com.imooc.imooc_voice.model.newapi.VideoRelatedBean;
 import com.imooc.imooc_voice.model.newapi.MvBean;
 import com.imooc.imooc_voice.model.newapi.MvInfoBean;
 import com.imooc.imooc_voice.model.newapi.PlayListCommentEntity;
@@ -29,7 +28,6 @@ import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.view.discory.square.detail.CommentDelegate;
 import com.imooc.imooc_voice.view.home.search.artist.ArtistDetailDelegate;
 import com.imooc.imooc_voice.view.home.search.sort.VideoSearchDelegate;
-import com.imooc.imooc_voice.view.user.UserDetailDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
@@ -265,13 +263,13 @@ public class MvDeatilDelegate extends NeteaseLoadingDelegate {
 		return R.layout.delegate_video_detail_loading_view;
 	}
 
-	//TODO 给视频点赞或取消点赞
+	//TODO 给MV点赞或取消点赞
 	@OnClick(R2.id.iv_video_detail_praise)
 	void onClickPraise() {
 
 	}
 
-	//TODO 收藏该视频或取消收藏
+	//TODO 收藏该MV或取消收藏
 	@OnClick(R2.id.iv_video_detail_collect)
 	void onClickCollect() {
 

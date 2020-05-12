@@ -23,6 +23,7 @@ import com.imooc.lib_network.listener.DisposeDataListener;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -68,12 +69,18 @@ public class ArtistHomePageDelegate extends NeteaseLoadingDelegate {
 
 			}
 		});
-		//TODO 相似歌手
+		//TODO 相似歌手   无粉丝数数据
 		RequestCenter.getSimiSinger(artistId, new DisposeDataListener() {
 			@Override
 			public void onSuccess(Object responseObj) {
 				SimiSingerBean bean = (SimiSingerBean) responseObj;
-				//List<SimiSingerBean.ArtistsBean> simiArtists = bean.getArtists().subList(0, 3);
+				List<SimiSingerBean.ArtistsBean> simiArtists = new ArrayList<>();
+				if(bean.getArtists().size() >= 3){
+					 simiArtists = bean.getArtists().subList(0, 3);
+				}else{
+					simiArtists = bean.getArtists();
+				}
+
 
 			}
 

@@ -69,7 +69,6 @@
                 android:id="@+id/author_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="周杰伦"
                 android:textColor="#dddddd"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -110,10 +109,10 @@
 
                 <ImageView
                     android:id="@+id/favourite_view"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="43dp"
+                    android:layout_height="43dp"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/b1j" />
+                    android:src="@drawable/bh3" />
             </LinearLayout>
 
             <LinearLayout
@@ -123,9 +122,9 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@mipmap/b1u" />
+                    android:layout_width="43dp"
+                    android:layout_height="43dp"
+                    android:src="@drawable/bgs" />
             </LinearLayout>
 
             <LinearLayout
@@ -135,10 +134,10 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="43dp"
+                    android:layout_height="43dp"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/audio_middle" />
+                    android:src="@drawable/bgj" />
             </LinearLayout>
 
             <LinearLayout
@@ -148,10 +147,10 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="43dp"
+                    android:layout_height="43dp"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/b0m" />
+                    android:src="@drawable/bg5" />
             </LinearLayout>
 
             <LinearLayout
@@ -161,10 +160,10 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="43dp"
+                    android:layout_height="43dp"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/b1n" />
+                    android:src="@drawable/bh7" />
             </LinearLayout>
 
         </LinearLayout>
