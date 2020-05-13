@@ -20,6 +20,7 @@ import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.event.ArtistIdEvent;
 import com.imooc.imooc_voice.model.newapi.dj.DjSubBean;
 import com.imooc.imooc_voice.model.newapi.search.SingerSongSearchBean;
+import com.imooc.imooc_voice.model.newapi.song.SongDetailBean;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
 import com.imooc.imooc_voice.view.home.search.artist.sort.ArtistAlbumDelegate;
 import com.imooc.imooc_voice.view.home.search.artist.sort.ArtistHomePageDelegate;
@@ -89,6 +90,7 @@ public class ArtistDetailDelegate extends NeteaseDelegate {
 			artistId = args.getString(ARGS_ARTIST_ID);
 		}
 	}
+
 	@Override
 	public Object setLayout() {
 		return R.layout.delegate_artist_detail;
@@ -112,7 +114,6 @@ public class ArtistDetailDelegate extends NeteaseDelegate {
 			public void onSuccess(Object responseObj) {
 				SingerSongSearchBean bean = (SingerSongSearchBean) responseObj;
 				SingerSongSearchBean.ArtistBean artist = bean.getArtist();
-				List<SingerSongSearchBean.HotSongsBean> hotSongs = bean.getHotSongs();
 
 				//歌手姓名
 				mTvArtistName.setText(artist.getName());

@@ -55,9 +55,7 @@ public class VideoDelegate extends NeteaseLoadingDelegate {
 
 	@Override
 	public void initView() {
-		//TODO videoId = 1000 请求的视频是MV
 		mRecyclerView = rootView.findViewById(R.id.rv_delegate_normal);
-		Log.e("VideoDelegate","videoId:" + videoId);
 		RequestCenter.getVideoTab(videoId, new DisposeDataListener() {
 			@Override
 			public void onSuccess(Object responseObj) {

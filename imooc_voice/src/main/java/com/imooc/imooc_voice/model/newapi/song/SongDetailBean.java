@@ -102,7 +102,7 @@ public class SongDetailBean {
         private int copyright;
         private int s_id;
         private long mark;
-        private int mv;
+        private long mv;
         private int mst;
         private int cp;
         private int rtype;
@@ -312,7 +312,7 @@ public class SongDetailBean {
             this.mark = mark;
         }
 
-        public int getMv() {
+        public long getMv() {
             return mv;
         }
 

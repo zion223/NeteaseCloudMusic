@@ -88,7 +88,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1.5dp"
+        android:layout_height="1dp"
         android:layout_below="@+id/tv_item_gedan_comment_replied"
         android:layout_alignLeft="@+id/tv_item_gedan_comment_avatar_name"
         android:layout_marginTop="2dp"

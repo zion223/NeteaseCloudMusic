@@ -585,8 +585,9 @@ public class RequestCenter {
      * 私人FM
      */
     public static void getMyFm(DisposeDataListener listener){
-
-        RequestCenter.getRequest(HttpConstants.PERSONAL_FM, null, listener, MyFmBean.class);
+        RequestParams params = new RequestParams();
+        params.put("timestamp", System.currentTimeMillis());
+        RequestCenter.getRequest(HttpConstants.PERSONAL_FM, params, listener, MyFmBean.class);
     }
 
     /**

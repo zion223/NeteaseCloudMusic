@@ -28,6 +28,8 @@ public final class AudioHelper {
 	public static void startMusicService(ArrayList<AudioBean> mLists) {
 		MusicService.startMusicService(mLists);
 	}
+
+	//TODO 
 	public static void addAudio(Activity activity, AudioBean bean){
 		AudioController.getInstance().addAudio(bean);
 		MusicPlayerActivity.start(activity);

@@ -29,6 +29,7 @@ import com.imooc.imooc_voice.util.IConstants;
 import com.imooc.imooc_voice.util.MusicUtils;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
 import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
+import com.imooc.imooc_voice.view.mine.collect.MineCollectTabDelegate;
 import com.imooc.imooc_voice.view.mine.local.LocalMusicDelegate;
 import com.imooc.imooc_voice.view.mine.radio.MineRadioDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
@@ -151,7 +152,6 @@ public class MineDelegate extends NeteaseDelegate {
 				SubCountBean bean = (SubCountBean) responseObj;
 				//我的电台 数量
 				mTvRadioCount.setText("(" + bean.getDjRadioCount() + ")");
-				//TODO 我的收藏 - 收藏的歌手 收藏的视频   专辑 专栏 MLOG
 
 			}
 
@@ -201,6 +201,11 @@ public class MineDelegate extends NeteaseDelegate {
 		getParentDelegate().getSupportDelegate().start(new MineRadioDelegate());
 	}
 
+	//我的收藏
+	@OnClick(R2.id.ll_mine_collect)
+	void onClickCollect(){
+		getParentDelegate().getSupportDelegate().start(new MineCollectTabDelegate());
+	}
 
 	private void initSpecIcon() {
 		List<SpecData> specData = new ArrayList<>();

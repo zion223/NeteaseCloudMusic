@@ -12,7 +12,7 @@ public class MyFmBean {
 
     private boolean popAdjust;
     private int code;
-    private List<DataBean> data;
+    private List<PersonalSong> data;
 
     public boolean isPopAdjust() {
         return popAdjust;
@@ -30,15 +30,15 @@ public class MyFmBean {
         this.code = code;
     }
 
-    public List<DataBean> getData() {
+    public List<PersonalSong> getData() {
         return data;
     }
 
-    public void setData(List<DataBean> data) {
+    public void setData(List<PersonalSong> data) {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class PersonalSong {
         /**
          * name : 真爱
          * id : 5257122

@@ -17,6 +17,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
+import com.imooc.imooc_voice.api.HttpConstants;
 import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.newapi.AlbumOrSongBean;
 import com.imooc.imooc_voice.model.newapi.BannerBean;
@@ -25,9 +26,11 @@ import com.imooc.imooc_voice.model.newapi.LoginBean;
 import com.imooc.imooc_voice.model.newapi.MainRecommendPlayListBean;
 import com.imooc.imooc_voice.model.newapi.NewSongBean;
 import com.imooc.imooc_voice.model.newapi.search.AlbumSearchBean;
+import com.imooc.imooc_voice.model.newapi.song.SongDetailBean;
 import com.imooc.imooc_voice.util.GsonUtil;
 import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
+import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.imooc_voice.view.discory.album.NewAlbumDelegate;
 import com.imooc.imooc_voice.view.discory.daily.DailyRecommendDelegate;
 import com.imooc.imooc_voice.view.discory.radio.RadioDelegate;
@@ -36,6 +39,8 @@ import com.imooc.imooc_voice.view.discory.square.GedanSquareDelegate;
 import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
 import com.imooc.imooc_voice.view.video.mv.MvRankDelegate;
 import com.imooc.imooc_voice.view.video.mv.MvRankTabDelegate;
+import com.imooc.lib_audio.app.AudioHelper;
+import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_common_ui.bannder.BannerCreator;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.delegate.web.WebDelegateImpl;
@@ -117,14 +122,28 @@ public class DiscoverDelegate extends NeteaseDelegate {
 					@Override
 					public void onItemClick(int position) {
 						BannerBean.BannersBean item = banners.get(position);
-						if(item.getTargetType() == 4){
-							//歌曲
+						if(item.getTargetType() == 4 || item.getTargetType() == 1){
+							long songId = item.getTargetId();
+							RequestCenter.getSongDetail(String.valueOf(songId), new DisposeDataListener() {
+								@Override
+								public void onSuccess(Object responseObj) {
+									SongDetailBean songBean = (SongDetailBean) responseObj;
+									//只有一首歌
+									SongDetailBean.SongsBean bean = songBean.getSongs().get(0);
+									String songPlayUrl = HttpConstants.getSongPlayUrl(bean.getId());
+									AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(bean.getId()), songPlayUrl, bean.getName(), bean.getAr().get(0).getName(), bean.getAl().getName(), bean.getAl().getName(), bean.getAl().getPicUrl(), TimeUtil.getTimeNoYMDH(bean.getDt())));
+								}
+
+								@Override
+								public void onFailure(Object reasonObj) {
+
+								}
+							});
 						}else if(item.getTargetType() == 10){
 							//专辑
 							getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(ALBUM, item.getTargetId()));
 						}
 						if(item.getUrl() != null ){
-							Log.d(TAG, "banner url:" + item.getUrl());
 							getParentDelegate().getSupportDelegate().start(WebContainerDelegate.newInstance(item.getUrl()));
 						}
 					}
@@ -162,8 +181,8 @@ public class DiscoverDelegate extends NeteaseDelegate {
 
 			@Override
 			public void onFailure(Object reasonObj) {
-				OkHttpException exception = (OkHttpException) reasonObj;
-				Log.e(TAG, exception.getEmsg().toString());
+				Exception exception = (Exception) reasonObj;
+				Log.e(TAG, exception.toString());
 			}
 		});
 		/*
@@ -178,8 +197,8 @@ public class DiscoverDelegate extends NeteaseDelegate {
 					String artistName = albums.get(i).getArtist().getName();
 					String albumName = albums.get(i).getName();
 					String picUrl = albums.get(i).getPicUrl();
-					String id = albums.get(i).getId();
-					albumList.add(new AlbumOrSongBean(id, TYPE_ALBUM, picUrl, albumName, artistName));
+					long id = albums.get(i).getId();
+					albumList.add(new AlbumOrSongBean(String.valueOf(id), TYPE_ALBUM, picUrl, albumName, artistName));
 				}
 				mAlbumSongAdapter = new AlbumSongAdapter(albumList);
 				mAlbumSongAdapter.setOnItemClickListener((adpater, view1, i) -> {

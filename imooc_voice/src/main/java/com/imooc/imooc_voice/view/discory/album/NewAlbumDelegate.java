@@ -50,7 +50,7 @@ public class NewAlbumDelegate extends NeteaseLoadingDelegate {
 					@Override
 					public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
 						AlbumSearchBean.ResultBean.AlbumsBean entity = (AlbumSearchBean.ResultBean.AlbumsBean) baseQuickAdapter.getItem(i);
-						getSupportDelegate().start(SongListDetailDelegate.newInstance(ALBUM, Long.parseLong(entity.getId())));
+						getSupportDelegate().start(SongListDetailDelegate.newInstance(ALBUM, entity.getId()));
 					}
 				});
 				mRecyclerViewNewAlbum.setLayoutManager(new GridLayoutManager(getContext(),2));

@@ -53,13 +53,18 @@ public class SingerSearchDelegate extends NeteaseSearchLoadingDelegate {
 	}
 
 
-	static class SingerSearchAdapter extends BaseQuickAdapter<SingerSearchBean.ResultBean.ArtistsBean, BaseViewHolder>{
+	public static class SingerSearchAdapter extends BaseQuickAdapter<SingerSearchBean.ResultBean.ArtistsBean, BaseViewHolder>{
 
 		private String keywords;
 
 		SingerSearchAdapter(String keyword,@Nullable List<SingerSearchBean.ResultBean.ArtistsBean> data) {
 			super(R.layout.item_singer_normal, data);
 			this.keywords = keyword;
+		}
+
+		public SingerSearchAdapter(@Nullable List<SingerSearchBean.ResultBean.ArtistsBean> data) {
+			super(R.layout.item_singer_normal, data);
+			this.keywords = "";
 		}
 
 		@Override

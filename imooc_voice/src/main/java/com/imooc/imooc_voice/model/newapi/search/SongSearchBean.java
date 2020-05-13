@@ -83,6 +83,7 @@ public class SongSearchBean {
             private int status;
             private int rtype;
             private int ftype;
+            //是否有MV
             private int mvid;
             private int fee;
             private Object rUrl;

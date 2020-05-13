@@ -1,43 +1,30 @@
 package com.imooc.imooc_voice.view.mine.local;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.imooc.imooc_voice.R;
-import com.imooc.imooc_voice.R2;
-import com.imooc.imooc_voice.util.PreferencesUtil;
+import com.imooc.imooc_voice.view.mine.local.artist.ArtistDelegate;
+import com.imooc.imooc_voice.view.mine.local.music.MusicDelegate;
 import com.imooc.imooc_voice.view.mine.local.view.SortPopupDialog;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
-import com.imooc.lib_common_ui.navigator.CommonNavigatorCreater;
+import com.imooc.lib_common_ui.delegate.NeteaseTabDelegate;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.core.BasePopupView;
 import com.lxj.xpopup.interfaces.OnSelectListener;
 
-import net.lucode.hackware.magicindicator.MagicIndicator;
-import net.lucode.hackware.magicindicator.ViewPagerHelper;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
-public class LocalMusicDelegate extends NeteaseDelegate{
-
-	@BindView(R2.id.magic_indicator_tab)
-	MagicIndicator mTabMagicIndicator;
-	@BindView(R2.id.view_pager_tab)
-	ViewPager mTabViewPager;
-	@BindView(R2.id.img_tab_more)
-	ImageView mTabMore;
+import java.util.ArrayList;
+import java.util.List;
 
 
-	private LocalMusicAdapter mAdapter;
+public class LocalMusicDelegate extends NeteaseTabDelegate {
+
+
 	private BasePopupView tabMoreDialog;
-	private PreferencesUtil preferencesUtil;
+	private List<NeteaseDelegate> mDelegateList = new ArrayList<>();
 
 	private static final String[] mTitleDataList = {"单曲", "歌手", "专辑", "文件夹"};
 	private static final SortPopupDialog.SortType[] mFramentType =
@@ -45,33 +32,39 @@ public class LocalMusicDelegate extends NeteaseDelegate{
 
 
 	@Override
-	public Object setLayout() {
-		return R.layout.delegate_tab;
+	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
+		super.onBindView(savedInstanceState, view);
+		initDialog();
 	}
 
 	@Override
-	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
-
-		mAdapter = new LocalMusicAdapter(getChildFragmentManager());
-		mTabViewPager.setAdapter(mAdapter);
-		mTabViewPager.setOffscreenPageLimit(4);
-		initMagicIndicator();
-		initDialog();
-		preferencesUtil = PreferencesUtil.getInstance(getContext());
+	public String[] setTitleDataList() {
+		return mTitleDataList;
 	}
 
-	private void initMagicIndicator() {
-		mTabMagicIndicator.setBackgroundColor(Color.WHITE);
-		CommonNavigator commonNavigator = CommonNavigatorCreater.setDefaultNavigator(getContext(), mTitleDataList, mTabViewPager);
-		commonNavigator.setAdjustMode(true);
-		mTabMagicIndicator.setNavigator(commonNavigator);
-		ViewPagerHelper.bind(mTabMagicIndicator, mTabViewPager);
-
+	@Override
+	public void setShowMoreView(int vivisiable) {
+		super.setShowMoreView(View.VISIBLE);
 	}
+
+
+	@Override
+	public CharSequence setLeftTitle() {
+		return "本地音乐";
+	}
+
+	@Override
+	public List<NeteaseDelegate> setDelegateList() {
+		mDelegateList.add(new MusicDelegate());
+		mDelegateList.add(new ArtistDelegate());
+		mDelegateList.add(new MusicDelegate());
+		return mDelegateList;
+	}
+
 
 	private void initDialog() {
 		tabMoreDialog = new XPopup.Builder(getContext())
-				.atView(mTabMore)
+				.atView(getIvMore())
 				//背景不变灰色
 				.hasShadowBg(false)
 				.asAttachList(new String[]{"下载管理", "扫描本地音乐", "选择排序方式", "获取封面歌词"},
@@ -85,8 +78,8 @@ public class LocalMusicDelegate extends NeteaseDelegate{
 									case 1:
 										break;
 									case 2:
-
-										int currentItem = mTabViewPager.getCurrentItem();
+										//排序方式
+										int currentItem = getTabViewPager().getCurrentItem();
 										final BasePopupView sortDialog = new XPopup.Builder(getContext())
 												.asCustom(new SortPopupDialog(getContext(), new SortPopupDialog.OnSelectMenuListener() {
 													@Override
@@ -110,15 +103,16 @@ public class LocalMusicDelegate extends NeteaseDelegate{
 	}
 
 
-	@OnClick(R2.id.img_tab_back)
-	void onClickBack(){
-		getSupportDelegate().pop();
+	@Override
+	public void setMoreViewOnClickListener(View.OnClickListener listener) {
+		super.setMoreViewOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				tabMoreDialog.show();
+			}
+		});
 	}
 
-	@OnClick(R2.id.img_tab_more)
-	void onClickMore(){
-		tabMoreDialog.show();
-	}
 
 
 }

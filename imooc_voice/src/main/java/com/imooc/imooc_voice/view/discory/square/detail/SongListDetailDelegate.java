@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,8 +32,10 @@ import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.imooc_voice.view.home.search.artist.ArtistDetailDelegate;
 import com.imooc.imooc_voice.view.user.UserDetailDelegate;
+import com.imooc.imooc_voice.view.video.MvDeatilDelegate;
 import com.imooc.lib_audio.app.AudioHelper;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
+import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_common_ui.dialog.MusicPopUpDialog;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
@@ -258,7 +261,7 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 				gedanCreator = album.getArtist().getName();
 				gedanTitle = album.getName();
 
-				mAdapter = new PlayListAdapter(getContext(), getSupportDelegate(), bean.getSongs());
+				mAdapter = new PlayListAdapter(getContext(), SongListDetailDelegate.this,false, bean.getSongs());
 				mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
 					@Override
 					public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -360,7 +363,7 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 							public void onSuccess(Object responseObj) {
 								SongDetailBean bean = (SongDetailBean) responseObj;
 								List<SongDetailBean.SongsBean> songs = bean.getSongs();
-								mAdapter = new PlayListAdapter(getContext(), getSupportDelegate(), songs);
+								mAdapter = new PlayListAdapter(getContext(), SongListDetailDelegate.this, false, songs);
 								mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
 									@Override
 									public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -431,25 +434,40 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	}
 
 
-	//歌单的Adapter
-	static public class PlayListAdapter extends BaseQuickAdapter<SongDetailBean.SongsBean, BaseViewHolder> {
+	//歌单的Adapter ArtistHomePage ArtistSong
+	public static class PlayListAdapter extends BaseQuickAdapter<SongDetailBean.SongsBean, BaseViewHolder> {
 
 		private Context mContext;
-		private SupportFragmentDelegate mDelegate;
+		private Boolean hasHeader;
+		private NeteaseDelegate mDelegate;
 
-		PlayListAdapter(Context context, SupportFragmentDelegate delegate,  @Nullable List<SongDetailBean.SongsBean> data) {
+		public PlayListAdapter(Context context, NeteaseDelegate delegate, boolean hasHeader, @Nullable List<SongDetailBean.SongsBean> data) {
 			super(R.layout.item_gedan_detail_song, data);
 			this.mContext = context;
 			this.mDelegate = delegate;
+			this.hasHeader = hasHeader;
 		}
 
 		@Override
 		protected void convert(BaseViewHolder helper, SongDetailBean.SongsBean item) {
-
-			helper.setText(R.id.item_play_no, String.valueOf(helper.getLayoutPosition() + 1));
+			if(hasHeader){
+				helper.setText(R.id.item_play_no, String.valueOf(helper.getAdapterPosition()));
+			}else{
+				helper.setText(R.id.item_play_no, String.valueOf(helper.getAdapterPosition() + 1));
+			}
 			helper.setText(R.id.viewpager_list_toptext, item.getName());
 			helper.setText(R.id.viewpager_list_bottom_text, item.getAr().get(0).getName());
+			//当前歌曲是否有MV
+			if(item.getMv() != 0){
+				helper.setVisible(R.id.iv_list_video, true);
+			}
 
+			helper.setOnClickListener(R.id.iv_list_video, new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					mDelegate.getSupportDelegate().start(MvDeatilDelegate.newInstance(String.valueOf(item.getMv())));
+				}
+			});
 			helper.setOnClickListener(R.id.viewpager_list_button, new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -483,17 +501,17 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 
 								@Override
 								public void onClickArtistDetail() {
-									mDelegate.start(ArtistDetailDelegate.newInstance(item.getAr().get(0).getId()));
+									mDelegate.getSupportDelegate().start(ArtistDetailDelegate.newInstance(item.getAr().get(0).getId()));
 								}
 
 								@Override
 								public void onClickAlbumDetail() {
-									mDelegate.start(SongListDetailDelegate.newInstance(ALBUM, item.getAl().getId()));
+									mDelegate.getSupportDelegate().start(SongListDetailDelegate.newInstance(ALBUM, item.getAl().getId()));
 								}
 
 								@Override
 								public void onClickComment() {
-									mDelegate.start(CommentDelegate.newInstance(String.valueOf(item.getId()), SONG, item.getAl().getPicUrl(), item.getAr().get(0).getName(), item.getAl().getName()));
+									mDelegate.getSupportDelegate().start(CommentDelegate.newInstance(String.valueOf(item.getId()), SONG, item.getAl().getPicUrl(), item.getAr().get(0).getName(), item.getAl().getName()));
 								}
 							})
 							.build();

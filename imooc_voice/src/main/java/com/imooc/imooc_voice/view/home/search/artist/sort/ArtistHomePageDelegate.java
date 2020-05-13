@@ -12,11 +12,17 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
+import com.imooc.imooc_voice.api.HttpConstants;
 import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.event.ArtistIdEvent;
 import com.imooc.imooc_voice.model.newapi.search.SimiSingerBean;
 import com.imooc.imooc_voice.model.newapi.search.SingerSongSearchBean;
+import com.imooc.imooc_voice.model.newapi.song.SongDetailBean;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
+import com.imooc.imooc_voice.util.TimeUtil;
+import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
+import com.imooc.lib_audio.app.AudioHelper;
+import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
@@ -37,7 +43,7 @@ public class ArtistHomePageDelegate extends NeteaseLoadingDelegate {
 	RecyclerView mRvArtistHotSong;
 
 	private String artistId;
-	private ArtistHotSongAdapter mAdapter;
+	private SongListDetailDelegate.PlayListAdapter mAdapter;
 
 	@Override
 	public void initView() {
@@ -51,12 +57,21 @@ public class ArtistHomePageDelegate extends NeteaseLoadingDelegate {
 			public void onSuccess(Object responseObj) {
 				SingerSongSearchBean bean = (SingerSongSearchBean) responseObj;
 				SingerSongSearchBean.ArtistBean artist = bean.getArtist();
-				List<SingerSongSearchBean.HotSongsBean> hotSongs = bean.getHotSongs();
+				List<SongDetailBean.SongsBean> hotSongs = bean.getHotSongs();
 				if(hotSongs.size() > 5){
-					mAdapter = new ArtistHotSongAdapter(hotSongs.subList(0, 5));
+					mAdapter = new SongListDetailDelegate.PlayListAdapter(getContext(), getParentDelegate(), false, hotSongs.subList(0, 5));
 				}else{
-					mAdapter = new ArtistHotSongAdapter(hotSongs);
+					mAdapter = new SongListDetailDelegate.PlayListAdapter(getContext(), getParentDelegate(), false, hotSongs);
 				}
+				mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+					@Override
+					public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+						SongDetailBean.SongsBean item = (SongDetailBean.SongsBean) adapter.getItem(position);
+						String songPlayUrl = HttpConstants.getSongPlayUrl(item.getId());
+						AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getAr().get(0).getName(), item.getAl().getName(), item.getAl().getName(), item.getAl().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDt())));
+
+					}
+				});
 				mRvArtistHotSong.setAdapter(mAdapter);
 				mRvArtistHotSong.setLayoutManager(new LinearLayoutManager(getContext()));
 				//简介
@@ -101,25 +116,6 @@ public class ArtistHomePageDelegate extends NeteaseLoadingDelegate {
 		artistId = event.getId();
 	}
 
-	static class ArtistHotSongAdapter extends BaseQuickAdapter<SingerSongSearchBean.HotSongsBean, BaseViewHolder> {
-
-		ArtistHotSongAdapter(@Nullable List<SingerSongSearchBean.HotSongsBean> data) {
-			super(R.layout.item_gedan_detail_song, data);
-		}
-
-		@Override
-		protected void convert(@NonNull BaseViewHolder adapter, SingerSongSearchBean.HotSongsBean item) {
-			adapter.setText(R.id.item_play_no, String.valueOf(adapter.getLayoutPosition()+1));
-			adapter.setText(R.id.viewpager_list_toptext, item.getName());
-			adapter.setText(R.id.viewpager_list_bottom_text, item.getAr().get(0).getName() + "-" + item.getAl().getName());
-			adapter.setOnClickListener(R.id.viewpager_list_button, new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-
-				}
-			});
-		}
-	}
 
 	static class SimiArtistAdapter extends BaseQuickAdapter<SimiSingerBean.ArtistsBean, BaseViewHolder>{
 

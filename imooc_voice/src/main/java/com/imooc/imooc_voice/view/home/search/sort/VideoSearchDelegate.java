@@ -33,6 +33,7 @@ public class VideoSearchDelegate extends NeteaseSearchLoadingDelegate {
 					mAdapter = new VideoSearchAdapter(keywords, videos);
 					mAdapter.setOnItemClickListener((adapter, view, i) -> {
 						FeedSearchBean.ResultBean.VideosBean entity = (FeedSearchBean.ResultBean.VideosBean) adapter.getItem(i);
+
 						getParentDelegate().getSupportDelegate().start(VideoDetailDelegate.newInstance(entity.getVid()));
 					});
 					mRecyclerView = rootView.findViewById(R.id.rv_delegate_normal);
@@ -78,7 +79,10 @@ public class VideoSearchDelegate extends NeteaseSearchLoadingDelegate {
 			String description = TimeUtil.getTimeNoYMDH(item.getDurationms()) + " by " + item.getCreator().get(0).getUserName();
 			adapter.setText(R.id.tv_item_video_creator, description);
 			manager.displayImageForCorner((ImageView) adapter.getView(R.id.iv_item_video_cover), item.getCoverUrl());
-
+			if(item.getType() == 0){
+				//MV类型  TODO 显示不正常
+				//adapter.setVisible(R.id.tv_item_mv_type, true);
+			}
 		}
 	}
 }

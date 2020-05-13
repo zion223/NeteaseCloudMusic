@@ -53,7 +53,7 @@
             android:layout_below="@+id/viewpager_list_toptext"
             android:layout_toRightOf="@+id/iv_gedan_detail_sq"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="3dp"
+            android:layout_marginLeft="5dp"
             android:ellipsize="end"
             android:maxLength="20"
             android:singleLine="true"
@@ -63,13 +63,13 @@
 
         <ImageView
             android:id="@+id/iv_list_video"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/viewpager_list_button"
-            android:layout_marginRight="60dp"
+            android:layout_marginRight="30dp"
             android:visibility="gone"
-            android:src="@drawable/t_actionbar_video_normal"/>
+            android:src="@drawable/ic_watch_view"/>
 
     <ImageView
         android:id="@+id/viewpager_list_button"
