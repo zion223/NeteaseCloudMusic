@@ -271,7 +271,7 @@ public class MusicPlayerActivity extends BaseActivity {
 	}
 
 	private void changeFavouriteStatus(boolean anim) {
-
+		//TODO 喜欢歌曲
 		if (GreenDaoHelper.selectFavourite(mAudioBean) != null) {
 			mFavouriteView.setImageResource(R.mipmap.audio_aeh);
 		} else {

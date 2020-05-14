@@ -13,10 +13,12 @@ import android.widget.TextView;
 import com.donkingliang.groupedadapter.adapter.GroupedRecyclerViewAdapter;
 import com.donkingliang.groupedadapter.holder.BaseViewHolder;
 import com.imooc.imooc_voice.R;
+import com.imooc.imooc_voice.api.HttpConstants;
 import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.mine.SpecData;
 import com.imooc.imooc_voice.model.newapi.search.MultipleSearchEntity;
 import com.imooc.imooc_voice.model.newapi.search.SynthesisSearchBean;
+import com.imooc.imooc_voice.model.newapi.song.SongDetailBean;
 import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.imooc_voice.view.discory.radio.detail.RadioDetailDelegate;
@@ -25,6 +27,8 @@ import com.imooc.imooc_voice.view.home.search.NeteaseSearchLoadingDelegate;
 import com.imooc.imooc_voice.view.home.search.artist.ArtistDetailDelegate;
 import com.imooc.imooc_voice.view.user.UserDetailDelegate;
 import com.imooc.imooc_voice.view.video.VideoDetailDelegate;
+import com.imooc.lib_audio.app.AudioHelper;
+import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
@@ -81,9 +85,9 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 		switch (groupPosition) {
 			case 0:
 				//单曲
-				SynthesisSearchBean.ResultBean.SongBean.SongsBean songsBean = data.get(groupPosition).getSong().getSongs().get(childPosition);
-				//TODO 加入播放队列
-				//getParentDelegate().getSupportDelegate().start();
+				SongDetailBean.SongsBean item = data.get(groupPosition).getSong().getSongs().get(childPosition);
+				String songPlayUrl = HttpConstants.getSongPlayUrl(item.getId());
+				AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getAr().get(0).getName(), item.getAl().getName(), item.getAl().getName(), item.getAl().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDt())));
 				break;
 			case 1:
 				//视频
@@ -252,8 +256,8 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 			switch (groupPosition) {
 				case 0:
 					//单曲
-					List<SynthesisSearchBean.ResultBean.SongBean.SongsBean> songs = mData.get(groupPosition).getSong().getSongs();
-					final SynthesisSearchBean.ResultBean.SongBean.SongsBean item = songs.get(childPosition);
+					List<SongDetailBean.SongsBean> songs = mData.get(groupPosition).getSong().getSongs();
+					final SongDetailBean.SongsBean item = songs.get(childPosition);
 					adapter.get(R.id.item_play_no).setVisibility(View.GONE);
 					if (item.getName().contains(keyword)) {
 						int start = item.getName().indexOf(keyword);

@@ -26,6 +26,7 @@ import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.CHANNEL;
 import com.imooc.imooc_voice.model.event.LoginEvent;
+import com.imooc.imooc_voice.model.newapi.CommonMessageBean;
 import com.imooc.imooc_voice.model.newapi.LoginBean;
 import com.imooc.imooc_voice.util.GsonUtil;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
@@ -254,6 +255,23 @@ public class HomeDelegate extends NeteaseDelegate{
 		}
 	}
 
+	//签到
+	@OnClick(R2.id.avatar_check)
+	void onClickSignin(){
+		//TODO 签到标志位
+//		RequestCenter.signIn(new DisposeDataListener() {
+//			@Override
+//			public void onSuccess(Object responseObj) {
+//				CommonMessageBean bean = (CommonMessageBean) responseObj;
+//
+//			}
+//
+//			@Override
+//			public void onFailure(Object reasonObj) {
+//
+//			}
+//		});
+	}
 	public static Animation shakeAnimation() {
 		Animation rotateAnimation = new RotateAnimation(-20, 20, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
 		rotateAnimation.setRepeatCount(2);

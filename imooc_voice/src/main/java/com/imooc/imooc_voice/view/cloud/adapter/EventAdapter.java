@@ -58,7 +58,6 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
 				type = item.getInfo().getCommentThread().getResourceInfo().getEventType();
 			}
 
-			//
 			//String resourceInfo = item.getInfo().getCommentThread().getResourceInfo().getName();
 			//String title = resourceInfo.split(":")[0];
 			//标题头

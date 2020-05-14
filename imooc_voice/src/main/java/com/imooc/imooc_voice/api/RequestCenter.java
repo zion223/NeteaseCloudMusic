@@ -71,6 +71,7 @@ import com.imooc.imooc_voice.model.newapi.song.LikeMusicBean;
 import com.imooc.imooc_voice.model.newapi.song.LyricBean;
 import com.imooc.imooc_voice.model.newapi.song.PlayListCommentBean;
 import com.imooc.imooc_voice.model.newapi.song.SongDetailBean;
+import com.imooc.imooc_voice.model.newapi.song.SongUrlBean;
 import com.imooc.lib_network.CommonOkHttpClient;
 import com.imooc.lib_network.listener.DisposeDataHandler;
 import com.imooc.lib_network.listener.DisposeDataListener;
@@ -105,6 +106,22 @@ public class RequestCenter {
         RequestCenter.getRequest(HttpConstants.LOGIN, params, listener, LoginBean.class);
     }
 
+	/**
+	 * 用户签到
+	 */
+	public static void signIn(DisposeDataListener listener) {
+
+		RequestCenter.getRequest(HttpConstants.SIGNIN, null, listener, CommonMessageBean.class);
+	}
+
+    /**
+     * 获取音乐播放url
+     */
+    public static void getSongUrl(long id ,DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.SONG_URL, params, listener, SongUrlBean.class);
+    }
     /**
      * 发送验证码
      */

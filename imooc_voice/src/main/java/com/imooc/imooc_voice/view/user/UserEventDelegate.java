@@ -16,7 +16,7 @@ import com.imooc.lib_network.listener.DisposeDataListener;
 
 import java.util.List;
 
-
+//用户动态
 public class UserEventDelegate extends NeteaseLoadingDelegate {
 
 	private static final String ARGS_USER_ID = "ARGS_USER_ID";
@@ -44,20 +44,10 @@ public class UserEventDelegate extends NeteaseLoadingDelegate {
 
 	}
 
+	@SuppressLint("StaticFieldLeak")
 	@Override
 	public void initView() {
 
-		initEvent();
-	}
-
-	@Override
-	public int setLoadingViewLayout() {
-		return R.layout.delegate_user_event_loading;
-	}
-
-
-	@SuppressLint("StaticFieldLeak")
-	private void initEvent() {
 		mRecyclerView = rootView.findViewById(R.id.rv_user_event);
 		new AsyncTask<Void, Void, Void>() {
 			@Override
@@ -86,8 +76,15 @@ public class UserEventDelegate extends NeteaseLoadingDelegate {
 				return null;
 			}
 		}.execute();
-
 	}
+
+	@Override
+	public int setLoadingViewLayout() {
+		return R.layout.delegate_user_event_loading;
+	}
+
+
+
 
 
 }

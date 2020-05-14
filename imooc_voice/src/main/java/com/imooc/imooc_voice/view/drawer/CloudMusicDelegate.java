@@ -1,27 +1,28 @@
 package com.imooc.imooc_voice.view.drawer;
 
 import android.annotation.SuppressLint;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.newapi.notification.UserCloudBean;
+import com.imooc.imooc_voice.model.newapi.song.SongDetailBean;
+import com.imooc.imooc_voice.model.newapi.song.SongUrlBean;
+import com.imooc.imooc_voice.util.TimeUtil;
+import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
+import com.imooc.lib_audio.app.AudioHelper;
+import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 //音乐云盘
 public class CloudMusicDelegate extends NeteaseLoadingDelegate {
@@ -31,7 +32,7 @@ public class CloudMusicDelegate extends NeteaseLoadingDelegate {
 	private TextView mTvStorageRoom;
 	private ImageView mIvBack;
 	private RecyclerView mRecyclerView;
-	private CloudMusicAdapter mAdapter;
+	private SongListDetailDelegate.PlayListAdapter mAdapter;
 
 	@Override
 	public void initView() {
@@ -50,16 +51,40 @@ public class CloudMusicDelegate extends NeteaseLoadingDelegate {
 			@Override
 			public void onSuccess(Object responseObj) {
 				UserCloudBean bean = (UserCloudBean) responseObj;
-				//云盘空间
-				mTvStorageRoom.setText(new DecimalFormat("#.00").format((float)bean.getSize()/GB)  + " G/ " + bean.getMaxSize()/GB + "G");
+				//云盘剩余空间和总空间
+				float leftSize = (float) bean.getSize();
+				mTvStorageRoom.setText(Math.round(leftSize * 100) / 100 + " G/ " + bean.getMaxSize() / GB + "G");
+				//头布局
 				View headerView = LayoutInflater.from(getContext()).inflate(R.layout.item_music_header, null, false);
-				((TextView)headerView.findViewById(R.id.play_all_number)).setText("(共" + bean.getCount() +"首)");
+				((TextView) headerView.findViewById(R.id.play_all_number)).setText("(共" + bean.getCount() + "首)");
 				//云盘歌曲
 				ArrayList<UserCloudBean.CloudSong> data = bean.getData();
-				mAdapter = new CloudMusicAdapter(data);
+				ArrayList<SongDetailBean.SongsBean> songData = new ArrayList<>();
+				for (int i = 0; i < data.size(); i++) {
+					songData.add(data.get(i).getSimpleSong());
+				}
+				mAdapter = new SongListDetailDelegate.PlayListAdapter(getContext(), CloudMusicDelegate.this, true, songData);
 				mAdapter.setHeaderView(headerView);
 				mAdapter.setOnItemClickListener((adapter, view, i) -> {
-					//TODO 加入播放队列
+					SongDetailBean.SongsBean item = (SongDetailBean.SongsBean) adapter.getItem(i);
+					RequestCenter.getSongUrl(item.getId(), new DisposeDataListener() {
+						@Override
+						public void onSuccess(Object responseObj) {
+							SongUrlBean url = (SongUrlBean) responseObj;
+							String songPlayUrl = url.getData().get(0).getUrl();
+							if(!TextUtils.isEmpty(songPlayUrl)){
+								AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getAr().get(0).getName(), item.getAl().getName(), item.getAl().getName(), item.getAl().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDt())));
+							}else{
+								Toast.makeText(getContext(), "获取播放地址失败", Toast.LENGTH_SHORT).show();
+							}
+						}
+
+						@Override
+						public void onFailure(Object reasonObj) {
+
+						}
+					});
+
 				});
 				mRecyclerView.setAdapter(mAdapter);
 				mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -78,26 +103,5 @@ public class CloudMusicDelegate extends NeteaseLoadingDelegate {
 		return R.layout.delegate_user_cloud;
 	}
 
-	static class CloudMusicAdapter extends BaseQuickAdapter<UserCloudBean.CloudSong, BaseViewHolder>{
 
-		CloudMusicAdapter(@Nullable List<UserCloudBean.CloudSong> data) {
-			super(R.layout.item_gedan_detail_song, data);
-		}
-
-		@Override
-		protected void convert(@NonNull BaseViewHolder helper, UserCloudBean.CloudSong item) {
-			//排序
-			helper.setText(R.id.item_play_no, String.valueOf(helper.getLayoutPosition()));
-			//歌曲名
-			helper.setText(R.id.viewpager_list_toptext, item.getSimpleSong().getName());
-			//歌手名 - 专辑名
-			helper.setText(R.id.viewpager_list_bottom_text, item.getSimpleSong().getAr().get(0).getName() + "-" + item.getAlbum());
-			helper.setOnClickListener(R.id.viewpager_list_button, new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-
-				}
-			});
-		}
-	}
 }

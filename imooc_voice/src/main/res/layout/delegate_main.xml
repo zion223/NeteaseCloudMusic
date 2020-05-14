@@ -91,17 +91,16 @@
                     <RelativeLayout
                         android:id="@+id/rl_main_avatar"
                         android:layout_width="match_parent"
-                        android:layout_height="150dp"
+                        android:layout_height="180dp"
                         android:background="@color/app_background">
 
                         <ImageView
                             android:id="@+id/avatr_view"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-
                             android:layout_alignParentLeft="true"
                             android:layout_marginLeft="10dp"
-                            android:layout_marginTop="25dp" />
+                            android:layout_marginTop="50dp" />
 
                         <TextView
                             android:id="@+id/avatar_name"

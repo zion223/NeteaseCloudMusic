@@ -1,6 +1,6 @@
 package com.imooc.imooc_voice.model.newapi.notification;
 
-import com.imooc.imooc_voice.model.newapi.search.SynthesisSearchBean;
+import com.imooc.imooc_voice.model.newapi.song.SongDetailBean;
 
 import java.util.ArrayList;
 
@@ -80,7 +80,7 @@ public class UserCloudBean {
 		private long addTime;
 		private long fileSize;
 		private String fileName;
-		private SynthesisSearchBean.ResultBean.SongBean.SongsBean simpleSong;
+		private SongDetailBean.SongsBean simpleSong;
 
 		public String getAlbum() {
 			return album;
@@ -154,11 +154,11 @@ public class UserCloudBean {
 			this.fileName = fileName;
 		}
 
-		public SynthesisSearchBean.ResultBean.SongBean.SongsBean getSimpleSong() {
+		public SongDetailBean.SongsBean getSimpleSong() {
 			return simpleSong;
 		}
 
-		public void setSimpleSong(SynthesisSearchBean.ResultBean.SongBean.SongsBean simpleSong) {
+		public void setSimpleSong(SongDetailBean.SongsBean simpleSong) {
 			this.simpleSong = simpleSong;
 		}
 	}

@@ -68,4 +68,12 @@
     <declare-styleable name="RikkaRoundRectView">
         <attr name="roundRatio" format="float" />
     </declare-styleable>
+
+    <declare-styleable name="CircleProgressButton">
+        <attr name="bgColor" format="color" />
+        <attr name="progressColor" format="color" />
+        <attr name="viewWidth" format="dimension" />
+        <attr name="viewHeight" format="dimension" />
+        <attr name="viewRoundWidth" format="dimension" />
+    </declare-styleable>
 </resources>

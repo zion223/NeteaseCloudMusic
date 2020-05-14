@@ -18,6 +18,7 @@ import com.imooc.lib_audio.mediaplayer.events.AudioPauseEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioProgressEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioStartEvent;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
+import com.imooc.lib_common_ui.widget.CircleProgressButton;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 
 import org.greenrobot.eventbus.EventBus;
@@ -38,7 +39,7 @@ public class BottomMusicView extends RelativeLayout {
 	private ImageView mLeftView;
 	private TextView mTitleView;
 	private TextView mAlbumView;
-	private ImageView mPlayView;
+	private CircleProgressButton mPlayView;
 	private ImageView mRightView;
 
 	/*
@@ -133,6 +134,8 @@ public class BottomMusicView extends RelativeLayout {
 	@Subscribe(threadMode = ThreadMode.MAIN)
 	public void onAudioProgrssEvent(AudioProgressEvent event) {
 		//更新当前view的播放进度
+
+		mPlayView.setProgressValue(event.progress / event.maxLength * 100);
 	}
 
 	private void showLoadView() {
@@ -141,20 +144,23 @@ public class BottomMusicView extends RelativeLayout {
 			ImageLoaderManager.getInstance().displayImageForCircle(mLeftView, mAudioBean.getAlbumPic());
 			mTitleView.setText(mAudioBean.getName());
 			mAlbumView.setText(mAudioBean.getAlbum());
-			mPlayView.setImageResource(R.mipmap.note_btn_pause_white);
+			//mPlayView.setImageResource(R.mipmap.note_btn_pause_white);
+			mPlayView.setPlayOrPause(CircleProgressButton.PAUSE);
 		}
 	}
 
 	private void showPauseView() {
 		if (mAudioBean != null) {
-			mPlayView.setImageResource(R.mipmap.note_btn_play_white);
+			//mPlayView.setImageResource(R.mipmap.note_btn_play_white);
+			mPlayView.setPlayOrPause(CircleProgressButton.PLAY);
 		}
 		mRotateAnimator.pause();
 	}
 
 	private void showPlayView() {
 		if (mAudioBean != null) {
-			mPlayView.setImageResource(R.mipmap.note_btn_pause_white);
+			//mPlayView.setImageResource(R.mipmap.note_btn_pause_white);
+			mPlayView.setPlayOrPause(CircleProgressButton.PAUSE);
 		}
 		if(mRotateAnimator.isPaused()){
 			mRotateAnimator.resume();

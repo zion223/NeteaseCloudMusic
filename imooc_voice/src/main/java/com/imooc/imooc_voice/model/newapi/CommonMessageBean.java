@@ -4,8 +4,18 @@ public class CommonMessageBean {
 
     private String id;
     private int code;
+    //签到积分
+    private int point;
     private String msg;
     private String message;
+
+    public int getPoint() {
+        return point;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
+    }
 
     public String getMessage() {
         return message;
