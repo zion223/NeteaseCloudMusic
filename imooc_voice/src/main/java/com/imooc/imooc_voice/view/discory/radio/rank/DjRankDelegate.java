@@ -157,10 +157,10 @@ public class DjRankDelegate extends NeteaseLoadingDelegate implements BaseQuickA
             adapter.setText(R.id.tv_item_rank_123_hot, SearchUtil.getCorresPondingString(entity.getScore()));
             if(entity.getUserType() == 4 ){
             	adapter.setVisible(R.id.iv_item_rank_user_tag, true);
-            	adapter.setImageResource(R.id.iv_item_rank_user_tag, R.drawable.yinyueren);
+            	adapter.setImageResource(R.id.iv_item_rank_user_tag, R.drawable.ic_musician);
 			}else if(entity.getUserType() == 10 || entity.getUserType() == 1){
 				adapter.setVisible(R.id.iv_item_rank_user_tag, true);
-				adapter.setImageResource(R.id.iv_item_rank_user_tag, R.drawable.guanfang);
+				adapter.setImageResource(R.id.iv_item_rank_user_tag, R.drawable.ic_official);
 			}
             manager.displayImageForCircle((ImageView) adapter.getView(R.id.iv_item_rank_123_avatar), entity.getAvatarUrl());
 
@@ -181,12 +181,12 @@ public class DjRankDelegate extends NeteaseLoadingDelegate implements BaseQuickA
 			int diffRank = list.getLastRank() - list.getRank();
 			if(diffRank != 0){
 				if(diffRank > 0){
-					adapter.setImageResource(R.id.iv_item_dj_diff, R.drawable.up);
+					adapter.setImageResource(R.id.iv_item_dj_diff, R.drawable.ic_rank_up);
 				}else{
-					adapter.setImageResource(R.id.iv_item_dj_diff, R.drawable.down);
+					adapter.setImageResource(R.id.iv_item_dj_diff, R.drawable.ic_rank_down);
 				}
 			}else{
-				adapter.setImageResource(R.id.iv_item_dj_diff, R.drawable.zero);
+				adapter.setImageResource(R.id.iv_item_dj_diff, R.drawable.ic_diff_none);
 			}
             String diff  = String.valueOf(Math.abs(diffRank));
             adapter.setText(R.id.tv_item_dj_rank_diff, diff);
@@ -194,10 +194,10 @@ public class DjRankDelegate extends NeteaseLoadingDelegate implements BaseQuickA
 			//userType
 			if(list.getUserType() == 4){
 				adapter.setVisible(R.id.iv_item_dj_tag, true);
-				adapter.setImageResource(R.id.iv_item_dj_tag, R.drawable.yinyueren);
+				adapter.setImageResource(R.id.iv_item_dj_tag, R.drawable.ic_musician);
 			}else if(list.getUserType() == 10 || list.getUserType() == 1){
 				adapter.setVisible(R.id.iv_item_dj_tag, true);
-				adapter.setImageResource(R.id.iv_item_dj_tag, R.drawable.guanfang);
+				adapter.setImageResource(R.id.iv_item_dj_tag, R.drawable.ic_official);
 			}
 			if(list.getRank() < 4){
 				adapter.setTextColor(R.id.tv_item_dj_rank_rank, Color.RED);

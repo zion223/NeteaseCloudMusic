@@ -12,7 +12,7 @@
         android:layout_height="45dp"
         android:layout_centerVertical="true"
         android:layout_marginStart="12dp"
-        android:src="@drawable/test" />
+        android:src="@drawable/ic_test" />
 
     <ImageView
         android:id="@+id/iv_item_notification_user_tag"
@@ -20,7 +20,7 @@
         android:layout_height="15dp"
         android:layout_alignRight="@+id/iv_item_notification_fromuser_avatar"
         android:layout_alignBottom="@+id/iv_item_notification_fromuser_avatar"
-        android:src="@drawable/guanfang"
+        android:src="@drawable/ic_official"
         android:visibility="visible" />
 
     <TextView
@@ -64,7 +64,7 @@
         android:layout_below="@+id/tv_item_notification_time"
         android:layout_alignRight="@+id/tv_item_notification_time"
         android:layout_marginTop="5dp"
-        android:background="@drawable/bg_home_tip"
+        android:background="@drawable/bg_circle_red"
         android:gravity="center"
         android:text="1"
         android:textSize="10sp"

@@ -9,7 +9,7 @@
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:src="@drawable/test" />
+        android:src="@drawable/ic_test" />
 
     <ImageView
         android:id="@+id/iv_item_rank_program_play"
@@ -18,7 +18,7 @@
         android:layout_alignLeft="@+id/iv_item_program_rank_avatar"
         android:layout_alignBottom="@+id/iv_item_program_rank_avatar"
         android:layout_marginLeft="82dp"
-        android:src="@drawable/play_red"
+        android:src="@drawable/ic_play_red"
         android:visibility="visible" />
 
     <TextView

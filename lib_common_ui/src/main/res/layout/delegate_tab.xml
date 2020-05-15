@@ -16,7 +16,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_margin="10dp"
-            android:src="@drawable/left_arrow" />
+            android:src="@drawable/ic_left_arrow_black" />
 
         <TextView
             android:id="@+id/delegate_tab_title"
@@ -34,7 +34,7 @@
             android:layout_height="20dp"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="15dp"
-            android:src="@drawable/search" />
+            android:src="@drawable/ic_search" />
 
         <ImageView
             android:id="@+id/delegate_tab_more"
@@ -42,7 +42,7 @@
             android:layout_height="20dp"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="10dp"
-            android:src="@drawable/more" />
+            android:src="@drawable/ic_more_black" />
 
     </LinearLayout>
 

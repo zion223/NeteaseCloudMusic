@@ -13,7 +13,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:src="@mipmap/b4y"
+        android:src="@mipmap/ic_album_demo"
         android:scaleType="centerInside"
         android:visibility="visible" />
 
@@ -60,7 +60,7 @@
         android:layout_centerVertical="true"
         android:focusable="true"
         android:visibility="visible"
-        android:src="@drawable/list_icn_more" />
+        android:src="@drawable/ic_song_more" />
 
     <ImageView
         android:id="@+id/tab_play_state"
@@ -69,7 +69,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
-        android:src="@drawable/play"
+        android:src="@drawable/ic_status_play"
         android:scaleType="centerInside"
         android:visibility="gone" />
 </RelativeLayout>

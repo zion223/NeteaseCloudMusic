@@ -15,7 +15,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_margin="10dp"
-            android:src="@drawable/left_arrow" />
+            android:src="@drawable/ic_left_arrow_black" />
 
         <TextView
             android:id="@+id/tv_webcontainer_title"

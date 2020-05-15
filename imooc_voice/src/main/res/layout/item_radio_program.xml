@@ -13,89 +13,31 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:src="@drawable/play"
         android:scaleType="centerInside"
+        android:src="@drawable/ic_status_play"
         android:visibility="gone" />
-    <TextView
-        android:id="@+id/item_radio_program_no"
-        android:layout_width="30dp"
-        android:layout_height="25dp"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="5dp"
-        android:textSize="18sp"
-        android:text="1"/>
 
-    <TextView
-        android:id="@+id/item_radio_program_toptext"
-        android:layout_toRightOf="@id/item_radio_program_no"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:layout_marginTop="10dp"
-        android:text="幸福的人从不晚睡"
-        android:textColor="@color/listTextColor"
-        android:textSize="15sp" />
-
-    <TextView
-        android:id="@+id/item_radio_program_createtime"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/item_radio_program_toptext"
-        android:layout_toRightOf="@+id/iv_gedan_detail_sq"
-        android:layout_alignLeft="@+id/item_radio_program_toptext"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="3dp"
-        android:maxLength="20"
-        android:singleLine="true"
-        android:text="2019-3-15"
-        android:textSize="10sp" />
     <ImageView
         android:id="@+id/iv_gedan_detail_playnum"
         android:layout_width="8dp"
         android:layout_height="8dp"
-        android:layout_alignTop="@+id/item_radio_program_duration"
         android:layout_alignBottom="@+id/item_radio_program_duration"
-        android:layout_toRightOf="@+id/item_radio_program_createtime"
+        android:layout_alignTop="@+id/item_radio_program_duration"
         android:layout_below="@+id/item_radio_program_toptext"
         android:layout_marginLeft="5dp"
-        android:src="@drawable/play_num"/>
-    <TextView
-        android:id="@+id/item_radio_program_playnum"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/item_radio_program_toptext"
-        android:layout_toRightOf="@+id/iv_gedan_detail_playnum"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="3dp"
-        android:maxLength="20"
-        android:singleLine="true"
-        android:text="15325"
-        android:textSize="10sp" />
+        android:layout_toRightOf="@+id/item_radio_program_createtime"
+        android:src="@drawable/ic_radio_play_num" />
+
     <ImageView
         android:id="@+id/iv_gedan_detail_duration"
         android:layout_width="10dp"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/item_radio_program_duration"
         android:layout_alignBottom="@+id/item_radio_program_duration"
-        android:layout_toRightOf="@+id/item_radio_program_playnum"
+        android:layout_alignTop="@+id/item_radio_program_duration"
         android:layout_below="@+id/item_radio_program_toptext"
         android:layout_marginLeft="5dp"
-        android:src="@drawable/time"/>
-    <TextView
-        android:id="@+id/item_radio_program_duration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/item_radio_program_toptext"
-        android:layout_toRightOf="@+id/iv_gedan_detail_duration"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="3dp"
-        android:maxLength="20"
-        android:singleLine="true"
-        android:text="15:30"
-        android:textSize="10sp" />
+        android:layout_toRightOf="@+id/item_radio_program_playnum"
+        android:src="@drawable/ic_play_time_gray" />
 
     <ImageView
         android:id="@+id/viewpager_list_button"
@@ -105,5 +47,68 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
         android:focusable="true"
-        android:src="@drawable/b6r" />
+        android:src="@drawable/ic_more_gray" />
+
+    <TextView
+        android:id="@+id/item_radio_program_no"
+        android:layout_width="30dp"
+        android:layout_height="25dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:text="1"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/item_radio_program_playnum"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_radio_program_toptext"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/iv_gedan_detail_playnum"
+        android:maxLength="20"
+        android:singleLine="true"
+        android:text="15325"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/item_radio_program_toptext"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/item_radio_program_no"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:text="幸福的人从不晚睡"
+        android:textColor="@color/listTextColor"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/item_radio_program_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_radio_program_toptext"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/iv_gedan_detail_duration"
+        android:maxLength="20"
+        android:singleLine="true"
+        android:text="15:30"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/item_radio_program_createtime"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/item_radio_program_toptext"
+        android:layout_below="@+id/item_radio_program_toptext"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/iv_gedan_detail_sq"
+        android:maxLength="20"
+        android:singleLine="true"
+        android:text="2019-3-15"
+        android:textSize="10sp" />
 </RelativeLayout>

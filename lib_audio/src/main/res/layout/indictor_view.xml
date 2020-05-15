@@ -15,6 +15,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:src="@mipmap/b4i" />-->
+        android:src="@mipmap/ic_collect_gray" />-->
 
 </RelativeLayout>

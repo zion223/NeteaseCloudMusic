@@ -9,7 +9,7 @@
         android:id="@+id/iv_item_notification_comment_avatar_img"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:src="@drawable/test" />
+        android:src="@drawable/ic_test" />
 
     <TextView
         android:id="@+id/tv_item_notification_comment_avatar_name"

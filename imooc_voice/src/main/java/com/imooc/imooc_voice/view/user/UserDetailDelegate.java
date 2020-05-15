@@ -14,7 +14,6 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -28,7 +27,6 @@ import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.newapi.FollowBean;
 import com.imooc.imooc_voice.model.newapi.personal.UserDetailBean;
 import com.imooc.imooc_voice.util.SearchUtil;
-import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.navigator.CommonNavigatorCreater;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
@@ -104,7 +102,7 @@ public class UserDetailDelegate extends NeteaseDelegate {
 	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
 
 		//发私信左边的图片
-		Drawable drawable = getResources().getDrawable(R.drawable.sixin);
+		Drawable drawable = getResources().getDrawable(R.drawable.ic_notification_msg_white);
 		drawable.setBounds(5, 0, 50, 50);//第一个 0 是距左边距离，第二个 0 是距上边距离，40 分别是
 		mTvSendMsg.setCompoundDrawables(drawable, null, null, null);
 

@@ -12,7 +12,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:src="@drawable/play"
+        android:src="@drawable/ic_status_play"
         android:scaleType="centerInside"
         android:visibility="gone" />
     <TextView
@@ -45,7 +45,7 @@
             android:layout_marginTop="5dp"
             android:layout_below="@+id/viewpager_list_toptext"
             android:layout_alignLeft="@id/viewpager_list_toptext"
-            android:src="@drawable/b73"/>
+            android:src="@drawable/ic_song_sq"/>
         <TextView
             android:id="@+id/viewpager_list_bottom_text"
             android:layout_width="wrap_content"
@@ -79,5 +79,5 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
         android:focusable="true"
-        android:src="@drawable/more" />
+        android:src="@drawable/ic_more_black" />
 </RelativeLayout>

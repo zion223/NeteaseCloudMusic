@@ -338,12 +338,12 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 						//网易音乐人
 						adapter.setText(R.id.tv_item_search_user_description, "网易音乐人");
 						adapter.setVisible(R.id.iv_item_search_user_tag, true);
-						((ImageView) adapter.get(R.id.iv_item_search_user_tag)).setImageResource(R.drawable.yinyueren);
+						((ImageView) adapter.get(R.id.iv_item_search_user_tag)).setImageResource(R.drawable.ic_musician);
 
 					} else if (userItem.getUserType() == 10) {
 						//大V
 						adapter.setVisible(R.id.iv_item_search_user_tag, true);
-						((ImageView) adapter.get(R.id.iv_item_search_user_tag)).setImageResource(R.drawable.guanfang);
+						((ImageView) adapter.get(R.id.iv_item_search_user_tag)).setImageResource(R.drawable.ic_official);
 						adapter.setText(R.id.tv_item_search_user_description, userItem.getDescription());
 					} else {
 						adapter.setText(R.id.tv_item_search_user_description, userItem.getDescription());
@@ -358,11 +358,11 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 					if (userItem.getGender() == 1) {
 						//男性
 						adapter.setVisible(R.id.iv_item_search_user_gender, true);
-						((ImageView) adapter.get(R.id.iv_item_search_user_gender)).setImageResource(R.drawable.alh);
+						((ImageView) adapter.get(R.id.iv_item_search_user_gender)).setImageResource(R.drawable.ic_male);
 					} else if (userItem.getGender() == 2) {
 						//女性
 						adapter.setVisible(R.id.iv_item_search_user_gender, true);
-						((ImageView) adapter.get(R.id.iv_item_search_user_gender)).setImageResource(R.drawable.alk);
+						((ImageView) adapter.get(R.id.iv_item_search_user_gender)).setImageResource(R.drawable.ic_female);
 					}
 					//用户头像
 					ImageLoaderManager.getInstance().displayImageForCircle((ImageView) adapter.get(R.id.iv_item_search_user_avatar), userItem.getAvatarUrl());

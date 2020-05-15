@@ -15,7 +15,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_margin="10dp"
-            android:src="@drawable/left_arrow" />
+            android:src="@drawable/ic_left_arrow_black" />
 
         <TextView
             android:id="@+id/tv_gedan_detail_comment_num"
@@ -59,14 +59,14 @@
                     android:id="@+id/iv_gedan_detail_comment_img"
                     android:layout_width="73dp"
                     android:layout_height="73dp"
-                    android:src="@drawable/test" />
+                    android:src="@drawable/ic_test" />
                 <ImageView
                     android:id="@+id/iv_album_right_flag"
                     android:layout_width="10dp"
                     android:layout_height="73dp"
                     android:layout_marginLeft="1dp"
                     android:layout_toRightOf="@+id/iv_gedan_detail_comment_img"
-                    android:src="@drawable/and"
+                    android:src="@drawable/ic_album_attach"
                     android:visibility="gone" />
                 <TextView
                     android:id="@+id/tv_gedan_detail_comment_title"
@@ -97,7 +97,7 @@
                     android:layout_height="20dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/agj" />
+                    android:src="@drawable/ic_right_arrow_gray" />
             </RelativeLayout>
 
             <View

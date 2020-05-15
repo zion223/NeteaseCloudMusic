@@ -14,14 +14,14 @@
             android:layout_height="23dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/hot_play" />
+            android:src="@drawable/ic_hot_play" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="30dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
             android:gravity="center_vertical"
             android:text="播放热门50"
             android:textColor="@color/black"
@@ -29,14 +29,21 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_artist_homepage_hot_song"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="30dp">
+        android:layout_height="30dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="8dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tv_more_info"
+            android:layout_alignTop="@+id/tv_more_info"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@+id/tv_more_info"
+            android:src="@drawable/fragmentation_ic_right" />
 
         <TextView
             android:id="@+id/tv_more_info"
@@ -44,32 +51,15 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:textSize="13sp"
-            android:text="更多热歌"/>
-
-        <ImageView
-            android:layout_width="8dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"
-            android:layout_alignTop="@+id/tv_more_info"
-            android:layout_alignBottom="@+id/tv_more_info"
-            android:layout_toRightOf="@+id/tv_more_info"
-            android:src="@drawable/fragmentation_ic_right"/>
+            android:text="更多热歌"
+            android:textSize="13sp" />
     </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/app_background"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="20dp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
         android:text="歌手简介"
@@ -81,11 +71,23 @@
         android:id="@+id/tv_artist_homepage_brief"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
         android:ellipsize="end"
         android:maxLines="4" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/app_background" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_artist_homepage_hot_song"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <include layout="@layout/item_more_info" />
 

@@ -13,7 +13,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:src="@drawable/any" />
+        android:src="@drawable/ic_play_gray" />
 
     <TextView
         android:id="@+id/play_all_text"
@@ -42,7 +42,7 @@
         android:focusable="false"
         android:gravity="end"
         android:layout_marginRight="10dp"
-        android:src="@drawable/list_icn_mng" />
+        android:src="@drawable/ic_menu_black" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

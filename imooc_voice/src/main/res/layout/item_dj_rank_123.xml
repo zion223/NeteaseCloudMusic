@@ -8,7 +8,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/test" />
+        android:src="@drawable/ic_test" />
 
     <ImageView
         android:id="@+id/iv_item_rank_user_tag"
@@ -17,7 +17,7 @@
         android:layout_alignLeft="@+id/iv_item_rank_123_avatar"
         android:layout_alignBottom="@+id/iv_item_rank_123_avatar"
         android:layout_marginLeft="82dp"
-        android:src="@drawable/guanfang"
+        android:src="@drawable/ic_official"
         android:visibility="visible" />
 
     <TextView

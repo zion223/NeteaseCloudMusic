@@ -26,7 +26,7 @@
                 android:layout_height="20dp"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:background="@mipmap/category" />
+                android:background="@mipmap/ic_category" />
 
             <TextView
                 android:id="@+id/search_view"
@@ -34,7 +34,7 @@
                 android:layout_height="20dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:background="@mipmap/b_p" />
+                android:background="@drawable/ic_search_gray" />
 
             <net.lucode.hackware.magicindicator.MagicIndicator
                 android:id="@+id/magic_indicator"
@@ -126,7 +126,7 @@
                             android:layout_marginLeft="10dp"
                             android:layout_toRightOf="@+id/avatar_name"
                             android:visibility="gone"
-                            android:src="@drawable/vip" />
+                            android:src="@drawable/ic_vip" />
 
                         <TextView
                             android:id="@+id/tv_user_level"
@@ -152,7 +152,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_marginTop="10dp"
                             android:layout_marginRight="20dp"
-                            android:background="@drawable/bg_collect"
+                            android:background="@drawable/bg_round_red"
                             android:gravity="center_horizontal"
                             android:paddingTop="5dp"
                             android:paddingBottom="5dp"
@@ -215,14 +215,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        app:icon="@drawable/boi"
+                        app:icon="@drawable/ic_message_red"
                         app:iconHeight="23dp"
                         app:iconWidth="23dp"
                         app:infoText="我的消息"
                         app:infoTextColor="@color/color_333333"
                         app:infoTextMarginTop="5dp"
                         app:infoTextSize="11sp"
-                        app:tipBg="@drawable/bg_home_tip"
+                        app:tipBg="@drawable/bg_circle_red"
                         app:tipPaddingRight="2dp"
                         app:tipPaddingTop="2dp"
                         app:tipText="1"
@@ -233,14 +233,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        app:icon="@drawable/b32"
+                        app:icon="@drawable/ic_notification_friend"
                         app:iconHeight="23dp"
                         app:iconWidth="23dp"
                         app:infoText="我的好友"
                         app:infoTextColor="@color/color_333333"
                         app:infoTextMarginTop="5dp"
                         app:infoTextSize="11sp"
-                        app:tipBg="@drawable/bg_home_tip"
+                        app:tipBg="@drawable/bg_circle_red"
                         app:tipPaddingRight="2dp"
                         app:tipPaddingTop="2dp"
                         app:tipText="1"
@@ -252,14 +252,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        app:icon="@drawable/bog"
+                        app:icon="@drawable/ic_listen_regeconize"
                         app:iconHeight="23dp"
                         app:iconWidth="23dp"
                         app:infoText="听歌识曲"
                         app:infoTextColor="@color/color_333333"
                         app:infoTextMarginTop="5dp"
                         app:infoTextSize="11sp"
-                        app:tipBg="@drawable/bg_home_tip"
+                        app:tipBg="@drawable/bg_circle_red"
                         app:tipPaddingRight="2dp"
                         app:tipPaddingTop="2dp"
                         app:tipText="1"
@@ -270,14 +270,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        app:icon="@drawable/bon"
+                        app:icon="@drawable/ic_change_skin"
                         app:iconHeight="23dp"
                         app:iconWidth="23dp"
                         app:infoText="个性换肤"
                         app:infoTextColor="@color/color_333333"
                         app:infoTextMarginTop="5dp"
                         app:infoTextSize="11sp"
-                        app:tipBg="@drawable/bg_home_tip"
+                        app:tipBg="@drawable/bg_circle_red"
                         app:tipPaddingRight="2dp"
                         app:tipPaddingTop="2dp"
                         app:tipText="1"
@@ -295,7 +295,7 @@
                 <com.imooc.lib_common_ui.HornizeItemView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:hIcon="@drawable/boh"
+                    app:hIcon="@drawable/ic_perform"
                     app:hTipVisiblity="false"
                     app:paddingLeft="20dp"
                     app:paddingRight="30dp"
@@ -305,7 +305,7 @@
                 <com.imooc.lib_common_ui.HornizeItemView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:hIcon="@drawable/bop"
+                    app:hIcon="@drawable/ic_shop"
                     app:hTipVisiblity="false"
                     app:paddingLeft="20dp"
                     app:paddingRight="30dp"
@@ -315,7 +315,7 @@
                 <com.imooc.lib_common_ui.HornizeItemView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:hIcon="@drawable/bok"
+                    app:hIcon="@drawable/ic_position"
                     app:hTipVisiblity="false"
                     app:paddingLeft="20dp"
                     app:paddingRight="30dp"
@@ -324,7 +324,7 @@
                 <com.imooc.lib_common_ui.HornizeItemView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:hIcon="@drawable/bo6"
+                    app:hIcon="@drawable/ic_lingsheng"
                     app:hTipVisiblity="false"
                     app:paddingLeft="20dp"
                     app:paddingRight="30dp"
@@ -339,7 +339,7 @@
                 <com.imooc.lib_common_ui.HornizeItemView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:hIcon="@drawable/bor"
+                    app:hIcon="@drawable/ic_timer"
                     app:hTipVisiblity="false"
                     app:paddingLeft="20dp"
                     app:paddingRight="30dp"
@@ -349,7 +349,7 @@
                     android:id="@+id/home_qrcode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:hIcon="@drawable/boj"
+                    app:hIcon="@drawable/ic_scan"
                     app:hTipVisiblity="false"
                     app:paddingLeft="20dp"
                     app:paddingRight="30dp"
@@ -359,7 +359,7 @@
                     android:id="@+id/home_music"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:hIcon="@drawable/bo9"
+                    app:hIcon="@drawable/ic_alarm"
                     app:hTipVisiblity="false"
                     app:paddingLeft="20dp"
                     app:paddingRight="30dp"
@@ -369,7 +369,7 @@
                     android:id="@+id/online_music_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:hIcon="@drawable/bod"
+                    app:hIcon="@drawable/ic_free_flow"
                     app:hTipVisiblity="false"
                     app:paddingLeft="20dp"
                     app:paddingRight="30dp"
@@ -379,7 +379,7 @@
                     android:id="@+id/icon_cloud_music"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:hIcon="@drawable/bo_"
+                    app:hIcon="@drawable/ic_cloud"
                     app:hTipVisiblity="false"
                     app:paddingLeft="20dp"
                     app:paddingRight="30dp"
@@ -388,7 +388,7 @@
                 <com.imooc.lib_common_ui.HornizeItemView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:hIcon="@drawable/bob"
+                    app:hIcon="@drawable/ic_discount"
                     app:hTipVisiblity="false"
                     app:paddingLeft="20dp"
                     app:paddingRight="30dp"
@@ -398,7 +398,7 @@
                     android:id="@+id/check_update_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:hIcon="@drawable/boa"
+                    app:hIcon="@drawable/ic_sun"
                     app:hTipVisiblity="false"
                     app:paddingLeft="20dp"
                     app:paddingRight="30dp"
@@ -431,7 +431,7 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@mipmap/baz" />
+                    android:src="@mipmap/ic_night" />
 
                 <View
                     android:layout_width="6dp"
@@ -455,7 +455,7 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@mipmap/bb1" />
+                    android:src="@mipmap/ic_setting" />
 
                 <View
                     android:layout_width="6dp"
@@ -480,7 +480,7 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@mipmap/baq" />
+                    android:src="@mipmap/ic_shutdown" />
 
                 <View
                     android:layout_width="6dp"

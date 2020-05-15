@@ -26,7 +26,7 @@
         android:layout_alignTop="@+id/tv_item_dj_rank_diff"
         android:layout_alignBottom="@+id/tv_item_dj_rank_diff"
         android:layout_marginLeft="5dp"
-        android:src="@drawable/zero"
+        android:src="@drawable/ic_diff_none"
         android:visibility="visible" />
 
     <TextView
@@ -48,7 +48,7 @@
         android:layout_height="45dp"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/tv_item_dj_rank_rank"
-        android:src="@drawable/test" />
+        android:src="@drawable/ic_test" />
 
     <ImageView
         android:id="@+id/iv_item_dj_tag"
@@ -56,7 +56,7 @@
         android:layout_height="15dp"
         android:layout_alignRight="@+id/iv_item_dj_avatar"
         android:layout_alignBottom="@+id/iv_item_dj_avatar"
-        android:src="@drawable/guanfang"
+        android:src="@drawable/ic_official"
         android:visibility="invisible" />
 
     <TextView
@@ -89,5 +89,5 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
         android:layout_toLeftOf="@+id/tv_item_dj_rank_score"
-        android:src="@drawable/rankhot" />
+        android:src="@drawable/ic_rank_hot" />
 </RelativeLayout>

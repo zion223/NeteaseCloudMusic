@@ -9,7 +9,7 @@
         android:id="@+id/iv_item_discover"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/test" />
+        android:src="@drawable/ic_test" />
 
     <ImageView
         android:layout_width="12dp"
@@ -17,7 +17,7 @@
         android:layout_alignTop="@+id/tv_item_discover_playnum"
         android:layout_alignBottom="@+id/tv_item_discover_playnum"
         android:layout_toLeftOf="@+id/tv_item_discover_playnum"
-        android:src="@drawable/playnum" />
+        android:src="@drawable/ic_song_play_num" />
 
     <TextView
         android:id="@+id/tv_item_discover_playnum"

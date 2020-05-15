@@ -36,7 +36,6 @@ import com.imooc.lib_audio.mediaplayer.events.AudioStartEvent;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_audio.mediaplayer.util.Utils;
 import com.imooc.lib_common_ui.base.BaseActivity;
-import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_share.share.ShareContentData;
 import com.imooc.lib_share.share.ShareDialog;
 
@@ -256,15 +255,15 @@ public class MusicPlayerActivity extends BaseActivity {
 	private void updatePlayModeView() {
 		switch (mPlayMode) {
 			case LOOP:
-				mPlayModeView.setImageResource(R.mipmap.player_loop);
+				mPlayModeView.setImageResource(R.mipmap.ic_player_loop);
 				Toast.makeText(getBaseContext(), "列表播放",Toast.LENGTH_SHORT).show();
 				break;
 			case RANDOM:
-				mPlayModeView.setImageResource(R.mipmap.player_random);
+				mPlayModeView.setImageResource(R.mipmap.ic_player_random);
 				Toast.makeText(getBaseContext(), "随机播放",Toast.LENGTH_SHORT).show();
 				break;
 			case REPEAT:
-				mPlayModeView.setImageResource(R.mipmap.player_once);
+				mPlayModeView.setImageResource(R.mipmap.ic_player_once);
 				Toast.makeText(getBaseContext(), "循环播放",Toast.LENGTH_SHORT).show();
 				break;
 		}

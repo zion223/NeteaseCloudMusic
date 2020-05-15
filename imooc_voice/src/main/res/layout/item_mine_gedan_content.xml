@@ -12,14 +12,14 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_centerVertical="true"
-        android:src="@drawable/test" />
+        android:src="@drawable/ic_test" />
 
     <ImageView
         android:id="@+id/iv_album_right_flag"
         android:layout_width="10dp"
         android:layout_height="60dp"
         android:layout_toRightOf="@+id/iv_item_gedan_content_img"
-        android:src="@drawable/and"
+        android:src="@drawable/ic_album_attach"
         android:visibility="gone" />
 
     <TextView
@@ -55,5 +55,5 @@
         android:layout_height="25dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/more" />
+        android:src="@drawable/ic_more_black" />
 </RelativeLayout>

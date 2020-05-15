@@ -13,7 +13,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_margin="10dp"
-            android:src="@drawable/left_arrow" />
+            android:src="@drawable/ic_left_arrow_black" />
 
         <TextView
             android:id="@+id/tv_user_cloud_title"
@@ -43,7 +43,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
             android:layout_toLeftOf="@+id/img_tab_more"
-            android:src="@drawable/search" />
+            android:src="@drawable/ic_search_gray" />
 
         <ImageView
             android:id="@+id/img_tab_more"
@@ -52,7 +52,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
-            android:src="@drawable/asb" />
+            android:src="@drawable/ic_upload_gray" />
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView

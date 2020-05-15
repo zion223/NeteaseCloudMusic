@@ -26,7 +26,7 @@
         android:layout_alignTop="@+id/tv_item_program_rank_diff"
         android:layout_alignBottom="@+id/tv_item_program_rank_diff"
         android:layout_marginLeft="2dp"
-        android:src="@drawable/zero"
+        android:src="@drawable/ic_diff_none"
         android:visibility="visible" />
 
     <TextView
@@ -48,7 +48,7 @@
         android:layout_height="50dp"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/tv_item_program_rank_rank"
-        android:src="@drawable/test" />
+        android:src="@drawable/ic_test" />
 
 
     <TextView
@@ -72,7 +72,7 @@
         android:layout_height="15dp"
         android:layout_below="@+id/tv_item_program_rank_name"
         android:layout_alignLeft="@+id/tv_item_program_rank_name"
-        android:src="@drawable/test" />
+        android:src="@drawable/ic_test" />
 
     <TextView
         android:id="@+id/tv_item_program_rank_djname"

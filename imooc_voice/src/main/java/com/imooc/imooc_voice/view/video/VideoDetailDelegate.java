@@ -167,10 +167,10 @@ public class VideoDetailDelegate extends NeteaseLoadingDelegate {
 				//是否已经点赞
 				if (videoData.getPraised()) {
 					//已经点赞过
-					mIvPraiseView.setImageResource(R.drawable.zan_red);
+					mIvPraiseView.setImageResource(R.drawable.ic_parise_red);
 					mIvPraiseView.setTag(true);
 				} else {
-					mIvPraiseView.setImageResource(R.drawable.zan);
+					mIvPraiseView.setImageResource(R.drawable.ic_parise);
 					mIvPraiseView.setTag(false);
 				}
 
@@ -292,12 +292,12 @@ public class VideoDetailDelegate extends NeteaseLoadingDelegate {
 				if(bean.getCode() == 200){
 					if(!praise){
 						//点赞成功
-						mIvPraiseView.setImageResource(R.drawable.zan_red);
+						mIvPraiseView.setImageResource(R.drawable.ic_parise_red);
 						AnimUtil.getLikeAnim(mIvPraiseView).start();
 						mTvPraiseCount.setText(String.valueOf(Integer.parseInt(videoData.getPraisedcount()) + 1));
 					}else{
 						//取消赞成功
-						mIvPraiseView.setImageResource(R.drawable.zan);
+						mIvPraiseView.setImageResource(R.drawable.ic_parise);
 						mTvPraiseCount.setText(videoData.getPraisedcount());
 					}
 					//设置点赞标志位

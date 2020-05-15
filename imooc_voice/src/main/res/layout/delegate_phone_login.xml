@@ -14,7 +14,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_margin="10dp"
-            android:src="@drawable/left_arrow" />
+            android:src="@drawable/ic_left_arrow_black" />
 
         <TextView
             android:id="@+id/tv_login_title"
@@ -82,7 +82,7 @@
             android:layout_marginTop="150dp"
             android:layout_marginEnd="50dp"
             android:layout_marginBottom="110dp"
-            android:background="@drawable/bg_home_tiyan"
+            android:background="@drawable/bg_home_experience"
             android:gravity="center"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -141,7 +141,7 @@
             android:layout_marginTop="80dp"
             android:layout_marginEnd="50dp"
             android:layout_marginBottom="110dp"
-            android:background="@drawable/bg_home_tiyan"
+            android:background="@drawable/bg_home_experience"
             android:gravity="center"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"

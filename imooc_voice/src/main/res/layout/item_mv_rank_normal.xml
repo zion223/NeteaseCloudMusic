@@ -18,7 +18,7 @@
         android:layout_alignTop="@+id/tv_item_mv_playnum"
         android:layout_alignBottom="@+id/tv_item_mv_playnum"
         android:layout_toLeftOf="@+id/tv_item_mv_playnum"
-        android:src="@drawable/playnum" />
+        android:src="@drawable/ic_song_play_num" />
 
     <TextView
         android:id="@+id/tv_item_mv_playnum"
@@ -51,7 +51,7 @@
         android:layout_alignLeft="@+id/tv_mv_rank"
         android:layout_alignTop="@+id/tv_item_mv_rank_diff"
         android:layout_alignBottom="@+id/tv_item_mv_rank_diff"
-        android:src="@drawable/zero"
+        android:src="@drawable/ic_diff_none"
         android:visibility="visible" />
 
     <TextView

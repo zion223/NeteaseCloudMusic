@@ -19,7 +19,7 @@
         android:layout_height="13dp"
         android:layout_marginTop="3dp"
         android:layout_toLeftOf="@+id/tv_item_video_playnum"
-        android:src="@drawable/playnum" />
+        android:src="@drawable/ic_song_play_num" />
 
     <TextView
         android:id="@+id/tv_item_video_playnum"

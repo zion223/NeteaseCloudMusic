@@ -295,10 +295,10 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 			if (bean.isLiked()) {
 				//当前是赞过的
 				praiseView.setTag(true);
-				praiseView.setImageResource(R.drawable.zan_red);
+				praiseView.setImageResource(R.drawable.ic_parise_red);
 			} else {
 				praiseView.setTag(false);
-				praiseView.setImageResource(R.drawable.zan);
+				praiseView.setImageResource(R.drawable.ic_parise);
 			}
 			baseViewHolder.setOnClickListener(R.id.iv_item_gedan_comment_zan, new View.OnClickListener() {
 				@Override
@@ -313,7 +313,7 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 							if (result.getCode() == 200) {
 								praiseView.setTag(!parise);
 								if (!parise) {
-									praiseView.setImageResource(R.drawable.zan_red);
+									praiseView.setImageResource(R.drawable.ic_parise_red);
 									//点赞
 									AnimUtil.getLikeAnim(praiseView).start();
 									baseViewHolder.setText(R.id.tv_item_gedan_comment_zan_count, String.valueOf(bean.getLikedCount() + 1));
@@ -321,7 +321,7 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 									Toast.makeText(mContext, "点赞成功", Toast.LENGTH_SHORT).show();
 								} else {
 									baseViewHolder.setText(R.id.tv_item_gedan_comment_zan_count, String.valueOf(bean.getLikedCount()));
-									praiseView.setImageResource(R.drawable.zan);
+									praiseView.setImageResource(R.drawable.ic_parise);
 									baseViewHolder.setTextColor(R.id.tv_item_gedan_comment_zan_count, Color.GRAY);
 									Toast.makeText(mContext, "取消赞成功", Toast.LENGTH_SHORT).show();
 								}

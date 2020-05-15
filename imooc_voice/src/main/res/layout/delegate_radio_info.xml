@@ -19,7 +19,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/tv_radio_info_zhubo"
-        android:src="@drawable/test"/>
+        android:src="@drawable/ic_test"/>
     <TextView
         android:id="@+id/tv_radio_info_name"
         android:layout_width="wrap_content"

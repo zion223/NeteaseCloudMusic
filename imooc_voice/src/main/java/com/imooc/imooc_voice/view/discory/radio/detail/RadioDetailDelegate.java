@@ -108,7 +108,7 @@ public class RadioDetailDelegate extends NeteaseLoadingDelegate implements View.
 					mTvRadioSubscrib.setTag(true);
 				} else {
 					mTvRadioSubscrib.setText("订阅");
-					mTvRadioSubscrib.setBackground(getResources().getDrawable(R.drawable.bg_collect));
+					mTvRadioSubscrib.setBackground(getResources().getDrawable(R.drawable.bg_round_red));
 					mTvRadioSubscrib.setTag(false);
 				}
 
@@ -176,7 +176,7 @@ public class RadioDetailDelegate extends NeteaseLoadingDelegate implements View.
 						@Override
 						public void onSuccess(Object responseObj) {
 							mTvRadioSubscrib.setText("订阅");
-							mTvRadioSubscrib.setBackground(getResources().getDrawable(R.drawable.bg_collect));
+							mTvRadioSubscrib.setBackground(getResources().getDrawable(R.drawable.bg_round_red));
 							mTvRadioSubscrib.setTag(!(boolean) mTvRadioSubscrib.getTag());
 						}
 

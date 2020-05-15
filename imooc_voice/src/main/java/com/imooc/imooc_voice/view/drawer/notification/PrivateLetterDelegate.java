@@ -81,12 +81,12 @@ public class PrivateLetterDelegate extends NeteaseLoadingDelegate {
 			if(item.getFromUser().getUserType() == 4){
 				//网易音乐人
 				adapter.setVisible(R.id.iv_item_notification_user_tag, true);
-				((ImageView)adapter.getView(R.id.iv_item_notification_user_tag)).setImageResource(R.drawable.yinyueren);
+				((ImageView)adapter.getView(R.id.iv_item_notification_user_tag)).setImageResource(R.drawable.ic_musician);
 
 			}else if(item.getFromUser().getUserType() ==10){
 				//大V
 				adapter.setVisible(R.id.iv_item_notification_user_tag, true);
-				((ImageView)adapter.getView(R.id.iv_item_notification_user_tag)).setImageResource(R.drawable.guanfang);
+				((ImageView)adapter.getView(R.id.iv_item_notification_user_tag)).setImageResource(R.drawable.ic_official);
 			}
 
 			if (item.getNewMsgCount() != 0){

@@ -61,7 +61,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/listenrank" />
+                    android:src="@drawable/ic_listen_rank" />
 
                 <TextView
                     android:id="@+id/tv_user_info_toptext"
@@ -104,7 +104,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/listenrank" />
+                    android:src="@drawable/ic_listen_rank" />
 
                 <TextView
                     android:id="@+id/tv_user_info_toplike"

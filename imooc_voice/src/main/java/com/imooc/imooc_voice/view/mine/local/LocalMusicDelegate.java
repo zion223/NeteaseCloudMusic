@@ -68,7 +68,7 @@ public class LocalMusicDelegate extends NeteaseTabDelegate {
 				//背景不变灰色
 				.hasShadowBg(false)
 				.asAttachList(new String[]{"下载管理", "扫描本地音乐", "选择排序方式", "获取封面歌词"},
-						new int[]{R.drawable.a0g, R.drawable.b9f, R.drawable.b9f, R.drawable.b9f},
+						new int[]{R.drawable.ic_dialog_more, R.drawable.ic_dialog_more, R.drawable.ic_dialog_more, R.drawable.ic_dialog_more},
 						new OnSelectListener() {
 							@Override
 							public void onSelect(int position, String text) {

@@ -9,7 +9,7 @@
         android:id="@+id/iv_item_album_song"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/test" />
+        android:src="@drawable/ic_test" />
 
     <ImageView
         android:id="@+id/iv_item_album_icon"
@@ -17,7 +17,7 @@
         android:layout_height="100dp"
         android:layout_toRightOf="@+id/iv_item_album_song"
         android:visibility="gone"
-        android:src="@drawable/and" />
+        android:src="@drawable/ic_album_attach" />
 
     <TextView
         android:id="@+id/tv_item_album_song_name"

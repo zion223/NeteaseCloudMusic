@@ -16,7 +16,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="10dp"
-            android:src="@drawable/download" />
+            android:src="@drawable/ic_dialog_music" />
 
         <TextView
             android:id="@+id/tv_music_name_head_dialog"
@@ -56,7 +56,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginLeft="25dp"
-            android:src="@drawable/next" />
+            android:src="@drawable/ic_next_song" />
 
         <TextView
             android:id="@+id/tv_next_dialog"
@@ -151,7 +151,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginLeft="25dp"
-            android:src="@drawable/upload" />
+            android:src="@drawable/ic_upload" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -215,7 +215,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginLeft="25dp"
-            android:src="@drawable/artist" />
+            android:src="@drawable/ic_artist" />
 
         <TextView
             android:id="@+id/tv_artist_dialog"
@@ -247,7 +247,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginLeft="25dp"
-            android:src="@drawable/album" />
+            android:src="@drawable/ic_album_black" />
 
         <TextView
             android:id="@+id/tv_album_dialog"
@@ -278,7 +278,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginLeft="25dp"
-            android:src="@drawable/delete" />
+            android:src="@drawable/ic_delete_song" />
 
         <TextView
             android:id="@+id/tv_detail_dialog"
@@ -310,7 +310,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginLeft="25dp"
-            android:src="@drawable/delete" />
+            android:src="@drawable/ic_delete_song" />
 
         <TextView
             android:id="@+id/tv_delete_dialog"

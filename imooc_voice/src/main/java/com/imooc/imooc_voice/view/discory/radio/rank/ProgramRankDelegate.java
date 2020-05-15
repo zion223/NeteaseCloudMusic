@@ -130,12 +130,12 @@ public class ProgramRankDelegate extends NeteaseLoadingDelegate {
 			int diffRank = item.getLastRank() - item.getRank();
 			if(diffRank != 0){
 				if(diffRank > 0){
-					adapter.setImageResource(R.id.iv_item_program_diff, R.drawable.up);
+					adapter.setImageResource(R.id.iv_item_program_diff, R.drawable.ic_rank_up);
 				}else{
-					adapter.setImageResource(R.id.iv_item_program_diff, R.drawable.down);
+					adapter.setImageResource(R.id.iv_item_program_diff, R.drawable.ic_rank_down);
 				}
 			}else{
-				adapter.setImageResource(R.id.iv_item_program_diff, R.drawable.zero);
+				adapter.setImageResource(R.id.iv_item_program_diff, R.drawable.ic_diff_none);
 			}
 			//排名
 			if(item.getRank() < 4){

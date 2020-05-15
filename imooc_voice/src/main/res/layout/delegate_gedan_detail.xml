@@ -49,7 +49,7 @@
                             android:layout_height="30dp"
                             android:layout_marginLeft="10dp"
                             android:visibility="gone"
-                            android:src="@drawable/b5w" />
+                            android:src="@drawable/ic_album_attach_top" />
 
                         <ImageView
                             android:id="@+id/iv_gedan_detail_img"
@@ -66,7 +66,7 @@
                             android:layout_alignBottom="@+id/tv_gedan_detail_playnum"
                             android:layout_marginTop="5dp"
                             android:layout_toLeftOf="@+id/tv_gedan_detail_playnum"
-                            android:src="@drawable/playnum" />
+                            android:src="@drawable/ic_song_play_num" />
 
                         <TextView
                             android:id="@+id/tv_gedan_detail_playnum"
@@ -119,7 +119,7 @@
                                 android:layout_width="10dp"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center_vertical"
-                                android:src="@drawable/right_white" />
+                                android:src="@drawable/ic_right_arrow_white" />
                         </LinearLayout>
 
                         <TextView
@@ -156,7 +156,7 @@
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@drawable/bgr" />
+                                android:src="@drawable/ic_comment_white" />
 
                             <TextView
                                 android:id="@+id/tv_gedan_detail_comment_count"
@@ -176,7 +176,7 @@
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@drawable/bge" />
+                                android:src="@drawable/ic_share_white" />
 
                             <TextView
                                 android:id="@+id/tv_gedan_detail_share_count"
@@ -196,7 +196,7 @@
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@drawable/bgt" />
+                                android:src="@drawable/ic_download_white" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -216,7 +216,7 @@
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@drawable/bgt" />
+                                android:src="@drawable/ic_download_white" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -245,7 +245,7 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_marginTop="10dp"
-                            android:src="@drawable/aqm" />
+                            android:src="@drawable/ic_left_arrow_white1" />
 
                         <ImageView
                             android:id="@+id/iv_gedan_detail_search"
@@ -254,7 +254,7 @@
                             android:layout_marginTop="12dp"
                             android:layout_marginRight="10dp"
                             android:layout_toLeftOf="@+id/iv_gedan_detail_more"
-                            android:src="@drawable/aqv" />
+                            android:src="@drawable/ic_search_white" />
 
                         <ImageView
                             android:id="@+id/iv_gedan_detail_more"
@@ -263,7 +263,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_marginTop="10dp"
                             android:layout_marginRight="10dp"
-                            android:src="@drawable/ani" />
+                            android:src="@drawable/ic_more_white" />
 
                         <TextView
                             android:id="@+id/tv_gedan_detail_toolbar_title"
@@ -294,7 +294,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:background="@drawable/bg_gedan_detail_song_header"
+                android:background="@drawable/bg_song_list_header"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -302,7 +302,7 @@
                     android:layout_height="23dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="15dp"
-                    android:src="@drawable/any" />
+                    android:src="@drawable/ic_play_gray" />
 
                 <TextView
                     android:id="@+id/tv_gedan_detaill_all_play"
@@ -328,7 +328,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/bg_collect"
+                    android:background="@drawable/bg_round_red"
                     android:orientation="horizontal"
                     android:visibility="gone">
 
@@ -337,7 +337,7 @@
                         android:layout_width="10dp"
                         android:layout_height="10dp"
                         android:layout_gravity="center_vertical"
-                        android:src="@drawable/plus" />
+                        android:src="@drawable/ic_add_white" />
 
                     <TextView
                         android:id="@+id/tv_gedan_detail_collect_count"
@@ -363,7 +363,7 @@
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:layout_gravity="center_vertical"
-                        android:src="@drawable/playlistsubscribe" />
+                        android:src="@drawable/ic_collected" />
 
                     <TextView
                         android:id="@+id/tv_gedan_detail_collect_count1"

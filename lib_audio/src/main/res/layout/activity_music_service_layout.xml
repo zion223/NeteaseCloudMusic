@@ -14,7 +14,7 @@
         android:layout_marginTop="-16dp"
         android:layout_marginRight="100dp"
         android:rotation="-30"
-        android:src="@mipmap/b4i"
+        android:src="@mipmap/ic_play_neddle"
         android:transformPivotX="15.1dp"
         android:transformPivotY="15.1dp" />
     <!--标题布局-->
@@ -112,7 +112,7 @@
                     android:layout_width="43dp"
                     android:layout_height="43dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/bh3" />
+                    android:src="@drawable/ic_like_white" />
             </LinearLayout>
 
             <LinearLayout
@@ -124,20 +124,7 @@
                 <ImageView
                     android:layout_width="43dp"
                     android:layout_height="43dp"
-                    android:src="@drawable/bgs" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="43dp"
-                    android:layout_height="43dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/bgj" />
+                    android:src="@drawable/ic_download_white" />
             </LinearLayout>
 
             <LinearLayout
@@ -150,7 +137,7 @@
                     android:layout_width="43dp"
                     android:layout_height="43dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/bg5" />
+                    android:src="@drawable/ic_yinxiao" />
             </LinearLayout>
 
             <LinearLayout
@@ -163,7 +150,20 @@
                     android:layout_width="43dp"
                     android:layout_height="43dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/bh7" />
+                    android:src="@drawable/ic_commect_white" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="43dp"
+                    android:layout_height="43dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_song_more" />
             </LinearLayout>
 
         </LinearLayout>
@@ -208,7 +208,7 @@
                 android:maxHeight="1dp"
                 android:minHeight="1dp"
                 android:progressDrawable="@drawable/bg_seekbar"
-                android:thumb="@drawable/bg_thumb" />
+                android:thumb="@drawable/bg_circle_white" />
         </RelativeLayout>
 
         <LinearLayout

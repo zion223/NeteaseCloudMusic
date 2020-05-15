@@ -20,7 +20,7 @@
         android:layout_alignRight="@+id/iv_item_search_user_avatar"
         android:layout_alignBottom="@+id/iv_item_search_user_avatar"
         android:visibility="invisible"
-        android:src="@drawable/guanfang" />
+        android:src="@drawable/ic_official" />
 
     <RelativeLayout
         android:id="@+id/rl_name_and_gender"
@@ -60,7 +60,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:singleLine="true"
-            android:textSize="12dp" />
+            android:textSize="12sp" />
     </RelativeLayout>
 
     <LinearLayout
@@ -70,7 +70,7 @@
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="20dp"
-        android:background="@drawable/bg_follow"
+        android:background="@drawable/bg_round_red_hollow"
         android:visibility="visible">
 
         <ImageView
@@ -79,7 +79,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="13dp"
             android:layout_marginRight="3dp"
-            android:src="@drawable/plus_red" />
+            android:src="@drawable/ic_add_red" />
 
         <TextView
             android:id="@+id/tv_item_search_user_follow"
@@ -100,7 +100,7 @@
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="20dp"
-        android:background="@drawable/bg_already_follow"
+        android:background="@drawable/bg_gray_border"
         android:visibility="gone">
 
         <ImageView
@@ -108,7 +108,7 @@
             android:layout_height="13dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/bdy" />
+            android:src="@drawable/ic_check" />
 
         <TextView
             android:id="@+id/tv_item_search_user_followed"

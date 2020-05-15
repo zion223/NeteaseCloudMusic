@@ -60,14 +60,14 @@ public class GedanDelegate extends NeteaseLoadingDelegate {
 
 	@Override
 	public void initView() {
-		mRecyclerViewGedan = rootView.findViewById(R.id.rv_gedan_normal);
+		mRecyclerViewGedan = rootView.findViewById(R.id.rv_delegate_normal);
 		final GridLayoutManager manager = new GridLayoutManager(getContext(), INIT_LOAD_LINE);
 		initGedanView(manager);
 	}
 
 	@Override
 	public int setLoadingViewLayout() {
-		return R.layout.delegate_gedan;
+		return R.layout.delegate_recyclerview_normal;
 	}
 
 

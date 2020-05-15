@@ -9,7 +9,7 @@
         android:id="@+id/iv_item_gedan_comment_avatar_img"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:src="@drawable/test" />
+        android:src="@drawable/ic_test" />
 
     <TextView
         android:id="@+id/tv_item_gedan_comment_avatar_name"
@@ -29,7 +29,7 @@
         android:layout_marginLeft="5dp"
         android:layout_toRightOf="@+id/tv_item_gedan_comment_avatar_name"
         android:visibility="invisible"
-        android:src="@drawable/vip" />
+        android:src="@drawable/ic_vip" />
 
     <TextView
         android:id="@+id/tv_item_gedan_comment_time"
@@ -73,7 +73,7 @@
         android:layout_alignTop="@+id/tv_item_gedan_comment_avatar_name"
         android:layout_alignParentRight="true"
         android:layout_marginRight="20dp"
-        android:src="@drawable/zan" />
+        android:src="@drawable/ic_parise" />
 
     <TextView
         android:id="@+id/tv_item_gedan_comment_zan_count"

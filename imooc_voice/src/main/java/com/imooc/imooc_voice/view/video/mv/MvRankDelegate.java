@@ -116,12 +116,12 @@ public class MvRankDelegate extends NeteaseLoadingDelegate {
 
 			if(diff != 0){
 				if(diff > 0){
-					adapter.setImageResource(R.id.iv_item_mv_rank_diff, R.drawable.up);
+					adapter.setImageResource(R.id.iv_item_mv_rank_diff, R.drawable.ic_rank_up);
 				}else{
-					adapter.setImageResource(R.id.iv_item_mv_rank_diff, R.drawable.down);
+					adapter.setImageResource(R.id.iv_item_mv_rank_diff, R.drawable.ic_rank_down);
 				}
 			}else{
-				adapter.setImageResource(R.id.iv_item_mv_rank_diff, R.drawable.zero);
+				adapter.setImageResource(R.id.iv_item_mv_rank_diff, R.drawable.ic_diff_none);
 			}
 			adapter.setText(R.id.tv_item_mv_rank_diff, String.valueOf(Math.abs(diff)));
 			//排行榜前三

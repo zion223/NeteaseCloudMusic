@@ -27,7 +27,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ajv" />
+            android:src="@drawable/ic_sort_time_red" />
 
         <TextView
             android:layout_width="0dp"
@@ -47,7 +47,7 @@
             android:layout_marginRight="30dp"
             android:layout_weight="3"
             android:visibility="gone"
-            android:src="@drawable/check" />
+            android:src="@drawable/ic_check_red" />
 
     </LinearLayout>
 
@@ -62,7 +62,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/aki" />
+            android:src="@drawable/ic_sort_song_red" />
 
         <TextView
             android:layout_width="0dp"
@@ -82,7 +82,7 @@
             android:layout_marginRight="30dp"
             android:layout_weight="3"
             android:visibility="gone"
-            android:src="@drawable/check" />
+            android:src="@drawable/ic_check_red" />
 
     </LinearLayout>
 
@@ -97,7 +97,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/akg" />
+            android:src="@drawable/ic_sort_album_red" />
 
         <TextView
             android:layout_width="0dp"
@@ -117,7 +117,7 @@
             android:layout_marginRight="30dp"
             android:layout_weight="3"
             android:visibility="gone"
-            android:src="@drawable/check" />
+            android:src="@drawable/ic_check_red" />
 
     </LinearLayout>
 
@@ -132,7 +132,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/akf" />
+            android:src="@drawable/ic_sort_artist_red" />
 
         <TextView
             android:layout_width="0dp"
@@ -152,7 +152,7 @@
             android:layout_marginRight="30dp"
             android:layout_weight="3"
             android:visibility="gone"
-            android:src="@drawable/check" />
+            android:src="@drawable/ic_check_red" />
 
     </LinearLayout>
 
@@ -167,7 +167,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/aki" />
+            android:src="@drawable/ic_sort_song_red" />
 
         <TextView
             android:layout_width="0dp"
@@ -187,7 +187,7 @@
             android:layout_marginRight="30dp"
             android:layout_weight="3"
             android:visibility="gone"
-            android:src="@drawable/check" />
+            android:src="@drawable/ic_check_red" />
 
     </LinearLayout>
 
@@ -202,7 +202,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/number" />
+            android:src="@drawable/ic_sort_number" />
 
         <TextView
             android:layout_width="0dp"
@@ -222,7 +222,7 @@
             android:layout_marginRight="30dp"
             android:layout_weight="3"
             android:visibility="gone"
-            android:src="@drawable/check" />
+            android:src="@drawable/ic_check_red" />
 
     </LinearLayout>
 </LinearLayout>

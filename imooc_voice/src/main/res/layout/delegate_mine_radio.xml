@@ -16,7 +16,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_margin="10dp"
-            android:src="@drawable/left_arrow" />
+            android:src="@drawable/ic_left_arrow_black" />
 
         <TextView
             android:layout_width="0dp"
@@ -58,7 +58,7 @@
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="30dp"
-                    android:src="@drawable/mike" />
+                    android:src="@drawable/ic_mike" />
 
                 <TextView
                     android:layout_width="0dp"

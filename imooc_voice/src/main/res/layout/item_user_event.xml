@@ -327,7 +327,7 @@
                 android:id="@+id/iv_like"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/zan" />
+                android:src="@drawable/ic_parise" />
 
             <TextView
                 android:id="@+id/tv_like_count"

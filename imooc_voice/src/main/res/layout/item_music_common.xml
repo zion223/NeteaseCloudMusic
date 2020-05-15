@@ -13,7 +13,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:src="@drawable/play"
+        android:src="@drawable/ic_status_play"
         android:scaleType="centerInside"
         android:visibility="gone" />
 
@@ -61,5 +61,5 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:focusable="true"
-        android:src="@drawable/list_icn_more" />
+        android:src="@drawable/ic_song_more" />
 </RelativeLayout>

@@ -40,7 +40,7 @@
                 android:layout_width="13dp"
                 android:layout_height="13dp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/playnum" />
+                android:src="@drawable/ic_song_play_num" />
 
             <TextView
                 android:id="@+id/tv_item_video_play_count"
@@ -57,7 +57,7 @@
                 android:layout_width="18dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="5dp"
-                android:src="@drawable/apv" />
+                android:src="@drawable/ic_video_playtime" />
 
             <TextView
                 android:id="@+id/tv_item_video_play_duration"
@@ -114,7 +114,7 @@
             android:layout_below="@+id/view_line"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:src="@drawable/test" />
+            android:src="@drawable/ic_test" />
 
         <TextView
             android:id="@+id/tv_item_video_creator_name"
@@ -137,7 +137,7 @@
             android:layout_alignBottom="@+id/iv_item_video_creator_img"
             android:layout_marginRight="20dp"
             android:layout_toLeftOf="@+id/iv_item_icon_comment"
-            android:src="@drawable/zan" />
+            android:src="@drawable/ic_parise" />
 
         <TextView
             android:id="@+id/tv_item_video_praised_count"
@@ -157,7 +157,7 @@
             android:layout_alignBottom="@+id/iv_item_video_creator_img"
             android:layout_marginRight="25dp"
             android:layout_toLeftOf="@+id/viewpager_item_video_list_button"
-            android:src="@drawable/be5" />
+            android:src="@drawable/ic_comment_gray" />
 
         <TextView
             android:id="@+id/tv_item_video_comment_count"
@@ -178,7 +178,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
             android:focusable="true"
-            android:src="@drawable/more" />
+            android:src="@drawable/ic_more_black" />
 
     </RelativeLayout>
 

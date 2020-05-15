@@ -15,7 +15,7 @@
             android:layout_height="25dp"
             android:layout_gravity="bottom"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/left_arrow" />
+            android:src="@drawable/ic_left_arrow_black" />
 
         <EditText
             android:id="@+id/tv_search_result_text"

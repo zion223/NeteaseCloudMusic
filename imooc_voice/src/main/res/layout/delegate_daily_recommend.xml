@@ -86,7 +86,7 @@
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:layout_margin="10dp"
-                        android:src="@drawable/a47" />
+                        android:src="@drawable/ic_left_arrow_white" />
                     <TextView
                         android:id="@+id/tv_left_title"
                         android:layout_width="wrap_content"
@@ -140,7 +140,7 @@
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_centerVertical="true"
-                    app:srcCompat="@drawable/any" />
+                    app:srcCompat="@drawable/ic_play_gray" />
 
                 <TextView
                     android:id="@+id/tv_playall"

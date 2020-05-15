@@ -42,11 +42,11 @@
         android:layout_height="20dp"
         android:layout_gravity="center_vertical"
         android:layout_marginRight="15dp"
-        android:src="@drawable/amp" />
+        android:src="@drawable/ic_add_gray" />
 
     <ImageView
         android:layout_width="20dp"
         android:layout_height="18dp"
         android:layout_gravity="center_vertical"
-        android:src="@drawable/more" />
+        android:src="@drawable/ic_more_black" />
 </LinearLayout>

@@ -9,7 +9,7 @@
         android:id="@+id/iv_radio_pay_img"
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:src="@drawable/test"/>
+        android:src="@drawable/ic_test"/>
     <TextView
         android:id="@+id/tv_radio_pay_title"
         android:layout_toRightOf="@+id/iv_radio_pay_img"

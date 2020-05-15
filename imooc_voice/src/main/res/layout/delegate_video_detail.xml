@@ -22,7 +22,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="10dp"
-                android:src="@drawable/left_arrow" />
+                android:src="@drawable/ic_left_arrow_black" />
 
 
             <TextView
@@ -118,7 +118,7 @@
                                 android:layout_height="23dp"
                                 android:layout_marginTop="10dp"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@drawable/zan" />
+                                android:src="@drawable/ic_parise" />
 
                             <TextView
                                 android:id="@+id/tv_video_detail_praise_count"
@@ -251,7 +251,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="20dp"
-                    android:background="@drawable/bg_red_rect"
+                    android:background="@drawable/bg_round_red_14dp"
                     android:visibility="gone">
 
                     <ImageView
@@ -260,7 +260,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="13dp"
                         android:layout_marginRight="3dp"
-                        android:src="@drawable/plus_white" />
+                        android:src="@drawable/ic_add_white" />
 
                     <TextView
                         android:id="@+id/tv_item_search_user_follow"
@@ -281,7 +281,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="20dp"
-                    android:background="@drawable/bg_already_follow"
+                    android:background="@drawable/bg_gray_border"
                     android:visibility="gone">
 
                     <ImageView
@@ -289,7 +289,7 @@
                         android:layout_height="13dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
-                        android:src="@drawable/bdy" />
+                        android:src="@drawable/ic_check" />
 
                     <TextView
                         android:id="@+id/tv_item_search_user_followed"
