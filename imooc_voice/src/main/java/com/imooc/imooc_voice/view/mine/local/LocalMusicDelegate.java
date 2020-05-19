@@ -6,8 +6,8 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.imooc.imooc_voice.R;
-import com.imooc.imooc_voice.view.mine.local.artist.ArtistDelegate;
-import com.imooc.imooc_voice.view.mine.local.music.MusicDelegate;
+import com.imooc.imooc_voice.view.mine.local.tab.ArtistDelegate;
+import com.imooc.imooc_voice.view.mine.local.tab.MusicDelegate;
 import com.imooc.imooc_voice.view.mine.local.view.SortPopupDialog;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseTabDelegate;
@@ -19,7 +19,7 @@ import com.lxj.xpopup.interfaces.OnSelectListener;
 import java.util.ArrayList;
 import java.util.List;
 
-
+//本地音乐
 public class LocalMusicDelegate extends NeteaseTabDelegate {
 
 
@@ -85,6 +85,7 @@ public class LocalMusicDelegate extends NeteaseTabDelegate {
 													@Override
 													public void onMenuSelected(String type) {
 														//更新排序Adapter
+
 
 													}
 												}, mFramentType[currentItem]));

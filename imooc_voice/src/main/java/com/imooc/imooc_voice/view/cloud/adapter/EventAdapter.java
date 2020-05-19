@@ -18,6 +18,7 @@ import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import java.util.ArrayList;
 import java.util.List;
 
+//用户动态适配器
 public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, BaseViewHolder> {
 
 	private ImageLoaderManager manager;
@@ -35,6 +36,7 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
 		manager.displayImageForCircle(avatarView, item.getUser().getAvatarUrl());
 		adapter.setText(R.id.tv_nickname, item.getUser().getNickname());
 		adapter.setText(R.id.tv_publish_time, TimeUtil.getTimeStandardOnlyYMDChinese(item.getShowTime()));
+		//转发、评论、点赞 数量
 		adapter.setText(R.id.tv_relayout_count, item.getInfo().getShareCount() == 0 ? "" : String.valueOf(item.getInfo().getShareCount()));
 		adapter.setText(R.id.tv_comment_count, item.getInfo().getCommentCount() == 0 ? "" : String.valueOf(item.getInfo().getCommentCount()));
 		adapter.setText(R.id.tv_like_count, item.getInfo().getLikedCount() == 0 ? "" : String.valueOf(item.getInfo().getLikedCount()));
@@ -43,7 +45,7 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
 		String jsonEvnet = item.getJson();
 		UserEventJsonBean userEventJsonBean = GsonUtil.fromJSON(jsonEvnet, UserEventJsonBean.class);
 		if (userEventJsonBean != null) {
-			Log.d(TAG, "jsonBean:" + userEventJsonBean);
+			Log.d(TAG, "JsonBean:" + userEventJsonBean);
 			//显示msg内容
 			if (!TextUtils.isEmpty(userEventJsonBean.getMsg())) {
 				adapter.setVisible(R.id.tv_content, true);

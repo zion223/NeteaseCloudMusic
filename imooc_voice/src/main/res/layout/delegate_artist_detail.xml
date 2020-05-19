@@ -171,27 +171,6 @@
                         android:layout_marginTop="10dp"
                         android:src="@drawable/ic_left_arrow_white" />
 
-                    <ImageView
-                        android:id="@+id/img_tab_more"
-                        android:layout_width="20dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginRight="10dp"
-                        android:src="@drawable/ic_more_white" />
-
-                    <TextView
-                        android:id="@+id/tv_left_title"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="15sp"
-                        android:layout_toEndOf="@id/img_artist_detail_back"
-                        android:layout_weight="1"
-                        android:textColor="@color/white"
-                        android:textSize="18sp"
-                        android:typeface="monospace"
-                        android:visibility="visible" />
                 </LinearLayout>
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>

@@ -231,8 +231,8 @@ public class DiscoverDelegate extends NeteaseDelegate {
 					String artistName = data.get(i).getArtists().get(0).getName();
 					String albumName = data.get(i).getName();
 					String picUrl = data.get(i).getAlbum().getPicUrl();
-					String id = data.get(i).getId();
-					songList.add(new AlbumOrSongBean(id, TYPE_SONG, picUrl, albumName, artistName));
+					long id = data.get(i).getId();
+					songList.add(new AlbumOrSongBean(String.valueOf(id), TYPE_SONG, picUrl, albumName, artistName));
 				}
 			}
 

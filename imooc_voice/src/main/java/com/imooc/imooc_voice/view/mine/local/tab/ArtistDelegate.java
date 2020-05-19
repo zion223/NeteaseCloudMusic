@@ -1,4 +1,4 @@
-package com.imooc.imooc_voice.view.mine.local.artist;
+package com.imooc.imooc_voice.view.mine.local.tab;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;

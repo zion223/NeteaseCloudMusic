@@ -20,7 +20,6 @@ import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.event.ArtistIdEvent;
 import com.imooc.imooc_voice.model.newapi.dj.DjSubBean;
 import com.imooc.imooc_voice.model.newapi.search.SingerSongSearchBean;
-import com.imooc.imooc_voice.model.newapi.song.SongDetailBean;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
 import com.imooc.imooc_voice.view.home.search.artist.sort.ArtistAlbumDelegate;
 import com.imooc.imooc_voice.view.home.search.artist.sort.ArtistHomePageDelegate;
@@ -126,13 +125,13 @@ public class ArtistDetailDelegate extends NeteaseDelegate {
 					mLlArtistFollow.setVisibility(View.VISIBLE);
 				}
 
-				ImageLoaderManager.getInstance().displayImageForCorner(mIvArtistBackground, artist.getImg1v1Url());
+				ImageLoaderManager.getInstance().displayImageForCorner(mIvArtistBackground, artist.getImg1v1Url()+"?param=200y200");
 
 				SpannableString msp = new SpannableString("专辑" + bean.getArtist().getAlbumSize());
 				msp.setSpan(new AbsoluteSizeSpan(30), 2, msp.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-				mTitleDataList[2] = msp;
 				SpannableString msp1 = new SpannableString("视频" + bean.getArtist().getMvSize());
 				msp1.setSpan(new AbsoluteSizeSpan(30), 2, msp1.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+				mTitleDataList[2] = msp;
 				mTitleDataList[3] = msp1;
 
 

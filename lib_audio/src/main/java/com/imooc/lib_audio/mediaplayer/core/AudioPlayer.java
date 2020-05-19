@@ -73,6 +73,7 @@ public class AudioPlayer implements MediaPlayer.OnCompletionListener,
 			if (msg.what == TIME_MSG) {
 				if (mMediaPlayer.getState() == CustomMediaPlayer.Status.STARTED
 						|| mMediaPlayer.getState() == CustomMediaPlayer.Status.PAUSED) {
+					//播放进度
 					EventBus.getDefault().post(new AudioProgressEvent(mMediaPlayer.getState(), getCurrentPosition(), getDuration()));
 					//TIME_INVAL 时间后重新发送 Message
 					sendEmptyMessageDelayed(TIME_MSG, TIME_INVAL);

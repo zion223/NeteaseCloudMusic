@@ -57,6 +57,7 @@ public class ArtistHomePageDelegate extends NeteaseLoadingDelegate {
 			public void onSuccess(Object responseObj) {
 				SingerSongSearchBean bean = (SingerSongSearchBean) responseObj;
 				SingerSongSearchBean.ArtistBean artist = bean.getArtist();
+				//热门歌曲
 				List<SongDetailBean.SongsBean> hotSongs = bean.getHotSongs();
 				if(hotSongs.size() > 5){
 					mAdapter = new SongListDetailDelegate.PlayListAdapter(getContext(), getParentDelegate(), false, hotSongs.subList(0, 5));
@@ -74,7 +75,7 @@ public class ArtistHomePageDelegate extends NeteaseLoadingDelegate {
 				});
 				mRvArtistHotSong.setAdapter(mAdapter);
 				mRvArtistHotSong.setLayoutManager(new LinearLayoutManager(getContext()));
-				//简介
+				//歌手简介
 				mTvArtistBrief.setText(artist.getBriefDesc());
 				addRootView();
 			}

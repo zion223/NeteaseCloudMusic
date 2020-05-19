@@ -1,7 +1,7 @@
 package com.imooc.imooc_voice;
 
 public interface Constants {
-	String SHARED_PREFERENCE_FILE_NAME = "RikkaTheWorld_sp";
+	String SHARED_PREFERENCE_FILE_NAME = "NeteaseCloudMusic_sp";
 
 
 	interface SpKey {

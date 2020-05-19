@@ -16,7 +16,6 @@ import com.imooc.imooc_voice.model.event.ArtistIdEvent;
 import com.imooc.imooc_voice.model.newapi.search.SingerVideoSearchBean;
 import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
-import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
 import com.imooc.imooc_voice.view.video.MvDeatilDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
@@ -26,8 +25,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
-
-import static com.imooc.imooc_voice.Constants.ALBUM;
 
 
 /**
@@ -44,7 +41,7 @@ public class ArtistVideoDelegate extends NeteaseLoadingDelegate {
 		if (TextUtils.isEmpty(artistId)) {
 			artistId = SharePreferenceUtil.getInstance(getContext()).getCurrentArtistId();
 		}
-		//歌手的视频 TODO 歌手的MV
+		//歌手的MV TODO 歌手的视频
 		RequestCenter.getSingerVideo(artistId, new DisposeDataListener() {
 			@Override
 			public void onSuccess(Object responseObj) {
@@ -93,7 +90,6 @@ public class ArtistVideoDelegate extends NeteaseLoadingDelegate {
 
 		@Override
 		protected void convert(@NonNull BaseViewHolder adapter, SingerVideoSearchBean.Mvs item) {
-
 
 			//设置播放次数
 			adapter.setText(R.id.tv_item_video_playnum, SearchUtil.getCorresPondingString(item.getPlayCount()));

@@ -9,7 +9,6 @@ import com.imooc.lib_audio.mediaplayer.events.AudioFavouriteEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioPlayModeEvent;
 import com.imooc.lib_audio.mediaplayer.exception.AudioQueueEmptyException;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
-import com.imooc.lib_audio.mediaplayer.model.Favourite;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -33,7 +32,7 @@ public class AudioController {
 
 	//播放器
 	private AudioPlayer mAudioPlayer;
-	//播放队列
+	//当前播放队列
 	private ArrayList<AudioBean> mQueue;
 	//播放模式
 	private PlayMode mPlayMode;

@@ -93,7 +93,6 @@ public abstract class NeteaseTabDelegate extends NeteaseDelegate {
 	public void setMoreViewOnClickListener(View.OnClickListener listener){
 		mIvMore.setOnClickListener(listener);
 	}
-
 	public void setToolBarVisiable(int visiable){
 		mLlTitle.setVisibility(visiable);
 	}

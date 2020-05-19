@@ -17,6 +17,7 @@
             android:fitsSystemWindows="true"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
+            <!-- 模糊的背景图片 -->
             <ImageView
                 android:id="@+id/iv_background"
                 android:layout_width="match_parent"
@@ -87,17 +88,18 @@
                         android:layout_height="25dp"
                         android:layout_margin="10dp"
                         android:src="@drawable/ic_left_arrow_white" />
+
                     <TextView
                         android:id="@+id/tv_left_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginStart="15sp"
                         android:layout_toEndOf="@id/img_daily_back"
-                        android:layout_gravity="center_vertical"
+                        android:text="每日推荐"
                         android:textColor="@color/white"
                         android:textSize="18sp"
-                        android:text="每日推荐"
                         android:typeface="monospace"
                         android:visibility="gone" />
 
@@ -159,8 +161,8 @@
             android:id="@+id/tv_gap"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#f0f0f0"
-            android:layout_below="@id/rl_playall_top"/>
+            android:layout_below="@id/rl_playall_top"
+            android:background="#f0f0f0" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_dailyrecommend"

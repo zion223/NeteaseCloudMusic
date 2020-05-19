@@ -16,19 +16,16 @@ import com.imooc.lib_common_ui.R;
 public class CircleProgressButton extends View {
 
 
-	public static final int PLAY = 0;
-	public static final int PAUSE = 1;
-
 	private int bgColor;
 	private int progressColor;
 	private int viewWidth;
 	private int viewHeight;
 	private float viewRoundWidth;
-	private int progressValue = 0;
+	private float progressValue = 0;
 	private int progressMax = 100;
 	private Paint paint;
 	private RectF rectF;
-	private int playOrPause = PLAY;
+	private Status playOrPause = Status.PLAY;
 
 	public CircleProgressButton(Context context) {
 		this(context, null, 0);
@@ -46,10 +43,11 @@ public class CircleProgressButton extends View {
 		bgColor = typedArray.getColor(R.styleable.CircleProgressButton_bgColor, Color.GRAY);
 		//进度环的颜色
 		progressColor = typedArray.getColor(R.styleable.CircleProgressButton_progressColor, Color.RED);
+		//宽度和高度
 		viewWidth = typedArray.getColor(R.styleable.CircleProgressButton_viewWidth, 15);
 		viewHeight = typedArray.getColor(R.styleable.CircleProgressButton_viewHeight, 15);
-
-		viewRoundWidth = typedArray.getColor(R.styleable.CircleProgressButton_viewRoundWidth, 2);
+		//外层圆环的宽度
+		viewRoundWidth = typedArray.getColor(R.styleable.CircleProgressButton_viewRoundWidth, 3);
 		typedArray.recycle();
 	}
 
@@ -61,7 +59,7 @@ public class CircleProgressButton extends View {
 		canvas.save();
 		int center = getWidth() / 2;
 		int radius = (int) (center - viewRoundWidth / 2);
-		paint.setColor(bgColor); //设置圆环的颜色
+		paint.setColor(bgColor); //设置背景圆环的颜色
 		paint.setStyle(Paint.Style.STROKE); //设置空心
 		paint.setStrokeWidth(viewRoundWidth); //设置圆环的宽度
 		paint.setAntiAlias(true);  //消除锯齿
@@ -77,23 +75,22 @@ public class CircleProgressButton extends View {
 
 		//画播放和暂停
 		int x = getWidth();
-		if(playOrPause == PLAY){
-			//红色
+		if(playOrPause == Status.PLAY){
+			//红色 两条竖线
 			paint.setColor(Color.RED);
 			paint.setStyle(Paint.Style.FILL);
-			paint.setStrokeWidth(1.5f);
-			canvas.drawLine(3*x/8, 2*x/8, 3*x/8,6*x/8, paint);
-			//canvas.drawLine(4*x/8, 4*x/8, 4*x/8,6*x/8, paint);
-			canvas.drawLine(5*x/8, 2*x/8, 5*x/8,6*x/8, paint);
-		}else if(playOrPause == PAUSE){
-			//灰色
+			paint.setStrokeWidth(2.0f);
+			canvas.drawLine(3*x/8, 5*x/16, 3*x/8,11*x/16, paint);
+			canvas.drawLine(5*x/8, 5*x/16, 5*x/8,11*x/16, paint);
+		}else if(playOrPause == Status.PAUSE){
+			//灰色 三角形
 			Path path = new Path();
-			paint.setColor(Color.GRAY);
+			paint.setColor(Color.DKGRAY);
 			paint.setStyle(Paint.Style.STROKE);
-			paint.setStrokeWidth(1.5f);
-			path.moveTo(3*x/8,3*x/8);
-			path.lineTo(3*x/8,5*x/8);
-			path.lineTo(5*x/8,4*x/8);
+			paint.setStrokeWidth(2.0f);
+			path.moveTo(7*x/16,5*x/16);
+			path.lineTo(7*x/16,11*x/16);
+			path.lineTo(11*x/16,8*x/16);
 			path.close();
 			canvas.drawPath(path, paint);
 		}
@@ -101,11 +98,8 @@ public class CircleProgressButton extends View {
 		super.onDraw(canvas);
 	}
 
-	public int getProgressValue() {
-		return progressValue;
-	}
-
-	public void setProgressValue(int progressValue) {
+	//播放进度
+	public void setProgressValue(float progressValue) {
 		if(progressValue < 0 || progressValue > 100){
 			throw new IllegalArgumentException("progressValue illegal");
 		}
@@ -113,22 +107,20 @@ public class CircleProgressButton extends View {
 		postInvalidate();
 	}
 
-	public int getPlayOrPause() {
-		return playOrPause;
-	}
-
-	public void setPlayOrPause(int playOrPause) {
-		this.playOrPause = playOrPause;
+	//设置播放状态
+	public void setPlayOrPause(Status status) {
+		this.playOrPause = status;
+		if(playOrPause == Status.PAUSE){
+			bgColor = Color.DKGRAY;
+		}else if(playOrPause == Status.PLAY){
+			bgColor = Color.GRAY;
+		}
 		postInvalidate();
 	}
 
-	/*
-	 *     <declare-styleable name="ProgressButton">
-	 *         <attr name="bgColor" format="color"/>
-	 *         <attr name="progressColor" format="color"/>
-	 *         <attr name="viewWidth" format="dimension"/>
-	 *         <attr name="viewHeight" format="dimension"/>
-	 *         <attr name="viewRoundWidth" format="dimension"/>
-	 *     </declare-styleable>
-	 */
+	//播放状态
+	public enum Status{
+		PLAY,
+		PAUSE
+	}
 }

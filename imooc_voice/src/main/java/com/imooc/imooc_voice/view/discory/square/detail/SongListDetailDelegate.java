@@ -456,7 +456,7 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 				helper.setText(R.id.item_play_no, String.valueOf(helper.getAdapterPosition() + 1));
 			}
 			helper.setText(R.id.viewpager_list_toptext, item.getName());
-			helper.setText(R.id.viewpager_list_bottom_text, item.getAr().get(0).getName());
+			helper.setText(R.id.viewpager_list_bottom_text, item.getAr().get(0).getName() + " - " + item.getAl().getName());
 			//当前歌曲是否有MV
 			if(item.getMv() != 0){
 				helper.setVisible(R.id.iv_list_video, true);

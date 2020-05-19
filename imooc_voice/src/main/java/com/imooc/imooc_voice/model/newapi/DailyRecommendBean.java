@@ -88,7 +88,7 @@ public class DailyRecommendBean {
          */
 
         private String name;
-        private String id;
+        private long id;
         private int position;
         private int status;
         private int fee;
@@ -188,11 +188,11 @@ public class DailyRecommendBean {
             this.name = name;
         }
 
-        public String getId() {
+        public long getId() {
             return id;
         }
 
-        public void setId(String id) {
+        public void setId(long id) {
             this.id = id;
         }
 

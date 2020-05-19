@@ -26,34 +26,32 @@
             android:layout_centerVertical="true"
             android:scaleType="fitXY" />
 
-        <LinearLayout
+
+        <TextView
+            android:id="@+id/audio_name_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:layout_alignTop="@+id/album_view"
             android:layout_marginStart="7dp"
+            android:layout_marginRight="20dp"
             android:layout_toRightOf="@id/album_view"
-            android:orientation="vertical">
+            android:ellipsize="end"
+            android:textColor="#333333"
+            android:textSize="16sp"
+            tools:text="歌曲名" />
 
-            <TextView
-                android:id="@+id/audio_name_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:ellipsize="end"
-                android:textColor="#333333"
-                android:textSize="16sp"
-                tools:text="四块五" />
-
-            <TextView
-                android:id="@+id/audio_album_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:ellipsize="end"
-                android:textColor="#999999"
-                android:textSize="12sp"
-                tools:text="隔避老攀" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/audio_album_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/audio_name_view"
+            android:layout_alignLeft="@+id/audio_name_view"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="20dp"
+            android:ellipsize="end"
+            android:textColor="#999999"
+            android:textSize="12sp"
+            tools:text="歌手名" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -76,13 +74,13 @@
                 android:src="@mipmap/note_btn_play_white" />-->
             <com.imooc.lib_common_ui.widget.CircleProgressButton
                 android:id="@+id/play_view"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_gravity="center_vertical"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:paddingLeft="15dp"
-                android:paddingRight="15dp"/>
+                android:paddingRight="15dp" />
 
             <ImageView
                 android:id="@+id/show_list_view"

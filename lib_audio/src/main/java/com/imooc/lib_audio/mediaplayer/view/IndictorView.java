@@ -62,7 +62,6 @@ public class IndictorView extends RelativeLayout implements ViewPager.OnPageChan
 		mContext = context;
 		EventBus.getDefault().register(this);
 		initData();
-
 	}
 
 	@Override

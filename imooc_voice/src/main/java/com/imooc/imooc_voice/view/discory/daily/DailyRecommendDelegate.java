@@ -17,12 +17,15 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
+import com.imooc.imooc_voice.api.HttpConstants;
 import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.newapi.DailyRecommendBean;
 import com.imooc.imooc_voice.model.newapi.LoginBean;
 import com.imooc.imooc_voice.util.GsonUtil;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
+import com.imooc.lib_audio.app.AudioHelper;
+import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_common_ui.appbar.AppBarStateChangeListener;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.utils.StatusBarUtil;
@@ -78,13 +81,24 @@ public class DailyRecommendDelegate extends NeteaseDelegate {
 		String coverUrl = GsonUtil.fromJSON(SharePreferenceUtil.getInstance(getContext()).getUserInfo(""), LoginBean.class).getProfile().getBackgroundUrl();
 		//模糊背景
 		manager.displayImageForViewGroup(mIvAppBarBackground, coverUrl, 125);
+		//正常背景
 		manager.displayImageForView(mIvAppBarCoverBackground, coverUrl);
+		//获取每日推荐数据
 		RequestCenter.getDailyRecommend(new DisposeDataListener() {
 			@Override
 			public void onSuccess(Object responseObj) {
 				DailyRecommendBean bean = (DailyRecommendBean) responseObj;
 				List<DailyRecommendBean.RecommendBean> recommend = bean.getRecommend();
 				mAdapter = new DailyRecommendAdapter(recommend);
+				mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+					@Override
+					public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+						DailyRecommendBean.RecommendBean item = (DailyRecommendBean.RecommendBean) adapter.getItem(position);
+						String songPlayUrl = HttpConstants.getSongPlayUrl(item.getId());
+						AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getArtists().get(0).getName(), item.getAlbum().getName(), item.getAlbum().getName(), item.getAlbum().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDuration())));
+
+					}
+				});
 				mRvRecommend.setAdapter(mAdapter);
 				mRvRecommend.setLayoutManager(new LinearLayoutManager(getContext()));
 			}
@@ -120,7 +134,6 @@ public class DailyRecommendDelegate extends NeteaseDelegate {
 			public void onOffsetChanged(AppBarLayout appBarLayout) {
 				float alphaPercent = (float) (mRlPlayAll.getTop() - minDistance) / (float) deltaDistance;
 				int alpha = (int) (alphaPercent * 255);
-				Log.e("daily", "alpha : " + alpha);
 				mIvAppBarCoverBackground.setImageAlpha(alpha);
 				mTvMonth.setAlpha(alphaPercent);
 				mTvDay.setAlpha(alphaPercent);
@@ -150,7 +163,7 @@ public class DailyRecommendDelegate extends NeteaseDelegate {
 		protected void convert(@NonNull BaseViewHolder helper, DailyRecommendBean.RecommendBean item) {
 			helper.setText(R.id.item_play_no, String.valueOf(helper.getLayoutPosition()+1));
 			helper.setText(R.id.viewpager_list_toptext, item.getName());
-			helper.setText(R.id.viewpager_list_bottom_text, item.getArtists().get(0).getName());
+			helper.setText(R.id.viewpager_list_bottom_text, item.getArtists().get(0).getName() + " - " + item.getAlbum().getName());
 			helper.setOnClickListener(R.id.viewpager_list_button, new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

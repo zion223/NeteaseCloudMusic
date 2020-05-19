@@ -148,7 +148,7 @@ public class MusicPlayerActivity extends BaseActivity {
 		});
 		//歌曲信息
 		mInfoView = findViewById(R.id.album_view);
-		mInfoView.setText(mAudioBean.getAlbumInfo());
+		mInfoView.setText(mAudioBean.getName());
 		//跑马灯效果焦点获取
 		mInfoView.requestFocus();
 		//歌曲作者
