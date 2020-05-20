@@ -37,12 +37,12 @@ greendao {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    
+    implementation this.rootProject.depsLibs.xpopup
     //占位主工程android原生库
     compileOnly this.rootProject.depsLibs.appcompat
     compileOnly this.rootProject.depsLibs.BaseRecyclerViewAdapterHelper
-//    compileOnly this.rootProject.depsLibs.design
-//    compileOnly this.rootProject.depsLibs.recyclerview
+    compileOnly this.rootProject.depsLibs.design
+    compileOnly this.rootProject.depsLibs.recyclerview
 
     //占位主工程的greenDao类库
     compileOnly this.rootProject.depsLibs.greendao

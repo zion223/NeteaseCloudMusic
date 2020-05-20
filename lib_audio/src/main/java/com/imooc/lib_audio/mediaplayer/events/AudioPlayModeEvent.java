@@ -7,7 +7,7 @@ import com.imooc.lib_audio.mediaplayer.core.AudioController;
  */
 public class AudioPlayModeEvent {
 
-	private AudioController.PlayMode mPlayMode;
+	public AudioController.PlayMode mPlayMode;
 
 	public AudioPlayModeEvent(AudioController.PlayMode playMode) {
 		this.mPlayMode = playMode;

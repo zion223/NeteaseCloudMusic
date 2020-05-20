@@ -21,6 +21,8 @@ import com.imooc.lib_audio.mediaplayer.events.AudioStartEvent;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_common_ui.widget.CircleProgressButton;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
+import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.core.BasePopupView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -101,8 +103,10 @@ public class BottomMusicView extends RelativeLayout {
 			@Override
 			public void onClick(View v) {
 				//显示音乐列表对话框
-//				MusicListDialog dialog = new MusicListDialog(mContext);
-//				dialog.show();
+				XPopup.setAnimationDuration(2000);
+				new XPopup.Builder(getContext())
+						.asCustom(new MusicListDialog(getContext()))
+						.show();
 			}
 		});
 	}

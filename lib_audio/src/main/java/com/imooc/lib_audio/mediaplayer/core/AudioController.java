@@ -62,7 +62,7 @@ public class AudioController {
 	/**
 	 * 对外提提供是否暂停状态
 	 */
-	public boolean isPauseState() {
+	private boolean isPauseState() {
 		return CustomMediaPlayer.Status.PAUSED == getStatus();
 	}
 
@@ -74,6 +74,7 @@ public class AudioController {
 		return mQueue == null ? new ArrayList<AudioBean>() : mQueue;
 	}
 
+	//添加Audio
 	public void addAudio(AudioBean bean) {
 		addAudio(0, bean);
 	}
@@ -94,7 +95,14 @@ public class AudioController {
 				setPlayIndex(query);
 			}
 		}
+	}
 
+	//删除Audio
+	public void removeAudio(AudioBean bean){
+		if(mQueue == null){
+			throw new AudioQueueEmptyException("");
+		}
+		mQueue.remove(bean);
 	}
 
 
