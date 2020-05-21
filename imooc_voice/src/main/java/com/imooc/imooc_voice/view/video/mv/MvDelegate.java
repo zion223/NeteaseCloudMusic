@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
-import com.imooc.imooc_voice.api.RequestCenter;
-import com.imooc.imooc_voice.model.newapi.MvTopBean;
 import com.imooc.imooc_voice.util.TimeUtil;
+import com.imooc.lib_api.RequestCenter;
+import com.imooc.lib_api.model.MvTopBean;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;

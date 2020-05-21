@@ -51,9 +51,10 @@
 
             <ImageView
                 android:id="@+id/tip_view"
-                android:layout_width="25dp"
-                android:layout_height="20dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:layout_gravity="center"
+                android:layout_marginRight="5dp"
                 android:src="@drawable/ic_collect" />
 
             <TextView

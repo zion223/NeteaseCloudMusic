@@ -93,7 +93,7 @@
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/fragment_main_item_count1"
+                android:id="@+id/fragment_main_item_lately_count"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"

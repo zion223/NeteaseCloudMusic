@@ -15,6 +15,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -22,6 +23,7 @@ import com.imooc.lib_audio.R;
 import com.imooc.lib_audio.mediaplayer.core.AudioController;
 import com.imooc.lib_audio.mediaplayer.events.AudioLoadEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioPlayModeEvent;
+import com.imooc.lib_audio.mediaplayer.events.AudioRemoveEvent;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.lxj.xpopup.core.BottomPopupView;
 
@@ -41,8 +43,10 @@ public class MusicListDialog extends BottomPopupView {
     private ImageView mTipView;
     private TextView mPlayModeView;
     private TextView mPlayNumView;
+    private TextView mFavouriteView;
     private RecyclerView mRecyclerView;
     private MusicListAdapter mMusicListAdapter;
+    private ImageView mDeleteView;
     /*
      * data
      */
@@ -68,17 +72,40 @@ public class MusicListDialog extends BottomPopupView {
         initView();
     }
 
+    @Override
+    public int getAnimationDuration() {
+        return 1000;
+    }
+
     private void initData() {
         //当前播歌曲，用来初始化UI
         mQueue = AudioController.getInstance().getQueue();
-        mAudioBean = AudioController.getInstance().getNowPlaying();
-        mPlayMode = AudioController.getInstance().getPlayMode();
+        if(mQueue.size() != 0){
+            mAudioBean = AudioController.getInstance().getNowPlaying();
+            mPlayMode = AudioController.getInstance().getPlayMode();
+        }
     }
 
     @SuppressLint("SetTextI18n")
     private void initView() {
 
         mTipView = findViewById(R.id.mode_image_view);
+        mDeleteView = findViewById(R.id.delete_view);
+        mFavouriteView = findViewById(R.id.favourite_view);
+        mFavouriteView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                //TODO 收藏全部歌曲到歌单  需要请求创建的歌单数据
+            }
+        });
+        mDeleteView.setOnClickListener(new  View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                //清空播放列表 TODO 确认对话框
+                AudioController.getInstance().removeAudio();
+                dismiss();
+            }
+        });
         mPlayNumView = findViewById(R.id.num_text_view);
         mPlayNumView.setText("(" + mQueue.size() + ")");
         mPlayModeView = findViewById(R.id.mode_text_view);
@@ -153,6 +180,14 @@ public class MusicListDialog extends BottomPopupView {
         updatePlayModeView();
     }
 
+    @SuppressLint("SetTextI18n")
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onAudioRemoveEvent(AudioRemoveEvent event) {
+        mQueue =AudioController.getInstance().getQueue();
+        mPlayNumView.setText("(" + mQueue.size() + ")");
+        mMusicListAdapter.setNewData(mQueue);
+    }
+
     @Override
     public void dismiss() {
         super.dismiss();
@@ -182,11 +217,16 @@ public class MusicListDialog extends BottomPopupView {
                 helper.setTextColor(R.id.item_name, Color.parseColor("#333333"));
                 helper.setTextColor(R.id.item_author,  Color.parseColor("#999999"));
             }
-            //TODO 删除队列中歌曲
+
             helper.setOnClickListener(R.id.item_delete, new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    AudioController.getInstance().removeAudio(item);
+                    if(mCurrentBean == item){
+                        //TODO 不可移除当前播放的歌曲
+                        Toast.makeText(mContext, "不支持删除正在播放的音乐", Toast.LENGTH_SHORT).show();
+                    }else{
+                        AudioController.getInstance().removeAudio(item);
+                    }
                 }
             });
         }

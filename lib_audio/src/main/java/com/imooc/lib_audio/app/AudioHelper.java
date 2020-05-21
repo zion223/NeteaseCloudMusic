@@ -34,4 +34,10 @@ public final class AudioHelper {
 		AudioController.getInstance().addAudio(bean);
 		MusicPlayerActivity.start(activity);
 	}
+
+	//不启动Activity
+	public static void addAudio(AudioBean bean){
+		AudioController.getInstance().addAudio(bean);
+	}
+
 }

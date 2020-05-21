@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,10 +12,10 @@ import android.widget.LinearLayout;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
-import com.imooc.imooc_voice.api.RequestCenter;
-import com.imooc.imooc_voice.model.newapi.VideoBean;
-import com.imooc.imooc_voice.model.newapi.VideoUrlBean;
 import com.imooc.imooc_voice.util.TimeUtil;
+import com.imooc.lib_api.RequestCenter;
+import com.imooc.lib_api.model.VideoBean;
+import com.imooc.lib_api.model.VideoUrlBean;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
@@ -119,7 +118,7 @@ public class VideoDelegate extends NeteaseLoadingDelegate {
 		return R.layout.delegate_recyclerview_normal;
 	}
 
-	static class VideoAdapter extends BaseQuickAdapter<VideoBean.VideoEntity, BaseViewHolder>{
+	static class VideoAdapter extends BaseQuickAdapter<VideoBean.VideoEntity, BaseViewHolder> {
 		private ImageLoaderManager manager = ImageLoaderManager.getInstance();
 
 		VideoAdapter(@Nullable List<VideoBean.VideoEntity> data) {

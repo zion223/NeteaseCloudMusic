@@ -15,6 +15,9 @@ import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.model.info.MusicInfo;
 import com.imooc.imooc_voice.util.IConstants;
 import com.imooc.imooc_voice.util.MusicUtils;
+import com.imooc.imooc_voice.util.SearchUtil;
+import com.imooc.imooc_voice.util.TimeUtil;
+import com.imooc.lib_audio.app.AudioHelper;
 import com.imooc.lib_audio.mediaplayer.core.AudioController;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
@@ -58,12 +61,12 @@ public class MusicDelegate extends NeteaseLoadingDelegate {
 
 				final MusicInfo item = (MusicInfo) adapter.getItem(position);
 				assert item != null;
-				AudioController.getInstance().addAudio(new AudioBean(String.valueOf(item.songId), item.data, item.musicName, item.artist, item.albumName, item.albumData, item.albumData, String.valueOf(item.duration)));
+				AudioHelper.addAudio(new AudioBean(String.valueOf(item.songId), item.data,
+						item.musicName, item.artist, item.albumName, item.albumData, item.albumData, TimeUtil.getTimeNoYMDH(Long.parseLong(String.valueOf(item.duration)))));
 				//设置当前播放状态 取消上个播放状态
 				final ImageView playView = view.findViewById(R.id.play_state);
 				playView.setVisibility(View.VISIBLE);
 				if (currentMusicPosition != -1) {
-					//mAdapter.notifyDataSetChanged();
 					mAdapter.notifyItemChanged(currentMusicPosition + 1);
 				}
 				currentMusicPosition = position;

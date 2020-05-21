@@ -13,10 +13,10 @@ import android.widget.ImageView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
-import com.imooc.imooc_voice.api.RequestCenter;
-import com.imooc.imooc_voice.model.newapi.RecommendPlayListBean;
 import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
+import com.imooc.lib_api.RequestCenter;
+import com.imooc.lib_api.model.RecommendPlayListBean;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
@@ -29,6 +29,7 @@ public class GedanDelegate extends NeteaseLoadingDelegate {
 
 	private static final String ARGS_GEDAN_TAG = "ARGS_GEDAN_TAG";
 	private String tag;
+
 
 
 	RecyclerView mRecyclerViewGedan;

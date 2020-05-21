@@ -11,6 +11,7 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.imooc.lib_audio.R;
 import com.imooc.lib_audio.mediaplayer.core.AudioController;
@@ -103,10 +104,14 @@ public class BottomMusicView extends RelativeLayout {
 			@Override
 			public void onClick(View v) {
 				//显示音乐列表对话框
-				XPopup.setAnimationDuration(2000);
-				new XPopup.Builder(getContext())
-						.asCustom(new MusicListDialog(getContext()))
-						.show();
+				if(AudioController.getInstance().getQueue().size() != 0){
+					new XPopup.Builder(getContext())
+							.asCustom(new MusicListDialog(getContext()))
+							.show();
+				}else{
+					Toast.makeText(getContext(), "当前播放队列没有歌曲", Toast.LENGTH_SHORT).show();
+				}
+
 			}
 		});
 	}

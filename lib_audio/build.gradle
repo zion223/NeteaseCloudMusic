@@ -55,7 +55,8 @@ dependencies {
     compileOnly project(':lib_image_loader')
     compileOnly project(':lib_common_ui')
     compileOnly project(':lib_share')
-    //compileOnly project(':lib_base')
+    compileOnly project(':lib_api')
+    compileOnly project(':lib_network')
 }
 
 uploadArchives{

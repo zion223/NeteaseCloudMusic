@@ -1,5 +1,6 @@
 package com.imooc.lib_common_ui.delegate;
 
+import android.graphics.drawable.ColorDrawable;
 import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +17,7 @@ import com.imooc.lib_common_ui.navigator.CommonNavigatorCreater;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
+import net.lucode.hackware.magicindicator.buildins.UIUtil;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 
 import java.util.List;
@@ -39,6 +41,7 @@ public abstract class NeteaseTabDelegate extends NeteaseDelegate {
 	ImageView mIvSearch;
 
 	private MultiFragmentPagerAdapter mAdapter;
+	private CommonNavigator commonNavigator;
 
 	@Override
 	public Object setLayout() {
@@ -55,15 +58,17 @@ public abstract class NeteaseTabDelegate extends NeteaseDelegate {
 		mTabViewPager.setAdapter(mAdapter);
 		mTabViewPager.setOffscreenPageLimit(setTitleDataList().length);
 		//mTabMagicIndicator.setBackgroundColor(Color.WHITE);
-		CommonNavigator commonNavigator = CommonNavigatorCreater.setDefaultNavigator(getContext(), setTitleDataList(), mTabViewPager);
-		commonNavigator.setAdjustMode(true);
+		commonNavigator = CommonNavigatorCreater.setDefaultNavigator(getContext(), setTitleDataList(), mTabViewPager);
+		commonNavigator.setAdjustMode(setAdjustMode());
 		mTabMagicIndicator.setNavigator(commonNavigator);
+		setDividerDrawable(commonNavigator,0);
 		ViewPagerHelper.bind(mTabMagicIndicator, mTabViewPager);
 
 		setShowMoreView(View.GONE);
 		setMoreViewOnClickListener(null);
 		setToolBarVisiable(View.VISIBLE);
 		setShowSearchView(View.VISIBLE);
+
 	}
 
 	public ImageView getIvMore() {
@@ -74,6 +79,24 @@ public abstract class NeteaseTabDelegate extends NeteaseDelegate {
 		return mTabMagicIndicator;
 	}
 
+	public void setDividerDrawable(CommonNavigator navigator, final int dp) {
+		if(dp != 0){
+			LinearLayout titleContainer = navigator.getTitleContainer();
+			titleContainer.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
+			//设置TAB的间距
+			titleContainer.setDividerDrawable(new ColorDrawable() {
+				@Override
+				public int getIntrinsicWidth() {
+					return UIUtil.dip2px(getContext(), dp);
+				}
+			});
+		}
+	}
+
+	//  true:自适应模式，适用于数目固定的、少量的title
+	public boolean setAdjustMode(){
+		return true;
+	}
 	public ViewPager getTabViewPager() {
 		return mTabViewPager;
 	}

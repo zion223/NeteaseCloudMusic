@@ -163,7 +163,7 @@
                     android:layout_width="43dp"
                     android:layout_height="43dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/ic_song_more" />
+                    android:src="@drawable/ic_song_more_audio" />
             </LinearLayout>
 
         </LinearLayout>

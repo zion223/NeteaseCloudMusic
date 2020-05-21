@@ -38,10 +38,13 @@ import com.imooc.lib_audio.mediaplayer.util.Utils;
 import com.imooc.lib_common_ui.base.BaseActivity;
 import com.imooc.lib_share.share.ShareContentData;
 import com.imooc.lib_share.share.ShareDialog;
+import com.lxj.xpopup.XPopup;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import static com.imooc.lib_audio.app.AudioHelper.getContext;
 
 public class MusicPlayerActivity extends BaseActivity {
 
@@ -100,7 +103,6 @@ public class MusicPlayerActivity extends BaseActivity {
 	private void initAnimator() {
 
 		//播放动作 动画
-
 		mNeddlePlayAnimator = ObjectAnimator.ofFloat(mNeddleiew, "rotation", -25, 0);
 		mNeddlePlayAnimator.setDuration(200);
 		mNeddlePlayAnimator.setRepeatMode(ValueAnimator.REVERSE);
@@ -142,8 +144,9 @@ public class MusicPlayerActivity extends BaseActivity {
 		findViewById(R.id.show_list_view).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-//				MusicListDialog dialog = new MusicListDialog(MusicPlayerActivity.this);
-//				dialog.show();
+				new XPopup.Builder(MusicPlayerActivity.this)
+						.asCustom(new MusicListDialog(MusicPlayerActivity.this))
+						.show();
 			}
 		});
 		//歌曲信息
@@ -256,15 +259,12 @@ public class MusicPlayerActivity extends BaseActivity {
 		switch (mPlayMode) {
 			case LOOP:
 				mPlayModeView.setImageResource(R.mipmap.ic_player_loop);
-				Toast.makeText(getBaseContext(), "列表播放",Toast.LENGTH_SHORT).show();
 				break;
 			case RANDOM:
 				mPlayModeView.setImageResource(R.mipmap.ic_player_random);
-				Toast.makeText(getBaseContext(), "随机播放",Toast.LENGTH_SHORT).show();
 				break;
 			case REPEAT:
 				mPlayModeView.setImageResource(R.mipmap.ic_player_once);
-				Toast.makeText(getBaseContext(), "循环播放",Toast.LENGTH_SHORT).show();
 				break;
 		}
 	}

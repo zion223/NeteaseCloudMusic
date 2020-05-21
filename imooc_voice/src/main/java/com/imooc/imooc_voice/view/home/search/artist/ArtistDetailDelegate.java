@@ -16,15 +16,15 @@ import android.widget.TextView;
 
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
-import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.event.ArtistIdEvent;
-import com.imooc.imooc_voice.model.newapi.dj.DjSubBean;
-import com.imooc.imooc_voice.model.newapi.search.SingerSongSearchBean;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
 import com.imooc.imooc_voice.view.home.search.artist.sort.ArtistAlbumDelegate;
 import com.imooc.imooc_voice.view.home.search.artist.sort.ArtistHomePageDelegate;
 import com.imooc.imooc_voice.view.home.search.artist.sort.ArtistSongDelegate;
 import com.imooc.imooc_voice.view.home.search.artist.sort.ArtistVideoDelegate;
+import com.imooc.lib_api.RequestCenter;
+import com.imooc.lib_api.model.dj.DjSubBean;
+import com.imooc.lib_api.model.search.SingerSongSearchBean;
 import com.imooc.lib_common_ui.delegate.MultiFragmentPagerAdapter;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.navigator.CommonNavigatorCreater;

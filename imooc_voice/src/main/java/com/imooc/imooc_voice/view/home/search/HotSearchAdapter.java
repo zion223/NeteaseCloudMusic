@@ -4,17 +4,17 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
-import com.imooc.imooc_voice.model.newapi.search.HotSearchDetailBean;
+import com.imooc.lib_api.model.search.HotSearchDetailBean;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 
 import java.util.List;
+
 
 public class HotSearchAdapter extends BaseQuickAdapter<HotSearchDetailBean.DataBean, BaseViewHolder> {
 

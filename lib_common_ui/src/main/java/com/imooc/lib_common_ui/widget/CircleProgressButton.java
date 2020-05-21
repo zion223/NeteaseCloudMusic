@@ -47,7 +47,7 @@ public class CircleProgressButton extends View {
 		viewWidth = typedArray.getColor(R.styleable.CircleProgressButton_viewWidth, 15);
 		viewHeight = typedArray.getColor(R.styleable.CircleProgressButton_viewHeight, 15);
 		//外层圆环的宽度
-		viewRoundWidth = typedArray.getColor(R.styleable.CircleProgressButton_viewRoundWidth, 3);
+		viewRoundWidth = typedArray.getColor(R.styleable.CircleProgressButton_viewRoundWidth, 4);
 		typedArray.recycle();
 	}
 
@@ -79,7 +79,7 @@ public class CircleProgressButton extends View {
 			//红色 两条竖线
 			paint.setColor(Color.RED);
 			paint.setStyle(Paint.Style.FILL);
-			paint.setStrokeWidth(2.0f);
+			paint.setStrokeWidth(3f);
 			canvas.drawLine(3*x/8, 5*x/16, 3*x/8,11*x/16, paint);
 			canvas.drawLine(5*x/8, 5*x/16, 5*x/8,11*x/16, paint);
 		}else if(playOrPause == Status.PAUSE){
@@ -87,7 +87,7 @@ public class CircleProgressButton extends View {
 			Path path = new Path();
 			paint.setColor(Color.DKGRAY);
 			paint.setStyle(Paint.Style.STROKE);
-			paint.setStrokeWidth(2.0f);
+			paint.setStrokeWidth(3f);
 			path.moveTo(7*x/16,5*x/16);
 			path.lineTo(7*x/16,11*x/16);
 			path.lineTo(11*x/16,8*x/16);

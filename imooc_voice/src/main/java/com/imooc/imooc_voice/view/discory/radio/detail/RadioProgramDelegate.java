@@ -12,10 +12,10 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
-import com.imooc.imooc_voice.api.RequestCenter;
-import com.imooc.imooc_voice.model.newapi.dj.DjProgramBean;
 import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
+import com.imooc.lib_api.RequestCenter;
+import com.imooc.lib_api.model.dj.DjProgramBean;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
@@ -91,7 +91,7 @@ public class RadioProgramDelegate extends NeteaseLoadingDelegate {
         return R.layout.delegate_recyclerview_normal;
     }
 
-    static class RadioProgramAdapter extends BaseQuickAdapter<DjProgramBean.ProgramsBean, BaseViewHolder>{
+    static class RadioProgramAdapter extends BaseQuickAdapter<DjProgramBean.ProgramsBean, BaseViewHolder> {
 
         RadioProgramAdapter(@Nullable List<DjProgramBean.ProgramsBean> data) {
             super(R.layout.item_radio_program, data);

@@ -61,6 +61,7 @@ dependencies {
     implementation project(path: ':lib_audio')
     implementation project(path: ':lib_video')
     implementation project(path: ':lib_update')
+    implementation project(path: ':lib_api')
     implementation project(path: ':lib_network')
     implementation project(path: ':lib_pullalive')
     implementation project(path: ':lib_share')

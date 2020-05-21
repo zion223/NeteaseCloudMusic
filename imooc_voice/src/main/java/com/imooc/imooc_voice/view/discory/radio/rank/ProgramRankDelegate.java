@@ -15,9 +15,9 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
-import com.imooc.imooc_voice.api.RequestCenter;
-import com.imooc.imooc_voice.model.newapi.dj.DjProgramTopListBean;
-import com.imooc.imooc_voice.model.newapi.dj.DjProgramTopListHoursBean;
+import com.imooc.lib_api.RequestCenter;
+import com.imooc.lib_api.model.dj.DjProgramTopListBean;
+import com.imooc.lib_api.model.dj.DjProgramTopListHoursBean;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
@@ -98,7 +98,7 @@ public class ProgramRankDelegate extends NeteaseLoadingDelegate {
 		return R.layout.delegate_radio_dj_rank;
 	}
 
-	static class ProgramHoursRankAdapter extends BaseQuickAdapter<DjProgramTopListBean.List, BaseViewHolder>{
+	static class ProgramHoursRankAdapter extends BaseQuickAdapter<DjProgramTopListBean.List, BaseViewHolder> {
 
 		ProgramHoursRankAdapter(@Nullable List<DjProgramTopListBean.List> data) {
 			super(R.layout.item_program_rank_123, data);

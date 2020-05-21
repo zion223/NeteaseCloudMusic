@@ -60,7 +60,7 @@
         android:layout_centerVertical="true"
         android:focusable="true"
         android:visibility="visible"
-        android:src="@drawable/ic_song_more" />
+        android:src="@drawable/ic_song_more_audio" />
 
     <ImageView
         android:id="@+id/tab_play_state"

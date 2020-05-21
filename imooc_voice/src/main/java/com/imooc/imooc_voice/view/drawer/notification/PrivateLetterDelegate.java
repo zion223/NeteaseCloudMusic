@@ -10,11 +10,11 @@ import android.widget.ImageView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
-import com.imooc.imooc_voice.api.RequestCenter;
-import com.imooc.imooc_voice.model.newapi.notification.MsgDetailBean;
-import com.imooc.imooc_voice.model.newapi.notification.PrivateMsgBean;
 import com.imooc.imooc_voice.util.GsonUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
+import com.imooc.lib_api.RequestCenter;
+import com.imooc.lib_api.model.notification.MsgDetailBean;
+import com.imooc.lib_api.model.notification.PrivateMsgBean;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
@@ -58,7 +58,7 @@ public class PrivateLetterDelegate extends NeteaseLoadingDelegate {
 		return R.layout.delegate_recyclerview_normal;
 	}
 
-	static class PrivateMsgAdapter extends BaseQuickAdapter<PrivateMsgBean.Msg, BaseViewHolder>{
+	static class PrivateMsgAdapter extends BaseQuickAdapter<PrivateMsgBean.Msg, BaseViewHolder> {
 
 		PrivateMsgAdapter(@Nullable List<PrivateMsgBean.Msg> data) {
 			super(R.layout.item_notification_msg, data);

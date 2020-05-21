@@ -15,20 +15,18 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
-import com.imooc.imooc_voice.api.HttpConstants;
-import com.imooc.imooc_voice.api.RequestCenter;
-import com.imooc.imooc_voice.model.newapi.search.SongSearchBean;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.imooc_voice.view.home.search.NeteaseSearchLoadingDelegate;
 import com.imooc.imooc_voice.view.video.MvDeatilDelegate;
+import com.imooc.lib_api.HttpConstants;
+import com.imooc.lib_api.RequestCenter;
+import com.imooc.lib_api.model.search.SongSearchBean;
 import com.imooc.lib_audio.app.AudioHelper;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
 import java.util.List;
-
-import me.yokeyword.fragmentation.SupportFragmentDelegate;
 
 /*
  *	单曲搜索

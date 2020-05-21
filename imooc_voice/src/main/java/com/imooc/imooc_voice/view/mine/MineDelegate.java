@@ -17,13 +17,8 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.donkingliang.groupedadapter.adapter.GroupedRecyclerViewAdapter;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
-import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.info.MusicInfo;
 import com.imooc.imooc_voice.model.mine.SpecData;
-import com.imooc.imooc_voice.model.newapi.LoginBean;
-import com.imooc.imooc_voice.model.newapi.SubCountBean;
-import com.imooc.imooc_voice.model.newapi.personal.UserPlayListGroupEntity;
-import com.imooc.imooc_voice.model.newapi.personal.UserPlaylistBean;
 import com.imooc.imooc_voice.util.GsonUtil;
 import com.imooc.imooc_voice.util.IConstants;
 import com.imooc.imooc_voice.util.MusicUtils;
@@ -32,6 +27,11 @@ import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
 import com.imooc.imooc_voice.view.mine.collect.MineCollectTabDelegate;
 import com.imooc.imooc_voice.view.mine.local.LocalMusicDelegate;
 import com.imooc.imooc_voice.view.mine.radio.MineRadioDelegate;
+import com.imooc.lib_api.RequestCenter;
+import com.imooc.lib_api.model.LoginBean;
+import com.imooc.lib_api.model.SubCountBean;
+import com.imooc.lib_api.model.personal.UserPlayListGroupEntity;
+import com.imooc.lib_api.model.personal.UserPlaylistBean;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.dialog.CreatePlayListDialog;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
@@ -92,7 +92,7 @@ public class MineDelegate extends NeteaseDelegate {
 			mTvLocalMusicCount.setText("(" + localMusicCount + ")");
 		}
 
-		//最近播放数量
+		//TODO 最近播放数量
 
 		//下载管理
 

@@ -16,9 +16,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.imooc.imooc_voice.R;
-import com.imooc.imooc_voice.api.RequestCenter;
-import com.imooc.imooc_voice.model.newapi.dj.DjDetailBean;
 import com.imooc.imooc_voice.util.SearchUtil;
+import com.imooc.lib_api.RequestCenter;
+import com.imooc.lib_api.model.dj.DjDetailBean;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_common_ui.dialog.UnsubscribeRadioDialog;
 import com.imooc.lib_common_ui.navigator.CommonNavigatorCreater;

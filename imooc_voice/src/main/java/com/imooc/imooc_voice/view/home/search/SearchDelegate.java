@@ -5,20 +5,18 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
-import com.imooc.imooc_voice.api.RequestCenter;
-import com.imooc.imooc_voice.model.newapi.search.HotSearchDetailBean;
 import com.imooc.imooc_voice.view.home.search.artist.ArtistSortDelegate;
+import com.imooc.lib_api.RequestCenter;
+import com.imooc.lib_api.model.search.HotSearchDetailBean;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_network.listener.DisposeDataListener;
 

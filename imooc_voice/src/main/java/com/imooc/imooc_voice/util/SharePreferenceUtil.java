@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 
 import com.imooc.imooc_voice.Constants;
-import com.imooc.imooc_voice.model.newapi.LoginBean;
+import com.imooc.lib_api.model.LoginBean;
 
 import java.util.List;
 import java.util.Locale;

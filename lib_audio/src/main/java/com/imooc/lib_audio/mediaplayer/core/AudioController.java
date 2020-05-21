@@ -7,6 +7,7 @@ import com.imooc.lib_audio.mediaplayer.events.AudioCompleteEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioErrorEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioFavouriteEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioPlayModeEvent;
+import com.imooc.lib_audio.mediaplayer.events.AudioRemoveEvent;
 import com.imooc.lib_audio.mediaplayer.exception.AudioQueueEmptyException;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 
@@ -97,14 +98,27 @@ public class AudioController {
 		}
 	}
 
-	//删除Audio
+	//删除单个Audio
 	public void removeAudio(AudioBean bean){
 		if(mQueue == null){
 			throw new AudioQueueEmptyException("");
 		}
-		mQueue.remove(bean);
+		if(mQueue.remove(bean)){
+			EventBus.getDefault().post(new AudioRemoveEvent());
+		}
 	}
 
+	//删除全部
+	public void removeAudio(){
+		if(mQueue == null){
+			throw new AudioQueueEmptyException("");
+		}
+		AudioBean currentBean = getCurrentPlaying();
+		mQueue.clear();
+		//不删除当前播放的歌曲
+		mQueue.add(currentBean);
+
+	}
 
 	public void setQueue(ArrayList<AudioBean> bean){
 		setQueue(bean, 0);

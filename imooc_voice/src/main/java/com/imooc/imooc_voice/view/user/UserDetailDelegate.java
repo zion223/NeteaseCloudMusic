@@ -23,10 +23,10 @@ import android.widget.Toast;
 
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
-import com.imooc.imooc_voice.api.RequestCenter;
-import com.imooc.imooc_voice.model.newapi.FollowBean;
-import com.imooc.imooc_voice.model.newapi.personal.UserDetailBean;
 import com.imooc.imooc_voice.util.SearchUtil;
+import com.imooc.lib_api.RequestCenter;
+import com.imooc.lib_api.model.FollowBean;
+import com.imooc.lib_api.model.personal.UserDetailBean;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.navigator.CommonNavigatorCreater;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;

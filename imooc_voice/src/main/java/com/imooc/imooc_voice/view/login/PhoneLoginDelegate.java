@@ -15,14 +15,14 @@ import android.widget.Toast;
 
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
-import com.imooc.imooc_voice.api.RequestCenter;
 import com.imooc.imooc_voice.model.event.RequestSuccessEvent;
-import com.imooc.imooc_voice.model.newapi.CommonMessageBean;
-import com.imooc.imooc_voice.model.newapi.LoginBean;
 import com.imooc.imooc_voice.util.ScreenUtils;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
 import com.imooc.imooc_voice.util.ValidateUtils;
 import com.imooc.imooc_voice.view.home.BaseDelegate;
+import com.imooc.lib_api.RequestCenter;
+import com.imooc.lib_api.model.CommonMessageBean;
+import com.imooc.lib_api.model.LoginBean;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.widget.CaptchaView;
 import com.imooc.lib_network.listener.DisposeDataListener;

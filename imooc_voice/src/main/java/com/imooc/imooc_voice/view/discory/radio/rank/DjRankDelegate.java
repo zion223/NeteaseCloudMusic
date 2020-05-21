@@ -16,11 +16,11 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseSectionQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
-import com.imooc.imooc_voice.api.RequestCenter;
-import com.imooc.imooc_voice.model.newapi.dj.DjTopListBean;
-import com.imooc.imooc_voice.model.newapi.dj.DjToplistEntity;
 import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.view.user.UserDetailDelegate;
+import com.imooc.lib_api.RequestCenter;
+import com.imooc.lib_api.model.dj.DjTopListBean;
+import com.imooc.lib_api.model.dj.DjToplistEntity;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
@@ -135,7 +135,7 @@ public class DjRankDelegate extends NeteaseLoadingDelegate implements BaseQuickA
 
 	}
 
-	static class DjHoursAdapter extends BaseSectionQuickAdapter<DjToplistEntity, BaseViewHolder>{
+	static class DjHoursAdapter extends BaseSectionQuickAdapter<DjToplistEntity, BaseViewHolder> {
         private ImageLoaderManager manager;
 
         DjHoursAdapter(List<DjToplistEntity> data) {

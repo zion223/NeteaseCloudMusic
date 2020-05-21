@@ -9,10 +9,10 @@ import android.widget.ImageView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
-import com.imooc.imooc_voice.model.newapi.personal.UserEventBean;
-import com.imooc.imooc_voice.model.newapi.personal.UserEventJsonBean;
 import com.imooc.imooc_voice.util.GsonUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
+import com.imooc.lib_api.model.personal.UserEventBean;
+import com.imooc.lib_api.model.personal.UserEventJsonBean;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 
 import java.util.ArrayList;

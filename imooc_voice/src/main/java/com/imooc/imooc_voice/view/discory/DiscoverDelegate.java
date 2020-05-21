@@ -17,19 +17,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
-import com.imooc.imooc_voice.api.HttpConstants;
-import com.imooc.imooc_voice.api.RequestCenter;
-import com.imooc.imooc_voice.model.newapi.AlbumOrSongBean;
-import com.imooc.imooc_voice.model.newapi.BannerBean;
-import com.imooc.imooc_voice.model.newapi.DailyRecommendBean;
-import com.imooc.imooc_voice.model.newapi.LoginBean;
-import com.imooc.imooc_voice.model.newapi.MainRecommendPlayListBean;
-import com.imooc.imooc_voice.model.newapi.NewSongBean;
-import com.imooc.imooc_voice.model.newapi.search.AlbumSearchBean;
-import com.imooc.imooc_voice.model.newapi.song.SongDetailBean;
-import com.imooc.imooc_voice.util.GsonUtil;
 import com.imooc.imooc_voice.util.SearchUtil;
-import com.imooc.imooc_voice.util.SharePreferenceUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.imooc_voice.view.discory.album.NewAlbumDelegate;
 import com.imooc.imooc_voice.view.discory.daily.DailyRecommendDelegate;
@@ -37,18 +25,22 @@ import com.imooc.imooc_voice.view.discory.radio.RadioDelegate;
 import com.imooc.imooc_voice.view.discory.rank.RankingDelegate;
 import com.imooc.imooc_voice.view.discory.square.GedanSquareDelegate;
 import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
-import com.imooc.imooc_voice.view.video.mv.MvRankDelegate;
-import com.imooc.imooc_voice.view.video.mv.MvRankTabDelegate;
+import com.imooc.lib_api.HttpConstants;
+import com.imooc.lib_api.RequestCenter;
+import com.imooc.lib_api.model.AlbumOrSongBean;
+import com.imooc.lib_api.model.BannerBean;
+import com.imooc.lib_api.model.DailyRecommendBean;
+import com.imooc.lib_api.model.MainRecommendPlayListBean;
+import com.imooc.lib_api.model.NewSongBean;
+import com.imooc.lib_api.model.search.AlbumSearchBean;
+import com.imooc.lib_api.model.song.SongDetailBean;
 import com.imooc.lib_audio.app.AudioHelper;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_common_ui.bannder.BannerCreator;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
-import com.imooc.lib_common_ui.delegate.web.WebDelegateImpl;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
-import com.imooc.lib_network.exception.OkHttpException;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,6 +49,7 @@ import butterknife.OnClick;
 
 import static com.imooc.imooc_voice.Constants.ALBUM;
 import static com.imooc.imooc_voice.Constants.PLAYLIST;
+import static com.imooc.imooc_voice.Constants.SONG;
 
 public class DiscoverDelegate extends NeteaseDelegate {
 
@@ -87,8 +80,6 @@ public class DiscoverDelegate extends NeteaseDelegate {
 	private GridLayoutManager albumSongManager;
 
 
-	private int TYPE_ALBUM = 0;
-	private int TYPE_SONG = 1;
 
 	private final ArrayList<AlbumOrSongBean> albumList = new ArrayList<>();
 	private final ArrayList<AlbumOrSongBean> songList = new ArrayList<>();
@@ -122,6 +113,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 					@Override
 					public void onItemClick(int position) {
 						BannerBean.BannersBean item = banners.get(position);
+						//歌曲
 						if(item.getTargetType() == 4 || item.getTargetType() == 1){
 							long songId = item.getTargetId();
 							RequestCenter.getSongDetail(String.valueOf(songId), new DisposeDataListener() {
@@ -143,6 +135,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 							//专辑
 							getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(ALBUM, item.getTargetId()));
 						}
+						//网页
 						if(item.getUrl() != null ){
 							getParentDelegate().getSupportDelegate().start(WebContainerDelegate.newInstance(item.getUrl()));
 						}
@@ -198,20 +191,40 @@ public class DiscoverDelegate extends NeteaseDelegate {
 					String albumName = albums.get(i).getName();
 					String picUrl = albums.get(i).getPicUrl();
 					long id = albums.get(i).getId();
-					albumList.add(new AlbumOrSongBean(String.valueOf(id), TYPE_ALBUM, picUrl, albumName, artistName));
+					albumList.add(new AlbumOrSongBean(String.valueOf(id), ALBUM, picUrl, albumName, artistName));
 				}
 				mAlbumSongAdapter = new AlbumSongAdapter(albumList);
 				mAlbumSongAdapter.setOnItemClickListener((adpater, view1, i) -> {
 					AlbumOrSongBean entity = (AlbumOrSongBean) adpater.getItem(i);
-					if (entity.getType() == TYPE_ALBUM) {
+					//查看专辑
+					if (entity.getType() == ALBUM) {
 						getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(ALBUM, entity.getId()));
 					} else {
-						//TODO 加入播放队列
+						//播放歌曲
+						long songId = entity.getId();
+						RequestCenter.getSongDetail(String.valueOf(songId), new DisposeDataListener() {
+							@Override
+							public void onSuccess(Object responseObj) {
+								SongDetailBean bean = (SongDetailBean) responseObj;
+								//只有一首音乐
+								SongDetailBean.SongsBean item = bean.getSongs().get(0);
+								if(item != null){
+									String songPlayUrl = HttpConstants.getSongPlayUrl(songId);
+									AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getAr().get(0).getName(), item.getAl().getName(), item.getAl().getName(), item.getAl().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDt())));
+								}
+							}
+
+							@Override
+							public void onFailure(Object reasonObj) {
+
+							}
+						});
+
 					}
 				});
 				mRecyclerViewAlbumSong.setAdapter(mAlbumSongAdapter);
 				//防止列表为空
-				changeAlbumOrSong(TYPE_ALBUM);
+				changeAlbumOrSong(ALBUM);
 			}
 
 			@Override
@@ -232,7 +245,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 					String albumName = data.get(i).getName();
 					String picUrl = data.get(i).getAlbum().getPicUrl();
 					long id = data.get(i).getId();
-					songList.add(new AlbumOrSongBean(String.valueOf(id), TYPE_SONG, picUrl, albumName, artistName));
+					songList.add(new AlbumOrSongBean(String.valueOf(id), SONG, picUrl, albumName, artistName));
 				}
 			}
 
@@ -256,12 +269,12 @@ public class DiscoverDelegate extends NeteaseDelegate {
 
 	@OnClick(R2.id.tv_discover_new_album)
 	void onClickChooseAlbum() {
-		changeAlbumOrSong(TYPE_ALBUM);
+		changeAlbumOrSong(ALBUM);
 	}
 
 	@OnClick(R2.id.tv_discover_new_song)
 	void onClickChooseSong() {
-		changeAlbumOrSong(TYPE_SONG);
+		changeAlbumOrSong(SONG);
 	}
 
 	//每日推荐
@@ -291,7 +304,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 	//新歌推荐或者更多新碟
 	@OnClick(R2.id.tv_discover_more_album_song)
 	void onClickAlbumOrSong() {
-		if ((int) mTvAlbumOrSong.getTag() == TYPE_ALBUM) {
+		if ((int) mTvAlbumOrSong.getTag() == ALBUM) {
 			getParentDelegate().getSupportDelegate().start(new NewAlbumDelegate());
 		}else{
 			//TODO 新歌推荐
@@ -302,7 +315,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 
 
 	void changeAlbumOrSong(int type) {
-		if (type == TYPE_ALBUM) {
+		if (type == ALBUM) {
 			//当前是新碟
 			mTvCurrentAlbum.setTextColor(getResources().getColor(R.color.black));
 			mTvCurrentAlbum.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));//加粗
@@ -315,10 +328,10 @@ public class DiscoverDelegate extends NeteaseDelegate {
 			mTvAlbumOrSong.setText("更多新碟");
 
 			mAlbumSongAdapter.setNewData(albumList);
-			mTvAlbumOrSong.setTag(TYPE_ALBUM);
+			mTvAlbumOrSong.setTag(ALBUM);
 
 
-		} else if (type == TYPE_SONG) {
+		} else if (type == SONG) {
 			mTvCurrentSong.setTextColor(getResources().getColor(R.color.black));
 			mTvCurrentSong.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));//加粗
 			mTvCurrentSong.setTextSize(15);
@@ -330,7 +343,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 			mTvAlbumOrSong.setText("新歌推荐");
 			//addAll方法改变原数组内容
 			mAlbumSongAdapter.setNewData(songList);
-			mTvAlbumOrSong.setTag(TYPE_SONG);
+			mTvAlbumOrSong.setTag(SONG);
 		}
 
 	}

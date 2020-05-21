@@ -33,11 +33,13 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/album_view"
             android:layout_marginStart="7dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="-1dp"
             android:layout_marginRight="20dp"
             android:layout_toRightOf="@id/album_view"
             android:ellipsize="end"
             android:textColor="#333333"
-            android:textSize="16sp"
+            android:textSize="14sp"
             tools:text="歌曲名" />
 
         <TextView
@@ -63,22 +65,15 @@
             android:paddingLeft="10dp"
             android:paddingTop="-10dp">
 
-            <!--<ImageView
-                android:id="@+id/play_view"
-                android:layout_width="55dp"
-                android:layout_height="match_parent"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:src="@mipmap/note_btn_play_white" />-->
+
             <com.imooc.lib_common_ui.widget.CircleProgressButton
                 android:id="@+id/play_view"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:layout_gravity="center_vertical"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
+                android:focusable="true"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp" />
 

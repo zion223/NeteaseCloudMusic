@@ -14,9 +14,9 @@ import android.widget.LinearLayout;
 
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
-import com.imooc.imooc_voice.api.RequestCenter;
-import com.imooc.imooc_voice.model.newapi.VideoGroupBean;
 import com.imooc.imooc_voice.view.video.mv.MvDelegate;
+import com.imooc.lib_api.RequestCenter;
+import com.imooc.lib_api.model.VideoGroupBean;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.navigator.CommonNavigatorCreater;
 import com.imooc.lib_network.listener.DisposeDataListener;
