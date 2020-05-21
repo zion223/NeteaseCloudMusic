@@ -95,6 +95,8 @@ public class HttpConstants {
 
 	static String SONG_DETAIL = ROOT_URL + "/song/detail";
 
+	static String LYRIC = ROOT_URL + "/lyric";
+
 	static String LIKE_MUSIC = ROOT_URL + "/like";
 
 	static String MUSIC_COMMENT = ROOT_URL + "/comment/music";
@@ -114,8 +116,6 @@ public class HttpConstants {
 	static String PERSONAL_FM = ROOT_URL + "/personal_fm";
 
 	static String MAIN_EVENT = ROOT_URL + "/event";
-
-	static String LYRIC = ROOT_URL + "/lyric";
 
 	static String COMMENT_PLAYLIST = ROOT_URL + "/comment/playlist";
 

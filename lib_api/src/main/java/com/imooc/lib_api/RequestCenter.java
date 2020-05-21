@@ -614,7 +614,10 @@ public class RequestCenter {
         RequestCenter.getRequest(HttpConstants.MAIN_EVENT, null, listener, MainEventBean.class);
     }
 
-    public static void getLyric(long id, DisposeDataListener listener){
+    /**
+     *  获取歌曲歌词
+     */
+    public static void getLyric(String id, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("id", id);
         RequestCenter.getRequest(HttpConstants.LYRIC, params, listener, LyricBean.class);

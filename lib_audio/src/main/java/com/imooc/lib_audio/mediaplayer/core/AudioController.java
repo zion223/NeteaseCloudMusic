@@ -160,6 +160,9 @@ public class AudioController {
 		mAudioPlayer.pause();
 	}
 
+	public void seekTo(long time){
+		mAudioPlayer.seekTo(time);
+	}
 	public void release(){
 		mAudioPlayer.release();
 		EventBus.getDefault().unregister(this);

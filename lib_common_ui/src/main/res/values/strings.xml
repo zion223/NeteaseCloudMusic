@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">lib_common_ui</string>
+    <string name="lrc_label">暂无歌词</string>
 </resources>

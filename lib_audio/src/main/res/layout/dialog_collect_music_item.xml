@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/iv_item_collect_content_img"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:layout_centerVertical="true" />
 
     <TextView

@@ -10,6 +10,13 @@
     <color name="app_background">#1111</color>
     <color name="gedan_detail">#F2EDF3</color>
     <color name="color_F71816">#F71816</color>
+
+    <color name="lrc_normal_text_color">#9E9E9E</color>
+    <color name="lrc_current_text_color">#ffffffff</color>
+    <color name="lrc_timeline_text_color">#F71816</color>
+    <color name="lrc_timeline_color">#809E9E9E</color>
+    <color name="lrc_time_text_color">#809E9E9E</color>
+
     <color name="white">#FFFFFF</color>
     <!-- 白色 -->
     <color name="ivory">#FFFFF0</color>

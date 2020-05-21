@@ -333,7 +333,6 @@ public class MineDelegate extends NeteaseDelegate {
 		@Override
 		public void onBindChildViewHolder(com.donkingliang.groupedadapter.holder.BaseViewHolder holder, int groupPosition, int childPosition) {
 			UserPlaylistBean.PlaylistBean item = mData.get(groupPosition).getBean().get(childPosition);
-			Log.e("aaa", item.getName() + "==" + item.getId());
 			ImageView img = holder.get(R.id.iv_item_gedan_content_img);
 			manager.displayImageForCorner(img, item.getCoverImgUrl(), 5);
 			holder.setText(R.id.tv_item_gedan_content_toptext, item.getName());

@@ -18,11 +18,13 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.imooc.lib_api.RequestCenter;
+import com.imooc.lib_api.model.song.LyricBean;
 import com.imooc.lib_audio.R;
 import com.imooc.lib_audio.mediaplayer.core.AudioController;
 import com.imooc.lib_audio.mediaplayer.core.CustomMediaPlayer;
@@ -36,6 +38,8 @@ import com.imooc.lib_audio.mediaplayer.events.AudioStartEvent;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_audio.mediaplayer.util.Utils;
 import com.imooc.lib_common_ui.base.BaseActivity;
+import com.imooc.lib_common_ui.lrc.LrcView;
+import com.imooc.lib_network.listener.DisposeDataListener;
 import com.imooc.lib_share.share.ShareContentData;
 import com.imooc.lib_share.share.ShareDialog;
 import com.lxj.xpopup.XPopup;
@@ -44,7 +48,6 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import static com.imooc.lib_audio.app.AudioHelper.getContext;
 
 public class MusicPlayerActivity extends BaseActivity {
 
@@ -66,6 +69,9 @@ public class MusicPlayerActivity extends BaseActivity {
 	private ImageView mNeddleiew;
 	private IndictorView mIndictorView;
 
+	private LinearLayout mLlOpreationView;
+
+	private LrcView lrcView;
 	private Animator mFavAnimator;
 	private ObjectAnimator mNeddlePlayAnimator;
 	private ObjectAnimator mNeddlePauseAnimator;
@@ -90,7 +96,7 @@ public class MusicPlayerActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_music_service_layout);
 		//使用转场动画 从底部弹出和退出
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 			getWindow().setEnterTransition(
 					TransitionInflater.from(this).inflateTransition(R.transition.transition_bottom2top));
 		}
@@ -118,6 +124,27 @@ public class MusicPlayerActivity extends BaseActivity {
 
 	private void initView() {
 		mBgView = findViewById(R.id.root_layout);
+		lrcView = findViewById(R.id.lrc_view);
+		lrcView.setOnSingerClickListener(new LrcView.OnSingleClickListener() {
+			@Override
+			public void onClick() {
+				//隐藏歌词布局
+				lrcView.setVisibility(View.GONE);
+				mNeddleiew.setVisibility(View.VISIBLE);
+				mIndictorView.setVisibility(View.VISIBLE);
+				mLlOpreationView.setVisibility(View.VISIBLE);
+			}
+		});
+
+		//拖动歌词条
+		lrcView.setDraggable(true, new LrcView.OnPlayClickListener() {
+			@Override
+			public boolean onPlayClick(long time) {
+				AudioController.getInstance().seekTo(time);
+				return true;
+			}
+		});
+		mLlOpreationView = findViewById(R.id.operation_view);
 		//背景虚化图
 		//ImageLoaderManager.getInstance().displayImageForViewGroup(mBgView, mAudioBean.getAlbumPic(), 100);
 		//返回按钮
@@ -127,12 +154,7 @@ public class MusicPlayerActivity extends BaseActivity {
 				onBackPressed();
 			}
 		});
-		findViewById(R.id.title_layout).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
 
-			}
-		});
 		//分享
 		findViewById(R.id.share_view).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -157,7 +179,7 @@ public class MusicPlayerActivity extends BaseActivity {
 		//歌曲作者
 		mAuthorView = findViewById(R.id.author_view);
 		mAuthorView.setText(mAudioBean.getAuthor());
-
+		//唱针
 		mNeddleiew = findViewById(R.id.needle);
 		//防止执行动画时被遮挡
 		mNeddleiew.bringToFront();
@@ -233,7 +255,14 @@ public class MusicPlayerActivity extends BaseActivity {
 
 			@Override
 			public void onSingleTouch(MotionEvent event) {
+
 				//显示歌词布局
+				lrcView.setVisibility(View.VISIBLE);
+				mIndictorView.setVisibility(View.GONE);
+				mNeddleiew.setVisibility(View.GONE);
+				mLlOpreationView.setVisibility(View.GONE);
+
+
 			}
 		});
 		//ViewPager转动时唱针收起
@@ -246,10 +275,10 @@ public class MusicPlayerActivity extends BaseActivity {
 
 	private void updateStateView() {
 		//还没进去Activity前 歌曲已经播放
-		if(AudioController.getInstance().isStartState()){
+		if (AudioController.getInstance().isStartState()) {
 			mPlayView.setImageResource(R.mipmap.audio_aj6);
 			mNeddleiew.setRotation(0);
-		}else{
+		} else {
 			mPlayView.setImageResource(R.mipmap.audio_aj7);
 			mNeddleiew.setRotation(-25);
 		}
@@ -296,6 +325,19 @@ public class MusicPlayerActivity extends BaseActivity {
 	private void initData() {
 		mAudioBean = AudioController.getInstance().getNowPlaying();
 		mPlayMode = AudioController.getInstance().getPlayMode();
+		//获取歌词
+		RequestCenter.getLyric(mAudioBean.getId(), new DisposeDataListener() {
+			@Override
+			public void onSuccess(Object responseObj) {
+				LyricBean lyric = (LyricBean) responseObj;
+				lrcView.loadLrc(lyric.getLrc().getLyric(), lyric.getTlyric().getLyric());
+			}
+
+			@Override
+			public void onFailure(Object reasonObj) {
+
+			}
+		});
 	}
 
 
@@ -306,18 +348,18 @@ public class MusicPlayerActivity extends BaseActivity {
 	}
 
 	@Subscribe(threadMode = ThreadMode.MAIN)
-	public void onAudioPlayModeEvent(AudioPlayModeEvent event){
+	public void onAudioPlayModeEvent(AudioPlayModeEvent event) {
 		mPlayMode = AudioController.getInstance().getPlayMode();
 		updatePlayModeView();
 	}
 
 	@Subscribe(threadMode = ThreadMode.MAIN)
-	public void onAudioStartEvent(AudioStartEvent event){
+	public void onAudioStartEvent(AudioStartEvent event) {
 		showPlayView();
 	}
 
 	@Subscribe(threadMode = ThreadMode.MAIN)
-	public void onAudioPauseEvent(AudioPauseEvent event){
+	public void onAudioPauseEvent(AudioPauseEvent event) {
 		showPauseView();
 	}
 
@@ -333,6 +375,7 @@ public class MusicPlayerActivity extends BaseActivity {
 		mTotalTimeView.setText(mAudioBean.getTotalTime());
 		changeFavouriteStatus(false);
 		mProgressView.setProgress(0);
+		lrcView.updateTime(0);
 	}
 
 	@Subscribe(threadMode = ThreadMode.MAIN)
@@ -344,6 +387,8 @@ public class MusicPlayerActivity extends BaseActivity {
 		//设置最大时间
 		mProgressView.setMax(totalTime);
 		mStartTimeView.setText(Utils.formatTime(currentTime));
+		//更新歌词
+		lrcView.updateTime(currentTime);
 		//更新状态
 		if (event.mStatus == CustomMediaPlayer.Status.PAUSED) {
 			//showPauseView();
@@ -351,8 +396,9 @@ public class MusicPlayerActivity extends BaseActivity {
 			//showPlayView();
 		}
 	}
+
 	@Subscribe(threadMode = ThreadMode.MAIN)
-	public void onAudioFavChangeEvent(AudioFavouriteEvent event){
+	public void onAudioFavChangeEvent(AudioFavouriteEvent event) {
 		changeFavouriteStatus(true);
 	}
 
@@ -370,28 +416,28 @@ public class MusicPlayerActivity extends BaseActivity {
 
 	private void showPlayAnimator() {
 		//唱针当前角度mNeddleiew.getRotation() : -25.0
-		if(mNeddleiew.getRotation() == -25.0) {
+		if (mNeddleiew.getRotation() == -25.0) {
 			if (mNeddlePlayAnimator.isPaused()) {
 				mNeddlePlayAnimator.resume();
 			} else {
 				mNeddlePlayAnimator.start();
 			}
-		}else{
+		} else {
 			Log.e(TAG, "showPlayAnimator() 唱针状态不正常");
 		}
 	}
 
 	private void showPauseAnimator() {
 		//唱针当前角度mNeddleiew.getRotation() : 0
-		if(mNeddleiew.getRotation() == 0){
+		if (mNeddleiew.getRotation() == 0) {
 			mNeddlePauseAnimator.start();
-		}else{
+		} else {
 			Log.e(TAG, "showPauseAnimator() 唱针状态不正常");
 		}
 	}
 
 
-	private void shareMusic(String url,String name){
+	private void shareMusic(String url, String name) {
 		final ShareContentData data = ShareContentData.Builder()
 				.shareType(5)
 				.shareTitle(name)

@@ -79,9 +79,95 @@
         android:id="@+id/indictor_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/title_layout" />
+        android:layout_below="@id/title_layout"
+        android:visibility="visible" />
 
+    <com.imooc.lib_common_ui.lrc.LrcView
+        android:id="@+id/lrc_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottom_layout"
+        android:layout_below="@+id/title_layout"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:visibility="gone" />
 
+    <LinearLayout
+        android:id="@+id/operation_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottom_layout"
+        android:orientation="horizontal"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/favourite_view"
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_like_white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:src="@drawable/ic_download_white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_yinxiao" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_commect_white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_song_more_audio" />
+        </LinearLayout>
+
+    </LinearLayout>
     <!--底部布局-->
     <RelativeLayout
         android:id="@+id/bottom_layout"
@@ -89,90 +175,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:paddingStart="12sp"
-        android:paddingTop="25dp"
+        android:paddingTop="10dp"
         android:paddingEnd="12dp"
         android:paddingBottom="25dp">
 
-        <LinearLayout
-            android:id="@+id/operation_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/favourite_view"
-                    android:layout_width="43dp"
-                    android:layout_height="43dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_like_white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="43dp"
-                    android:layout_height="43dp"
-                    android:src="@drawable/ic_download_white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="43dp"
-                    android:layout_height="43dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_yinxiao" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="43dp"
-                    android:layout_height="43dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_commect_white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="43dp"
-                    android:layout_height="43dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_song_more_audio" />
-            </LinearLayout>
-
-        </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/time_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/operation_view"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:paddingStart="12dp"

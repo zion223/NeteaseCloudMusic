@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -23,6 +24,8 @@ import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
+
+import static android.media.MediaPlayer.SEEK_CLOSEST;
 
 /**
  * 播放音频
@@ -105,6 +108,15 @@ public class AudioPlayer implements MediaPlayer.OnCompletionListener,
 	public void resume(){
 		if(getState() == CustomMediaPlayer.Status.PAUSED){
 			start();
+		}
+	}
+
+	/**
+	 * 	跳转到指定时间播放
+	 */
+	public void seekTo(long time){
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			mMediaPlayer.seekTo(time, SEEK_CLOSEST);
 		}
 	}
 
