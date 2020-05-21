@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.imooc.lib_common_ui.R;
 import com.lxj.xpopup.core.CenterPopupView;
 
+//创建歌单
 public class CreatePlayListDialog extends CenterPopupView implements View.OnClickListener{
 
     private EditText mEtName;

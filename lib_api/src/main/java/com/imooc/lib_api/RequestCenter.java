@@ -775,6 +775,20 @@ public class RequestCenter {
     }
 
     /**
+     *  对歌单添加或删除歌曲
+     *      参数:op: 从歌单增加单曲为 add, 删除为 del
+     *          pid: 歌单 id
+     *          tracks: 歌曲 id,可多个,用逗号隔开
+     */
+    public static void trackPlayList(boolean add, long pid, String tracks, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("op", add ? "add" : "del");
+        params.put("pid", pid);
+        params.put("tracks", tracks);
+        RequestCenter.getRequest(HttpConstants.PLAYLIST_TRACK, params, listener, CommonMessageBean.class);
+    }
+
+    /**
      *  关注或取消关注用户
      */
     public static void follow(String id, boolean follow, DisposeDataListener listener){

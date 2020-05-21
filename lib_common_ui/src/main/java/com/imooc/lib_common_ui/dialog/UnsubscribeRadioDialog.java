@@ -7,6 +7,7 @@ import android.view.View;
 import com.imooc.lib_common_ui.R;
 import com.lxj.xpopup.core.CenterPopupView;
 
+//取消订阅电台
 public class UnsubscribeRadioDialog extends CenterPopupView {
 
     IConfirmUnsubscribeListener listener;

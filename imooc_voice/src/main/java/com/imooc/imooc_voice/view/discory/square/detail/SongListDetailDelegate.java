@@ -338,15 +338,15 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 
 				List<PlaylistDetailBean.PlaylistBean.TrackIdsBean> trackIds = playlist.getTrackIds();
 
-				int trakIds = trackIds.size();
-				mTvSongNum.setText("(共" + (trakIds - 1) + "首)");
-
-				if (trakIds > 50) {
-					trakIds = 50;
+				int ids = trackIds.size();
+				mTvSongNum.setText("(共" + (ids - 1) + "首)");
+				//TODO 只请求前50首数据
+				if (ids > 50) {
+					ids = 50;
 				}
-				for (int i = 0; i < trakIds; i++) {
+				for (int i = 0; i < ids; i++) {
 					//最后一个参数不加逗号
-					if (i == trakIds - 1) {
+					if (i == ids - 1) {
 						params.append(trackIds.get(i).getId());
 					} else {
 						params.append(trackIds.get(i).getId()).append(",");
@@ -432,92 +432,7 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	}
 
 
-	//歌单的Adapter ArtistHomePage ArtistSong
-	public static class PlayListAdapter extends BaseQuickAdapter<SongDetailBean.SongsBean, BaseViewHolder> {
 
-		private Context mContext;
-		private Boolean hasHeader;
-		private NeteaseDelegate mDelegate;
-
-		public PlayListAdapter(Context context, NeteaseDelegate delegate, boolean hasHeader, @Nullable List<SongDetailBean.SongsBean> data) {
-			super(R.layout.item_gedan_detail_song, data);
-			this.mContext = context;
-			this.mDelegate = delegate;
-			this.hasHeader = hasHeader;
-		}
-
-		@Override
-		protected void convert(BaseViewHolder helper, SongDetailBean.SongsBean item) {
-			if(hasHeader){
-				helper.setText(R.id.item_play_no, String.valueOf(helper.getAdapterPosition()));
-			}else{
-				helper.setText(R.id.item_play_no, String.valueOf(helper.getAdapterPosition() + 1));
-			}
-			helper.setText(R.id.viewpager_list_toptext, item.getName());
-			helper.setText(R.id.viewpager_list_bottom_text, item.getAr().get(0).getName() + " - " + item.getAl().getName());
-			//当前歌曲是否有MV
-			if(item.getMv() != 0){
-				helper.setVisible(R.id.iv_list_video, true);
-			}
-
-			helper.setOnClickListener(R.id.iv_list_video, new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					mDelegate.getSupportDelegate().start(MvDeatilDelegate.newInstance(String.valueOf(item.getMv())));
-				}
-			});
-			helper.setOnClickListener(R.id.viewpager_list_button, new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					MusicPopUpDialog dialog = new MusicPopUpDialog.Builder()
-							.setContext(mContext)
-							.setDeleteViewInvisiable(true)
-							.setmAlbumName(item.getAl().getName())
-							.setmArtistName(item.getAr().get(0).getName())
-							.setmAlbumPic(item.getAl().getPicUrl())
-							.setmMusicName(item.getName())
-							.setListener(new MusicPopUpDialog.OnClickItemListener() {
-								@Override
-								public void onClickNext() {
-
-								}
-
-								@Override
-								public void onClickAddFav() {
-
-								}
-
-								@Override
-								public void onClickShare() {
-
-								}
-
-								@Override
-								public void onClickDelete() {
-
-								}
-
-								@Override
-								public void onClickArtistDetail() {
-									mDelegate.getSupportDelegate().start(ArtistDetailDelegate.newInstance(item.getAr().get(0).getId()));
-								}
-
-								@Override
-								public void onClickAlbumDetail() {
-									mDelegate.getSupportDelegate().start(SongListDetailDelegate.newInstance(ALBUM, item.getAl().getId()));
-								}
-
-								@Override
-								public void onClickComment() {
-									mDelegate.getSupportDelegate().start(CommentDelegate.newInstance(String.valueOf(item.getId()), SONG, item.getAl().getPicUrl(), item.getAr().get(0).getName(), item.getAl().getName()));
-								}
-							})
-							.build();
-					dialog.show();
-				}
-			});
-		}
-	}
 
 
 }

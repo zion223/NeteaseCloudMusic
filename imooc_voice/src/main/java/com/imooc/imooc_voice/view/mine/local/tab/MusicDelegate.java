@@ -31,7 +31,6 @@ public class MusicDelegate extends NeteaseLoadingDelegate {
 	/**
 	 * ui
 	 */
-
 	private View headerView;
 	private RecyclerView recyclerView;
 	private LinearLayoutManager linearLayoutManager;

@@ -14,6 +14,7 @@ import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.model.event.ArtistIdEvent;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
+import com.imooc.imooc_voice.view.discory.square.detail.PlayListAdapter;
 import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
 import com.imooc.lib_api.HttpConstants;
 import com.imooc.lib_api.RequestCenter;
@@ -42,7 +43,7 @@ public class ArtistHomePageDelegate extends NeteaseLoadingDelegate {
 	RecyclerView mRvArtistHotSong;
 
 	private String artistId;
-	private SongListDetailDelegate.PlayListAdapter mAdapter;
+	private PlayListAdapter mAdapter;
 
 	@Override
 	public void initView() {
@@ -59,9 +60,9 @@ public class ArtistHomePageDelegate extends NeteaseLoadingDelegate {
 				//热门歌曲
 				List<SongDetailBean.SongsBean> hotSongs = bean.getHotSongs();
 				if(hotSongs.size() > 5){
-					mAdapter = new SongListDetailDelegate.PlayListAdapter(getContext(), getParentDelegate(), false, hotSongs.subList(0, 5));
+					mAdapter = new PlayListAdapter(getContext(), getParentDelegate(), false, hotSongs.subList(0, 5));
 				}else{
-					mAdapter = new SongListDetailDelegate.PlayListAdapter(getContext(), getParentDelegate(), false, hotSongs);
+					mAdapter = new PlayListAdapter(getContext(), getParentDelegate(), false, hotSongs);
 				}
 				mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
 					@Override

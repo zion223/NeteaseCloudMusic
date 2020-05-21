@@ -11,6 +11,7 @@ import com.imooc.lib_common_ui.R;
 import com.lxj.xpopup.core.PositionPopupView;
 import com.lxj.xpopup.util.XPopupUtils;
 
+//MV分类Dialog
 public class MvSortDialog extends PositionPopupView implements View.OnClickListener {
 
 

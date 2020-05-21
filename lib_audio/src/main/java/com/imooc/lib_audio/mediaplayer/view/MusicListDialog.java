@@ -3,16 +3,11 @@ package com.imooc.lib_audio.mediaplayer.view;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +20,9 @@ import com.imooc.lib_audio.mediaplayer.events.AudioLoadEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioPlayModeEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioRemoveEvent;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
+import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.core.BottomPopupView;
+import com.lxj.xpopup.util.XPopupUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -53,6 +50,7 @@ public class MusicListDialog extends BottomPopupView {
     private ArrayList<AudioBean> mQueue; //播放队列
     private AudioBean mAudioBean; //当前正在播放歌曲
     private AudioController.PlayMode mPlayMode;
+    private StringBuilder tracks;
 
     MusicListDialog(@NonNull Context context) {
         super(context);
@@ -84,6 +82,17 @@ public class MusicListDialog extends BottomPopupView {
             mAudioBean = AudioController.getInstance().getNowPlaying();
             mPlayMode = AudioController.getInstance().getPlayMode();
         }
+        //获取trackId
+         tracks = new StringBuilder();
+
+        for (int i = 0; i < mQueue.size(); i++) {
+            //最后一个参数不加逗号
+            if (i == mQueue.size() - 1) {
+                tracks.append(mQueue.get(i).getId());
+            } else {
+                tracks.append(mQueue.get(i).getId()).append(",");
+            }
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -92,10 +101,16 @@ public class MusicListDialog extends BottomPopupView {
         mTipView = findViewById(R.id.mode_image_view);
         mDeleteView = findViewById(R.id.delete_view);
         mFavouriteView = findViewById(R.id.favourite_view);
+
+        //收藏歌曲到创建的歌单
         mFavouriteView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //TODO 收藏全部歌曲到歌单  需要请求创建的歌单数据
+
+                new XPopup.Builder(getContext())
+                        .asCustom(new MusicCollectDialog(getContext(), tracks.toString()))
+                        .show();
+
             }
         });
         mDeleteView.setOnClickListener(new  View.OnClickListener(){

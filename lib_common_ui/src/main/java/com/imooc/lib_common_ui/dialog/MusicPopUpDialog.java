@@ -111,9 +111,9 @@ public class MusicPopUpDialog implements View.OnClickListener {
 			TextView album = window.findViewById(R.id.tv_album_dialog);
 			//专辑是圆角图片
 			ImageLoaderManager.getInstance().displayImageForCorner(headerAlbum, mAlbumPic, 3);
-			artist.setText("歌手: " + mArtistName);
-			album.setText("专辑: " + mAlbumName);
-			headerMusicName.setText("歌曲: " + mMusicName);
+			artist.setText("歌手:  " + mArtistName);
+			album.setText("专辑:  " + mAlbumName);
+			headerMusicName.setText("歌曲:  " + mMusicName);
 			headerArtist.setText(mArtistName);
 			window.findViewById(R.id.ll_addfav_dialog).setOnClickListener(this);
 			window.findViewById(R.id.ll_share_dialog).setOnClickListener(this);
@@ -140,9 +140,7 @@ public class MusicPopUpDialog implements View.OnClickListener {
 			//分享
 		} else if (id == R.id.ll_share_dialog) {
 			mListener.onClickShare();
-			//查看歌曲信息
-		} else if (id == R.id.tv_detail_dialog) {
-			//删除
+			//删除歌曲
 		} else if (id == R.id.ll_delete_view) {
 			mListener.onClickDelete();
 			//查看歌手

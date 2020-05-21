@@ -14,6 +14,7 @@ import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.model.event.ArtistIdEvent;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
+import com.imooc.imooc_voice.view.discory.square.detail.PlayListAdapter;
 import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
 import com.imooc.lib_api.HttpConstants;
 import com.imooc.lib_api.RequestCenter;
@@ -36,7 +37,7 @@ public class ArtistSongDelegate extends NeteaseLoadingDelegate {
 
 
 	private RecyclerView mRecyclerView;
-	private SongListDetailDelegate.PlayListAdapter mAdapter;
+	private PlayListAdapter mAdapter;
 
 	private String artistId;
 
@@ -59,7 +60,7 @@ public class ArtistSongDelegate extends NeteaseLoadingDelegate {
 				SingerSongSearchBean bean = (SingerSongSearchBean) responseObj;
 				List<SongDetailBean.SongsBean> hotSongs = bean.getHotSongs();
 				mRecyclerView = rootView.findViewById(R.id.rv_delegate_normal);
-				mAdapter = new SongListDetailDelegate.PlayListAdapter(getContext(), getParentDelegate(),true, hotSongs);
+				mAdapter = new PlayListAdapter(getContext(), getParentDelegate(),true, hotSongs);
 				mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
 					@Override
 					public void onItemClick(BaseQuickAdapter adapter, View view, int position) {

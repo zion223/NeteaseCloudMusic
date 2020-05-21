@@ -11,7 +11,7 @@
         android:layout_marginLeft="20dp"
         android:textStyle="bold"
         android:textSize="16sp"
-        android:textColor="@color/text_color"
+        android:textColor="@color/color_333333"
         android:text="新建歌单"/>
     <EditText
         android:id="@+id/et_create_playlist_name"

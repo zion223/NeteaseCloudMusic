@@ -25,6 +25,8 @@ public class HttpConstants {
 
 	static String DELETE_PLAYLIST = ROOT_URL + "/playlist/delete";
 
+	static String PLAYLIST_TRACK = ROOT_URL + "/playlist/tracks";
+
 	static String FOLLOW = ROOT_URL + "/follow";
 
 	static String PLAYLIST_SUBSCRIBE = ROOT_URL + "/playlist/subscribe";
