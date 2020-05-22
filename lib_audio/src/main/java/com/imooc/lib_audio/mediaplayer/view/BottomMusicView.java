@@ -78,7 +78,11 @@ public class BottomMusicView extends RelativeLayout {
 			@Override
 			public void onClick(View v) {
 				//跳到音乐播放Activitity
-				MusicPlayerActivity.start((Activity) mContext);
+				if(AudioController.getInstance().getNowPlaying() != null){
+					MusicPlayerActivity.start((Activity) mContext);
+				}else{
+					Toast.makeText(getContext(), "当前播放队列无歌曲", Toast.LENGTH_SHORT).show();
+				}
 			}
 		});
 		mLeftView = rootView.findViewById(R.id.album_view);

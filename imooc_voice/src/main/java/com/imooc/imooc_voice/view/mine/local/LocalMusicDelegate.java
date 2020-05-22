@@ -6,7 +6,9 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.imooc.imooc_voice.R;
+import com.imooc.imooc_voice.view.mine.local.tab.AlbumDelegate;
 import com.imooc.imooc_voice.view.mine.local.tab.ArtistDelegate;
+import com.imooc.imooc_voice.view.mine.local.tab.FolderDelegate;
 import com.imooc.imooc_voice.view.mine.local.tab.MusicDelegate;
 import com.imooc.imooc_voice.view.mine.local.view.SortPopupDialog;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
@@ -57,7 +59,8 @@ public class LocalMusicDelegate extends NeteaseTabDelegate {
 	public List<NeteaseDelegate> setDelegateList() {
 		mDelegateList.add(new MusicDelegate());
 		mDelegateList.add(new ArtistDelegate());
-		mDelegateList.add(new MusicDelegate());
+		mDelegateList.add(new AlbumDelegate());
+		mDelegateList.add(new FolderDelegate());
 		return mDelegateList;
 	}
 

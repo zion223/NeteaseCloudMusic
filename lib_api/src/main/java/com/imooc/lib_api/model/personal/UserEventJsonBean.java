@@ -1424,7 +1424,7 @@ public class UserEventJsonBean {
          * durationms : 264290
          */
 
-        private int vid;
+        private String vid;
         private String coverUrl;
         private int duration;
         private int playTime;
@@ -1444,11 +1444,11 @@ public class UserEventJsonBean {
         private int durationms;
         private List<ResolutionsBean> resolutions;
 
-        public int getVid() {
+        public String getVid() {
             return vid;
         }
 
-        public void setVid(int vid) {
+        public void setVid(String vid) {
             this.vid = vid;
         }
 

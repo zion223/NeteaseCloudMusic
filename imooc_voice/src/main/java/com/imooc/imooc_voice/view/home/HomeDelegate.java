@@ -97,7 +97,6 @@ public class HomeDelegate extends NeteaseDelegate{
 	@Override
 	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
 		initView();
-		//initData();
 		sharePreferenceUtil = SharePreferenceUtil.getInstance(getContext());
 		LoginBean bean = GsonUtil.fromJSON(sharePreferenceUtil.getUserInfo(""), LoginBean.class);
 		if(bean != null){
@@ -112,32 +111,12 @@ public class HomeDelegate extends NeteaseDelegate{
 
 	}
 
-	private void initData() {
-		ArrayList<AudioBean> mLists = new ArrayList<>();
-		mLists.add(
-				new AudioBean("100002", "http://sq-sycdn.kuwo.cn/resource/n1/98/51/3777061809.mp3", "勇气",
-						"梁静茹", "勇气", "华语流行乐女歌手梁静茹演唱的一首疗伤情歌",
-						"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1559698193627&di=711751f16fefddbf4cbf71da7d8e6d66&imgtype=jpg&src=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D213168965%2C1040740194%26fm%3D214%26gp%3D0.jpg",
-						"4:40"));
-		mLists.add(
-				new AudioBean("100003", "http://sp-sycdn.kuwo.cn/resource/n2/52/80/2933081485.mp3", "灿烂如你",
-						"汪峰", "春天里", "摇滚歌手汪峰演唱的歌曲",
-						"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1559698239736&di=3433a1d95c589e31a36dd7b4c176d13a&imgtype=0&src=http%3A%2F%2Fpic.zdface.com%2Fupload%2F201051814737725.jpg",
-						"3:20"));
-		mLists.add(
-				new AudioBean("100004", "http://sr-sycdn.kuwo.cn/resource/n2/33/25/2629654819.mp3", "小幸运",
-						"田馥甄", "小幸运", "田馥甄 演唱的歌曲",
-						"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1559698289780&di=5146d48002250bf38acfb4c9b4bb6e4e&imgtype=0&src=http%3A%2F%2Fpic.baike.soso.com%2Fp%2F20131220%2Fbki-20131220170401-1254350944.jpg",
-						"2:45"));
-		AudioHelper.startMusicService(mLists);
-	}
-
 
 	//初始化控件
 	private void initView() {
 		mAdapter = new HomePagerAdapter(getChildFragmentManager(), CHANNELS);
 		mViewPager.setAdapter(mAdapter);
-		mViewPager.setOffscreenPageLimit(1);
+		mViewPager.setOffscreenPageLimit(4);
 		initMagicIndicator();
 	}
 

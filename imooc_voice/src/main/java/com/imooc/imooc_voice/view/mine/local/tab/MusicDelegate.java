@@ -17,6 +17,7 @@ import com.imooc.imooc_voice.util.IConstants;
 import com.imooc.imooc_voice.util.MusicUtils;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.lib_audio.app.AudioHelper;
+import com.imooc.lib_audio.mediaplayer.core.AudioController;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 
@@ -35,7 +36,7 @@ public class MusicDelegate extends NeteaseLoadingDelegate {
 	private MusicAdapter mAdapter;
 
 	/**
-	 * data
+	 * data  TODO 持久化存储  重新进入界面后 currentMusicPosition 重置
 	 */
 	private int currentMusicPosition = -1;
 
@@ -100,6 +101,11 @@ public class MusicDelegate extends NeteaseLoadingDelegate {
 			});
 			//播放状态
 			helper.setVisible(R.id.play_state, false);
+			if(AudioController.getInstance().getNowPlaying() != null && AudioController.getInstance().getNowPlaying().getName().equals(item.musicName)){
+				helper.setVisible(R.id.play_state, true);
+			}else{
+				helper.setVisible(R.id.play_state, false);
+			}
 		}
 
 	}

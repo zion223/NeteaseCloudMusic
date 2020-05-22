@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.lib_audio.R;
+import com.imooc.lib_audio.app.AudioHelper;
 import com.imooc.lib_audio.mediaplayer.core.AudioController;
 import com.imooc.lib_audio.mediaplayer.events.AudioLoadEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioPlayModeEvent;
@@ -31,6 +32,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
+//歌曲播放列表Dialog
 public class MusicListDialog extends BottomPopupView {
 
     private Context mContext;
@@ -152,7 +154,8 @@ public class MusicListDialog extends BottomPopupView {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 AudioBean entity = (AudioBean) adapter.getItem(position);
-                AudioController.getInstance().addAudio(entity);
+                AudioHelper.addAudio(entity);
+                dismiss();
             }
         });
         mRecyclerView.setAdapter(mMusicListAdapter);

@@ -22,7 +22,6 @@ public class TimeUtil {
 		c.set(Calendar.SECOND, 0);
 		c.set(Calendar.MILLISECOND, 0);
 		long sevenOClock = c.getTimeInMillis();
-		Log.d(TAG, "c : " + sevenOClock);
 		return sevenOClock < time;
 	}
 

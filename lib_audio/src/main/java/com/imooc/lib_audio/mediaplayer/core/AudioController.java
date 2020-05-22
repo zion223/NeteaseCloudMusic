@@ -92,7 +92,7 @@ public class AudioController {
 		}else{
 			//当前播放列表中有这个歌曲
 			AudioBean currentPlaying = getCurrentPlaying();
-			if(currentPlaying.getId().equals(bean.getId())){
+			if(!currentPlaying.getId().equals(bean.getId())){
 				setPlayIndex(query);
 			}
 		}
@@ -237,7 +237,8 @@ public class AudioController {
 		if (mQueue != null && !mQueue.isEmpty() && index >= 0 && index < mQueue.size()) {
 			return mQueue.get(index);
 		} else {
-			throw new AudioQueueEmptyException("当前播放队列为空,请先设置播放队列." + "当前Index："+ index + "播放队列大小"+mQueue.size());
+			return null;
+			//throw new AudioQueueEmptyException("当前播放队列为空,请先设置播放队列." + "当前Index: "+ index + "播放队列大小: " + mQueue.size());
 		}
 	}
 

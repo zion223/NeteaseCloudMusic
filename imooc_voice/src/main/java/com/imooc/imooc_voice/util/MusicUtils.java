@@ -26,8 +26,8 @@ import java.util.List;
  */
 public class MusicUtils implements IConstants {
 
-    public static final int FILTER_SIZE = 1 * 1024 * 1024;// 1MB
-    public static final int FILTER_DURATION = 1 * 60 * 1000;// 1分钟
+    public static final int FILTER_SIZE = 1024 * 1024;// 1MB
+    public static final int FILTER_DURATION = 60 * 1000;// 1分钟
 
 
     private static String[] proj_music = new String[]{
@@ -54,19 +54,17 @@ public class MusicUtils implements IConstants {
 
         Uri uri = MediaStore.Files.getContentUri("external");
         ContentResolver cr = context.getContentResolver();
-        StringBuilder mSelection = new StringBuilder(FileColumns.MEDIA_TYPE
+        // 查询语句：检索出.mp3为后缀名，时长大于1分钟，文件大小大于1MB的媒体文件
+
+        String mSelection = FileColumns.MEDIA_TYPE
                 + " = " + FileColumns.MEDIA_TYPE_AUDIO + " and " + "("
                 + FileColumns.DATA + " like'%.mp3' or " + Media.DATA
-                + " like'%.wma')");
-        // 查询语句：检索出.mp3为后缀名，时长大于1分钟，文件大小大于1MB的媒体文件
-        mSelection.append(" and " + Media.SIZE + " > " + FILTER_SIZE);
-        mSelection.append(" and " + Media.DURATION + " > " + FILTER_DURATION);
-        mSelection.append(") group by ( " + FileColumns.PARENT);
+                + " like'%.wma')" + " and " + Media.SIZE + " > " + FILTER_SIZE +
+                " and " + Media.DURATION + " > " + FILTER_DURATION +
+                ") group by ( " + FileColumns.PARENT;
 
-        List<FolderInfo> list = getFolderList(cr.query(uri, proj_folder, mSelection.toString(), null,
+        return getFolderList(cr.query(uri, proj_folder, mSelection, null,
                 null));
-
-        return list;
 
     }
 
@@ -80,16 +78,14 @@ public class MusicUtils implements IConstants {
 
         Uri uri = MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI;
         ContentResolver cr = context.getContentResolver();
-        StringBuilder where = new StringBuilder(MediaStore.Audio.Artists._ID
+
+        String where = MediaStore.Audio.Artists._ID
                 + " in (select distinct " + Media.ARTIST_ID
-                + " from audio_meta where (1=1 )");
-        where.append(" and " + Media.SIZE + " > " + FILTER_SIZE);
-        where.append(" and " + Media.DURATION + " > " + FILTER_DURATION);
-
-        where.append(")");
-
+                + " from audio_meta where (1=1 )" + " and " + Media.SIZE + " > " + FILTER_SIZE +
+                " and " + Media.DURATION + " > " + FILTER_DURATION +
+                ")";
         List<ArtistInfo> list = getArtistList(cr.query(uri, proj_artist,
-                where.toString(), null, PreferencesUtil.getInstance(context).getArtistSortOrder()));
+                where, null, PreferencesUtil.getInstance(context).getArtistSortOrder()));
 
         return list;
 
@@ -104,17 +100,15 @@ public class MusicUtils implements IConstants {
     public static List<AlbumInfo> queryAlbums(Context context) {
 
         ContentResolver cr = context.getContentResolver();
-        StringBuilder where = new StringBuilder(Albums._ID
-                + " in (select distinct " + Media.ALBUM_ID
-                + " from audio_meta where (1=1)");
-        where.append(" and " + Media.SIZE + " > " + FILTER_SIZE);
-        where.append(" and " + Media.DURATION + " > " + FILTER_DURATION);
-
-        where.append(" )");
 
         // Media.ALBUM_KEY 按专辑名称排序
+        String where = Albums._ID
+                + " in (select distinct " + Media.ALBUM_ID
+                + " from audio_meta where (1=1)" + " and " + Media.SIZE + " > " + FILTER_SIZE +
+                " and " + Media.DURATION + " > " + FILTER_DURATION +
+                " )";
         return getAlbumList(cr.query(Albums.EXTERNAL_CONTENT_URI, proj_album,
-                where.toString(), null, PreferencesUtil.getInstance(context).getAlbumSortOrder()));
+                where, null, PreferencesUtil.getInstance(context).getAlbumSortOrder()));
 
     }
 
@@ -129,7 +123,7 @@ public class MusicUtils implements IConstants {
     }
 
 
-    private static ArrayList<MusicInfo> queryMusic(Context context, String id, int from) {
+    public static ArrayList<MusicInfo> queryMusic(Context context, String id, int from) {
 
         Uri uri = Media.EXTERNAL_CONTENT_URI;
         ContentResolver cr = context.getContentResolver();

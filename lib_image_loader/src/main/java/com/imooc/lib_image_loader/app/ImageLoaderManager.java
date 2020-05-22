@@ -28,6 +28,9 @@ import com.imooc.lib_image_loader.image.CornerTransform;
 import com.imooc.lib_image_loader.image.CustomRequestListener;
 import com.imooc.lib_image_loader.image.ImageUtils;
 
+import java.io.File;
+import java.util.concurrent.ExecutionException;
+
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -66,6 +69,14 @@ public class ImageLoaderManager {
 
 	}
 
+	public File getImageFile(Context context, String url) throws ExecutionException, InterruptedException {
+		return Glide.with(context)
+				.downloadOnly()
+				.load(url)
+				.submit()
+				.get();
+
+	}
 	/**
 	 * 加载圆形图片
 	 * @param imageView

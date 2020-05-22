@@ -84,7 +84,6 @@ public class MvSortDialog extends PositionPopupView implements View.OnClickListe
 				}
 			}
 			area = view.getText().toString();
-			Log.e("dialog", "area" + area);
 		//类型
 		}else if(id == R.id.tv_mv_type_all || id == R.id.tv_mv_type_guan || id == R.id.tv_mv_type_yuansheng
 				|| id == R.id.tv_mv_type_xianchang || id == R.id.tv_mv_type_netease){
@@ -97,7 +96,6 @@ public class MvSortDialog extends PositionPopupView implements View.OnClickListe
 				}
 			}
 			type = view.getText().toString();
-			Log.e("dialog", "type" + type);
 
 			//排序
 		}else if(id == R.id.tv_mv_order_fast || id == R.id.tv_mv_order_new || id == R.id.tv_mv_order_hot){
@@ -109,7 +107,6 @@ public class MvSortDialog extends PositionPopupView implements View.OnClickListe
 				}
 			}
 			order = view.getText().toString();
-			Log.e("dialog", "order" + order);
 
 		}
 

@@ -136,6 +136,15 @@ public class MusicPlayerActivity extends BaseActivity {
 				mLlOpreationView.setVisibility(View.VISIBLE);
 			}
 		});
+		lrcView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				lrcView.setVisibility(View.GONE);
+				mNeddleiew.setVisibility(View.VISIBLE);
+				mIndictorView.setVisibility(View.VISIBLE);
+				mLlOpreationView.setVisibility(View.VISIBLE);
+			}
+		});
 
 		//拖动歌词条
 		lrcView.setDraggable(true, new LrcView.OnPlayClickListener() {

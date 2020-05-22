@@ -66,7 +66,6 @@ public class PrivateLetterDelegate extends NeteaseLoadingDelegate {
 
 		@Override
 		protected void convert(@NonNull BaseViewHolder adapter, PrivateMsgBean.Msg item) {
-			Log.e("id", item.getFromUser().getUserId() + "==" +item.getFromUser().getNickname());
 			//发私信的人 昵称
 			adapter.setText(R.id.tv_item_notification_fromuser, item.getFromUser().getNickname());
 			//发送时间
