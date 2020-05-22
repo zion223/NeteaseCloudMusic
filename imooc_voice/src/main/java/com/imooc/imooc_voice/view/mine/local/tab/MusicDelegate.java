@@ -15,10 +15,8 @@ import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.model.info.MusicInfo;
 import com.imooc.imooc_voice.util.IConstants;
 import com.imooc.imooc_voice.util.MusicUtils;
-import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.lib_audio.app.AudioHelper;
-import com.imooc.lib_audio.mediaplayer.core.AudioController;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 
@@ -51,7 +49,7 @@ public class MusicDelegate extends NeteaseLoadingDelegate {
 		ArrayList<MusicInfo> songList = (ArrayList) MusicUtils.queryMusic(getProxyActivity(), IConstants.START_FROM_LOCAL);
 		mAdapter = new MusicAdapter(songList);
 		headerView = LayoutInflater.from(getContext()).inflate(R.layout.item_music_header, null, false);
-		((TextView)headerView.findViewById(R.id.play_all_number)).setText("(共" + songList.size() +"首)");
+		((TextView) headerView.findViewById(R.id.play_all_number)).setText("(共" + songList.size() + "首)");
 		//添加头布局
 		mAdapter.setHeaderView(headerView);
 		mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -82,7 +80,6 @@ public class MusicDelegate extends NeteaseLoadingDelegate {
 	}
 
 
-
 	static class MusicAdapter extends BaseQuickAdapter<MusicInfo, BaseViewHolder> {
 
 		MusicAdapter(@Nullable List<MusicInfo> data) {
@@ -93,7 +90,7 @@ public class MusicDelegate extends NeteaseLoadingDelegate {
 		protected void convert(BaseViewHolder helper, final MusicInfo item) {
 			//歌曲名
 			helper.setText(R.id.viewpager_list_toptext, item.musicName);
-			helper.setText(R.id.viewpager_list_bottom_text, item.artist);
+			helper.setText(R.id.viewpager_list_bottom_text, item.artist + " - " + item.albumName);
 			final ImageView listView = helper.getView(R.id.viewpager_list_button);
 			listView.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -101,16 +98,8 @@ public class MusicDelegate extends NeteaseLoadingDelegate {
 					//弹出菜单
 				}
 			});
-			final ImageView playView = helper.getView(R.id.play_state);
-
-			//当前音乐是正在播放的音乐
-			playView.setVisibility(View.GONE);
-//			if (AudioController.getInstance().getNowPlaying().getName().equals(item.musicName)) {
-//				playView.setVisibility(View.VISIBLE);
-//			} else {
-//				playView.setVisibility(View.GONE);
-//			}
-
+			//播放状态
+			helper.setVisible(R.id.play_state, false);
 		}
 
 	}

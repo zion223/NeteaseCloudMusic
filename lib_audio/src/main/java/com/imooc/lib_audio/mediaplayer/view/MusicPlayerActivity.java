@@ -57,6 +57,7 @@ public class MusicPlayerActivity extends BaseActivity {
 	private TextView mAuthorView;
 
 	private ImageView mFavouriteView;
+	private ImageView mCommectView;
 
 	private SeekBar mProgressView;
 	private TextView mStartTimeView;
@@ -183,6 +184,15 @@ public class MusicPlayerActivity extends BaseActivity {
 		mNeddleiew = findViewById(R.id.needle);
 		//防止执行动画时被遮挡
 		mNeddleiew.bringToFront();
+		//评论
+		mCommectView = findViewById(R.id.iv_comment);
+		mCommectView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// 歌曲评论
+			}
+		});
+		//喜欢
 		mFavouriteView = findViewById(R.id.favourite_view);
 		mFavouriteView.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -197,8 +207,26 @@ public class MusicPlayerActivity extends BaseActivity {
 		mTotalTimeView.setText(mAudioBean.getTotalTime());
 		mProgressView = findViewById(R.id.progress_view);
 		mProgressView.setProgress(0);
-		mProgressView.setEnabled(false);
+		//seekBar 可拖动
+		mProgressView.setEnabled(true);
+		mProgressView.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
+			}
+
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+
+			}
+			//松开的时候
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+				//歌曲播放进度
+				AudioController.getInstance().seekTo(seekBar.getProgress());
+
+			}
+		});
 		mPlayModeView = findViewById(R.id.play_mode_view);
 		mPlayModeView.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -382,12 +410,12 @@ public class MusicPlayerActivity extends BaseActivity {
 	public void onAudioProgressEvent(AudioProgressEvent event) {
 		int totalTime = event.maxLength;
 		int currentTime = event.progress;
-
+		//设置当前进度
 		mProgressView.setProgress(currentTime);
 		//设置最大时间
 		mProgressView.setMax(totalTime);
 		mStartTimeView.setText(Utils.formatTime(currentTime));
-		//更新歌词
+		//更新歌词播放进度
 		lrcView.updateTime(currentTime);
 		//更新状态
 		if (event.mStatus == CustomMediaPlayer.Status.PAUSED) {
