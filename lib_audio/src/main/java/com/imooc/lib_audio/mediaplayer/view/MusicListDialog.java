@@ -201,7 +201,7 @@ public class MusicListDialog extends BottomPopupView {
     @SuppressLint("SetTextI18n")
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onAudioRemoveEvent(AudioRemoveEvent event) {
-        mQueue =AudioController.getInstance().getQueue();
+        mQueue = AudioController.getInstance().getQueue();
         mPlayNumView.setText("(" + mQueue.size() + ")");
         mMusicListAdapter.setNewData(mQueue);
     }

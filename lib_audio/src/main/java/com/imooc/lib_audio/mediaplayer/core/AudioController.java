@@ -245,20 +245,7 @@ public class AudioController {
 	public AudioBean getNowPlaying() {
 		return getPlaying(mQueueIndex);
 	}
-	public void changeFavourite() {
-		if(GreenDaoHelper.selectFavourite(getCurrentPlaying()) != null){
-			//当前是已经收藏的  取消收藏
-			GreenDaoHelper.removeFavourite(getNowPlaying());
-			//发送事件
-			EventBus.getDefault().post(new AudioFavouriteEvent(false));
-		}else{
-			//添加到收藏收藏
-			GreenDaoHelper.addFavourite(getNowPlaying());
-			//发送事件
-			EventBus.getDefault().post(new AudioFavouriteEvent(true));
-		}
 
-	}
 	//插放完毕事件处理
 	@Subscribe(threadMode = ThreadMode.MAIN)
 	public void onAudioCompleteEvent(AudioCompleteEvent event) {

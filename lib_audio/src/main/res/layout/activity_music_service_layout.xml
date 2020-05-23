@@ -147,13 +147,27 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/tv_comment_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/iv_comment"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginLeft="28dp"
+                    android:text="999+"
+                    android:textSize="10sp"
+                    android:textColor="@color/white"/>
+                <ImageView
+                    android:id="@+id/iv_comment"
+                    android:layout_width="43dp"
+                    android:layout_height="43dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_commect_white" />
+            </RelativeLayout>
 
-            <ImageView
-                android:id="@+id/iv_comment"
-                android:layout_width="43dp"
-                android:layout_height="43dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_commect_white" />
         </LinearLayout>
 
         <LinearLayout

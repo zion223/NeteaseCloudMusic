@@ -41,6 +41,7 @@ public class MusicCollectDialog extends CenterPopupView {
 	protected void onCreate() {
 		super.onCreate();
 		mRecyclerView = findViewById(R.id.recycler_playlist);
+		//获取当前用户ID
 		final int userId = SharePreferenceUtil.getInstance(mContext).getUserId();
 
 		RequestCenter.getUserPlaylist(userId, new DisposeDataListener() {

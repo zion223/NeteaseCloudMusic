@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
@@ -24,11 +25,13 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.imooc.lib_api.RequestCenter;
+import com.imooc.lib_api.model.LikeListBean;
+import com.imooc.lib_api.model.song.LikeMusicBean;
 import com.imooc.lib_api.model.song.LyricBean;
+import com.imooc.lib_api.model.song.PlayListCommentBean;
 import com.imooc.lib_audio.R;
 import com.imooc.lib_audio.mediaplayer.core.AudioController;
 import com.imooc.lib_audio.mediaplayer.core.CustomMediaPlayer;
-import com.imooc.lib_audio.mediaplayer.db.GreenDaoHelper;
 import com.imooc.lib_audio.mediaplayer.events.AudioFavouriteEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioLoadEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioPauseEvent;
@@ -36,6 +39,7 @@ import com.imooc.lib_audio.mediaplayer.events.AudioPlayModeEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioProgressEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioStartEvent;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
+import com.imooc.lib_audio.mediaplayer.util.SharePreferenceUtil;
 import com.imooc.lib_audio.mediaplayer.util.Utils;
 import com.imooc.lib_common_ui.base.BaseActivity;
 import com.imooc.lib_common_ui.lrc.LrcView;
@@ -47,6 +51,9 @@ import com.lxj.xpopup.XPopup;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MusicPlayerActivity extends BaseActivity {
@@ -62,6 +69,7 @@ public class MusicPlayerActivity extends BaseActivity {
 	private SeekBar mProgressView;
 	private TextView mStartTimeView;
 	private TextView mTotalTimeView;
+	private TextView mCommentNum;
 
 	private ImageView mPlayModeView;
 	private ImageView mPlayView;
@@ -82,6 +90,7 @@ public class MusicPlayerActivity extends BaseActivity {
 	 */
 	private AudioBean mAudioBean; //当前正在播放歌曲
 	private AudioController.PlayMode mPlayMode;//当前播放模式
+	private List<String> likeList = new ArrayList<>(); //当前喜欢的音乐ID集合
 
 	//从外部启动该Activity
 	public static void start(Activity context) {
@@ -125,6 +134,7 @@ public class MusicPlayerActivity extends BaseActivity {
 
 	private void initView() {
 		mBgView = findViewById(R.id.root_layout);
+		mCommentNum = findViewById(R.id.tv_comment_num);
 		lrcView = findViewById(R.id.lrc_view);
 		lrcView.setOnSingerClickListener(new LrcView.OnSingleClickListener() {
 			@Override
@@ -198,19 +208,23 @@ public class MusicPlayerActivity extends BaseActivity {
 		mCommectView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// 歌曲评论
+				// TODO  打开歌曲评论 架构原因
+
 			}
 		});
-		//喜欢
+		//喜欢音乐
 		mFavouriteView = findViewById(R.id.favourite_view);
+		//设置喜欢标志为 默认为false
+		mFavouriteView.setTag(false);
 		mFavouriteView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				//收藏与否
-				AudioController.getInstance().changeFavourite();
+				changeFavouriteStatus();
 			}
 		});
-		changeFavouriteStatus(false);
+		//是否喜欢该音乐
+		loadFavouriteStatus();
 		mStartTimeView = findViewById(R.id.start_time_view);
 		mTotalTimeView = findViewById(R.id.total_time_view);
 		mTotalTimeView.setText(mAudioBean.getTotalTime());
@@ -228,6 +242,7 @@ public class MusicPlayerActivity extends BaseActivity {
 			public void onStartTrackingTouch(SeekBar seekBar) {
 
 			}
+
 			//松开的时候
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
@@ -335,28 +350,67 @@ public class MusicPlayerActivity extends BaseActivity {
 		}
 	}
 
-	private void changeFavouriteStatus(boolean anim) {
-		//TODO 喜欢歌曲
-		if (GreenDaoHelper.selectFavourite(mAudioBean) != null) {
-			mFavouriteView.setImageResource(R.mipmap.audio_aeh);
-		} else {
-			mFavouriteView.setImageResource(R.mipmap.audio_aef);
-		}
-		if (anim) {
-			if (mFavAnimator != null)
-				mFavAnimator.end();
-			//缩放	SCALE_X、SCALE_Y   1.0 -> 1.2 -> 1.0 动画
-			PropertyValuesHolder animX =
-					PropertyValuesHolder.ofFloat(View.SCALE_X.getName(), 1.0f, 1.2f, 1.0f);
-			PropertyValuesHolder animY =
-					PropertyValuesHolder.ofFloat(View.SCALE_Y.getName(), 1.0f, 1.2f, 1.0f);
-			//属性动画
-			mFavAnimator = ObjectAnimator.ofPropertyValuesHolder(mFavouriteView, animX, animY);
-			//持续加速差值器
-			mFavAnimator.setInterpolator(new AccelerateInterpolator());
-			mFavAnimator.setDuration(300);
-			mFavAnimator.start();
-		}
+	//是否喜欢该音乐
+	void loadFavouriteStatus() {
+		RequestCenter.getLikeList(SharePreferenceUtil.getInstance(getBaseContext()).getUserId(), new DisposeDataListener() {
+			@Override
+			public void onSuccess(Object responseObj) {
+				LikeListBean bean = (LikeListBean) responseObj;
+				likeList = bean.getIds();
+				for (String id : likeList) {
+					if (mAudioBean.getId().equals(id)) {
+						//设置红心
+						mFavouriteView.setImageResource(R.mipmap.audio_aeh);
+						//已喜欢音乐标识
+						mFavouriteView.setTag(true);
+						return;
+					}
+				}
+			}
+
+			@Override
+			public void onFailure(Object reasonObj) {
+
+			}
+		});
+	}
+
+	//喜欢或取消喜欢该音乐
+	private void changeFavouriteStatus() {
+		final boolean liked = (boolean) mFavouriteView.getTag();
+
+		RequestCenter.getlikeMusic(mAudioBean.getId(), !liked, new DisposeDataListener() {
+			@Override
+			public void onSuccess(Object responseObj) {
+				LikeMusicBean bean = (LikeMusicBean) responseObj;
+				if (liked && bean.getCode() == 200) {
+					//设置为不喜欢
+					mFavouriteView.setImageResource(R.mipmap.audio_aef);
+				} else {
+					//设置为喜欢
+					mFavouriteView.setImageResource(R.mipmap.audio_aeh);
+				}
+				if (mFavAnimator != null)
+					mFavAnimator.end();
+				//缩放	SCALE_X、SCALE_Y   1.0 -> 1.2 -> 1.0 动画
+				PropertyValuesHolder animX =
+						PropertyValuesHolder.ofFloat(View.SCALE_X.getName(), 1.0f, 1.2f, 1.0f);
+				PropertyValuesHolder animY =
+						PropertyValuesHolder.ofFloat(View.SCALE_Y.getName(), 1.0f, 1.2f, 1.0f);
+				//属性动画
+				mFavAnimator = ObjectAnimator.ofPropertyValuesHolder(mFavouriteView, animX, animY);
+				//持续加速差值器
+				mFavAnimator.setInterpolator(new AccelerateInterpolator());
+				mFavAnimator.setDuration(300);
+				mFavAnimator.start();
+			}
+
+			@Override
+			public void onFailure(Object reasonObj) {
+
+			}
+		});
+
 	}
 
 	private void initData() {
@@ -375,6 +429,25 @@ public class MusicPlayerActivity extends BaseActivity {
 
 			}
 		});
+		//获取评论数量
+		RequestCenter.getMusicComment(mAudioBean.getId(), new DisposeDataListener() {
+			@SuppressLint("SetTextI18n")
+			@Override
+			public void onSuccess(Object responseObj) {
+				PlayListCommentBean commentBean = (PlayListCommentBean) responseObj;
+				if(commentBean.getTotal() > 1000){
+					mCommentNum.setText("999+");
+				}else{
+					mCommentNum.setText(String.valueOf(commentBean.getTotal()));
+				}
+			}
+
+			@Override
+			public void onFailure(Object reasonObj) {
+
+			}
+		});
+
 	}
 
 
@@ -410,7 +483,8 @@ public class MusicPlayerActivity extends BaseActivity {
 		mAuthorView.setText(mAudioBean.getAuthor());
 		mStartTimeView.setText("00:00");
 		mTotalTimeView.setText(mAudioBean.getTotalTime());
-		changeFavouriteStatus(false);
+		//重新加载是否喜欢该音乐
+		loadFavouriteStatus();
 		mProgressView.setProgress(0);
 		lrcView.updateTime(0);
 	}
@@ -432,11 +506,6 @@ public class MusicPlayerActivity extends BaseActivity {
 		} else {
 			//showPlayView();
 		}
-	}
-
-	@Subscribe(threadMode = ThreadMode.MAIN)
-	public void onAudioFavChangeEvent(AudioFavouriteEvent event) {
-		changeFavouriteStatus(true);
 	}
 
 	private void showPlayView() {

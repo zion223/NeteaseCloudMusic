@@ -118,8 +118,6 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	private String copyWriter;
 	//专辑或者歌单  0: 歌曲  1: mv 2: 歌单 3: 专辑 4: 电台 5: 视频 6: 动态
 	private int type;
-	//评论数量
-	private String count;
 	//歌单图片
 	private String gedanImg;
 	//歌单创建者
@@ -254,7 +252,6 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 				userId = String.valueOf(bean.getAlbum().getArtist().getId());
 				//用于评论Delegate数据
 
-				count = String.valueOf(album.getInfo().getCommentCount());
 				gedanImg = album.getPicUrl();
 				gedanCreator = album.getArtist().getName();
 				gedanTitle = album.getName();
@@ -288,7 +285,7 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	 */
 	private void initPlayListView() {
 
-		//copyWeriter
+		//copyWriter
 		if (!TextUtils.isEmpty(copyWriter)) {
 			mTvCopyWriter.setText(copyWriter);
 			mTvCopyWriter.setVisibility(View.VISIBLE);
@@ -314,7 +311,6 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 				mTvCommentCount.setText(String.valueOf(playlist.getCommentCount()));
 
 				//传递给评论Delegate的数据
-				count = String.valueOf(playlist.getCommentCount());
 				gedanImg = String.valueOf(playlist.getCoverImgUrl());
 				gedanCreator = playlist.getCreator().getNickname();
 				//创建歌单的用户ID
@@ -339,7 +335,7 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 				List<PlaylistDetailBean.PlaylistBean.TrackIdsBean> trackIds = playlist.getTrackIds();
 
 				int ids = trackIds.size();
-				mTvSongNum.setText("(共" + (ids - 1) + "首)");
+				mTvSongNum.setText("(共" + ids + "首)");
 				//TODO 只请求前50首数据
 				if (ids > 50) {
 					ids = 50;

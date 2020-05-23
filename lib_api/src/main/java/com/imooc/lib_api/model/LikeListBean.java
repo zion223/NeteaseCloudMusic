@@ -12,7 +12,7 @@ public class LikeListBean {
 
     private long checkPoint;
     private int code;
-    private List<Long> ids;
+    private List<String> ids;
 
     public long getCheckPoint() {
         return checkPoint;
@@ -30,11 +30,11 @@ public class LikeListBean {
         this.code = code;
     }
 
-    public List<Long> getIds() {
+    public List<String> getIds() {
         return ids;
     }
 
-    public void setIds(List<Long> ids) {
+    public void setIds(List<String> ids) {
         this.ids = ids;
     }
 

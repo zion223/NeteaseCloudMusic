@@ -494,10 +494,11 @@ public class RequestCenter {
 
     /**
      *  喜欢音乐列表
+     *      uid 用户ID
      */
     public static void getLikeList(long id, DisposeDataListener listener){
         RequestParams params = new RequestParams();
-        params.put("id", id);
+        params.put("uid", id);
         RequestCenter.getRequest(HttpConstants.LIKE_LIST, params, listener, LikeListBean.class);
     }
 
@@ -514,9 +515,10 @@ public class RequestCenter {
     /**
      *  喜欢音乐
      */
-    public static void getlikeMusic(long id, DisposeDataListener listener){
+    public static void getlikeMusic(String id, boolean like, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("id", id);
+        params.put("like", like);
         RequestCenter.getRequest(HttpConstants.LIKE_MUSIC, params, listener, LikeMusicBean.class);
     }
 

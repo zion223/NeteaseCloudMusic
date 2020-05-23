@@ -16,12 +16,15 @@ import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.lib_api.RequestCenter;
 import com.imooc.lib_api.model.dj.DjProgramBean;
+import com.imooc.lib_api.model.song.SongUrlBean;
+import com.imooc.lib_audio.app.AudioHelper;
+import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
 import java.util.List;
 
-
+//电台节目列表
 public class RadioProgramDelegate extends NeteaseLoadingDelegate {
 
     private RecyclerView mRecyclerView;
@@ -70,6 +73,28 @@ public class RadioProgramDelegate extends NeteaseLoadingDelegate {
                         DjProgramBean bean  = (DjProgramBean) responseObj;
                         List<DjProgramBean.ProgramsBean> programs = bean.getPrograms();
                         mAdapter = new RadioProgramAdapter(programs);
+                        //播放电台节目
+                        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                DjProgramBean.ProgramsBean item = (DjProgramBean.ProgramsBean) adapter.getItem(position);
+                                //获取电台节目播放地址 TODO 无法获取播放地址
+                                RequestCenter.getSongUrl(item.getId(), new DisposeDataListener() {
+                                    @Override
+                                    public void onSuccess(Object responseObj) {
+                                        SongUrlBean urlBean = (SongUrlBean) responseObj;
+                                        String url = urlBean.getData().get(0).getUrl();
+                                        AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), url, item.getName(), item.getDj().getNickname(), item.getRadio().getName(), item.getRadio().getName(), item.getRadio().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDuration())));
+                                    }
+
+                                    @Override
+                                    public void onFailure(Object reasonObj) {
+
+                                    }
+                                });
+
+                            }
+                        });
                         mRecyclerView.setAdapter(mAdapter);
                         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                         addRootView();
@@ -99,7 +124,7 @@ public class RadioProgramDelegate extends NeteaseLoadingDelegate {
 
         @Override
         protected void convert(@NonNull BaseViewHolder adapter, DjProgramBean.ProgramsBean bean) {
-
+            //节目名称
             adapter.setText(R.id.item_radio_program_toptext, bean.getName());
             //编号
             adapter.setText(R.id.item_radio_program_no, String.valueOf(adapter.getLayoutPosition() + 1));
@@ -107,7 +132,9 @@ public class RadioProgramDelegate extends NeteaseLoadingDelegate {
             adapter.setText(R.id.item_radio_program_createtime, TimeUtil.getTimeStandardOnlyYMD(bean.getCreateTime()));
             //播放数量
             int listenerCount = bean.getListenerCount();
+            //播放数量
             adapter.setText(R.id.item_radio_program_playnum, SearchUtil.getCorresPondingString(listenerCount));
+            //节目时间
             adapter.setText(R.id.item_radio_program_duration, TimeUtil.getTimeNoYMDH(bean.getDuration()));
         }
 

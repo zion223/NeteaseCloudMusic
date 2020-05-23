@@ -55,8 +55,6 @@ public class GreenDaoHelper {
 	 */
 	public static Favourite selectFavourite(AudioBean audioBean) {
 		FavouriteDao dao = mDaoSession.getFavouriteDao();
-		Favourite favourite =
-				dao.queryBuilder().where(FavouriteDao.Properties.AudioId.eq(audioBean.getId())).unique();
-		return favourite;
+		return dao.queryBuilder().where(FavouriteDao.Properties.AudioId.eq(audioBean.getId())).unique();
 	}
 }

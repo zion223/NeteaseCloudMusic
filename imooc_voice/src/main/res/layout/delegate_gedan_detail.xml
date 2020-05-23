@@ -284,7 +284,7 @@
                             android:layout_alignLeft="@+id/tv_gedan_detail_toolbar_title"
                             android:gravity="top"
                             android:textColor="@color/white"
-                            android:visibility="invisible"
+                            android:visibility="gone"
                             android:textSize="8sp" />
                     </RelativeLayout>
                 </android.support.v7.widget.Toolbar>
