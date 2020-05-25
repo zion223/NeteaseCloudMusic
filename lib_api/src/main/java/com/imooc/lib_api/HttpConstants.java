@@ -103,6 +103,8 @@ public class HttpConstants {
 
 	static String COMMENT_LIKE = ROOT_URL + "/comment/like";
 
+	static String COMMENT_HOT = ROOT_URL + "/comment/hot";
+
 	static String RESOURCE_LIKE = ROOT_URL + "/resource/like";
 
 	static String INTELLIGANCE_LIST = ROOT_URL + "/playmode/intelligence/list";

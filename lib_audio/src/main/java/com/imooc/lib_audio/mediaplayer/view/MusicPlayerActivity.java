@@ -135,20 +135,12 @@ public class MusicPlayerActivity extends BaseActivity {
 	private void initView() {
 		mBgView = findViewById(R.id.root_layout);
 		mCommentNum = findViewById(R.id.tv_comment_num);
+		//歌词
 		lrcView = findViewById(R.id.lrc_view);
 		lrcView.setOnSingerClickListener(new LrcView.OnSingleClickListener() {
 			@Override
 			public void onClick() {
 				//隐藏歌词布局
-				lrcView.setVisibility(View.GONE);
-				mNeddleiew.setVisibility(View.VISIBLE);
-				mIndictorView.setVisibility(View.VISIBLE);
-				mLlOpreationView.setVisibility(View.VISIBLE);
-			}
-		});
-		lrcView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
 				lrcView.setVisibility(View.GONE);
 				mNeddleiew.setVisibility(View.VISIBLE);
 				mIndictorView.setVisibility(View.VISIBLE);
@@ -208,7 +200,7 @@ public class MusicPlayerActivity extends BaseActivity {
 		mCommectView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO  打开歌曲评论 架构原因
+				// TODO  打开歌曲评论
 
 			}
 		});
@@ -364,6 +356,11 @@ public class MusicPlayerActivity extends BaseActivity {
 						//已喜欢音乐标识
 						mFavouriteView.setTag(true);
 						return;
+					}else{
+						//设置红心
+						mFavouriteView.setImageResource(R.mipmap.audio_aef);
+						//已喜欢音乐标识
+						mFavouriteView.setTag(false);
 					}
 				}
 			}

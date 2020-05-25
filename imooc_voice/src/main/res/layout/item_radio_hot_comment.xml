@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp"
+    android:paddingTop="10dp">
+
+    <ImageView
+        android:id="@+id/iv_item_hot_comment_avatar_img"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_test" />
+
+    <TextView
+        android:id="@+id/tv_item_hot_comment_avatar_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/iv_item_hot_comment_avatar_img"
+        android:text="三字三十三"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/tv_item_hot_comment_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_item_hot_comment_avatar_img"
+        android:layout_alignLeft="@+id/tv_item_hot_comment_avatar_name"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="15dp"
+        android:text="评论内容"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="35dp"
+        android:layout_height="2dp"
+        android:layout_below="@+id/tv_item_hot_comment_content"
+        android:layout_alignLeft="@+id/tv_item_hot_comment_avatar_name"
+        android:layout_marginTop="10dp"
+        android:background="@color/app_background" />
+
+    <TextView
+        android:id="@+id/tv_item_hot_comment_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_item_hot_comment_content"
+        android:layout_toRightOf="@+id/view_line"
+        android:text="《我要走二环》 郭德纲于谦"
+        android:textSize="14sp" />
+</RelativeLayout>

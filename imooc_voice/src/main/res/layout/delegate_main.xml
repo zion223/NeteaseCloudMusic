@@ -299,7 +299,7 @@
                     app:hTipVisiblity="false"
                     app:paddingLeft="20dp"
                     app:paddingRight="30dp"
-                    app:rightText="林志颖北京"
+                    app:rightText="周杰伦青岛"
                     app:tileText="演出" />
 
                 <com.imooc.lib_common_ui.HornizeItemView
@@ -309,7 +309,7 @@
                     app:hTipVisiblity="false"
                     app:paddingLeft="20dp"
                     app:paddingRight="30dp"
-                    app:rightText="JBL耳机78元"
+                    app:rightText="Freelace耳机728元"
                     app:tileText="商城" />
 
                 <com.imooc.lib_common_ui.HornizeItemView

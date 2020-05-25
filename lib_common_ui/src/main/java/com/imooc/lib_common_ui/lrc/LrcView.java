@@ -78,6 +78,7 @@ public class LrcView extends View {
 		 */
 		boolean onPlayClick(long time);
 	}
+
     /**
      * 点击歌词布局
      */

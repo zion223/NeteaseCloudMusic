@@ -222,7 +222,7 @@ public class RadioDetailDelegate extends NeteaseLoadingDelegate implements View.
 		public Fragment getItem(int i) {
 			switch (i) {
 				case 0:
-					return RadioInfoDelegate.newInstance(djId, img, name, rcmd, info, sort);
+					return RadioInfoDelegate.newInstance(djId, img, name, rcmd, info, sort, id);
 				case 1:
 					return RadioProgramDelegate.newInstance(id);
 				default:

@@ -550,6 +550,18 @@ public class RequestCenter {
     }
 
     /**
+     * 获取热门评论
+     *  id : 资源 id
+     *  type: 数字 , 资源类型 , 对应歌曲 , mv, 专辑 , 歌单 , 电台, 视频对应以下类型
+     *      PS. 0: 歌曲 1: mv 2: 歌单 3: 专辑 4: 电台 5: 视频
+     */
+    public static void getHotComment(String id, int type, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        params.put("type", type);
+        RequestCenter.getRequest(HttpConstants.COMMENT_HOT, params, listener, PlayListCommentBean.class);
+    }
+    /**
      *  给资源点赞
      *  type : 资源类型 1: mv 4: 电台 5: 视频 6: 动态
      *  t : 是否点赞 ,1 为点赞 ,0 为取消点赞
@@ -702,11 +714,18 @@ public class RequestCenter {
      *   asc : 排序方式,默认为 false (新 => 老 ) 设置 true 可改为 老 => 新
      */
     public static void getRadioProgram(String rid, DisposeDataListener listener){
-        RequestParams params = new RequestParams();
-        params.put("rid", rid);
-        RequestCenter.getRequest(HttpConstants.DJ_PROGRAM, params, listener, DjProgramBean.class);
+        getRadioProgram(rid, false, listener);
     }
 
+    /**
+     *  asc 为true
+     */
+    public static void getRadioProgram(String rid, boolean asc, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("rid", rid);
+        params.put("asc", asc);
+        RequestCenter.getRequest(HttpConstants.DJ_PROGRAM, params, listener, DjProgramBean.class);
+    }
     /**
      * 电台 - 24小时主播榜
      */

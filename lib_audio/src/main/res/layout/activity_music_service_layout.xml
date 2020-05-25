@@ -157,7 +157,6 @@
                     android:layout_alignLeft="@+id/iv_comment"
                     android:layout_marginTop="7dp"
                     android:layout_marginLeft="28dp"
-                    android:text="999+"
                     android:textSize="10sp"
                     android:textColor="@color/white"/>
                 <ImageView
