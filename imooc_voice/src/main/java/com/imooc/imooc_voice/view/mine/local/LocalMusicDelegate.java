@@ -26,7 +26,6 @@ public class LocalMusicDelegate extends NeteaseTabDelegate {
 
 
 	private BasePopupView tabMoreDialog;
-	private List<NeteaseDelegate> mDelegateList = new ArrayList<>();
 
 	private static final String[] mTitleDataList = {"单曲", "歌手", "专辑", "文件夹"};
 	private static final SortPopupDialog.SortType[] mFramentType =

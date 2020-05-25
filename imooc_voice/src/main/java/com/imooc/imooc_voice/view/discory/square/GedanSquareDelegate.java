@@ -17,7 +17,6 @@ public class GedanSquareDelegate extends NeteaseTabDelegate {
 	//TODO 添加推荐 频道  精品 频道  /top/playlist/highquality
 	private static final CharSequence[] CHANNELS = {"官方", "ACG", "华语", "影视原声", "摇滚", "经典", "电子", "流行", "怀旧"};
 
-	private List<NeteaseDelegate> mDelegateList = new ArrayList<>();
 
 	@Override
 	public CharSequence[] setTitleDataList() {

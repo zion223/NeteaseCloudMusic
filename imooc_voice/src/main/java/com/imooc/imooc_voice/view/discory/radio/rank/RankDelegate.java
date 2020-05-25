@@ -15,8 +15,6 @@ public class RankDelegate extends NeteaseTabDelegate {
 
 	private static final String[] mTitleDataList = {"主播榜", "节目榜", "电台榜"};
 
-	private ArrayList<NeteaseDelegate> mDelegateList = new ArrayList<>();
-
 
 	@Override
 	public CharSequence[] setTitleDataList() {

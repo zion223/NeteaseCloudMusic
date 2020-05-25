@@ -12,7 +12,6 @@ public class MineCollectTabDelegate extends NeteaseTabDelegate {
 
 	private static final String[] mTitleDataList = {"专辑", "歌手", "视频", "专栏", "MLOG"};
 
-	private List<NeteaseDelegate> mDelegateList = new ArrayList<>();
 
 	@Override
 	public String[] setTitleDataList() {

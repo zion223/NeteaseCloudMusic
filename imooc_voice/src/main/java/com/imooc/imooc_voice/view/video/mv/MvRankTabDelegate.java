@@ -12,7 +12,6 @@ import java.util.List;
 public class MvRankTabDelegate extends NeteaseTabDelegate {
 
 
-	private ArrayList<NeteaseDelegate> mDelegates = new ArrayList<>();
 
 	private static final String[] mTitleDataList = {"内地", "港台", "欧美", "韩国", "日本"};
 
@@ -30,9 +29,9 @@ public class MvRankTabDelegate extends NeteaseTabDelegate {
 	@Override
 	public List<NeteaseDelegate> setDelegateList() {
 		for (String s : mTitleDataList) {
-			mDelegates.add(MvRankDelegate.newInstance(s));
+			mDelegateList.add(MvRankDelegate.newInstance(s));
 		}
-		return mDelegates;
+		return mDelegateList;
 	}
 
 	@Override

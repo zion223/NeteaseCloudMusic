@@ -14,7 +14,6 @@ import java.util.List;
 public class MessageTabDelegate extends NeteaseTabDelegate {
 
 
-	private ArrayList<NeteaseDelegate> mDelegateList = new ArrayList<>();
 	private static final String[] mTitleDataList = {"私信", "评论", "@我", "通知"};
 
 	/**

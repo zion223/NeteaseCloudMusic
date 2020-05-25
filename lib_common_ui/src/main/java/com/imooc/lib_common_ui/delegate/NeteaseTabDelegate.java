@@ -20,6 +20,7 @@ import net.lucode.hackware.magicindicator.ViewPagerHelper;
 import net.lucode.hackware.magicindicator.buildins.UIUtil;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -40,6 +41,7 @@ public abstract class NeteaseTabDelegate extends NeteaseDelegate {
 	@BindView(R2.id.delegate_tab_search)
 	ImageView mIvSearch;
 
+	protected List<NeteaseDelegate> mDelegateList = new ArrayList<>();
 	private MultiFragmentPagerAdapter mAdapter;
 	private CommonNavigator commonNavigator;
 
