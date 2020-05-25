@@ -5,6 +5,7 @@
     android:orientation="horizontal">
 
     <ImageView
+        android:id="@+id/iv_collect_artist_song"
         android:layout_width="40dp"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
@@ -12,6 +13,7 @@
         android:src="@drawable/ic_collect_gray" />
 
     <TextView
+        android:id="@+id/tv_artist_song_header_num"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginLeft="5dp"

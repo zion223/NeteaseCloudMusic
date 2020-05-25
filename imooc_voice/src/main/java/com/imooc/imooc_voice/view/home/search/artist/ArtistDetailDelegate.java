@@ -127,13 +127,12 @@ public class ArtistDetailDelegate extends NeteaseDelegate {
 
 				ImageLoaderManager.getInstance().displayImageForCorner(mIvArtistBackground, artist.getImg1v1Url()+"?param=200y200");
 
-				SpannableString msp = new SpannableString("专辑" + bean.getArtist().getAlbumSize());
-				msp.setSpan(new AbsoluteSizeSpan(30), 2, msp.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-				SpannableString msp1 = new SpannableString("视频" + bean.getArtist().getMvSize());
-				msp1.setSpan(new AbsoluteSizeSpan(30), 2, msp1.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-				mTitleDataList[2] = msp;
-				mTitleDataList[3] = msp1;
-
+				SpannableString albumString = new SpannableString("专辑" + bean.getArtist().getAlbumSize());
+				albumString.setSpan(new AbsoluteSizeSpan(30), 2, albumString.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+				SpannableString videoString = new SpannableString("视频" + bean.getArtist().getMvSize());
+				videoString.setSpan(new AbsoluteSizeSpan(30), 2, videoString.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+				mTitleDataList[2] = albumString;
+				mTitleDataList[3] = videoString;
 
 				initMagicIndicator();
 
@@ -163,12 +162,14 @@ public class ArtistDetailDelegate extends NeteaseDelegate {
 		ViewPagerHelper.bind(mArtistMagicIndicator, mArtistViewPager);
 	}
 
+	//返回
 	@OnClick(R2.id.img_artist_detail_back)
 	void OnClickPop(){
 		getSupportDelegate().pop();
 		SharePreferenceUtil.getInstance(getContext()).removeCurrentArtistId();
 	}
 
+	//关注或取消关注歌手
 	@OnClick({R2.id.fl_artist_detail_followed, R2.id.ll_artist_detail_follow})
 	void onClickSubscribeArtist(View view){
 		int id = view.getId();

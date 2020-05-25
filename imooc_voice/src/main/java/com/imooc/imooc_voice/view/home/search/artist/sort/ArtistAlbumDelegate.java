@@ -42,14 +42,13 @@ public class ArtistAlbumDelegate extends NeteaseLoadingDelegate {
 		if(TextUtils.isEmpty(artistId)){
 			artistId = SharePreferenceUtil.getInstance(getContext()).getCurrentArtistId();
 		}
-
+		mRecyclerView = rootView.findViewById(R.id.rv_delegate_normal);
 		RequestCenter.getSingerAlbum(artistId, new DisposeDataListener() {
 			@Override
 			public void onSuccess(Object responseObj) {
 
 				SingerAblumSearchBean bean = (SingerAblumSearchBean) responseObj;
 				List<SingerAblumSearchBean.HotAlbumsBean> hotSongs = bean.getHotAlbums();
-				mRecyclerView = rootView.findViewById(R.id.rv_delegate_normal);
 				mAdapter = new ArtistAlbumAdapter(hotSongs);
 				mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
 					@Override

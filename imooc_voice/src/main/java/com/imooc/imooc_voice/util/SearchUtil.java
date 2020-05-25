@@ -15,8 +15,7 @@ public class SearchUtil {
 		if(content.contains(keywords)){
 			int start = content.indexOf(keywords);
 			int end = start + keywords.length();
-			String resString = content;
-			SpannableStringBuilder style = new SpannableStringBuilder(resString);
+			SpannableStringBuilder style = new SpannableStringBuilder(content);
 			style.setSpan(new ForegroundColorSpan(Color.parseColor("#2196f3")), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			return style;
 		}else{

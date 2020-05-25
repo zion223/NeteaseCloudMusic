@@ -127,7 +127,6 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	//创建歌单的用户ID
 	private String userId;
 
-	final StringBuilder params = new StringBuilder();
 
 	public static SongListDetailDelegate newInstance(int type, long id) {
 		return newInstance(type, id, "");
@@ -340,6 +339,7 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 				if (ids > 50) {
 					ids = 50;
 				}
+				final StringBuilder params = new StringBuilder();
 				for (int i = 0; i < ids; i++) {
 					//最后一个参数不加逗号
 					if (i == ids - 1) {
