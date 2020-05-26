@@ -15,6 +15,9 @@
         android:id="@+id/tv_item_hot_comment_avatar_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/iv_item_hot_comment_avatar_img"
+        android:layout_alignBottom="@+id/iv_item_hot_comment_avatar_img"
+        android:gravity="center_vertical"
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/iv_item_hot_comment_avatar_img"
         android:text="三字三十三"
@@ -28,6 +31,8 @@
         android:layout_alignLeft="@+id/tv_item_hot_comment_avatar_name"
         android:layout_marginTop="5dp"
         android:layout_marginRight="15dp"
+        android:maxLines="2"
+        android:ellipsize="end"
         android:text="评论内容"
         android:textColor="@color/black"
         android:textSize="14sp" />
@@ -38,7 +43,7 @@
         android:layout_height="2dp"
         android:layout_below="@+id/tv_item_hot_comment_content"
         android:layout_alignLeft="@+id/tv_item_hot_comment_avatar_name"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:background="@color/app_background" />
 
     <TextView
@@ -48,5 +53,6 @@
         android:layout_below="@+id/tv_item_hot_comment_content"
         android:layout_toRightOf="@+id/view_line"
         android:text="《我要走二环》 郭德纲于谦"
+        android:layout_marginTop="10dp"
         android:textSize="14sp" />
 </RelativeLayout>

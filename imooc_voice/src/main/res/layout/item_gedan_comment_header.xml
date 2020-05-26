@@ -21,7 +21,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginBottom="3dp"
-        android:text="64"
         android:textSize="13sp"
         android:layout_marginLeft="5dp"/>
 </LinearLayout>

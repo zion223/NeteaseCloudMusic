@@ -32,7 +32,6 @@ public class MusicDelegate extends NeteaseLoadingDelegate {
 	 */
 	private View headerView;
 	private RecyclerView recyclerView;
-	private LinearLayoutManager linearLayoutManager;
 	private MusicAdapter mAdapter;
 
 	/**
@@ -45,8 +44,7 @@ public class MusicDelegate extends NeteaseLoadingDelegate {
 	public void initView() {
 
 		recyclerView = rootView.findViewById(R.id.recyclerview);
-		linearLayoutManager = new LinearLayoutManager(getContext());
-
+		//查找本地音乐
 		ArrayList<MusicInfo> songList = (ArrayList) MusicUtils.queryMusic(getProxyActivity(), IConstants.START_FROM_LOCAL);
 		mAdapter = new MusicAdapter(songList);
 		headerView = LayoutInflater.from(getContext()).inflate(R.layout.item_music_header, null, false);
@@ -71,7 +69,7 @@ public class MusicDelegate extends NeteaseLoadingDelegate {
 			}
 		});
 		recyclerView.setAdapter(mAdapter);
-		recyclerView.setLayoutManager(linearLayoutManager);
+		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		addRootView();
 	}
 
@@ -107,6 +105,7 @@ public class MusicDelegate extends NeteaseLoadingDelegate {
 				helper.setVisible(R.id.play_state, false);
 			}
 		}
+
 
 	}
 }

@@ -4,9 +4,6 @@ import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -19,6 +16,8 @@ import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.lib_api.RequestCenter;
 import com.imooc.lib_api.model.dj.DjDetailBean;
+import com.imooc.lib_common_ui.delegate.MultiFragmentPagerAdapter;
+import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_common_ui.dialog.UnsubscribeRadioDialog;
 import com.imooc.lib_common_ui.navigator.CommonNavigatorCreater;
@@ -30,7 +29,13 @@ import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RadioDetailDelegate extends NeteaseLoadingDelegate implements View.OnClickListener {
+
+	private static final String ARGS_RADIO_ID = "ARGS_RADIO_ID";
+
 
 	private TextView mTvRadioTitle;
 	private TextView mTvRadioSubscribed;
@@ -40,17 +45,9 @@ public class RadioDetailDelegate extends NeteaseLoadingDelegate implements View.
 	private MagicIndicator mRadioMagicIndicator;
 	private ViewPager mRadioViewPager;
 
-	private static final String ARGS_RADIO_ID = "ARGS_RADIO_ID";
+	private String rid;
 	private ImageLoaderManager manager;
-	private String id;
-	// for InfoDelegate
-	private String img;
-	private String name;
-	private String rcmd;
-	private String info;
-	private String sort;
-	private String djId;
-
+	private MultiFragmentPagerAdapter mAdapter ;
 	private static CharSequence[] mTitleDataList = new CharSequence[2];
 
 	public static RadioDetailDelegate newInstance(long id) {
@@ -66,7 +63,7 @@ public class RadioDetailDelegate extends NeteaseLoadingDelegate implements View.
 		super.onCreate(savedInstanceState);
 		final Bundle args = getArguments();
 		if (args != null) {
-			id = args.getString(ARGS_RADIO_ID);
+			rid = args.getString(ARGS_RADIO_ID);
 		}
 		manager = ImageLoaderManager.getInstance();
 
@@ -89,7 +86,7 @@ public class RadioDetailDelegate extends NeteaseLoadingDelegate implements View.
 		mRadioViewPager = rootView.findViewById(R.id.view_pager_radio_detail);
 
 
-		RequestCenter.getRadioDetail(id, new DisposeDataListener() {
+		RequestCenter.getRadioDetail(rid, new DisposeDataListener() {
 			@SuppressLint("SetTextI18n")
 			@Override
 			public void onSuccess(Object responseObj) {
@@ -112,14 +109,14 @@ public class RadioDetailDelegate extends NeteaseLoadingDelegate implements View.
 					mTvRadioSubscrib.setTag(false);
 				}
 
-				img = bean.getDjRadio().getDj().getAvatarUrl();
-				name = bean.getDjRadio().getDj().getNickname();
-				rcmd = bean.getDjRadio().getDj().getSignature();
-				info = bean.getDjRadio().getDesc();
-				sort = bean.getDjRadio().getCategory();
-				djId = String.valueOf(bean.getDjRadio().getDj().getUserId());
-
-				mRadioViewPager.setAdapter(new RadioTabAdapter(getChildFragmentManager()));
+				final List<NeteaseDelegate> mDelegates = new ArrayList<>();
+				//添加电台主页
+				mDelegates.add(RadioInfoDelegate.newInstance(rid));
+				//
+				mDelegates.add(RadioProgramDelegate.newInstance(rid));
+				mAdapter = new MultiFragmentPagerAdapter(getChildFragmentManager());
+				mAdapter.init(mDelegates);
+				mRadioViewPager.setAdapter(mAdapter);
 				mRadioViewPager.setCurrentItem(1);
 
 				mTitleDataList[0] = "详情";
@@ -172,7 +169,7 @@ public class RadioDetailDelegate extends NeteaseLoadingDelegate implements View.
 				@Override
 				public void onConfirm() {
 					//已经订阅则取消订阅
-					RequestCenter.getSubRadio(id, false, new DisposeDataListener() {
+					RequestCenter.getSubRadio(rid, false, new DisposeDataListener() {
 						@Override
 						public void onSuccess(Object responseObj) {
 							mTvRadioSubscrib.setText("订阅");
@@ -192,7 +189,7 @@ public class RadioDetailDelegate extends NeteaseLoadingDelegate implements View.
 					.show();
 		}else{
 			//订阅电台
-			RequestCenter.getSubRadio(id, true, new DisposeDataListener() {
+			RequestCenter.getSubRadio(rid, true, new DisposeDataListener() {
 				@Override
 				public void onSuccess(Object responseObj) {
 
@@ -212,28 +209,4 @@ public class RadioDetailDelegate extends NeteaseLoadingDelegate implements View.
 	}
 
 
-	class RadioTabAdapter extends FragmentPagerAdapter {
-
-		RadioTabAdapter(FragmentManager fm) {
-			super(fm);
-		}
-
-		@Override
-		public Fragment getItem(int i) {
-			switch (i) {
-				case 0:
-					return RadioInfoDelegate.newInstance(djId, img, name, rcmd, info, sort, id);
-				case 1:
-					return RadioProgramDelegate.newInstance(id);
-				default:
-					break;
-			}
-			return null;
-		}
-
-		@Override
-		public int getCount() {
-			return 2;
-		}
-	}
 }
