@@ -62,7 +62,7 @@ public class UserEventDelegate extends NeteaseLoadingDelegate {
 					public void onSuccess(Object responseObj) {
 						UserEventBean bean = (UserEventBean) responseObj;
 						List<UserEventBean.EventsBean> events = bean.getEvents();
-						mAdapter = new EventAdapter(events);
+						mAdapter = new EventAdapter(getParentDelegate(), events);
 						mRecyclerView.setAdapter(mAdapter);
 						mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 						addRootView();

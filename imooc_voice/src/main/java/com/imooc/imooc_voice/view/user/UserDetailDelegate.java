@@ -108,7 +108,7 @@ public class UserDetailDelegate extends NeteaseDelegate {
 
 		//设置发私信透明度
 		mTvSendMsg.getBackground().mutate().setAlpha(200);
-
+		//查看粉丝和关注的人
 		RequestCenter.getUserDetail(userId, new DisposeDataListener() {
 			@SuppressLint("SetTextI18n")
 			@Override
@@ -178,12 +178,14 @@ public class UserDetailDelegate extends NeteaseDelegate {
 
 				//关注用户成功
 				FollowBean bean = (FollowBean) responseObj;
-				//提示关注成功toast
-				Toast.makeText(getContext(), bean.getFollowContent(), Toast.LENGTH_SHORT).show();
-				//显示关注天数
-				String followTimeContent = bean.getFollowTimeContent();
-				mLlFollowUser.setVisibility(View.INVISIBLE);
-				mFlFollowedUser.setVisibility(View.VISIBLE);
+				if(bean.getCode() == 200){
+					//提示关注成功toast
+					Toast.makeText(getContext(), bean.getFollowContent(), Toast.LENGTH_SHORT).show();
+					//显示关注天数 TODO
+					String followTimeContent = bean.getFollowTimeContent();
+					mLlFollowUser.setVisibility(View.INVISIBLE);
+					mFlFollowedUser.setVisibility(View.VISIBLE);
+				}
 			}
 
 			@Override
@@ -206,9 +208,10 @@ public class UserDetailDelegate extends NeteaseDelegate {
 
 				//取消关注用户成功
 				FollowBean bean = (FollowBean) responseObj;
-
-				mLlFollowUser.setVisibility(View.VISIBLE);
-				mFlFollowedUser.setVisibility(View.INVISIBLE);
+				if(bean.getCode() == 200){
+					mLlFollowUser.setVisibility(View.VISIBLE);
+					mFlFollowedUser.setVisibility(View.INVISIBLE);
+				}
 			}
 
 			@Override
@@ -218,6 +221,14 @@ public class UserDetailDelegate extends NeteaseDelegate {
 		});
 
 	}
+
+	//查看粉丝和关注的人
+	@OnClick(R2.id.tv_user_detail_sub)
+	void onClickSubAndFollowDetail(){
+
+		getSupportDelegate().start(UserFriendDelegate.newInstance(userId));
+	}
+
 
 	@OnClick(R2.id.img_user_detail_back)
 	void onClickBack() {

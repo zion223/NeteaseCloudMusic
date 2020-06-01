@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/iv_item_gedan_comment_avatar_img"
-        android:text="三字三十三"
+        android:text="评论用户"
         android:textSize="13sp" />
 
     <ImageView
@@ -49,7 +49,7 @@
         android:layout_alignLeft="@+id/tv_item_gedan_comment_time"
         android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
-        android:text="有我里里"
+        android:text="评论内容"
         android:textColor="@color/black"
         android:textSize="14sp" />
 

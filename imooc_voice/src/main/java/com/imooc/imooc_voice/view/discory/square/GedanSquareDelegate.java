@@ -1,13 +1,11 @@
 package com.imooc.imooc_voice.view.discory.square;
 
-import android.view.View;
 
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseTabDelegate;
 
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -37,8 +35,8 @@ public class GedanSquareDelegate extends NeteaseTabDelegate {
 	}
 
 	@Override
-	public void setShowSearchView(int vivisiable) {
-		super.setShowSearchView(View.GONE);
+	public void setShowSearchView(boolean vivisiable) {
+		super.setShowSearchView(false);
 	}
 
 	@Override

@@ -57,6 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_item_search_user_name"
             android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:singleLine="true"

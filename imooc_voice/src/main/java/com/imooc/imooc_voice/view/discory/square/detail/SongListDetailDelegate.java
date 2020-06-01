@@ -29,8 +29,11 @@ import com.imooc.imooc_voice.view.video.MvDeatilDelegate;
 import com.imooc.lib_api.HttpConstants;
 import com.imooc.lib_api.RequestCenter;
 import com.imooc.lib_api.model.AlbumDetailBean;
+import com.imooc.lib_api.model.AlbumDynamicBean;
+import com.imooc.lib_api.model.CommonMessageBean;
 import com.imooc.lib_api.model.PlaylistDetailBean;
 import com.imooc.lib_api.model.TopListDetailBean;
+import com.imooc.lib_api.model.search.AlbumSearchBean;
 import com.imooc.lib_api.model.song.SongDetailBean;
 import com.imooc.lib_audio.app.AudioHelper;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
@@ -219,12 +222,13 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 		mIvAvatarView.setVisibility(View.GONE);
 		//显示专辑特有图标
 		mIvAlbumAttachIcon.setVisibility(View.VISIBLE);
+		//专辑详情
 		RequestCenter.getAlbumDetail(songlistId, new DisposeDataListener() {
 			@SuppressLint("SetTextI18n")
 			@Override
 			public void onSuccess(Object responseObj) {
 				AlbumDetailBean bean = (AlbumDetailBean) responseObj;
-				TopListDetailBean.Album album = bean.getAlbum();
+				AlbumSearchBean.ResultBean.AlbumsBean album = bean.getAlbum();
 				//专辑名称
 				if (bean.getAlbum().getAlias().size() != 0) {
 					mTvDetailTitle.setText(bean.getAlbum().getName() + bean.getAlbum().getAlias().get(0));
@@ -236,17 +240,17 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 				//毛玻璃效果 Failed to allocate a 144000016 byte allocation with 25165824 free bytes and 95MB until OOM, target footprint 462221240, growth limit 536870912
 				//manager.displayImageForViewGroup(mAppBarLayout, album.getBlurPicUrl(), 200);
 				//显示歌手名
-				mTvDetailAvatarName.setText("歌手:  " + album.getArtist().getName());
+				if(album.getArtists().size() > 1){
+					//拼接歌手名
+					mTvDetailAvatarName.setText("歌手:  " + album.getArtists().get(0).getName() + "/" + album.getArtists().get(1).getName());
+				}else {
+					mTvDetailAvatarName.setText("歌手:  " + album.getArtist().getName());
+				}
 				mTvDetailDesc.setText("发行时间:" + TimeUtil.getTimeStandardOnlyYMD(album.getPublishTime()) + "\n" + album.getDescription());
-				//评论数量
-				mTvCommentCount.setText(String.valueOf(album.getInfo().getCommentCount()));
-				//分享数量
-				mTvShareCount.setText(String.valueOf(album.getInfo().getShareCount()));
+
 				//歌曲数量
 				mTvSongNum.setText("(共" + bean.getSongs().size() + "首)");
-				//
-				mTvSongCollectCount.setText("收藏");
-				mLlPlayListSubscribe.setVisibility(View.VISIBLE);
+
 				//歌手ID
 				userId = String.valueOf(bean.getAlbum().getArtist().getId());
 				//用于评论Delegate数据
@@ -267,6 +271,36 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 				});
 				mRecyclerViewGedan.setAdapter(mAdapter);
 				mRecyclerViewGedan.setLayoutManager(new LinearLayoutManager(getContext()));
+				//获取专辑动态
+				RequestCenter.getAlbumDynamic(songlistId, new DisposeDataListener() {
+					@Override
+					public void onSuccess(Object responseObj) {
+						AlbumDynamicBean bean = (AlbumDynamicBean) responseObj;
+						//评论数量
+						mTvCommentCount.setText(String.valueOf(bean.getCommentCount()));
+						//分享数量
+						mTvShareCount.setText(String.valueOf(bean.getShareCount()));
+						//收藏的数量
+						mTvSongCollectCount.setText("收藏(" + SearchUtil.getCorresPondingString(bean.getSubCount()) + ")");
+
+						mTvSongCollectCount1.setText(String.valueOf(bean.getSubCount()));
+
+						if (bean.isSub()) {
+							//已收藏
+							mLlPlayListSubscribed.setVisibility(View.VISIBLE);
+							mLlPlayListSubscribe.setVisibility(View.GONE);
+						} else {
+							//未收藏
+							mLlPlayListSubscribe.setVisibility(View.VISIBLE);
+							mLlPlayListSubscribed.setVisibility(View.GONE);
+						}
+					}
+
+					@Override
+					public void onFailure(Object reasonObj) {
+
+					}
+				});
 				addRootView();
 
 			}
@@ -302,6 +336,8 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 
 				//播放数量
 				mTvGedanPlayNum.setText(SearchUtil.getCorresPondingString(playlist.getPlayCount()));
+				//显示播放数量旁边的
+				mIvPlayNumIcon.setVisibility(View.VISIBLE);
 				manager.displayImageForCircle(mIvAvatarView, playlist.getCreator().getAvatarUrl());
 
 				manager.displayImageForCorner(mImageViewGedan, playlist.getCoverImgUrl(), 5);
@@ -323,9 +359,11 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 				if (playlist.isSubscribed()) {
 					//已收藏
 					mLlPlayListSubscribed.setVisibility(View.VISIBLE);
+					mLlPlayListSubscribe.setVisibility(View.GONE);
 				} else {
 					//未收藏
 					mLlPlayListSubscribe.setVisibility(View.VISIBLE);
+					mLlPlayListSubscribed.setVisibility(View.GONE);
 				}
 
 				//毛玻璃效果背景
@@ -352,6 +390,7 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 
 					@Override
 					protected Void doInBackground(Void... voids) {
+						//获取歌曲详情
 						RequestCenter.getSongDetail(params.toString(), new DisposeDataListener() {
 							@Override
 							public void onSuccess(Object responseObj) {
@@ -408,7 +447,57 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	void onClickGedanComment() {
 
 		getSupportDelegate().start(CommentDelegate.newInstance(songlistId, type, gedanImg, gedanCreator, gedanTitle));
+	}
 
+	//收藏或取消收藏 专辑或者歌单
+	@OnClick({R2.id.ll_gedan_subscribe, R2.id.ll_gedan_subscribed})
+	void onClickSub(){
+		// followed true 表示未收藏
+		boolean followed = mLlPlayListSubscribe.getVisibility() == View.VISIBLE;
+		if(type == PLAYLIST){
+			//收藏歌单
+			RequestCenter.subscribePlayList(songlistId, followed, new DisposeDataListener() {
+				@Override
+				public void onSuccess(Object responseObj) {
+					changeFollowStatus((CommonMessageBean) responseObj, followed);
+				}
+
+				@Override
+				public void onFailure(Object reasonObj) {
+
+				}
+			});
+		}else if(type == ALBUM){
+			//收藏专辑
+			RequestCenter.subscribeAlbum(songlistId, followed, new DisposeDataListener() {
+				@Override
+				public void onSuccess(Object responseObj) {
+					changeFollowStatus((CommonMessageBean) responseObj, followed);
+				}
+
+				@Override
+				public void onFailure(Object reasonObj) {
+
+				}
+			});
+		}
+
+	}
+
+
+	//更改收藏和未收藏的显示状态
+	private void changeFollowStatus(CommonMessageBean responseObj, boolean followed) {
+		if (responseObj.getCode() == 200) {
+			//收藏或取消收藏成功
+			if (followed) {
+				//收藏成功
+				mLlPlayListSubscribed.setVisibility(View.VISIBLE);
+				mLlPlayListSubscribe.setVisibility(View.GONE);
+			} else {
+				mLlPlayListSubscribed.setVisibility(View.GONE);
+				mLlPlayListSubscribe.setVisibility(View.VISIBLE);
+			}
+		}
 	}
 
 	//查看用户详情或者歌手

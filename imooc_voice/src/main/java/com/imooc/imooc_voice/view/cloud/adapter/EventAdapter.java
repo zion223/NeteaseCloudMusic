@@ -13,6 +13,8 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.util.GsonUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
+import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
+import com.imooc.imooc_voice.view.user.UserDetailDelegate;
 import com.imooc.lib_api.HttpConstants;
 import com.imooc.lib_api.RequestCenter;
 import com.imooc.lib_api.model.VideoUrlBean;
@@ -20,6 +22,7 @@ import com.imooc.lib_api.model.personal.UserEventBean;
 import com.imooc.lib_api.model.personal.UserEventJsonBean;
 import com.imooc.lib_audio.app.AudioHelper;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
+import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
 import com.imooc.lib_video.videoplayer.CustomJzVideoView;
@@ -34,15 +37,21 @@ import java.util.List;
 
 import cn.jzvd.Jzvd;
 
+import static com.imooc.imooc_voice.Constants.ALBUM;
+import static com.imooc.imooc_voice.Constants.PLAYLIST;
+
 //用户动态适配器
 public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, BaseViewHolder> implements View.OnClickListener {
 
+	//图片加载
 	private ImageLoaderManager manager;
+	private NeteaseDelegate mDelegate;
 	private List<ImageView> imgList = new ArrayList<>();
 
-	public EventAdapter(@Nullable List<UserEventBean.EventsBean> data) {
+	public EventAdapter(NeteaseDelegate delegate, @Nullable List<UserEventBean.EventsBean> data) {
 		super(R.layout.item_user_event, data);
 		manager = ImageLoaderManager.getInstance();
+		this.mDelegate = delegate;
 	}
 
 	@Override
@@ -50,14 +59,24 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
 		//用户头像
 		ImageView avatarView = adapter.getView(R.id.iv_avatar);
 		manager.displayImageForCircle(avatarView, item.getUser().getAvatarUrl());
+		avatarView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				//用户详情
+				mDelegate.getSupportDelegate().start(UserDetailDelegate.newInstance(item.getUser().getUserId()));
+			}
+		});
+		//昵称
 		adapter.setText(R.id.tv_nickname, item.getUser().getNickname());
+		//发布时间
 		adapter.setText(R.id.tv_publish_time, TimeUtil.getTimeStandardOnlyYMDChinese(item.getShowTime()));
 		//转发、评论、点赞 数量
 		adapter.setText(R.id.tv_relayout_count, item.getInfo().getShareCount() == 0 ? "" : String.valueOf(item.getInfo().getShareCount()));
 		adapter.setText(R.id.tv_comment_count, item.getInfo().getCommentCount() == 0 ? "" : String.valueOf(item.getInfo().getCommentCount()));
 		adapter.setText(R.id.tv_like_count, item.getInfo().getLikedCount() == 0 ? "" : String.valueOf(item.getInfo().getLikedCount()));
-
+		//初始化图片控件
 		initImageView(adapter);
+		//解析JSON
 		String jsonEvnet = item.getJson();
 		UserEventJsonBean userEventJsonBean = GsonUtil.fromJSON(jsonEvnet, UserEventJsonBean.class);
 		if (userEventJsonBean != null) {
@@ -67,7 +86,9 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
 				adapter.setVisible(R.id.tv_content, true);
 				adapter.setText(R.id.tv_content, userEventJsonBean.getMsg());
 			}
+			//显示图片
 			showImg(adapter, item);
+			//显示分享组件的内容 歌曲、电台、歌单 、专辑等
 			showShareLayout(adapter, userEventJsonBean);
 
 
@@ -154,7 +175,6 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
 		}
 		if (item.getPics() != null || item.getPics().size() != 0) {
 			adapter.setVisible(R.id.rl_img, true);
-			Log.d(TAG, "size:" + item.getPics().size());
 			for (int i = 0; i < item.getPics().size(); i++) {
 				if (i == 0) {
 					adapter.setVisible(R.id.ll_img_group1, true);
@@ -171,6 +191,7 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
 
 
 				final int postion = i;
+				//查看大图
 				imgList.get(i).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -191,7 +212,7 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
 
 	//分享 layout
 	private void showShareLayout(BaseViewHolder adapter, UserEventJsonBean jsonBean) {
-		//点击播放 音乐、电台内容
+		//点击播放 音乐、电台内容 查看歌单和专辑
 		adapter.setOnClickListener(R.id.rl_share, new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -200,9 +221,14 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
 					UserEventJsonBean.SongBean item = jsonBean.getSong();
 					String songPlayUrl = HttpConstants.getSongPlayUrl(item.getId());
 					AudioHelper.addAudio(new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getArtists().get(0).getName(), item.getAlbum().getName(), item.getAlbum().getName(), item.getAlbum().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDuration())));
-				}else{
-
+				}else if(jsonBean.getAlbum() != null){
+					//查看专辑
+					mDelegate.getSupportDelegate().start(SongListDetailDelegate.newInstance(ALBUM, jsonBean.getAlbum().getId()));
+				}else if(jsonBean.getPlaylist() != null){
+					//查看歌单
+					mDelegate.getSupportDelegate().start(SongListDetailDelegate.newInstance(PLAYLIST, jsonBean.getPlaylist().getId()));
 				}
+
 			}
 		});
 
@@ -215,7 +241,7 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
 			//歌手名
 			adapter.setText(R.id.tv_creator_name, jsonBean.getSong().getArtists().get(0).getName());
 
-			//节目
+		//节目
 		} else if (jsonBean != null && jsonBean.getProgram() != null && !TextUtils.isEmpty(jsonBean.getProgram().getName())) {
 			adapter.setVisible(R.id.rl_share, true);
 			manager.displayImageForCorner((ImageView) adapter.getView(R.id.iv_song_cover), jsonBean.getProgram().getCoverUrl());
@@ -224,7 +250,7 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
 			//电台名称
 			adapter.setText(R.id.tv_creator_name, jsonBean.getProgram().getRadio().getName());
 
-			//视频
+		//视频
 		} else if (jsonBean != null && jsonBean.getVideo() != null) {
 			//不显示分享
 			adapter.setVisible(R.id.rl_share, false);
@@ -246,7 +272,25 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
 				}
 			});
 			adapter.setVisible(R.id.rl_video, true);
-		} else {
+		//歌单
+		} else if(jsonBean != null && jsonBean.getPlaylist() != null){
+			adapter.setVisible(R.id.rl_share, true);
+			manager.displayImageForCorner((ImageView) adapter.getView(R.id.iv_song_cover), jsonBean.getPlaylist().getCoverImgUrl());
+			//歌单名称
+			adapter.setText(R.id.tv_songname, jsonBean.getPlaylist().getName());
+			//歌单创建者 名称
+			adapter.setText(R.id.tv_creator_name, "by " + jsonBean.getPlaylist().getCreator().getNickname());
+		//专辑
+		}else if(jsonBean != null && jsonBean.getAlbum() != null){
+			manager.displayImageForCorner((ImageView) adapter.getView(R.id.iv_song_cover), jsonBean.getAlbum().getPicUrl());
+			//专辑名称
+			adapter.setText(R.id.tv_songname, jsonBean.getAlbum().getName());
+			//专辑的歌手
+			adapter.setText(R.id.tv_creator_name, jsonBean.getAlbum().getArtist().getName());
+			//专辑特有标志
+			adapter.setVisible(R.id.iv_album_tag, true);
+
+		}else{
 			adapter.setVisible(R.id.rl_share, false);
 		}
 	}

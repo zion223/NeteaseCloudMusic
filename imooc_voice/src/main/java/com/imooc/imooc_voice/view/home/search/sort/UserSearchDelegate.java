@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
+import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.view.home.search.NeteaseSearchLoadingDelegate;
 import com.imooc.imooc_voice.view.user.UserDetailDelegate;
 import com.imooc.lib_api.RequestCenter;
@@ -33,12 +34,12 @@ public class UserSearchDelegate extends NeteaseSearchLoadingDelegate {
 			public void onSuccess(Object responseObj) {
 				UserSearchBean bean = (UserSearchBean) responseObj;
 				List<UserSearchBean.ResultBean.UserprofilesBean> userprofiles = bean.getResult().getUserprofiles();
-				mAdapter = new UserSearchAdapter(getContext(), userprofiles);
+				mAdapter = new UserSearchAdapter(getContext(), userprofiles, keyword);
 				mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
 					@Override
 					public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
 						UserSearchBean.ResultBean.UserprofilesBean entity = (UserSearchBean.ResultBean.UserprofilesBean) baseQuickAdapter.getItem(i);
-						getParentDelegate().getSupportDelegate().start(UserDetailDelegate.newInstance(String.valueOf(entity.getUserId())));
+						getParentDelegate().getSupportDelegate().start(UserDetailDelegate.newInstance(entity.getUserId()));
 					}
 				});
 				mRecyclerView = rootView.findViewById(R.id.rv_delegate_normal);
@@ -54,18 +55,35 @@ public class UserSearchDelegate extends NeteaseSearchLoadingDelegate {
 		});
 	}
 
-	static class UserSearchAdapter extends BaseQuickAdapter<UserSearchBean.ResultBean.UserprofilesBean, BaseViewHolder> {
+	//用户查询Adapter
+	public static class UserSearchAdapter extends BaseQuickAdapter<UserSearchBean.ResultBean.UserprofilesBean, BaseViewHolder> {
 
 		private Context mContext;
+		private String mKeyword = "";
+		//是否显示关注或已关注的View
+		private boolean showFollowView = true;
 
 		public UserSearchAdapter(Context context, @Nullable List<UserSearchBean.ResultBean.UserprofilesBean> data) {
 			super(R.layout.item_search_user, data);
 			this.mContext = context;
 		}
 
+		UserSearchAdapter(Context context, @Nullable List<UserSearchBean.ResultBean.UserprofilesBean> data, String keyword) {
+			super(R.layout.item_search_user, data);
+			this.mContext = context;
+			this.mKeyword = keyword;
+		}
+
+		public UserSearchAdapter(Context context, @Nullable List<UserSearchBean.ResultBean.UserprofilesBean> data, boolean showFollowView) {
+			super(R.layout.item_search_user, data);
+			this.mContext = context;
+			this.showFollowView = showFollowView;
+		}
+
 		@Override
 		protected void convert(@NonNull final BaseViewHolder adapter, final UserSearchBean.ResultBean.UserprofilesBean item) {
-			adapter.setText(R.id.tv_item_search_user_name, item.getNickname());
+			//关键字匹配的字符串
+			adapter.setText(R.id.tv_item_search_user_name, SearchUtil.getMatchingKeywords(item.getNickname(), mKeyword));
 
 			//用户身份
 			if(item.getUserType() == 4){
@@ -74,22 +92,33 @@ public class UserSearchDelegate extends NeteaseSearchLoadingDelegate {
 				adapter.setVisible(R.id.iv_item_search_user_tag, true);
 				((ImageView)adapter.getView(R.id.iv_item_search_user_tag)).setImageResource(R.drawable.ic_musician);
 
-			}else if(item.getUserType() ==10){
-				//大V
+			}else if(item.getUserType() == 10 || item.getUserType() == 2){
+				//大V 入驻艺人
 				adapter.setVisible(R.id.iv_item_search_user_tag, true);
 				((ImageView)adapter.getView(R.id.iv_item_search_user_tag)).setImageResource(R.drawable.ic_official);
-				adapter.setText(R.id.tv_item_search_user_description, item.getDescription());
+				adapter.setText(R.id.tv_item_search_user_description, item.getSignature());
+			}else if(item.getUserType() == 200){
+				adapter.setVisible(R.id.iv_item_search_user_tag, true);
+				((ImageView)adapter.getView(R.id.iv_item_search_user_tag)).setImageResource(R.drawable.ic_yellow_star);
+				adapter.setText(R.id.tv_item_search_user_description, item.getSignature());
 			}else{
-				adapter.setText(R.id.tv_item_search_user_description, item.getDescription());
+				adapter.setText(R.id.tv_item_search_user_description, item.getSignature());
 			}
-			//是否关注
-			if(item.isFollowed()){
-				adapter.setVisible(R.id.ll_search_user_followed, true);
+			if(!showFollowView){
+				adapter.setVisible(R.id.ll_search_user_followed, false);
+				adapter.setVisible(R.id.ll_search_user_follow, false);
 			}else{
-				adapter.setVisible(R.id.ll_search_user_follow, true);
+				//是否关注
+				if(item.isFollowed()){
+					adapter.setVisible(R.id.ll_search_user_followed, true);
+					adapter.setVisible(R.id.ll_search_user_follow, false);
+				}else{
+					adapter.setVisible(R.id.ll_search_user_follow, true);
+					adapter.setVisible(R.id.ll_search_user_followed, false);
+				}
 			}
 			//性别
-			if(item.getGender()==1){
+			if(item.getGender() == 1){
 				//男性
 				adapter.setVisible(R.id.iv_item_search_user_gender, true);
 				((ImageView)adapter.getView(R.id.iv_item_search_user_gender)).setImageResource(R.drawable.ic_male);
@@ -106,13 +135,14 @@ public class UserSearchDelegate extends NeteaseSearchLoadingDelegate {
 			adapter.setOnClickListener(R.id.ll_search_user_followed, new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					RequestCenter.follow(String.valueOf(item.getUserId()), false, new DisposeDataListener() {
+					RequestCenter.follow(item.getUserId(), false, new DisposeDataListener() {
 						@Override
 						public void onSuccess(Object responseObj) {
 							FollowBean bean = (FollowBean) responseObj;
-							Toast.makeText(mContext, bean.getFollowContent(),Toast.LENGTH_SHORT).show();
-							adapter.setVisible(R.id.ll_search_user_follow, true);
-							adapter.setVisible(R.id.ll_search_user_followed, false);
+							if(bean.getCode() == 200){
+								adapter.setVisible(R.id.ll_search_user_follow, true);
+								adapter.setVisible(R.id.ll_search_user_followed, false);
+							}
 						}
 
 						@Override
@@ -126,13 +156,15 @@ public class UserSearchDelegate extends NeteaseSearchLoadingDelegate {
 			adapter.setOnClickListener(R.id.ll_search_user_follow, new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					RequestCenter.follow(String.valueOf(item.getUserId()), true, new DisposeDataListener() {
+					RequestCenter.follow(item.getUserId(), true, new DisposeDataListener() {
 						@Override
 						public void onSuccess(Object responseObj) {
 							FollowBean bean = (FollowBean) responseObj;
-							Toast.makeText(mContext, bean.getFollowContent(),Toast.LENGTH_SHORT).show();
-							adapter.setVisible(R.id.ll_search_user_followed, true);
-							adapter.setVisible(R.id.ll_search_user_follow, false);
+							if(bean.getCode() == 200){
+								Toast.makeText(mContext, bean.getFollowContent(),Toast.LENGTH_SHORT).show();
+								adapter.setVisible(R.id.ll_search_user_followed, true);
+								adapter.setVisible(R.id.ll_search_user_follow, false);
+							}
 						}
 
 						@Override

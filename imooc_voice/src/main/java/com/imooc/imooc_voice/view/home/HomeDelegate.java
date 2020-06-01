@@ -31,10 +31,9 @@ import com.imooc.imooc_voice.view.home.adapter.HomePagerAdapter;
 import com.imooc.imooc_voice.view.home.title.ScaleTransitionPagerTitleView;
 import com.imooc.imooc_voice.view.login.LoginDelegate;
 import com.imooc.imooc_voice.view.home.search.SearchDelegate;
+import com.imooc.imooc_voice.view.user.UserDetailDelegate;
 import com.imooc.lib_api.RequestCenter;
 import com.imooc.lib_api.model.LoginBean;
-import com.imooc.lib_audio.app.AudioHelper;
-import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_common_ui.VerticalItemView;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
@@ -88,6 +87,7 @@ public class HomeDelegate extends NeteaseDelegate{
 	private SharePreferenceUtil sharePreferenceUtil;
 
 	private HomePagerAdapter mAdapter;
+	private LoginBean loginBean;
 
 	@Override
 	public Object setLayout() {
@@ -98,12 +98,12 @@ public class HomeDelegate extends NeteaseDelegate{
 	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
 		initView();
 		sharePreferenceUtil = SharePreferenceUtil.getInstance(getContext());
-		LoginBean bean = GsonUtil.fromJSON(sharePreferenceUtil.getUserInfo(""), LoginBean.class);
-		if(bean != null){
+		loginBean = GsonUtil.fromJSON(sharePreferenceUtil.getUserInfo(""), LoginBean.class);
+		if(loginBean != null){
 			mRlAvatar.setVisibility(View.VISIBLE);
 			mLlUnLoggin.setVisibility(View.GONE);
-			ImageLoaderManager.getInstance().displayImageForCircle(mIvAvatarView, bean.getProfile().getAvatarUrl());
-			mTvAvatarName.setText(bean.getProfile().getNickname());
+			ImageLoaderManager.getInstance().displayImageForCircle(mIvAvatarView, loginBean.getProfile().getAvatarUrl());
+			mTvAvatarName.setText(loginBean.getProfile().getNickname());
 		}else{
 			mRlAvatar.setVisibility(View.GONE);
 			mLlUnLoggin.setVisibility(View.VISIBLE);
@@ -171,6 +171,12 @@ public class HomeDelegate extends NeteaseDelegate{
 		} else {
 			mDrawerLayout.closeDrawer(Gravity.LEFT);
 		}
+	}
+
+	@OnClick(R2.id.avatar_name)
+	void onClickUserDetail(){
+		mDrawerLayout.closeDrawer(Gravity.LEFT);
+		getSupportDelegate().start(UserDetailDelegate.newInstance(String.valueOf(loginBean.getProfile().getUserId())));
 	}
 
 	@OnClick(R2.id.search_view)

@@ -34,7 +34,7 @@
             android:maxLines="1"
             android:singleLine="true"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="20dp"
             android:text="被驯服的象"
             android:textColor="@color/listTextColor"
             android:textSize="15sp" />

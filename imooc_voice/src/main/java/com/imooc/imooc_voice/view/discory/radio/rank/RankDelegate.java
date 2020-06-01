@@ -1,11 +1,9 @@
 package com.imooc.imooc_voice.view.discory.radio.rank;
 
-import android.view.View;
 
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseTabDelegate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -35,7 +33,7 @@ public class RankDelegate extends NeteaseTabDelegate {
 	}
 
 	@Override
-	public void setShowSearchView(int vivisiable) {
-		super.setShowSearchView(View.GONE);
+	public void setShowSearchView(boolean vivisiable) {
+		super.setShowSearchView(false);
 	}
 }

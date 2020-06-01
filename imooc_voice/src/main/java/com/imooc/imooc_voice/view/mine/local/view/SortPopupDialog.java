@@ -10,7 +10,7 @@ import com.imooc.imooc_voice.util.PreferencesUtil;
 import com.imooc.imooc_voice.util.SortOrder;
 import com.lxj.xpopup.core.CenterPopupView;
 
-
+//歌曲排序方式Dialog
 public class SortPopupDialog extends CenterPopupView {
 
 	private OnSelectMenuListener mListener;
@@ -194,7 +194,9 @@ public class SortPopupDialog extends CenterPopupView {
 						dismiss();
 					}
 				});
-
+				break;
+			default:
+				break;
 
 		}
 
@@ -206,6 +208,7 @@ public class SortPopupDialog extends CenterPopupView {
 	}
 
 	public enum SortType{
+		//单曲 歌手 专辑 文件夹
 		SONG, AITIST, ALBUM, FOLDER
 	}
 

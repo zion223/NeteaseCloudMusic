@@ -31,7 +31,15 @@ public class HttpConstants {
 
 	static String PLAYLIST_SUBSCRIBE = ROOT_URL + "/playlist/subscribe";
 
+	static String ALBUM_SUBSCRIBE = ROOT_URL + "/album/sub";
+
+	static String ALBUM_DYNAMIC = ROOT_URL + "/album/detail/dynamic";
+
 	static String USER_SUBCOUNT = ROOT_URL + "/user/subcount";
+
+	static String USER_FOLLOWER = ROOT_URL + "/user/follows";
+
+	static String USER_FOLLOWED = ROOT_URL + "/user/followeds";
 
 	static String BANNER = ROOT_URL + "/banner";
 
@@ -124,7 +132,6 @@ public class HttpConstants {
 	static String COMMENT_ALBUM = ROOT_URL + "/comment/album";
 
 	static String PAY_GIFT = ROOT_URL + "/dj/paygift";
-
 
 	static String DJ_RECOMMEND = ROOT_URL + "/dj/recommend";
 

@@ -66,6 +66,7 @@
                             android:layout_alignBottom="@+id/tv_gedan_detail_playnum"
                             android:layout_marginTop="5dp"
                             android:layout_toLeftOf="@+id/tv_gedan_detail_playnum"
+                            android:visibility="gone"
                             android:src="@drawable/ic_song_play_num" />
 
                         <TextView

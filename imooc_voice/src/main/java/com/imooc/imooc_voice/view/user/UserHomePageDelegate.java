@@ -33,7 +33,7 @@ import butterknife.OnClick;
 
 import static com.imooc.imooc_voice.Constants.PLAYLIST;
 
-
+//用户首页
 public class UserHomePageDelegate extends NeteaseDelegate {
 
 	private static final String ARGS_USER_DETAIL = "ARGS_USER_DETAIL";
@@ -105,7 +105,7 @@ public class UserHomePageDelegate extends NeteaseDelegate {
 		mTvListenRankTitle.setText(mCurrentUser.getProfile().getNickname() + "的听歌排行");
 		mTvListenRankCount.setText("累计听歌" + mCurrentUser.getListenSongs() + "首");
 		mTvLikeMusicTitle.setText(mCurrentUser.getProfile().getNickname() + "喜欢的音乐");
-
+		//获取用户歌单
 		RequestCenter.getUserPlaylist(mCurrentUser.getProfile().getUserId(), new DisposeDataListener() {
 			@Override
 			public void onSuccess(Object responseObj) {
@@ -141,14 +141,14 @@ public class UserHomePageDelegate extends NeteaseDelegate {
 						getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(PLAYLIST, entity.getId()));
 					}
 				});
-				//更多歌单
+				//查看更多歌单
 				mPlayListAdapter.setOnFooterClickListener(new GroupedRecyclerViewAdapter.OnFooterClickListener() {
 					@Override
 					public void onFooterClick(GroupedRecyclerViewAdapter adapter, BaseViewHolder holder, int groupPosition) {
 						if(groupPosition == TYPE_CREATE){
-							//创建的歌单
+							//创建的歌单 TODO
 						}else if(groupPosition ==TYPE_SUBSCRIBE){
-							//收藏的歌单
+							//收藏的歌单 TODO
 
 						}
 					}
@@ -162,7 +162,7 @@ public class UserHomePageDelegate extends NeteaseDelegate {
 
 			}
 		});
-		//创建的电台   Mlog
+		//创建的电台   Mlog TODO
 
 	}
 

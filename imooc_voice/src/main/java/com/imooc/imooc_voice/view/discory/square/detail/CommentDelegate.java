@@ -273,22 +273,28 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 			//用户昵称
 			baseViewHolder.setText(R.id.tv_item_gedan_comment_avatar_name, bean.getUser().getNickname());
 			//用户VIP类型
-			if (bean.getUser().getVipType() == 11) {
-				baseViewHolder.setVisible(R.id.iv_item_gedan_comment_avatar_vip, true);
+			if (bean.getUser().getVipType() == 11 && bean.getUser().getVipRights() != null) {
+				if(bean.getUser().getVipRights().getRedVipAnnualCount() == 1){
+					//年费vip TODO 年vip 图片
+				}else{
+					//普通vip
+					baseViewHolder.setVisible(R.id.iv_item_gedan_comment_avatar_vip, true);
+				}
 			}
+			//评论时间
 			baseViewHolder.setText(R.id.tv_item_gedan_comment_time, TimeUtil.getTimeStandardOnlyYMDChinese(bean.getTime()));
 			//点赞数量
 			if (bean.getLikedCount() != 0) {
 				baseViewHolder.setVisible(R.id.tv_item_gedan_comment_zan_count, true);
 				baseViewHolder.setText(R.id.tv_item_gedan_comment_zan_count, String.valueOf(bean.getLikedCount()));
 			}
+			//评论内容
 			baseViewHolder.setText(R.id.tv_item_gedan_comment_content, bean.getContent());
 			//回复数量
 			if (bean.getBeReplied().size() != 0) {
 				baseViewHolder.setVisible(R.id.tv_item_gedan_comment_replied, true);
 				baseViewHolder.setText(R.id.tv_item_gedan_comment_replied, bean.getBeReplied().size() + "条回复");
 			}
-			baseViewHolder.setText(R.id.tv_item_gedan_comment_content, bean.getContent());
 
 			final ImageView praiseView = baseViewHolder.getView(R.id.iv_item_gedan_comment_zan);
 			//tag : true 当前是赞 false当前不是赞

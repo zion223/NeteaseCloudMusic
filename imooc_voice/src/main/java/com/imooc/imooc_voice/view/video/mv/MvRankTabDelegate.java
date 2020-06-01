@@ -35,7 +35,7 @@ public class MvRankTabDelegate extends NeteaseTabDelegate {
 	}
 
 	@Override
-	public void setShowSearchView(int vivisiable) {
-		super.setShowSearchView(View.GONE);
+	public void setShowSearchView(boolean vivisiable) {
+		super.setShowSearchView(false);
 	}
 }

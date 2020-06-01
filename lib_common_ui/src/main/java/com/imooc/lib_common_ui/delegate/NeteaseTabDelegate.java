@@ -69,7 +69,7 @@ public abstract class NeteaseTabDelegate extends NeteaseDelegate {
 		setShowMoreView(View.GONE);
 		setMoreViewOnClickListener(null);
 		setToolBarVisiable(View.VISIBLE);
-		setShowSearchView(View.VISIBLE);
+		setShowSearchView(true);
 
 	}
 
@@ -112,8 +112,8 @@ public abstract class NeteaseTabDelegate extends NeteaseDelegate {
 	public void setShowMoreView(int vivisiable){
 		mIvMore.setVisibility(vivisiable);
 	}
-	public void setShowSearchView(int vivisiable){
-		mIvSearch.setVisibility(vivisiable);
+	public void setShowSearchView(boolean vivisiable){
+		mIvSearch.setVisibility(vivisiable ? View.VISIBLE:View.INVISIBLE);
 	}
 	public void setMoreViewOnClickListener(View.OnClickListener listener){
 		mIvMore.setOnClickListener(listener);

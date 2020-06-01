@@ -226,7 +226,7 @@
             android:background="@drawable/bg_share_song"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <ImageView
                 android:id="@+id/iv_song_cover"
@@ -234,7 +234,14 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="10dp"
                 android:scaleType="centerCrop" />
-
+            <ImageView
+                android:id="@+id/iv_album_tag"
+                android:layout_width="20dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="-10dp"
+                android:src="@drawable/ic_album_attach"
+                android:layout_toRightOf="@+id/iv_song_cover"
+                android:visibility="gone"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -2,6 +2,7 @@ package com.imooc.lib_api;
 
 
 import com.imooc.lib_api.model.AlbumDetailBean;
+import com.imooc.lib_api.model.AlbumDynamicBean;
 import com.imooc.lib_api.model.AlbumSublistBean;
 import com.imooc.lib_api.model.ArtistJson;
 import com.imooc.lib_api.model.ArtistListBean;
@@ -29,6 +30,8 @@ import com.imooc.lib_api.model.RecommendPlayListBean;
 import com.imooc.lib_api.model.SubCountBean;
 import com.imooc.lib_api.model.TopListBean;
 import com.imooc.lib_api.model.TopListDetailBean;
+import com.imooc.lib_api.model.UserFollowedBean;
+import com.imooc.lib_api.model.UserFollowerBean;
 import com.imooc.lib_api.model.VideoBean;
 import com.imooc.lib_api.model.VideoDetailBean;
 import com.imooc.lib_api.model.VideoGroupBean;
@@ -165,6 +168,24 @@ public class RequestCenter {
     }
 
     /**
+     *  获取用户粉丝列表
+     */
+    public static void getUserFollower(String uid, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("uid", uid);
+        RequestCenter.getRequest(HttpConstants.USER_FOLLOWED, params, listener, UserFollowedBean.class);
+    }
+
+    /**
+     *  获取用户关注列表
+     */
+    public static void getUserFollowed(String uid, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("uid", uid);
+        RequestCenter.getRequest(HttpConstants.USER_FOLLOWER, params, listener, UserFollowerBean.class);
+    }
+
+    /**
      *  用户登出请求
      */
     public static void logout(DisposeDataListener listener) {
@@ -276,6 +297,14 @@ public class RequestCenter {
         RequestCenter.getRequest(HttpConstants.ALBUM_DETAIL, params, listener, AlbumDetailBean.class);
     }
 
+    /**
+     *  专辑动态信息
+     */
+    public static void getAlbumDynamic(String id, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.ALBUM_DYNAMIC, params, listener, AlbumDynamicBean.class);
+    }
     /**
      *  新碟上架
      */
@@ -822,7 +851,7 @@ public class RequestCenter {
         RequestCenter.getRequest(HttpConstants.FOLLOW, params, listener, FollowBean.class);
     }
     /**
-     *  收藏或取消收藏
+     *  收藏或取消收藏歌单
      *
      */
     public static void subscribePlayList(String id, boolean sub, DisposeDataListener listener){
@@ -831,7 +860,16 @@ public class RequestCenter {
         params.put("t", sub ? 1 : 2);
         RequestCenter.getRequest(HttpConstants.PLAYLIST_SUBSCRIBE, params, listener, CommonMessageBean.class);
     }
-
+    /**
+     *  收藏或取消收藏
+     *
+     */
+    public static void subscribeAlbum(String id, boolean sub, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        params.put("t", sub ? 1 : 2);
+        RequestCenter.getRequest(HttpConstants.ALBUM_SUBSCRIBE, params, listener, CommonMessageBean.class);
+    }
     /**
      *  获取视频标签列表
      */

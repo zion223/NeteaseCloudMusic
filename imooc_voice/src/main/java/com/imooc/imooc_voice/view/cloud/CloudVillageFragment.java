@@ -61,7 +61,7 @@ public class CloudVillageFragment extends NeteaseLoadingDelegate implements Swip
 			public void onSuccess(Object responseObj) {
 				mRecommandData = (MainEventBean) responseObj;
 				mDatas = mRecommandData.getEvent();
-				mAdapter = new EventAdapter(mDatas);
+				mAdapter = new EventAdapter( CloudVillageFragment.this, mDatas);
 				mRecyclerView.setAdapter(mAdapter);
 				mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 				addRootView();

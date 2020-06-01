@@ -1,6 +1,7 @@
 package com.imooc.lib_api.model;
 
 
+import com.imooc.lib_api.model.search.AlbumSearchBean;
 import com.imooc.lib_api.model.song.SongDetailBean;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 public class AlbumDetailBean {
 
 	private int code;
-	private TopListDetailBean.Album album;
+	private AlbumSearchBean.ResultBean.AlbumsBean album;
 	private ArrayList<SongDetailBean.SongsBean> songs;
 
 	public int getCode() {
@@ -19,11 +20,11 @@ public class AlbumDetailBean {
 		this.code = code;
 	}
 
-	public TopListDetailBean.Album getAlbum() {
+	public AlbumSearchBean.ResultBean.AlbumsBean getAlbum() {
 		return album;
 	}
 
-	public void setAlbum(TopListDetailBean.Album album) {
+	public void setAlbum(AlbumSearchBean.ResultBean.AlbumsBean album) {
 		this.album = album;
 	}
 

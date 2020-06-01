@@ -113,7 +113,6 @@
                             android:gravity="center_vertical"
                             android:maxLines="1"
                             android:text="张张"
-
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 

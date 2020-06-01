@@ -191,8 +191,8 @@ public class UserSearchBean {
                 this.birthday = birthday;
             }
 
-            public long getUserId() {
-                return userId;
+            public String getUserId() {
+                return String.valueOf(userId);
             }
 
             public void setUserId(long userId) {

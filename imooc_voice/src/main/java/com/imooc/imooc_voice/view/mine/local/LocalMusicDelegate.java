@@ -18,7 +18,6 @@ import com.lxj.xpopup.core.BasePopupView;
 import com.lxj.xpopup.interfaces.OnSelectListener;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 //本地音乐
@@ -71,40 +70,44 @@ public class LocalMusicDelegate extends NeteaseTabDelegate {
 				.hasShadowBg(false)
 				.asAttachList(new String[]{"下载管理", "扫描本地音乐", "选择排序方式", "获取封面歌词"},
 						new int[]{R.drawable.ic_dialog_more, R.drawable.ic_dialog_more, R.drawable.ic_dialog_more, R.drawable.ic_dialog_more},
-						new OnSelectListener() {
-							@Override
-							public void onSelect(int position, String text) {
-								switch (position){
-									case 0:
-										break;
-									case 1:
-										break;
-									case 2:
-										//排序方式
-										int currentItem = getTabViewPager().getCurrentItem();
-										final BasePopupView sortDialog = new XPopup.Builder(getContext())
-												.asCustom(new SortPopupDialog(getContext(), new SortPopupDialog.OnSelectMenuListener() {
-													@Override
-													public void onMenuSelected(String type) {
-														//更新排序Adapter
-
-
-													}
-												}, mFramentType[currentItem]));
-										//根据当前Delegate判断显示不同的排序方式
-										sortDialog.show();
-										break;
-									case 3:
-										break;
-									default:
-										break;
-
-								}
-							}
-						});
+						listener);
 
 	}
 
+
+	private OnSelectListener listener = new OnSelectListener() {
+		@Override
+		public void onSelect(int position, String text) {
+			switch (position){
+				case 0:
+					//下载管理
+					break;
+				case 1:
+					//扫描本地音乐
+					break;
+				case 2:
+					//排序方式
+					int currentItem = getTabViewPager().getCurrentItem();
+					final BasePopupView sortDialog = new XPopup.Builder(getContext())
+							.asCustom(new SortPopupDialog(getContext(), new SortPopupDialog.OnSelectMenuListener() {
+								@Override
+								public void onMenuSelected(String type) {
+									//更新排序Adapter 发送reload事件
+
+								}
+							}, mFramentType[currentItem]));
+					//根据当前Delegate判断显示不同的排序方式
+					sortDialog.show();
+					break;
+				case 3:
+					//获取封面歌词
+					break;
+				default:
+					break;
+
+			}
+		}
+	};
 
 	@Override
 	public void setMoreViewOnClickListener(View.OnClickListener listener) {

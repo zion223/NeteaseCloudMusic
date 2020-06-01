@@ -1,6 +1,7 @@
 package com.imooc.lib_api.model.personal;
 
 import com.google.gson.annotations.SerializedName;
+import com.imooc.lib_api.model.search.AlbumSearchBean;
 
 import java.util.List;
 
@@ -19,11 +20,18 @@ public class UserEventJsonBean {
      */
 
     private String msg;
+    //歌曲
     private SongBean song;
+    //视频
     private VideoBean video;
+    //电台节目
     private ProgramBean program;
+    //动态
     private UserEventBean event;
+    //歌单
     private UserPlaylistBean.PlaylistBean playlist;
+    //专辑
+    private AlbumSearchBean.ResultBean.AlbumsBean album;
 
     @Override
     public String toString() {
@@ -34,7 +42,12 @@ public class UserEventJsonBean {
                 ", program=" + program +
                 ", event=" + event +
                 ", playlist=" + playlist +
+                ", album=" + album +
                 '}';
+    }
+
+    public AlbumSearchBean.ResultBean.AlbumsBean getAlbum() {
+        return album;
     }
 
     public String getMsg() {
