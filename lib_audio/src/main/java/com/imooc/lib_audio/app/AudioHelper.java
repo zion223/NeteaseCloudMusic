@@ -32,12 +32,14 @@ public final class AudioHelper {
 	//TODO AudioBean改造
 	public static void addAudio(Activity activity, AudioBean bean){
 		AudioController.getInstance().addAudio(bean);
-		MusicPlayerActivity.start(activity);
+		if(activity != null){
+			MusicPlayerActivity.start(activity);
+		}
 	}
 
 	//不启动Activity
 	public static void addAudio(AudioBean bean){
-		AudioController.getInstance().addAudio(bean);
+		addAudio(null, bean);
 	}
 
 }

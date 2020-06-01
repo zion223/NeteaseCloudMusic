@@ -55,13 +55,12 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:background="@color/app_background" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/delegate_view_pager_tab"
         android:layout_width="match_parent"
-        android:layout_marginTop="5dp"
         android:layout_height="0dp"
         android:layout_weight="10" />
 </LinearLayout>

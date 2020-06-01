@@ -56,7 +56,11 @@ public abstract class NeteaseTabDelegate extends NeteaseDelegate {
 		mTvLeftTitle.setText(setLeftTitle());
 
 		mAdapter = new MultiFragmentPagerAdapter(getChildFragmentManager());
-		mAdapter.init(setDelegateList());
+		if(setDelegateList() != null){
+			mAdapter.init(setDelegateList());
+		}else{
+			throw new NullPointerException("DelegateList can not be null");
+		}
 		mTabViewPager.setAdapter(mAdapter);
 		mTabViewPager.setOffscreenPageLimit(setTitleDataList().length);
 		//mTabMagicIndicator.setBackgroundColor(Color.WHITE);

@@ -23,6 +23,7 @@ import com.imooc.imooc_voice.view.discory.album.NewAlbumDelegate;
 import com.imooc.imooc_voice.view.discory.daily.DailyRecommendDelegate;
 import com.imooc.imooc_voice.view.discory.radio.RadioDelegate;
 import com.imooc.imooc_voice.view.discory.rank.RankingDelegate;
+import com.imooc.imooc_voice.view.discory.song.TopSongTabDelegate;
 import com.imooc.imooc_voice.view.discory.square.GedanSquareDelegate;
 import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
 import com.imooc.lib_api.HttpConstants;
@@ -308,7 +309,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 			getParentDelegate().getSupportDelegate().start(new NewAlbumDelegate());
 		}else{
 			//TODO 新歌推荐
-
+			getParentDelegate().getSupportDelegate().start(new TopSongTabDelegate());
 		}
 	}
 

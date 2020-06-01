@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="65dp"
     android:paddingLeft="10dp">
 
     <ImageView
@@ -12,26 +12,24 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:src="@drawable/ic_status_play"
         android:scaleType="centerInside"
+        android:src="@drawable/ic_status_play"
         android:visibility="gone" />
-    <TextView
-        android:id="@+id/item_play_no"
-        android:layout_width="30dp"
-        android:layout_height="25dp"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="5dp"
-        android:text="1"
-        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/iv_song_img"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_centerVertical="true" />
 
     <TextView
         android:id="@+id/viewpager_list_toptext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="13dp"
         android:layout_marginRight="20dp"
-        android:layout_toRightOf="@id/item_play_no"
+        android:layout_toRightOf="@id/iv_song_img"
         android:ellipsize="end"
         android:maxLines="1"
         android:singleLine="true"

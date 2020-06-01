@@ -93,11 +93,12 @@ public class UserSearchDelegate extends NeteaseSearchLoadingDelegate {
 				((ImageView)adapter.getView(R.id.iv_item_search_user_tag)).setImageResource(R.drawable.ic_musician);
 
 			}else if(item.getUserType() == 10 || item.getUserType() == 2){
-				//大V 入驻艺人
+				//明星用户
 				adapter.setVisible(R.id.iv_item_search_user_tag, true);
 				((ImageView)adapter.getView(R.id.iv_item_search_user_tag)).setImageResource(R.drawable.ic_official);
 				adapter.setText(R.id.tv_item_search_user_description, item.getSignature());
 			}else if(item.getUserType() == 200){
+				//音乐达人
 				adapter.setVisible(R.id.iv_item_search_user_tag, true);
 				((ImageView)adapter.getView(R.id.iv_item_search_user_tag)).setImageResource(R.drawable.ic_yellow_star);
 				adapter.setText(R.id.tv_item_search_user_description, item.getSignature());
