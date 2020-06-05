@@ -35,6 +35,13 @@ public class PlayListAdapter extends BaseQuickAdapter<SongDetailBean.SongsBean, 
 		this.hasHeader = hasHeader;
 	}
 
+	public PlayListAdapter(Context context, NeteaseDelegate delegate, @Nullable List<SongDetailBean.SongsBean> data) {
+		super(R.layout.item_gedan_detail_song, data);
+		this.mContext = context;
+		this.mDelegate = delegate;
+		this.hasHeader = false;
+	}
+
 	@Override
 	protected void convert(BaseViewHolder helper, SongDetailBean.SongsBean item) {
 		if(hasHeader){

@@ -193,7 +193,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="15dp"
                 android:layout_marginTop="650dp"
                 android:background="@drawable/bg_dailyrecommend"
                 app:layout_collapseMode="pin" />
@@ -211,7 +211,7 @@
         <LinearLayout
             android:id="@+id/ll_user_magicindicator"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="25dp"
             tools:ignore="RtlSymmetry"
             android:orientation="horizontal">
             <net.lucode.hackware.magicindicator.MagicIndicator

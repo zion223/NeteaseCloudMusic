@@ -8,4 +8,12 @@
         android:id="@+id/rv_delegate_normal"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/tv_msg_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginTop="100dp"
+        android:gravity="center_horizontal"
+        android:visibility="gone"/>
 </LinearLayout>

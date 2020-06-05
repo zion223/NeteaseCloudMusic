@@ -79,6 +79,8 @@ public class HttpConstants {
 
 	static String USER_EVENT = ROOT_URL + "/user/event";
 
+	static String USER_RECORD = ROOT_URL + "/user/record";
+
 	static String USER_DETAIL = ROOT_URL + "/user/detail";
 
 	static String SEARCH_HOT = ROOT_URL + "/search/hot/detail";

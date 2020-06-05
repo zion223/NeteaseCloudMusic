@@ -13,7 +13,7 @@
             android:id="@+id/img_search_result_back"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_gravity="bottom"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
             android:src="@drawable/ic_left_arrow_black" />
 
@@ -22,7 +22,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="15dp"
             android:layout_weight="7"
             android:background="@null"
             android:gravity="bottom"

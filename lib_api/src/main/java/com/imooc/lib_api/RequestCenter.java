@@ -32,6 +32,7 @@ import com.imooc.lib_api.model.TopListBean;
 import com.imooc.lib_api.model.TopListDetailBean;
 import com.imooc.lib_api.model.UserFollowedBean;
 import com.imooc.lib_api.model.UserFollowerBean;
+import com.imooc.lib_api.model.UserRecordBean;
 import com.imooc.lib_api.model.VideoBean;
 import com.imooc.lib_api.model.VideoDetailBean;
 import com.imooc.lib_api.model.VideoGroupBean;
@@ -358,6 +359,17 @@ public class RequestCenter {
         params.put("limit", limit);
         params.put("lasttime", time);
         RequestCenter.getRequest(HttpConstants.USER_EVENT, params, listener, UserEventBean.class);
+    }
+
+    /**
+     *  用户播放记录
+     *    type : type=1 时只返回 weekData, type=0 时返回 allData
+     */
+    public static void getUserRecord(int uid, int type, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("uid", uid);
+        params.put("type", type);
+        RequestCenter.getRequest(HttpConstants.USER_RECORD, params, listener, UserRecordBean.class);
     }
 
     /**

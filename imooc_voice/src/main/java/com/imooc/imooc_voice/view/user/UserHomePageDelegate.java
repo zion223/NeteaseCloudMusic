@@ -18,6 +18,7 @@ import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
+import com.imooc.imooc_voice.view.user.record.UserRecordTabDelegate;
 import com.imooc.lib_api.RequestCenter;
 import com.imooc.lib_api.model.UserPlaylistEntity;
 import com.imooc.lib_api.model.personal.UserDetailBean;
@@ -130,7 +131,7 @@ public class UserHomePageDelegate extends NeteaseDelegate {
 				playlistEntities.add(new UserPlaylistEntity("(" +createPlaylistSize +")", "更多歌单", bean.getPlaylist().subList(1, 4)));
 				//收藏的歌单的数量
 				int collectPlayListSize = size - subIndex;
-				playlistEntities.add(new UserPlaylistEntity("(" +collectPlayListSize +")", "更多歌单", bean.getPlaylist().subList(subIndex, subIndex + 3)));
+				playlistEntities.add(new UserPlaylistEntity("(" +collectPlayListSize +")", "更多歌单", bean.getPlaylist().subList(subIndex, collectPlayListSize < 3 ? subIndex + collectPlayListSize: subIndex + 3)));
 
 				mPlayListAdapter = new UserHomePagePlayListAdapter(playlistEntities, getContext());
 				//子布局点击事件 歌单详情
@@ -173,6 +174,11 @@ public class UserHomePageDelegate extends NeteaseDelegate {
 		getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(PLAYLIST, likeMusicId));
 	}
 
+	//听歌排行
+	@OnClick(R2.id.rl_user_record)
+	void onClickUserRecord(){
+		getParentDelegate().getSupportDelegate().start(UserRecordTabDelegate.newInstance(mCurrentUser.getProfile().getUserId(), mCurrentUser.getProfile().getNickname()));
+	}
 
 	class UserHomePagePlayListAdapter extends GroupedRecyclerViewAdapter {
 

@@ -51,6 +51,7 @@
             <include layout="@layout/item_more_info" />
 
             <RelativeLayout
+                android:id="@+id/rl_user_record"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -103,8 +104,7 @@
                     android:id="@+id/iv_user_info_like"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_listen_rank" />
+                    android:layout_centerVertical="true" />
 
                 <TextView
                     android:id="@+id/tv_user_info_toplike"

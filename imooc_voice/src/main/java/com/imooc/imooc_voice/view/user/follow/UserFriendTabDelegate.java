@@ -1,18 +1,15 @@
-package com.imooc.imooc_voice.view.user;
+package com.imooc.imooc_voice.view.user.follow;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.View;
 
-import com.imooc.imooc_voice.view.user.follow.UserFollowDelegate;
-import com.imooc.imooc_voice.view.user.follow.UserFollowerDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseTabDelegate;
 
 import java.util.List;
 
 //用户的粉丝和关注列表
-public class UserFriendDelegate extends NeteaseTabDelegate {
+public class UserFriendTabDelegate extends NeteaseTabDelegate {
 
 	private static final String ARGS_USER_ID = "ARGS_USER_ID";
 
@@ -20,10 +17,10 @@ public class UserFriendDelegate extends NeteaseTabDelegate {
 
 	private String userId;
 
-	public static UserFriendDelegate newInstance(String id) {
+	public static UserFriendTabDelegate newInstance(String id) {
 		final Bundle args = new Bundle();
 		args.putString(ARGS_USER_ID, id);
-		final UserFriendDelegate delegate = new UserFriendDelegate();
+		final UserFriendTabDelegate delegate = new UserFriendTabDelegate();
 		delegate.setArguments(args);
 		return delegate;
 	}

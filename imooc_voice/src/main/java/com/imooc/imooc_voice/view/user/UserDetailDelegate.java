@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.util.SearchUtil;
+import com.imooc.imooc_voice.view.user.follow.UserFriendTabDelegate;
 import com.imooc.lib_api.RequestCenter;
 import com.imooc.lib_api.model.FollowBean;
 import com.imooc.lib_api.model.personal.UserDetailBean;
@@ -226,7 +227,7 @@ public class UserDetailDelegate extends NeteaseDelegate {
 	@OnClick(R2.id.tv_user_detail_sub)
 	void onClickSubAndFollowDetail(){
 
-		getSupportDelegate().start(UserFriendDelegate.newInstance(userId));
+		getSupportDelegate().start(UserFriendTabDelegate.newInstance(userId));
 	}
 
 
