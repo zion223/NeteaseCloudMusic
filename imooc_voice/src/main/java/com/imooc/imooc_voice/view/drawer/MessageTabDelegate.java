@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.imooc.imooc_voice.view.drawer.notification.CommentDelegate;
 import com.imooc.imooc_voice.view.drawer.notification.PrivateLetterDelegate;
+import com.imooc.imooc_voice.view.drawer.notification.PrivateNoticeDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseTabDelegate;
 
@@ -42,7 +43,7 @@ public class MessageTabDelegate extends NeteaseTabDelegate {
 		//@我 TODO
 		mDelegateList.add(new PrivateLetterDelegate());
 		//通知 TODO
-		mDelegateList.add(new PrivateLetterDelegate());
+		mDelegateList.add(new PrivateNoticeDelegate());
 		return mDelegateList;
 	}
 

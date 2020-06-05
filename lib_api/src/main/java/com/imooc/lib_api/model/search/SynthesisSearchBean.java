@@ -1200,7 +1200,7 @@ public class SynthesisSearchBean {
                 private int playCount;
                 private int bookCount;
                 private String description;
-                private boolean highQuality;
+                private Object highQuality;
                 private TrackBean track;
                 private Object alg;
 
@@ -1284,9 +1284,6 @@ public class SynthesisSearchBean {
                     this.description = description;
                 }
 
-                public boolean isHighQuality() {
-                    return highQuality;
-                }
 
                 public void setHighQuality(boolean highQuality) {
                     this.highQuality = highQuality;

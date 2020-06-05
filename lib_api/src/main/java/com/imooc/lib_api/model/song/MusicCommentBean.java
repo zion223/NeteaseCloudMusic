@@ -129,6 +129,7 @@ public class MusicCommentBean {
 		 */
 
 		private UserBeanX user;
+		private UserBeanX beRepliedUser;
 		private Object pendantData;
 		private Object showFloorComment;
 		private int status;
@@ -143,6 +144,14 @@ public class MusicCommentBean {
 		private Object repliedMark;
 		private boolean liked;
 		private List<?> beReplied;
+
+		public UserBeanX getBeRepliedUser() {
+			return beRepliedUser;
+		}
+
+		public void setBeRepliedUser(UserBeanX beRepliedUser) {
+			this.beRepliedUser = beRepliedUser;
+		}
 
 		public UserBeanX getUser() {
 			return user;

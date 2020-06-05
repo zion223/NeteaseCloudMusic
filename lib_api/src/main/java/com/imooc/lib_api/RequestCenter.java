@@ -52,6 +52,7 @@ import com.imooc.lib_api.model.dj.DjTopListBean;
 import com.imooc.lib_api.model.manager.MusicCanPlayBean;
 import com.imooc.lib_api.model.notification.PrivateCommentBean;
 import com.imooc.lib_api.model.notification.PrivateMsgBean;
+import com.imooc.lib_api.model.notification.PrivateNoticeBean;
 import com.imooc.lib_api.model.notification.UserCloudBean;
 import com.imooc.lib_api.model.personal.UserDetailBean;
 import com.imooc.lib_api.model.personal.UserEventBean;
@@ -1034,12 +1035,11 @@ public class RequestCenter {
     }
 
     /**
-     *  获取通知 TODO
+     *  获取通知
      */
-    public static void getPrivateNotice(int id, DisposeDataListener listener){
+    public static void getPrivateNotice(DisposeDataListener listener){
         RequestParams params = new RequestParams();
-        params.put("uid", id);
-        RequestCenter.getRequest(HttpConstants.MSG_COMMENT, params, listener, PrivateCommentBean.class);
+        RequestCenter.getRequest(HttpConstants.MSG_NOTICE, params, listener, PrivateNoticeBean.class);
     }
 
     /**

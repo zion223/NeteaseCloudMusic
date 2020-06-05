@@ -82,10 +82,14 @@ public class PrivateLetterDelegate extends NeteaseLoadingDelegate {
 				adapter.setVisible(R.id.iv_item_notification_user_tag, true);
 				((ImageView)adapter.getView(R.id.iv_item_notification_user_tag)).setImageResource(R.drawable.ic_musician);
 
-			}else if(item.getFromUser().getUserType() ==10){
-				//大V
+			}else if(item.getFromUser().getUserType() == 10 || item.getFromUser().getUserType() == 2){
+				//明星用户
 				adapter.setVisible(R.id.iv_item_notification_user_tag, true);
 				((ImageView)adapter.getView(R.id.iv_item_notification_user_tag)).setImageResource(R.drawable.ic_official);
+			}else if(item.getFromUser().getUserType() == 200){
+				//音乐达人
+				adapter.setVisible(R.id.iv_item_notification_user_tag, true);
+				((ImageView)adapter.getView(R.id.iv_item_notification_user_tag)).setImageResource(R.drawable.ic_yellow_star);
 			}
 
 			if (item.getNewMsgCount() != 0){

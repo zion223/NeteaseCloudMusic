@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:paddingTop="5dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="5dp">
+
+    <ImageView
+        android:id="@+id/iv_item_notice_fromuser_avatar"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="12dp"
+        android:src="@drawable/ic_test" />
+
+    <ImageView
+        android:id="@+id/iv_item_notice_user_tag"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignRight="@+id/iv_item_notice_fromuser_avatar"
+        android:layout_alignBottom="@+id/iv_item_notice_fromuser_avatar"
+        android:src="@drawable/ic_official"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_item_notice_fromuser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/iv_item_notice_fromuser_avatar"
+        android:textColor="#517D98"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_item_notice_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/tv_item_notice_fromuser"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/iv_item_notice_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_item_notice_fromuser"
+        android:layout_alignLeft="@+id/tv_item_notice_fromuser"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_item_notice_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_item_notice_fromuser"
+        android:layout_alignParentRight="true"
+        android:text="17:00"
+        android:textSize="9sp" />
+
+
+</RelativeLayout>
