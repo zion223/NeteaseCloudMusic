@@ -18,8 +18,6 @@ import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 
 public class SplashDelegate extends NeteaseDelegate {
 
-	private CountDownTimer countDownTimer;
-
 	@Override
 	public Object setLayout() {
 		return R.layout.delegate_splash;
@@ -38,7 +36,7 @@ public class SplashDelegate extends NeteaseDelegate {
 	}
 
 	private void startCountDownTime() {
-		countDownTimer = new CountDownTimer(2000, 1000) {
+		final CountDownTimer countDownTimer = new CountDownTimer(2000, 1000) {
 			@Override
 			public void onTick(long millisUntilFinished) {
 

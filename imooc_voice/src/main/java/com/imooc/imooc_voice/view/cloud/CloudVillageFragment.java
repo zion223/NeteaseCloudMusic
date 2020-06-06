@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
+//云村
 public class CloudVillageFragment extends NeteaseLoadingDelegate implements SwipeRefreshLayout.OnRefreshListener{
 
 	SwipeRefreshLayout refreshLayout;

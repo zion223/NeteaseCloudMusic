@@ -2,6 +2,7 @@ package com.imooc.lib_api.model.notification;
 
 
 import com.imooc.lib_api.model.FollowBean;
+import com.imooc.lib_api.model.search.UserSearchBean;
 
 import java.util.ArrayList;
 
@@ -46,8 +47,8 @@ public class PrivateCommentBean {
 	}
 
 	public static class Comment{
-		private FollowBean.User user;
-		private FollowBean.User beRepliedUser;
+		private UserSearchBean.ResultBean.UserprofilesBean user;
+		private UserSearchBean.ResultBean.UserprofilesBean beRepliedUser;
 		private String beRepliedContent;
 		private long time;
 		private String content;
@@ -58,19 +59,20 @@ public class PrivateCommentBean {
 		private int parentCommentId;
 		private int resourceType;
 
-		public FollowBean.User getUser() {
+
+		public UserSearchBean.ResultBean.UserprofilesBean getUser() {
 			return user;
 		}
 
-		public void setUser(FollowBean.User user) {
+		public void setUser(UserSearchBean.ResultBean.UserprofilesBean user) {
 			this.user = user;
 		}
 
-		public FollowBean.User getBeRepliedUser() {
+		public UserSearchBean.ResultBean.UserprofilesBean getBeRepliedUser() {
 			return beRepliedUser;
 		}
 
-		public void setBeRepliedUser(FollowBean.User beRepliedUser) {
+		public void setBeRepliedUser(UserSearchBean.ResultBean.UserprofilesBean beRepliedUser) {
 			this.beRepliedUser = beRepliedUser;
 		}
 

@@ -90,6 +90,7 @@ public class SearchDelegate extends NeteaseDelegate {
 
     @OnClick(R2.id.img_suggest_back)
     void onClickBack(){
+        getSupportDelegate().hideSoftInput();
         getSupportDelegate().pop();
     }
 

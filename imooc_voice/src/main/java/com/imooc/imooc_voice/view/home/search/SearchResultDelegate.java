@@ -92,15 +92,6 @@ public class SearchResultDelegate extends NeteaseDelegate {
 				mViewPager.setCurrentItem(position, true);
 			}
 		});
-		mSearchResultDelegates.add(multipleSearchDelegate);
-		mSearchResultDelegates.add(new SongSearchDelegate());
-		mSearchResultDelegates.add(new PlayListSearchDelegate());
-		mSearchResultDelegates.add(new VideoSearchDelegate());
-		mSearchResultDelegates.add(new SingerSearchDelegate());
-		mSearchResultDelegates.add(new AlbumSearchDelegate());
-		mSearchResultDelegates.add(new RadioSearchDelegate());
-		mSearchResultDelegates.add(new UserSearchDelegate());
-
 		mEtKeywords.setText(keywords);
 		mEtKeywords.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 			@Override
@@ -113,7 +104,14 @@ public class SearchResultDelegate extends NeteaseDelegate {
 				return false;
 			}
 		});
-
+		mSearchResultDelegates.add(multipleSearchDelegate);
+		mSearchResultDelegates.add(new SongSearchDelegate());
+		mSearchResultDelegates.add(new PlayListSearchDelegate());
+		mSearchResultDelegates.add(new VideoSearchDelegate());
+		mSearchResultDelegates.add(new SingerSearchDelegate());
+		mSearchResultDelegates.add(new AlbumSearchDelegate());
+		mSearchResultDelegates.add(new RadioSearchDelegate());
+		mSearchResultDelegates.add(new UserSearchDelegate());
 		MultiFragmentPagerAdapter searchResultPagerAdapter = new MultiFragmentPagerAdapter(getChildFragmentManager());
 		searchResultPagerAdapter.init(mSearchResultDelegates);
 

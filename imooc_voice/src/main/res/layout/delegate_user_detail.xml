@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_test"
+                android:background="@color/gray"
                 app:layout_collapseMode="parallax" />
 
             <ImageView
@@ -42,8 +42,8 @@
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="100dp"
-                    android:src="@drawable/ic_test"/>
+                    android:layout_marginTop="100dp" />
+
                 <TextView
                     android:id="@+id/tv_user_detail_name"
                     android:layout_width="wrap_content"
@@ -52,7 +52,6 @@
                     android:layout_alignLeft="@+id/iv_user_detail_avatar"
                     android:layout_toEndOf="@+id/tv_day"
                     android:layout_marginTop="10dp"
-                    android:text="音乐酱"
                     android:textStyle="bold"
                     android:textColor="#f0f0f0"
                     android:textSize="17sp"
@@ -67,7 +66,6 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:textSize="13sp"
-                    android:text="关注 10   粉丝 1000"
                     android:textColor="#f0f0f0" />
                 <ImageView
                     android:id="@+id/iv_user_detail_vip"
@@ -154,7 +152,12 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                app:layout_collapseMode="pin">
+                app:layout_collapseMode="pin"
+                app:contentInsetLeft="0dp"
+                app:contentInsetStart="0dp"
+                app:contentInsetEnd="0dp"
+                app:maxButtonHeight="20dp"
+                app:titleMargin="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -165,7 +168,9 @@
                         android:id="@+id/img_user_detail_back"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:layout_margin="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
                         android:src="@drawable/ic_left_arrow_white" />
                     <TextView
                         android:id="@+id/tv_left_title"

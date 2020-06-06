@@ -18,7 +18,7 @@
         android:layout_alignBottom="@+id/iv_item_rank_123_avatar"
         android:layout_marginLeft="82dp"
         android:src="@drawable/ic_official"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tv_item_rank_123_name"

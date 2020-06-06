@@ -109,7 +109,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="15dp"
                 android:layout_marginTop="590dp"
                 android:background="@drawable/bg_dailyrecommend"
                 app:layout_collapseMode="pin" />
@@ -134,22 +134,19 @@
                 android:id="@+id/rl_playall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:layout_marginStart="20dp">
 
                 <ImageView
                     android:id="@+id/iv_playall"
                     android:layout_width="23dp"
                     android:layout_height="23dp"
-                    android:layout_centerVertical="true"
                     app:srcCompat="@drawable/ic_play_gray" />
 
                 <TextView
                     android:id="@+id/tv_playall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="7dp"
+                    android:layout_marginStart="8dp"
                     android:layout_toEndOf="@+id/iv_playall"
                     android:text="播放全部"
                     android:textColor="#333333"

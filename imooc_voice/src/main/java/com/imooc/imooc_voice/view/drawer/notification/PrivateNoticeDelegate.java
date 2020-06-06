@@ -10,6 +10,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.util.GsonUtil;
+import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.lib_api.RequestCenter;
 import com.imooc.lib_api.model.notification.PrivateNoticeBean;
@@ -69,7 +70,7 @@ public class PrivateNoticeDelegate extends NeteaseLoadingDelegate {
 			//解析JSON数据  TODO 适配更多通知类型
 
 			UserNoticeJsonBean userNoticeJsonBean = GsonUtil.fromJSON(item.getNotice(), UserNoticeJsonBean.class);
-			if(userNoticeJsonBean.getComment() != null){
+			if(userNoticeJsonBean != null &&userNoticeJsonBean.getComment() != null){
 				//评论的内容
 				adapter.setText(R.id.iv_item_notice_message, userNoticeJsonBean.getComment().getContent());
 				//点赞评论
@@ -87,21 +88,8 @@ public class PrivateNoticeDelegate extends NeteaseLoadingDelegate {
 			adapter.setText(R.id.tv_item_notice_time, TimeUtil.getPrivateMsgTime(item.getTime()));
 
 			ImageLoaderManager.getInstance().displayImageForCircle(adapter.getView(R.id.iv_item_notice_fromuser_avatar), userNoticeJsonBean.getUser().getAvatarUrl());
-
-			if(userNoticeJsonBean.getUser().getUserType() == 4){
-				//网易音乐人
-				adapter.setVisible(R.id.iv_item_notification_user_tag, true);
-				((ImageView)adapter.getView(R.id.iv_item_notification_user_tag)).setImageResource(R.drawable.ic_musician);
-
-			}else if(userNoticeJsonBean.getUser().getUserType() == 10 || userNoticeJsonBean.getUser().getUserType() == 2){
-				//明星用户
-				adapter.setVisible(R.id.iv_item_notification_user_tag, true);
-				((ImageView)adapter.getView(R.id.iv_item_notification_user_tag)).setImageResource(R.drawable.ic_official);
-			}else if(userNoticeJsonBean.getUser().getUserType() == 200){
-				//音乐达人
-				adapter.setVisible(R.id.iv_item_notification_user_tag, true);
-				((ImageView)adapter.getView(R.id.iv_item_notification_user_tag)).setImageResource(R.drawable.ic_yellow_star);
-			}
+			//显示用户类型
+			SearchUtil.setUserTypeImg(userNoticeJsonBean.getUser().getUserType(), R.id.iv_item_notification_user_tag, adapter);
 
 		}
 	}

@@ -21,7 +21,7 @@
         android:layout_alignRight="@+id/iv_item_notification_fromuser_avatar"
         android:layout_alignBottom="@+id/iv_item_notification_fromuser_avatar"
         android:src="@drawable/ic_official"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tv_item_notification_fromuser"

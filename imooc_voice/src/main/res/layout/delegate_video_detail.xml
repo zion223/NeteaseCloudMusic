@@ -10,6 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:layout_collapseMode="pin"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetEnd="0dp"
+        app:maxButtonHeight="20dp"
+        app:titleMargin="0dp"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
         <RelativeLayout
@@ -22,6 +27,8 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
                 android:src="@drawable/ic_left_arrow_black" />
 
 
@@ -126,7 +133,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
                                 android:textColor="@color/gray"
-                                android:text="1"
                                 android:textSize="11sp"/>
                         </LinearLayout>
 
@@ -151,7 +157,6 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/gray"
                                 android:textSize="11sp"
-                                android:text="123"
                                 android:layout_gravity="center_horizontal" />
                         </LinearLayout>
 

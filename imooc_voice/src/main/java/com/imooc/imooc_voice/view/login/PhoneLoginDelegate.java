@@ -115,6 +115,8 @@ public class PhoneLoginDelegate extends NeteaseDelegate {
 		if (ValidateUtils.isMobile(mPhone.getText().toString())) {
 			mRlPhone.setVisibility(View.GONE);
 			mLvPassword.setVisibility(View.VISIBLE);
+			//获取密码输入框焦点
+			mEtPassword.setFocusable(true);
 		} else {
 			Toast.makeText(getContext(), "请正确输入手机号", Toast.LENGTH_SHORT).show();
 		}

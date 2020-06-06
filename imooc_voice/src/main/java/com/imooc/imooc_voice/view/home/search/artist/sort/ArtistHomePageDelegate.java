@@ -15,7 +15,6 @@ import com.imooc.imooc_voice.model.event.ArtistIdEvent;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.imooc_voice.view.discory.square.detail.PlayListAdapter;
-import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
 import com.imooc.lib_api.HttpConstants;
 import com.imooc.lib_api.RequestCenter;
 import com.imooc.lib_api.model.search.SimiSingerBean;

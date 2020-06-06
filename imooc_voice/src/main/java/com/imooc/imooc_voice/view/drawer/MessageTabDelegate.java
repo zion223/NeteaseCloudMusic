@@ -42,7 +42,7 @@ public class MessageTabDelegate extends NeteaseTabDelegate {
 		mDelegateList.add(new CommentDelegate());
 		//@我 TODO
 		mDelegateList.add(new PrivateLetterDelegate());
-		//通知 TODO
+		//通知
 		mDelegateList.add(new PrivateNoticeDelegate());
 		return mDelegateList;
 	}
@@ -51,4 +51,5 @@ public class MessageTabDelegate extends NeteaseTabDelegate {
 	public void setShowSearchView(boolean vivisiable) {
 		super.setShowSearchView(false);
 	}
+
 }

@@ -3500,7 +3500,7 @@ public class SynthesisSearchBean {
 
             private String moreText;
             private boolean more;
-            private List<UsersBean> users;
+            private List<UserSearchBean.ResultBean.UserprofilesBean> users;
 
             public String getMoreText() {
                 return moreText;
@@ -3518,11 +3518,11 @@ public class SynthesisSearchBean {
                 this.more = more;
             }
 
-            public List<UsersBean> getUsers() {
+            public List<UserSearchBean.ResultBean.UserprofilesBean> getUsers() {
                 return users;
             }
 
-            public void setUsers(List<UsersBean> users) {
+            public void setUsers(List<UserSearchBean.ResultBean.UserprofilesBean> users) {
                 this.users = users;
             }
 

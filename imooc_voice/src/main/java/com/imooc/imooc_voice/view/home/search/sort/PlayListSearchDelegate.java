@@ -63,10 +63,12 @@ public class PlayListSearchDelegate extends NeteaseSearchLoadingDelegate {
 	static class PlayListSearchAdapter extends BaseQuickAdapter<PlayListSearchBean.ResultBean.PlaylistsBean, BaseViewHolder> {
 
 		private String keywords;
+		private ImageLoaderManager manager;
 
 		PlayListSearchAdapter(String keyword, @Nullable List<PlayListSearchBean.ResultBean.PlaylistsBean> data) {
 			super(R.layout.item_mine_gedan_content, data);
 			this.keywords = keyword;
+			manager = ImageLoaderManager.getInstance();
 		}
 
 		@Override
@@ -80,7 +82,7 @@ public class PlayListSearchDelegate extends NeteaseSearchLoadingDelegate {
 
 			adapter.setText(R.id.tv_item_gedan_content_bottomtext, SearchUtil.getMatchingKeywords(description, keywords));
 			adapter.setVisible(R.id.iv_item_gedan_more, false);
-			ImageLoaderManager.getInstance().displayImageForCorner((ImageView) adapter.getView(R.id.iv_item_gedan_content_img), item.getCoverImgUrl());
+			manager.displayImageForCorner((ImageView) adapter.getView(R.id.iv_item_gedan_content_img), item.getCoverImgUrl());
 
 		}
 	}

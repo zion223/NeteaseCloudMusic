@@ -1,7 +1,6 @@
 package com.imooc.imooc_voice.view.discory.square.detail;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,28 +17,23 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.imooc_voice.view.home.search.artist.ArtistDetailDelegate;
 import com.imooc.imooc_voice.view.user.UserDetailDelegate;
-import com.imooc.imooc_voice.view.video.MvDeatilDelegate;
 import com.imooc.lib_api.HttpConstants;
 import com.imooc.lib_api.RequestCenter;
 import com.imooc.lib_api.model.AlbumDetailBean;
 import com.imooc.lib_api.model.AlbumDynamicBean;
 import com.imooc.lib_api.model.CommonMessageBean;
 import com.imooc.lib_api.model.PlaylistDetailBean;
-import com.imooc.lib_api.model.TopListDetailBean;
 import com.imooc.lib_api.model.search.AlbumSearchBean;
 import com.imooc.lib_api.model.song.SongDetailBean;
 import com.imooc.lib_audio.app.AudioHelper;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
-import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
-import com.imooc.lib_common_ui.dialog.MusicPopUpDialog;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
@@ -51,7 +45,6 @@ import butterknife.OnClick;
 
 import static com.imooc.imooc_voice.Constants.ALBUM;
 import static com.imooc.imooc_voice.Constants.PLAYLIST;
-import static com.imooc.imooc_voice.Constants.SONG;
 
 /**
  * 歌单和专辑详情

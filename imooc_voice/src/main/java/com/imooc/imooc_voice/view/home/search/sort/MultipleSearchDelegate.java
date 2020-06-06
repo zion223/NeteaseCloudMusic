@@ -26,6 +26,7 @@ import com.imooc.lib_api.HttpConstants;
 import com.imooc.lib_api.RequestCenter;
 import com.imooc.lib_api.model.search.MultipleSearchEntity;
 import com.imooc.lib_api.model.search.SynthesisSearchBean;
+import com.imooc.lib_api.model.search.UserSearchBean;
 import com.imooc.lib_api.model.song.SongDetailBean;
 import com.imooc.lib_audio.app.AudioHelper;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
@@ -111,7 +112,7 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 				break;
 			case 5:
 				//用户
-				SynthesisSearchBean.ResultBean.UserBean.UsersBean usersBean = data.get(groupPosition).getUser().getUsers().get(childPosition);
+				UserSearchBean.ResultBean.UserprofilesBean usersBean = data.get(groupPosition).getUser().getUsers().get(childPosition);
 				getParentDelegate().getSupportDelegate().start(UserDetailDelegate.newInstance(String.valueOf(usersBean.getUserId())));
 				break;
 
@@ -140,7 +141,7 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 		private ArrayList<MultipleSearchEntity> mData;
 		private ArrayList<SpecData> mDataType = new ArrayList<>();
 		private String keyword;
-
+		private ImageLoaderManager manager;
 		MultipeSearchAdapter(Context context, ArrayList<MultipleSearchEntity> data, String keywords) {
 			super(context);
 			this.mData = data;
@@ -151,6 +152,7 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 			mDataType.add(new SpecData(R.layout.item_mine_gedan_content, "电台"));
 			mDataType.add(new SpecData(R.layout.item_singer_normal, "歌手"));
 			mDataType.add(new SpecData(R.layout.item_search_user, "用户"));
+			manager = ImageLoaderManager.getInstance();
 		}
 
 		@Override
@@ -202,7 +204,7 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 
 		@Override
 		public void onBindChildViewHolder(BaseViewHolder holder, int groupPosition, int childPosition) {
-			convertChildViewHolder(holder, groupPosition, childPosition);
+			convertChildViewHolder(holder, groupPosition, childPosition, manager);
 		}
 
 		/**
@@ -252,7 +254,7 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 			}
 		}
 
-		private void convertChildViewHolder(BaseViewHolder adapter, int groupPosition, int childPosition) {
+		private void convertChildViewHolder(BaseViewHolder adapter, int groupPosition, int childPosition, ImageLoaderManager manager) {
 			switch (groupPosition) {
 				case 0:
 					//单曲
@@ -293,7 +295,7 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 					//视频描述
 					String description = TimeUtil.getTimeNoYMDH(videoItem.getDurationms()) + " by " + videoItem.getCreator().get(0).getUserName();
 					adapter.setText(R.id.tv_item_video_creator, description);
-					ImageLoaderManager.getInstance().displayImageForCorner((ImageView) adapter.get(R.id.iv_item_video_cover), videoItem.getCoverUrl());
+					manager.displayImageForCorner((ImageView) adapter.get(R.id.iv_item_video_cover), videoItem.getCoverUrl());
 					break;
 				case 2:
 					//歌单
@@ -306,7 +308,7 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 					description = platlistItem.getTrackCount() + "首，by " + platlistItem.getCreator().getNickname() + "，播放" + SearchUtil.getCorresPondingString(playListPlaycount) + "次";
 					adapter.setVisible(R.id.iv_item_gedan_more, false);
 					((TextView) adapter.get(R.id.tv_item_gedan_content_bottomtext)).setText(SearchUtil.getMatchingKeywords(description, keyword));
-					ImageLoaderManager.getInstance().displayImageForCorner((ImageView) adapter.get(R.id.iv_item_gedan_content_img), platlistItem.getCoverImgUrl());
+					manager.displayImageForCorner((ImageView) adapter.get(R.id.iv_item_gedan_content_img), platlistItem.getCoverImgUrl());
 					break;
 				case 3:
 					//电台
@@ -314,7 +316,7 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 					SynthesisSearchBean.ResultBean.DjRadioBean.DjRadiosBean djRadioItem = djRadios.get(childPosition);
 					((TextView) adapter.get(R.id.tv_item_gedan_content_toptext)).setText(SearchUtil.getMatchingKeywords(djRadioItem.getName(), keyword));
 					((TextView) adapter.get(R.id.tv_item_gedan_content_bottomtext)).setText(SearchUtil.getMatchingKeywords(djRadioItem.getDj().getNickname(), keyword));
-					ImageLoaderManager.getInstance().displayImageForCorner((ImageView) adapter.get(R.id.iv_item_gedan_content_img), djRadioItem.getPicUrl());
+					manager.displayImageForCorner((ImageView) adapter.get(R.id.iv_item_gedan_content_img), djRadioItem.getPicUrl());
 					adapter.setVisible(R.id.iv_item_gedan_more, false);
 					break;
 				case 4:
@@ -325,12 +327,12 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 					if (artistItem.getAlias() != null && artistItem.getAlias().size() != 0) {
 						adapter.setText(R.id.tv_singer_alias, "(" + SearchUtil.getMatchingKeywords(artistItem.getAlias().get(0), keyword) + ")");
 					}
-					ImageLoaderManager.getInstance().displayImageForCircle((ImageView) adapter.get(R.id.iv_singer_avatar), artistItem.getPicUrl());
+					manager.displayImageForCircle((ImageView) adapter.get(R.id.iv_singer_avatar), artistItem.getPicUrl());
 					break;
 				case 5:
 					//用户
-					List<SynthesisSearchBean.ResultBean.UserBean.UsersBean> users = mData.get(groupPosition).getUser().getUsers();
-					SynthesisSearchBean.ResultBean.UserBean.UsersBean userItem = users.get(childPosition);
+					List<UserSearchBean.ResultBean.UserprofilesBean> users = mData.get(groupPosition).getUser().getUsers();
+					UserSearchBean.ResultBean.UserprofilesBean userItem = users.get(childPosition);
 					adapter.setText(R.id.tv_item_search_user_name, userItem.getNickname());
 
 					//用户身份
@@ -340,12 +342,16 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 						adapter.setVisible(R.id.iv_item_search_user_tag, true);
 						((ImageView) adapter.get(R.id.iv_item_search_user_tag)).setImageResource(R.drawable.ic_musician);
 
-					} else if (userItem.getUserType() == 10) {
+					} else if (userItem.getUserType() == 10 || userItem.getUserType() == 2) {
 						//大V
 						adapter.setVisible(R.id.iv_item_search_user_tag, true);
 						((ImageView) adapter.get(R.id.iv_item_search_user_tag)).setImageResource(R.drawable.ic_official);
 						adapter.setText(R.id.tv_item_search_user_description, userItem.getDescription());
-					} else {
+					} else if(userItem.getUserType() == 200){
+						adapter.setVisible(R.id.iv_item_search_user_tag, true);
+						((ImageView) adapter.get(R.id.iv_item_search_user_tag)).setImageResource(R.drawable.ic_yellow_star);
+						adapter.setText(R.id.tv_item_search_user_description, userItem.getDescription());
+					}else{
 						adapter.setText(R.id.tv_item_search_user_description, userItem.getDescription());
 					}
 					//是否关注
@@ -365,7 +371,7 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 						((ImageView) adapter.get(R.id.iv_item_search_user_gender)).setImageResource(R.drawable.ic_female);
 					}
 					//用户头像
-					ImageLoaderManager.getInstance().displayImageForCircle((ImageView) adapter.get(R.id.iv_item_search_user_avatar), userItem.getAvatarUrl());
+					manager.displayImageForCircle((ImageView) adapter.get(R.id.iv_item_search_user_avatar), userItem.getAvatarUrl());
 					break;
 			}
 		}

@@ -125,7 +125,7 @@ public class ArtistDetailDelegate extends NeteaseDelegate {
 					mLlArtistFollow.setVisibility(View.VISIBLE);
 				}
 
-				ImageLoaderManager.getInstance().displayImageForCorner(mIvArtistBackground, artist.getImg1v1Url()+"?param=200y200");
+				ImageLoaderManager.getInstance().displayImageForCorner(mIvArtistBackground, artist.getImg1v1Url() + "?param=200y200");
 
 				SpannableString albumString = new SpannableString("专辑" + bean.getArtist().getAlbumSize());
 				albumString.setSpan(new AbsoluteSizeSpan(30), 2, albumString.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

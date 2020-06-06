@@ -20,13 +20,14 @@ import java.util.List;
 import static com.imooc.imooc_voice.Constants.ALBUM;
 import static com.imooc.imooc_voice.Constants.SONG;
 
-//歌单的Adapter ArtistHomePage ArtistSong   创建的歌单、云盘中 中的单曲可删除
+//歌单的Adapter ArtistHomePage ArtistSong 用户的播放记录   创建的歌单、云盘中 中的单曲可删除
 public class PlayListAdapter extends BaseQuickAdapter<SongDetailBean.SongsBean, BaseViewHolder> {
 
 	private Context mContext;
 	//是否有头布局 影响显示序号
 	private Boolean hasHeader;
 	private NeteaseDelegate mDelegate;
+	//在用户的听歌排行中不显示此View 而是显示听歌的次数
 	private boolean showMoreView = true;
 
 	public PlayListAdapter(Context context, NeteaseDelegate delegate, boolean hasHeader, @Nullable List<SongDetailBean.SongsBean> data) {
@@ -63,7 +64,7 @@ public class PlayListAdapter extends BaseQuickAdapter<SongDetailBean.SongsBean, 
 		//歌手名 - 专辑名
 		helper.setText(R.id.viewpager_list_bottom_text, item.getAr().get(0).getName() + " - " + item.getAl().getName());
 		//当前歌曲是否有MV
-		if(item.getMv() != 0){
+		if(item.getMv() != 0 && showMoreView){
 			helper.setVisible(R.id.iv_list_video, true);
 		}
 		//当前歌曲的视频
@@ -79,7 +80,7 @@ public class PlayListAdapter extends BaseQuickAdapter<SongDetailBean.SongsBean, 
 				showMoreDialog(item);
 			}
 		});
-		//是否显示 更多View
+		//是否显示 更多View 和mv图标绑定在一起  不显示更多按钮时 也不显示mv图标
 		helper.setVisible(R.id.viewpager_list_button, showMoreView);
 	}
 

@@ -62,22 +62,26 @@ public class UserSearchDelegate extends NeteaseSearchLoadingDelegate {
 		private String mKeyword = "";
 		//是否显示关注或已关注的View
 		private boolean showFollowView = true;
+		private ImageLoaderManager manager;
 
 		public UserSearchAdapter(Context context, @Nullable List<UserSearchBean.ResultBean.UserprofilesBean> data) {
 			super(R.layout.item_search_user, data);
 			this.mContext = context;
+			manager = ImageLoaderManager.getInstance();
 		}
 
 		UserSearchAdapter(Context context, @Nullable List<UserSearchBean.ResultBean.UserprofilesBean> data, String keyword) {
 			super(R.layout.item_search_user, data);
 			this.mContext = context;
 			this.mKeyword = keyword;
+			manager = ImageLoaderManager.getInstance();
 		}
 
 		public UserSearchAdapter(Context context, @Nullable List<UserSearchBean.ResultBean.UserprofilesBean> data, boolean showFollowView) {
 			super(R.layout.item_search_user, data);
 			this.mContext = context;
 			this.showFollowView = showFollowView;
+			manager = ImageLoaderManager.getInstance();
 		}
 
 		@Override
@@ -86,23 +90,14 @@ public class UserSearchDelegate extends NeteaseSearchLoadingDelegate {
 			adapter.setText(R.id.tv_item_search_user_name, SearchUtil.getMatchingKeywords(item.getNickname(), mKeyword));
 
 			//用户身份
+			SearchUtil.setUserTypeImg(item.getUserType(), R.id.iv_item_search_user_tag, adapter);
+
+			//用户身份
 			if(item.getUserType() == 4){
 				//网易音乐人
 				adapter.setText(R.id.tv_item_search_user_description, "网易音乐人");
-				adapter.setVisible(R.id.iv_item_search_user_tag, true);
-				((ImageView)adapter.getView(R.id.iv_item_search_user_tag)).setImageResource(R.drawable.ic_musician);
-
-			}else if(item.getUserType() == 10 || item.getUserType() == 2){
-				//明星用户
-				adapter.setVisible(R.id.iv_item_search_user_tag, true);
-				((ImageView)adapter.getView(R.id.iv_item_search_user_tag)).setImageResource(R.drawable.ic_official);
-				adapter.setText(R.id.tv_item_search_user_description, item.getSignature());
-			}else if(item.getUserType() == 200){
-				//音乐达人
-				adapter.setVisible(R.id.iv_item_search_user_tag, true);
-				((ImageView)adapter.getView(R.id.iv_item_search_user_tag)).setImageResource(R.drawable.ic_yellow_star);
-				adapter.setText(R.id.tv_item_search_user_description, item.getSignature());
-			}else{
+			} else {
+				//用户签名
 				adapter.setText(R.id.tv_item_search_user_description, item.getSignature());
 			}
 			if(!showFollowView){
@@ -129,7 +124,7 @@ public class UserSearchDelegate extends NeteaseSearchLoadingDelegate {
 				((ImageView)adapter.getView(R.id.iv_item_search_user_gender)).setImageResource(R.drawable.ic_female);
 			}
 			//用户头像
-			ImageLoaderManager.getInstance().displayImageForCircle((ImageView) adapter.getView(R.id.iv_item_search_user_avatar), item.getAvatarUrl());
+			manager.displayImageForCircle((ImageView) adapter.getView(R.id.iv_item_search_user_avatar), item.getAvatarUrl());
 
 
 			//取消关注

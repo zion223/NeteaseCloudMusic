@@ -234,6 +234,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
+                    app:contentInsetLeft="0dp"
+                    app:contentInsetStart="0dp"
+                    app:contentInsetEnd="0dp"
+                    app:maxButtonHeight="20dp"
+                    app:titleMargin="0dp"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
                     <RelativeLayout
@@ -246,6 +251,7 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_marginTop="10dp"
+                            android:layout_centerVertical="true"
                             android:src="@drawable/ic_left_arrow_white1" />
 
                         <ImageView
@@ -274,6 +280,8 @@
                             android:layout_marginTop="10dp"
                             android:layout_toRightOf="@+id/img_gedan_detail_back"
                             android:text="歌单"
+                            android:gravity="center_vertical"
+                            android:layout_centerVertical="true"
                             android:textColor="@color/white"
                             android:textSize="17sp" />
 
@@ -320,8 +328,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:text="(共13首)" />
+                    android:layout_weight="1" />
 
                 <LinearLayout
                     android:id="@+id/ll_gedan_subscribe"

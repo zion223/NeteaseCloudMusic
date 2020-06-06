@@ -39,7 +39,7 @@ public class UserDetailBean implements Serializable {
     //绑定的账号
     private List<BindingsBean> bindings;
 
-    public static class UserPointBean {
+    public static class UserPointBean implements Serializable{
         /**
          * userId : 415560926
          * balance : 106
@@ -105,7 +105,7 @@ public class UserDetailBean implements Serializable {
         }
     }
 
-    public static class ProfileBean{
+    public static class ProfileBean implements Serializable{
         /**
          * userId : 415560926
          * accountStatus : 0
@@ -504,7 +504,7 @@ public class UserDetailBean implements Serializable {
         }
     }
 
-    public static class BindingsBean{
+    public static class BindingsBean implements Serializable{
 
         @Override
         public String toString() {

@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.imooc.imooc_voice.R;
@@ -19,9 +18,9 @@ import org.greenrobot.eventbus.ThreadMode;
 
 public abstract class NeteaseSearchLoadingDelegate extends NeteaseLoadingDelegate {
 
-	public RecyclerView mRecyclerView;
-	private String keywords ="";
+	private String keywords = "";
 	public BaseQuickAdapter mAdapter;
+	public RecyclerView mRecyclerView;
 
 
 
@@ -32,7 +31,6 @@ public abstract class NeteaseSearchLoadingDelegate extends NeteaseLoadingDelegat
 		addLoadingView();
 		EventBus.getDefault().postSticky(new KeywordsEvent(keywords));
 	}
-
 
 	@Override
 	public void onDestroyView() {
@@ -64,10 +62,6 @@ public abstract class NeteaseSearchLoadingDelegate extends NeteaseLoadingDelegat
 	}
 
 	public abstract void reloadSearchResult(String keyword);
-
-
-
-
 
 
 }

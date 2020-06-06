@@ -129,7 +129,7 @@ public class DjRankDelegate extends NeteaseLoadingDelegate implements BaseQuickA
 			if(entity.t != null){
 				getParentDelegate().getSupportDelegate().start(UserDetailDelegate.newInstance(entity.t.getId()));;
 			}else{
-				//点击了头部 查看排行榜详情
+				//点击了头部 查看排行榜详情 TODO
 			}
 		}
 
@@ -155,13 +155,9 @@ public class DjRankDelegate extends NeteaseLoadingDelegate implements BaseQuickA
             adapter.setText(R.id.tv_item_rank_123_name, entity.getNickName());
             //分数
             adapter.setText(R.id.tv_item_rank_123_hot, SearchUtil.getCorresPondingString(entity.getScore()));
-            if(entity.getUserType() == 4 ){
-            	adapter.setVisible(R.id.iv_item_rank_user_tag, true);
-            	adapter.setImageResource(R.id.iv_item_rank_user_tag, R.drawable.ic_musician);
-			}else if(entity.getUserType() == 10 || entity.getUserType() == 1){
-				adapter.setVisible(R.id.iv_item_rank_user_tag, true);
-				adapter.setImageResource(R.id.iv_item_rank_user_tag, R.drawable.ic_official);
-			}
+            //用户身份
+            SearchUtil.setUserTypeImg(entity.getUserType(), R.id.iv_item_rank_user_tag, adapter);
+
             manager.displayImageForCircle((ImageView) adapter.getView(R.id.iv_item_rank_123_avatar), entity.getAvatarUrl());
 
         }
@@ -189,16 +185,12 @@ public class DjRankDelegate extends NeteaseLoadingDelegate implements BaseQuickA
 				adapter.setImageResource(R.id.iv_item_dj_diff, R.drawable.ic_diff_none);
 			}
             String diff  = String.valueOf(Math.abs(diffRank));
+			//排名
             adapter.setText(R.id.tv_item_dj_rank_diff, diff);
             adapter.setText(R.id.tv_item_dj_rank_score, SearchUtil.getCorresPondingString(list.getScore()));
-			//userType
-			if(list.getUserType() == 4){
-				adapter.setVisible(R.id.iv_item_dj_tag, true);
-				adapter.setImageResource(R.id.iv_item_dj_tag, R.drawable.ic_musician);
-			}else if(list.getUserType() == 10 || list.getUserType() == 1){
-				adapter.setVisible(R.id.iv_item_dj_tag, true);
-				adapter.setImageResource(R.id.iv_item_dj_tag, R.drawable.ic_official);
-			}
+			//用户身份
+			SearchUtil.setUserTypeImg(list.getUserType(), R.id.iv_item_dj_tag, adapter);
+			//前三名
 			if(list.getRank() < 4){
 				adapter.setTextColor(R.id.tv_item_dj_rank_rank, Color.RED);
 			}

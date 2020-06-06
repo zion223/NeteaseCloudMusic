@@ -4,6 +4,10 @@ import android.graphics.Color;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
+import android.widget.ImageView;
+
+import com.chad.library.adapter.base.BaseViewHolder;
+import com.imooc.imooc_voice.R;
 
 /*
  *	搜索工具类
@@ -43,5 +47,31 @@ public class SearchUtil {
 	public static String getCorresPondingString(long num){
 		return getCorresPondingString(((Long)num).intValue());
 	}
+
+	//根据用户类型 设置不同的用户专属图标
+	public static void setUserTypeImg(int type, int viewId, BaseViewHolder viewHolder){
+		switch (type){
+			//网易音乐人
+			case 4:
+				viewHolder.setVisible(viewId, true);
+				((ImageView)viewHolder.getView(viewId)).setImageResource(R.drawable.ic_musician);
+				break;
+			//明星用户
+			case 10:
+			case 2:
+				viewHolder.setVisible(viewId, true);
+				((ImageView)viewHolder.getView(viewId)).setImageResource(R.drawable.ic_official);
+				break;
+			//音乐达人
+			case 200:
+				viewHolder.setVisible(viewId, true);
+				((ImageView)viewHolder.getView(viewId)).setImageResource(R.drawable.ic_yellow_star);
+				break;
+			default:
+				viewHolder.setVisible(viewId, false);
+				break;
+		}
+	}
+
 
 }

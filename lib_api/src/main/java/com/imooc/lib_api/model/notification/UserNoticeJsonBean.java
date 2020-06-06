@@ -1,13 +1,13 @@
 package com.imooc.lib_api.model.notification;
 
-import com.imooc.lib_api.model.FollowBean;
 import com.imooc.lib_api.model.search.SynthesisSearchBean;
+import com.imooc.lib_api.model.search.UserSearchBean;
 import com.imooc.lib_api.model.song.MusicCommentBean;
 
 public class UserNoticeJsonBean {
 
 	private int type;
-	private FollowBean.User user;
+	private UserSearchBean.ResultBean.UserprofilesBean user;
 
 	//评论的通知
 	private MusicCommentBean.CommentsBean comment;
@@ -22,11 +22,11 @@ public class UserNoticeJsonBean {
 		this.type = type;
 	}
 
-	public FollowBean.User getUser() {
+	public UserSearchBean.ResultBean.UserprofilesBean getUser() {
 		return user;
 	}
 
-	public void setUser(FollowBean.User user) {
+	public void setUser(UserSearchBean.ResultBean.UserprofilesBean user) {
 		this.user = user;
 	}
 

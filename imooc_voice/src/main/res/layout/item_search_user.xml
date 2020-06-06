@@ -19,7 +19,7 @@
         android:layout_height="15dp"
         android:layout_alignRight="@+id/iv_item_search_user_avatar"
         android:layout_alignBottom="@+id/iv_item_search_user_avatar"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:src="@drawable/ic_official" />
 
     <RelativeLayout

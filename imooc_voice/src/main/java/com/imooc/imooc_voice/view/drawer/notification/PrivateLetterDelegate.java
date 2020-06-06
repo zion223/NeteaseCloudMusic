@@ -11,6 +11,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.util.GsonUtil;
+import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.lib_api.RequestCenter;
 import com.imooc.lib_api.model.notification.MsgDetailBean;
@@ -75,22 +76,9 @@ public class PrivateLetterDelegate extends NeteaseLoadingDelegate {
 			String lastMsg = item.getLastMsg();
 			MsgDetailBean msgDetailBean = GsonUtil.fromJSON(lastMsg, MsgDetailBean.class);
 			adapter.setText(R.id.iv_item_notification_message, msgDetailBean.getMsg());
-
 			//用户身份
-			if(item.getFromUser().getUserType() == 4){
-				//网易音乐人
-				adapter.setVisible(R.id.iv_item_notification_user_tag, true);
-				((ImageView)adapter.getView(R.id.iv_item_notification_user_tag)).setImageResource(R.drawable.ic_musician);
+			SearchUtil.setUserTypeImg(item.getFromUser().getUserType(), R.id.iv_item_notification_user_tag, adapter);
 
-			}else if(item.getFromUser().getUserType() == 10 || item.getFromUser().getUserType() == 2){
-				//明星用户
-				adapter.setVisible(R.id.iv_item_notification_user_tag, true);
-				((ImageView)adapter.getView(R.id.iv_item_notification_user_tag)).setImageResource(R.drawable.ic_official);
-			}else if(item.getFromUser().getUserType() == 200){
-				//音乐达人
-				adapter.setVisible(R.id.iv_item_notification_user_tag, true);
-				((ImageView)adapter.getView(R.id.iv_item_notification_user_tag)).setImageResource(R.drawable.ic_yellow_star);
-			}
 
 			if (item.getNewMsgCount() != 0){
 				adapter.setVisible(R.id.tv_item_notification_count, true);

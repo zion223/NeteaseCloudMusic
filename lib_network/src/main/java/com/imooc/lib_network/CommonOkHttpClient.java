@@ -1,6 +1,5 @@
 package com.imooc.lib_network;
 
-import android.content.Context;
 
 import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
