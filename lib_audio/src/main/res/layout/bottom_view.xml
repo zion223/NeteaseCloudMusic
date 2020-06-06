@@ -13,7 +13,7 @@
     <RelativeLayout
         android:id="@+id/content_view"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="50dp"
         android:layout_below="@id/divider"
         android:clipChildren="false"
         android:paddingStart="5dp"
@@ -21,8 +21,8 @@
 
         <ImageView
             android:id="@+id/album_view"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
             android:layout_centerVertical="true"
             android:scaleType="fitXY" />
 

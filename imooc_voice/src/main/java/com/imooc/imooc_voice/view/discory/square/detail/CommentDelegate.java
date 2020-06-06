@@ -23,11 +23,13 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.util.AnimUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
+import com.imooc.imooc_voice.view.user.UserDetailDelegate;
 import com.imooc.lib_api.RequestCenter;
 import com.imooc.lib_api.model.PlayListCommentEntity;
 import com.imooc.lib_api.model.song.CommentLikeBean;
 import com.imooc.lib_api.model.song.MusicCommentBean;
 import com.imooc.lib_api.model.song.PlayListCommentBean;
+import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
@@ -218,7 +220,7 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 		for (int j = 0; j < commentBean.getComments().size(); j++) {
 			entities.add(new PlayListCommentEntity(commentBean.getComments().get(j)));
 		}
-		mAdapter = new MultipleSectionGedanCommentAdapter(id, type, getContext(), entities);
+		mAdapter = new MultipleSectionGedanCommentAdapter(id, type, getContext(), this, entities);
 		mRecyclerViewComment.setAdapter(mAdapter);
 		mRecyclerViewComment.setLayoutManager(new LinearLayoutManager(getContext()) {
 			@Override
@@ -245,17 +247,19 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 	public static class MultipleSectionGedanCommentAdapter extends BaseSectionQuickAdapter<PlayListCommentEntity, BaseViewHolder> {
 
 		private ImageLoaderManager manager;
+		private NeteaseDelegate mDelegate;
 		private String commentId;
 		private Context mContext;
 		private int commentType;
 
 		//评论类型 tyep  0: 歌曲  1: mv 2: 歌单 3: 专辑 4: 电台 5: 视频 6: 动态
-		public MultipleSectionGedanCommentAdapter(String id, int type, Context context, List<PlayListCommentEntity> data) {
+		public MultipleSectionGedanCommentAdapter(String id, int type, Context context, NeteaseDelegate delegate, List<PlayListCommentEntity> data) {
 			super(R.layout.item_gedan_detail_comment, R.layout.item_gedan_comment_header, data);
 			manager = ImageLoaderManager.getInstance();
 			commentId = id;
 			mContext = context;
 			commentType = type;
+			mDelegate = delegate;
 		}
 
 		@Override
@@ -295,7 +299,19 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 				baseViewHolder.setVisible(R.id.tv_item_gedan_comment_replied, true);
 				baseViewHolder.setText(R.id.tv_item_gedan_comment_replied, bean.getBeReplied().size() + "条回复");
 			}
-
+			//点击头像和用户名进入用户详情
+			baseViewHolder.setOnClickListener(R.id.iv_item_gedan_comment_avatar_img, new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					mDelegate.getSupportDelegate().start(UserDetailDelegate.newInstance(String.valueOf(bean.getUser().getUserId())));
+				}
+			});
+			baseViewHolder.setOnClickListener(R.id.tv_item_gedan_comment_avatar_name, new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					mDelegate.getSupportDelegate().start(UserDetailDelegate.newInstance(String.valueOf(bean.getUser().getUserId())));
+				}
+			});
 			final ImageView praiseView = baseViewHolder.getView(R.id.iv_item_gedan_comment_zan);
 			//tag : true 当前是赞 false当前不是赞
 			if (bean.isLiked()) {

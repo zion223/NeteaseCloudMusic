@@ -113,7 +113,7 @@ public class CircleProgressButton extends View {
 		if(playOrPause == Status.PAUSE){
 			bgColor = Color.DKGRAY;
 		}else if(playOrPause == Status.PLAY){
-			bgColor = Color.GRAY;
+			bgColor = Color.LTGRAY;
 		}
 		postInvalidate();
 	}

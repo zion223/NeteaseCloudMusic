@@ -27,6 +27,7 @@ public class PlayListAdapter extends BaseQuickAdapter<SongDetailBean.SongsBean, 
 	//是否有头布局 影响显示序号
 	private Boolean hasHeader;
 	private NeteaseDelegate mDelegate;
+	private boolean showMoreView = true;
 
 	public PlayListAdapter(Context context, NeteaseDelegate delegate, boolean hasHeader, @Nullable List<SongDetailBean.SongsBean> data) {
 		super(R.layout.item_gedan_detail_song, data);
@@ -40,6 +41,14 @@ public class PlayListAdapter extends BaseQuickAdapter<SongDetailBean.SongsBean, 
 		this.mContext = context;
 		this.mDelegate = delegate;
 		this.hasHeader = false;
+	}
+
+	public PlayListAdapter(Context context, NeteaseDelegate delegate, boolean hasHeader, boolean showMoreView, @Nullable List<SongDetailBean.SongsBean> data) {
+		super(R.layout.item_gedan_detail_song, data);
+		this.mContext = context;
+		this.mDelegate = delegate;
+		this.hasHeader = hasHeader;
+		this.showMoreView = showMoreView;
 	}
 
 	@Override
@@ -70,6 +79,8 @@ public class PlayListAdapter extends BaseQuickAdapter<SongDetailBean.SongsBean, 
 				showMoreDialog(item);
 			}
 		});
+		//是否显示 更多View
+		helper.setVisible(R.id.viewpager_list_button, showMoreView);
 	}
 
 

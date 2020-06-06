@@ -217,7 +217,7 @@ public class MvDeatilDelegate extends NeteaseLoadingDelegate {
 						for (int j = 0; j < bean.getComments().size(); j++) {
 							entities.add(new PlayListCommentEntity(bean.getComments().get(j)));
 						}
-						mCommentAdapter = new CommentDelegate.MultipleSectionGedanCommentAdapter(mvId, VIDEO, getContext(), entities);
+						mCommentAdapter = new CommentDelegate.MultipleSectionGedanCommentAdapter(mvId, VIDEO, getContext(), MvDeatilDelegate.this, entities);
 						mRvVideoComment.setAdapter(mCommentAdapter);
 						mRvVideoComment.setLayoutManager(new LinearLayoutManager(getContext()) {
 							@Override

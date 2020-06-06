@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/iv_item_notice_fromuser_avatar"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_centerVertical="true"
         android:layout_marginStart="12dp"
         android:src="@drawable/ic_test" />
@@ -31,7 +31,7 @@
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/iv_item_notice_fromuser_avatar"
         android:textColor="#517D98"
-        android:textSize="15sp" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/tv_item_notice_event"
@@ -40,7 +40,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/tv_item_notice_fromuser"
-        android:textSize="15sp" />
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/iv_item_notice_message"
@@ -53,7 +53,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="@color/black"
-        android:textSize="12sp" />
+        android:textSize="11sp" />
 
     <TextView
         android:id="@+id/tv_item_notice_time"

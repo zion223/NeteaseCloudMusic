@@ -1,4 +1,6 @@
 package com.imooc.lib_api.model;
+import com.imooc.lib_api.model.song.SongDetailBean;
+
 import java.util.List;
 
 public class VideoBean {
@@ -1929,7 +1931,7 @@ public class VideoBean {
 		private boolean hasRelatedGameAd;
 		private Object markTypes;
 		//相关歌曲
-		private List<PlayModeIntelligenceBean.DataBean.SongInfoBean> relateSong;
+		private List<SongDetailBean.SongsBean> relateSong;
 		private String relatedInfo;
 		private String videoUserLiveInfo;
 		private String vid;
@@ -2092,11 +2094,11 @@ public class VideoBean {
 			return markTypes;
 		}
 
-		public void setRelatesong(List<PlayModeIntelligenceBean.DataBean.SongInfoBean> relatesong) {
+		public void setRelatesong(List<SongDetailBean.SongsBean> relatesong) {
 			this.relateSong = relatesong;
 		}
 
-		public List<PlayModeIntelligenceBean.DataBean.SongInfoBean> getRelatesong() {
+		public List<SongDetailBean.SongsBean> getRelatesong() {
 			return relateSong;
 		}
 

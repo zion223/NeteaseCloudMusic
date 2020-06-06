@@ -51,8 +51,8 @@ public class UserRecordTabDelegate extends NeteaseTabDelegate {
 
 	@Override
 	public List<NeteaseDelegate> setDelegateList() {
-		mDelegateList.add(UserRecordDelegate.newInstance(userId, 0));
 		mDelegateList.add(UserRecordDelegate.newInstance(userId, 1));
+		mDelegateList.add(UserRecordDelegate.newInstance(userId, 0));
 		return mDelegateList;
 	}
 

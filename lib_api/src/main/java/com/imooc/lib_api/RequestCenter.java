@@ -619,6 +619,7 @@ public class RequestCenter {
 
     /**
      *  心动模式
+     *  id : 歌曲id
      *  pid : 歌单 id
      *  可选参数 : sid : 要开始播放的歌曲的 id
      */

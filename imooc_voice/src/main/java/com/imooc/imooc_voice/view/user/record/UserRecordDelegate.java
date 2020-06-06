@@ -1,5 +1,6 @@
 package com.imooc.imooc_voice.view.user.record;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -56,6 +57,7 @@ public class UserRecordDelegate extends NeteaseLoadingDelegate {
 		mTvMsg = rootView.findViewById(R.id.tv_msg_text);
 		//获取用户播放记录
 		RequestCenter.getUserRecord(userId, recordType, new DisposeDataListener() {
+			@SuppressLint("SetTextI18n")
 			@Override
 			public void onSuccess(Object responseObj) {
 				UserRecordBean bean = (UserRecordBean) responseObj;
@@ -64,7 +66,7 @@ public class UserRecordDelegate extends NeteaseLoadingDelegate {
 				if (bean.getCode() != 200) {
 					//不允许别人查看播放记录 显示内容
 					mTvMsg.setVisibility(View.VISIBLE);
-					mTvMsg.setText("由于对方的设置,您不可以查看对方的播放记录");
+					mTvMsg.setText("由于对方设置你无法查看TA的听歌排行");
 					mRecyclerView.setVisibility(View.GONE);
 				} else if (bean.getCode() == 200 && recordType == 1 && bean.getWeekData() != null) {
 					for (int i = 0; i < bean.getWeekData().size(); i++) {
@@ -75,7 +77,7 @@ public class UserRecordDelegate extends NeteaseLoadingDelegate {
 						mSongList.add(bean.getAllData().get(i).getSong());
 					}
 				}
-				mAdapter = new PlayListAdapter(getContext(), getParentDelegate(), mSongList);
+				mAdapter = new PlayListAdapter(getContext(), getParentDelegate(), false,false, mSongList);
 				mRecyclerView.setAdapter(mAdapter);
 				mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 				addRootView();

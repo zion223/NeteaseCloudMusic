@@ -17,6 +17,7 @@ import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
 import com.imooc.imooc_voice.view.user.UserDetailDelegate;
 import com.imooc.lib_api.HttpConstants;
 import com.imooc.lib_api.RequestCenter;
+import com.imooc.lib_api.model.DailyRecommendBean;
 import com.imooc.lib_api.model.VideoUrlBean;
 import com.imooc.lib_api.model.personal.UserEventBean;
 import com.imooc.lib_api.model.personal.UserEventJsonBean;
@@ -218,7 +219,7 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
 			public void onClick(View v) {
 				if(jsonBean.getSong() != null && !TextUtils.isEmpty(jsonBean.getSong().getName())){
 					//播放歌曲
-					UserEventJsonBean.SongBean item = jsonBean.getSong();
+					DailyRecommendBean.RecommendBean item = jsonBean.getSong();
 					String songPlayUrl = HttpConstants.getSongPlayUrl(item.getId());
 					AudioHelper.addAudio(new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getArtists().get(0).getName(), item.getAlbum().getName(), item.getAlbum().getName(), item.getAlbum().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDuration())));
 				}else if(jsonBean.getAlbum() != null){
