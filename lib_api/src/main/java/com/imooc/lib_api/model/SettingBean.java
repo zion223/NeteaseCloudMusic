@@ -69,11 +69,16 @@ public class SettingBean {
      */
     public static class Setting{
         private boolean phoneFriendSetting;
+        //可以再附近页看到我
         private boolean peopleNearbyCanSeeMe;
+        //
         private boolean allowSubscriptionNotify;
+        //收到赞
         private boolean allowLikedNotify;
+        //新粉丝
         private boolean allowNewFollowerNotify;
         private boolean needRcmdEvent;
+        //歌单被收藏
         private boolean allowPlaylistShareNotify;
         private boolean allowDJProgramShareNotify;
         private boolean allowDJProgramSubscriptionNotify;

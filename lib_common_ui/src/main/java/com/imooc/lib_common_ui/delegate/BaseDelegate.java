@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 
 import com.imooc.lib_common_ui.base.ProxyActivity;
 
-import org.greenrobot.eventbus.EventBus;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;

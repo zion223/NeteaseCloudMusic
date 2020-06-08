@@ -16,7 +16,6 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 public class ImoocActivity extends ProxyActivity{
 
-	private static final String TAG = "ImoocActivity";
 
 	@Override
 	public NeteaseDelegate setRootDelegate() {

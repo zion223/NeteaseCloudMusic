@@ -1,7 +1,6 @@
 package com.imooc.imooc_voice.view.discory.square.detail;
 
 import android.annotation.SuppressLint;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -104,8 +103,8 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	ImageView mIvAlbumAttachIcon;
 	@BindView(R2.id.loadframe)
 	FrameLayout mFlSong;
-	@BindView(R2.id.ll_play_header)
-	LinearLayout mLlPlayHeader;
+	@BindView(R2.id.rl_play_header)
+	RelativeLayout mRlPlayHeader;
 
 	private PlayListAdapter mAdapter;
 	private ImageLoaderManager manager;
@@ -135,10 +134,6 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	private int deltaDistance;
 
 
-	public static SongListDetailDelegate newInstance(int type, long id) {
-		return newInstance(type, id, "");
-	}
-
 	public static SongListDetailDelegate newInstance(int type, long id, String copyWriter) {
 		final Bundle args = new Bundle();
 		args.putString(ARGS_SONGLIST_ID, String.valueOf(id));
@@ -147,6 +142,10 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 		final SongListDetailDelegate delegate = new SongListDetailDelegate();
 		delegate.setArguments(args);
 		return delegate;
+	}
+
+	public static SongListDetailDelegate newInstance(int type, long id) {
+		return newInstance(type, id, "");
 	}
 
 	@Override
@@ -170,7 +169,7 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	public void initView() {
 		mRecyclerViewGedan = rootView.findViewById(R.id.rv_gedan_detail_normal);
 		minDistance = StatusBarUtil.dip2px(getContext(), 55);
-		deltaDistance = StatusBarUtil.dip2px(getContext(), 300) - minDistance;
+		deltaDistance = StatusBarUtil.dip2px(getContext(), 310) - minDistance;
 
 		switch (type) {
 			case PLAYLIST:
@@ -190,65 +189,28 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	@Override
 	public void onLazyInitView(@Nullable Bundle savedInstanceState) {
 		super.onLazyInitView(savedInstanceState);
-//		mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-//			@Override
-//			public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
-//
-//				//ToolBar标题变化
-//				if (Math.abs(i) > 220) {
-//					mTvToolBarTitle.setText(mTvDetailTitle.getText());
-//				} else {
-//					if (type == ALBUM) {
-//						mTvToolBarTitle.setText("专辑");
-//					} else {
-//						mTvToolBarTitle.setText("歌单");
-//					}
-//					mTvToolBarTitle.setFocusable(true);
-//				}
-//				//mCollspsingToolbar 透明度变化 0- 660  i/660
-//				DecimalFormat df = new DecimalFormat("0.0");
-//				float num = (float) (Math.abs(i)) / (float) 440;
-//				//float alpha = (1 - num) * 255;
-//				int alpha = (int) (num * 255);
-//				//int alphaa = Integer.parseInt(String.valueOf(s.split(".")[0]));
-//				//mCollspsingToolbar.setAlpha(alpha);
-//				//mIvAppbarBackground.setImageAlpha(alpha);
-//
-//			}
-//		});
 		mAppBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
 			@Override
 			public void onStateChanged(AppBarLayout appBarLayout, State state) {
-				if (state == State.COLLAPSED) {
-					setLeftTitleAlpha(255f);
-				}
+
 			}
 
 			@Override
 			public void onOffsetChanged(AppBarLayout appBarLayout) {
-				float alphaPercent = (float) (mLlPlayHeader.getTop() - minDistance) / (float) deltaDistance;
+				float alphaPercent = (float) (mRlPlayHeader.getTop() - minDistance) / (float) deltaDistance;
 				int alpha = (int) (alphaPercent * 255);
-				Log.e(TAG, "alpha:" + alpha);
 				mIvAppbarBackgroundCover.setImageAlpha(alpha);
-				if (alphaPercent < 0.2f) {
-					float leftTitleAlpha = (1.0f - alphaPercent / 0.2f);
-					setLeftTitleAlpha(leftTitleAlpha);
-				} else {
-					setLeftTitleAlpha(0);
-				}
 			}
 		});
 	}
 
-	private void setLeftTitleAlpha(float alpha) {
-		mTvToolBarTitle.setVisibility(View.VISIBLE);
-		mTvToolBarTitle.setAlpha(alpha);
-	}
+
 
 	/**
 	 * 初始化专辑
 	 */
 	private void initAlbumView() {
+		mTvToolBarTitle.setText("专辑");
 		//不显示播放数量
 		mTvGedanPlayNum.setVisibility(View.GONE);
 		mIvPlayNumIcon.setVisibility(View.GONE);
@@ -271,7 +233,7 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 				}
 				//专辑图片
 				manager.displayImageForCorner(mImageViewGedan, album.getPicUrl());
-				manager.displayImageForViewGroup(mIvAppbarBackgroundCover, album.getPicUrl(),125);
+				manager.displayImageForViewGroup(mIvAppbarBackgroundCover, album.getPicUrl(),55);
 				//模糊背景
 				manager.displayImageForViewGroup(mIvAppbarBackgroundImg, album.getPicUrl(), 175);
 				//毛玻璃效果 Failed to allocate a 144000016 byte allocation with 25165824 free bytes and 95MB until OOM, target footprint 462221240, growth limit 536870912
@@ -303,7 +265,6 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 						SongDetailBean.SongsBean item = (SongDetailBean.SongsBean) adapter.getItem(position);
 						String songPlayUrl = HttpConstants.getSongPlayUrl(item.getId());
 						AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getAr().get(0).getName(), item.getAl().getName(), item.getAl().getName(), item.getAl().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDt())));
-
 					}
 				});
 				mRecyclerViewGedan.setAdapter(mAdapter);
@@ -354,7 +315,7 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	 * 初始化歌单
 	 */
 	private void initPlayListView() {
-
+		mTvToolBarTitle.setText("歌单");
 		//copyWriter
 		if (!TextUtils.isEmpty(copyWriter)) {
 			mTvCopyWriter.setText(copyWriter);
@@ -406,9 +367,9 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 				//毛玻璃效果背景
 				//manager.displayImageForViewGroup(mAppBarLayout, playlist.getCoverImgUrl(), 200);
 				//正常背景
-				manager.displayImageForViewGroup(mIvAppbarBackgroundCover, playlist.getCoverImgUrl(),125);
+				manager.displayImageForViewGroup(mIvAppbarBackgroundCover, playlist.getCoverImgUrl(),55);
 				//模糊背景
-				manager.displayImageForViewGroup(mIvAppbarBackgroundImg, playlist.getCoverImgUrl(), 175);
+				manager.displayImageForViewGroup(mIvAppbarBackgroundImg, playlist.getCoverImgUrl(), 200);
 
 				List<PlaylistDetailBean.PlaylistBean.TrackIdsBean> trackIds = playlist.getTrackIds();
 

@@ -41,6 +41,7 @@ public class BaseDelegate extends NeteaseDelegate {
 	//TODO 返回按键拦截
 	@Override
 	public boolean onBackPressedSupport() {
+		getSupportDelegate().pop();
 		return false;
 	}
 }
