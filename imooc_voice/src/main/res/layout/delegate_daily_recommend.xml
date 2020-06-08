@@ -75,7 +75,13 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                app:layout_collapseMode="pin">
+                app:layout_collapseMode="pin"
+                android:layout_marginBottom="10dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetStart="0dp"
+                app:contentInsetEnd="0dp"
+                app:maxButtonHeight="20dp"
+                app:titleMargin="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"

@@ -19,14 +19,23 @@
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="300dp"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <ImageView
+                    android:id="@+id/iv_gedan_detail_img_back"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    app:layout_collapseMode="parallax"/>
+
+                <ImageView
                     android:id="@+id/iv_gedan_detail_img_cover"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    app:layout_collapseMode="parallax"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -232,8 +241,9 @@
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar_gedan_detail"
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
+                    android:layout_height="55dp"
                     app:layout_collapseMode="pin"
+                    android:layout_marginBottom="10dp"
                     app:contentInsetLeft="0dp"
                     app:contentInsetStart="0dp"
                     app:contentInsetEnd="0dp"
@@ -297,19 +307,26 @@
                             android:textSize="8sp" />
                     </RelativeLayout>
                 </android.support.v7.widget.Toolbar>
-
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="620dp"
+                    android:background="@drawable/bg_dailyrecommend"
+                    app:layout_collapseMode="pin" />
             </android.support.design.widget.CollapsingToolbarLayout>
 
             <LinearLayout
+                android:id="@+id/ll_play_header"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@drawable/bg_song_list_header"
-                android:orientation="horizontal">
+                android:layout_height="40dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:layout_gravity="top">
 
                 <ImageView
                     android:layout_width="23dp"
                     android:layout_height="23dp"
-                    android:layout_gravity="center_vertical"
+                    android:layout_gravity="top"
                     android:layout_marginLeft="15dp"
                     android:src="@drawable/ic_play_gray" />
 
@@ -317,7 +334,6 @@
                     android:id="@+id/tv_gedan_detaill_all_play"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="15dp"
                     android:text="全部播放"
                     android:textColor="@color/black"
@@ -327,14 +343,12 @@
                     android:id="@+id/tv_gedan_detail_song_num"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_weight="1" />
 
                 <LinearLayout
                     android:id="@+id/ll_gedan_subscribe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/bg_round_red"
                     android:orientation="horizontal"
@@ -362,7 +376,6 @@
                     android:id="@+id/ll_gedan_subscribed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_marginRight="10dp"
                     android:orientation="horizontal"
                     android:visibility="gone">

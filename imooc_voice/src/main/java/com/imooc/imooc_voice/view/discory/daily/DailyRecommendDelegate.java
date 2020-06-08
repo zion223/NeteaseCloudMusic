@@ -89,13 +89,13 @@ public class DailyRecommendDelegate extends NeteaseDelegate {
 				DailyRecommendBean bean = (DailyRecommendBean) responseObj;
 				List<DailyRecommendBean.RecommendBean> recommend = bean.getRecommend();
 				mAdapter = new DailyRecommendAdapter(recommend);
+				//播放音乐
 				mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
 					@Override
 					public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 						DailyRecommendBean.RecommendBean item = (DailyRecommendBean.RecommendBean) adapter.getItem(position);
 						String songPlayUrl = HttpConstants.getSongPlayUrl(item.getId());
 						AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getArtists().get(0).getName(), item.getAlbum().getName(), item.getAlbum().getName(), item.getAlbum().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDuration())));
-
 					}
 				});
 				mRvRecommend.setAdapter(mAdapter);
@@ -160,7 +160,7 @@ public class DailyRecommendDelegate extends NeteaseDelegate {
 
 		@Override
 		protected void convert(@NonNull BaseViewHolder helper, DailyRecommendBean.RecommendBean item) {
-			helper.setText(R.id.item_play_no, String.valueOf(helper.getLayoutPosition()+1));
+			helper.setText(R.id.item_play_no, String.valueOf(helper.getLayoutPosition() + 1));
 			helper.setText(R.id.viewpager_list_toptext, item.getName());
 			helper.setText(R.id.viewpager_list_bottom_text, item.getArtists().get(0).getName() + " - " + item.getAlbum().getName());
 			helper.setOnClickListener(R.id.viewpager_list_button, new View.OnClickListener() {

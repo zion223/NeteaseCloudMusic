@@ -89,7 +89,7 @@ public class PrivateNoticeDelegate extends NeteaseLoadingDelegate {
 
 			ImageLoaderManager.getInstance().displayImageForCircle(adapter.getView(R.id.iv_item_notice_fromuser_avatar), userNoticeJsonBean.getUser().getAvatarUrl());
 			//显示用户类型
-			SearchUtil.setUserTypeImg(userNoticeJsonBean.getUser().getUserType(), R.id.iv_item_notification_user_tag, adapter);
+			SearchUtil.setUserTypeImg(userNoticeJsonBean.getUser().getUserType(), R.id.iv_item_notice_user_tag, adapter);
 
 		}
 	}

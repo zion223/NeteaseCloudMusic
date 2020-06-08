@@ -10,7 +10,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -33,11 +35,12 @@ import com.imooc.lib_api.model.search.AlbumSearchBean;
 import com.imooc.lib_api.model.song.SongDetailBean;
 import com.imooc.lib_audio.app.AudioHelper;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
+import com.imooc.lib_common_ui.appbar.AppBarStateChangeListener;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
+import com.imooc.lib_common_ui.utils.StatusBarUtil;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 import butterknife.BindView;
@@ -74,7 +77,9 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	@BindView(R2.id.collapsing_toolbar_layout)
 	CollapsingToolbarLayout mCollspsingToolbar;
 	@BindView(R2.id.iv_gedan_detail_img_cover)
-	ImageView mIvAppbarBackground;
+	ImageView mIvAppbarBackgroundCover;
+	@BindView(R2.id.iv_gedan_detail_img_back)
+	ImageView mIvAppbarBackgroundImg;
 	@BindView(R2.id.iv_gedan_detail_avatar_img)
 	ImageView mIvAvatarView;
 	@BindView(R2.id.tv_gedan_detail_playnum)
@@ -97,6 +102,10 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	LinearLayout mLlPlayListSubscribed;
 	@BindView(R2.id.iv_gedan_detail_album_tag)
 	ImageView mIvAlbumAttachIcon;
+	@BindView(R2.id.loadframe)
+	FrameLayout mFlSong;
+	@BindView(R2.id.ll_play_header)
+	LinearLayout mLlPlayHeader;
 
 	private PlayListAdapter mAdapter;
 	private ImageLoaderManager manager;
@@ -122,6 +131,8 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	private String gedanTitle;
 	//创建歌单的用户ID
 	private String userId;
+	private int minDistance;
+	private int deltaDistance;
 
 
 	public static SongListDetailDelegate newInstance(int type, long id) {
@@ -158,6 +169,9 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	@Override
 	public void initView() {
 		mRecyclerViewGedan = rootView.findViewById(R.id.rv_gedan_detail_normal);
+		minDistance = StatusBarUtil.dip2px(getContext(), 55);
+		deltaDistance = StatusBarUtil.dip2px(getContext(), 300) - minDistance;
+
 		switch (type) {
 			case PLAYLIST:
 				//歌单
@@ -176,32 +190,59 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 	@Override
 	public void onLazyInitView(@Nullable Bundle savedInstanceState) {
 		super.onLazyInitView(savedInstanceState);
-		mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+//		mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+//			@Override
+//			public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
+//
+//				//ToolBar标题变化
+//				if (Math.abs(i) > 220) {
+//					mTvToolBarTitle.setText(mTvDetailTitle.getText());
+//				} else {
+//					if (type == ALBUM) {
+//						mTvToolBarTitle.setText("专辑");
+//					} else {
+//						mTvToolBarTitle.setText("歌单");
+//					}
+//					mTvToolBarTitle.setFocusable(true);
+//				}
+//				//mCollspsingToolbar 透明度变化 0- 660  i/660
+//				DecimalFormat df = new DecimalFormat("0.0");
+//				float num = (float) (Math.abs(i)) / (float) 440;
+//				//float alpha = (1 - num) * 255;
+//				int alpha = (int) (num * 255);
+//				//int alphaa = Integer.parseInt(String.valueOf(s.split(".")[0]));
+//				//mCollspsingToolbar.setAlpha(alpha);
+//				//mIvAppbarBackground.setImageAlpha(alpha);
+//
+//			}
+//		});
+		mAppBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
 			@Override
-			public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
-
-				//ToolBar标题变化
-				if (Math.abs(i) > 220) {
-					mTvToolBarTitle.setText(mTvDetailTitle.getText());
-				} else {
-					if (type == ALBUM) {
-						mTvToolBarTitle.setText("专辑");
-					} else {
-						mTvToolBarTitle.setText("歌单");
-					}
-					mTvToolBarTitle.setFocusable(true);
+			public void onStateChanged(AppBarLayout appBarLayout, State state) {
+				if (state == State.COLLAPSED) {
+					setLeftTitleAlpha(255f);
 				}
-				//mCollspsingToolbar 透明度变化 0- 660  i/660
-				DecimalFormat df = new DecimalFormat("0.0");
-				float num = (float) (Math.abs(i)) / (float) 440;
-				//float alpha = (1 - num) * 255;
-				int alpha = (int) (num * 255);
-				//int alphaa = Integer.parseInt(String.valueOf(s.split(".")[0]));
-				//mCollspsingToolbar.setAlpha(alpha);
-				//mIvAppbarBackground.setImageAlpha(alpha);
+			}
 
+			@Override
+			public void onOffsetChanged(AppBarLayout appBarLayout) {
+				float alphaPercent = (float) (mLlPlayHeader.getTop() - minDistance) / (float) deltaDistance;
+				int alpha = (int) (alphaPercent * 255);
+				Log.e(TAG, "alpha:" + alpha);
+				mIvAppbarBackgroundCover.setImageAlpha(alpha);
+				if (alphaPercent < 0.2f) {
+					float leftTitleAlpha = (1.0f - alphaPercent / 0.2f);
+					setLeftTitleAlpha(leftTitleAlpha);
+				} else {
+					setLeftTitleAlpha(0);
+				}
 			}
 		});
+	}
+
+	private void setLeftTitleAlpha(float alpha) {
+		mTvToolBarTitle.setVisibility(View.VISIBLE);
+		mTvToolBarTitle.setAlpha(alpha);
 	}
 
 	/**
@@ -230,6 +271,9 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 				}
 				//专辑图片
 				manager.displayImageForCorner(mImageViewGedan, album.getPicUrl());
+				manager.displayImageForViewGroup(mIvAppbarBackgroundCover, album.getPicUrl(),125);
+				//模糊背景
+				manager.displayImageForViewGroup(mIvAppbarBackgroundImg, album.getPicUrl(), 175);
 				//毛玻璃效果 Failed to allocate a 144000016 byte allocation with 25165824 free bytes and 95MB until OOM, target footprint 462221240, growth limit 536870912
 				//manager.displayImageForViewGroup(mAppBarLayout, album.getBlurPicUrl(), 200);
 				//显示歌手名
@@ -360,7 +404,11 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 				}
 
 				//毛玻璃效果背景
-				manager.displayImageForViewGroup(mAppBarLayout, playlist.getCoverImgUrl(), 200);
+				//manager.displayImageForViewGroup(mAppBarLayout, playlist.getCoverImgUrl(), 200);
+				//正常背景
+				manager.displayImageForViewGroup(mIvAppbarBackgroundCover, playlist.getCoverImgUrl(),125);
+				//模糊背景
+				manager.displayImageForViewGroup(mIvAppbarBackgroundImg, playlist.getCoverImgUrl(), 175);
 
 				List<PlaylistDetailBean.PlaylistBean.TrackIdsBean> trackIds = playlist.getTrackIds();
 
@@ -379,39 +427,31 @@ public class SongListDetailDelegate extends NeteaseLoadingDelegate {
 						params.append(trackIds.get(i).getId()).append(",");
 					}
 				}
-				new AsyncTask<Void, Void, Void>() {
+                RequestCenter.getSongDetail(params.toString(), new DisposeDataListener() {
+                    @Override
+                    public void onSuccess(Object responseObj) {
+                        SongDetailBean bean = (SongDetailBean) responseObj;
+                        List<SongDetailBean.SongsBean> songs = bean.getSongs();
+                        mAdapter = new PlayListAdapter(getContext(), SongListDetailDelegate.this, false, songs);
+                        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                SongDetailBean.SongsBean item = (SongDetailBean.SongsBean) adapter.getItem(position);
+                                String songPlayUrl = HttpConstants.getSongPlayUrl(item.getId());
+                                AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getAr().get(0).getName(), item.getAl().getName(), item.getAl().getName(), item.getAl().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDt())));
+                            }
+                        });
+                        mRecyclerViewGedan.setAdapter(mAdapter);
+                        mRecyclerViewGedan.setLayoutManager(new LinearLayoutManager(getContext()));
+                        addRootView();
+                    }
 
-					@Override
-					protected Void doInBackground(Void... voids) {
-						//获取歌曲详情
-						RequestCenter.getSongDetail(params.toString(), new DisposeDataListener() {
-							@Override
-							public void onSuccess(Object responseObj) {
-								SongDetailBean bean = (SongDetailBean) responseObj;
-								List<SongDetailBean.SongsBean> songs = bean.getSongs();
-								mAdapter = new PlayListAdapter(getContext(), SongListDetailDelegate.this, false, songs);
-								mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-									@Override
-									public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-										SongDetailBean.SongsBean item = (SongDetailBean.SongsBean) adapter.getItem(position);
-										String songPlayUrl = HttpConstants.getSongPlayUrl(item.getId());
-										AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getAr().get(0).getName(), item.getAl().getName(), item.getAl().getName(), item.getAl().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDt())));
+                    @Override
+                    public void onFailure(Object reasonObj) {
 
-									}
-								});
-								mRecyclerViewGedan.setAdapter(mAdapter);
-								mRecyclerViewGedan.setLayoutManager(new LinearLayoutManager(getContext()));
-								addRootView();
-							}
+                    }
+                });
 
-							@Override
-							public void onFailure(Object reasonObj) {
-
-							}
-						});
-						return null;
-					}
-				}.execute();
 
 				//manager.displayImageForViewGroup(mIvAppbarBackground, json.getPic300(), 500);
 

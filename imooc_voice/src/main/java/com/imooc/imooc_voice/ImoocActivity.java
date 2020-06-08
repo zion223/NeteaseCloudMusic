@@ -55,5 +55,9 @@ public class ImoocActivity extends ProxyActivity{
 
 	}
 
-
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		getSupportDelegate().pop();
+	}
 }

@@ -50,7 +50,6 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.Simple
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -83,6 +82,8 @@ public class HomeDelegate extends NeteaseDelegate{
 	LinearLayout mLlUnLoggin;
 	@BindView(R2.id.icon_notification_listen)
 	VerticalItemView mVerItemViewListen;
+	@BindView(R2.id.tv_user_level)
+	TextView mTvLevel;
 
 	private SharePreferenceUtil sharePreferenceUtil;
 
@@ -100,6 +101,8 @@ public class HomeDelegate extends NeteaseDelegate{
 		sharePreferenceUtil = SharePreferenceUtil.getInstance(getContext());
 		loginBean = GsonUtil.fromJSON(sharePreferenceUtil.getUserInfo(""), LoginBean.class);
 		if(loginBean != null){
+			//TODO 用户等级
+			//mTvLevel.setText("LV." + loginBean.getProfile().get);
 			mRlAvatar.setVisibility(View.VISIBLE);
 			mLlUnLoggin.setVisibility(View.GONE);
 			ImageLoaderManager.getInstance().displayImageForCircle(mIvAvatarView, loginBean.getProfile().getAvatarUrl());
