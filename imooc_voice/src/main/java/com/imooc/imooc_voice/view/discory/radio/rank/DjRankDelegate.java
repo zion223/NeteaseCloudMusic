@@ -19,7 +19,7 @@ import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.view.user.UserDetailDelegate;
 import com.imooc.lib_api.RequestCenter;
-import com.imooc.lib_api.model.dj.DjTopListBean;
+import com.imooc.lib_api.model.dj.DjRankListBean;
 import com.imooc.lib_api.model.dj.DjToplistEntity;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
@@ -46,8 +46,8 @@ public class DjRankDelegate extends NeteaseLoadingDelegate implements BaseQuickA
 		RequestCenter.getRadioTopHours(3, new DisposeDataListener() {
 			@Override
 			public void onSuccess(Object responseObj) {
-				DjTopListBean bean = (DjTopListBean) responseObj;
-				List<DjTopListBean.List> list = bean.getData().getList();
+				DjRankListBean bean = (DjRankListBean) responseObj;
+				List<DjRankListBean.List> list = bean.getData().getList();
 				entities.add(new DjToplistEntity(true, "24小时榜"));
 				for (int i = 0; i < list.size(); i++) {
 					entities.add(new DjToplistEntity(list.get(i)));
@@ -57,8 +57,8 @@ public class DjRankDelegate extends NeteaseLoadingDelegate implements BaseQuickA
 				RequestCenter.getRadioTopNewComer(3, new DisposeDataListener() {
 					@Override
 					public void onSuccess(Object responseObj) {
-						DjTopListBean bean = (DjTopListBean) responseObj;
-						List<DjTopListBean.List> list = bean.getData().getList();
+						DjRankListBean bean = (DjRankListBean) responseObj;
+						List<DjRankListBean.List> list = bean.getData().getList();
 						for (int j = 0; j < list.size(); j++) {
 							entities.add(new DjToplistEntity(list.get(j)));
 						}
@@ -72,8 +72,8 @@ public class DjRankDelegate extends NeteaseLoadingDelegate implements BaseQuickA
 						RequestCenter.getRadioTopPopular(20, new DisposeDataListener() {
 							@Override
 							public void onSuccess(Object responseObj) {
-								DjTopListBean bean = (DjTopListBean) responseObj;
-								List<DjTopListBean.List> popularData = bean.getData().getList();
+								DjRankListBean bean = (DjRankListBean) responseObj;
+								List<DjRankListBean.List> popularData = bean.getData().getList();
 								mPopularAdapter = new DjPopularAdapter(popularData);
 								mPopularAdapter.setOnItemClickListener(DjRankDelegate.this);
 								mPopularAdapter.setHeaderView(LayoutInflater.from(getContext()).inflate(R.layout.item_rank_dj_popular_header, null, false));
@@ -119,9 +119,9 @@ public class DjRankDelegate extends NeteaseLoadingDelegate implements BaseQuickA
 
 	@Override
 	public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
-		if(baseQuickAdapter.getItem(i) instanceof DjTopListBean.List){
+		if(baseQuickAdapter.getItem(i) instanceof DjRankListBean.List){
 			//最热主播数据
-			DjTopListBean.List entity = (DjTopListBean.List) baseQuickAdapter.getItem(i);
+			DjRankListBean.List entity = (DjRankListBean.List) baseQuickAdapter.getItem(i);
 			getParentDelegate().getSupportDelegate().start(UserDetailDelegate.newInstance(entity.getId()));;
 		}else{
 			//排行榜个人详情
@@ -150,7 +150,7 @@ public class DjRankDelegate extends NeteaseLoadingDelegate implements BaseQuickA
 
         @Override
         protected void convert(@NonNull BaseViewHolder adapter, DjToplistEntity item) {
-            DjTopListBean.List entity = item.t;
+            DjRankListBean.List entity = item.t;
             //用户昵称
             adapter.setText(R.id.tv_item_rank_123_name, entity.getNickName());
             //分数
@@ -163,15 +163,15 @@ public class DjRankDelegate extends NeteaseLoadingDelegate implements BaseQuickA
         }
     }
 
-    static class DjPopularAdapter extends BaseQuickAdapter<DjTopListBean.List, BaseViewHolder>{
+    static class DjPopularAdapter extends BaseQuickAdapter<DjRankListBean.List, BaseViewHolder>{
 		private ImageLoaderManager manager;
-        DjPopularAdapter(@Nullable List<DjTopListBean.List> data) {
+        DjPopularAdapter(@Nullable List<DjRankListBean.List> data) {
             super(R.layout.item_dj_rank_normal, data);
 			manager = ImageLoaderManager.getInstance();
         }
 
         @Override
-        protected void convert(@NonNull BaseViewHolder adapter, DjTopListBean.List list) {
+        protected void convert(@NonNull BaseViewHolder adapter, DjRankListBean.List list) {
             adapter.setText(R.id.tv_item_dj_rank_name, list.getNickName());
             //排名变化
 			int diffRank = list.getLastRank() - list.getRank();

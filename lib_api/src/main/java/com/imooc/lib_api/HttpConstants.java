@@ -141,6 +141,8 @@ public class HttpConstants {
 
 	static String DJ_SUB = ROOT_URL + "/dj/sub";
 
+	static String DJ_TOPLIST = ROOT_URL + "/dj/toplist";
+
 	static String DJ_TOPLIST_HOURS = ROOT_URL + "/dj/toplist/hours";
 
 	static String DJ_TOPLIST_NEWCOMER = ROOT_URL + "/dj/toplist/newcomer";
@@ -162,6 +164,8 @@ public class HttpConstants {
 	static String VIDEO_GROUP = ROOT_URL + "/video/group/list";
 
 	static String VIDEO_TAB = ROOT_URL + "/video/group";
+
+	static String VIDEO_RECOMMEND = ROOT_URL + "/video/timeline/recommend";
 
 	static String VIDEO_DETAIL = ROOT_URL + "/video/detail";
 

@@ -80,6 +80,45 @@ public class DjSubListBean {
 		private long id;
 		private String rcmdtext;
 		private int newProgramCount;
+		private int rank;
+		private int lastRank;
+		private String score;
+
+		public boolean isBuyed() {
+			return buyed;
+		}
+
+		public boolean isFinished() {
+			return finished;
+		}
+
+		public boolean isUnderShelf() {
+			return underShelf;
+		}
+
+		public int getRank() {
+			return rank;
+		}
+
+		public void setRank(int rank) {
+			this.rank = rank;
+		}
+
+		public int getLastRank() {
+			return lastRank;
+		}
+
+		public void setLastRank(int lastRank) {
+			this.lastRank = lastRank;
+		}
+
+		public String getScore() {
+			return score;
+		}
+
+		public void setScore(String score) {
+			this.score = score;
+		}
 
 		public void setDj(Dj dj) {
 			this.dj = dj;
