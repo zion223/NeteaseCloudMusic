@@ -167,8 +167,9 @@
             android:layout_below="@id/rl_playall_top"
             android:background="#f0f0f0" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_dailyrecommend"
+
+        <FrameLayout
+            android:id="@+id/loadframe"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/tv_gap"

@@ -26,7 +26,7 @@ import com.imooc.lib_api.model.LoginBean;
 import com.imooc.lib_audio.app.AudioHelper;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_common_ui.appbar.AppBarStateChangeListener;
-import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
+import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_common_ui.utils.StatusBarUtil;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
@@ -37,7 +37,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class DailyRecommendDelegate extends NeteaseDelegate {
+public class DailyRecommendDelegate extends NeteaseLoadingDelegate {
 
 
 	@BindView(R2.id.tv_day)
@@ -52,14 +52,22 @@ public class DailyRecommendDelegate extends NeteaseDelegate {
 	AppBarLayout appBarLayout;
 	@BindView(R2.id.rl_play)
 	RelativeLayout mRlPlayAll;
-	@BindView(R2.id.rv_dailyrecommend)
-	RecyclerView mRvRecommend;
 	@BindView(R2.id.tv_left_title)
 	TextView mTvLeftTitle;
 
+
+	private RecyclerView mRvRecommend;
+	private ImageLoaderManager manager;
 	private DailyRecommendAdapter mAdapter;
+
 	int deltaDistance;
 	int minDistance;
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		manager = ImageLoaderManager.getInstance();
+	}
 
 	@Override
 	public Object setLayout() {
@@ -69,11 +77,12 @@ public class DailyRecommendDelegate extends NeteaseDelegate {
 
 	@SuppressLint("SetTextI18n")
 	@Override
-	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
-		ImageLoaderManager manager = ImageLoaderManager.getInstance();
+	public void initView() {
+		mRvRecommend = rootView.findViewById(R.id.rv_delegate_normal);
+
 		minDistance = StatusBarUtil.dip2px(getContext(), 55);
 		deltaDistance = StatusBarUtil.dip2px(getContext(), 200) - minDistance;
-
+		//月份和日期
 		mTvDay.setText(TimeUtil.getDay(System.currentTimeMillis()));
 		mTvMonth.setText("/" +TimeUtil.getMonth(System.currentTimeMillis()));
 
@@ -90,16 +99,14 @@ public class DailyRecommendDelegate extends NeteaseDelegate {
 				List<DailyRecommendBean.RecommendBean> recommend = bean.getRecommend();
 				mAdapter = new DailyRecommendAdapter(recommend);
 				//播放音乐
-				mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-					@Override
-					public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-						DailyRecommendBean.RecommendBean item = (DailyRecommendBean.RecommendBean) adapter.getItem(position);
-						String songPlayUrl = HttpConstants.getSongPlayUrl(item.getId());
-						AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getArtists().get(0).getName(), item.getAlbum().getName(), item.getAlbum().getName(), item.getAlbum().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDuration())));
-					}
+				mAdapter.setOnItemClickListener((adapter, view, position) -> {
+					DailyRecommendBean.RecommendBean item = (DailyRecommendBean.RecommendBean) adapter.getItem(position);
+					String songPlayUrl = HttpConstants.getSongPlayUrl(item.getId());
+					AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getArtists().get(0).getName(), item.getAlbum().getName(), item.getAlbum().getName(), item.getAlbum().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDuration())));
 				});
 				mRvRecommend.setAdapter(mAdapter);
 				mRvRecommend.setLayoutManager(new LinearLayoutManager(getContext()));
+				addRootView();
 			}
 
 			@Override
@@ -108,6 +115,12 @@ public class DailyRecommendDelegate extends NeteaseDelegate {
 			}
 		});
 	}
+
+	@Override
+	public int setLoadingViewLayout() {
+		return R.layout.delegate_recyclerview_normal;
+	}
+
 
 	@Override
 	public void onResume() {
@@ -152,7 +165,7 @@ public class DailyRecommendDelegate extends NeteaseDelegate {
 	}
 
 
-	static class DailyRecommendAdapter extends BaseQuickAdapter<DailyRecommendBean.RecommendBean, BaseViewHolder>{
+	private static class DailyRecommendAdapter extends BaseQuickAdapter<DailyRecommendBean.RecommendBean, BaseViewHolder>{
 
 		DailyRecommendAdapter(@Nullable List<DailyRecommendBean.RecommendBean> data) {
 			super(R.layout.item_gedan_detail_song, data);
