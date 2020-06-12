@@ -64,7 +64,9 @@ public class VideoTabDelegate extends NeteaseDelegate {
 				}
 				String[] mTitleData = new String[tabSize];
 				long[] mVideoTabId = new long[tabSize];
-				for(int i = 0; i < tabSize; i++){
+				mVideoTabId[0] = 9999;
+				mTitleData[0] = "推荐";
+				for(int i = 1; i < tabSize; i++){
 					VideoGroupBean.Data tab = data.get(i);
 					String name = tab.getName();
 					mTitleData[i] = name;
@@ -73,12 +75,11 @@ public class VideoTabDelegate extends NeteaseDelegate {
 
 				mAdapter = new VideoTabAdapter(mVideoTabId, getChildFragmentManager());
 				mTabViewPager.setAdapter(mAdapter);
-				mTabViewPager.setOffscreenPageLimit(mTitleData.length);
+				//mTabViewPager.setOffscreenPageLimit(mTitleData.length);
 
 
 				mTabMagicIndicator.setBackgroundColor(Color.WHITE);
 				CommonNavigator commonNavigator = CommonNavigatorCreater.setDefaultNavigator(getContext(), mTitleData, mTabViewPager);
-				//commonNavigator.setAdjustMode(true);
 				mTabMagicIndicator.setNavigator(commonNavigator);
 
 				LinearLayout titleContainer = commonNavigator.getTitleContainer(); // must after setNavigator
@@ -90,7 +91,6 @@ public class VideoTabDelegate extends NeteaseDelegate {
 					}
 				});
 				ViewPagerHelper.bind(mTabMagicIndicator, mTabViewPager);
-
 
 			}
 

@@ -3,6 +3,7 @@ package com.imooc.imooc_voice.view.video;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -83,12 +84,15 @@ public class VideoDetailDelegate extends NeteaseLoadingDelegate {
 	@BindView(R2.id.iv_video_detail_collect)
 	ImageView mIvCollect;
 
+
+	private NestedScrollView mScrollView;
 	private RecyclerView mRvRelateVideo;
 	private RecyclerView mRvVideoComment;
 
 	//视频ID
 	private String videoId;
 	private VideoBean.Data videoData;
+
 	//视频创作者ID
 	private String creatorId;
 	private ArrayList<PlayListCommentEntity> entities = new ArrayList<>();
@@ -140,6 +144,7 @@ public class VideoDetailDelegate extends NeteaseLoadingDelegate {
 
 		mRvRelateVideo = rootView.findViewById(R.id.rv_video_related);
 		mRvVideoComment = rootView.findViewById(R.id.rv_video_comment);
+		mScrollView = rootView.findViewById(R.id.scroll_view);
 
 		RequestCenter.getVideoDetail(videoId, new DisposeDataListener() {
 			@SuppressLint("SetTextI18n")
@@ -334,9 +339,8 @@ public class VideoDetailDelegate extends NeteaseLoadingDelegate {
 						mIvCollect.setImageResource(R.drawable.ic_collect);
 						mTvCollectCount.setText(videoData.getSubscribeCount());
 					}
-				}else{
-					//失败
-				}
+				}//失败
+
 			}
 
 			@Override
@@ -346,10 +350,11 @@ public class VideoDetailDelegate extends NeteaseLoadingDelegate {
 		});
 	}
 
-	//TODO 滚动到评论处
-	@OnClick(R2.id.iv_video_detail_comment)
-	void onClickComment() {
 
+	@OnClick(R2.id.iv_video_detail_comment)
+	void onClickScrollToCommentView() {
+		int commentTopHeight = mRvVideoComment.getTop();
+		mScrollView.smoothScrollTo(0, commentTopHeight);
 	}
 
 	//分享组件

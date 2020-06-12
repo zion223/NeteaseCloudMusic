@@ -3,6 +3,7 @@ package com.imooc.imooc_voice.view.video;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.imooc.imooc_voice.R;
@@ -27,6 +29,7 @@ import com.imooc.lib_api.model.VideoRelatedBean;
 import com.imooc.lib_api.model.VideoUrlBean;
 import com.imooc.lib_api.model.search.FeedSearchBean;
 import com.imooc.lib_api.model.search.SingerSongSearchBean;
+import com.imooc.lib_api.model.song.CommentLikeBean;
 import com.imooc.lib_api.model.song.PlayListCommentBean;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
@@ -76,6 +79,7 @@ public class MvDeatilDelegate extends NeteaseLoadingDelegate {
 
 	private RecyclerView mRvRelateVideo;
 	private RecyclerView mRvVideoComment;
+	private NestedScrollView mScrollView;
 
 	private String mvId;
 	//歌手id
@@ -114,6 +118,7 @@ public class MvDeatilDelegate extends NeteaseLoadingDelegate {
 	public void initView() {
 		mRvRelateVideo = rootView.findViewById(R.id.rv_video_related);
 		mRvVideoComment = rootView.findViewById(R.id.rv_video_comment);
+		mScrollView = rootView.findViewById(R.id.scroll_view);
 
 		RequestCenter.getMVDetail(mvId, new DisposeDataListener() {
 			@SuppressLint("SetTextI18n")
@@ -263,22 +268,51 @@ public class MvDeatilDelegate extends NeteaseLoadingDelegate {
 		return R.layout.delegate_video_detail_loading_view;
 	}
 
-	//TODO 给MV点赞或取消点赞
 	@OnClick(R2.id.iv_video_detail_praise)
 	void onClickPraise() {
+		RequestCenter.getlikeResource(mvId, 1, true, new DisposeDataListener(){
+			@Override
+			public void onSuccess(Object responseObj) {
+				CommentLikeBean bean = (CommentLikeBean) responseObj;
+				if(bean.getCode() == 200){
+					Toast.makeText(getContext(), "点赞成功", Toast.LENGTH_SHORT).show();
+				}else{
+					Toast.makeText(getContext(), "点赞失败", Toast.LENGTH_SHORT).show();
+				}
+			}
 
+			@Override
+			public void onFailure(Object reasonObj) {
+
+			}
+		});
 	}
 
-	//TODO 收藏该MV或取消收藏
 	@OnClick(R2.id.iv_video_detail_collect)
 	void onClickCollect() {
+		RequestCenter.getMvSub(mvId, true, new DisposeDataListener() {
+			@Override
+			public void onSuccess(Object responseObj) {
+				CommentLikeBean bean = (CommentLikeBean) responseObj;
+				if(bean.getCode() == 200){
+					Toast.makeText(getContext(), "收藏成功", Toast.LENGTH_SHORT).show();
+				}else{
+					Toast.makeText(getContext(), "收藏失败", Toast.LENGTH_SHORT).show();
+				}
+			}
 
+			@Override
+			public void onFailure(Object reasonObj) {
+
+			}
+		});
 	}
 
-	//TODO 滚动到评论处
 	@OnClick(R2.id.iv_video_detail_comment)
 	void onClickComment() {
 
+		int commentTopHeight = mRvVideoComment.getTop();
+		mScrollView.smoothScrollTo(0, commentTopHeight);
 	}
 
 	//分享组件

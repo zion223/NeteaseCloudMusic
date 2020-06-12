@@ -47,8 +47,13 @@ public abstract class NeteaseLoadingDelegate extends NeteaseDelegate{
 	@Override
 	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
 		frameLayout = view.findViewById(R.id.loadframe);
-		rootView = LayoutInflater.from(getContext()).inflate(setLoadingViewLayout(), frameLayout, false);
-		addLoadingView();
+		if(frameLayout == null){
+			throw new NullPointerException("can not find FrameLayout id loadframe");
+		}else{
+			rootView = LayoutInflater.from(getContext()).inflate(setLoadingViewLayout(), frameLayout, false);
+			addLoadingView();
+		}
+
 	}
 
 	@Override
