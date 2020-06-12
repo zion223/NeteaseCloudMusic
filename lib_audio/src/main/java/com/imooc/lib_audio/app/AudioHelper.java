@@ -42,4 +42,9 @@ public final class AudioHelper {
 		addAudio(null, bean);
 	}
 
+	//加入List的音乐
+	public static void addAudio(ArrayList<AudioBean> mLists){
+		MusicService.startMusicService(mLists);
+	}
+
 }
