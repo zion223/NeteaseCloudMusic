@@ -30,6 +30,7 @@ import com.imooc.lib_api.model.song.LikeMusicBean;
 import com.imooc.lib_api.model.song.LyricBean;
 import com.imooc.lib_api.model.song.PlayListCommentBean;
 import com.imooc.lib_audio.R;
+import com.imooc.lib_audio.mediaplayer.core.AudioBufferUpdateEvent;
 import com.imooc.lib_audio.mediaplayer.core.AudioController;
 import com.imooc.lib_audio.mediaplayer.core.CustomMediaPlayer;
 import com.imooc.lib_audio.mediaplayer.events.AudioFavouriteEvent;
@@ -503,6 +504,11 @@ public class MusicPlayerActivity extends BaseActivity {
 		} else {
 			//showPlayView();
 		}
+	}
+
+	@Subscribe(threadMode = ThreadMode.MAIN)
+	public void onAudioBufferUpdateEvent(AudioBufferUpdateEvent event) {
+		mProgressView.setSecondaryProgress(event.progress);
 	}
 
 	private void showPlayView() {

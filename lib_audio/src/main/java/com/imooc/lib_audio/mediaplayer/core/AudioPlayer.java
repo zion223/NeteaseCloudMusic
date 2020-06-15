@@ -188,6 +188,8 @@ public class AudioPlayer implements MediaPlayer.OnCompletionListener,
 	@Override
 	public void onBufferingUpdate(MediaPlayer mp, int percent) {
 		//缓存进度
+		EventBus.getDefault().post(new AudioBufferUpdateEvent(percent));
+		Log.e(TAG, "onBufferingUpdate:" + percent);
 	}
 
 	@Override
