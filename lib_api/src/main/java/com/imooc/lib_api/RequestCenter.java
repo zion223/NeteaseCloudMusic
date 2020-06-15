@@ -48,6 +48,7 @@ import com.imooc.lib_api.model.dj.DjRecommendBean;
 import com.imooc.lib_api.model.dj.DjRecommendTypeBean;
 import com.imooc.lib_api.model.dj.DjSubBean;
 import com.imooc.lib_api.model.dj.DjSubListBean;
+import com.imooc.lib_api.model.dj.DjRankListBean;
 import com.imooc.lib_api.model.dj.DjTopListBean;
 import com.imooc.lib_api.model.manager.MusicCanPlayBean;
 import com.imooc.lib_api.model.notification.PrivateCommentBean;
@@ -731,6 +732,21 @@ public class RequestCenter {
     }
 
     /**
+     *  新晋电台榜/热门电台榜
+     *  type: 榜单类型, new 为新晋电台榜,hot为热门电台榜
+     */
+    public static void getDjToplist(String type, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        if("new".equals(type) || "hot".equals(type)){
+            params.put("type", type);
+            RequestCenter.getRequest(HttpConstants.DJ_TOPLIST, params, listener, DjTopListBean.class);
+        }else{
+            throw new IllegalArgumentException("type can only be new or hot");
+        }
+
+    }
+
+    /**
      *  关注歌手
      */
     public static void getSubArtist(String rid, boolean isSub, DisposeDataListener listener){
@@ -775,7 +791,7 @@ public class RequestCenter {
     public static void getRadioTopHours(int limit, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("limit", limit);
-        RequestCenter.getRequest(HttpConstants.DJ_TOPLIST_HOURS, params, listener, DjTopListBean.class);
+        RequestCenter.getRequest(HttpConstants.DJ_TOPLIST_HOURS, params, listener, DjRankListBean.class);
     }
 
     /**
@@ -802,7 +818,7 @@ public class RequestCenter {
     public static void getRadioTopNewComer(int limit, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("limit", limit);
-        RequestCenter.getRequest(HttpConstants.DJ_TOPLIST_NEWCOMER, params, listener, DjTopListBean.class);
+        RequestCenter.getRequest(HttpConstants.DJ_TOPLIST_NEWCOMER, params, listener, DjRankListBean.class);
     }
     /**
      * 电台 - 最热主播榜
@@ -810,7 +826,7 @@ public class RequestCenter {
     public static void getRadioTopPopular(int limit, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("limit", limit);
-        RequestCenter.getRequest(HttpConstants.DJ_TOPLIST_POPULAR, params, listener, DjTopListBean.class);
+        RequestCenter.getRequest(HttpConstants.DJ_TOPLIST_POPULAR, params, listener, DjRankListBean.class);
     }
     /**
      *  电台详情
@@ -896,8 +912,19 @@ public class RequestCenter {
      */
     public static void getVideoTab(String id, DisposeDataListener listener){
         RequestParams params = new RequestParams();
-        params.put("id", id);
-        RequestCenter.getRequest(HttpConstants.VIDEO_TAB, params, listener, VideoBean.class);
+        if("9999".equals(id)){
+            getVideoRecommend(listener);
+        }else{
+            params.put("id", id);
+            RequestCenter.getRequest(HttpConstants.VIDEO_TAB, params, listener, VideoBean.class);
+        }
+    }
+
+    /**
+     *  获取推荐视频
+     */
+    public static void getVideoRecommend(DisposeDataListener listener){
+        RequestCenter.getRequest(HttpConstants.VIDEO_RECOMMEND, null, listener, VideoBean.class);
     }
 
     /**
@@ -910,13 +937,23 @@ public class RequestCenter {
     }
 
     /**
-     * 获取视频详情
+     * 收藏和取消收藏视频
      */
     public static void getVideoSub(String id, Boolean sub, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("id", id);
         params.put("t", sub ? 1 : 0);
         RequestCenter.getRequest(HttpConstants.VIDEO_SUB, params, listener, CommentLikeBean.class);
+    }
+
+    /**
+     * 收藏和取消收藏MV
+     */
+    public static void getMvSub(String id, Boolean sub, DisposeDataListener listener){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        params.put("t", sub ? 1 : 0);
+        RequestCenter.getRequest(HttpConstants.MV_SUB, params, listener, CommentLikeBean.class);
     }
 
     /**

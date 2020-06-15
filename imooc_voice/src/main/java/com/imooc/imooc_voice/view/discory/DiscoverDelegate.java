@@ -32,6 +32,7 @@ import com.imooc.lib_api.model.AlbumOrSongBean;
 import com.imooc.lib_api.model.BannerBean;
 import com.imooc.lib_api.model.DailyRecommendBean;
 import com.imooc.lib_api.model.MainRecommendPlayListBean;
+import com.imooc.lib_api.model.MyFmBean;
 import com.imooc.lib_api.model.NewSongBean;
 import com.imooc.lib_api.model.search.AlbumSearchBean;
 import com.imooc.lib_api.model.song.SongDetailBean;
@@ -268,11 +269,13 @@ public class DiscoverDelegate extends NeteaseDelegate {
 		getParentDelegate().getSupportDelegate().start(new GedanSquareDelegate());
 	}
 
+	//切换新歌和新碟
 	@OnClick(R2.id.tv_discover_new_album)
 	void onClickChooseAlbum() {
 		changeAlbumOrSong(ALBUM);
 	}
 
+	//切换新歌和新碟
 	@OnClick(R2.id.tv_discover_new_song)
 	void onClickChooseSong() {
 		changeAlbumOrSong(SONG);
@@ -288,6 +291,33 @@ public class DiscoverDelegate extends NeteaseDelegate {
 	@OnClick(R2.id.ll_discover_gedan)
 	void onClickGedanSquree() {
 		getParentDelegate().getSupportDelegate().start(new GedanSquareDelegate());
+	}
+
+	// TODO 私人FM
+	@OnClick(R2.id.ll_discover_myfm)
+	void onClickMyFm(){
+		/*
+		 *	私人FM 不显示播放队列   播放队列的位置为显示"喜欢"图标
+		 *	当请求的歌曲播放完毕后需要再次请求数据
+		 *  播放过的歌曲就丢弃
+		 *  ViewPager不可以左滑
+		 *  没有左箭头 左箭头的位置是"喜欢"图标 左边是"不喜欢"图标  点击"不喜欢"图标 会切换下一首歌曲
+		 *
+		 */
+		RequestCenter.getMyFm(new DisposeDataListener() {
+			@Override
+			public void onSuccess(Object responseObj) {
+				MyFmBean bean = (MyFmBean) responseObj;
+				//加入播放队列
+				List<DailyRecommendBean.RecommendBean> fmData = bean.getData();
+				//AudioHelper.addAudio();
+			}
+
+			@Override
+			public void onFailure(Object reasonObj) {
+
+			}
+		});
 	}
 
 	//排行榜
@@ -308,7 +338,6 @@ public class DiscoverDelegate extends NeteaseDelegate {
 		if ((int) mTvAlbumOrSong.getTag() == ALBUM) {
 			getParentDelegate().getSupportDelegate().start(new NewAlbumDelegate());
 		}else{
-			//TODO 新歌推荐
 			getParentDelegate().getSupportDelegate().start(new TopSongTabDelegate());
 		}
 	}
@@ -316,35 +345,37 @@ public class DiscoverDelegate extends NeteaseDelegate {
 
 
 	void changeAlbumOrSong(int type) {
-		if (type == ALBUM) {
-			//当前是新碟
-			mTvCurrentAlbum.setTextColor(getResources().getColor(R.color.black));
-			mTvCurrentAlbum.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));//加粗
-			mTvCurrentAlbum.setTextSize(15);
+		switch (type){
+			case ALBUM:
+				//当前是新碟
+				mTvCurrentAlbum.setTextColor(getResources().getColor(R.color.black));
+				mTvCurrentAlbum.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));//加粗
+				mTvCurrentAlbum.setTextSize(15);
 
-			mTvCurrentSong.setTextColor(getResources().getColor(R.color.gray));
-			mTvCurrentSong.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));//加粗
-			mTvCurrentSong.setTextSize(12);
+				mTvCurrentSong.setTextColor(getResources().getColor(R.color.gray));
+				mTvCurrentSong.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));//加粗
+				mTvCurrentSong.setTextSize(12);
 
-			mTvAlbumOrSong.setText("更多新碟");
+				mTvAlbumOrSong.setText("更多新碟");
+				mAlbumSongAdapter.setNewData(albumList);
+				mTvAlbumOrSong.setTag(ALBUM);
+				break;
+			case SONG:
+				mTvCurrentSong.setTextColor(getResources().getColor(R.color.black));
+				mTvCurrentSong.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));//加粗
+				mTvCurrentSong.setTextSize(15);
 
-			mAlbumSongAdapter.setNewData(albumList);
-			mTvAlbumOrSong.setTag(ALBUM);
+				mTvCurrentAlbum.setTextColor(getResources().getColor(R.color.gray));
+				mTvCurrentAlbum.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));//加粗
+				mTvCurrentAlbum.setTextSize(12);
 
-
-		} else if (type == SONG) {
-			mTvCurrentSong.setTextColor(getResources().getColor(R.color.black));
-			mTvCurrentSong.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));//加粗
-			mTvCurrentSong.setTextSize(15);
-
-			mTvCurrentAlbum.setTextColor(getResources().getColor(R.color.gray));
-			mTvCurrentAlbum.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));//加粗
-			mTvCurrentAlbum.setTextSize(12);
-
-			mTvAlbumOrSong.setText("新歌推荐");
-			//addAll方法改变原数组内容
-			mAlbumSongAdapter.setNewData(songList);
-			mTvAlbumOrSong.setTag(SONG);
+				mTvAlbumOrSong.setText("新歌推荐");
+				//addAll方法改变原数组内容
+				mAlbumSongAdapter.setNewData(songList);
+				mTvAlbumOrSong.setTag(SONG);
+				break;
+			default:
+				break;
 		}
 
 	}

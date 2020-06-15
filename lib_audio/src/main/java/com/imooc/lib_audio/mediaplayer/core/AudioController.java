@@ -2,10 +2,8 @@ package com.imooc.lib_audio.mediaplayer.core;
 
 import android.util.Log;
 
-import com.imooc.lib_audio.mediaplayer.db.GreenDaoHelper;
 import com.imooc.lib_audio.mediaplayer.events.AudioCompleteEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioErrorEvent;
-import com.imooc.lib_audio.mediaplayer.events.AudioFavouriteEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioPlayModeEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioRemoveEvent;
 import com.imooc.lib_audio.mediaplayer.exception.AudioQueueEmptyException;

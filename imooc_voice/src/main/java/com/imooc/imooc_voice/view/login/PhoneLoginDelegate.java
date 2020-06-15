@@ -19,7 +19,7 @@ import com.imooc.imooc_voice.model.event.RequestSuccessEvent;
 import com.imooc.imooc_voice.util.ScreenUtils;
 import com.imooc.imooc_voice.util.SharePreferenceUtil;
 import com.imooc.imooc_voice.util.ValidateUtils;
-import com.imooc.imooc_voice.view.home.BaseDelegate;
+import com.imooc.imooc_voice.view.home.HomeDelegate;
 import com.imooc.lib_api.RequestCenter;
 import com.imooc.lib_api.model.CommonMessageBean;
 import com.imooc.lib_api.model.LoginBean;
@@ -171,7 +171,7 @@ public class PhoneLoginDelegate extends NeteaseDelegate {
 							} else {
 								Toast.makeText(getContext(), bean.getProfile().getNickname() + "登陆成功", Toast.LENGTH_LONG).show();
 								SharePreferenceUtil.getInstance(getContext()).saveUserInfo(bean, phone);
-								getSupportDelegate().start(new BaseDelegate());
+								getSupportDelegate().start(new HomeDelegate());
 							}
 
 						}
@@ -197,7 +197,7 @@ public class PhoneLoginDelegate extends NeteaseDelegate {
 					if(bean.getCode() == 200){
 						Toast.makeText(getContext(), bean.getProfile().getNickname() + "登陆成功", Toast.LENGTH_LONG).show();
 						SharePreferenceUtil.getInstance(getContext()).saveUserInfo(bean, phone);
-						getSupportDelegate().startWithPop(new BaseDelegate());
+						getSupportDelegate().startWithPop(new HomeDelegate());
 					}else{
 						Toast.makeText(getContext(), bean.getMsg(), Toast.LENGTH_LONG).show();
 					}

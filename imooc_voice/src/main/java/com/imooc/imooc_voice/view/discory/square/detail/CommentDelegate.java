@@ -3,7 +3,6 @@ package com.imooc.imooc_voice.view.discory.square.detail;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -145,67 +144,54 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 
 		ImageLoaderManager.getInstance().displayImageForCorner((ImageView) rootView.findViewById(R.id.iv_gedan_detail_comment_img), headerImg, 5);
 
-		new AsyncTask<Void, Void, Void>() {
-			@Override
-			protected void onPreExecute() {
-				super.onPreExecute();
-			}
+		//加载不同类型的评论
+		switch (type) {
+			case PLAYLIST:
+				//歌单评论
+				RequestCenter.getPlaylistComment(id, new DisposeDataListener() {
+					@Override
+					public void onSuccess(Object responseObj) {
+						loadCommentList((PlayListCommentBean) responseObj, PLAYLIST);
+					}
 
-			@Override
-			protected void onPostExecute(Void aVoid) {
-				super.onPostExecute(aVoid);
-			}
+					@Override
+					public void onFailure(Object reasonObj) {
 
-			@Override
-			protected Void doInBackground(Void... voids) {
-				switch (type) {
-					case PLAYLIST:
-						//歌单评论
-						RequestCenter.getPlaylistComment(id, new DisposeDataListener() {
-							@Override
-							public void onSuccess(Object responseObj) {
-								loadCommentList((PlayListCommentBean) responseObj, PLAYLIST);
-							}
+					}
+				});
+				break;
+			case SONG:
+				//歌曲评论
+				RequestCenter.getMusicComment(id, new DisposeDataListener() {
+					@Override
+					public void onSuccess(Object responseObj) {
+						loadCommentList((PlayListCommentBean) responseObj, SONG);
+					}
 
-							@Override
-							public void onFailure(Object reasonObj) {
+					@Override
+					public void onFailure(Object reasonObj) {
 
-							}
-						});
-						break;
-					case SONG:
-						//歌曲评论
-						RequestCenter.getMusicComment(id, new DisposeDataListener() {
-							@Override
-							public void onSuccess(Object responseObj) {
-								loadCommentList((PlayListCommentBean) responseObj, SONG);
-							}
+					}
+				});
+				break;
+			//专辑评论
+			case ALBUM:
+				RequestCenter.getAlbumComment(id, new DisposeDataListener() {
+					@Override
+					public void onSuccess(Object responseObj) {
+						loadCommentList((PlayListCommentBean) responseObj, ALBUM);
+					}
 
-							@Override
-							public void onFailure(Object reasonObj) {
+					@Override
+					public void onFailure(Object reasonObj) {
 
-							}
-						});
-						break;
-					//专辑评论
-					case ALBUM:
-						RequestCenter.getAlbumComment(id, new DisposeDataListener() {
-							@Override
-							public void onSuccess(Object responseObj) {
-								loadCommentList((PlayListCommentBean) responseObj, ALBUM);
-							}
+					}
+				});
+				break;
+			default:
+				break;
+		}
 
-							@Override
-							public void onFailure(Object reasonObj) {
-
-							}
-						});
-						break;
-
-				}
-				return null;
-			}
-		}.execute();
 	}
 
 	@SuppressLint("SetTextI18n")
@@ -213,8 +199,10 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 		//评论数量
 		mTvCommentTitle.setText("评论(" + commentBean.getTotal() + ")");
 		entities.add(new PlayListCommentEntity(true, "精彩评论", ""));
-		for (int i = 0; i < commentBean.getHotComments().size(); i++) {
-			entities.add(new PlayListCommentEntity(commentBean.getHotComments().get(i)));
+		if(commentBean.getHotComments() != null && commentBean.getHotComments().size() > 0){
+			for (int i = 0; i < commentBean.getHotComments().size(); i++) {
+				entities.add(new PlayListCommentEntity(commentBean.getHotComments().get(i)));
+			}
 		}
 		entities.add(new PlayListCommentEntity(true, "最新评论", String.valueOf(commentBean.getTotal())));
 		for (int j = 0; j < commentBean.getComments().size(); j++) {
