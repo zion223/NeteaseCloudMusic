@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.imooc_voice.view.discory.square.detail.PlayListAdapter;
-import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
 import com.imooc.lib_api.RequestCenter;
 import com.imooc.lib_api.model.notification.UserCloudBean;
 import com.imooc.lib_api.model.song.SongDetailBean;
@@ -74,7 +73,7 @@ public class CloudMusicDelegate extends NeteaseLoadingDelegate {
 							SongUrlBean url = (SongUrlBean) responseObj;
 							String songPlayUrl = url.getData().get(0).getUrl();
 							if(!TextUtils.isEmpty(songPlayUrl)){
-								AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getAr().get(0).getName(), item.getAl().getName(), item.getAl().getName(), item.getAl().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDt())));
+								AudioHelper.Companion.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getAr().get(0).getName(), item.getAl().getName(), item.getAl().getName(), item.getAl().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDt())));
 							}else{
 								Toast.makeText(getContext(), "获取播放地址失败", Toast.LENGTH_SHORT).show();
 							}

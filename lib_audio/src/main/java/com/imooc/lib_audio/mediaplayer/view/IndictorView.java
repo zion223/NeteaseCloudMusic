@@ -90,8 +90,8 @@ public class IndictorView extends RelativeLayout implements ViewPager.OnPageChan
 	}
 
 	private void initData() {
-		mQueue = AudioController.getInstance().getQueue();
-		mAudioBean = AudioController.getInstance().getNowPlaying();
+		mQueue = AudioController.INSTANCE.getQueue();
+		mAudioBean = AudioController.INSTANCE.getNowPlaying();
 	}
 
 
@@ -117,7 +117,7 @@ public class IndictorView extends RelativeLayout implements ViewPager.OnPageChan
 	 */
 	@Override
 	public void onPageSelected(int position) {
-		AudioController.getInstance().setPlayIndex(position);
+		AudioController.INSTANCE.setPlayIndex(position);
 	}
 
 	//改变专辑动画
@@ -128,7 +128,7 @@ public class IndictorView extends RelativeLayout implements ViewPager.OnPageChan
 			case ViewPager.SCROLL_STATE_IDLE:
 				Log.d(TAG, "SCROLL_STATE_IDLE");
 				//当前是播放状态
-				if(AudioController.getInstance().isStartState()){
+				if(AudioController.INSTANCE.isStartState()){
 					showPlayAnim();
 					if(mListener != null){
 						mListener.onIdle();
@@ -153,7 +153,7 @@ public class IndictorView extends RelativeLayout implements ViewPager.OnPageChan
 	@Subscribe(threadMode = ThreadMode.MAIN)
 	public void onAudioLoadEvent(AudioLoadEvent event) {
 		//更新viewpager为load状态
-		mAudioBean = event.mAudioBean;
+		mAudioBean = event.getBean();
 		showLoadView(true);
 		showPauseAnim();
 	}

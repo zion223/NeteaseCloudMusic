@@ -105,7 +105,7 @@ public class DailyRecommendDelegate extends NeteaseLoadingDelegate {
                 mAdapter.setOnItemClickListener((adapter, view, position) -> {
                     DailyRecommendBean.RecommendBean item = (DailyRecommendBean.RecommendBean) adapter.getItem(position);
                     String songPlayUrl = HttpConstants.getSongPlayUrl(item.getId());
-                    AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getArtists().get(0).getName(), item.getAlbum().getName(), item.getAlbum().getName(), item.getAlbum().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDuration())));
+                    AudioHelper.Companion.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getArtists().get(0).getName(), item.getAlbum().getName(), item.getAlbum().getName(), item.getAlbum().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDuration())));
                 });
                 mRvRecommend.setAdapter(mAdapter);
                 mRvRecommend.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -142,7 +142,7 @@ public class DailyRecommendDelegate extends NeteaseLoadingDelegate {
 				String songPlayUrl = HttpConstants.getSongPlayUrl(item.getId());
 				audioList.add(new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getArtists().get(0).getName(), item.getAlbum().getName(), item.getAlbum().getName(), item.getAlbum().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDuration())));
             }
-            AudioHelper.addAudio(audioList);
+            AudioHelper.Companion.addAudio(audioList);
         }
 
     }

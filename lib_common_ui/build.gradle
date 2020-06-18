@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 apply plugin: 'com.jakewharton.butterknife'
 android {
     compileSdkVersion rootProject.android.compileSdkVersion
@@ -43,4 +44,8 @@ dependencies {
     implementation rootProject.depsLibs.glide
 
     compileOnly project(':lib_image_loader')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }

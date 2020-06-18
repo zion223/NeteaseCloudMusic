@@ -68,8 +68,7 @@ public class ArtistHomePageDelegate extends NeteaseLoadingDelegate {
 					public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 						SongDetailBean.SongsBean item = (SongDetailBean.SongsBean) adapter.getItem(position);
 						String songPlayUrl = HttpConstants.getSongPlayUrl(item.getId());
-						AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getAr().get(0).getName(), item.getAl().getName(), item.getAl().getName(), item.getAl().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDt())));
-
+						AudioHelper.Companion.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getAr().get(0).getName(), item.getAl().getName(), item.getAl().getName(), item.getAl().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDt())));
 					}
 				});
 				mRvArtistHotSong.setAdapter(mAdapter);

@@ -57,7 +57,7 @@ public class MusicDelegate extends NeteaseLoadingDelegate {
 
 				final MusicInfo item = (MusicInfo) adapter.getItem(position);
 				assert item != null;
-				AudioHelper.addAudio(new AudioBean(String.valueOf(item.songId), item.data,
+				AudioHelper.Companion.addAudio(new AudioBean(String.valueOf(item.songId), item.data,
 						item.musicName, item.artist, item.albumName, item.albumData, item.albumData, TimeUtil.getTimeNoYMDH(Long.parseLong(String.valueOf(item.duration)))));
 				//设置当前播放状态 取消上个播放状态
 				final ImageView playView = view.findViewById(R.id.play_state);
@@ -99,7 +99,7 @@ public class MusicDelegate extends NeteaseLoadingDelegate {
 			});
 			//播放状态
 			helper.setVisible(R.id.play_state, false);
-			if(AudioController.getInstance().getNowPlaying() != null && AudioController.getInstance().getNowPlaying().getName().equals(item.musicName)){
+			if(AudioController.INSTANCE.getNowPlaying().getName().equals(item.musicName)){
 				helper.setVisible(R.id.play_state, true);
 			}else{
 				helper.setVisible(R.id.play_state, false);

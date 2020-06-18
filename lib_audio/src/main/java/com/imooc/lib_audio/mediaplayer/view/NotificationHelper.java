@@ -51,10 +51,10 @@ public class NotificationHelper {
 
 
 	public void init(NotificationHelperListener listener) {
-		mNotificationManager = (NotificationManager) AudioHelper.getContext()
+		mNotificationManager = (NotificationManager) AudioHelper.Companion.getContext()
 				.getSystemService(Context.NOTIFICATION_SERVICE);
-		packageName = AudioHelper.getContext().getPackageName();
-		mAudioBean = AudioController.getInstance().getNowPlaying();
+		packageName = AudioHelper.Companion.getContext().getPackageName();
+		mAudioBean = AudioController.INSTANCE.getNowPlaying();
 		initNotification();
 		mListener = listener;
 		if (mListener != null) mListener.onNotificationInit();
@@ -65,8 +65,8 @@ public class NotificationHelper {
 		initRemoteViews();
 
 		//再构建Notification
-		Intent intent = new Intent(AudioHelper.getContext(), MusicPlayerActivity.class);
-		PendingIntent pendingIntent = PendingIntent.getActivity(AudioHelper.getContext(), 0, intent,
+		Intent intent = new Intent(AudioHelper.Companion.getContext(), MusicPlayerActivity.class);
+		PendingIntent pendingIntent = PendingIntent.getActivity(AudioHelper.Companion.getContext(), 0, intent,
 				PendingIntent.FLAG_UPDATE_CURRENT);
 
 		//适配安卓8.0的消息渠道
@@ -78,7 +78,7 @@ public class NotificationHelper {
 			mNotificationManager.createNotificationChannel(channel);
 		}
 		NotificationCompat.Builder builder =
-				new NotificationCompat.Builder(AudioHelper.getContext(), CHANNEL_ID).setContentIntent(pendingIntent)
+				new NotificationCompat.Builder(AudioHelper.Companion.getContext(), CHANNEL_ID).setContentIntent(pendingIntent)
 						.setSmallIcon(R.mipmap.ic_notification)
 						.setCustomBigContentView(mBigRemoteViews) //大布局
 						.setContent(mSmallRemoteViews); //正常布局，两个布局可以切换
@@ -106,11 +106,11 @@ public class NotificationHelper {
 		mSmallRemoteViews.setTextViewText(R.id.tip_view, mAudioBean.getAlbum());
 
 		//点击播放按钮广播
-		Intent playIntent = new Intent(MusicService.NotificationReceiver.ACTION_STATUS_BAR);
+		Intent playIntent = new Intent(MusicService.NotificationReceiver.Companion.getACTION_STATUS_BAR());
 		playIntent.putExtra(MusicService.NotificationReceiver.EXTRA,
 				MusicService.NotificationReceiver.EXTRA_PLAY);
 		PendingIntent playPendingIntent =
-				PendingIntent.getBroadcast(AudioHelper.getContext(), 1, playIntent,
+				PendingIntent.getBroadcast(AudioHelper.Companion.getContext(), 1, playIntent,
 						PendingIntent.FLAG_UPDATE_CURRENT);
 		mBigRemoteViews.setOnClickPendingIntent(R.id.play_view, playPendingIntent);
 		mBigRemoteViews.setImageViewResource(R.id.play_view, R.mipmap.note_btn_play_white);
@@ -118,21 +118,21 @@ public class NotificationHelper {
 		mSmallRemoteViews.setImageViewResource(R.id.play_view, R.mipmap.note_btn_play_white);
 
 		//点击上一首按钮广播
-		Intent previousIntent = new Intent(MusicService.NotificationReceiver.ACTION_STATUS_BAR);
+		Intent previousIntent = new Intent(MusicService.NotificationReceiver.Companion.getACTION_STATUS_BAR());
 		previousIntent.putExtra(MusicService.NotificationReceiver.EXTRA,
 				MusicService.NotificationReceiver.EXTRA_PRE);
 		PendingIntent previousPendingIntent =
-				PendingIntent.getBroadcast(AudioHelper.getContext(), 2, previousIntent,
+				PendingIntent.getBroadcast(AudioHelper.Companion.getContext(), 2, previousIntent,
 						PendingIntent.FLAG_UPDATE_CURRENT);
 		mBigRemoteViews.setOnClickPendingIntent(R.id.previous_view, previousPendingIntent);
 		mBigRemoteViews.setImageViewResource(R.id.previous_view, R.mipmap.note_btn_pre_white);
 
 		//点击下一首按钮广播
-		Intent nextIntent = new Intent(MusicService.NotificationReceiver.ACTION_STATUS_BAR);
+		Intent nextIntent = new Intent(MusicService.NotificationReceiver.Companion.getACTION_STATUS_BAR());
 		nextIntent.putExtra(MusicService.NotificationReceiver.EXTRA,
 				MusicService.NotificationReceiver.EXTRA_PRE);
 		PendingIntent nextPendingIntent =
-				PendingIntent.getBroadcast(AudioHelper.getContext(), 3, nextIntent,
+				PendingIntent.getBroadcast(AudioHelper.Companion.getContext(), 3, nextIntent,
 						PendingIntent.FLAG_UPDATE_CURRENT);
 		mBigRemoteViews.setOnClickPendingIntent(R.id.next_view, nextPendingIntent);
 		mBigRemoteViews.setImageViewResource(R.id.next_view, R.mipmap.note_btn_next_white);
@@ -140,11 +140,11 @@ public class NotificationHelper {
 		mSmallRemoteViews.setImageViewResource(R.id.next_view, R.mipmap.note_btn_next_white);
 
 		//点击收藏按钮广播
-		Intent favouriteIntent = new Intent(MusicService.NotificationReceiver.ACTION_STATUS_BAR);
+		Intent favouriteIntent = new Intent(MusicService.NotificationReceiver.Companion.getACTION_STATUS_BAR());
 		favouriteIntent.putExtra(MusicService.NotificationReceiver.EXTRA,
 				MusicService.NotificationReceiver.EXTRA_FAV);
 		PendingIntent favouritePendingIntent =
-				PendingIntent.getBroadcast(AudioHelper.getContext(), 4, favouriteIntent,
+				PendingIntent.getBroadcast(AudioHelper.Companion.getContext(), 4, favouriteIntent,
 						PendingIntent.FLAG_UPDATE_CURRENT);
 		mBigRemoteViews.setOnClickPendingIntent(R.id.favourite_view, favouritePendingIntent);
 
@@ -157,7 +157,7 @@ public class NotificationHelper {
 			mBigRemoteViews.setTextViewText(R.id.title_view, mAudioBean.getName());
 			mBigRemoteViews.setTextViewText(R.id.tip_view, mAudioBean.getAlbum());
 			ImageLoaderManager.getInstance()
-					.displayImageForNotification(AudioHelper.getContext(), mBigRemoteViews, R.id.image_view,
+					.displayImageForNotification(AudioHelper.Companion.getContext(), mBigRemoteViews, R.id.image_view,
 							mNotification, NOTIFICATION_ID, mAudioBean.getAlbumPic());
 			//更新收藏view
 //			if (null != GreenDaoHelper.selectFavourite(mAudioBean)) {
@@ -171,7 +171,7 @@ public class NotificationHelper {
 			mSmallRemoteViews.setTextViewText(R.id.title_view, mAudioBean.getName());
 			mSmallRemoteViews.setTextViewText(R.id.tip_view, mAudioBean.getAlbum());
 			ImageLoaderManager.getInstance()
-					.displayImageForNotification(AudioHelper.getContext(), mSmallRemoteViews, R.id.image_view,
+					.displayImageForNotification(AudioHelper.Companion.getContext(), mSmallRemoteViews, R.id.image_view,
 							mNotification, NOTIFICATION_ID, mAudioBean.getAlbumPic());
 
 			mNotificationManager.notify(NOTIFICATION_ID, mNotification);

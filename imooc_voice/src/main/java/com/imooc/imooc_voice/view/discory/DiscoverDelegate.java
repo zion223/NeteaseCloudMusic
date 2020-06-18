@@ -125,7 +125,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 									//只有一首歌
 									SongDetailBean.SongsBean bean = songBean.getSongs().get(0);
 									String songPlayUrl = HttpConstants.getSongPlayUrl(bean.getId());
-									AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(bean.getId()), songPlayUrl, bean.getName(), bean.getAr().get(0).getName(), bean.getAl().getName(), bean.getAl().getName(), bean.getAl().getPicUrl(), TimeUtil.getTimeNoYMDH(bean.getDt())));
+									AudioHelper.Companion.addAudio(getProxyActivity(), new AudioBean(String.valueOf(bean.getId()), songPlayUrl, bean.getName(), bean.getAr().get(0).getName(), bean.getAl().getName(), bean.getAl().getName(), bean.getAl().getPicUrl(), TimeUtil.getTimeNoYMDH(bean.getDt())));
 								}
 
 								@Override
@@ -212,7 +212,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 								SongDetailBean.SongsBean item = bean.getSongs().get(0);
 								if(item != null){
 									String songPlayUrl = HttpConstants.getSongPlayUrl(songId);
-									AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getAr().get(0).getName(), item.getAl().getName(), item.getAl().getName(), item.getAl().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDt())));
+									AudioHelper.Companion.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getAr().get(0).getName(), item.getAl().getName(), item.getAl().getName(), item.getAl().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDt())));
 								}
 							}
 

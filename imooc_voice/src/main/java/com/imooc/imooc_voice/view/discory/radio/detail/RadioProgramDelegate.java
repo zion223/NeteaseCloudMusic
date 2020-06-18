@@ -111,7 +111,7 @@ public class RadioProgramDelegate extends NeteaseLoadingDelegate {
 							public void onSuccess(Object responseObj) {
 								SongUrlBean urlBean = (SongUrlBean) responseObj;
 								String url = urlBean.getData().get(0).getUrl();
-								AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), url, item.getName(), item.getDj().getNickname(), item.getRadio().getName(), item.getRadio().getName(), item.getRadio().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDuration())));
+								AudioHelper.Companion.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), url, item.getName(), item.getDj().getNickname(), item.getRadio().getName(), item.getRadio().getName(), item.getRadio().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDuration())));
 							}
 
 							@Override

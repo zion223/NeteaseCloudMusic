@@ -23,7 +23,6 @@ import com.imooc.lib_audio.mediaplayer.events.AudioRemoveEvent;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.core.BottomPopupView;
-import com.lxj.xpopup.util.XPopupUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -79,10 +78,10 @@ public class MusicListDialog extends BottomPopupView {
 
     private void initData() {
         //当前播歌曲，用来初始化UI
-        mQueue = AudioController.getInstance().getQueue();
+        mQueue = AudioController.INSTANCE.getQueue();
         if(mQueue.size() != 0){
-            mAudioBean = AudioController.getInstance().getNowPlaying();
-            mPlayMode = AudioController.getInstance().getPlayMode();
+            mAudioBean = AudioController.INSTANCE.getNowPlaying();
+            mPlayMode = AudioController.INSTANCE.getPlayMode();
         }
         //获取trackId
          tracks = new StringBuilder();
@@ -119,7 +118,7 @@ public class MusicListDialog extends BottomPopupView {
             @Override
             public void onClick(View v) {
                 //清空播放列表 TODO 确认对话框
-                AudioController.getInstance().removeAudio();
+                AudioController.INSTANCE.removeAudio();
                 dismiss();
             }
         });
@@ -132,13 +131,13 @@ public class MusicListDialog extends BottomPopupView {
                 //调用切换播放模式事件
                 switch (mPlayMode) {
                     case LOOP:
-                        AudioController.getInstance().setPlayMode(AudioController.PlayMode.RANDOM);
+                        AudioController.INSTANCE.setPlayMode(AudioController.PlayMode.RANDOM);
                         break;
                     case RANDOM:
-                        AudioController.getInstance().setPlayMode(AudioController.PlayMode.REPEAT);
+                        AudioController.INSTANCE.setPlayMode(AudioController.PlayMode.REPEAT);
                         break;
                     case REPEAT:
-                        AudioController.getInstance().setPlayMode(AudioController.PlayMode.LOOP);
+                        AudioController.INSTANCE.setPlayMode(AudioController.PlayMode.LOOP);
                         break;
                 }
             }
@@ -154,7 +153,7 @@ public class MusicListDialog extends BottomPopupView {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 AudioBean entity = (AudioBean) adapter.getItem(position);
-                AudioHelper.addAudio(entity);
+                AudioHelper.Companion.addAudio(entity);
                 dismiss();
             }
         });
@@ -186,14 +185,14 @@ public class MusicListDialog extends BottomPopupView {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onAudioLoadEvent(AudioLoadEvent event) {
-        mAudioBean = event.mAudioBean;
+        mAudioBean = event.getBean();
         //更新列表
         updateList();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onAudioPlayModeEvent(AudioPlayModeEvent event) {
-        mPlayMode = event.mPlayMode;
+        mPlayMode = event.getMPlayMode();
         //更新播放模式
         updatePlayModeView();
     }
@@ -201,7 +200,7 @@ public class MusicListDialog extends BottomPopupView {
     @SuppressLint("SetTextI18n")
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onAudioRemoveEvent(AudioRemoveEvent event) {
-        mQueue = AudioController.getInstance().getQueue();
+        mQueue = AudioController.INSTANCE.getQueue();
         mPlayNumView.setText("(" + mQueue.size() + ")");
         mMusicListAdapter.setNewData(mQueue);
     }
@@ -243,7 +242,7 @@ public class MusicListDialog extends BottomPopupView {
                         //TODO 不可移除当前播放的歌曲
                         Toast.makeText(mContext, "不支持删除正在播放的音乐", Toast.LENGTH_SHORT).show();
                     }else{
-                        AudioController.getInstance().removeAudio(item);
+                        AudioController.INSTANCE.removeAudio(item);
                     }
                 }
             });

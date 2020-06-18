@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion rootProject.android.compileSdkVersion
@@ -30,6 +31,10 @@ dependencies {
     //占位编译  编译时有效不会参与打包
     compileOnly rootProject.depsLibs.rxjava
     compileOnly rootProject.depsLibs.rxandroid
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
 
+}
+repositories {
+    mavenCentral()
 }

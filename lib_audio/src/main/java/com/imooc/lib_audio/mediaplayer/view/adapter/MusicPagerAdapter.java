@@ -49,7 +49,7 @@ public class MusicPagerAdapter extends PagerAdapter {
 		animator.setDuration(10000);
 		animator.setInterpolator(new LinearInterpolator());
 		animator.setRepeatCount(-1);
-		if (AudioController.getInstance().isStartState()) {
+		if (AudioController.INSTANCE.isStartState()) {
 			animator.start();
 		}
 		return animator;

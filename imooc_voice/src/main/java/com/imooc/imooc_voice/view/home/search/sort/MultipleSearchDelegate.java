@@ -88,7 +88,7 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 				//单曲
 				SongDetailBean.SongsBean item = data.get(groupPosition).getSong().getSongs().get(childPosition);
 				String songPlayUrl = HttpConstants.getSongPlayUrl(item.getId());
-				AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getAr().get(0).getName(), item.getAl().getName(), item.getAl().getName(), item.getAl().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDt())));
+				AudioHelper.Companion.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getAr().get(0).getName(), item.getAl().getName(), item.getAl().getName(), item.getAl().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDt())));
 				break;
 			case 1:
 				//视频

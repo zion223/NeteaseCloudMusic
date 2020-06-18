@@ -221,7 +221,7 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
 					//播放歌曲
 					DailyRecommendBean.RecommendBean item = jsonBean.getSong();
 					String songPlayUrl = HttpConstants.getSongPlayUrl(item.getId());
-					AudioHelper.addAudio(new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getArtists().get(0).getName(), item.getAlbum().getName(), item.getAlbum().getName(), item.getAlbum().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDuration())));
+					AudioHelper.Companion.addAudio(new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getArtists().get(0).getName(), item.getAlbum().getName(), item.getAlbum().getName(), item.getAlbum().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDuration())));
 				}else if(jsonBean.getAlbum() != null){
 					//查看专辑
 					mDelegate.getSupportDelegate().start(SongListDetailDelegate.newInstance(ALBUM, jsonBean.getAlbum().getId()));

@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion rootProject.android.compileSdkVersion
@@ -27,5 +28,9 @@ dependencies {
     api 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
     api rootProject.depsLibs.okhttp //okttp依赖
     api rootProject.depsLibs.gson
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+}
+repositories {
+    mavenCentral()
 }

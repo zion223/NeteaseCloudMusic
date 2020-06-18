@@ -30,7 +30,7 @@ public class ImoocVoiceApplication extends Application {
                 })
                 .install();
         //音频组件
-        AudioHelper.init(this);
+        AudioHelper.Companion.init(this);
         //网络请求组件
         OkHttpHelper.init(this);
         //Netease初始化

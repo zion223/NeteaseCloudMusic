@@ -1,6 +1,7 @@
 package com.imooc.lib_audio.mediaplayer.db;
 
 import android.database.sqlite.SQLiteDatabase;
+
 import com.imooc.lib_audio.app.AudioHelper;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_audio.mediaplayer.model.Favourite;
@@ -23,7 +24,7 @@ public class GreenDaoHelper {
 	 * 设置greenDao
 	 */
 	public static void initDatabase() {
-		mHelper = new DaoMaster.DevOpenHelper(AudioHelper.getContext(), DB_BAME, null);
+		mHelper = new DaoMaster.DevOpenHelper(AudioHelper.Companion.getContext(), DB_BAME, null);
 		mDb = mHelper.getWritableDatabase();
 		mDaoMaster = new DaoMaster(mDb);
 		mDaoSession = mDaoMaster.newSession();

@@ -63,7 +63,7 @@ public class SongSearchDelegate extends NeteaseSearchLoadingDelegate {
 					public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
 						SongSearchBean.ResultBean.SongsBean entity = (SongSearchBean.ResultBean.SongsBean) baseQuickAdapter.getItem(i);
 						String songUrl = HttpConstants.getSongPlayUrl(entity.getId());
-						AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(entity.getId()), songUrl, entity.getName(), entity.getArtists().get(0).getName(), entity.getAlbum().getName(), entity.getAlbum().getName(), entity.getArtists().get(0).getPicUrl(), TimeUtil.getTimeNoYMDH(entity.getDuration())));
+						AudioHelper.Companion.addAudio(getProxyActivity(), new AudioBean(String.valueOf(entity.getId()), songUrl, entity.getName(), entity.getArtists().get(0).getName(), entity.getAlbum().getName(), entity.getAlbum().getName(), entity.getArtists().get(0).getPicUrl(), TimeUtil.getTimeNoYMDH(entity.getDuration())));
 					}
 				});
 				//reload data

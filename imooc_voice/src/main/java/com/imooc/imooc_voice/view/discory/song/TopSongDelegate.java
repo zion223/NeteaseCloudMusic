@@ -86,7 +86,7 @@ public class TopSongDelegate extends NeteaseLoadingDelegate {
 				mAdapter.setOnItemClickListener((adapter, view, position) -> {
 					DailyRecommendBean.RecommendBean item = (DailyRecommendBean.RecommendBean) adapter.getItem(position);
 					String songPlayUrl = HttpConstants.getSongPlayUrl(item.getId());
-					AudioHelper.addAudio(new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getArtists().get(0).getName(), item.getAlbum().getName(), item.getAlbum().getName(), item.getAlbum().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDuration())));
+					AudioHelper.Companion.addAudio(new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getArtists().get(0).getName(), item.getAlbum().getName(), item.getAlbum().getName(), item.getAlbum().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDuration())));
 				});
 				mRvTopSong.setAdapter(mAdapter);
 				mRvTopSong.setLayoutManager(new LinearLayoutManager(getContext()));

@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'maven'
 
@@ -58,6 +59,7 @@ dependencies {
     compileOnly project(':lib_share')
     compileOnly project(':lib_api')
     compileOnly project(':lib_network')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
 uploadArchives{
@@ -77,4 +79,7 @@ uploadArchives{
         }
 
     }
+}
+repositories {
+    mavenCentral()
 }

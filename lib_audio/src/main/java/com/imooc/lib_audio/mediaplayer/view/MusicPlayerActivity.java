@@ -30,10 +30,9 @@ import com.imooc.lib_api.model.song.LikeMusicBean;
 import com.imooc.lib_api.model.song.LyricBean;
 import com.imooc.lib_api.model.song.PlayListCommentBean;
 import com.imooc.lib_audio.R;
-import com.imooc.lib_audio.mediaplayer.core.AudioBufferUpdateEvent;
 import com.imooc.lib_audio.mediaplayer.core.AudioController;
 import com.imooc.lib_audio.mediaplayer.core.CustomMediaPlayer;
-import com.imooc.lib_audio.mediaplayer.events.AudioFavouriteEvent;
+import com.imooc.lib_audio.mediaplayer.events.AudioBufferUpdateEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioLoadEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioPauseEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioPlayModeEvent;
@@ -153,13 +152,13 @@ public class MusicPlayerActivity extends BaseActivity {
 		lrcView.setDraggable(true, new LrcView.OnPlayClickListener() {
 			@Override
 			public boolean onPlayClick(long time) {
-				AudioController.getInstance().seekTo(time);
+				AudioController.INSTANCE.seekTo(time);
 				return true;
 			}
 		});
 		mLlOpreationView = findViewById(R.id.operation_view);
 		//背景虚化图
-		//ImageLoaderManager.getInstance().displayImageForViewGroup(mBgView, mAudioBean.getAlbumPic(), 100);
+		//ImageLoaderManager.INSTANCE.displayImageForViewGroup(mBgView, mAudioBean.getAlbumPic(), 100);
 		//返回按钮
 		findViewById(R.id.back_view).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -240,7 +239,7 @@ public class MusicPlayerActivity extends BaseActivity {
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
 				//歌曲播放进度
-				AudioController.getInstance().seekTo(seekBar.getProgress());
+				AudioController.INSTANCE.seekTo(seekBar.getProgress());
 
 			}
 		});
@@ -251,13 +250,13 @@ public class MusicPlayerActivity extends BaseActivity {
 				//切换播放模式 LOOP --> RANDOM --> REPEAT --> LOOP
 				switch (mPlayMode) {
 					case LOOP:
-						AudioController.getInstance().setPlayMode(AudioController.PlayMode.RANDOM);
+						AudioController.INSTANCE.setPlayMode(AudioController.PlayMode.RANDOM);
 						break;
 					case RANDOM:
-						AudioController.getInstance().setPlayMode(AudioController.PlayMode.REPEAT);
+						AudioController.INSTANCE.setPlayMode(AudioController.PlayMode.REPEAT);
 						break;
 					case REPEAT:
-						AudioController.getInstance().setPlayMode(AudioController.PlayMode.LOOP);
+						AudioController.INSTANCE.setPlayMode(AudioController.PlayMode.LOOP);
 						break;
 				}
 			}
@@ -267,21 +266,21 @@ public class MusicPlayerActivity extends BaseActivity {
 		mPreViousView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				AudioController.getInstance().previous();
+				AudioController.INSTANCE.previous();
 			}
 		});
 		mPlayView = findViewById(R.id.play_view);
 		mPlayView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				AudioController.getInstance().playOrPause();
+				AudioController.INSTANCE.playOrPause();
 			}
 		});
 		mNextView = findViewById(R.id.next_view);
 		mNextView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				AudioController.getInstance().next();
+				AudioController.INSTANCE.next();
 			}
 		});
 		mIndictorView = findViewById(R.id.indictor_view);
@@ -320,7 +319,7 @@ public class MusicPlayerActivity extends BaseActivity {
 
 	private void updateStateView() {
 		//还没进去Activity前 歌曲已经播放
-		if (AudioController.getInstance().isStartState()) {
+		if (AudioController.INSTANCE.isStartState()) {
 			mPlayView.setImageResource(R.mipmap.audio_aj6);
 			mNeddleiew.setRotation(0);
 		} else {
@@ -412,8 +411,8 @@ public class MusicPlayerActivity extends BaseActivity {
 	}
 
 	private void initData() {
-		mAudioBean = AudioController.getInstance().getNowPlaying();
-		mPlayMode = AudioController.getInstance().getPlayMode();
+		mAudioBean = AudioController.INSTANCE.getNowPlaying();
+		mPlayMode = AudioController.INSTANCE.getPlayMode();
 		//获取歌词
 		RequestCenter.getLyric(mAudioBean.getId(), new DisposeDataListener() {
 			@Override
@@ -457,7 +456,7 @@ public class MusicPlayerActivity extends BaseActivity {
 
 	@Subscribe(threadMode = ThreadMode.MAIN)
 	public void onAudioPlayModeEvent(AudioPlayModeEvent event) {
-		mPlayMode = AudioController.getInstance().getPlayMode();
+		mPlayMode = AudioController.INSTANCE.getPlayMode();
 		updatePlayModeView();
 	}
 
@@ -475,8 +474,8 @@ public class MusicPlayerActivity extends BaseActivity {
 	@Subscribe(threadMode = ThreadMode.MAIN)
 	public void onAudioLoadEvent(AudioLoadEvent event) {
 		//更新notifacation为load状态
-		mAudioBean = event.mAudioBean;
-		//ImageLoaderManager.getInstance().displayImageForViewGroup(mBgView, mAudioBean.getAlbumPic(), 100);
+		mAudioBean = event.getBean();
+		//ImageLoaderManager.INSTANCE.displayImageForViewGroup(mBgView, mAudioBean.getAlbumPic(), 100);
 		mInfoView.setText(mAudioBean.getAlbumInfo());
 		mAuthorView.setText(mAudioBean.getAuthor());
 		mStartTimeView.setText("00:00");
@@ -489,8 +488,8 @@ public class MusicPlayerActivity extends BaseActivity {
 
 	@Subscribe(threadMode = ThreadMode.MAIN)
 	public void onAudioProgressEvent(AudioProgressEvent event) {
-		int totalTime = event.maxLength;
-		int currentTime = event.progress;
+		int totalTime = event.getMaxLength();
+		int currentTime = event.getProgress();
 		//设置当前进度
 		mProgressView.setProgress(currentTime);
 		//设置最大时间
@@ -499,7 +498,7 @@ public class MusicPlayerActivity extends BaseActivity {
 		//更新歌词播放进度
 		lrcView.updateTime(currentTime);
 		//更新状态
-		if (event.mStatus == CustomMediaPlayer.Status.PAUSED) {
+		if (event.getMStatus() == CustomMediaPlayer.Status.PAUSED) {
 			//showPauseView();
 		} else {
 			//showPlayView();
@@ -508,7 +507,7 @@ public class MusicPlayerActivity extends BaseActivity {
 
 	@Subscribe(threadMode = ThreadMode.MAIN)
 	public void onAudioBufferUpdateEvent(AudioBufferUpdateEvent event) {
-		mProgressView.setSecondaryProgress(event.progress);
+		mProgressView.setSecondaryProgress(event.getProgress());
 	}
 
 	private void showPlayView() {

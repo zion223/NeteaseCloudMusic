@@ -4,7 +4,6 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
@@ -23,7 +22,6 @@ import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_common_ui.widget.CircleProgressButton;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.lxj.xpopup.XPopup;
-import com.lxj.xpopup.core.BasePopupView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -78,7 +76,7 @@ public class BottomMusicView extends RelativeLayout {
 			@Override
 			public void onClick(View v) {
 				//跳到音乐播放Activitity
-				if(AudioController.getInstance().getNowPlaying() != null){
+				if(AudioController.INSTANCE.getNowPlaying() != null){
 					MusicPlayerActivity.start((Activity) mContext);
 				}else{
 					Toast.makeText(getContext(), "当前播放队列无歌曲", Toast.LENGTH_SHORT).show();
@@ -100,7 +98,7 @@ public class BottomMusicView extends RelativeLayout {
 			@Override
 			public void onClick(View v) {
 				//处理播放暂停事件
-				AudioController.getInstance().playOrPause();
+				AudioController.INSTANCE.playOrPause();
 			}
 		});
 		mRightView = rootView.findViewById(R.id.show_list_view);
@@ -108,7 +106,7 @@ public class BottomMusicView extends RelativeLayout {
 			@Override
 			public void onClick(View v) {
 				//显示音乐列表对话框
-				if(AudioController.getInstance().getQueue().size() != 0){
+				if(AudioController.INSTANCE.getQueue().size() != 0){
 					new XPopup.Builder(getContext())
 							.asCustom(new MusicListDialog(getContext()))
 							.show();
@@ -129,7 +127,7 @@ public class BottomMusicView extends RelativeLayout {
 	@Subscribe(threadMode = ThreadMode.MAIN)
 	public void onAudioLoadEvent(AudioLoadEvent event) {
 		//更新当前view为load状态
-		mAudioBean = event.mAudioBean;
+		mAudioBean = event.getBean();
 		showLoadView();
 	}
 
@@ -148,7 +146,7 @@ public class BottomMusicView extends RelativeLayout {
 	@Subscribe(threadMode = ThreadMode.MAIN)
 	public void onAudioProgrssEvent(AudioProgressEvent event) {
 		//更新当前view的播放进度
-		mPlayView.setProgressValue(((float)event.progress / (float)event.maxLength) * 100);
+		mPlayView.setProgressValue(((float)event.getProgress() / (float)event.getMaxLength()) * 100);
 	}
 
 	//加载状态
