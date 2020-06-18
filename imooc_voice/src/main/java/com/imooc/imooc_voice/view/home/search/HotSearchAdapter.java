@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,15 +28,17 @@ public class HotSearchAdapter extends BaseQuickAdapter<HotSearchDetailBean.DataB
 
     @Override
     protected void convert(BaseViewHolder helper, HotSearchDetailBean.DataBean item) {
-        //TODO 最后一个数据显示错误
         final TextView tvRank = helper.getView(R.id.tv_suggest_rank);
         final ImageView mIvIcon = helper.getView(R.id.iv_suggest_icon);
         if(!TextUtils.isEmpty(item.getIconUrl())){
             manager.displayImageForView(mIvIcon, item.getIconUrl());
         }
-        if(helper.getLayoutPosition() <= 3){
+        if(helper.getAdapterPosition() <= 3){
             helper.setTypeface(R.id.tv_suggest_name, Typeface.defaultFromStyle(Typeface.BOLD));
             tvRank.setTextColor(Color.parseColor("#FF4500"));
+        }else{
+            helper.setTypeface(R.id.tv_suggest_name, Typeface.defaultFromStyle(Typeface.NORMAL));
+            tvRank.setTextColor(Color.GRAY);
         }
         //关键字
         helper.setText(R.id.tv_suggest_name, item.getSearchWord());

@@ -67,7 +67,7 @@ public class SearchDelegate extends NeteaseDelegate {
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                         HotSearchDetailBean.DataBean entity = (HotSearchDetailBean.DataBean) adapter.getItem(position);
                         String searchword = entity.getSearchWord();
-                        getParentDelegate().getSupportDelegate().start(SearchResultDelegate.newInstance(searchword));
+                        getSupportDelegate().start(SearchResultDelegate.newInstance(searchword));
                     }
                 });
                 mRecyclerViewSuggest.setAdapter(mAdapter);

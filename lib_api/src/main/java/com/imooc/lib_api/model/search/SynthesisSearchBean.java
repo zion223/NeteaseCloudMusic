@@ -1196,7 +1196,7 @@ public class SynthesisSearchBean {
                 private CreatorBean creator;
                 private boolean subscribed;
                 private int trackCount;
-                private int userId;
+                private String userId;
                 private int playCount;
                 private int bookCount;
                 private String description;
@@ -1252,11 +1252,11 @@ public class SynthesisSearchBean {
                     this.trackCount = trackCount;
                 }
 
-                public int getUserId() {
+                public String getUserId() {
                     return userId;
                 }
 
-                public void setUserId(int userId) {
+                public void setUserId(String userId) {
                     this.userId = userId;
                 }
 

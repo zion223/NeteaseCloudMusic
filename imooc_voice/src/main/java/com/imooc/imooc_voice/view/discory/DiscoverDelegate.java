@@ -199,9 +199,9 @@ public class DiscoverDelegate extends NeteaseDelegate {
 				mAlbumSongAdapter.setOnItemClickListener((adpater, view1, i) -> {
 					AlbumOrSongBean entity = (AlbumOrSongBean) adpater.getItem(i);
 					//查看专辑
-					if (entity.getType() == ALBUM) {
+					if (entity != null && entity.getType() == ALBUM) {
 						getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(ALBUM, entity.getId()));
-					} else {
+					} else if(entity != null && entity.getType() == SONG){
 						//播放歌曲
 						long songId = entity.getId();
 						RequestCenter.getSongDetail(String.valueOf(songId), new DisposeDataListener() {

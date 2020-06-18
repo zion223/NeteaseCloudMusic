@@ -11,6 +11,7 @@
         android:textSize="18sp"
         android:layout_marginTop="10dp"
         android:gravity="center"
+        android:textColor="@color/gray"
         android:text="1"/>
     <TextView
         android:id="@+id/tv_suggest_name"
