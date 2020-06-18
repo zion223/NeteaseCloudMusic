@@ -1532,7 +1532,7 @@ public class VideoBean {
 		return rcmdLimit;
 	}
 
-	public class Experts {
+	public static class Experts {
 
 		private String name;
 
@@ -1803,7 +1803,7 @@ public class VideoBean {
 
 	}
 
-	public class Urlinfo {
+	public static class Urlinfo {
 
 		private String id;
 		private String url;
@@ -1871,7 +1871,7 @@ public class VideoBean {
 
 	}
 
-	public class Videogroup {
+	public static class Videogroup {
 
 		private int id;
 		private String name;
@@ -2218,7 +2218,7 @@ public class VideoBean {
 
 	}
 
-	public class Resolutions {
+	public static class Resolutions {
 
 		private int resolution;
 		private int size;

@@ -65,7 +65,7 @@ public class AlbumCollectDelegate extends NeteaseLoadingDelegate {
 
 	static class AlbumCollectAdapter extends BaseQuickAdapter<AlbumSearchBean.ResultBean.AlbumsBean, BaseViewHolder> {
 
-		private ImageLoaderManager manager;
+		private final ImageLoaderManager manager;
 
 
 		AlbumCollectAdapter(@Nullable List<AlbumSearchBean.ResultBean.AlbumsBean> data) {
@@ -101,7 +101,7 @@ public class AlbumCollectDelegate extends NeteaseLoadingDelegate {
 			adapter.setText(R.id.tv_item_gedan_content_bottomtext, artistName + "  " + item.getSize() + "首");
 			adapter.setVisible(R.id.iv_item_gedan_more, true);
 			//专辑图片
-			manager.displayImageForCorner((ImageView) adapter.getView(R.id.iv_item_gedan_content_img), item.getPicUrl());
+			manager.displayImageForCorner(adapter.getView(R.id.iv_item_gedan_content_img), item.getPicUrl());
 
 		}
 	}

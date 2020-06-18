@@ -1,6 +1,5 @@
 package com.imooc.lib_network.request;
 
-import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -14,7 +13,7 @@ public class RequestParams {
      * Constructs a new empty {@code RequestParams} instance.
      */
     public RequestParams() {
-        this((Map<String, String>) null);
+        this(null);
     }
 
     /**
@@ -71,10 +70,6 @@ public class RequestParams {
 //    }
 
     public boolean hasParams() {
-        if(urlParams.size() > 0 || fileParams.size() > 0){
-
-            return true;
-        }
-        return false;
+        return urlParams.size() > 0 || fileParams.size() > 0;
     }
 }

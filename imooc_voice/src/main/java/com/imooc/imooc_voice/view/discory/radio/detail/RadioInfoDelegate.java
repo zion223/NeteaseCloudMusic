@@ -76,7 +76,7 @@ public class RadioInfoDelegate extends NeteaseDelegate {
     }
 
     @Override
-    public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
+    public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) {
         //获取电台详情
         RequestCenter.getRadioDetail(rid, new DisposeDataListener() {
             @Override

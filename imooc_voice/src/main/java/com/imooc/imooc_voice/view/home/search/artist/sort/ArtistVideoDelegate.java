@@ -98,7 +98,7 @@ public class ArtistVideoDelegate extends NeteaseLoadingDelegate {
 			//视频描述
 
 			adapter.setText(R.id.tv_item_video_creator, item.getPublishTime());
-			ImageLoaderManager.getInstance().displayImageForCorner((ImageView) adapter.getView(R.id.iv_item_video_cover), item.getImgurl());
+			ImageLoaderManager.getInstance().displayImageForCorner(adapter.getView(R.id.iv_item_video_cover), item.getImgurl());
 
 
 		}

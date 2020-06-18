@@ -1,6 +1,5 @@
 package com.imooc.imooc_voice.view.drawer;
 
-import android.view.View;
 
 import com.imooc.imooc_voice.view.drawer.notification.CommentDelegate;
 import com.imooc.imooc_voice.view.drawer.notification.PrivateLetterDelegate;
@@ -8,7 +7,6 @@ import com.imooc.imooc_voice.view.drawer.notification.PrivateNoticeDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseTabDelegate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 

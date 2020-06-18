@@ -3,7 +3,6 @@ package com.imooc.lib_common_ui.dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 

@@ -165,13 +165,12 @@ public class HornizeItemView extends RelativeLayout {
 			rightParams.addRule(RelativeLayout.LEFT_OF, R.id.hornized_right_image_id);
 			rightParams.addRule(RelativeLayout.CENTER_VERTICAL);
 			rightParams.setMargins(mRightIconMarginLeft, 0, 0, 0);
-			layout.addView(mRightView, rightParams);
 		} else {
 			//添加到父布局左侧
 			rightParams.addRule(RelativeLayout.ALIGN_PARENT_END);
 			rightParams.addRule(RelativeLayout.CENTER_VERTICAL);
-			layout.addView(mRightView, rightParams);
 		}
+		layout.addView(mRightView, rightParams);
 
 		rootLayout.addView(layout, layoutParams);
 		addView(rootLayout, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,

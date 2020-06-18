@@ -42,7 +42,7 @@ public class SearchDelegate extends NeteaseDelegate {
     }
 
     @Override
-    public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
+    public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) {
 
         mEtKeywords.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {

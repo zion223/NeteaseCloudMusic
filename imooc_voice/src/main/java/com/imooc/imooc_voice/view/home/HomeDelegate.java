@@ -87,7 +87,6 @@ public class HomeDelegate extends NeteaseDelegate{
 
 	private SharePreferenceUtil sharePreferenceUtil;
 
-	private HomePagerAdapter mAdapter;
 	private LoginBean loginBean;
 
 	@Override
@@ -96,7 +95,7 @@ public class HomeDelegate extends NeteaseDelegate{
 	}
 
 	@Override
-	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
+	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) {
 		initView();
 		sharePreferenceUtil = SharePreferenceUtil.getInstance(getContext());
 		loginBean = GsonUtil.fromJSON(sharePreferenceUtil.getUserInfo(""), LoginBean.class);
@@ -117,7 +116,7 @@ public class HomeDelegate extends NeteaseDelegate{
 
 	//初始化控件
 	private void initView() {
-		mAdapter = new HomePagerAdapter(getChildFragmentManager(), CHANNELS);
+		HomePagerAdapter mAdapter = new HomePagerAdapter(getChildFragmentManager(), CHANNELS);
 		mViewPager.setAdapter(mAdapter);
 		mViewPager.setOffscreenPageLimit(4);
 		initMagicIndicator();

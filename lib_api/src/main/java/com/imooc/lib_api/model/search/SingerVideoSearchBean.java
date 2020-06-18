@@ -145,7 +145,7 @@ public class SingerVideoSearchBean {
 
 	}
 
-	public class Artist {
+	public static class Artist {
 
 		private long img1v1Id;
 		private int topicPerson;

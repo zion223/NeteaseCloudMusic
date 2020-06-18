@@ -1,2 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.imooc.lib_api" />
+<manifest package="com.imooc.lib_api" />

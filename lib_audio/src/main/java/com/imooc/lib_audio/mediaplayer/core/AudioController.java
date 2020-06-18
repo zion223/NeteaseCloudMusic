@@ -30,9 +30,9 @@ public class AudioController {
 	}
 
 	//播放器
-	private AudioPlayer mAudioPlayer;
+	private final AudioPlayer mAudioPlayer;
 	//当前播放队列
-	private ArrayList<AudioBean> mQueue;
+	private final ArrayList<AudioBean> mQueue;
 	//播放模式
 	private PlayMode mPlayMode;
 	//当前播放索引
@@ -51,7 +51,7 @@ public class AudioController {
 	}
 
 	private static class SingletonHolder{
-		private static AudioController INSTANCE = new AudioController();
+		private static final AudioController INSTANCE = new AudioController();
 	}
 
 	public boolean isStartState() {

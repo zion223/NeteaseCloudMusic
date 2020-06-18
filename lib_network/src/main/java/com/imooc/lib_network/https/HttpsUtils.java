@@ -54,9 +54,8 @@ public class HttpsUtils {
                 try {
                     if (certificate != null)
                         certificate.close();
-                } catch (IOException e)
-
-                {
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
             TrustManagerFactory trustManagerFactory = null;
@@ -64,9 +63,7 @@ public class HttpsUtils {
             trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
             trustManagerFactory.init(keyStore);
 
-            TrustManager[] trustManagers = trustManagerFactory.getTrustManagers();
-
-            return trustManagers;
+            return trustManagerFactory.getTrustManagers();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (CertificateException e) {
@@ -129,7 +126,7 @@ public class HttpsUtils {
         }
 
         @Override
-        public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+        public void checkClientTrusted(X509Certificate[] chain, String authType) {
 
         }
 
@@ -164,7 +161,7 @@ public class HttpsUtils {
     }
 
     public static X509TrustManager initTrustManager() {
-        X509TrustManager mTrustManager = new X509TrustManager() {
+        return new X509TrustManager() {
             @Override
             public X509Certificate[] getAcceptedIssuers() {
                 return new X509Certificate[]{};
@@ -178,6 +175,5 @@ public class HttpsUtils {
             public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
             }
         };
-        return mTrustManager;
     }
 }

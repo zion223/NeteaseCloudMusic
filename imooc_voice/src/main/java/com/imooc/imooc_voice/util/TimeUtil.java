@@ -1,7 +1,5 @@
 package com.imooc.imooc_voice.util;
 
-import android.util.Log;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -125,13 +123,14 @@ public class TimeUtil {
 		return format.format(time);
 	}
 
-	private static boolean isToday(String str, String formatStr) throws Exception {
+	private static boolean isToday(String str, String formatStr) {
 
 		SimpleDateFormat format = new SimpleDateFormat(formatStr);
 		Date date = null;
 		try {
 			date = format.parse(str);
 		} catch (ParseException e) {
+			e.printStackTrace();
 		}
 		Calendar c1 = Calendar.getInstance();
 		c1.setTime(date);

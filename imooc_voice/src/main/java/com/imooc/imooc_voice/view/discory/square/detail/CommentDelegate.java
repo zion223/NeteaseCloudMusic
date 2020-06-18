@@ -142,7 +142,7 @@ public class CommentDelegate extends NeteaseLoadingDelegate implements View.OnCl
 		//标题
 		mTvHeaderTitle.setText(headerTop);
 
-		ImageLoaderManager.getInstance().displayImageForCorner((ImageView) rootView.findViewById(R.id.iv_gedan_detail_comment_img), headerImg, 5);
+		ImageLoaderManager.getInstance().displayImageForCorner(rootView.findViewById(R.id.iv_gedan_detail_comment_img), headerImg, 5);
 
 		//加载不同类型的评论
 		switch (type) {

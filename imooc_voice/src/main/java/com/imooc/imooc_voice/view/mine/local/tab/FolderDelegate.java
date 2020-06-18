@@ -24,15 +24,12 @@ import java.util.List;
 
 public class FolderDelegate extends NeteaseLoadingDelegate {
 
-	private RecyclerView recyclerView;
-	private LinearLayoutManager linearLayoutManager;
-
 	private FolderAdapter mAdapter;
 
 	@Override
 	public void initView() {
-		recyclerView = rootView.findViewById(R.id.recyclerview);
-		linearLayoutManager = new LinearLayoutManager(getContext());
+		RecyclerView recyclerView = rootView.findViewById(R.id.recyclerview);
+		LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
 		recyclerView.setLayoutManager(linearLayoutManager);
 		mAdapter = new FolderAdapter(null);
 		recyclerView.setAdapter(mAdapter);
@@ -85,10 +82,10 @@ public class FolderDelegate extends NeteaseLoadingDelegate {
 			//文件夹歌曲数量和文件的路径
 			helper.setText(R.id.viewpager_list_bottom_text, item.folder_count + "首  " + item.folder_path);
 			//文件夹封面
-			ImageView img = ((ImageView)helper.getView(R.id.iv_tab));
+			ImageView img = helper.getView(R.id.iv_tab);
 			img.setImageResource(R.drawable.ic_folder);
 
-			ViewGroup.LayoutParams layoutParams = ((ImageView) helper.getView(R.id.iv_tab)).getLayoutParams();
+			ViewGroup.LayoutParams layoutParams = helper.getView(R.id.iv_tab).getLayoutParams();
 			layoutParams.width = UIUtil.dip2px(img.getContext(), 20);
 			layoutParams.height = UIUtil.dip2px(img.getContext(), 20);
 			img.setLayoutParams(layoutParams);

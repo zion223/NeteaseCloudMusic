@@ -295,7 +295,7 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 					//视频描述
 					String description = TimeUtil.getTimeNoYMDH(videoItem.getDurationms()) + " by " + videoItem.getCreator().get(0).getUserName();
 					adapter.setText(R.id.tv_item_video_creator, description);
-					manager.displayImageForCorner((ImageView) adapter.get(R.id.iv_item_video_cover), videoItem.getCoverUrl());
+					manager.displayImageForCorner(adapter.get(R.id.iv_item_video_cover), videoItem.getCoverUrl());
 					break;
 				case 2:
 					//歌单
@@ -308,7 +308,7 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 					description = platlistItem.getTrackCount() + "首，by " + platlistItem.getCreator().getNickname() + "，播放" + SearchUtil.getCorresPondingString(playListPlaycount) + "次";
 					adapter.setVisible(R.id.iv_item_gedan_more, false);
 					((TextView) adapter.get(R.id.tv_item_gedan_content_bottomtext)).setText(SearchUtil.getMatchingKeywords(description, keyword));
-					manager.displayImageForCorner((ImageView) adapter.get(R.id.iv_item_gedan_content_img), platlistItem.getCoverImgUrl());
+					manager.displayImageForCorner(adapter.get(R.id.iv_item_gedan_content_img), platlistItem.getCoverImgUrl());
 					break;
 				case 3:
 					//电台
@@ -316,7 +316,7 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 					SynthesisSearchBean.ResultBean.DjRadioBean.DjRadiosBean djRadioItem = djRadios.get(childPosition);
 					((TextView) adapter.get(R.id.tv_item_gedan_content_toptext)).setText(SearchUtil.getMatchingKeywords(djRadioItem.getName(), keyword));
 					((TextView) adapter.get(R.id.tv_item_gedan_content_bottomtext)).setText(SearchUtil.getMatchingKeywords(djRadioItem.getDj().getNickname(), keyword));
-					manager.displayImageForCorner((ImageView) adapter.get(R.id.iv_item_gedan_content_img), djRadioItem.getPicUrl());
+					manager.displayImageForCorner(adapter.get(R.id.iv_item_gedan_content_img), djRadioItem.getPicUrl());
 					adapter.setVisible(R.id.iv_item_gedan_more, false);
 					break;
 				case 4:
@@ -327,7 +327,7 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 					if (artistItem.getAlias() != null && artistItem.getAlias().size() != 0) {
 						adapter.setText(R.id.tv_singer_alias, "(" + SearchUtil.getMatchingKeywords(artistItem.getAlias().get(0), keyword) + ")");
 					}
-					manager.displayImageForCircle((ImageView) adapter.get(R.id.iv_singer_avatar), artistItem.getPicUrl());
+					manager.displayImageForCircle(adapter.get(R.id.iv_singer_avatar), artistItem.getPicUrl());
 					break;
 				case 5:
 					//用户
@@ -371,7 +371,7 @@ public class MultipleSearchDelegate extends NeteaseSearchLoadingDelegate impleme
 						((ImageView) adapter.get(R.id.iv_item_search_user_gender)).setImageResource(R.drawable.ic_female);
 					}
 					//用户头像
-					manager.displayImageForCircle((ImageView) adapter.get(R.id.iv_item_search_user_avatar), userItem.getAvatarUrl());
+					manager.displayImageForCircle(adapter.get(R.id.iv_item_search_user_avatar), userItem.getAvatarUrl());
 					break;
 			}
 		}

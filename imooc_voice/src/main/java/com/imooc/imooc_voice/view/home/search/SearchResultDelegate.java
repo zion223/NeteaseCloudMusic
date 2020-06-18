@@ -80,7 +80,7 @@ public class SearchResultDelegate extends NeteaseDelegate {
 	}
 
 	@Override
-	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
+	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) {
 
 		//添加搜索结果Delegate
 		//综合1018 单曲√ 云村 视频√ 歌手√ 专辑 歌单√ 主播电台√ 用户√

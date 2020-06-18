@@ -1,7 +1,6 @@
 package com.imooc.lib_common_ui.delegate;
 
 import android.graphics.drawable.ColorDrawable;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;

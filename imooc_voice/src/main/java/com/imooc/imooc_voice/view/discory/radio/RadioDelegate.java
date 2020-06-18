@@ -1,7 +1,6 @@
 package com.imooc.imooc_voice.view.discory.radio;
 
 import android.annotation.SuppressLint;
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -188,7 +187,7 @@ public class RadioDelegate extends NeteaseLoadingDelegate implements View.OnClic
         protected void convert(@NonNull BaseViewHolder adapter, DjRecommendBean.DjRadiosBean bean) {
             adapter.setText(R.id.iv_radio_recommend_name, bean.getName());
             adapter.setText(R.id.iv_radio_recommend_des, bean.getRcmdtext());
-            manager.displayImageForCorner((ImageView) adapter.getView(R.id.iv_radio_recommend_img), bean.getPicUrl(), 5);
+            manager.displayImageForCorner(adapter.getView(R.id.iv_radio_recommend_img), bean.getPicUrl(), 5);
         }
     }
 }

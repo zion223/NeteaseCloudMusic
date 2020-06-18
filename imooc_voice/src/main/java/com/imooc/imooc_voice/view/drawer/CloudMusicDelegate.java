@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.imooc_voice.view.discory.square.detail.PlayListAdapter;
-import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
 import com.imooc.lib_api.RequestCenter;
 import com.imooc.lib_api.model.notification.UserCloudBean;
 import com.imooc.lib_api.model.song.SongDetailBean;
@@ -31,7 +30,6 @@ public class CloudMusicDelegate extends NeteaseLoadingDelegate {
 	private static final long GB = 1024 * 1024 * 1024;
 
 	private TextView mTvStorageRoom;
-	private ImageView mIvBack;
 	private RecyclerView mRecyclerView;
 	private PlayListAdapter mAdapter;
 
@@ -39,8 +37,8 @@ public class CloudMusicDelegate extends NeteaseLoadingDelegate {
 	public void initView() {
 		mTvStorageRoom = rootView.findViewById(R.id.tv_user_cloud_size);
 		mRecyclerView = rootView.findViewById(R.id.rv_cloud_music);
-		mIvBack = rootView.findViewById(R.id.img_cloud_back);
-		//返回
+		ImageView mIvBack = rootView.findViewById(R.id.img_cloud_back);
+		//返回按钮
 		mIvBack.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

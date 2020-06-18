@@ -106,7 +106,7 @@ public class ProgramRankDelegate extends NeteaseLoadingDelegate {
 
 		@Override
 		protected void convert(@NonNull BaseViewHolder adapter, DjProgramTopListBean.List item) {
-			ImageLoaderManager.getInstance().displayImageForCorner((ImageView) adapter.getView(R.id.iv_item_program_rank_avatar), item.getProgram().getCoverUrl());
+			ImageLoaderManager.getInstance().displayImageForCorner(adapter.getView(R.id.iv_item_program_rank_avatar), item.getProgram().getCoverUrl());
 			adapter.setText(R.id.tv_item_rank_program_name, item.getProgram().getName());
 		}
 	}
@@ -149,8 +149,8 @@ public class ProgramRankDelegate extends NeteaseLoadingDelegate {
 			//排名变化
 			adapter.setText(R.id.tv_item_program_rank_diff, String.valueOf(Math.abs(diffRank)));
 			//节目封面
-			ImageLoaderManager.getInstance().displayImageForCorner((ImageView) adapter.getView(R.id.iv_item_program_img), item.getProgram().getCoverUrl());
-			ImageLoaderManager.getInstance().displayImageForCircle((ImageView) adapter.getView(R.id.iv_item_program_rank_djavatar), item.getProgram().getDj().getAvatarUrl());
+			ImageLoaderManager.getInstance().displayImageForCorner(adapter.getView(R.id.iv_item_program_img), item.getProgram().getCoverUrl());
+			ImageLoaderManager.getInstance().displayImageForCircle(adapter.getView(R.id.iv_item_program_rank_djavatar), item.getProgram().getDj().getAvatarUrl());
 
 
 		}

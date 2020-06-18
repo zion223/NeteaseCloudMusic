@@ -12,8 +12,6 @@ import com.imooc.lib_image_loader.image.ImageUtils;
 
 import java.util.List;
 
-import butterknife.internal.Utils;
-
 /**
  * 显示1~N张图片的View
  */

@@ -60,7 +60,7 @@ public class ArtistCollectDelegate extends NeteaseLoadingDelegate {
 	}
 
 	static class ArtistCollectAdapter extends BaseQuickAdapter<SingerSearchBean.ResultBean.ArtistsBean, BaseViewHolder>{
-		private ImageLoaderManager manager;
+		private final ImageLoaderManager manager;
 
 		ArtistCollectAdapter(@Nullable List<SingerSearchBean.ResultBean.ArtistsBean> data) {
 			super(R.layout.item_singer_collect, data);

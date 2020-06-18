@@ -7,10 +7,6 @@ import android.text.TextUtils;
 
 import com.imooc.lib_api.model.LoginBean;
 
-import java.util.List;
-import java.util.Locale;
-
-
 
 /**
  * 本地SharePreference工具

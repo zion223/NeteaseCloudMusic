@@ -95,7 +95,7 @@ public class UserHomePageDelegate extends NeteaseDelegate {
 
 	@SuppressLint("SetTextI18n")
 	@Override
-	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
+	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) {
 
 		//基本信息
 		String createTime = TimeUtil.getTimeStandardOnlyYMD(mCurrentUser.getCreateTime());
@@ -249,7 +249,7 @@ public class UserHomePageDelegate extends NeteaseDelegate {
 			//歌单名
 			holder.setText(R.id.tv_item_gedan_content_toptext, item.getName());
 			//歌单图片
-			manager.displayImageForCorner((ImageView) holder.get(R.id.iv_item_gedan_content_img), item.getCoverImgUrl());
+			manager.displayImageForCorner(holder.get(R.id.iv_item_gedan_content_img), item.getCoverImgUrl());
 			if(groupPosition == TYPE_SUBSCRIBE){
 				holder.setText(R.id.tv_item_gedan_content_bottomtext, item.getTrackCount() + "首,  by "+ item.getCreator().getNickname() +"  播放" + SearchUtil.getCorresPondingString(item.getPlayCount()) + "次");
 			}else if(groupPosition == TYPE_CREATE){

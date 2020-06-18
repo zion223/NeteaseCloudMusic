@@ -1,7 +1,6 @@
 package com.imooc.lib_api.model.notification;
 
 
-import com.imooc.lib_api.model.FollowBean;
 import com.imooc.lib_api.model.search.UserSearchBean;
 
 import java.util.ArrayList;

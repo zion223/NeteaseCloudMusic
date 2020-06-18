@@ -35,7 +35,7 @@ public class VideoUrlBean {
 		return code;
 	}
 
-	public class Urls {
+	public static class Urls {
 
 		private String id;
 		private String url;

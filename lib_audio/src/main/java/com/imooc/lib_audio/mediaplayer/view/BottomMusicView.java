@@ -4,7 +4,6 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
@@ -23,7 +22,6 @@ import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_common_ui.widget.CircleProgressButton;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.lxj.xpopup.XPopup;
-import com.lxj.xpopup.core.BasePopupView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

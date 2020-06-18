@@ -106,7 +106,7 @@ public class RadioRankDelegate extends NeteaseLoadingDelegate {
 			//排名变化
 			adapter.setText(R.id.tv_item_radio_rank_diff, String.valueOf(Math.abs(diffRank)));
 			//节目封面
-			ImageLoaderManager.getInstance().displayImageForCorner((ImageView) adapter.getView(R.id.iv_item_radio_img), item.getPicUrl());
+			ImageLoaderManager.getInstance().displayImageForCorner(adapter.getView(R.id.iv_item_radio_img), item.getPicUrl());
 
 		}
 	}

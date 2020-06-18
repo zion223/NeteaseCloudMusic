@@ -236,7 +236,7 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
 		//单曲
 		if (jsonBean != null && jsonBean.getSong() != null && !TextUtils.isEmpty(jsonBean.getSong().getName())) {
 			adapter.setVisible(R.id.rl_share, true);
-			manager.displayImageForCorner((ImageView) adapter.getView(R.id.iv_song_cover), jsonBean.getSong().getAlbum().getPicUrl());
+			manager.displayImageForCorner(adapter.getView(R.id.iv_song_cover), jsonBean.getSong().getAlbum().getPicUrl());
 			//单曲名
 			adapter.setText(R.id.tv_songname, jsonBean.getSong().getName());
 			//歌手名
@@ -245,7 +245,7 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
 		//节目
 		} else if (jsonBean != null && jsonBean.getProgram() != null && !TextUtils.isEmpty(jsonBean.getProgram().getName())) {
 			adapter.setVisible(R.id.rl_share, true);
-			manager.displayImageForCorner((ImageView) adapter.getView(R.id.iv_song_cover), jsonBean.getProgram().getCoverUrl());
+			manager.displayImageForCorner(adapter.getView(R.id.iv_song_cover), jsonBean.getProgram().getCoverUrl());
 
 			adapter.setText(R.id.tv_songname, jsonBean.getProgram().getName());
 			//电台名称
@@ -276,14 +276,14 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
 		//歌单
 		} else if(jsonBean != null && jsonBean.getPlaylist() != null){
 			adapter.setVisible(R.id.rl_share, true);
-			manager.displayImageForCorner((ImageView) adapter.getView(R.id.iv_song_cover), jsonBean.getPlaylist().getCoverImgUrl());
+			manager.displayImageForCorner(adapter.getView(R.id.iv_song_cover), jsonBean.getPlaylist().getCoverImgUrl());
 			//歌单名称
 			adapter.setText(R.id.tv_songname, jsonBean.getPlaylist().getName());
 			//歌单创建者 名称
 			adapter.setText(R.id.tv_creator_name, "by " + jsonBean.getPlaylist().getCreator().getNickname());
 		//专辑
 		}else if(jsonBean != null && jsonBean.getAlbum() != null){
-			manager.displayImageForCorner((ImageView) adapter.getView(R.id.iv_song_cover), jsonBean.getAlbum().getPicUrl());
+			manager.displayImageForCorner(adapter.getView(R.id.iv_song_cover), jsonBean.getAlbum().getPicUrl());
 			//专辑名称
 			adapter.setText(R.id.tv_songname, jsonBean.getAlbum().getName());
 			//专辑的歌手

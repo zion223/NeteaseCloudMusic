@@ -1,11 +1,8 @@
 package com.imooc.imooc_voice.view.video.mv;
 
-import android.view.View;
-
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseTabDelegate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 

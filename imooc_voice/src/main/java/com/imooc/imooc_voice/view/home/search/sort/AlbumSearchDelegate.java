@@ -55,8 +55,8 @@ public class AlbumSearchDelegate extends NeteaseSearchLoadingDelegate {
 
 	public static class AlbumSearchAdapter extends BaseQuickAdapter<AlbumSearchBean.ResultBean.AlbumsBean, BaseViewHolder>{
 
-		private String keywords;
-		private ImageLoaderManager manager;
+		private final String keywords;
+		private final ImageLoaderManager manager;
 
 		public AlbumSearchAdapter(String keywords, @Nullable List<AlbumSearchBean.ResultBean.AlbumsBean> data) {
 			super(R.layout.item_mine_gedan_content, data);
@@ -100,7 +100,7 @@ public class AlbumSearchDelegate extends NeteaseSearchLoadingDelegate {
 			adapter.setText(R.id.tv_item_gedan_content_bottomtext, SearchUtil.getMatchingKeywords(bottomText,keywords));
 			adapter.setVisible(R.id.iv_item_gedan_more, false);
 			//专辑图片
-			manager.displayImageForCorner((ImageView) adapter.getView(R.id.iv_item_gedan_content_img), item.getPicUrl());
+			manager.displayImageForCorner(adapter.getView(R.id.iv_item_gedan_content_img), item.getPicUrl());
 
 		}
 	}

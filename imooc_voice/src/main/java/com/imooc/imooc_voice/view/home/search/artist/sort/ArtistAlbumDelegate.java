@@ -90,7 +90,7 @@ public class ArtistAlbumDelegate extends NeteaseLoadingDelegate {
 			adapter.setVisible(R.id.iv_album_right_flag, true);
 			adapter.setText(R.id.tv_item_gedan_content_toptext, item.getName());
 			adapter.setText(R.id.tv_item_gedan_content_bottomtext, TimeUtil.getTimeStandardOnlyYMDWithDot(item.getPublishTime()) + " 歌曲"+item.getSize());
-			ImageLoaderManager.getInstance().displayImageForCorner((ImageView) adapter.getView(R.id.iv_item_gedan_content_img), item.getPicUrl());
+			ImageLoaderManager.getInstance().displayImageForCorner(adapter.getView(R.id.iv_item_gedan_content_img), item.getPicUrl());
 		}
 	}
 }

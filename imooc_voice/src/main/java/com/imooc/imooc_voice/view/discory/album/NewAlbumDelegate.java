@@ -87,7 +87,7 @@ public class NewAlbumDelegate extends NeteaseLoadingDelegate {
 		@Override
 		protected void convert(@NonNull BaseViewHolder adapter, AlbumSearchBean.ResultBean.AlbumsBean item) {
 			adapter.setVisible(R.id.iv_item_album_icon, true);
-			manager.displayImageForCorner((ImageView) adapter.getView(R.id.iv_item_album_song), item.getPicUrl());
+			manager.displayImageForCorner(adapter.getView(R.id.iv_item_album_song), item.getPicUrl());
 			adapter.setText(R.id.tv_item_album_song_name, item.getName());
 			adapter.setText(R.id.tv_item_album_song_artist, item.getArtist().getName());
 		}

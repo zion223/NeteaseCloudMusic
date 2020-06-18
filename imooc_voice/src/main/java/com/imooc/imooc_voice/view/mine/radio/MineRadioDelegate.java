@@ -43,7 +43,7 @@ public class MineRadioDelegate extends NeteaseDelegate {
 	}
 
 	@Override
-	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
+	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) {
 		RequestCenter.getSubRadioList(new DisposeDataListener() {
 			@SuppressLint("SetTextI18n")
 			@Override

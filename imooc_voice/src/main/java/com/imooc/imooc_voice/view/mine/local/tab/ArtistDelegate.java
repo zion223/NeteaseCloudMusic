@@ -28,9 +28,6 @@ import java.util.List;
 
 public class ArtistDelegate extends NeteaseLoadingDelegate {
 
-	private RecyclerView recyclerView;
-	private LinearLayoutManager linearLayoutManager;
-
 	/**
 	 * data
 	 */
@@ -47,8 +44,8 @@ public class ArtistDelegate extends NeteaseLoadingDelegate {
 
 
 	public void initView() {
-		recyclerView = rootView.findViewById(R.id.recyclerview);
-		linearLayoutManager = new LinearLayoutManager(getContext());
+		RecyclerView recyclerView = rootView.findViewById(R.id.recyclerview);
+		LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
 		recyclerView.setLayoutManager(linearLayoutManager);
 		mAdapter = new ArtistAdapter(null);
 		//添加头布局

@@ -84,7 +84,7 @@ public class PhoneLoginDelegate extends NeteaseDelegate {
 	}
 
 	@Override
-	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
+	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) {
 		ScreenUtils.setStatusBarColor(getProxyActivity(), Color.parseColor("#ffffffff"));
 		timer = new Timer();
 		task = new TimerTask() {

@@ -33,7 +33,7 @@ public class VideoGroupBean {
 		return data;
 	}
 
-	public class Data {
+	public static class Data {
 
 		private long id;
 		private String name;

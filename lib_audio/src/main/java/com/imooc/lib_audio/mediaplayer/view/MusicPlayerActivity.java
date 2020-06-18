@@ -33,7 +33,6 @@ import com.imooc.lib_audio.R;
 import com.imooc.lib_audio.mediaplayer.core.AudioBufferUpdateEvent;
 import com.imooc.lib_audio.mediaplayer.core.AudioController;
 import com.imooc.lib_audio.mediaplayer.core.CustomMediaPlayer;
-import com.imooc.lib_audio.mediaplayer.events.AudioFavouriteEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioLoadEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioPauseEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioPlayModeEvent;

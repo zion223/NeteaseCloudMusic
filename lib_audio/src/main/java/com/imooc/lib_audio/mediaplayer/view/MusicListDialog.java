@@ -23,7 +23,6 @@ import com.imooc.lib_audio.mediaplayer.events.AudioRemoveEvent;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.core.BottomPopupView;
-import com.lxj.xpopup.util.XPopupUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

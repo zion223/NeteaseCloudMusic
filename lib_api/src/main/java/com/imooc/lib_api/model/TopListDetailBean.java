@@ -410,7 +410,7 @@ public class TopListDetailBean {
 		return rewardToplist;
 	}
 
-	public class Tracks {
+	public static class Tracks {
 
 		private String first;
 		private String second;
@@ -433,7 +433,7 @@ public class TopListDetailBean {
 
 	}
 
-	public class Artists {
+	public static class Artists {
 
 		private String first;
 		private String second;
@@ -525,7 +525,7 @@ public class TopListDetailBean {
 
 	}
 
-	public class Artist {
+	public static class Artist {
 
 		private String name;
 		private int id;
@@ -886,7 +886,7 @@ public class TopListDetailBean {
 
 	}
 
-	public class BMusic {
+	public static class BMusic {
 
 		private String name;
 		private long id;
@@ -972,7 +972,7 @@ public class TopListDetailBean {
 
 	}
 
-	public class RewardToplist {
+	public static class RewardToplist {
 
 		private String coverUrl;
 		private List<DailyRecommendBean.RecommendBean> songs;

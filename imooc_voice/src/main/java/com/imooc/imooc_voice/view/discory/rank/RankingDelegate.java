@@ -44,7 +44,7 @@ public class RankingDelegate extends NeteaseDelegate {
 	}
 
 	@Override
-	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
+	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) {
 		//官方榜单 带歌曲名
 		RequestCenter.getTopListDetail(new DisposeDataListener() {
 			@Override
@@ -100,7 +100,7 @@ public class RankingDelegate extends NeteaseDelegate {
 
 		@Override
 		protected void convert(@NonNull BaseViewHolder adapter, TopListDetailBean.ListBean item) {
-			manager.displayImageForCorner((ImageView) adapter.getView(R.id.iv_item_rank_cover_image), item.getCoverImgUrl());
+			manager.displayImageForCorner(adapter.getView(R.id.iv_item_rank_cover_image), item.getCoverImgUrl());
 			adapter.setText(R.id.tv_item_rank_update_frequency, item.getUpdateFrequency());
 			adapter.setText(R.id.tv_item_rank_first_txt, "1." +item.getTracks().get(0).getFirst()+" - "+item.getTracks().get(0).getSecond());
 			adapter.setText(R.id.tv_item_rank_second_txt, "2." +item.getTracks().get(1).getFirst()+" - "+item.getTracks().get(1).getSecond());
@@ -117,7 +117,7 @@ public class RankingDelegate extends NeteaseDelegate {
 
 		@Override
 		protected void convert(@NonNull BaseViewHolder adapter, TopListBean.ListBean item) {
-			manager.displayImageForCorner((ImageView) adapter.getView(R.id.iv_item_rank_cover_image), item.getCoverImgUrl());
+			manager.displayImageForCorner(adapter.getView(R.id.iv_item_rank_cover_image), item.getCoverImgUrl());
 			adapter.setText(R.id.tv_item_rank_update_frequency, item.getUpdateFrequency());
 			adapter.setText(R.id.tv_item_rank_name, item.getName());
 

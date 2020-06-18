@@ -31,7 +31,7 @@ public class DjRankListBean {
 		return data;
 	}
 
-	public class Data {
+	public static class Data {
 
 		private int total;
 		private long updateTime;

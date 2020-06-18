@@ -4,8 +4,7 @@ package com.imooc.lib_common_ui.delegate.web;
 import android.webkit.JavascriptInterface;
 
 //import com.alibaba.fastjson.JSON;
-import com.imooc.lib_common_ui.delegate.web.event.Event;
-import com.imooc.lib_common_ui.delegate.web.event.EventManager;
+
 
 public class LatteWebInterface {
 

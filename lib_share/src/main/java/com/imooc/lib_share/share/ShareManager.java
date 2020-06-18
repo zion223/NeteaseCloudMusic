@@ -53,7 +53,7 @@ public class ShareManager {
 
 
 	public enum PlatformType{
-		QQ, QZone, WeChat, WechatMoments;
+		QQ, QZone, WeChat, WechatMoments
 	}
 
 }

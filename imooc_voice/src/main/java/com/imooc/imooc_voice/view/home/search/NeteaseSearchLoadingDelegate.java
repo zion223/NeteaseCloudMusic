@@ -25,7 +25,7 @@ public abstract class NeteaseSearchLoadingDelegate extends NeteaseLoadingDelegat
 
 
 	@Override
-	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
+	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) {
 		frameLayout = view.findViewById(com.imooc.lib_common_ui.R.id.loadframe);
 		rootView = LayoutInflater.from(getContext()).inflate(setLoadingViewLayout(), frameLayout, false);
 		addLoadingView();

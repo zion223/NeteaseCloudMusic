@@ -50,6 +50,5 @@ public abstract class Event implements IEvent {
 	}
 
 	public void setWebView(WebView mWebView) {
-		WebView mWebView1 = mWebView;
 	}
 }

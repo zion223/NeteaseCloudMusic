@@ -100,7 +100,7 @@ public class UserDetailDelegate extends NeteaseDelegate {
 	}
 
 	@Override
-	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
+	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) {
 
 		//发私信左边的图片
 		Drawable drawable = getResources().getDrawable(R.drawable.ic_notification_msg_white);

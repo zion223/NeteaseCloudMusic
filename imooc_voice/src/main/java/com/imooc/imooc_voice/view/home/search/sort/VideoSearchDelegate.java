@@ -78,7 +78,7 @@ public class VideoSearchDelegate extends NeteaseSearchLoadingDelegate {
 			//视频描述
 			String description = TimeUtil.getTimeNoYMDH(item.getDurationms()) + " by " + item.getCreator().get(0).getUserName();
 			adapter.setText(R.id.tv_item_video_creator, description);
-			manager.displayImageForCorner((ImageView) adapter.getView(R.id.iv_item_video_cover), item.getCoverUrl());
+			manager.displayImageForCorner(adapter.getView(R.id.iv_item_video_cover), item.getCoverUrl());
 			if(item.getType() == 0){
 				//MV类型  TODO 显示不正常
 				//adapter.setVisible(R.id.tv_item_mv_type, true);

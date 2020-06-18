@@ -82,7 +82,7 @@ public class PlayListSearchDelegate extends NeteaseSearchLoadingDelegate {
 
 			adapter.setText(R.id.tv_item_gedan_content_bottomtext, SearchUtil.getMatchingKeywords(description, keywords));
 			adapter.setVisible(R.id.iv_item_gedan_more, false);
-			manager.displayImageForCorner((ImageView) adapter.getView(R.id.iv_item_gedan_content_img), item.getCoverImgUrl());
+			manager.displayImageForCorner(adapter.getView(R.id.iv_item_gedan_content_img), item.getCoverImgUrl());
 
 		}
 	}

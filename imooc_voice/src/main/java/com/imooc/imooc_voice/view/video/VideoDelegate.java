@@ -32,7 +32,6 @@ public class VideoDelegate extends NeteaseLoadingDelegate {
     private String videoId;
 
     private RecyclerView mRecyclerView;
-    private VideoAdapter mAdapter;
 
     public static VideoDelegate newInstance(long id) {
         final Bundle args = new Bundle();
@@ -72,7 +71,7 @@ public class VideoDelegate extends NeteaseLoadingDelegate {
 
     private void loadVideoView(VideoBean responseObj) {
         List<VideoBean.VideoEntity> datas = responseObj.getDatas();
-        mAdapter = new VideoAdapter(datas);
+        VideoAdapter mAdapter = new VideoAdapter(datas);
         mAdapter.setOnItemClickListener((adapter, view, i) -> {
             VideoBean.VideoEntity entity = (VideoBean.VideoEntity) adapter.getItem(i);
             //视频详情
@@ -140,7 +139,7 @@ public class VideoDelegate extends NeteaseLoadingDelegate {
             //视频标题
             adapter.setText(R.id.tv_item_video_title, item.getData().getTitle());
             //视频作者 头像
-            manager.displayImageForCircle((ImageView) adapter.getView(R.id.iv_item_video_creator_img), item.getData().getCreator().getAvatarurl());
+            manager.displayImageForCircle(adapter.getView(R.id.iv_item_video_creator_img), item.getData().getCreator().getAvatarurl());
             //视频作者 用户名
             adapter.setText(R.id.tv_item_video_creator_name, item.getData().getCreator().getNickname());
             //点赞次数

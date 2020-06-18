@@ -64,8 +64,8 @@ public class ArtistDetailDelegate extends NeteaseDelegate {
 
 	private String artistId;
 	private MultiFragmentPagerAdapter mPageAdapter;
-	private List<NeteaseDelegate> mDelegateList = new ArrayList<>();
-	private static CharSequence[] mTitleDataList = new CharSequence[4];
+	private final List<NeteaseDelegate> mDelegateList = new ArrayList<>();
+	private static final CharSequence[] mTitleDataList = new CharSequence[4];
 
 	/**
 	 * 	主页 热门歌曲 简介
@@ -96,7 +96,7 @@ public class ArtistDetailDelegate extends NeteaseDelegate {
 	}
 
 	@Override
-	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
+	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) {
 		mTitleDataList[0] = "主页";
 		mTitleDataList[1] = "歌曲";
 

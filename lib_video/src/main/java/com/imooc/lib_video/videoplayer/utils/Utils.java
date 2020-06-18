@@ -61,19 +61,12 @@ public class Utils {
 		ConnectivityManager connectivityManager =
 				(ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo info = connectivityManager.getActiveNetworkInfo();
-		if (info != null && info.isConnected() && info.getType() == ConnectivityManager.TYPE_WIFI) {
-			return true;
-		}
-		return false;
+		return info != null && info.isConnected() && info.getType() == ConnectivityManager.TYPE_WIFI;
 	}
 
 	//decide can autoplay the ad
 	public static boolean canAutoPlay(Context context) {
-		if (isWifiConnected(context)) {
-			return true;
-		} else {
-			return false;
-		}
+		return isWifiConnected(context);
 	}
 
 	public static DisplayMetrics getDisplayMetrics(Context context) {
@@ -107,7 +100,7 @@ public class Utils {
 	private static boolean canTelephone(Context context) {
 		TelephonyManager telephony =
 				(TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-		return (telephony.getPhoneType() == TelephonyManager.PHONE_TYPE_NONE) ? false : true;
+		return telephony.getPhoneType() != TelephonyManager.PHONE_TYPE_NONE;
 	}
 
 	public static boolean containString(String source, String destation) {
@@ -116,10 +109,7 @@ public class Utils {
 			return false;
 		}
 
-		if (source.contains(destation)) {
-			return true;
-		}
-		return false;
+		return source.contains(destation);
 	}
 
 	/**
@@ -191,6 +181,7 @@ public class Utils {
 			try {
 				out.close();
 			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
 		return true;

@@ -47,7 +47,7 @@ public class WebContainerDelegate extends NeteaseDelegate {
 	}
 
 	@Override
-	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
+	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) {
 		final WebDelegateImpl webDelegate = WebDelegateImpl.create(mUrl);
 		webDelegate.setListener(title -> {
 			mTvTitle.setText(title);

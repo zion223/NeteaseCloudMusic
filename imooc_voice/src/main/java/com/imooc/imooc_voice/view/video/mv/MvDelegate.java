@@ -40,7 +40,7 @@ public class MvDelegate extends NeteaseDelegate {
 	}
 
 	@Override
-	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
+	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) {
 
 		//排行榜信息
 		RequestCenter.getMvTop(new DisposeDataListener() {

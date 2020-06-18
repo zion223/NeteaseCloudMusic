@@ -461,7 +461,7 @@ public class DjProgramTopListBean {
 
 	}
 
-	public class MainSong {
+	public static class MainSong {
 
 		private String name;
 		private long id;

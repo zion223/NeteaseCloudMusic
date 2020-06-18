@@ -41,7 +41,7 @@ public class RadioSortDelegate extends NeteaseDelegate {
 	}
 
 	@Override
-	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
+	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) {
 		RequestCenter.getRadioCatelist(new DisposeDataListener() {
 			@Override
 			public void onSuccess(Object responseObj) {
@@ -90,7 +90,7 @@ public class RadioSortDelegate extends NeteaseDelegate {
 		@Override
 		protected void convert(@NonNull BaseViewHolder adapter, RadioSortEntity item) {
 			adapter.setText(R.id.item_radio_sort_name, item.t.getName());
-			ImageLoaderManager.getInstance().displayImageForView((ImageView) adapter.getView(R.id.iv_radio_sort_img), item.t.getPic56x56Url());
+			ImageLoaderManager.getInstance().displayImageForView(adapter.getView(R.id.iv_radio_sort_img), item.t.getPic56x56Url());
 		}
 	}
 

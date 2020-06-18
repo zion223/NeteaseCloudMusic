@@ -94,7 +94,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 	}
 
 	@Override
-	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
+	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) {
 
 		albumSongManager = new GridLayoutManager(getContext(), 3);
 		mRecyclerViewAlbumSong.setLayoutManager(albumSongManager);
@@ -411,7 +411,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 		@Override
 		protected void convert(@NonNull BaseViewHolder adapter, AlbumOrSongBean entity) {
 			//圆角图片
-			manager.displayImageForCorner((ImageView) adapter.getView(R.id.iv_item_album_song), entity.getPicUrl());
+			manager.displayImageForCorner(adapter.getView(R.id.iv_item_album_song), entity.getPicUrl());
 			adapter.setText(R.id.tv_item_album_song_name, entity.getTopText());
 			adapter.setText(R.id.tv_item_album_song_artist, entity.getBottomText());
 		}

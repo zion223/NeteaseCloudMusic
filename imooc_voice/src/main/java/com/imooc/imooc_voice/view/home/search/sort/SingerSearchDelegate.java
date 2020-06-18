@@ -74,7 +74,7 @@ public class SingerSearchDelegate extends NeteaseSearchLoadingDelegate {
 			if(item.getAlias() != null && item.getAlias().size() != 0){
 				adapter.setText(R.id.tv_singer_alias, "("+SearchUtil.getMatchingKeywords(item.getAlias().get(0),keywords)+")");
 			}
-			ImageLoaderManager.getInstance().displayImageForCircle((ImageView) adapter.getView(R.id.iv_singer_avatar), item.getPicUrl());
+			ImageLoaderManager.getInstance().displayImageForCircle(adapter.getView(R.id.iv_singer_avatar), item.getPicUrl());
 
 		}
 	}

@@ -113,7 +113,7 @@ public class RadioPayDelegate extends NeteaseLoadingDelegate {
 			baseViewHolder.setText(R.id.tv_radio_pay_title, bean.getName());
 			baseViewHolder.setText(R.id.tv_radio_pay_desc, bean.getRcmdText());
 			baseViewHolder.setText(R.id.tv_radio_pay_price, "￥" + String.valueOf(bean.getOriginalPrice()).substring(0, String.valueOf(bean.getOriginalPrice()).length() - 2));
-			manager.displayImageForCorner((ImageView)baseViewHolder.getView(R.id.iv_radio_pay_img), bean.getPicUrl(),5);
+			manager.displayImageForCorner(baseViewHolder.getView(R.id.iv_radio_pay_img), bean.getPicUrl(),5);
 		}
 	}
 }

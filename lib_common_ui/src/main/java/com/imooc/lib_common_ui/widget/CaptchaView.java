@@ -52,11 +52,11 @@ public class CaptchaView extends RelativeLayout {
 	}
 
 	private void initView(View view) {
-		tv_code1 = (TextView) view.findViewById(R.id.tv_code1);
-		tv_code2 = (TextView) view.findViewById(R.id.tv_code2);
-		tv_code3 = (TextView) view.findViewById(R.id.tv_code3);
-		tv_code4 = (TextView) view.findViewById(R.id.tv_code4);
-		et_code = (EditText) view.findViewById(R.id.et_code);
+		tv_code1 = view.findViewById(R.id.tv_code1);
+		tv_code2 = view.findViewById(R.id.tv_code2);
+		tv_code3 = view.findViewById(R.id.tv_code3);
+		tv_code4 = view.findViewById(R.id.tv_code4);
+		et_code = view.findViewById(R.id.et_code);
 		v1 = view.findViewById(R.id.v1);
 		v2 = view.findViewById(R.id.v2);
 		v3 = view.findViewById(R.id.v3);

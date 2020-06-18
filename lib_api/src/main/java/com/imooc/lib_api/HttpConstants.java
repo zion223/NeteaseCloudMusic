@@ -7,199 +7,199 @@ public class HttpConstants {
 
 	private static final String ROOT_URL = "http://62.234.57.125:3000";
 
-	static String LOGIN = ROOT_URL + "/login/cellphone";
+	static final String LOGIN = ROOT_URL + "/login/cellphone";
 
-	static String SIGNIN = ROOT_URL + "/daily_signin";
+	static final String SIGNIN = ROOT_URL + "/daily_signin";
 
-	static String SONG_URL = ROOT_URL + "/song/url";
+	static final String SONG_URL = ROOT_URL + "/song/url";
 
-	static String CAPTCHA_SEND = ROOT_URL + "/captcha/sent";
+	static final String CAPTCHA_SEND = ROOT_URL + "/captcha/sent";
 
-	static String CAPTCHA_VERITY = ROOT_URL + "/captcha/verify";
+	static final String CAPTCHA_VERITY = ROOT_URL + "/captcha/verify";
 
-	static String REGISTER = ROOT_URL + "/register/cellphone";
+	static final String REGISTER = ROOT_URL + "/register/cellphone";
 
-	static String LOGOUT = ROOT_URL + "/logout";
+	static final String LOGOUT = ROOT_URL + "/logout";
 
-	static String CREATE_PLAYLIST = ROOT_URL + "/playlist/create";
+	static final String CREATE_PLAYLIST = ROOT_URL + "/playlist/create";
 
-	static String DELETE_PLAYLIST = ROOT_URL + "/playlist/delete";
+	static final String DELETE_PLAYLIST = ROOT_URL + "/playlist/delete";
 
-	static String PLAYLIST_TRACK = ROOT_URL + "/playlist/tracks";
+	static final String PLAYLIST_TRACK = ROOT_URL + "/playlist/tracks";
 
-	static String FOLLOW = ROOT_URL + "/follow";
+	static final String FOLLOW = ROOT_URL + "/follow";
 
-	static String PLAYLIST_SUBSCRIBE = ROOT_URL + "/playlist/subscribe";
+	static final String PLAYLIST_SUBSCRIBE = ROOT_URL + "/playlist/subscribe";
 
-	static String ALBUM_SUBSCRIBE = ROOT_URL + "/album/sub";
+	static final String ALBUM_SUBSCRIBE = ROOT_URL + "/album/sub";
 
-	static String ALBUM_DYNAMIC = ROOT_URL + "/album/detail/dynamic";
+	static final String ALBUM_DYNAMIC = ROOT_URL + "/album/detail/dynamic";
 
-	static String USER_SUBCOUNT = ROOT_URL + "/user/subcount";
+	static final String USER_SUBCOUNT = ROOT_URL + "/user/subcount";
 
-	static String USER_FOLLOWER = ROOT_URL + "/user/follows";
+	static final String USER_FOLLOWER = ROOT_URL + "/user/follows";
 
-	static String USER_FOLLOWED = ROOT_URL + "/user/followeds";
+	static final String USER_FOLLOWED = ROOT_URL + "/user/followeds";
 
-	static String BANNER = ROOT_URL + "/banner";
+	static final String BANNER = ROOT_URL + "/banner";
 
-	static String RADIO_BANNER = ROOT_URL + "/dj/banner";
+	static final String RADIO_BANNER = ROOT_URL + "/dj/banner";
 
-	static String RECOMMAND_PLAYLIST = ROOT_URL + "/recommend/resource";
+	static final String RECOMMAND_PLAYLIST = ROOT_URL + "/recommend/resource";
 
-	static String DAILY_RECOMMAND = ROOT_URL + "/recommend/songs";
+	static final String DAILY_RECOMMAND = ROOT_URL + "/recommend/songs";
 
-	static String TOP_LIST = ROOT_URL + "/toplist";
+	static final String TOP_LIST = ROOT_URL + "/toplist";
 
-	static String TOP_LIST_DETAIL = ROOT_URL + "/toplist/detail";
+	static final String TOP_LIST_DETAIL = ROOT_URL + "/toplist/detail";
 
-	static String RADIO_RECOMMEND = ROOT_URL + "/dj/recommend";
+	static final String RADIO_RECOMMEND = ROOT_URL + "/dj/recommend";
 
-	static String DJ_RECOMMEND_TYPE = ROOT_URL + "/dj/recommend/type";
+	static final String DJ_RECOMMEND_TYPE = ROOT_URL + "/dj/recommend/type";
 
-	static String RECOMMEND_PLAY_LIST = ROOT_URL + "/top/playlist";
+	static final String RECOMMEND_PLAY_LIST = ROOT_URL + "/top/playlist";
 
-	static String RECOMMEND_PLAY_LIST_HIGHQUALITY = ROOT_URL + "/top/playlist/highquality";
+	static final String RECOMMEND_PLAY_LIST_HIGHQUALITY = ROOT_URL + "/top/playlist/highquality";
 
-	static String CAT_LIST = ROOT_URL + "/playlist/catlist";
+	static final String CAT_LIST = ROOT_URL + "/playlist/catlist";
 
-	static String PLAY_LIST_DETAIL = ROOT_URL + "/playlist/detail";
+	static final String PLAY_LIST_DETAIL = ROOT_URL + "/playlist/detail";
 
-	static String ALBUM_DETAIL = ROOT_URL + "/album";
+	static final String ALBUM_DETAIL = ROOT_URL + "/album";
 
-	static String TOP_ALBUM = ROOT_URL + "/top/album";
+	static final String TOP_ALBUM = ROOT_URL + "/top/album";
 
-	static String NEW_ALBUM = ROOT_URL + "/album/newest";
+	static final String NEW_ALBUM = ROOT_URL + "/album/newest";
 
-	static String TOP_SONG = ROOT_URL + "/top/song";
+	static final String TOP_SONG = ROOT_URL + "/top/song";
 
-	static String MUSIC_CAN_PLAY = ROOT_URL + "/check/music";
+	static final String MUSIC_CAN_PLAY = ROOT_URL + "/check/music";
 
-	static String USER_PLAY_LIST = ROOT_URL + "/user/playlist";
+	static final String USER_PLAY_LIST = ROOT_URL + "/user/playlist";
 
-	static String USER_EVENT = ROOT_URL + "/user/event";
+	static final String USER_EVENT = ROOT_URL + "/user/event";
 
-	static String USER_RECORD = ROOT_URL + "/user/record";
+	static final String USER_RECORD = ROOT_URL + "/user/record";
 
-	static String USER_DETAIL = ROOT_URL + "/user/detail";
+	static final String USER_DETAIL = ROOT_URL + "/user/detail";
 
-	static String SEARCH_HOT = ROOT_URL + "/search/hot/detail";
+	static final String SEARCH_HOT = ROOT_URL + "/search/hot/detail";
 
-	static String SEARCH = ROOT_URL + "/search";
+	static final String SEARCH = ROOT_URL + "/search";
 
-	static String SINGER_HOT_SONG = ROOT_URL + "/artists";
+	static final String SINGER_HOT_SONG = ROOT_URL + "/artists";
 
-	static String SINGER_ALBUM = ROOT_URL + "/artist/album";
+	static final String SINGER_ALBUM = ROOT_URL + "/artist/album";
 
-	static String SINGER_VIDEO = ROOT_URL + "/artist/mv";
+	static final String SINGER_VIDEO = ROOT_URL + "/artist/mv";
 
-	static String SINGER_DESC = ROOT_URL + "/artist/desc";
+	static final String SINGER_DESC = ROOT_URL + "/artist/desc";
 
-	static String SINGER_LIST = ROOT_URL + "/artist/list";
+	static final String SINGER_LIST = ROOT_URL + "/artist/list";
 
-	static String HOT_SINGER = ROOT_URL + "/top/artists";
+	static final String HOT_SINGER = ROOT_URL + "/top/artists";
 
-	static String SINGER_SIMI = ROOT_URL + "/simi/artist";
+	static final String SINGER_SIMI = ROOT_URL + "/simi/artist";
 
-	static String LIKE_LIST = ROOT_URL + "/likelist";
+	static final String LIKE_LIST = ROOT_URL + "/likelist";
 
-	static String SONG_DETAIL = ROOT_URL + "/song/detail";
+	static final String SONG_DETAIL = ROOT_URL + "/song/detail";
 
-	static String LYRIC = ROOT_URL + "/lyric";
+	static final String LYRIC = ROOT_URL + "/lyric";
 
-	static String LIKE_MUSIC = ROOT_URL + "/like";
+	static final String LIKE_MUSIC = ROOT_URL + "/like";
 
-	static String MUSIC_COMMENT = ROOT_URL + "/comment/music";
+	static final String MUSIC_COMMENT = ROOT_URL + "/comment/music";
 
-	static String COMMENT_LIKE = ROOT_URL + "/comment/like";
+	static final String COMMENT_LIKE = ROOT_URL + "/comment/like";
 
-	static String COMMENT_HOT = ROOT_URL + "/comment/hot";
+	static final String COMMENT_HOT = ROOT_URL + "/comment/hot";
 
-	static String RESOURCE_LIKE = ROOT_URL + "/resource/like";
+	static final String RESOURCE_LIKE = ROOT_URL + "/resource/like";
 
-	static String INTELLIGANCE_LIST = ROOT_URL + "/playmode/intelligence/list";
+	static final String INTELLIGANCE_LIST = ROOT_URL + "/playmode/intelligence/list";
 
-	static String ALBUM_SUBLIST = ROOT_URL + "/album/sublist";
+	static final String ALBUM_SUBLIST = ROOT_URL + "/album/sublist";
 
-	static String ARTIST_SUBLIST = ROOT_URL + "/artist/sublist";
+	static final String ARTIST_SUBLIST = ROOT_URL + "/artist/sublist";
 
-	static String MV_SUBLIST = ROOT_URL + "/mv/sublist";
+	static final String MV_SUBLIST = ROOT_URL + "/mv/sublist";
 
-	static String PERSONAL_FM = ROOT_URL + "/personal_fm";
+	static final String PERSONAL_FM = ROOT_URL + "/personal_fm";
 
-	static String MAIN_EVENT = ROOT_URL + "/event";
+	static final String MAIN_EVENT = ROOT_URL + "/event";
 
-	static String COMMENT_PLAYLIST = ROOT_URL + "/comment/playlist";
+	static final String COMMENT_PLAYLIST = ROOT_URL + "/comment/playlist";
 
-	static String COMMENT_ALBUM = ROOT_URL + "/comment/album";
+	static final String COMMENT_ALBUM = ROOT_URL + "/comment/album";
 
-	static String PAY_GIFT = ROOT_URL + "/dj/paygift";
+	static final String PAY_GIFT = ROOT_URL + "/dj/paygift";
 
-	static String DJ_RECOMMEND = ROOT_URL + "/dj/recommend";
+	static final String DJ_RECOMMEND = ROOT_URL + "/dj/recommend";
 
-	static String DJ_CATLIST = ROOT_URL + "/dj/catelist";
+	static final String DJ_CATLIST = ROOT_URL + "/dj/catelist";
 
-	static String DJ_SUB = ROOT_URL + "/dj/sub";
+	static final String DJ_SUB = ROOT_URL + "/dj/sub";
 
-	static String DJ_TOPLIST = ROOT_URL + "/dj/toplist";
+	static final String DJ_TOPLIST = ROOT_URL + "/dj/toplist";
 
-	static String DJ_TOPLIST_HOURS = ROOT_URL + "/dj/toplist/hours";
+	static final String DJ_TOPLIST_HOURS = ROOT_URL + "/dj/toplist/hours";
 
-	static String DJ_TOPLIST_NEWCOMER = ROOT_URL + "/dj/toplist/newcomer";
+	static final String DJ_TOPLIST_NEWCOMER = ROOT_URL + "/dj/toplist/newcomer";
 
-	static String DJ_TOPLIST_POPULAR = ROOT_URL + "/dj/toplist/popular";
+	static final String DJ_TOPLIST_POPULAR = ROOT_URL + "/dj/toplist/popular";
 
-	static String ARTIST_SUB = ROOT_URL + "/artist/sub";
+	static final String ARTIST_SUB = ROOT_URL + "/artist/sub";
 
-	static String DJ_SUB_LIST = ROOT_URL + "/dj/sublist";
+	static final String DJ_SUB_LIST = ROOT_URL + "/dj/sublist";
 
-	static String DJ_PROGRAM = ROOT_URL + "/dj/program";
+	static final String DJ_PROGRAM = ROOT_URL + "/dj/program";
 
-	static String DJ_PROGRAM_TOPLIST_HOURS = ROOT_URL + "/dj/program/toplist/hours";
+	static final String DJ_PROGRAM_TOPLIST_HOURS = ROOT_URL + "/dj/program/toplist/hours";
 
-	static String DJ_PROGRAM_TOPLIST = ROOT_URL + "/dj/program/toplist";
+	static final String DJ_PROGRAM_TOPLIST = ROOT_URL + "/dj/program/toplist";
 
-	static String DJ_DETAIL = ROOT_URL + "/dj/detail";
+	static final String DJ_DETAIL = ROOT_URL + "/dj/detail";
 
-	static String VIDEO_GROUP = ROOT_URL + "/video/group/list";
+	static final String VIDEO_GROUP = ROOT_URL + "/video/group/list";
 
-	static String VIDEO_TAB = ROOT_URL + "/video/group";
+	static final String VIDEO_TAB = ROOT_URL + "/video/group";
 
-	static String VIDEO_RECOMMEND = ROOT_URL + "/video/timeline/recommend";
+	static final String VIDEO_RECOMMEND = ROOT_URL + "/video/timeline/recommend";
 
-	static String VIDEO_DETAIL = ROOT_URL + "/video/detail";
+	static final String VIDEO_DETAIL = ROOT_URL + "/video/detail";
 
-	static String VIDEO_SUB = ROOT_URL + "/video/sub";
+	static final String VIDEO_SUB = ROOT_URL + "/video/sub";
 
-	static String MV_DETAIL = ROOT_URL + "/mv/detail";
+	static final String MV_DETAIL = ROOT_URL + "/mv/detail";
 
-	static String MV_SUB = ROOT_URL + "/mv/sub";
+	static final String MV_SUB = ROOT_URL + "/mv/sub";
 
-	static String TOP_MV = ROOT_URL + "/top/mv";
+	static final String TOP_MV = ROOT_URL + "/top/mv";
 
-	static String VIDEO_COMMENT = ROOT_URL + "/comment/video";
+	static final String VIDEO_COMMENT = ROOT_URL + "/comment/video";
 
-	static String MV_COMMENT = ROOT_URL + "/comment/mv";
+	static final String MV_COMMENT = ROOT_URL + "/comment/mv";
 
-	static String VIDEO_RELATED = ROOT_URL + "/related/allvideo";
+	static final String VIDEO_RELATED = ROOT_URL + "/related/allvideo";
 
-	static String VIDEO_URL = ROOT_URL + "/video/url";
+	static final String VIDEO_URL = ROOT_URL + "/video/url";
 
-	static String MV_URL = ROOT_URL + "/mv/url";
+	static final String MV_URL = ROOT_URL + "/mv/url";
 
-	static String MV_ALL = ROOT_URL + "/mv/all";
+	static final String MV_ALL = ROOT_URL + "/mv/all";
 
-	static String MV_FIRST = ROOT_URL + "/mv/first";
+	static final String MV_FIRST = ROOT_URL + "/mv/first";
 
-	static String MSG_PRIVATE = ROOT_URL + "/msg/private";
+	static final String MSG_PRIVATE = ROOT_URL + "/msg/private";
 
-	static String MSG_COMMENT = ROOT_URL + "/msg/comments";
+	static final String MSG_COMMENT = ROOT_URL + "/msg/comments";
 
-	static String MSG_NOTICE = ROOT_URL + "/msg/notices";
+	static final String MSG_NOTICE = ROOT_URL + "/msg/notices";
 
-	static String USER_CLOUD = ROOT_URL + "/user/cloud";
+	static final String USER_CLOUD = ROOT_URL + "/user/cloud";
 
-	static String ARTIST_PIC = "http://music.163.com/api/search/get/web";
+	static final String ARTIST_PIC = "http://music.163.com/api/search/get/web";
 
 
 	public static String encode(String str) {

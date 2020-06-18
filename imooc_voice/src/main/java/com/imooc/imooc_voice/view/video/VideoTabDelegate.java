@@ -50,7 +50,7 @@ public class VideoTabDelegate extends NeteaseDelegate {
 	}
 
 	@Override
-	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
+	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) {
 		RequestCenter.getVideoGroup(new DisposeDataListener() {
 			@Override
 			public void onSuccess(Object responseObj) {

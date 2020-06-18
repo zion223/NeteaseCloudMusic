@@ -65,7 +65,7 @@ public class PersistentCookieStore implements CookieStore {
 		// Load any previously stored cookies into the store
 		Map<String, ?> prefsMap = cookiePrefs.getAll();
 		for (Map.Entry<String, ?> entry : prefsMap.entrySet()) {
-			if (((String) entry.getValue()) != null && !((String) entry.getValue()).startsWith(COOKIE_NAME_PREFIX)) {
+			if (entry.getValue() != null && !((String) entry.getValue()).startsWith(COOKIE_NAME_PREFIX)) {
 				String[] cookieNames = TextUtils.split((String) entry.getValue(), ",");
 				for (String name : cookieNames) {
 					String encodedCookie = cookiePrefs.getString(COOKIE_NAME_PREFIX + name, null);

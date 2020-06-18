@@ -52,8 +52,8 @@ public class ArtistSortDelegate extends NeteaseDelegate {
 	private int topPosition = -1;
 	private int bottomPosition = -1;
 
-	private TextView[] mTopTextViewArray = new TextView[5];
-	private TextView[] mBottomTextViewArray = new TextView[4];
+	private final TextView[] mTopTextViewArray = new TextView[5];
+	private final TextView[] mBottomTextViewArray = new TextView[4];
 
 	private ArtistSortAdapter mAdapter;
 
@@ -63,7 +63,7 @@ public class ArtistSortDelegate extends NeteaseDelegate {
 	}
 
 	@Override
-	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
+	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) {
 
 		initSortView();
 
@@ -183,14 +183,13 @@ public class ArtistSortDelegate extends NeteaseDelegate {
 			//是否已关注
 			if(item.isFollowed()){
 				adapter.setVisible(R.id.ll_singer_followed, true);
-				adapter.setVisible(R.id.ll_singer_followed, false);
 			}else{
 				adapter.setVisible(R.id.ll_singer_follow, true);
-				adapter.setVisible(R.id.ll_singer_followed, false);
 			}
+			adapter.setVisible(R.id.ll_singer_followed, false);
 			adapter.setText(R.id.tv_singer_name,item.getName());
 
-			ImageLoaderManager.getInstance().displayImageForCircle((ImageView) adapter.getView(R.id.iv_singer_avatar), item.getPicUrl());
+			ImageLoaderManager.getInstance().displayImageForCircle(adapter.getView(R.id.iv_singer_avatar), item.getPicUrl());
 			//取消关注
 			adapter.setOnClickListener(R.id.ll_singer_followed, new View.OnClickListener() {
 				@Override

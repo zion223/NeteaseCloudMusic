@@ -54,7 +54,7 @@ public class MvSortDelegate extends NeteaseDelegate {
 	}
 
 	@Override
-	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) throws Exception {
+	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) {
 		mSortDialog = new XPopup.Builder(getContext())
 				.offsetY(100)
 				.popupAnimation(PopupAnimation.TranslateFromTop)

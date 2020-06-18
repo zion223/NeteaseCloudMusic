@@ -57,7 +57,7 @@ public class ArtistJson {
 		}
 	}
 
-	public class info{
+	public static class info{
 		long id;
 		String name;
 		String picUrl;

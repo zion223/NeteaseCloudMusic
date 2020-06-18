@@ -140,18 +140,17 @@ public class ImageLoaderManager {
 								.map(new Function<Bitmap, Drawable>() {
 									@Override
 									public Drawable apply(Bitmap bitmap) {
-										Drawable drawable = new BitmapDrawable(
+										return new BitmapDrawable(
 												//毛玻璃效果
 												ImageUtils.doBlur(res, radius, true)
 										);
-										return drawable;
 									}
 								})
 								.subscribeOn(Schedulers.io())
 								.observeOn(AndroidSchedulers.mainThread())
 								.subscribe(new Consumer<Drawable>() {
 									@Override
-									public void accept(Drawable drawable) throws Exception {
+									public void accept(Drawable drawable) {
 										group.setBackground(drawable);
 									}
 								});
@@ -180,7 +179,7 @@ public class ImageLoaderManager {
 								.observeOn(AndroidSchedulers.mainThread())
 								.subscribe(new Consumer<Drawable>() {
 									@Override
-									public void accept(Drawable drawable) throws Exception {
+									public void accept(Drawable drawable) {
 										view.setBackground(drawable);
 									}
 								});

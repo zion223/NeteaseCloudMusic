@@ -26,7 +26,7 @@ public class ResponseEntityToModule {
 	public static Object parseJsonObjectToModule(JSONObject jsonObj, Class<?> clazz) {
 		Object moduleObj = null;
 		try {
-			moduleObj = (Object) clazz.newInstance();
+			moduleObj = clazz.newInstance();
 			setFieldValue(moduleObj, jsonObj, clazz);
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
@@ -136,7 +136,7 @@ public class ResponseEntityToModule {
 	}
 
 	private static boolean isWrappedPrimitive(Class<?> type) {
-		if (type.getName().equals(Boolean.class.getName())
+		return type.getName().equals(Boolean.class.getName())
 				|| type.getName()
 				.equals(Byte.class.getName())
 				|| type.getName().equals(Character.class.getName())
@@ -144,9 +144,6 @@ public class ResponseEntityToModule {
 				|| type.getName().equals(Integer.class.getName())
 				|| type.getName().equals(Long.class.getName())
 				|| type.getName().equals(Float.class.getName())
-				|| type.getName().equals(Double.class.getName())) {
-			return true;
-		}
-		return false;
+				|| type.getName().equals(Double.class.getName());
 	}
 }

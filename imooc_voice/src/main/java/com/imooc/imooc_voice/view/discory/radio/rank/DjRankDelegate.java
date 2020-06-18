@@ -122,12 +122,12 @@ public class DjRankDelegate extends NeteaseLoadingDelegate implements BaseQuickA
 		if(baseQuickAdapter.getItem(i) instanceof DjRankListBean.List){
 			//最热主播数据
 			DjRankListBean.List entity = (DjRankListBean.List) baseQuickAdapter.getItem(i);
-			getParentDelegate().getSupportDelegate().start(UserDetailDelegate.newInstance(entity.getId()));;
+			getParentDelegate().getSupportDelegate().start(UserDetailDelegate.newInstance(entity.getId()));
 		}else{
 			//排行榜个人详情
 			DjToplistEntity entity = (DjToplistEntity) baseQuickAdapter.getItem(i);
 			if(entity.t != null){
-				getParentDelegate().getSupportDelegate().start(UserDetailDelegate.newInstance(entity.t.getId()));;
+				getParentDelegate().getSupportDelegate().start(UserDetailDelegate.newInstance(entity.t.getId()));
 			}else{
 				//点击了头部 查看排行榜详情 TODO
 			}
@@ -158,7 +158,7 @@ public class DjRankDelegate extends NeteaseLoadingDelegate implements BaseQuickA
             //用户身份
             SearchUtil.setUserTypeImg(entity.getUserType(), R.id.iv_item_rank_user_tag, adapter);
 
-            manager.displayImageForCircle((ImageView) adapter.getView(R.id.iv_item_rank_123_avatar), entity.getAvatarUrl());
+            manager.displayImageForCircle(adapter.getView(R.id.iv_item_rank_123_avatar), entity.getAvatarUrl());
 
         }
     }
@@ -199,7 +199,7 @@ public class DjRankDelegate extends NeteaseLoadingDelegate implements BaseQuickA
 				((TextView)adapter.getView(R.id.tv_item_dj_rank_rank)).setTypeface(Typeface.DEFAULT);
 			}
             adapter.setText(R.id.tv_item_dj_rank_rank, String.valueOf(list.getRank()));
-			manager.displayImageForCircle((ImageView) adapter.getView(R.id.iv_item_dj_avatar), list.getAvatarUrl());
+			manager.displayImageForCircle(adapter.getView(R.id.iv_item_dj_avatar), list.getAvatarUrl());
 
         }
     }

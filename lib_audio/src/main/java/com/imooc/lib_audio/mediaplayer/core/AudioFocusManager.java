@@ -7,8 +7,8 @@ public class AudioFocusManager implements AudioManager.OnAudioFocusChangeListene
 
 	private static final String TAG = AudioFocusManager.class.getSimpleName();
 
-	private AudioFocusListener mAudioFocusListener;
-	private AudioManager audioManager;
+	private final AudioFocusListener mAudioFocusListener;
+	private final AudioManager audioManager;
 
 	public AudioFocusManager(Context context, AudioFocusListener listener) {
 		audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);

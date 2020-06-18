@@ -10,8 +10,7 @@ public class GsonUtil {
     private static final String TAG = "GsonUtil";
 
     public static String toJson(Object obj) {
-        String result = createGson().toJson(obj);
-        return result;
+        return createGson().toJson(obj);
     }
 
     private static Gson createGson() {

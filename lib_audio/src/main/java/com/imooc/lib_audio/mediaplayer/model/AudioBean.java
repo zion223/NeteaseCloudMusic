@@ -1,13 +1,13 @@
 package com.imooc.lib_audio.mediaplayer.model;
 
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Keep;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Unique;
 
 import java.io.Serializable;
+import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * 1.歌曲实体

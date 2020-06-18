@@ -84,10 +84,9 @@ public class MusicUtils implements IConstants {
                 + " from audio_meta where (1=1 )" + " and " + Media.SIZE + " > " + FILTER_SIZE +
                 " and " + Media.DURATION + " > " + FILTER_DURATION +
                 ")";
-        List<ArtistInfo> list = getArtistList(cr.query(uri, proj_artist,
-                where, null, PreferencesUtil.getInstance(context).getArtistSortOrder()));
 
-        return list;
+        return getArtistList(cr.query(uri, proj_artist,
+                where, null, PreferencesUtil.getInstance(context).getArtistSortOrder()));
 
     }
 
@@ -140,10 +139,9 @@ public class MusicUtils implements IConstants {
         switch (from) {
             //本地歌曲
             case START_FROM_LOCAL:
-                ArrayList<MusicInfo> list3 = getMusicListCursor(cr.query(uri, proj_music,
+                return getMusicListCursor(cr.query(uri, proj_music,
                         select.toString(), null,
                         songSortOrder));
-                return list3;
             //从歌手
             case START_FROM_ARTIST:
                 select.append(" and " + Media.ARTIST_ID + " = " + id);
@@ -340,7 +338,7 @@ public class MusicUtils implements IConstants {
 
     public static Uri getAlbumUri(Context context, long musicId) {
         ContentResolver cr = context.getContentResolver();
-        Cursor cursor = cr.query(Media.EXTERNAL_CONTENT_URI, proj_music, "_id =" + String.valueOf(musicId), null, null);
+        Cursor cursor = cr.query(Media.EXTERNAL_CONTENT_URI, proj_music, "_id =" + musicId, null, null);
         long id = -3;
         if (cursor == null) {
             return null;
@@ -355,7 +353,7 @@ public class MusicUtils implements IConstants {
 
     public static String getAlbumdata(Context context, long musicid) {
         ContentResolver cr = context.getContentResolver();
-        Cursor cursor = cr.query(Media.EXTERNAL_CONTENT_URI, proj_music, "_id = " + String.valueOf(musicid), null, null);
+        Cursor cursor = cr.query(Media.EXTERNAL_CONTENT_URI, proj_music, "_id = " + musicid, null, null);
         if (cursor == null) {
             return null;
         }
@@ -365,7 +363,7 @@ public class MusicUtils implements IConstants {
         }
 
         if (albumId != -1) {
-            cursor = cr.query(Albums.EXTERNAL_CONTENT_URI, proj_album, Albums._ID + " = " + String.valueOf(albumId), null, null);
+            cursor = cr.query(Albums.EXTERNAL_CONTENT_URI, proj_album, Albums._ID + " = " + albumId, null, null);
         }
         if (cursor == null) {
             return null;
@@ -382,7 +380,7 @@ public class MusicUtils implements IConstants {
 
     public static ArtistInfo getArtistinfo(Context context, long id) {
         ContentResolver cr = context.getContentResolver();
-        Cursor cursor = cr.query(MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI, proj_artist, "_id =" + String.valueOf(id), null, null);
+        Cursor cursor = cr.query(MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI, proj_artist, "_id =" + id, null, null);
         if (cursor == null) {
             return null;
         }
@@ -398,7 +396,7 @@ public class MusicUtils implements IConstants {
 
     public static AlbumInfo getAlbumInfo(Context context, long albumId) {
         ContentResolver cr = context.getContentResolver();
-        Cursor cursor = cr.query(Albums.EXTERNAL_CONTENT_URI, proj_album, "_id =" + String.valueOf(albumId), null, null);
+        Cursor cursor = cr.query(Albums.EXTERNAL_CONTENT_URI, proj_album, "_id =" + albumId, null, null);
         if (cursor == null) {
             return null;
         }
@@ -415,7 +413,7 @@ public class MusicUtils implements IConstants {
 
     public static MusicInfo getMusicInfo(Context context, long id) {
         ContentResolver cr = context.getContentResolver();
-        Cursor cursor = cr.query(Media.EXTERNAL_CONTENT_URI, proj_music, "_id = " + String.valueOf(id), null, null);
+        Cursor cursor = cr.query(Media.EXTERNAL_CONTENT_URI, proj_music, "_id = " + id, null, null);
         if (cursor == null) {
             return null;
         }
@@ -439,9 +437,8 @@ public class MusicUtils implements IConstants {
             String filePath = cursor.getString(cursor
                     .getColumnIndex(Media.DATA));
             music.data = filePath;
-            String folderPath = filePath.substring(0,
+            music.folder = filePath.substring(0,
                     filePath.lastIndexOf(File.separator));
-            music.folder = folderPath;
             music.sort = Pinyin.toPinyin(music.musicName.charAt(0)).substring(0, 1).toUpperCase();
         }
         cursor.close();

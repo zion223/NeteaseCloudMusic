@@ -4,17 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -125,7 +119,7 @@ public class StatusBarUtil {
 				window.setAttributes(lp);
 				result = true;
 			} catch (Exception e) {
-
+				e.printStackTrace();
 			}
 		}
 		return result;
@@ -170,7 +164,7 @@ public class StatusBarUtil {
 					}
 				}
 			} catch (Exception e) {
-
+				e.printStackTrace();
 			}
 		}
 		return result;
@@ -202,6 +196,7 @@ public class StatusBarUtil {
 			int id = (int) f.get(null);
 			height = context.getResources().getDimensionPixelSize(id);
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return height;
 	}

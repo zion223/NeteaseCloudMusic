@@ -124,7 +124,7 @@ public class UserSearchDelegate extends NeteaseSearchLoadingDelegate {
 				((ImageView)adapter.getView(R.id.iv_item_search_user_gender)).setImageResource(R.drawable.ic_female);
 			}
 			//用户头像
-			manager.displayImageForCircle((ImageView) adapter.getView(R.id.iv_item_search_user_avatar), item.getAvatarUrl());
+			manager.displayImageForCircle(adapter.getView(R.id.iv_item_search_user_avatar), item.getAvatarUrl());
 
 
 			//取消关注
