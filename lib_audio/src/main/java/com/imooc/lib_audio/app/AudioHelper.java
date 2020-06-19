@@ -19,15 +19,13 @@ public final class AudioHelper {
 		mContext = context;
 		//初始化数据库
 		GreenDaoHelper.initDatabase();
+		MusicService.startMusicService();
 	}
 
 	public static Context getContext(){
 		return mContext;
 	}
 
-	public static void startMusicService(ArrayList<AudioBean> mLists) {
-		MusicService.startMusicService(mLists);
-	}
 
 	//TODO AudioBean改造
 	public static void addAudio(Activity activity, AudioBean bean){
@@ -44,7 +42,7 @@ public final class AudioHelper {
 
 	//加入List的音乐
 	public static void addAudio(ArrayList<AudioBean> mLists){
-		MusicService.startMusicService(mLists);
+		AudioController.getInstance().addAudio(mLists);
 	}
 
 }

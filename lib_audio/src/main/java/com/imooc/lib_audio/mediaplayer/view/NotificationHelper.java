@@ -45,6 +45,10 @@ public class NotificationHelper {
 		return mNotification;
 	}
 
+	public NotificationManager getNotificationManager() {
+		return mNotificationManager;
+	}
+
 	private static class SingletonHolder {
 		private static NotificationHelper instance = new NotificationHelper();
 	}
@@ -83,8 +87,10 @@ public class NotificationHelper {
 						.setCustomBigContentView(mBigRemoteViews) //大布局
 						.setContent(mSmallRemoteViews); //正常布局，两个布局可以切换
 		mNotification = builder.build();
-
-		showLoadStatus(mAudioBean);
+		if(mAudioBean != null){
+			mNotificationManager.notify(NOTIFICATION_ID, mNotification);
+			showLoadStatus(mAudioBean);
+		}
 	}
 
 	private void initRemoteViews() {
@@ -147,6 +153,16 @@ public class NotificationHelper {
 				PendingIntent.getBroadcast(AudioHelper.getContext(), 4, favouriteIntent,
 						PendingIntent.FLAG_UPDATE_CURRENT);
 		mBigRemoteViews.setOnClickPendingIntent(R.id.favourite_view, favouritePendingIntent);
+		//取消通知栏
+		//取消通知栏显示
+		Intent closeIntent = new Intent(MusicService.NotificationReceiver.ACTION_STATUS_BAR);
+		closeIntent.putExtra(MusicService.NotificationReceiver.EXTRA,
+				MusicService.NotificationReceiver.EXTRA_CANCLE);
+		PendingIntent closePendingIntent =
+				PendingIntent.getBroadcast(AudioHelper.getContext(), 5, closeIntent,
+						PendingIntent.FLAG_UPDATE_CURRENT);
+		mBigRemoteViews.setOnClickPendingIntent(R.id.close_view, closePendingIntent);
+		mSmallRemoteViews.setOnClickPendingIntent(R.id.close_view, closePendingIntent);
 
 	}
 	public void showLoadStatus(AudioBean bean) {
