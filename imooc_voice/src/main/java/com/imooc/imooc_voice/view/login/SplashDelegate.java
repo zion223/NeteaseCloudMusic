@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.util.ScreenUtils;
-import com.imooc.imooc_voice.util.SharePreferenceUtil;
+import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
 import com.imooc.imooc_voice.view.home.HomeDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 

@@ -2,18 +2,21 @@ package com.imooc.lib_audio.mediaplayer.core;
 
 import android.util.Log;
 
+import com.imooc.lib_audio.app.AudioHelper;
 import com.imooc.lib_audio.mediaplayer.events.AudioCompleteEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioErrorEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioPlayModeEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioRemoveEvent;
 import com.imooc.lib_audio.mediaplayer.exception.AudioQueueEmptyException;
-import com.imooc.lib_audio.mediaplayer.model.AudioBean;
+import com.imooc.lib_api.model.AudioBean;
+import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class AudioController {
@@ -32,7 +35,7 @@ public class AudioController {
 	//播放器
 	private final AudioPlayer mAudioPlayer;
 	//当前播放队列
-	private final ArrayList<AudioBean> mQueue;
+	private final ArrayList<AudioBean> mQueue = new ArrayList<>();
 	//播放模式
 	private PlayMode mPlayMode;
 	//当前播放索引
@@ -40,10 +43,18 @@ public class AudioController {
 
 	private AudioController(){
 		mAudioPlayer = new AudioPlayer();
-		mQueue = new ArrayList<>();
+		final AudioBean audio = SharePreferenceUtil.getInstance(AudioHelper.getContext()).getLatestSong();
+		final List<AudioBean> list = SharePreferenceUtil.getInstance(AudioHelper.getContext()).getMusicList();
+		if(audio != null && list != null) {
+			mQueue.add(audio);
+			list.remove(audio);
+			//上次保存的播放列表
+			mQueue.addAll(list);
+		}
 		mQueueIndex = 0;
 		mPlayMode = PlayMode.LOOP;
 		EventBus.getDefault().register(this);
+
 	}
 
 	public static AudioController getInstance(){
@@ -225,7 +236,7 @@ public class AudioController {
 	 * 切换播放/暂停状态
 	 */
 	public void playOrPause(){
-		if(CustomMediaPlayer.Status.INITIALIZED == getStatus()){
+		if(CustomMediaPlayer.Status.IDLE == getStatus()){
 			play();
 		}
 		if(isStartState()){

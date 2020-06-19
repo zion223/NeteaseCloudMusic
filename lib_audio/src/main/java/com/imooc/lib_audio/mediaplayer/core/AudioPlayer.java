@@ -19,7 +19,7 @@ import com.imooc.lib_audio.mediaplayer.events.AudioPauseEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioProgressEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioReleaseEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioStartEvent;
-import com.imooc.lib_audio.mediaplayer.model.AudioBean;
+import com.imooc.lib_api.model.AudioBean;
 
 import org.greenrobot.eventbus.EventBus;
 

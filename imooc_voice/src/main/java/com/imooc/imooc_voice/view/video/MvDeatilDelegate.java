@@ -44,7 +44,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.jzvd.Jzvd;
 
-import static com.imooc.imooc_voice.Constants.VIDEO;
+import static com.imooc.lib_common_ui.utils.Constants.VIDEO;
 
 public class MvDeatilDelegate extends NeteaseLoadingDelegate {
 

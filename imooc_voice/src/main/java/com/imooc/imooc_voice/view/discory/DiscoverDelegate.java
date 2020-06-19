@@ -37,7 +37,7 @@ import com.imooc.lib_api.model.NewSongBean;
 import com.imooc.lib_api.model.search.AlbumSearchBean;
 import com.imooc.lib_api.model.song.SongDetailBean;
 import com.imooc.lib_audio.app.AudioHelper;
-import com.imooc.lib_audio.mediaplayer.model.AudioBean;
+import com.imooc.lib_api.model.AudioBean;
 import com.imooc.lib_common_ui.bannder.BannerCreator;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
@@ -49,9 +49,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import static com.imooc.imooc_voice.Constants.ALBUM;
-import static com.imooc.imooc_voice.Constants.PLAYLIST;
-import static com.imooc.imooc_voice.Constants.SONG;
+import static com.imooc.lib_common_ui.utils.Constants.ALBUM;
+import static com.imooc.lib_common_ui.utils.Constants.PLAYLIST;
+import static com.imooc.lib_common_ui.utils.Constants.SONG;
 
 public class DiscoverDelegate extends NeteaseDelegate {
 

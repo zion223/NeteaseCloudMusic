@@ -1,6 +1,7 @@
 package com.imooc.imooc_voice.application;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.imooc.lib_audio.BuildConfig;
 import com.imooc.lib_audio.app.AudioHelper;
@@ -13,9 +14,12 @@ import me.yokeyword.fragmentation.helper.ExceptionHandler;
 
 public class ImoocVoiceApplication extends Application {
 
+    private static final String TAG = "ImoocVoiceApplication";
+
     @Override
     public void onCreate() {
         super.onCreate();
+        Log.d(TAG, "onCreate");
         Fragmentation.builder()
                 // 设置 栈视图 模式为 悬浮球模式   SHAKE: 摇一摇唤出   NONE：隐藏
                 .stackViewMode(Fragmentation.SHAKE)

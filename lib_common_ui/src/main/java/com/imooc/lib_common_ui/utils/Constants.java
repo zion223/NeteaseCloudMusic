@@ -1,4 +1,4 @@
-package com.imooc.imooc_voice;
+package com.imooc.lib_common_ui.utils;
 
 public interface Constants {
 	String SHARED_PREFERENCE_FILE_NAME = "NeteaseCloudMusic_sp";

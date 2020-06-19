@@ -20,7 +20,7 @@ import com.imooc.lib_audio.mediaplayer.core.AudioController;
 import com.imooc.lib_audio.mediaplayer.events.AudioLoadEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioPlayModeEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioRemoveEvent;
-import com.imooc.lib_audio.mediaplayer.model.AudioBean;
+import com.imooc.lib_api.model.AudioBean;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.core.BottomPopupView;
 

@@ -29,14 +29,14 @@ import com.imooc.lib_api.model.search.SynthesisSearchBean;
 import com.imooc.lib_api.model.search.UserSearchBean;
 import com.imooc.lib_api.model.song.SongDetailBean;
 import com.imooc.lib_audio.app.AudioHelper;
-import com.imooc.lib_audio.mediaplayer.model.AudioBean;
+import com.imooc.lib_api.model.AudioBean;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.imooc.imooc_voice.Constants.PLAYLIST;
+import static com.imooc.lib_common_ui.utils.Constants.PLAYLIST;
 
 
 /**

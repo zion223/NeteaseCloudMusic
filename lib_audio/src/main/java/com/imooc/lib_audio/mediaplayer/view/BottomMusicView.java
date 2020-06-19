@@ -18,7 +18,8 @@ import com.imooc.lib_audio.mediaplayer.events.AudioLoadEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioPauseEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioProgressEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioStartEvent;
-import com.imooc.lib_audio.mediaplayer.model.AudioBean;
+import com.imooc.lib_api.model.AudioBean;
+import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
 import com.imooc.lib_common_ui.widget.CircleProgressButton;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.lxj.xpopup.XPopup;
@@ -116,6 +117,13 @@ public class BottomMusicView extends RelativeLayout {
 
 			}
 		});
+		//显示上次退出时播放的歌曲
+		AudioBean latestSong = SharePreferenceUtil.getInstance(mContext).getLatestSong();
+		if(latestSong != null){
+			mTitleView.setText(latestSong.getName());
+			mAlbumView.setText(latestSong.getAlbum());
+			ImageLoaderManager.getInstance().displayImageForCircle(mLeftView, latestSong.getAlbumPic());
+		}
 	}
 
 	@Override

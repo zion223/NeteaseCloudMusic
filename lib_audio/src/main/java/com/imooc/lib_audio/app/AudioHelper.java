@@ -5,8 +5,7 @@ import android.content.Context;
 
 import com.imooc.lib_audio.mediaplayer.core.AudioController;
 import com.imooc.lib_audio.mediaplayer.core.MusicService;
-import com.imooc.lib_audio.mediaplayer.db.GreenDaoHelper;
-import com.imooc.lib_audio.mediaplayer.model.AudioBean;
+import com.imooc.lib_api.model.AudioBean;
 import com.imooc.lib_audio.mediaplayer.view.MusicPlayerActivity;
 
 import java.util.ArrayList;
@@ -17,8 +16,6 @@ public final class AudioHelper {
 
 	public static void init(Context context){
 		mContext = context;
-		//初始化数据库
-		GreenDaoHelper.initDatabase();
 		MusicService.startMusicService();
 	}
 

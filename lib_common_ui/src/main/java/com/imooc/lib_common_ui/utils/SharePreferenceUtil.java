@@ -1,17 +1,19 @@
-package com.imooc.imooc_voice.util;
+package com.imooc.lib_common_ui.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.provider.SyncStateContract;
 import android.text.TextUtils;
 
-import com.imooc.imooc_voice.Constants;
+
+import com.imooc.lib_api.model.AudioBean;
 import com.imooc.lib_api.model.LoginBean;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import static com.imooc.imooc_voice.Constants.SpKey.LOCAL_MUSIC_COUNT;
 
 
 /**
@@ -58,11 +60,11 @@ public class SharePreferenceUtil {
 	}
 
 	public int getLocalMusicCount() {
-		return Integer.parseInt(getString(LOCAL_MUSIC_COUNT, "0"));
+		return Integer.parseInt(getString(Constants.SpKey.LOCAL_MUSIC_COUNT, "0"));
 	}
 
 	public void saveLocalMusicCount(int count) {
-		saveString(LOCAL_MUSIC_COUNT, String.valueOf(count));
+		saveString(Constants.SpKey.LOCAL_MUSIC_COUNT, String.valueOf(count));
 	}
 
 	/**
@@ -130,14 +132,14 @@ public class SharePreferenceUtil {
 	/*
 	 * 存储最近一次听过的歌曲
 	 */
-//    public void saveLatestSong(SongInfo songInfo) {
-//        String song = GsonUtil.toJson(songInfo);
-//        saveString(Constants.SpKey.LATEST_SONG, song);
-//    }
-//
-//    public SongInfo getLatestSong() {
-//        return GsonUtil.fromJSON(getString(Constants.SpKey.LATEST_SONG, ""), SongInfo.class);
-//    }
+    public void saveLatestSong(AudioBean songInfo) {
+        String song = GsonUtil.toJson(songInfo);
+        saveString(Constants.SpKey.LATEST_SONG, song);
+    }
+
+    public AudioBean getLatestSong() {
+        return GsonUtil.fromJSON(getString(Constants.SpKey.LATEST_SONG, ""), AudioBean.class);
+    }
 
 	/**
 	 * 保存上次获取日推的时间
@@ -166,16 +168,19 @@ public class SharePreferenceUtil {
 	}
 
 	/**
-	 * 保存喜欢的歌曲列表
+	 * 保存播放歌曲列表
 	 */
-	public void saveLikeList(List<String> likeList) {
+	public void saveMusicList(List<AudioBean> likeList) {
 		String likeListString = GsonUtil.toJson(likeList);
 		saveString(Constants.SpKey.LIKE_LIST, likeListString);
 	}
 
-	public List<String> getLikeList() {
+	/**
+	 * 	获取播放列表
+	 */
+	public List<AudioBean> getMusicList() {
 		String likeListString = getString(Constants.SpKey.LIKE_LIST, "");
-		return GsonUtil.fromJSON(likeListString, List.class);
+		return GsonUtil.fromAudioJSON(likeListString);
 	}
 
 	private void remove(String key) {

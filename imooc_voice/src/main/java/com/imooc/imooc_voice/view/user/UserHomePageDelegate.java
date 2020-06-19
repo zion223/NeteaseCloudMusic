@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import static com.imooc.imooc_voice.Constants.PLAYLIST;
+import static com.imooc.lib_common_ui.utils.Constants.PLAYLIST;
 
 //用户首页
 public class UserHomePageDelegate extends NeteaseDelegate {

@@ -6,7 +6,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -23,7 +22,7 @@ import java.util.List;
 
 import butterknife.OnClick;
 
-import static com.imooc.imooc_voice.Constants.ALBUM;
+import static com.imooc.lib_common_ui.utils.Constants.ALBUM;
 
 public class NewAlbumDelegate extends NeteaseLoadingDelegate {
 

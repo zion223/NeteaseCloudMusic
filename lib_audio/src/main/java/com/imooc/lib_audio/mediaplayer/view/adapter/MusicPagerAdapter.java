@@ -13,7 +13,7 @@ import android.widget.ImageView;
 
 import com.imooc.lib_audio.R;
 import com.imooc.lib_audio.mediaplayer.core.AudioController;
-import com.imooc.lib_audio.mediaplayer.model.AudioBean;
+import com.imooc.lib_api.model.AudioBean;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 
 import java.util.ArrayList;

@@ -21,7 +21,7 @@ import com.imooc.imooc_voice.model.info.MusicInfo;
 import com.imooc.imooc_voice.model.mine.SpecData;
 import com.imooc.imooc_voice.util.IConstants;
 import com.imooc.imooc_voice.util.MusicUtils;
-import com.imooc.imooc_voice.util.SharePreferenceUtil;
+import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
 import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
 import com.imooc.imooc_voice.view.mine.collect.MineCollectTabDelegate;
 import com.imooc.imooc_voice.view.mine.local.LocalMusicDelegate;
@@ -42,7 +42,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import static com.imooc.imooc_voice.Constants.PLAYLIST;
+import static com.imooc.lib_common_ui.utils.Constants.PLAYLIST;
 
 public class MineDelegate extends NeteaseDelegate {
 

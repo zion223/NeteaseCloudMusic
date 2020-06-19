@@ -32,7 +32,7 @@ import com.imooc.lib_api.model.PlaylistDetailBean;
 import com.imooc.lib_api.model.search.AlbumSearchBean;
 import com.imooc.lib_api.model.song.SongDetailBean;
 import com.imooc.lib_audio.app.AudioHelper;
-import com.imooc.lib_audio.mediaplayer.model.AudioBean;
+import com.imooc.lib_api.model.AudioBean;
 import com.imooc.lib_common_ui.appbar.AppBarStateChangeListener;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_common_ui.utils.StatusBarUtil;
@@ -44,8 +44,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import static com.imooc.imooc_voice.Constants.ALBUM;
-import static com.imooc.imooc_voice.Constants.PLAYLIST;
+import static com.imooc.lib_common_ui.utils.Constants.ALBUM;
+import static com.imooc.lib_common_ui.utils.Constants.PLAYLIST;
 
 /**
  * 歌单和专辑详情

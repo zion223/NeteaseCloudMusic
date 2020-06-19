@@ -20,7 +20,7 @@ import com.imooc.lib_api.RequestCenter;
 import com.imooc.lib_api.model.DailyRecommendBean;
 import com.imooc.lib_api.model.NewSongBean;
 import com.imooc.lib_audio.app.AudioHelper;
-import com.imooc.lib_audio.mediaplayer.model.AudioBean;
+import com.imooc.lib_api.model.AudioBean;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;

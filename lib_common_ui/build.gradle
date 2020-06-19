@@ -31,6 +31,7 @@ dependencies {
 
     compileOnly this.rootProject.depsLibs.appcompat
     implementation this.rootProject.depsLibs.eventbus
+    implementation this.rootProject.depsLibs.gson
     implementation this.rootProject.depsLibs.recyclerview
     implementation this.rootProject.depsLibs.magicindicator
     implementation this.rootProject.depsLibs.GroupedRecyclerViewAdapter
@@ -43,4 +44,5 @@ dependencies {
     implementation rootProject.depsLibs.glide
 
     compileOnly project(':lib_image_loader')
+    implementation project(path: ':lib_api')
 }
