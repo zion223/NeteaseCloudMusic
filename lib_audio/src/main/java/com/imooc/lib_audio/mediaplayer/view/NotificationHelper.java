@@ -65,7 +65,6 @@ public class NotificationHelper {
 	}
 
 	private void initNotification() {
-
 		initRemoteViews();
 
 		//再构建Notification
@@ -97,8 +96,8 @@ public class NotificationHelper {
 		//大布局
 		int layoutId = R.layout.notification_big_layout;
 		mBigRemoteViews = new RemoteViews(packageName, layoutId);
-		mBigRemoteViews.setTextViewText(R.id.title_view, mAudioBean.getName());
-		mBigRemoteViews.setTextViewText(R.id.tip_view, mAudioBean.getAlbum());
+		//mBigRemoteViews.setTextViewText(R.id.title_view, mAudioBean.getName());
+		//mBigRemoteViews.setTextViewText(R.id.tip_view, mAudioBean.getAlbum());
 		//判断是否已收藏
 //		if (null != GreenDaoHelper.selectFavourite(mAudioBean)) {
 //			mBigRemoteViews.setImageViewResource(R.id.favourite_view, R.mipmap.note_btn_loved);
@@ -108,8 +107,8 @@ public class NotificationHelper {
 		//小布局
 		int smalllayoutId = R.layout.notification_small_layout;
 		mSmallRemoteViews = new RemoteViews(packageName, smalllayoutId);
-		mSmallRemoteViews.setTextViewText(R.id.title_view, mAudioBean.getName());
-		mSmallRemoteViews.setTextViewText(R.id.tip_view, mAudioBean.getAlbum());
+		//mSmallRemoteViews.setTextViewText(R.id.title_view, mAudioBean.getName());
+		//mSmallRemoteViews.setTextViewText(R.id.tip_view, mAudioBean.getAlbum());
 
 		//点击播放按钮广播
 		Intent playIntent = new Intent(MusicService.NotificationReceiver.ACTION_STATUS_BAR);
