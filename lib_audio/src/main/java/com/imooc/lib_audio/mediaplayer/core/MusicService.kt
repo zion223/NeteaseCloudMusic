@@ -7,21 +7,17 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.IBinder
 import com.imooc.lib_audio.app.AudioHelper
-import com.imooc.lib_audio.mediaplayer.core.AudioController.play
-import com.imooc.lib_audio.mediaplayer.core.AudioController.setQueue
 import com.imooc.lib_audio.mediaplayer.events.*
-import com.imooc.lib_audio.mediaplayer.model.AudioBean
 import com.imooc.lib_audio.mediaplayer.view.NotificationHelper
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
+//通知栏组件
 class MusicService : Service(), NotificationHelper.NotificationHelperListener{
 
 
     private var mReceiver: NotificationReceiver? = null
-
-    private lateinit var mAudioBeans: ArrayList<AudioBean>
 
 
     override fun onCreate() {
@@ -37,22 +33,13 @@ class MusicService : Service(), NotificationHelper.NotificationHelperListener{
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        if(intent != null){
-            mAudioBeans = intent.getSerializableExtra(DATA_AUDIOS) as ArrayList<AudioBean>
-            if (ACTION_START.equals(intent.getAction())) {
-                //开始播放
-                playMusic();
-                //初始化前台Notification
-                NotificationHelper.getInstance().init(this);
-            }
+        if(intent != null && ACTION_START == intent.action){
+            //初始化前台Notification
+            NotificationHelper.getInstance().init(this);
         }
         return super.onStartCommand(intent, flags, startId)
     }
 
-    private fun playMusic() {
-        setQueue(mAudioBeans)
-        play()
-    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onAudioLoadEvent(event: AudioLoadEvent) {
@@ -108,13 +95,11 @@ class MusicService : Service(), NotificationHelper.NotificationHelperListener{
     }
 
     companion object{
-        private val DATA_AUDIOS : String = "AUDIOS"
-        private val ACTION_START = "ACTION_START"
+        private const val ACTION_START = "ACTION_START"
 
-        fun startMusicService(list : ArrayList<AudioBean?>?) {
+        fun startMusicService() {
             val intent = Intent(AudioHelper.getContext(), MusicService::class.java)
             intent.action = ACTION_START
-            intent.putExtra(DATA_AUDIOS, list)
             AudioHelper.getContext().startService(intent)
         }
     }

@@ -2,13 +2,13 @@ package com.imooc.lib_audio.mediaplayer.core
 
 import android.media.MediaPlayer
 
-class CustomMediaPlayer: MediaPlayer, MediaPlayer.OnCompletionListener{
+class CustomMediaPlayer() : MediaPlayer(), MediaPlayer.OnCompletionListener{
 
 
     private var mStatus : Status = Status.IDLE
     private lateinit var mListener : OnCompletionListener
 
-    constructor() : super() {
+    init {
         mStatus = Status.IDLE
         super.setOnCompletionListener(this)
     }

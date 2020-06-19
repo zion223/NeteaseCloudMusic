@@ -17,6 +17,7 @@ public class AudioHelper {
         public fun init(context:Context){
             mContext = context
             GreenDaoHelper.initDatabase()
+            MusicService.startMusicService()
         }
 
         public fun getContext():Context{
@@ -26,15 +27,19 @@ public class AudioHelper {
         //TODO AudioBean改造
         public fun addAudio(activity : ProxyActivity?, bean : AudioBean){
             AudioController.addAudio(bean)
-            MusicPlayerActivity.start(activity)
+            if(activity != null){
+                MusicPlayerActivity.start(activity)
+            }
         }
 
         public fun addAudio(bean : AudioBean){
+
             addAudio(null, bean)
         }
 
-        public fun addAudio(list: ArrayList<AudioBean?>){
-            MusicService.startMusicService(list)
+        //播放全部音乐
+        public fun addAudio(list: ArrayList<AudioBean>){
+            AudioController.addAudio(list)
         }
 
     }

@@ -5,7 +5,6 @@ import com.imooc.lib_audio.mediaplayer.model.AudioBean
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import java.lang.NullPointerException
 import kotlin.random.Random
 
 object AudioController {
@@ -27,7 +26,7 @@ object AudioController {
     private var mQueue: ArrayList<AudioBean> = ArrayList()
 
     //当前播放模式
-    private lateinit var mPlayMode: PlayMode
+    private var mPlayMode: PlayMode
     //当前播放索引
     private var mQueueIndex = 0
 
@@ -57,6 +56,7 @@ object AudioController {
         addAudio(0, bean)
     }
 
+    //添加Audio
     fun addAudio(index : Int, bean : AudioBean){
         val query = mQueue.indexOf(bean)
         if(query <= -1){
@@ -66,9 +66,14 @@ object AudioController {
         }else{
             val currentPlaying = getCurrentPlaying()
             if(!currentPlaying.id.equals(bean.id)){
-                setPlayIndex(index)
+                setPlayIndex(query)
             }
         }
+    }
+
+    //添加音乐列表  TODO 判断是否当前播放列表重复
+    fun addAudio(list : ArrayList<AudioBean>){
+        mQueue.addAll(list)
     }
 
     //移除音乐  不可移除当前正在播放的音乐
@@ -215,10 +220,10 @@ object AudioController {
 
 
     fun getPlaying(index : Int): AudioBean {
-        return if(!mQueue.isEmpty() && index < mQueue.size && index >= 0){
+        return if(mQueue.isNotEmpty() && index < mQueue.size && index >= 0){
             mQueue.get(index)
         } else {
-            throw NullPointerException("")
+            AudioBean()
         }
     }
     //插放完毕事件处理

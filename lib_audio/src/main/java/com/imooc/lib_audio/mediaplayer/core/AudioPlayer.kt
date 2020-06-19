@@ -21,12 +21,12 @@ class AudioPlayer : MediaPlayer.OnCompletionListener, MediaPlayer.OnBufferingUpd
     private val TAG : String = "AudioPlayer"
 
     private val TIME_MSG : Int = 0x01
-    private val TIME_INVAL : Int = 100
+    private val TIME_INVAL : Long = 100
 
     private var mMediaPlayer : CustomMediaPlayer = CustomMediaPlayer()
-    private lateinit var mWifiLock : WifiManager.WifiLock
-    private lateinit var manager : WifiManager
-    private lateinit var mAudioFocusManager : AudioFocusManager
+    private var mWifiLock : WifiManager.WifiLock
+    private var manager : WifiManager
+    private var mAudioFocusManager : AudioFocusManager
 
     private var isPausedByFocusLossTransient : Boolean = false
 
@@ -52,7 +52,8 @@ class AudioPlayer : MediaPlayer.OnCompletionListener, MediaPlayer.OnBufferingUpd
                 if(mMediaPlayer.getState() == CustomMediaPlayer.Status.STARTED
                         || mMediaPlayer.getState() == CustomMediaPlayer.Status.PAUSED){
                     EventBus.getDefault().post(AudioProgressEvent(mMediaPlayer.getState(), getCurrentPosition(), getDuration()))
-
+                    //100ms 后再次发送
+                    sendEmptyMessageDelayed(TIME_MSG, TIME_INVAL)
                 }
             }
         }
@@ -76,7 +77,7 @@ class AudioPlayer : MediaPlayer.OnCompletionListener, MediaPlayer.OnBufferingUpd
 
     //恢复播放
     fun resume(){
-        if(getStatus() == CustomMediaPlayer.Status.STOPPED){
+        if(getStatus() == CustomMediaPlayer.Status.PAUSED){
             start()
         }
     }
@@ -123,7 +124,6 @@ class AudioPlayer : MediaPlayer.OnCompletionListener, MediaPlayer.OnBufferingUpd
     override fun onBufferingUpdate(mp: MediaPlayer?, percent: Int) {
         //网络歌曲 缓存的进度 在第二进度条显示
         EventBus.getDefault().post(AudioBufferUpdateEvent(percent))
-        Log.e(TAG, "onBufferingUpdate: $percent")
     }
 
     override fun onPrepared(mp: MediaPlayer?) {

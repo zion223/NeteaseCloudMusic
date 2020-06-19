@@ -13,5 +13,9 @@
             android:enabled="true"
             android:exported="false"
             android:launchMode="singleTask" />
+
+        <service android:name=".mediaplayer.core.MusicService"
+            android:enabled="true"
+            android:exported="true"/>
     </application>
 </manifest>

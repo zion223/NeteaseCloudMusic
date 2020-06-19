@@ -5,15 +5,10 @@ import android.media.AudioManager
 import android.os.Build
 import android.support.annotation.RequiresApi
 
-class AudioFocusManager : AudioManager.OnAudioFocusChangeListener {
+class AudioFocusManager(context: Context, listener: AudioFocusListener) : AudioManager.OnAudioFocusChangeListener {
 
-    private lateinit var audioManager : AudioManager
-    private lateinit var mAudioFocusListener : AudioFocusListener
-
-    constructor(context: Context, listener: AudioFocusListener){
-        audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
-        mAudioFocusListener = listener
-    }
+    private var audioManager : AudioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+    private var mAudioFocusListener : AudioFocusListener = listener
 
     //获取音频焦点
     fun requestAudioFocus():Boolean{
