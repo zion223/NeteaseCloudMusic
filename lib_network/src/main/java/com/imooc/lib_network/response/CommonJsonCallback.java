@@ -77,7 +77,6 @@ public class CommonJsonCallback implements Callback {
 		}
 		try {
 			JSONObject resultJson = new JSONObject(response.toString());
-			//TODO 加入需要登录判断
 			if (mClass == null) {
 				mDisposeDataListener.onSuccess(resultJson);
 			} else {

@@ -785,6 +785,7 @@ public class RequestCenter {
         params.put("asc", asc);
         RequestCenter.getRequest(HttpConstants.DJ_PROGRAM, params, listener, DjProgramBean.class);
     }
+
     /**
      * 电台 - 24小时主播榜
      */
@@ -795,12 +796,27 @@ public class RequestCenter {
     }
 
     /**
+     * 电台 - 24小时主播榜
+     */
+    public static void getRadioTopHours(DisposeDataListener listener){
+        RequestCenter.getRequest(HttpConstants.DJ_TOPLIST_HOURS, null, listener, DjRankListBean.class);
+    }
+
+    /**
      * 电台 - 24小时节目榜
     */
     public static void getRadioProgramTopHours(int limit, DisposeDataListener listener){
         RequestParams params = new RequestParams();
         params.put("limit", limit);
         RequestCenter.getRequest(HttpConstants.DJ_PROGRAM_TOPLIST_HOURS, params, listener, DjProgramTopListHoursBean.class);
+    }
+
+
+    /**
+     * 电台 - 24小时节目榜
+     */
+    public static void getRadioProgramTopHours(DisposeDataListener listener){
+        RequestCenter.getRequest(HttpConstants.DJ_PROGRAM_TOPLIST_HOURS, null, listener, DjProgramTopListHoursBean.class);
     }
 
     /**
@@ -820,6 +836,14 @@ public class RequestCenter {
         params.put("limit", limit);
         RequestCenter.getRequest(HttpConstants.DJ_TOPLIST_NEWCOMER, params, listener, DjRankListBean.class);
     }
+
+    /**
+     * 电台 - 新人榜
+     */
+    public static void getRadioTopNewComer(DisposeDataListener listener){
+        RequestCenter.getRequest(HttpConstants.DJ_TOPLIST_NEWCOMER, null, listener, DjRankListBean.class);
+    }
+
     /**
      * 电台 - 最热主播榜
      */

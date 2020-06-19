@@ -40,7 +40,7 @@ public class BottomMusicView extends RelativeLayout {
 	 */
 	private ImageView mLeftView;
 	private TextView mTitleView;
-	private TextView mAlbumView;
+	private TextView mAlbumView;  //TODO 歌曲播放时 显示滚动的歌词
 	private ImageView mRightView;
 	private CircleProgressButton mPlayView;
 

@@ -234,7 +234,7 @@ public class DiscoverDelegate extends NeteaseDelegate {
 			}
 		});
 		/*
-		 *	新歌  新歌速递 TODO 分类
+		 *	新歌  新歌速递
 		 */
 		RequestCenter.getTopSong(0, new DisposeDataListener() {
 			@Override

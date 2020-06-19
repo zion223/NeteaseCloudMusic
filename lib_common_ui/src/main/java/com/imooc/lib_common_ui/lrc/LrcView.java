@@ -15,6 +15,7 @@ import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -470,6 +471,8 @@ public class LrcView extends View {
 			if (i == mCurrentLine) {
 				mLrcPaint.setTextSize(mCurrentTextSize);
 				mLrcPaint.setColor(mCurrentTextColor);
+				//中间行歌词显示在BottomMusicView上 TODO
+				Log.e("LrcView", mLrcEntryList.get(mCurrentLine).getText());
 			} else if (isShowTimeline && i == centerLine) {
 				mLrcPaint.setColor(mTimelineTextColor);
 			} else {

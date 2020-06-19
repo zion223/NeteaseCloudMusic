@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -111,7 +112,9 @@ public class RadioProgramDelegate extends NeteaseLoadingDelegate {
 							public void onSuccess(Object responseObj) {
 								SongUrlBean urlBean = (SongUrlBean) responseObj;
 								String url = urlBean.getData().get(0).getUrl();
-								AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), url, item.getName(), item.getDj().getNickname(), item.getRadio().getName(), item.getRadio().getName(), item.getRadio().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDuration())));
+								if(!TextUtils.isEmpty(url)){
+									AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(item.getId()), url, item.getName(), item.getDj().getNickname(), item.getRadio().getName(), item.getRadio().getName(), item.getRadio().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDuration())));
+								}
 							}
 
 							@Override
