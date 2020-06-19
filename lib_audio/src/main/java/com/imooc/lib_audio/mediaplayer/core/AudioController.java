@@ -78,6 +78,10 @@ public class AudioController {
 		addAudio(0, bean);
 	}
 
+	public void addAudio(ArrayList<AudioBean> list) {
+		mQueue.addAll(list);
+	}
+
 	public void addAudio(int index, AudioBean bean) {
 		if(mQueue == null){
 			throw new AudioQueueEmptyException("");

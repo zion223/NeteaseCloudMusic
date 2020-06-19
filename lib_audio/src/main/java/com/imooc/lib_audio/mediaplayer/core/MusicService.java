@@ -15,30 +15,26 @@ import com.imooc.lib_audio.mediaplayer.events.AudioLoadEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioPauseEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioReleaseEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioStartEvent;
-import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_audio.mediaplayer.view.NotificationHelper;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.ArrayList;
+
+import static com.imooc.lib_audio.mediaplayer.view.NotificationHelper.NOTIFICATION_ID;
 
 public class MusicService extends Service implements NotificationHelper.NotificationHelperListener {
 
 
-	private static String DATA_AUDIOS = "AUDIOS";
 	//actions
 	private static String ACTION_START = "ACTION_START";
 
-	private ArrayList<AudioBean> mAudioBeans;
-
 	private NotificationReceiver mReceiver;
 
-	public static void startMusicService(ArrayList<AudioBean> list){
+	public static void startMusicService(){
 		Intent intent = new Intent(AudioHelper.getContext(), MusicService.class);
 		intent.setAction(ACTION_START);
-		intent.putExtra(DATA_AUDIOS, list);
 		AudioHelper.getContext().startService(intent);
 	}
 
@@ -59,10 +55,7 @@ public class MusicService extends Service implements NotificationHelper.Notifica
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		if(intent != null){
-			mAudioBeans = (ArrayList<AudioBean>) intent.getSerializableExtra(DATA_AUDIOS);
 			if (ACTION_START.equals(intent.getAction())) {
-				//开始播放
-				playMusic();
 				//初始化前台Notification
 				NotificationHelper.getInstance().init(this);
 			}
@@ -85,11 +78,6 @@ public class MusicService extends Service implements NotificationHelper.Notifica
 		}
 	}
 
-
-	private void playMusic() {
-		AudioController.getInstance().setQueue(mAudioBeans);
-		AudioController.getInstance().play();
-	}
 
 	@Subscribe(threadMode = ThreadMode.MAIN)
 	public void onAudioLoadEvent(AudioLoadEvent event) {
@@ -130,7 +118,7 @@ public class MusicService extends Service implements NotificationHelper.Notifica
 	//绑定Notifiction
 	@Override
 	public void onNotificationInit() {
-		startForeground(NotificationHelper.NOTIFICATION_ID, NotificationHelper.getInstance().getNotification());
+		//startForeground(NotificationHelper.NOTIFICATION_ID, NotificationHelper.getInstance().getNotification());
 	}
 
 
@@ -144,6 +132,7 @@ public class MusicService extends Service implements NotificationHelper.Notifica
 		public static final String EXTRA_NEXT = "play_next";
 		public static final String EXTRA_PRE = "play_previous";
 		public static final String EXTRA_FAV = "play_favourite";
+		public static final String EXTRA_CANCLE = "cancle_notification";
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
@@ -165,6 +154,8 @@ public class MusicService extends Service implements NotificationHelper.Notifica
 				case EXTRA_FAV:
 					//AudioController.getInstance().changeFavourite();
 					break;
+				case EXTRA_CANCLE:
+					NotificationHelper.getInstance().getNotificationManager().cancel(NOTIFICATION_ID);
 			}
 		}
 	}
