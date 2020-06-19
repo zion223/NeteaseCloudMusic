@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,16 +19,14 @@ import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.model.info.MusicInfo;
 import com.imooc.imooc_voice.model.mine.SpecData;
-import com.imooc.imooc_voice.util.GsonUtil;
 import com.imooc.imooc_voice.util.IConstants;
 import com.imooc.imooc_voice.util.MusicUtils;
-import com.imooc.imooc_voice.util.SharePreferenceUtil;
+import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
 import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
 import com.imooc.imooc_voice.view.mine.collect.MineCollectTabDelegate;
 import com.imooc.imooc_voice.view.mine.local.LocalMusicDelegate;
 import com.imooc.imooc_voice.view.mine.radio.MineRadioDelegate;
 import com.imooc.lib_api.RequestCenter;
-import com.imooc.lib_api.model.LoginBean;
 import com.imooc.lib_api.model.SubCountBean;
 import com.imooc.lib_api.model.personal.UserPlayListGroupEntity;
 import com.imooc.lib_api.model.personal.UserPlaylistBean;
@@ -45,7 +42,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import static com.imooc.imooc_voice.Constants.PLAYLIST;
+import static com.imooc.lib_common_ui.utils.Constants.PLAYLIST;
 
 public class MineDelegate extends NeteaseDelegate {
 

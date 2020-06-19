@@ -31,6 +31,7 @@ dependencies {
     api this.rootProject.depsLibs.fragmentation
 
     compileOnly this.rootProject.depsLibs.appcompat
+    implementation this.rootProject.depsLibs.gson
     implementation this.rootProject.depsLibs.eventbus
     implementation this.rootProject.depsLibs.recyclerview
     implementation this.rootProject.depsLibs.magicindicator
@@ -45,6 +46,7 @@ dependencies {
 
     compileOnly project(':lib_image_loader')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation project(path: ':lib_api')
 }
 repositories {
     mavenCentral()

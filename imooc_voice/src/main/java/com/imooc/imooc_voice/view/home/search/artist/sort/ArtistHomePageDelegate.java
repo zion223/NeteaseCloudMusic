@@ -12,7 +12,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.model.event.ArtistIdEvent;
-import com.imooc.imooc_voice.util.SharePreferenceUtil;
+import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.imooc_voice.view.discory.square.detail.PlayListAdapter;
 import com.imooc.lib_api.HttpConstants;

@@ -12,7 +12,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.model.event.ArtistIdEvent;
-import com.imooc.imooc_voice.util.SharePreferenceUtil;
+import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
 import com.imooc.lib_api.RequestCenter;
@@ -26,7 +26,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
-import static com.imooc.imooc_voice.Constants.ALBUM;
+import static com.imooc.lib_common_ui.utils.Constants.ALBUM;
 
 /**
  * 歌手专辑

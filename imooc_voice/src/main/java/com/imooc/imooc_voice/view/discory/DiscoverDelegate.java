@@ -49,9 +49,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import static com.imooc.imooc_voice.Constants.ALBUM;
-import static com.imooc.imooc_voice.Constants.PLAYLIST;
-import static com.imooc.imooc_voice.Constants.SONG;
+import static com.imooc.lib_common_ui.utils.Constants.ALBUM;
+import static com.imooc.lib_common_ui.utils.Constants.PLAYLIST;
+import static com.imooc.lib_common_ui.utils.Constants.SONG;
 
 public class DiscoverDelegate extends NeteaseDelegate {
 

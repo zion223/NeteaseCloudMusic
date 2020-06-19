@@ -4,10 +4,12 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
+import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.RemoteViews;
 
@@ -18,7 +20,7 @@ import com.imooc.lib_audio.mediaplayer.core.MusicService;
 import com.imooc.lib_audio.mediaplayer.model.AudioBean;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 
-public class NotificationHelper {
+public class NotificationHelper{
 
 	public static final String CHANNEL_ID = "channel_id_audio";
 	public static final String CHANNEL_NAME = "channel_name_audio";
@@ -29,8 +31,6 @@ public class NotificationHelper {
 	private RemoteViews mBigRemoteViews; // 大布局
 	private RemoteViews mSmallRemoteViews; //小布局
 
-	//TODO 取消通知
-	private ImageView mCloseView;
 	private NotificationManager mNotificationManager;
 	private NotificationHelperListener mListener;
 	private String packageName;
@@ -43,6 +43,10 @@ public class NotificationHelper {
 
 	public Notification getNotification() {
 		return mNotification;
+	}
+
+	public NotificationManager getNotificationManager() {
+		return mNotificationManager;
 	}
 
 	private static class SingletonHolder {
@@ -81,10 +85,14 @@ public class NotificationHelper {
 				new NotificationCompat.Builder(AudioHelper.Companion.getContext(), CHANNEL_ID).setContentIntent(pendingIntent)
 						.setSmallIcon(R.mipmap.ic_notification)
 						.setCustomBigContentView(mBigRemoteViews) //大布局
-						.setContent(mSmallRemoteViews); //正常布局，两个布局可以切换
+						.setContent(mSmallRemoteViews) //正常布局，两个布局可以切换
+						.setAutoCancel(false);
 		mNotification = builder.build();
+		if(!TextUtils.isEmpty(mAudioBean.getId())){
+			mNotificationManager.notify(NOTIFICATION_ID, mNotification);
+			showLoadStatus(mAudioBean);
+		}
 
-		showLoadStatus(mAudioBean);
 	}
 
 	private void initRemoteViews() {
@@ -147,6 +155,15 @@ public class NotificationHelper {
 				PendingIntent.getBroadcast(AudioHelper.Companion.getContext(), 4, favouriteIntent,
 						PendingIntent.FLAG_UPDATE_CURRENT);
 		mBigRemoteViews.setOnClickPendingIntent(R.id.favourite_view, favouritePendingIntent);
+		//取消通知栏显示
+		Intent closeIntent = new Intent(MusicService.NotificationReceiver.Companion.getACTION_STATUS_BAR());
+		closeIntent.putExtra(MusicService.NotificationReceiver.EXTRA,
+				MusicService.NotificationReceiver.EXTRA_CANCLE);
+		PendingIntent closePendingIntent =
+				PendingIntent.getBroadcast(AudioHelper.Companion.getContext(), 5, closeIntent,
+						PendingIntent.FLAG_UPDATE_CURRENT);
+		mBigRemoteViews.setOnClickPendingIntent(R.id.close_view, closePendingIntent);
+		mSmallRemoteViews.setOnClickPendingIntent(R.id.close_view, closePendingIntent);
 
 	}
 	public void showLoadStatus(AudioBean bean) {
@@ -159,7 +176,7 @@ public class NotificationHelper {
 			ImageLoaderManager.getInstance()
 					.displayImageForNotification(AudioHelper.Companion.getContext(), mBigRemoteViews, R.id.image_view,
 							mNotification, NOTIFICATION_ID, mAudioBean.getAlbumPic());
-			//更新收藏view
+			//更新收藏view  TODO
 //			if (null != GreenDaoHelper.selectFavourite(mAudioBean)) {
 //				mBigRemoteViews.setImageViewResource(R.id.favourite_view, R.mipmap.note_btn_loved);
 //			} else {
@@ -190,6 +207,7 @@ public class NotificationHelper {
 		if (mBigRemoteViews != null) {
 			mBigRemoteViews.setImageViewResource(R.id.play_view, R.mipmap.note_btn_play_white);
 			mSmallRemoteViews.setImageViewResource(R.id.play_view, R.mipmap.note_btn_play_white);
+			//调用后 setImageViewResource()才会生效
 			mNotificationManager.notify(NOTIFICATION_ID, mNotification);
 		}
 	}
@@ -198,7 +216,6 @@ public class NotificationHelper {
 		if (mBigRemoteViews != null) {
 			mBigRemoteViews.setImageViewResource(R.id.favourite_view,
 					isFavourite ? R.mipmap.note_btn_loved : R.mipmap.note_btn_love_white);
-			mNotificationManager.notify(NOTIFICATION_ID, mNotification);
 		}
 	}
 

@@ -17,5 +17,6 @@
         <service android:name=".mediaplayer.core.MusicService"
             android:enabled="true"
             android:exported="true"/>
+
     </application>
 </manifest>

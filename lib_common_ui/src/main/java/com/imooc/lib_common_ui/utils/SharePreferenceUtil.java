@@ -1,17 +1,16 @@
-package com.imooc.imooc_voice.util;
+package com.imooc.lib_common_ui.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
-import com.imooc.imooc_voice.Constants;
+
 import com.imooc.lib_api.model.LoginBean;
 
 import java.util.List;
 import java.util.Locale;
 
-import static com.imooc.imooc_voice.Constants.SpKey.LOCAL_MUSIC_COUNT;
 
 
 /**
@@ -58,11 +57,11 @@ public class SharePreferenceUtil {
 	}
 
 	public int getLocalMusicCount() {
-		return Integer.parseInt(getString(LOCAL_MUSIC_COUNT, "0"));
+		return Integer.parseInt(getString(Constants.SpKey.LOCAL_MUSIC_COUNT, "0"));
 	}
 
 	public void saveLocalMusicCount(int count) {
-		saveString(LOCAL_MUSIC_COUNT, String.valueOf(count));
+		saveString(Constants.SpKey.LOCAL_MUSIC_COUNT, String.valueOf(count));
 	}
 
 	/**

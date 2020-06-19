@@ -20,7 +20,7 @@ import com.imooc.lib_network.listener.DisposeDataListener;
 
 import java.util.List;
 
-import static com.imooc.imooc_voice.Constants.ALBUM;
+import static com.imooc.lib_common_ui.utils.Constants.ALBUM;
 
 public class AlbumSearchDelegate extends NeteaseSearchLoadingDelegate {
 

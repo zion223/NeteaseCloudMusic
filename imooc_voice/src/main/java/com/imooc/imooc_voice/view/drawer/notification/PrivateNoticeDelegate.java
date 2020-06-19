@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
-import com.imooc.imooc_voice.util.GsonUtil;
+import com.imooc.lib_common_ui.utils.GsonUtil;
 import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.lib_api.RequestCenter;

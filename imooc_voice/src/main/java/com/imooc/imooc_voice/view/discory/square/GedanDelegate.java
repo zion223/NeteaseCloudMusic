@@ -23,7 +23,7 @@ import com.imooc.lib_network.listener.DisposeDataListener;
 
 import java.util.List;
 
-import static com.imooc.imooc_voice.Constants.PLAYLIST;
+import static com.imooc.lib_common_ui.utils.Constants.PLAYLIST;
 
 public class GedanDelegate extends NeteaseLoadingDelegate {
 

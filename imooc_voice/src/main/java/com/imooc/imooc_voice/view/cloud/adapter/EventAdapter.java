@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
-import com.imooc.imooc_voice.util.GsonUtil;
+import com.imooc.lib_common_ui.utils.GsonUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
 import com.imooc.imooc_voice.view.user.UserDetailDelegate;
@@ -38,8 +38,8 @@ import java.util.List;
 
 import cn.jzvd.Jzvd;
 
-import static com.imooc.imooc_voice.Constants.ALBUM;
-import static com.imooc.imooc_voice.Constants.PLAYLIST;
+import static com.imooc.lib_common_ui.utils.Constants.ALBUM;
+import static com.imooc.lib_common_ui.utils.Constants.PLAYLIST;
 
 //用户动态适配器
 public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, BaseViewHolder> implements View.OnClickListener {

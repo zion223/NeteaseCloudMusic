@@ -30,6 +30,7 @@ class MusicService : Service(), NotificationHelper.NotificationHelperListener{
         super.onDestroy()
         EventBus.getDefault().unregister(this)
         unRegisterBroadcastReceiver()
+        stopForeground(true)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -76,7 +77,7 @@ class MusicService : Service(), NotificationHelper.NotificationHelperListener{
     }
 
     override fun onNotificationInit() {
-        startForeground(NotificationHelper.NOTIFICATION_ID, NotificationHelper.getInstance().getNotification());
+        //startForeground(NotificationHelper.NOTIFICATION_ID, NotificationHelper.getInstance().notification);
     }
 
     private fun registerBroadcastReceiver() {
@@ -123,6 +124,10 @@ class MusicService : Service(), NotificationHelper.NotificationHelperListener{
                 EXTRA_FAV -> {
 
                 }
+                EXTRA_CANCLE -> {
+                    //清除通知
+                    NotificationHelper.getInstance().notificationManager.cancel(NotificationHelper.NOTIFICATION_ID)
+                }
             }
         }
 
@@ -136,6 +141,7 @@ class MusicService : Service(), NotificationHelper.NotificationHelperListener{
             const val EXTRA_NEXT = "play_next"
             const val EXTRA_PRE = "play_previous"
             const val EXTRA_FAV = "play_favourite"
+            const val EXTRA_CANCLE = "cancle_notification"
         }
 
     }

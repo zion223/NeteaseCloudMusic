@@ -15,7 +15,7 @@ import com.imooc.lib_api.RequestCenter;
 import com.imooc.lib_api.model.CommonMessageBean;
 import com.imooc.lib_api.model.personal.UserPlaylistBean;
 import com.imooc.lib_audio.R;
-import com.imooc.lib_audio.mediaplayer.util.SharePreferenceUtil;
+import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
 import com.lxj.xpopup.core.CenterPopupView;

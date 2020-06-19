@@ -1,4 +1,4 @@
-package com.imooc.lib_audio.mediaplayer.util;
+package com.imooc.lib_common_ui.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -9,9 +9,8 @@ import com.google.gson.GsonBuilder;
 public class GsonUtil {
     private static final String TAG = "GsonUtil";
 
-    public static String toJson(Object obj) {
-        String result = createGson().toJson(obj);
-        return result;
+    static String toJson(Object obj) {
+        return createGson().toJson(obj);
     }
 
     private static Gson createGson() {

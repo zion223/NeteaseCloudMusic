@@ -13,7 +13,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.model.event.ArtistIdEvent;
 import com.imooc.imooc_voice.util.SearchUtil;
-import com.imooc.imooc_voice.util.SharePreferenceUtil;
+import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
 import com.imooc.imooc_voice.view.video.MvDeatilDelegate;
 import com.imooc.lib_api.RequestCenter;
 import com.imooc.lib_api.model.search.SingerVideoSearchBean;

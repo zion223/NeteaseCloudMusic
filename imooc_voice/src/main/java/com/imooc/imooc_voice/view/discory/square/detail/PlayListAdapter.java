@@ -17,8 +17,8 @@ import com.lxj.xpopup.XPopup;
 
 import java.util.List;
 
-import static com.imooc.imooc_voice.Constants.ALBUM;
-import static com.imooc.imooc_voice.Constants.SONG;
+import static com.imooc.lib_common_ui.utils.Constants.ALBUM;
+import static com.imooc.lib_common_ui.utils.Constants.SONG;
 
 //歌单的Adapter ArtistHomePage ArtistSong 用户的播放记录   创建的歌单、云盘中 中的单曲可删除
 public class PlayListAdapter extends BaseQuickAdapter<SongDetailBean.SongsBean, BaseViewHolder> {
