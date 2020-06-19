@@ -148,6 +148,8 @@ public class MusicListDialog extends BottomPopupView {
         mRecyclerView = findViewById(R.id.recycler);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
+        //定位当前播放的音乐的位置
+        int currentPosition = mQueue.indexOf(mAudioBean);
         mMusicListAdapter = new MusicListAdapter(mQueue, mAudioBean);
         mMusicListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -157,9 +159,11 @@ public class MusicListDialog extends BottomPopupView {
                 dismiss();
             }
         });
+
         mRecyclerView.setAdapter(mMusicListAdapter);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-
+        //正在播放的音乐处于中间的位置
+        mRecyclerView.scrollToPosition(currentPosition - 3);
     }
 
     private void updatePlayModeView() {
