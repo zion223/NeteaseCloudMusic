@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 
 import com.imooc.imooc_voice.view.login.SplashDelegate;
-import com.imooc.lib_audio.mediaplayer.core.AudioController;
+import com.imooc.lib_audio.app.AudioHelper;
 import com.imooc.lib_common_ui.app.Netease;
 import com.imooc.lib_common_ui.base.ProxyActivity;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
@@ -50,8 +50,8 @@ public class ImoocActivity extends ProxyActivity{
 	protected void onDestroy() {
 		super.onDestroy();
 		//保存当前播放的歌曲 进度
-		SharePreferenceUtil.getInstance(this).saveLatestSong(AudioController.getInstance().getNowPlaying());
-		SharePreferenceUtil.getInstance(this).saveMusicList(AudioController.getInstance().getQueue());
+		SharePreferenceUtil.getInstance(this).saveLatestSong(AudioHelper.getNowPlaying());
+		SharePreferenceUtil.getInstance(this).saveMusicList(AudioHelper.getCurrentQueue());
 	}
 
 	@Override

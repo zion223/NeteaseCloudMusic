@@ -31,7 +31,6 @@ public class ArtistDelegate extends NeteaseLoadingDelegate {
 	/**
 	 * data
 	 */
-	private int currentMusicPosition = -1;
 	private ArtistAdapter mAdapter;
 	private ImageLoaderManager imageLoaderManager;
 
@@ -53,17 +52,6 @@ public class ArtistDelegate extends NeteaseLoadingDelegate {
 			@Override
 			public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
-//					final MusicInfo item = (MusicInfo) adapter.getItem(position);
-//					assert item != null;
-//					AudioController.getInstance().addAudio(new AudioBean(String.valueOf(item.songId), item.data, item.musicName, item.artist, item.albumName, item.albumData, item.albumData, String.valueOf(item.duration)));
-//					//设置当前播放状态 取消上个播放状态
-//					final ImageView playView = view.findViewById(R.id.play_state);
-//					playView.setVisibility(View.VISIBLE);
-//					if(currentMusicPosition != -1){
-//						//mAdapter.notifyDataSetChanged();
-//						mAdapter.notifyItemChanged(currentMusicPosition + 1);
-//					}
-				currentMusicPosition = position;
 			}
 		});
 		recyclerView.setAdapter(mAdapter);
@@ -131,7 +119,6 @@ public class ArtistDelegate extends NeteaseLoadingDelegate {
 					if (albumView.getTag(R.id.image_loader_tag).toString().equals(String.valueOf(item.artist_id))) {
 						albumView.setTag(R.id.image_loader_tag, "set");
 						String pic = ((ArtistJson) responseObj).getResult().getArtists()[0].getImg1v1Url();
-						Log.e(TAG, item.artist_name + " pic: " + pic + " tag: " + albumView.getTag(R.id.image_loader_tag).toString());
 						imageLoaderManager.displayImageForCircle(albumView, pic);
 					}
 				}

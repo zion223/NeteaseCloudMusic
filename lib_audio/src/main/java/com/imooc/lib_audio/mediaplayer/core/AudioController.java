@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+//不允许在包外的类访问
 public class AudioController {
 
 	private static final String TAG = "AudioController";
@@ -81,7 +82,7 @@ public class AudioController {
 	}
 
 	public ArrayList<AudioBean> getQueue() {
-		return mQueue == null ? new ArrayList<AudioBean>() : mQueue;
+		return mQueue;
 	}
 
 	//添加Audio
@@ -94,7 +95,7 @@ public class AudioController {
 	}
 
 	public void addAudio(int index, AudioBean bean) {
-		if(mQueue == null){
+		if(mQueue.size() <= 0){
 			throw new AudioQueueEmptyException("");
 		}
 		int query = mQueue.indexOf(bean);
@@ -113,7 +114,7 @@ public class AudioController {
 
 	//删除单个Audio
 	public void removeAudio(AudioBean bean){
-		if(mQueue == null){
+		if(mQueue.size() <= 0){
 			throw new AudioQueueEmptyException("");
 		}
 		if(mQueue.remove(bean)){
@@ -123,7 +124,7 @@ public class AudioController {
 
 	//删除全部
 	public void removeAudio(){
-		if(mQueue == null){
+		if(mQueue.size() <= 0){
 			throw new AudioQueueEmptyException("");
 		}
 		AudioBean currentBean = getCurrentPlaying();
@@ -154,7 +155,7 @@ public class AudioController {
 	}
 
 	public void setPlayIndex(int index) {
-		if (mQueue == null) {
+		if (mQueue.size() <= 0) {
 			throw new AudioQueueEmptyException("当前播放队列为空,请先设置播放队列.");
 		}
 		mQueueIndex = index;
