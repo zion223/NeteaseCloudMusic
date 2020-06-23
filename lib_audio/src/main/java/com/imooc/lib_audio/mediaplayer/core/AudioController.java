@@ -248,7 +248,7 @@ public class AudioController {
 	}
 
 	private AudioBean getPlaying(int index) {
-		if (mQueue != null && !mQueue.isEmpty() && index >= 0 && index < mQueue.size()) {
+		if (mQueue.size() > 0 && index >= 0 && index < mQueue.size()) {
 			return mQueue.get(index);
 		} else {
 			return null;

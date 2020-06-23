@@ -1,4 +1,4 @@
-package com.imooc.lib_audio.mediaplayer.core;
+package com.imooc.lib_audio.mediaplayer.events;
 
 public class AudioBufferUpdateEvent {
 	public final int progress;
