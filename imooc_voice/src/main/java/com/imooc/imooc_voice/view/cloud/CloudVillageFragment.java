@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.imooc.imooc_voice.R;
+import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.imooc_voice.view.cloud.adapter.EventAdapter;
 import com.imooc.lib_api.RequestCenter;
 import com.imooc.lib_api.model.MainEventBean;
@@ -15,6 +16,11 @@ import com.imooc.lib_network.listener.DisposeDataListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 
 //云村
@@ -45,12 +51,29 @@ public class CloudVillageFragment extends NeteaseLoadingDelegate implements Swip
 	@Override
 	public void onRefresh() {
 		//requestData();
-		Netease.getHandler().postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				refreshLayout.setRefreshing(false);
-			}
-		}, 2000);
+		//延时操作符
+		Observable.timer(2, TimeUnit.SECONDS)
+				.subscribe(new Observer<Long>() {
+					@Override
+					public void onSubscribe(Disposable d) {
+
+					}
+
+					@Override
+					public void onNext(Long aLong) {
+						refreshLayout.setRefreshing(false);
+					}
+
+					@Override
+					public void onError(Throwable e) {
+
+					}
+
+					@Override
+					public void onComplete() {
+
+					}
+				});
 	}
 
 

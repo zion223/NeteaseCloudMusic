@@ -40,6 +40,8 @@ dependencies {
     implementation this.rootProject.depsLibs.xpopup
     implementation this.rootProject.depsLibs.gson
 
+    api 'io.reactivex.rxjava2:rxjava:2.2.7'
+    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
     //占位主工程android原生库
     compileOnly this.rootProject.depsLibs.appcompat
     compileOnly this.rootProject.depsLibs.BaseRecyclerViewAdapterHelper
