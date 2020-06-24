@@ -41,7 +41,6 @@ public class AudioPlayer implements MediaPlayer.OnCompletionListener,
 		AudioFocusManager.AudioFocusListener {
 
 	private static final String TAG = "AudioPlayer";
-	private static final int TIME_MSG = 0x01;
 	private static final int TIME_INVAL = 100;
 
 	private CustomMediaPlayer mMediaPlayer;
@@ -72,7 +71,7 @@ public class AudioPlayer implements MediaPlayer.OnCompletionListener,
 		mAudioFocusManager = new AudioFocusManager(AudioHelper.getContext(), this);
 	}
 
-	Consumer<Long> progressObservable = new Consumer<Long>() {
+	private Consumer<Long> progressObservable = new Consumer<Long>() {
 		@Override
 		public void accept(Long aLong) throws Exception {
 			if (mMediaPlayer.getState() == CustomMediaPlayer.Status.STARTED
