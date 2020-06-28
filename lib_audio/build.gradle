@@ -59,7 +59,7 @@ dependencies {
     compileOnly project(':lib_share')
     compileOnly project(':lib_api')
     compileOnly project(':lib_network')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 
 uploadArchives{
