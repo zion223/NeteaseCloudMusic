@@ -284,7 +284,7 @@ public class MusicPlayerActivity extends BaseActivity {
 			}
 		});
 		mIndictorView = findViewById(R.id.indictor_view);
-		mIndictorView.setListaner(new IndictorView.OnIndicatorViewStatusChangeListener() {
+		mIndictorView.setListener(new IndictorView.OnIndicatorViewStatusChangeListener() {
 			@Override
 			public void onDrag() {
 				//当前唱针处于播放状态时 唱针回退到初始状态

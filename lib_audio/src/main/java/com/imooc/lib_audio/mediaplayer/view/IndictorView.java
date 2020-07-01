@@ -26,7 +26,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
-public class IndictorView extends RelativeLayout implements ViewPager.OnPageChangeListener,IndictorViewPager.OnSingleTouchListener {
+public class IndictorView extends RelativeLayout implements ViewPager.OnPageChangeListener, IndictorViewPager.OnSingleTouchListener {
 
 
 	private static final String TAG = "IndictorView";
@@ -81,7 +81,7 @@ public class IndictorView extends RelativeLayout implements ViewPager.OnPageChan
 		View rootView = LayoutInflater.from(mContext).inflate(R.layout.indictor_view, this);
 		mViewPager = rootView.findViewById(R.id.view_pager);
 		mViewPager.setOverScrollMode(View.OVER_SCROLL_NEVER);
-		mMusicPagerAdapter = new MusicPagerAdapter(mQueue, mContext, null);
+		mMusicPagerAdapter = new MusicPagerAdapter(mQueue, mContext);
 		mViewPager.setAdapter(mMusicPagerAdapter);
 		showLoadView(false);
 		//要在UI初始化完，否则会多一次listener响应
@@ -181,6 +181,7 @@ public class IndictorView extends RelativeLayout implements ViewPager.OnPageChan
 		}
 	}
 
+	
 	/*
 	 * 显示播放动画
 	 */
@@ -195,7 +196,7 @@ public class IndictorView extends RelativeLayout implements ViewPager.OnPageChan
 		}
 	}
 
-	void setListaner(OnIndicatorViewStatusChangeListener listener){
+	void setListener(OnIndicatorViewStatusChangeListener listener){
 		this.mListener = listener;
 	}
 
