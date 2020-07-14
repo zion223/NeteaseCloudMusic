@@ -24,8 +24,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api 'com.android.support:support-v4:25.3.1'
     api this.rootProject.depsLibs.butterknife
+    api this.rootProject.depsLibs.support
     api this.rootProject.depsLibs.cvbanner
     api this.rootProject.depsLibs.fragmentation
 
@@ -40,8 +40,8 @@ dependencies {
     implementation this.rootProject.depsLibs.multidex
     implementation this.rootProject.depsLibs.xpopup
     implementation this.rootProject.depsLibs.vptransforms
-    annotationProcessor this.rootProject.depsLibs.butterknife_compiler
     implementation rootProject.depsLibs.glide
+    annotationProcessor this.rootProject.depsLibs.butterknife_compiler
 
     compileOnly project(':lib_image_loader')
     implementation project(path: ':lib_api')

@@ -9,7 +9,8 @@ ext{
             versionName      : '1.0',
             multiDexEnabled: true ]
     depsVersion = [
-        appcompat: "28.0.0",
+        appcompat      : "28.0.0",
+        support        : "25.3.1",
         magicindicator : '1.5.0',
         okhttp         : '3.3.0',
         gson           : '2.8.0',
@@ -29,6 +30,7 @@ ext{
         butterknife    : '8.4.0',
         cvbanner       : '2.0.5',
         fragmentation  : '1.2.4',
+        cookiejar      : 'v1.0.1',
         butterknife_compiler               : '8.6.0',
         GroupedRecyclerViewAdapter         : '1.3.7',
         BaseRVAdapterHelper                : '2.9.22',
@@ -37,6 +39,7 @@ ext{
     ]
     depsLibs = [
             appcompat      : "com.android.support:appcompat-v7:${depsVersion.appcompat}",
+            support        : "com.android.support:support-v4:${depsVersion.support}",
             magicindicator : "com.github.hackware1993:MagicIndicator:${depsVersion.magicindicator}",
             okhttp         : "com.squareup.okhttp3:okhttp:${depsVersion.okhttp}",
             gson           : "com.google.code.gson:gson:${depsVersion.gson}",
@@ -58,6 +61,7 @@ ext{
             cvbanner       : "com.bigkoo:convenientbanner:${depsVersion.cvbanner}",
             design         : "com.android.support:design:${depsVersion.design}",
             cardview       : "com.android.support:cardview-v7:${depsVersion.cardview}",
+            cookieJar      : "com.github.franmontiel:PersistentCookieJar:${depsVersion.cookiejar}",
             GroupedRecyclerViewAdapter            : "com.github.donkingliang:GroupedRecyclerViewAdapter:${depsVersion.GroupedRecyclerViewAdapter}",
             BaseRecyclerViewAdapterHelper         : "com.github.CymChad:BaseRecyclerViewAdapterHelper:${depsVersion.BaseRVAdapterHelper}",
             butterknife_compiler                  : "com.jakewharton:butterknife-compiler:${depsVersion.butterknife_compiler}",

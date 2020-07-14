@@ -24,8 +24,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
     api rootProject.depsLibs.okhttp //okttp依赖
+    api rootProject.depsLibs.cookieJar //cookie依赖
     api rootProject.depsLibs.gson
 
 }
