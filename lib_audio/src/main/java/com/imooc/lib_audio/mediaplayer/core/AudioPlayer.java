@@ -1,16 +1,15 @@
 package com.imooc.lib_audio.mediaplayer.core;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.wifi.WifiManager;
 import android.os.Build;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.os.PowerManager;
 import android.util.Log;
 
+import com.imooc.lib_api.model.AudioBean;
 import com.imooc.lib_audio.app.AudioHelper;
 import com.imooc.lib_audio.mediaplayer.events.AudioBufferUpdateEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioCompleteEvent;
@@ -20,11 +19,14 @@ import com.imooc.lib_audio.mediaplayer.events.AudioPauseEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioProgressEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioReleaseEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioStartEvent;
-import com.imooc.lib_api.model.AudioBean;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
 
 import static android.media.MediaPlayer.SEEK_CLOSEST;
 
@@ -36,10 +38,9 @@ public class AudioPlayer implements MediaPlayer.OnCompletionListener,
 		MediaPlayer.OnBufferingUpdateListener,
 		MediaPlayer.OnPreparedListener,
 		MediaPlayer.OnErrorListener,
-		AudioFocusManager.AudioFocusListener{
+		AudioFocusManager.AudioFocusListener {
 
 	private static final String TAG = "AudioPlayer";
-	private static final int TIME_MSG = 0x01;
 	private static final int TIME_INVAL = 100;
 
 	private CustomMediaPlayer mMediaPlayer;
@@ -48,7 +49,7 @@ public class AudioPlayer implements MediaPlayer.OnCompletionListener,
 
 	private boolean isPausedByFocusLossTransient;
 
-	public AudioPlayer(){
+	public AudioPlayer() {
 		init();
 	}
 
@@ -70,23 +71,19 @@ public class AudioPlayer implements MediaPlayer.OnCompletionListener,
 		mAudioFocusManager = new AudioFocusManager(AudioHelper.getContext(), this);
 	}
 
-
-	private final Handler mHandler = new Handler(Looper.getMainLooper()){
+	private Consumer<Long> progressObservable = new Consumer<Long>() {
 		@Override
-		public void handleMessage(Message msg) {
-			if (msg.what == TIME_MSG) {
-				if (mMediaPlayer.getState() == CustomMediaPlayer.Status.STARTED
-						|| mMediaPlayer.getState() == CustomMediaPlayer.Status.PAUSED) {
-					//播放进度
-					EventBus.getDefault().post(new AudioProgressEvent(mMediaPlayer.getState(), getCurrentPosition(), getDuration()));
-					//TIME_INVAL 时间后重新发送 Message
-					sendEmptyMessageDelayed(TIME_MSG, TIME_INVAL);
-				}
+		public void accept(Long aLong) throws Exception {
+			if (mMediaPlayer.getState() == CustomMediaPlayer.Status.STARTED
+					|| mMediaPlayer.getState() == CustomMediaPlayer.Status.PAUSED) {
+				//播放进度
+				EventBus.getDefault().post(new AudioProgressEvent(mMediaPlayer.getState(), getCurrentPosition(), getDuration()));
 			}
 		}
 	};
 
-	public void load(AudioBean bean){
+
+	public void load(AudioBean bean) {
 		try {
 			mMediaPlayer.reset();
 			mMediaPlayer.setDataSource(bean.getUrl());
@@ -106,16 +103,16 @@ public class AudioPlayer implements MediaPlayer.OnCompletionListener,
 	/**
 	 * 恢复播放
 	 */
-	public void resume(){
-		if(getState() == CustomMediaPlayer.Status.PAUSED){
+	public void resume() {
+		if (getState() == CustomMediaPlayer.Status.PAUSED) {
 			start();
 		}
 	}
 
 	/**
-	 * 	跳转到指定时间播放
+	 * 跳转到指定时间播放
 	 */
-	public void seekTo(long time){
+	public void seekTo(long time) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 			mMediaPlayer.seekTo(time, SEEK_CLOSEST);
 		}
@@ -124,15 +121,15 @@ public class AudioPlayer implements MediaPlayer.OnCompletionListener,
 	/**
 	 * 暂停播放
 	 */
-	public void pause(){
-		if(getState() == CustomMediaPlayer.Status.STARTED){
+	public void pause() {
+		if (getState() == CustomMediaPlayer.Status.STARTED) {
 			mMediaPlayer.pause();
 			//释放wifi锁
-			if(mWifiLock.isHeld()){
+			if (mWifiLock.isHeld()) {
 				mWifiLock.release();
 			}
 			//释放音频焦点
-			if(mAudioFocusManager != null){
+			if (mAudioFocusManager != null) {
 				mAudioFocusManager.abandonAudioFocus();
 			}
 			//发送暂停事件
@@ -144,15 +141,15 @@ public class AudioPlayer implements MediaPlayer.OnCompletionListener,
 	/**
 	 * 释放资源
 	 */
-	public void release(){
-		if(mMediaPlayer != null){
+	public void release() {
+		if (mMediaPlayer != null) {
 			mMediaPlayer.release();
 			mMediaPlayer = null;
-			if(mWifiLock.isHeld()){
+			if (mWifiLock.isHeld()) {
 				mWifiLock.release();
 			}
 			//释放音频焦点
-			if(mAudioFocusManager != null){
+			if (mAudioFocusManager != null) {
 				mAudioFocusManager.abandonAudioFocus();
 			}
 			//发送销毁事件
@@ -166,21 +163,23 @@ public class AudioPlayer implements MediaPlayer.OnCompletionListener,
 	 * 获取当前播放器状态
 	 */
 	public CustomMediaPlayer.Status getState() {
-		if(mMediaPlayer != null){
+		if (mMediaPlayer != null) {
 			return mMediaPlayer.getState();
 		}
 		return CustomMediaPlayer.Status.STOPPED;
 	}
 
 
-	private void start(){
-		if(!mAudioFocusManager.requestAudioFocus()){
+	@SuppressLint("CheckResult")
+	private void start() {
+		if (!mAudioFocusManager.requestAudioFocus()) {
 			Log.e(TAG, "requestAudioFocus失败");
 		}
 		mMediaPlayer.start();
 		mWifiLock.acquire();
 		//更新进度
-		mHandler.sendEmptyMessage(TIME_MSG);
+		Observable.interval(TIME_INVAL, TimeUnit.MILLISECONDS)
+				.subscribe(progressObservable);
 		//对外发送start事件
 		EventBus.getDefault().post(new AudioStartEvent());
 		Log.e(TAG, "AudioStartEvent");
@@ -202,8 +201,8 @@ public class AudioPlayer implements MediaPlayer.OnCompletionListener,
 
 	/**
 	 * true if the method handled the error, false if it didn't.
-	 *  Returning false, or not having an OnErrorListener at all, will
-	 *  cause the OnCompletionListener to be called.
+	 * Returning false, or not having an OnErrorListener at all, will
+	 * cause the OnCompletionListener to be called.
 	 */
 	@Override
 	public boolean onError(MediaPlayer mp, int what, int extra) {
@@ -223,12 +222,11 @@ public class AudioPlayer implements MediaPlayer.OnCompletionListener,
 	@Override
 	public void audioFocusGrant() {
 		setVolumn(1.0f, 1.0f);
-		if(isPausedByFocusLossTransient){
+		if (isPausedByFocusLossTransient) {
 			resume();
 		}
 		isPausedByFocusLossTransient = false;
 	}
-
 
 
 	@Override
@@ -250,6 +248,7 @@ public class AudioPlayer implements MediaPlayer.OnCompletionListener,
 		setVolumn(0.5f, 0.5f);
 
 	}
+
 	/**
 	 * 获取当前音乐总时长,更新进度用
 	 */
