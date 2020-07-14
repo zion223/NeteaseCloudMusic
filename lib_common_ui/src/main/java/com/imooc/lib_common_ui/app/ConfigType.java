@@ -8,5 +8,4 @@ public enum ConfigType {
     INTERCEPTOR,
     HANDLER,
     ACTIVITY,
-    JAVASCRIPT_INTERFACE
 }

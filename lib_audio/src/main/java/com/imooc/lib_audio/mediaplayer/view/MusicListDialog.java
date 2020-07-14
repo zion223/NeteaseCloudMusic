@@ -242,11 +242,10 @@ public class MusicListDialog extends BottomPopupView {
             helper.setOnClickListener(R.id.item_delete, new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    AudioController.getInstance().removeAudio(item);
                     if(mCurrentBean == item){
-                        //TODO 不可移除当前播放的歌曲
-                        Toast.makeText(mContext, "不支持删除正在播放的音乐", Toast.LENGTH_SHORT).show();
-                    }else{
-                        AudioController.getInstance().removeAudio(item);
+                        //如果是移除当前播放的音乐则切换到下一首
+                        AudioController.getInstance().next();
                     }
                 }
             });

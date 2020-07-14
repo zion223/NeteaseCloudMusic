@@ -471,7 +471,7 @@ public class LrcView extends View {
 			if (i == mCurrentLine) {
 				mLrcPaint.setTextSize(mCurrentTextSize);
 				mLrcPaint.setColor(mCurrentTextColor);
-				//中间行歌词显示在BottomMusicView上 TODO
+				//中间行歌词显示在BottomMusicView上 LrcView生命周期与BottomMusicView不同  TODO
 				Log.e("LrcView", mLrcEntryList.get(mCurrentLine).getText());
 			} else if (isShowTimeline && i == centerLine) {
 				mLrcPaint.setColor(mTimelineTextColor);

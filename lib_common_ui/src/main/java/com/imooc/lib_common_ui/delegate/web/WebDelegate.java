@@ -6,8 +6,6 @@ import android.support.annotation.Nullable;
 import android.webkit.WebView;
 
 
-import com.imooc.lib_common_ui.app.ConfigType;
-import com.imooc.lib_common_ui.app.Netease;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.delegate.web.route.RouteKeys;
 
@@ -56,9 +54,6 @@ public abstract class WebDelegate extends NeteaseDelegate {
 				//设置webChromeClient
 				mWebView.setWebChromeClient(initializer.initWebChromeClient());
 				//注入JS接口  在Configurator中加载的
-				final String name = Netease.getConfiguration(ConfigType.JAVASCRIPT_INTERFACE.name());
-				//TODO 可配置
-				mWebView.addJavascriptInterface(LatteWebInterface.create(this), "latte");
 				mIsWebViewAvilable = true;
 			}else{
 				throw new NullPointerException("initializer is null");

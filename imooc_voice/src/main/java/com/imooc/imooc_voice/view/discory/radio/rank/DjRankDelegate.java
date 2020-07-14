@@ -9,7 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -122,11 +121,13 @@ public class DjRankDelegate extends NeteaseLoadingDelegate implements BaseQuickA
 		if(baseQuickAdapter.getItem(i) instanceof DjRankListBean.List){
 			//最热主播数据
 			DjRankListBean.List entity = (DjRankListBean.List) baseQuickAdapter.getItem(i);
-			getParentDelegate().getSupportDelegate().start(UserDetailDelegate.newInstance(entity.getId()));
+			if(entity != null){
+				getParentDelegate().getSupportDelegate().start(UserDetailDelegate.newInstance(entity.getId()));
+			}
 		}else{
 			//排行榜个人详情
 			DjToplistEntity entity = (DjToplistEntity) baseQuickAdapter.getItem(i);
-			if(entity.t != null){
+			if(entity != null && entity.t != null){
 				getParentDelegate().getSupportDelegate().start(UserDetailDelegate.newInstance(entity.t.getId()));
 			}else{
 				//点击了头部 查看排行榜详情 TODO
