@@ -41,17 +41,8 @@ public class Configurator {
         return (T) LATTE_CONFIGS.get(key);
     }
 
-    public final Configurator withApiHost(String host){
-        LATTE_CONFIGS.put(ConfigType.API_HOST.name(),host);
-        return this;
-    }
-
     public final Configurator withActivity(Activity activity) {
         LATTE_CONFIGS.put(ConfigType.ACTIVITY.name(), activity);
-        return this;
-    }
-    public final Configurator withJavascriptInterface(String name) {
-        LATTE_CONFIGS.put(ConfigType.JAVASCRIPT_INTERFACE.name(),name);
         return this;
     }
 
