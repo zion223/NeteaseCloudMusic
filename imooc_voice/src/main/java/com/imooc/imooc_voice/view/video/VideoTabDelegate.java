@@ -16,7 +16,7 @@ import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.view.video.mv.MvDelegate;
 import com.imooc.lib_api.RequestCenter;
-import com.imooc.lib_api.model.VideoGroupBean;
+import com.imooc.lib_api.model.mv.VideoGroupBean;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.navigator.CommonNavigatorCreater;
 import com.imooc.lib_network.listener.DisposeDataListener;

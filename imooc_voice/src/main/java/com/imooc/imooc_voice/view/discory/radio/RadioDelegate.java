@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -17,7 +16,7 @@ import com.imooc.imooc_voice.view.discory.radio.detail.RadioDetailDelegate;
 import com.imooc.imooc_voice.view.discory.radio.pay.RadioPayDelegate;
 import com.imooc.imooc_voice.view.discory.radio.rank.RankDelegate;
 import com.imooc.lib_api.RequestCenter;
-import com.imooc.lib_api.model.DjBannerBean;
+import com.imooc.lib_api.model.dj.DjBannerBean;
 import com.imooc.lib_api.model.dj.DjRecommendBean;
 import com.imooc.lib_common_ui.bannder.BannerCreator;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;

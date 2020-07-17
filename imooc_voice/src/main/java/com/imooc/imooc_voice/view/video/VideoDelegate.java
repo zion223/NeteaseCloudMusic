@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -14,8 +13,8 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.lib_api.RequestCenter;
-import com.imooc.lib_api.model.VideoBean;
-import com.imooc.lib_api.model.VideoUrlBean;
+import com.imooc.lib_api.model.mv.VideoBean;
+import com.imooc.lib_api.model.mv.VideoUrlBean;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;

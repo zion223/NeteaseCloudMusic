@@ -16,7 +16,7 @@ import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
 import com.imooc.lib_api.RequestCenter;
-import com.imooc.lib_api.model.RecommendPlayListBean;
+import com.imooc.lib_api.model.playlist.RecommendPlayListBean;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;

@@ -18,7 +18,7 @@ import com.imooc.lib_audio.mediaplayer.events.AudioLoadEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioPauseEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioProgressEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioStartEvent;
-import com.imooc.lib_api.model.AudioBean;
+import com.imooc.lib_api.model.song.AudioBean;
 import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
 import com.imooc.lib_common_ui.widget.CircleProgressButton;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;

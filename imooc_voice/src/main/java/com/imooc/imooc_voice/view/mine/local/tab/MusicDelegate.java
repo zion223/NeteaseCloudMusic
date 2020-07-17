@@ -17,7 +17,7 @@ import com.imooc.imooc_voice.util.IConstants;
 import com.imooc.imooc_voice.util.MusicUtils;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.lib_audio.app.AudioHelper;
-import com.imooc.lib_api.model.AudioBean;
+import com.imooc.lib_api.model.song.AudioBean;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 
 import java.util.ArrayList;

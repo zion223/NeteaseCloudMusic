@@ -5,7 +5,7 @@ import android.content.Context;
 
 import com.imooc.lib_audio.mediaplayer.core.AudioController;
 import com.imooc.lib_audio.mediaplayer.core.MusicService;
-import com.imooc.lib_api.model.AudioBean;
+import com.imooc.lib_api.model.song.AudioBean;
 import com.imooc.lib_audio.mediaplayer.view.MusicPlayerActivity;
 
 import java.util.ArrayList;

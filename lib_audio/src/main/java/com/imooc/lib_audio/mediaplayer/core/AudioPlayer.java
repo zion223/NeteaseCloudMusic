@@ -9,7 +9,7 @@ import android.os.Build;
 import android.os.PowerManager;
 import android.util.Log;
 
-import com.imooc.lib_api.model.AudioBean;
+import com.imooc.lib_api.model.song.AudioBean;
 import com.imooc.lib_audio.app.AudioHelper;
 import com.imooc.lib_audio.mediaplayer.events.AudioBufferUpdateEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioCompleteEvent;

@@ -22,7 +22,7 @@ import com.imooc.lib_api.HttpConstants;
 import com.imooc.lib_api.RequestCenter;
 import com.imooc.lib_api.model.search.SongSearchBean;
 import com.imooc.lib_audio.app.AudioHelper;
-import com.imooc.lib_api.model.AudioBean;
+import com.imooc.lib_api.model.song.AudioBean;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_network.listener.DisposeDataListener;
 

@@ -18,7 +18,7 @@ import com.imooc.lib_api.model.notification.UserCloudBean;
 import com.imooc.lib_api.model.song.SongDetailBean;
 import com.imooc.lib_api.model.song.SongUrlBean;
 import com.imooc.lib_audio.app.AudioHelper;
-import com.imooc.lib_api.model.AudioBean;
+import com.imooc.lib_api.model.song.AudioBean;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_network.listener.DisposeDataListener;
 

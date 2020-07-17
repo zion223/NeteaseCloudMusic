@@ -3,14 +3,12 @@ package com.imooc.lib_common_ui.utils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.provider.SyncStateContract;
 import android.text.TextUtils;
 
 
-import com.imooc.lib_api.model.AudioBean;
-import com.imooc.lib_api.model.LoginBean;
+import com.imooc.lib_api.model.song.AudioBean;
+import com.imooc.lib_api.model.user.LoginBean;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
