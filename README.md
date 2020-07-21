@@ -2,7 +2,7 @@
 仿网易云音乐Android客户端V6.1版本
 
 
-## 应用展示
+## 应用运行gif展示
 
 ![avatar](/imooc_voice/src/main/res/raw/发现1.gif) ![avatar](/imooc_voice/src/main/res/raw/发现2.gif)
 ![avatar](/imooc_voice/src/main/res/raw/发现3.gif) ![avatar](/imooc_voice/src/main/res/raw/云村.gif)
