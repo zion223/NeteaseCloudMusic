@@ -592,7 +592,7 @@ public class SynthesisSearchBean {
                     private int gender;
                     private int city;
                     private long birthday;
-                    private int userId;
+                    private String userId;
                     private int userType;
                     private String nickname;
                     private String signature;
@@ -684,11 +684,11 @@ public class SynthesisSearchBean {
                         this.birthday = birthday;
                     }
 
-                    public int getUserId() {
+                    public String getUserId() {
                         return userId;
                     }
 
-                    public void setUserId(int userId) {
+                    public void setUserId(String userId) {
                         this.userId = userId;
                     }
 

@@ -85,7 +85,7 @@ public class SearchDelegate extends NeteaseDelegate {
 
     @OnClick(R2.id.img_search_artist)
     void onClickArtistSort(){
-        getParentDelegate().getSupportDelegate().start(new ArtistSortDelegate());
+        getSupportDelegate().start(new ArtistSortDelegate());
     }
 
     @OnClick(R2.id.img_suggest_back)

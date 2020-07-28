@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'org.greenrobot.greendao'
+//apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'maven'
 
 
@@ -29,11 +29,11 @@ android {
     }
 
 }
-greendao {
-    //其它配置保持默认,有需要再研究
-    schemaVersion 1 //数据库版本号
-    //daoPackage 'com.imooc.lib_audio.mediaplayer.db' //dao,master类所在包
-}
+//greendao {
+//    //其它配置保持默认,有需要再研究
+//    schemaVersion 1 //数据库版本号
+//    //daoPackage 'com.imooc.lib_audio.mediaplayer.db' //dao,master类所在包
+//}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
