@@ -29,7 +29,7 @@ import com.imooc.lib_api.model.search.SynthesisSearchBean;
 import com.imooc.lib_api.model.search.UserSearchBean;
 import com.imooc.lib_api.model.song.SongDetailBean;
 import com.imooc.lib_audio.app.AudioHelper;
-import com.imooc.lib_api.model.AudioBean;
+import com.imooc.lib_api.model.song.AudioBean;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.listener.DisposeDataListener;
 

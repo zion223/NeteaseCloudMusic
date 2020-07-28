@@ -11,7 +11,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.view.discory.square.detail.SongListDetailDelegate;
 import com.imooc.lib_api.RequestCenter;
-import com.imooc.lib_api.model.AlbumSublistBean;
+import com.imooc.lib_api.model.album.AlbumSublistBean;
 import com.imooc.lib_api.model.search.AlbumSearchBean;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;

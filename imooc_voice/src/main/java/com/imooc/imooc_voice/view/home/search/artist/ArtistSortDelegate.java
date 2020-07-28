@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -15,8 +14,8 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
 import com.imooc.lib_api.RequestCenter;
-import com.imooc.lib_api.model.ArtistListBean;
-import com.imooc.lib_api.model.TopListDetailBean;
+import com.imooc.lib_api.model.artist.ArtistListBean;
+import com.imooc.lib_api.model.playlist.TopListDetailBean;
 import com.imooc.lib_api.model.dj.DjSubBean;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;

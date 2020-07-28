@@ -10,7 +10,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.view.home.search.artist.ArtistDetailDelegate;
 import com.imooc.lib_api.RequestCenter;
-import com.imooc.lib_api.model.ArtistSublistBean;
+import com.imooc.lib_api.model.artist.ArtistSublistBean;
 import com.imooc.lib_api.model.search.SingerSearchBean;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;

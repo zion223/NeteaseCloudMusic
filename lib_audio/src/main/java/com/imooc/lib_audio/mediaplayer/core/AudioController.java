@@ -8,7 +8,7 @@ import com.imooc.lib_audio.mediaplayer.events.AudioErrorEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioPlayModeEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioRemoveEvent;
 import com.imooc.lib_audio.mediaplayer.exception.AudioQueueEmptyException;
-import com.imooc.lib_api.model.AudioBean;
+import com.imooc.lib_api.model.song.AudioBean;
 import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
 
 import org.greenrobot.eventbus.EventBus;

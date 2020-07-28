@@ -17,7 +17,7 @@ import com.imooc.imooc_voice.util.SearchUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.imooc_voice.view.video.MvDeatilDelegate;
 import com.imooc.lib_api.RequestCenter;
-import com.imooc.lib_api.model.MvBean;
+import com.imooc.lib_api.model.mv.MvBean;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_common_ui.dialog.MvSortDialog;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;

@@ -62,9 +62,9 @@ public class SingerDescriptionBean {
         /**
          * ti : 水树奈奈
          * txt : 出生年月：1980年1月21日
-         出生地：爱媛县
-         兴趣：音乐鉴赏
-         特长：书法
+         * 出生地：爱媛县
+         * 兴趣：音乐鉴赏
+         * 特长：书法
          */
 
         private String ti;

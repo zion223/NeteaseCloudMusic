@@ -15,7 +15,7 @@ import com.imooc.lib_audio.R;
 import com.imooc.lib_audio.app.AudioHelper;
 import com.imooc.lib_audio.mediaplayer.core.AudioController;
 import com.imooc.lib_audio.mediaplayer.core.MusicService;
-import com.imooc.lib_api.model.AudioBean;
+import com.imooc.lib_api.model.song.AudioBean;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 
 public class NotificationHelper {

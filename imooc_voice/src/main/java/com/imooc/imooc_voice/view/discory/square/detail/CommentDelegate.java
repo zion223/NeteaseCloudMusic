@@ -24,7 +24,7 @@ import com.imooc.imooc_voice.util.AnimUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
 import com.imooc.imooc_voice.view.user.UserDetailDelegate;
 import com.imooc.lib_api.RequestCenter;
-import com.imooc.lib_api.model.PlayListCommentEntity;
+import com.imooc.lib_api.model.playlist.PlayListCommentEntity;
 import com.imooc.lib_api.model.song.CommentLikeBean;
 import com.imooc.lib_api.model.song.MusicCommentBean;
 import com.imooc.lib_api.model.song.PlayListCommentBean;

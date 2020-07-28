@@ -7,8 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.view.cloud.adapter.EventAdapter;
 import com.imooc.lib_api.RequestCenter;
-import com.imooc.lib_api.model.MainEventBean;
-import com.imooc.lib_api.model.personal.UserEventBean;
+import com.imooc.lib_api.model.user.MainEventBean;
+import com.imooc.lib_api.model.user.UserEventBean;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_network.listener.DisposeDataListener;
 

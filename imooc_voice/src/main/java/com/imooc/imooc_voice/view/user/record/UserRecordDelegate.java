@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.view.discory.square.detail.PlayListAdapter;
 import com.imooc.lib_api.RequestCenter;
-import com.imooc.lib_api.model.UserRecordBean;
+import com.imooc.lib_api.model.user.UserRecordBean;
 import com.imooc.lib_api.model.song.SongDetailBean;
 import com.imooc.lib_common_ui.delegate.NeteaseLoadingDelegate;
 import com.imooc.lib_network.listener.DisposeDataListener;

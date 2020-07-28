@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -20,7 +19,7 @@ import com.imooc.lib_audio.mediaplayer.core.AudioController;
 import com.imooc.lib_audio.mediaplayer.events.AudioLoadEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioPlayModeEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioRemoveEvent;
-import com.imooc.lib_api.model.AudioBean;
+import com.imooc.lib_api.model.song.AudioBean;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.core.BottomPopupView;
 

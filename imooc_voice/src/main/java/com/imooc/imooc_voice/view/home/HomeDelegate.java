@@ -33,7 +33,7 @@ import com.imooc.imooc_voice.view.login.LoginDelegate;
 import com.imooc.imooc_voice.view.home.search.SearchDelegate;
 import com.imooc.imooc_voice.view.user.UserDetailDelegate;
 import com.imooc.lib_api.RequestCenter;
-import com.imooc.lib_api.model.LoginBean;
+import com.imooc.lib_api.model.user.LoginBean;
 import com.imooc.lib_common_ui.VerticalItemView;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;

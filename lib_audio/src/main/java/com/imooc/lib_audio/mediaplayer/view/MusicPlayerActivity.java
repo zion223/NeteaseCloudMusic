@@ -25,7 +25,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.imooc.lib_api.RequestCenter;
-import com.imooc.lib_api.model.LikeListBean;
+import com.imooc.lib_api.model.user.LikeListBean;
 import com.imooc.lib_api.model.song.LikeMusicBean;
 import com.imooc.lib_api.model.song.LyricBean;
 import com.imooc.lib_api.model.song.PlayListCommentBean;
@@ -38,7 +38,7 @@ import com.imooc.lib_audio.mediaplayer.events.AudioPauseEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioPlayModeEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioProgressEvent;
 import com.imooc.lib_audio.mediaplayer.events.AudioStartEvent;
-import com.imooc.lib_api.model.AudioBean;
+import com.imooc.lib_api.model.song.AudioBean;
 import com.imooc.lib_audio.mediaplayer.util.Utils;
 import com.imooc.lib_common_ui.base.BaseActivity;
 import com.imooc.lib_common_ui.lrc.LrcView;

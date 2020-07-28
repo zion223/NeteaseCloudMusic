@@ -1,7 +1,7 @@
 package com.imooc.lib_api.model.notification;
 
 
-import com.imooc.lib_api.model.personal.UserEventBean;
+import com.imooc.lib_api.model.user.UserEventBean;
 
 import java.util.ArrayList;
 
