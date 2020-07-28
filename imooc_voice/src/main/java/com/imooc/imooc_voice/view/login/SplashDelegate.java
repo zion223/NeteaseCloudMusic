@@ -2,7 +2,6 @@ package com.imooc.imooc_voice.view.login;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -15,6 +14,12 @@ import com.imooc.imooc_voice.util.ScreenUtils;
 import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
 import com.imooc.imooc_voice.view.home.HomeDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
+
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 public class SplashDelegate extends NeteaseDelegate {
 
@@ -32,28 +37,34 @@ public class SplashDelegate extends NeteaseDelegate {
 
 	@Override
 	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) {
-		startCountDownTime();
+		Observable.timer(2, TimeUnit.SECONDS)
+				.subscribe(new Observer<Long>() {
+					@Override
+					public void onSubscribe(Disposable d) {
+
+					}
+
+					@Override
+					public void onNext(Long aLong) {
+						String authToken = SharePreferenceUtil.getInstance(getContext()).getAuthToken("");
+						if (TextUtils.isEmpty(authToken)) {
+							getSupportDelegate().startWithPop(new LoginDelegate());
+						} else {
+							getSupportDelegate().startWithPop(new HomeDelegate());
+						}
+					}
+
+					@Override
+					public void onError(Throwable e) {
+
+					}
+
+					@Override
+					public void onComplete() {
+
+					}
+				});
 	}
 
-	private void startCountDownTime() {
-		final CountDownTimer countDownTimer = new CountDownTimer(2000, 1000) {
-			@Override
-			public void onTick(long millisUntilFinished) {
-
-			}
-
-			@Override
-			public void onFinish() {
-				String authToken = SharePreferenceUtil.getInstance(getContext()).getAuthToken("");
-				if (TextUtils.isEmpty(authToken)) {
-					getSupportDelegate().startWithPop(new LoginDelegate());
-				} else {
-					getSupportDelegate().startWithPop(new HomeDelegate());
-				}
-
-			}
-		};
-		countDownTimer.start();
-	}
 
 }
