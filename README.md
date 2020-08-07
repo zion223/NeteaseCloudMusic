@@ -2,7 +2,7 @@
 仿网易云音乐Android客户端V6.1版本
 
 
-## 应用展示
+## 应用运行gif展示
 
 ![avatar](/screenshot/发现1.gif) ![avatar](/screenshot/发现2.gif)
 ![avatar](/screenshot/发现3.gif) ![avatar](/screenshot/云村.gif)
