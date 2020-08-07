@@ -63,7 +63,7 @@ public class MvRankDelegate extends NeteaseLoadingDelegate {
 			public void onSuccess(Object responseObj) {
 				MvTopBean bean = (MvTopBean) responseObj;
 				ArrayList<MvTopBean.MvTopDetailBean> data = bean.getData();
-				((TextView)headerView.findViewById(R.id.tv_item_multiple_search_header)).setText("更新时间: " + TimeUtil.getTimeStandardOnlyMDChinese(bean.getUpdateTime()));
+				//((TextView)headerView.findViewById(R.id.tv_item_multiple_search_header)).setText("更新时间: " + TimeUtil.getTimeStandardOnlyMDChinese(bean.getUpdateTime()));
 				mAdapter = new MvTopAdapter(data);
 				mAdapter.setHeaderView(headerView);
 				//MV详情

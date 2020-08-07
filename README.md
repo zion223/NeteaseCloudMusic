@@ -4,11 +4,11 @@
 
 ## 应用展示
 
-![avatar](/imooc_voice/src/main/res/raw/发现1.gif) ![avatar](/imooc_voice/src/main/res/raw/发现2.gif)
-![avatar](/imooc_voice/src/main/res/raw/发现3.gif) ![avatar](/imooc_voice/src/main/res/raw/云村.gif)
-![avatar](/imooc_voice/src/main/res/raw/电台.gif) ![avatar](/imooc_voice/src/main/res/raw/搜索1.gif)
-![avatar](/imooc_voice/src/main/res/raw/搜索2.gif) ![avatar](/imooc_voice/src/main/res/raw/视频1.gif)
-![avatar](/imooc_voice/src/main/res/raw/视频2.gif) ![avatar](/imooc_voice/src/main/res/raw/通知.gif)
+![avatar](/screenshot/发现1.gif) ![avatar](/screenshot/发现2.gif)
+![avatar](/screenshot/发现3.gif) ![avatar](/screenshot/云村.gif)
+![avatar](/screenshot/电台.gif) ![avatar](/screenshot/搜索1.gif)
+![avatar](/screenshot/搜索2.gif) ![avatar](/screenshot/视频1.gif)
+![avatar](/screenshot/视频2.gif) ![avatar](/screenshot/通知.gif)
 
 
 ## App介绍

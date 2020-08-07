@@ -42,9 +42,6 @@ import com.imooc.imooc_voice.model.newapi.dj.DjSubBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjSubListBean;
 import com.imooc.imooc_voice.model.newapi.dj.DjTopListBean;
 import com.imooc.imooc_voice.model.newapi.manager.MusicCanPlayBean;
-import com.imooc.imooc_voice.model.newapi.notification.PrivateCommentBean;
-import com.imooc.imooc_voice.model.newapi.notification.PrivateMsgBean;
-import com.imooc.imooc_voice.model.newapi.notification.UserCloudBean;
 import com.imooc.imooc_voice.model.newapi.personal.UserDetailBean;
 import com.imooc.imooc_voice.model.newapi.personal.UserEventBean;
 import com.imooc.imooc_voice.model.newapi.personal.UserPlaylistBean;
@@ -780,31 +777,7 @@ public class RequestCenter {
         RequestCenter.getRequest(HttpConstants.VIDEO_URL, params, listener, VideoUrlBean.class);
     }
 
-    /**
-     *  获取私信
-     */
-    public static void getPrivateMsg(int limit, DisposeDataListener listener){
-        RequestParams params = new RequestParams();
-        params.put("limit", limit);
-        RequestCenter.getRequest(HttpConstants.MSG_PRIVATE, params, listener, PrivateMsgBean.class);
-    }
 
-    /**
-     *  获取评论
-     */
-    public static void getPrivateComment(int id, DisposeDataListener listener){
-        RequestParams params = new RequestParams();
-        params.put("uid", id);
-        RequestCenter.getRequest(HttpConstants.MSG_COMMENT, params, listener, PrivateCommentBean.class);
-    }
-
-    /**
-     *  获取云盘数据
-     */
-    public static void getUserCloud(DisposeDataListener listener){
-
-        RequestCenter.getRequest(HttpConstants.USER_CLOUD, null, listener, UserCloudBean.class);
-    }
     /**
      * 查询歌手图片
      * eg. http://music.163.com/api/search/get/web?s=邓紫棋&type=100
