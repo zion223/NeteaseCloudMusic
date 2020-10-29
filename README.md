@@ -1,5 +1,5 @@
 # NeteaseCloudMusic
-仿网易云音乐Android客户端V6.1版本
+仿网易云音乐Android客户端V6.1版本 (此项目已使用谷歌最新架构重构地址[在这](https://github.com/zion223/NeteaseCloudMusic-MVVM))
 
 
 ## 应用运行gif展示
