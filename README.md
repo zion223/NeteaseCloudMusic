@@ -34,7 +34,7 @@
  - **事件总线**： [EventBus](https://github.com/greenrobot/EventBus)
  - **动态权限申请**： [easypermissions](https://github.com/googlesamples/easypermissions)
  
-## TODO
+## 已完成的功能
 
 * [x] 登录
 * [ ] 刷新登录
