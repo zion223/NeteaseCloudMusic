@@ -104,6 +104,8 @@ public class HttpConstants {
 
 	static final String SEARCH = ROOT_URL + "/search";
 
+	static final String SEARCH_DEFAULT = ROOT_URL + "/search/default";
+
 	static final String SINGER_HOT_SONG = ROOT_URL + "/artists";
 
 	static final String SINGER_ALBUM = ROOT_URL + "/artist/album";

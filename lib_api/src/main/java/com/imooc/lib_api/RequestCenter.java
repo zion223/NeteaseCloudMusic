@@ -13,6 +13,7 @@ import com.imooc.lib_api.model.playlist.CatlistBean;
 import com.imooc.lib_api.model.notification.CommonMessageBean;
 import com.imooc.lib_api.model.playlist.DailyRecommendBean;
 import com.imooc.lib_api.model.dj.DjBannerBean;
+import com.imooc.lib_api.model.search.DefaultSearchBean;
 import com.imooc.lib_api.model.user.FollowBean;
 import com.imooc.lib_api.model.playlist.HighQualityPlayListBean;
 import com.imooc.lib_api.model.user.ForwardEventBean;
@@ -456,6 +457,14 @@ public class RequestCenter {
      */
     public static void getSearchHotDetail(DisposeDataListener listener) {
         RequestCenter.getRequest(HttpConstants.SEARCH_HOT, null, listener, HotSearchDetailBean.class);
+    }
+
+
+    /**
+     *  获取默认搜索关键词  TODO
+     */
+    public static void getDefaultSearch(DisposeDataListener listener) {
+        RequestCenter.getRequest(HttpConstants.SEARCH_DEFAULT, null, listener, DefaultSearchBean.class);
     }
 
     /**
