@@ -665,6 +665,13 @@ public class RequestCenter {
     }
 
     /**
+     * 获取云村热门评论  TODO
+     */
+    public static void getHotWallComment(DisposeDataListener listener) {
+        RequestCenter.getRequest(HttpConstants.COMMENT_HOTWALL, null, listener, PlayListCommentBean.class);
+    }
+
+    /**
      * 获取动态的评论  TODO
      * threadId  : 动态 id，可通过 /event，/user/event 接口获取
      */
