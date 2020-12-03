@@ -33,6 +33,7 @@ import com.imooc.lib_api.model.playlist.TopListDetailBean;
 import com.imooc.lib_api.model.user.UserAccountBean;
 import com.imooc.lib_api.model.user.UserFollowedBean;
 import com.imooc.lib_api.model.user.UserFollowerBean;
+import com.imooc.lib_api.model.user.UserLevelBean;
 import com.imooc.lib_api.model.user.UserRecordBean;
 import com.imooc.lib_api.model.mv.VideoBean;
 import com.imooc.lib_api.model.mv.VideoDetailBean;
@@ -176,8 +177,14 @@ public class RequestCenter {
      * 获取用户账号信息  TODO
      */
     public static void getUserAccount(DisposeDataListener listener) {
-
         RequestCenter.getRequest(HttpConstants.USER_ACCOUNT, null, listener, UserAccountBean.class);
+    }
+
+    /**
+     * 获取用户等级信息  TODO
+     */
+    public static void getUserLevel(DisposeDataListener listener) {
+        RequestCenter.getRequest(HttpConstants.USER_LEVEL, null, listener, UserLevelBean.class);
     }
 
     /**
