@@ -665,6 +665,16 @@ public class RequestCenter {
     }
 
     /**
+     * 获取动态的评论  TODO
+     * threadId  : 动态 id，可通过 /event，/user/event 接口获取
+     */
+    public static void getEventComment(String threadId , DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("threadId ", threadId);
+        RequestCenter.getRequest(HttpConstants.COMMENT_EVENT, params, listener, PlayListCommentBean.class);
+    }
+
+    /**
      * 给资源点赞
      * type : 资源类型 1: mv 4: 电台 5: 视频 6: 动态
      * t : 是否点赞 ,1 为点赞 ,0 为取消点赞

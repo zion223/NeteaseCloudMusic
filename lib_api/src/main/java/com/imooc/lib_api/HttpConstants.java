@@ -127,6 +127,8 @@ public class HttpConstants {
 
 	static final String COMMENT_HOT = ROOT_URL + "/comment/hot";
 
+	static final String COMMENT_EVENT = ROOT_URL + "/comment/event";
+
 	static final String RESOURCE_LIKE = ROOT_URL + "/resource/like";
 
 	static final String INTELLIGANCE_LIST = ROOT_URL + "/playmode/intelligence/list";
