@@ -15,6 +15,7 @@ import com.imooc.lib_api.model.playlist.DailyRecommendBean;
 import com.imooc.lib_api.model.dj.DjBannerBean;
 import com.imooc.lib_api.model.user.FollowBean;
 import com.imooc.lib_api.model.playlist.HighQualityPlayListBean;
+import com.imooc.lib_api.model.user.ForwardEventBean;
 import com.imooc.lib_api.model.user.LikeListBean;
 import com.imooc.lib_api.model.user.LoginBean;
 import com.imooc.lib_api.model.user.MainEventBean;
@@ -397,6 +398,20 @@ public class RequestCenter {
         params.put("limit", limit);
         params.put("lasttime", time);
         RequestCenter.getRequest(HttpConstants.USER_EVENT, params, listener, UserEventBean.class);
+    }
+
+    /**
+     * 转发 用户动态   TODO
+     * uid : 用户 id
+     * evId : 动态 id
+     * forwards : 转发的评论
+     */
+    public static void getForwardEvent(String uid, String eventId, String content, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("uid", uid);
+        params.put("evId", eventId);
+        params.put("forwards", content);
+        RequestCenter.getRequest(HttpConstants.USER_FORWARD, params, listener, ForwardEventBean.class);
     }
 
     /**

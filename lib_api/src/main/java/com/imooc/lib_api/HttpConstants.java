@@ -87,6 +87,8 @@ public class HttpConstants {
 
 	static final String USER_EVENT = ROOT_URL + "/user/event";
 
+	static final String USER_FORWARD = ROOT_URL + "/event/forward";
+
 	static final String USER_RECORD = ROOT_URL + "/user/record";
 
 	static final String USER_DETAIL = ROOT_URL + "/user/detail";
