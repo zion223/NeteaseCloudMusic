@@ -45,7 +45,7 @@ public class SearchDelegate extends NeteaseDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) {
-
+        getSupportDelegate().showSoftInput(view);
         mEtKeywords.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 String searchKeyWord = mEtKeywords.getText().toString();
@@ -53,7 +53,7 @@ public class SearchDelegate extends NeteaseDelegate {
                     //使用默认搜索关键词
                     searchKeyWord = mEtKeywords.getHint().toString();
                 }
-                getParentDelegate().getSupportDelegate().start(SearchResultDelegate.newInstance(searchKeyWord));
+                getSupportDelegate().start(SearchResultDelegate.newInstance(searchKeyWord));
                 getSupportDelegate().hideSoftInput();
             }
             return false;
