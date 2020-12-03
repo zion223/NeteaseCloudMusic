@@ -31,6 +31,7 @@ import com.imooc.lib_api.model.user.SubCountBean;
 import com.imooc.lib_api.model.playlist.TopListBean;
 import com.imooc.lib_api.model.playlist.TopListDetailBean;
 import com.imooc.lib_api.model.user.UserAccountBean;
+import com.imooc.lib_api.model.user.UserBindingBean;
 import com.imooc.lib_api.model.user.UserFollowedBean;
 import com.imooc.lib_api.model.user.UserFollowerBean;
 import com.imooc.lib_api.model.user.UserLevelBean;
@@ -185,6 +186,15 @@ public class RequestCenter {
      */
     public static void getUserLevel(DisposeDataListener listener) {
         RequestCenter.getRequest(HttpConstants.USER_LEVEL, null, listener, UserLevelBean.class);
+    }
+
+    /**
+     * 获取用户绑定信息  TODO
+     */
+    public static void getUserBinding(String uid, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("uid", uid);
+        RequestCenter.getRequest(HttpConstants.USER_LEVEL, params, listener, UserBindingBean.class);
     }
 
     /**
