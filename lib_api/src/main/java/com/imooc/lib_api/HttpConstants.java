@@ -37,6 +37,8 @@ public class HttpConstants {
 
 	static final String USER_SUBCOUNT = ROOT_URL + "/user/subcount";
 
+	static final String USER_ACCOUNT = ROOT_URL + "/user/account";
+
 	static final String USER_FOLLOWER = ROOT_URL + "/user/follows";
 
 	static final String USER_FOLLOWED = ROOT_URL + "/user/followeds";

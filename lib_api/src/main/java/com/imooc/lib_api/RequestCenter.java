@@ -30,6 +30,7 @@ import com.imooc.lib_api.model.playlist.RecommendPlayListBean;
 import com.imooc.lib_api.model.user.SubCountBean;
 import com.imooc.lib_api.model.playlist.TopListBean;
 import com.imooc.lib_api.model.playlist.TopListDetailBean;
+import com.imooc.lib_api.model.user.UserAccountBean;
 import com.imooc.lib_api.model.user.UserFollowedBean;
 import com.imooc.lib_api.model.user.UserFollowerBean;
 import com.imooc.lib_api.model.user.UserRecordBean;
@@ -169,6 +170,14 @@ public class RequestCenter {
     public static void getsubCount(DisposeDataListener listener) {
 
         RequestCenter.getRequest(HttpConstants.USER_SUBCOUNT, null, listener, SubCountBean.class);
+    }
+
+    /**
+     * 获取用户账号信息  TODO
+     */
+    public static void getUserAccount(DisposeDataListener listener) {
+
+        RequestCenter.getRequest(HttpConstants.USER_ACCOUNT, null, listener, UserAccountBean.class);
     }
 
     /**
