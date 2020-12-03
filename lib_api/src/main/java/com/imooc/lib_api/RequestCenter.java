@@ -733,6 +733,15 @@ public class RequestCenter {
     }
 
     /**
+     * 收藏的专栏 TODO
+     * limit: 取出歌单数量 , 默认为 50
+     * offset: 偏移数量 , 用于分页 , 如 :( 评论页数 -1)*50, 其中 50 为 limit 的值
+     */
+    public static void getTopicSublist(DisposeDataListener listener) {
+        RequestCenter.getRequest(HttpConstants.TOPIC_SUBLIST, null, listener, MvSublistBean.class);
+    }
+
+    /**
      * 私人FM
      */
     public static void getMyFm(DisposeDataListener listener) {
@@ -972,6 +981,16 @@ public class RequestCenter {
         params.put("pid", pid);
         params.put("tracks", tracks);
         RequestCenter.getRequest(HttpConstants.PLAYLIST_TRACK, params, listener, CommonMessageBean.class);
+    }
+
+    /**
+     * 相关歌单推荐 TODO
+     * pid: 歌单 id
+     */
+    public static void getRelatedPlaylist(String pid, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("id", pid);
+        RequestCenter.getRequest(HttpConstants.RELATED_PLAYLIST, params, listener, UserPlaylistBean.PlaylistBean.class);
     }
 
     /**

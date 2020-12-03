@@ -27,6 +27,8 @@ public class HttpConstants {
 
 	static final String PLAYLIST_TRACK = ROOT_URL + "/playlist/tracks";
 
+	static final String RELATED_PLAYLIST= ROOT_URL + "/related/playlist";
+
 	static final String FOLLOW = ROOT_URL + "/follow";
 
 	static final String PLAYLIST_SUBSCRIBE = ROOT_URL + "/playlist/subscribe";
@@ -68,6 +70,9 @@ public class HttpConstants {
 	static final String RECOMMEND_PLAY_LIST = ROOT_URL + "/top/playlist";
 
 	static final String RECOMMEND_PLAY_LIST_HIGHQUALITY = ROOT_URL + "/top/playlist/highquality";
+
+	// TODO 暂时不需要 精品歌单标签列表
+	static final String PLAY_LIST_HIGHQUALITY_TAG = ROOT_URL + "/playlist/highquality/tags";
 
 	static final String CAT_LIST = ROOT_URL + "/playlist/catlist";
 
@@ -140,6 +145,8 @@ public class HttpConstants {
 	static final String ARTIST_SUBLIST = ROOT_URL + "/artist/sublist";
 
 	static final String MV_SUBLIST = ROOT_URL + "/mv/sublist";
+	// TODO API 不好使
+	static final String TOPIC_SUBLIST = ROOT_URL + "/topic/sublist";
 
 	static final String PERSONAL_FM = ROOT_URL + "/personal_fm";
 
