@@ -411,7 +411,17 @@ public class RequestCenter {
         params.put("uid", uid);
         params.put("evId", eventId);
         params.put("forwards", content);
-        RequestCenter.getRequest(HttpConstants.USER_FORWARD, params, listener, ForwardEventBean.class);
+        RequestCenter.getRequest(HttpConstants.EVENT_FORWARD, params, listener, ForwardEventBean.class);
+    }
+
+    /**
+     * 删除 用户动态   TODO
+     * evId : 动态 id
+     */
+    public static void getDeleteEvent(String eventId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("evId", eventId);
+        RequestCenter.getRequest(HttpConstants.EVENT_DEL, params, listener, CommonMessageBean.class);
     }
 
     /**

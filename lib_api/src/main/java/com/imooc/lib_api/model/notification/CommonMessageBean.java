@@ -9,6 +9,13 @@ public class CommonMessageBean {
     private String msg;
     private String message;
 
+    public void setPoint(int point) {
+        this.point = point;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
     public int getPoint() {
         return point;
