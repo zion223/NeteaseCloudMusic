@@ -1,6 +1,7 @@
 package com.imooc.lib_api;
 
 
+import com.imooc.lib_api.model.CountryCodeBean;
 import com.imooc.lib_api.model.album.AlbumDetailBean;
 import com.imooc.lib_api.model.album.AlbumDynamicBean;
 import com.imooc.lib_api.model.album.AlbumSublistBean;
@@ -194,7 +195,14 @@ public class RequestCenter {
     public static void getUserBinding(String uid, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
         params.put("uid", uid);
-        RequestCenter.getRequest(HttpConstants.USER_LEVEL, params, listener, UserBindingBean.class);
+        RequestCenter.getRequest(HttpConstants.USER_BINDING, params, listener, UserBindingBean.class);
+    }
+
+    /**
+     * 获取国家编码接口  TODO
+     */
+    public static void getCountryCode(DisposeDataListener listener) {
+        RequestCenter.getRequest(HttpConstants.COUNTRY_CODE, null, listener, CountryCodeBean.class);
     }
 
     /**
