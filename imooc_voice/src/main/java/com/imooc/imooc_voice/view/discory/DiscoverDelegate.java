@@ -33,6 +33,7 @@ import com.imooc.lib_api.model.banner.BannerBean;
 import com.imooc.lib_api.model.playlist.DailyRecommendBean;
 import com.imooc.lib_api.model.playlist.MainRecommendPlayListBean;
 import com.imooc.lib_api.model.playlist.MyFmBean;
+import com.imooc.lib_api.model.search.TopAlbumBean;
 import com.imooc.lib_api.model.song.NewSongBean;
 import com.imooc.lib_api.model.search.AlbumSearchBean;
 import com.imooc.lib_api.model.song.SongDetailBean;
@@ -186,8 +187,9 @@ public class DiscoverDelegate extends NeteaseDelegate {
 		RequestCenter.getTopAlbum(3, new DisposeDataListener() {
 			@Override
 			public void onSuccess(Object responseObj) {
-				AlbumSearchBean.ResultBean bean = (AlbumSearchBean.ResultBean) responseObj;
-				List<AlbumSearchBean.ResultBean.AlbumsBean> albums = bean.getAlbums();
+				TopAlbumBean bean = (TopAlbumBean) responseObj;
+
+				List<AlbumSearchBean.ResultBean.AlbumsBean> albums = bean.getWeekData();
 				for (int i = 0; i < 3; i++) {
 					String artistName = albums.get(i).getArtist().getName();
 					String albumName = albums.get(i).getName();

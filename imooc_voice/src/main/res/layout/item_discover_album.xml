@@ -27,6 +27,8 @@
         android:layout_below="@id/iv_item_album_song"
         android:layout_alignLeft="@+id/iv_item_album_song"
         android:layout_marginTop="5dp"
+        android:maxLines="2"
+        android:ellipsize="end"
         android:text="歌名"
         android:textColor="@color/black"
         android:textSize="13sp" />

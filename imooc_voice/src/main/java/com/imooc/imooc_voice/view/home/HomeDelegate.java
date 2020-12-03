@@ -23,6 +23,7 @@ import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.model.CHANNEL;
 import com.imooc.imooc_voice.model.event.LoginEvent;
+import com.imooc.imooc_voice.util.ScreenUtils;
 import com.imooc.lib_common_ui.utils.GsonUtil;
 import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
 import com.imooc.imooc_voice.view.drawer.CloudMusicDelegate;
@@ -96,6 +97,7 @@ public class HomeDelegate extends NeteaseDelegate{
 
 	@Override
 	public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) {
+		ScreenUtils.setStatusBarColor(getProxyActivity(), Color.TRANSPARENT);
 		initView();
 		sharePreferenceUtil = SharePreferenceUtil.getInstance(getContext());
 		loginBean = GsonUtil.fromJSON(sharePreferenceUtil.getUserInfo(""), LoginBean.class);

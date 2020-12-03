@@ -149,7 +149,7 @@ public class HttpConstants {
 	static final String ARTIST_SUBLIST = ROOT_URL + "/artist/sublist";
 
 	static final String MV_SUBLIST = ROOT_URL + "/mv/sublist";
-	// TODO API 不好使
+
 	static final String TOPIC_SUBLIST = ROOT_URL + "/topic/sublist";
 
 	static final String PERSONAL_FM = ROOT_URL + "/personal_fm";

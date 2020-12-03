@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -16,6 +17,7 @@ import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.view.home.search.artist.ArtistSortDelegate;
 import com.imooc.lib_api.RequestCenter;
+import com.imooc.lib_api.model.search.DefaultSearchBean;
 import com.imooc.lib_api.model.search.HotSearchDetailBean;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
 import com.imooc.lib_network.listener.DisposeDataListener;
@@ -46,13 +48,30 @@ public class SearchDelegate extends NeteaseDelegate {
 
         mEtKeywords.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-               getParentDelegate().getSupportDelegate().start(SearchResultDelegate.newInstance(mEtKeywords.getText().toString()));
-                //隐藏软键盘
+                String searchKeyWord = mEtKeywords.getText().toString();
+                if(TextUtils.isEmpty(searchKeyWord)){
+                    //使用默认搜索关键词
+                    searchKeyWord = mEtKeywords.getHint().toString();
+                }
+                getParentDelegate().getSupportDelegate().start(SearchResultDelegate.newInstance(searchKeyWord));
                 getSupportDelegate().hideSoftInput();
             }
             return false;
         });
 
+        // 获取默认搜索关键词
+        RequestCenter.getDefaultSearch(new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                DefaultSearchBean bean = (DefaultSearchBean) responseObj;
+                mEtKeywords.setHint(bean.getData().getShowKeyword());
+            }
+
+            @Override
+            public void onFailure(Object reasonObj) {
+
+            }
+        });
 
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         RequestCenter.getSearchHotDetail(new DisposeDataListener() {
