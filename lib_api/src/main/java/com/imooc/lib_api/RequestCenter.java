@@ -9,6 +9,7 @@ import com.imooc.lib_api.model.artist.ArtistJson;
 import com.imooc.lib_api.model.artist.ArtistListBean;
 import com.imooc.lib_api.model.artist.ArtistSublistBean;
 import com.imooc.lib_api.model.banner.BannerBean;
+import com.imooc.lib_api.model.notification.PlaylistSubcribersBean;
 import com.imooc.lib_api.model.playlist.CatlistBean;
 import com.imooc.lib_api.model.notification.CommonMessageBean;
 import com.imooc.lib_api.model.playlist.DailyRecommendBean;
@@ -1020,6 +1021,18 @@ public class RequestCenter {
         params.put("id", id);
         params.put("t", sub ? 1 : 2);
         RequestCenter.getRequest(HttpConstants.PLAYLIST_SUBSCRIBE, params, listener, CommonMessageBean.class);
+    }
+
+    /**
+     * 获取歌单收藏者  TODO
+     * id : 歌单 id
+     * limit: 取出数量 , 默认为 20
+     * offset: 偏移数量 , 用于分页 , 如 :( 评论页数 -1)*20, 其中 20 为 limit 的值
+     */
+    public static void getPlaylistSubscribers(String id,  DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        RequestCenter.getRequest(HttpConstants.PLAYLIST_SUBSCRIBEERS, params, listener, PlaylistSubcribersBean.class);
     }
 
     /**

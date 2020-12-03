@@ -33,6 +33,8 @@ public class HttpConstants {
 
 	static final String PLAYLIST_SUBSCRIBE = ROOT_URL + "/playlist/subscribe";
 
+	static final String PLAYLIST_SUBSCRIBEERS = ROOT_URL + "/playlist/subscribers";
+
 	static final String ALBUM_SUBSCRIBE = ROOT_URL + "/album/sub";
 
 	static final String ALBUM_DYNAMIC = ROOT_URL + "/album/detail/dynamic";
