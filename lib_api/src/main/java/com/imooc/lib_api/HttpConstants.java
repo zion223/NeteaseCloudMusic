@@ -224,6 +224,8 @@ public class HttpConstants {
 
 	static final String MSG_NOTICE = ROOT_URL + "/msg/notices";
 
+	static final String MSG_FORWARD = ROOT_URL + "/msg/forwards";
+
 	static final String USER_CLOUD = ROOT_URL + "/user/cloud";
 
 	static final String ARTIST_PIC = "http://music.163.com/api/search/get/web";

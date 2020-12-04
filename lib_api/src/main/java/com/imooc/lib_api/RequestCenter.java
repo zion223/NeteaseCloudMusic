@@ -9,6 +9,7 @@ import com.imooc.lib_api.model.artist.ArtistJson;
 import com.imooc.lib_api.model.artist.ArtistListBean;
 import com.imooc.lib_api.model.artist.ArtistSublistBean;
 import com.imooc.lib_api.model.banner.BannerBean;
+import com.imooc.lib_api.model.notification.ForwardsMeBean;
 import com.imooc.lib_api.model.notification.PlaylistSubcribersBean;
 import com.imooc.lib_api.model.playlist.CatlistBean;
 import com.imooc.lib_api.model.notification.CommonMessageBean;
@@ -1231,6 +1232,13 @@ public class RequestCenter {
     public static void getPrivateNotice(DisposeDataListener listener) {
         RequestParams params = new RequestParams();
         RequestCenter.getRequest(HttpConstants.MSG_NOTICE, params, listener, PrivateNoticeBean.class);
+    }
+
+    /**
+     * 获取@我
+     */
+    public static void getForwardsMe(DisposeDataListener listener) {
+        RequestCenter.getRequest(HttpConstants.MSG_FORWARD, null, listener, ForwardsMeBean.class);
     }
 
     /**
