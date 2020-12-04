@@ -301,7 +301,7 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
 
 	}
 
-	static class ImageLoader implements XPopupImageLoader {
+	public static class ImageLoader implements XPopupImageLoader {
 
 		@Override
 		public void loadImage(int position, @NonNull Object uri, @NonNull ImageView imageView) {

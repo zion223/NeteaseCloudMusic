@@ -2,6 +2,7 @@ package com.imooc.imooc_voice.view.drawer;
 
 
 import com.imooc.imooc_voice.view.drawer.notification.CommentDelegate;
+import com.imooc.imooc_voice.view.drawer.notification.ForwardsMeDelegate;
 import com.imooc.imooc_voice.view.drawer.notification.PrivateLetterDelegate;
 import com.imooc.imooc_voice.view.drawer.notification.PrivateNoticeDelegate;
 import com.imooc.lib_common_ui.delegate.NeteaseDelegate;
@@ -38,8 +39,8 @@ public class MessageTabDelegate extends NeteaseTabDelegate {
 		mDelegateList.add(new PrivateLetterDelegate());
 		//评论
 		mDelegateList.add(new CommentDelegate());
-		//@我 TODO
-		mDelegateList.add(new PrivateLetterDelegate());
+		//@我
+		mDelegateList.add(new ForwardsMeDelegate());
 		//通知
 		mDelegateList.add(new PrivateNoticeDelegate());
 		return mDelegateList;

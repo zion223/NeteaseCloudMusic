@@ -74,4 +74,41 @@ public class SearchUtil {
 	}
 
 
+	public static String getEventType(int type ) {
+		String eventType ="";
+
+		switch (type) {
+			case 18:
+				eventType = "分享单曲：";
+				break;
+			case 19:
+				eventType = "分享专辑：";
+				break;
+			case 17:
+			case 28:
+				eventType ="分享电台节目：";
+				break;
+			case 22:
+				eventType = "转发：";
+				break;
+			case 39:
+				eventType = "发布视频：";
+				break;
+			case 35:
+				break;
+			case 13:
+				eventType = "分享歌单：";
+				break;
+			case 24:
+				eventType = "分享专栏文章：";
+				break;
+			case 41:
+			case 21:
+				eventType = "分享视频：";
+				break;
+		}
+		return eventType;
+	}
+
+
 }

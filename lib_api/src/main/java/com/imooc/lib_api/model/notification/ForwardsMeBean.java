@@ -52,10 +52,10 @@ public class ForwardsMeBean {
     public static class ForwardsMeData{
         // UserEventBean.EventsBean
         private String json;
-        private String time;
+        private long time;
         private long userId;
         private long id;
-        private long type;
+        private int type;
 
         public String getJson() {
             return json;
@@ -65,11 +65,11 @@ public class ForwardsMeBean {
             this.json = json;
         }
 
-        public String getTime() {
+        public long getTime() {
             return time;
         }
 
-        public void setTime(String time) {
+        public void setTime(long time) {
             this.time = time;
         }
 
@@ -89,11 +89,11 @@ public class ForwardsMeBean {
             this.id = id;
         }
 
-        public long getType() {
+        public int getType() {
             return type;
         }
 
-        public void setType(long type) {
+        public void setType(int type) {
             this.type = type;
         }
     }
