@@ -5,8 +5,8 @@
 
 ## App介绍
 项目采用单Activity多Fragment模式开发。目前已实现 网易云音乐NodeJS 项目70% 的功能，目前开发所用的分支为newapi，
-由于历史原因项目初期的数据来源为百度音乐API，后来才使用网易云音乐API特以区分。kotlin分支为使用kotlin语言重写此代码。
-App运行gif图请切换到master分支查看。
+由于历史原因项目初期的数据来源为百度音乐API，后来才使用网易云音乐API特以区分。kotlin分支为使用kotlin语言重写此代码。  
+**App运行gif图请切换到master分支查看。**
 
 ## 使用的技术/框架/开源项目
 
