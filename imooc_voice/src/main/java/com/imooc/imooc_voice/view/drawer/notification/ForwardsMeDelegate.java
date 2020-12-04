@@ -103,7 +103,7 @@ public class ForwardsMeDelegate extends NeteaseLoadingDelegate {
             adapter.setText(R.id.forward_type, SearchUtil.getEventType(eventsBean.getType()));
 
             // @我的人转载的动态的内容
-
+            initImageView(adapter);
             if (!TextUtils.isEmpty(userEventJsonBean.getMsg())) {
                 adapter.setVisible(R.id.tv_title, true);
                 adapter.setText(R.id.tv_title, userEventJsonBean.getMsg());
@@ -111,7 +111,7 @@ public class ForwardsMeDelegate extends NeteaseLoadingDelegate {
 
             adapter.setText(R.id.tv_nickname, "@" + forwardsEventBean.getEvent().getUser().getNickname() + ":");
             //显示图片
-            //showImg(adapter, eventsBean);
+            showImg(adapter, eventsBean);
             //显示分享组件的内容 歌曲、电台、歌单 、专辑等
             showShareLayout(adapter, userEventJsonBean);
 
@@ -246,6 +246,27 @@ public class ForwardsMeDelegate extends NeteaseLoadingDelegate {
             }else{
                 adapter.setVisible(R.id.rl_share, false);
             }
+        }
+        private void initImageView(BaseViewHolder adapter) {
+            ImageView ivShow1 = adapter.getView(R.id.iv_img_1);
+            ImageView ivShow2 = adapter.getView(R.id.iv_img_2);
+            ImageView ivShow3 = adapter.getView(R.id.iv_img_3);
+            ImageView ivShow4 = adapter.getView(R.id.iv_img_4);
+            ImageView ivShow5 = adapter.getView(R.id.iv_img_5);
+            ImageView ivShow6 = adapter.getView(R.id.iv_img_6);
+            ImageView ivShow7 = adapter.getView(R.id.iv_img_7);
+            ImageView ivShow8 = adapter.getView(R.id.iv_img_8);
+            ImageView ivShow9 = adapter.getView(R.id.iv_img_9);
+
+            imgList.add(ivShow1);
+            imgList.add(ivShow2);
+            imgList.add(ivShow3);
+            imgList.add(ivShow4);
+            imgList.add(ivShow5);
+            imgList.add(ivShow6);
+            imgList.add(ivShow7);
+            imgList.add(ivShow8);
+            imgList.add(ivShow9);
         }
     }
 }
