@@ -83,6 +83,14 @@ public class SharePreferenceUtil {
 	public String getUserInfo(String defaultValue) {
 		return getString(Constants.SpKey.USER_INFO, defaultValue);
 	}
+	// 获取用户等级
+	public int getUserLevel() {
+		return getInt(Constants.SpKey.USER_LEVEL, 0);
+	}
+	// 存储用户等级
+	public void saveUserLevel(int value) {
+		putInt(Constants.SpKey.USER_LEVEL, value);
+	}
 
 	//获取当前登录用户ID
 	public int getUserId() {
@@ -93,6 +101,7 @@ public class SharePreferenceUtil {
 		LoginBean loginBean = GsonUtil.fromJSON(userInfo, LoginBean.class);
 		return loginBean.getProfile().getUserId();
 	}
+
 	//退出登录 移除已登录用户信息
 	public void removeUserInfo() {
 		remove(Constants.SpKey.USER_INFO);
@@ -199,6 +208,10 @@ public class SharePreferenceUtil {
 
 	private int getInt(String key, int defaultValue) {
 		return sp.getInt(key, defaultValue);
+	}
+
+	private void putInt(String key, int defaultValue) {
+		editor.putInt(key, defaultValue);
 	}
 
 	private void saveString(String key, String value) {

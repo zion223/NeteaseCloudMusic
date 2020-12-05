@@ -24,6 +24,7 @@ import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.model.CHANNEL;
 import com.imooc.imooc_voice.model.event.LoginEvent;
 import com.imooc.imooc_voice.util.ScreenUtils;
+import com.imooc.lib_api.model.user.UserDetailBean;
 import com.imooc.lib_common_ui.utils.GsonUtil;
 import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
 import com.imooc.imooc_voice.view.drawer.CloudMusicDelegate;
@@ -102,8 +103,24 @@ public class HomeDelegate extends NeteaseDelegate{
 		sharePreferenceUtil = SharePreferenceUtil.getInstance(getContext());
 		loginBean = GsonUtil.fromJSON(sharePreferenceUtil.getUserInfo(""), LoginBean.class);
 		if(loginBean != null){
-			//TODO 用户等级
-			//mTvLevel.setText("LV." + loginBean.getProfile().get);
+			int userLevel = sharePreferenceUtil.getUserLevel();
+			if(userLevel == 0){
+				RequestCenter.getUserDetail(String.valueOf(loginBean.getAccount().getId()), new DisposeDataListener(){
+					@Override
+					public void onSuccess(Object responseObj) {
+						UserDetailBean userDetailBean = (UserDetailBean) responseObj;
+						// 存储用户等级
+						sharePreferenceUtil.saveUserLevel(userDetailBean.getLevel());
+						mTvLevel.setText("LV." + userDetailBean.getLevel());
+					}
+
+					@Override
+					public void onFailure(Object reasonObj) {
+
+					}
+				});
+			}
+			mTvLevel.setText("LV." + userLevel);
 			mRlAvatar.setVisibility(View.VISIBLE);
 			mLlUnLoggin.setVisibility(View.GONE);
 			ImageLoaderManager.getInstance().displayImageForCircle(mIvAvatarView, loginBean.getProfile().getAvatarUrl());
