@@ -95,9 +95,10 @@ public class AudioController {
 	}
 
 	public void addAudio(int index, AudioBean bean) {
-		if(mQueue.size() <= 0){
-			throw new AudioQueueEmptyException("");
-		}
+		// 这是什么逻辑 第一次添加的时候就崩溃了
+//		if(mQueue.size() <= 0){
+//			throw new AudioQueueEmptyException("");
+//		}
 		int query = mQueue.indexOf(bean);
 		if(query <= -1){
 			//当前播放列表中没有此歌曲

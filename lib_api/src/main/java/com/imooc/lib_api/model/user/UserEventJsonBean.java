@@ -34,6 +34,10 @@ public class UserEventJsonBean {
     //专辑
     private AlbumSearchBean.ResultBean.AlbumsBean album;
 
+    public void setAlbum(AlbumSearchBean.ResultBean.AlbumsBean album) {
+        this.album = album;
+    }
+
     @Override
     public String toString() {
         return "UserEventJsonBean{" +

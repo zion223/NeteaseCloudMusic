@@ -90,7 +90,6 @@ public class ForwardsMeDelegate extends NeteaseLoadingDelegate {
         protected void convert(BaseViewHolder adapter, ForwardsMeBean.ForwardsMeData item) {
             UserEventBean.EventsBean eventsBean = GsonUtil.fromJSON(item.getJson(), UserEventBean.EventsBean.class);
             ForwardsEventBean forwardsEventBean = GsonUtil.fromJSON(eventsBean.getJson(), ForwardsEventBean.class);
-            UserEventJsonBean userEventJsonBean = GsonUtil.fromJSON(forwardsEventBean.getEvent().getJson(),UserEventJsonBean.class);
             //时间
             adapter.setText(R.id.forward_time, TimeUtil.getPrivateMsgTime(item.getTime()));
             // @我的人头像
@@ -101,19 +100,57 @@ public class ForwardsMeDelegate extends NeteaseLoadingDelegate {
             adapter.setText(R.id.forward_content, forwardsEventBean.getMsg());
             // @我的人发布@类型
             adapter.setText(R.id.forward_type, SearchUtil.getEventType(eventsBean.getType()));
-
-            // @我的人转载的动态的内容
+            // 初始化imageView
             initImageView(adapter);
-            if (!TextUtils.isEmpty(userEventJsonBean.getMsg())) {
-                adapter.setVisible(R.id.tv_title, true);
-                adapter.setText(R.id.tv_title, userEventJsonBean.getMsg());
+
+            // 转发动态
+            if(forwardsEventBean.getEvent() != null){
+                UserEventJsonBean userEventJsonBean = GsonUtil.fromJSON(forwardsEventBean.getEvent().getJson(),UserEventJsonBean.class);
+                // @我的人转载的动态的内容
+                if (!TextUtils.isEmpty(userEventJsonBean.getMsg())) {
+                    adapter.setVisible(R.id.tv_title, true);
+                    adapter.setText(R.id.tv_title, userEventJsonBean.getMsg());
+                }
+                adapter.setVisible(R.id.rl_title, true);
+                adapter.setText(R.id.tv_nickname, "@" + forwardsEventBean.getEvent().getUser().getNickname() + ":");
+                //显示分享组件的内容 歌曲、电台、歌单 、专辑等
+                showShareLayout(adapter, userEventJsonBean);
+                // 显示图片
+                showImg(adapter, forwardsEventBean.getEvent());
+            }else if(forwardsEventBean.getPlaylist() != null){
+                // 分享歌单
+                adapter.setVisible(R.id.rl_share, true);
+                manager.displayImageForCorner(adapter.getView(R.id.iv_song_cover), forwardsEventBean.getPlaylist().getCoverImgUrl());
+                //歌单名称
+                adapter.setText(R.id.tv_songname, forwardsEventBean.getPlaylist().getName());
+                //歌单创建者 名称
+                adapter.setText(R.id.tv_creator_name, "by " + forwardsEventBean.getPlaylist().getCreator().getNickname());
+            }else if(forwardsEventBean.getProgram() != null){
+                // 分享电台
+                adapter.setVisible(R.id.rl_share, true);
+                manager.displayImageForCorner(adapter.getView(R.id.iv_song_cover), forwardsEventBean.getProgram().getCoverUrl());
+
+                adapter.setText(R.id.tv_songname, forwardsEventBean.getProgram().getName());
+                //电台名称
+                adapter.setText(R.id.tv_creator_name, forwardsEventBean.getProgram().getRadio().getName());
+            }else if(forwardsEventBean.getSong() != null){
+                // 分享歌曲
+                adapter.setVisible(R.id.rl_share, true);
+                manager.displayImageForCorner(adapter.getView(R.id.iv_song_cover), forwardsEventBean.getSong().getAlbum().getPicUrl());
+                //单曲名
+                adapter.setText(R.id.tv_songname, forwardsEventBean.getSong().getName());
+                //歌手名
+                adapter.setText(R.id.tv_creator_name, forwardsEventBean.getSong().getArtists().get(0).getName());
+            }else if(forwardsEventBean.getAlbum() != null){
+                manager.displayImageForCorner(adapter.getView(R.id.iv_song_cover), forwardsEventBean.getAlbum().getPicUrl());
+                //专辑名称
+                adapter.setText(R.id.tv_songname, forwardsEventBean.getAlbum().getName());
+                //专辑的歌手
+                adapter.setText(R.id.tv_creator_name, forwardsEventBean.getAlbum().getArtist().getName());
+                //专辑特有标志
+                adapter.setVisible(R.id.iv_album_tag, true);
             }
 
-            adapter.setText(R.id.tv_nickname, "@" + forwardsEventBean.getEvent().getUser().getNickname() + ":");
-            //显示图片
-            showImg(adapter, eventsBean);
-            //显示分享组件的内容 歌曲、电台、歌单 、专辑等
-            showShareLayout(adapter, userEventJsonBean);
 
         }
         //显示图片
