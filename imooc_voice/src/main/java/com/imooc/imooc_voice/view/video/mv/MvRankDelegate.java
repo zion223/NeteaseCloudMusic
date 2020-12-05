@@ -72,7 +72,7 @@ public class MvRankDelegate extends NeteaseLoadingDelegate {
 					@Override
 					public void onItemClick(BaseQuickAdapter adapter, View view, int i) {
 						MvTopBean.MvTopDetailBean entity = (MvTopBean.MvTopDetailBean) adapter.getItem(i);
-						getParentDelegate().getParentDelegate().getSupportDelegate().start(MvDeatilDelegate.newInstance(entity.getId()));
+						getParentDelegate().getSupportDelegate().start(MvDeatilDelegate.newInstance(entity.getId()));
 					}
 				});
 				mRecyclerView.setAdapter(mAdapter);
