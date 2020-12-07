@@ -103,8 +103,8 @@ public class HomeDelegate extends NeteaseDelegate {
     private SharePreferenceUtil sharePreferenceUtil;
 
     private LoginBean loginBean;
-
-    private Disposable mDisposable;
+    private int userLevel;
+    private Disposable mPauseMusicDisposable;
 
     @Override
     public Object setLayout() {
@@ -119,7 +119,7 @@ public class HomeDelegate extends NeteaseDelegate {
         sharePreferenceUtil = SharePreferenceUtil.getInstance(getContext());
         loginBean = GsonUtil.fromJSON(sharePreferenceUtil.getUserInfo(""), LoginBean.class);
         if (loginBean != null) {
-            int userLevel = sharePreferenceUtil.getUserLevel();
+            userLevel = sharePreferenceUtil.getUserLevel();
             if (userLevel == 0) {
                 RequestCenter.getUserDetail(String.valueOf(loginBean.getAccount().getId()), new DisposeDataListener() {
                     @Override
@@ -136,11 +136,7 @@ public class HomeDelegate extends NeteaseDelegate {
                     }
                 });
             }
-            mTvLevel.setText("LV." + userLevel);
-            mRlAvatar.setVisibility(View.VISIBLE);
-            mLlUnLoggin.setVisibility(View.GONE);
-            ImageLoaderManager.getInstance().displayImageForCircle(mIvAvatarView, loginBean.getProfile().getAvatarUrl());
-            mTvAvatarName.setText(loginBean.getProfile().getNickname());
+            initView();
         } else {
             mRlAvatar.setVisibility(View.GONE);
             mLlUnLoggin.setVisibility(View.VISIBLE);
@@ -151,6 +147,11 @@ public class HomeDelegate extends NeteaseDelegate {
 
     //初始化控件
     private void initView() {
+        mTvLevel.setText("LV." + userLevel);
+        mRlAvatar.setVisibility(View.VISIBLE);
+        mLlUnLoggin.setVisibility(View.GONE);
+        ImageLoaderManager.getInstance().displayImageForCircle(mIvAvatarView, loginBean.getProfile().getAvatarUrl());
+        mTvAvatarName.setText(loginBean.getProfile().getNickname());
         HomePagerAdapter mAdapter = new HomePagerAdapter(getChildFragmentManager(), CHANNELS);
         mViewPager.setAdapter(mAdapter);
         mViewPager.setOffscreenPageLimit(4);
@@ -306,15 +307,15 @@ public class HomeDelegate extends NeteaseDelegate {
                     if (time == 0) {
                         mTvTimer.setRightText("");
                     } else {
-                        if (mDisposable != null) {
-                            mDisposable.dispose();
+                        if (mPauseMusicDisposable != null) {
+                            mPauseMusicDisposable.dispose();
                         }
-                        mDisposable = Observable.interval(0, 1, TimeUnit.SECONDS)
+                        mPauseMusicDisposable = Observable.interval(0, 1, TimeUnit.SECONDS)
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe(aLong -> {
                                     if (aLong == time * 60 - 1) {
                                         // 到达定时时间
-                                        mDisposable.dispose();
+                                        mPauseMusicDisposable.dispose();
                                         mTvTimer.setRightText("");
                                         // 停止播放音乐
                                         AudioController.getInstance().pause();
