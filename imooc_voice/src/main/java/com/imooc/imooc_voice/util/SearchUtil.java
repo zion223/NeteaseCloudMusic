@@ -64,6 +64,7 @@ public class SearchUtil {
 				break;
 			//音乐达人
 			case 200:
+			case 11:
 				viewHolder.setVisible(viewId, true);
 				((ImageView)viewHolder.getView(viewId)).setImageResource(R.drawable.ic_yellow_star);
 				break;
