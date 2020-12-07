@@ -176,4 +176,12 @@ public class HornizeItemView extends RelativeLayout {
 		addView(rootLayout, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
 				ViewGroup.LayoutParams.WRAP_CONTENT));
 	}
+
+	public void setText(CharSequence text){
+		mTileView.setText(text);
+	}
+
+	public void setRightText(CharSequence text){
+		mRightView.setText(text);
+	}
 }

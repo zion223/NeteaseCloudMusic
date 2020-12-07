@@ -135,6 +135,19 @@ public class SharePreferenceUtil {
 		return getString(Constants.SpKey.AUTH_TOKEN, defaultValue);
 	}
 
+	/**
+	 * 获取定时时间
+	 */
+	public int getTimerClock(){
+		return getInt(Constants.SpKey.TIMER_CLOCK, 0);
+	}
+
+	/**
+	 * 设置定时时间
+	 */
+	public void setTimerClock(int time){
+		putInt(Constants.SpKey.TIMER_CLOCK, time);
+	}
 
 	/*
 	 * 存储最近一次听过的歌曲
@@ -178,16 +191,14 @@ public class SharePreferenceUtil {
 	 * 保存播放歌曲列表
 	 */
 	public void saveMusicList(List<AudioBean> likeList) {
-		String likeListString = GsonUtil.toJson(likeList);
-		saveString(Constants.SpKey.LIKE_LIST, likeListString);
+		saveString(Constants.SpKey.LIKE_LIST, GsonUtil.toJson(likeList));
 	}
 
 	/**
 	 * 	获取播放列表
 	 */
 	public List<AudioBean> getMusicList() {
-		String likeListString = getString(Constants.SpKey.LIKE_LIST, "");
-		return GsonUtil.fromAudioJSON(likeListString);
+		return GsonUtil.fromAudioJSON(getString(Constants.SpKey.LIKE_LIST, ""));
 	}
 
 	private void remove(String key) {
@@ -211,7 +222,7 @@ public class SharePreferenceUtil {
 	}
 
 	private void putInt(String key, int defaultValue) {
-		editor.putInt(key, defaultValue);
+		editor.putInt(key, defaultValue).apply();
 	}
 
 	private void saveString(String key, String value) {

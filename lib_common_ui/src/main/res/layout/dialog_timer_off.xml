@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bg_dialog_corner_normal"
     android:orientation="vertical"
-    android:paddingLeft="20dp"
+    android:paddingLeft="30dp"
     android:paddingTop="20dp"
     android:paddingBottom="20dp">
 
@@ -17,100 +17,24 @@
         android:textStyle="bold" />
 
     <LinearLayout
-        android:id="@+id/ll_dialog_sort_time"
+        android:id="@+id/ll_notimer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:visibility="gone"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_sort_time_red" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="4"
-            android:text="按添加时间"
-            android:textColor="@color/black"
-            android:textSize="15dp" />
-
-        <ImageView
-            android:id="@+id/iv_time_check"
-            android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="30dp"
-            android:layout_weight="3"
-            android:visibility="gone"
-            android:src="@drawable/ic_check_red" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_dialog_sort_music"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:visibility="visible"
         android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_sort_song_red" />
-
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
             android:layout_weight="4"
-            android:text="按单曲名"
+            android:text="不开启"
             android:textColor="@color/black"
             android:textSize="15dp" />
 
         <ImageView
-            android:id="@+id/iv_music_check"
-            android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="30dp"
-            android:layout_weight="3"
-            android:visibility="visible"
-            android:src="@drawable/ic_check_red" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_dialog_sort_album"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:visibility="gone"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_sort_album_red" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="4"
-            android:text="按专辑名"
-            android:textColor="@color/black"
-            android:textSize="15dp" />
-
-        <ImageView
-            android:id="@+id/iv_album_check"
+            android:id="@+id/iv_notimer_check"
             android:layout_width="0dp"
             android:layout_height="20dp"
             android:layout_gravity="center_vertical"
@@ -120,32 +44,25 @@
             android:src="@drawable/ic_check_red" />
 
     </LinearLayout>
-
     <LinearLayout
-        android:id="@+id/ll_dialog_sort_artist"
+        android:id="@+id/ll_10timer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:visibility="gone"
+        android:layout_marginTop="20dp"
+        android:visibility="visible"
         android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_sort_artist_red" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
             android:layout_weight="4"
-            android:text="按歌手名"
+            android:text="10分钟后"
             android:textColor="@color/black"
             android:textSize="15dp" />
 
         <ImageView
-            android:id="@+id/iv_artist_check"
+            android:id="@+id/iv_10min_check"
             android:layout_width="0dp"
             android:layout_height="20dp"
             android:layout_gravity="center_vertical"
@@ -155,32 +72,25 @@
             android:src="@drawable/ic_check_red" />
 
     </LinearLayout>
-
     <LinearLayout
-        android:id="@+id/ll_dialog_sort_folder"
+        android:id="@+id/ll_20timer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:visibility="gone"
+        android:layout_marginTop="20dp"
+        android:visibility="visible"
         android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_sort_song_red" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
             android:layout_weight="4"
-            android:text="按文件夹名"
+            android:text="20分钟后"
             android:textColor="@color/black"
             android:textSize="15dp" />
 
         <ImageView
-            android:id="@+id/iv_folder_check"
+            android:id="@+id/iv_20min_check"
             android:layout_width="0dp"
             android:layout_height="20dp"
             android:layout_gravity="center_vertical"
@@ -190,32 +100,81 @@
             android:src="@drawable/ic_check_red" />
 
     </LinearLayout>
-
     <LinearLayout
-        android:id="@+id/ll_dialog_sort_number"
+        android:id="@+id/ll_30timer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:visibility="gone"
+        android:layout_marginTop="20dp"
+        android:visibility="visible"
         android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_sort_number" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
             android:layout_weight="4"
-            android:text="按歌曲数量"
+            android:text="30分钟后"
             android:textColor="@color/black"
             android:textSize="15dp" />
 
         <ImageView
-            android:id="@+id/iv_number_check"
+            android:id="@+id/iv_30min_check"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="30dp"
+            android:layout_weight="3"
+            android:visibility="gone"
+            android:src="@drawable/ic_check_red" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_45timer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:visibility="visible"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="4"
+            android:text="45分钟后"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <ImageView
+            android:id="@+id/iv_45min_check"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="30dp"
+            android:layout_weight="3"
+            android:visibility="gone"
+            android:src="@drawable/ic_check_red" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_60timer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:visibility="visible"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="4"
+            android:text="60分钟后"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <ImageView
+            android:id="@+id/iv_60min_check"
             android:layout_width="0dp"
             android:layout_height="20dp"
             android:layout_gravity="center_vertical"
