@@ -228,6 +228,7 @@
                         app:tipTextSize="7sp" />
 
                     <com.imooc.lib_common_ui.VerticalItemView
+                        android:id="@+id/icon_notification_friends"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

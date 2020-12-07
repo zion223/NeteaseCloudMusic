@@ -24,6 +24,7 @@ import com.imooc.imooc_voice.R2;
 import com.imooc.imooc_voice.model.CHANNEL;
 import com.imooc.imooc_voice.model.event.LoginEvent;
 import com.imooc.imooc_voice.util.ScreenUtils;
+import com.imooc.imooc_voice.view.drawer.FriendsTabDelegate;
 import com.imooc.lib_api.model.user.UserDetailBean;
 import com.imooc.lib_common_ui.utils.GsonUtil;
 import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
@@ -255,6 +256,12 @@ public class HomeDelegate extends NeteaseDelegate{
 			//听歌识曲图标左右晃动
 			mVerItemViewListen.getIconView().setAnimation(shakeAnimation());
 		}
+	}
+
+	@OnClick(R2.id.icon_notification_friends)
+	void ClickMyFriend(){
+		mDrawerLayout.closeDrawer(Gravity.LEFT);
+		getSupportDelegate().start(FriendsTabDelegate.newInstance(String.valueOf(loginBean.getAccount().getId())));
 	}
 
 	//签到
