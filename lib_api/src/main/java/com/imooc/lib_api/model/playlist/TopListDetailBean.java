@@ -48,7 +48,7 @@ public class TopListDetailBean {
 		private long trackNumberUpdateTime;
 		private long createTime;
 		private boolean highQuality;
-		private int userId;
+		private long userId;
 		private long updateTime;
 		private long coverImgId;
 		private boolean newImported;
@@ -208,11 +208,11 @@ public class TopListDetailBean {
 			return highQuality;
 		}
 
-		public void setUserId(int userId) {
+		public void setUserId(long userId) {
 			this.userId = userId;
 		}
 
-		public int getUserId() {
+		public long getUserId() {
 			return userId;
 		}
 

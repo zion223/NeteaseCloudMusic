@@ -1,5 +1,7 @@
 package com.imooc.lib_api.model.playlist;
 
+import com.imooc.lib_api.model.song.SongDetailBean;
+
 import java.util.List;
 
 /**
@@ -14,11 +16,14 @@ public class DailyRecommendBean {
 
     private int code;
 
-    private List<RecommendBean> recommend;
+    private RecommendData data;
 
-    public DailyRecommendBean(int code, List<RecommendBean> recommend) {
-        this.code = code;
-        this.recommend = recommend;
+    public RecommendData getData() {
+        return data;
+    }
+
+    public void setData(RecommendData data) {
+        this.data = data;
     }
 
     public DailyRecommendBean() {
@@ -32,12 +37,56 @@ public class DailyRecommendBean {
         this.code = code;
     }
 
-    public List<RecommendBean> getRecommend() {
-        return recommend;
+
+    public static class RecommendData {
+        private List<SongDetailBean.SongsBean> dailySongs;
+        private List<SongDetailBean.SongsBean> orderSongs;
+        private List<RecommendReason> recommendReasons;
+
+        public List<SongDetailBean.SongsBean> getDailySongs() {
+            return dailySongs;
+        }
+
+        public void setDailySongs(List<SongDetailBean.SongsBean> dailySongs) {
+            this.dailySongs = dailySongs;
+        }
+
+        public List<SongDetailBean.SongsBean> getOrderSongs() {
+            return orderSongs;
+        }
+
+        public void setOrderSongs(List<SongDetailBean.SongsBean> orderSongs) {
+            this.orderSongs = orderSongs;
+        }
+
+        public List<RecommendReason> getRecommendReasons() {
+            return recommendReasons;
+        }
+
+        public void setRecommendReasons(List<RecommendReason> recommendReasons) {
+            this.recommendReasons = recommendReasons;
+        }
     }
 
-    public void setRecommend(List<RecommendBean> recommend) {
-        this.recommend = recommend;
+    public static class RecommendReason {
+        private long songId;
+        private String reason;
+
+        public long getSongId() {
+            return songId;
+        }
+
+        public void setSongId(long songId) {
+            this.songId = songId;
+        }
+
+        public String getReason() {
+            return reason;
+        }
+
+        public void setReason(String reason) {
+            this.reason = reason;
+        }
     }
 
     public static class RecommendBean {
@@ -1690,11 +1739,4 @@ public class DailyRecommendBean {
 
     }
 
-    @Override
-    public String toString() {
-        return "DailyRecommendBean{" +
-                "code=" + code +
-                ", recommend=" + recommend +
-                '}';
-    }
 }

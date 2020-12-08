@@ -164,7 +164,9 @@ public class AudioController {
 	}
 
 	public void play() {
-		mAudioPlayer.load(getCurrentPlaying());
+		if(mQueue.size() > 0){
+			mAudioPlayer.load(getCurrentPlaying());
+		}
 	}
 
 	private AudioBean getCurrentPlaying() {

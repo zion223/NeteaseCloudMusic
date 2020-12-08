@@ -16,6 +16,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.imooc.imooc_voice.R;
 import com.imooc.imooc_voice.R2;
+import com.imooc.lib_api.model.song.SongDetailBean;
 import com.imooc.lib_common_ui.utils.GsonUtil;
 import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
 import com.imooc.imooc_voice.util.TimeUtil;
@@ -61,7 +62,7 @@ public class DailyRecommendDelegate extends NeteaseLoadingDelegate {
     private ImageLoaderManager manager;
     private DailyRecommendAdapter mAdapter;
 
-    private List<DailyRecommendBean.RecommendBean> recommendData;
+    private List<SongDetailBean.SongsBean> recommendData;
 
     int deltaDistance;
     int minDistance;
@@ -99,7 +100,7 @@ public class DailyRecommendDelegate extends NeteaseLoadingDelegate {
             @Override
             public void onSuccess(Object responseObj) {
                 DailyRecommendBean bean = (DailyRecommendBean) responseObj;
-                recommendData = bean.getRecommend();
+                recommendData = bean.getData().getDailySongs();
                 mAdapter = new DailyRecommendAdapter(recommendData);
                 //播放音乐
                 mAdapter.setOnItemClickListener((adapter, view, position) -> {
@@ -138,9 +139,9 @@ public class DailyRecommendDelegate extends NeteaseLoadingDelegate {
         if (recommendData != null) {
             final int length = recommendData.size();
             for (int i = 0; i < length; i++) {
-				DailyRecommendBean.RecommendBean item = recommendData.get(i);
+                SongDetailBean.SongsBean item = recommendData.get(i);
 				String songPlayUrl = HttpConstants.getSongPlayUrl(item.getId());
-				audioList.add(new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getArtists().get(0).getName(), item.getAlbum().getName(), item.getAlbum().getName(), item.getAlbum().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDuration())));
+				audioList.add(new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getAr().get(0).getName(), item.getAl().getName(), item.getAl().getName(), item.getAl().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDt())));
             }
             AudioHelper.addAudio(audioList);
         }
@@ -185,17 +186,17 @@ public class DailyRecommendDelegate extends NeteaseLoadingDelegate {
     }
 
 
-    private static class DailyRecommendAdapter extends BaseQuickAdapter<DailyRecommendBean.RecommendBean, BaseViewHolder> {
+    private static class DailyRecommendAdapter extends BaseQuickAdapter<SongDetailBean.SongsBean, BaseViewHolder> {
 
-        DailyRecommendAdapter(@Nullable List<DailyRecommendBean.RecommendBean> data) {
+        DailyRecommendAdapter(@Nullable List<SongDetailBean.SongsBean> data) {
             super(R.layout.item_gedan_detail_song, data);
         }
 
         @Override
-        protected void convert(@NonNull BaseViewHolder helper, DailyRecommendBean.RecommendBean item) {
+        protected void convert(@NonNull BaseViewHolder helper, SongDetailBean.SongsBean item) {
             helper.setText(R.id.item_play_no, String.valueOf(helper.getLayoutPosition() + 1));
             helper.setText(R.id.viewpager_list_toptext, item.getName());
-            helper.setText(R.id.viewpager_list_bottom_text, item.getArtists().get(0).getName() + " - " + item.getAlbum().getName());
+            helper.setText(R.id.viewpager_list_bottom_text, item.getAr().get(0).getName() + " - " + item.getAl().getName());
             helper.setOnClickListener(R.id.viewpager_list_button, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

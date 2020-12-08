@@ -161,7 +161,7 @@ public class TopListBean {
         private boolean newImported;
         private int specialType;
         private boolean anonimous;
-        private int userId;
+        private long userId;
         private String description;
         private boolean ordered;
         private int adType;
@@ -372,11 +372,11 @@ public class TopListBean {
             this.anonimous = anonimous;
         }
 
-        public int getUserId() {
+        public long getUserId() {
             return userId;
         }
 
-        public void setUserId(int userId) {
+        public void setUserId(long userId) {
             this.userId = userId;
         }
 
