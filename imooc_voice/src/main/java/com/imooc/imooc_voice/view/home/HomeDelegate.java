@@ -115,9 +115,9 @@ public class HomeDelegate extends NeteaseDelegate {
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View view) {
         ScreenUtils.setStatusBarColor(getProxyActivity(), Color.TRANSPARENT);
-        initView();
         sharePreferenceUtil = SharePreferenceUtil.getInstance(getContext());
         loginBean = GsonUtil.fromJSON(sharePreferenceUtil.getUserInfo(""), LoginBean.class);
+        initView();
         if (loginBean != null) {
             userLevel = sharePreferenceUtil.getUserLevel();
             if (userLevel == 0) {

@@ -99,7 +99,7 @@ public class SharePreferenceUtil {
 			return 0;
 		}
 		LoginBean loginBean = GsonUtil.fromJSON(userInfo, LoginBean.class);
-		return loginBean.getProfile().getUserId();
+		return (int) loginBean.getProfile().getUserId();
 	}
 
 	//退出登录 移除已登录用户信息
