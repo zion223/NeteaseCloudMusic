@@ -78,6 +78,10 @@ public class PrivateNoticeDelegate extends NeteaseLoadingDelegate {
 				//歌单的通知
 				adapter.setText(R.id.iv_item_notice_message, userNoticeJsonBean.getPlaylist().getName());
 				adapter.setText(R.id.tv_item_notice_event, "收藏了你的歌单");
+			}else if(userNoticeJsonBean.getGeneralNotice() != null){
+				// 常规的通知
+				adapter.setText(R.id.iv_item_notice_message, userNoticeJsonBean.getGeneralNotice().getContent());
+				adapter.setText(R.id.tv_item_notice_event, userNoticeJsonBean.getGeneralNotice().getActionDesc());
 			}else{
 				adapter.setText(R.id.iv_item_notice_message, "不支持的内容");
 				adapter.setText(R.id.tv_item_notice_event, "不支持的内容");
