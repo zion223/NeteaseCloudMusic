@@ -1,10 +1,10 @@
 # NeteaseCloudMusic
-仿网易云音乐Android客户端V6.5.1版本 (此项目已使用谷歌最新架构重构地址[在这](https://github.com/zion223/NeteaseCloudMusic-MVVM))
+仿网易云音乐Android客户端V6.5.1版本(MVVM架构)
 
 
 
 ## App介绍
-项目采用单Activity多Fragment模式开发。目前已实现 网易云音乐NodeJS 项目70% 的功能，目前开发所用的分支为newapi，
+目前已实现 网易云音乐NodeJS 项目70% 的功能，目前开发所用的分支为newapi，
 由于历史原因项目初期的数据来源为百度音乐API，后来才使用网易云音乐API特以区分。kotlin分支为使用kotlin语言重写此代码。  
 **App运行gif图请切换到master分支查看。**  
 **PS. 目前后端服务器已到期，如需要可自行在本地搭建服务配合使用 具体参考[网易云音乐API](https://binaryify.github.io/NeteaseCloudMusicApi/#/?id=%e8%bf%90%e8%a1%8c)**
